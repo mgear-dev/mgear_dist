@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.skin &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../index.html"/>
+        <link rel="up" title="Base Modules" href="../baseModules.html"/>
+        <link rel="next" title="mgear.maya.transform" href="mgear.maya.transform.html"/>
+        <link rel="prev" title="mgear.maya.primitive" href="mgear.maya.primitive.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.vector.html">mgear.maya.vector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../baseModules.html">Base Modules</a> &raquo;</li>
+      
+    <li>mgear.maya.skin</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/generated/mgear.maya.skin.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.skin">
+<span id="mgear-maya-skin"></span><h1>mgear.maya.skin<a class="headerlink" href="#module-mgear.maya.skin" title="Permalink to this headline">¶</a></h1>
+<p>Functions to work with skinCluster data.</p>
+<p>This module is derivated from Chad Vernon&#8217;s Skin IO.</p>
+<p><a class="reference external" href="https://github.com/chadmv/cmt/tree/master/scripts/cmt/deform">Chad Vernon&#8217;s github</a></p>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.collectBlendWeights" title="mgear.maya.skin.collectBlendWeights"><code class="xref py py-obj docutils literal"><span class="pre">collectBlendWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;...)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.collectData" title="mgear.maya.skin.collectData"><code class="xref py py-obj docutils literal"><span class="pre">collectData</span></code></a>(skinCls,&nbsp;dataDic)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.collectInfluenceWeights" title="mgear.maya.skin.collectInfluenceWeights"><code class="xref py py-obj docutils literal"><span class="pre">collectInfluenceWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;...)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.exportSkin" title="mgear.maya.skin.exportSkin"><code class="xref py py-obj docutils literal"><span class="pre">exportSkin</span></code></a>([filePath,&nbsp;objs])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.getCurrentWeights" title="mgear.maya.skin.getCurrentWeights"><code class="xref py py-obj docutils literal"><span class="pre">getCurrentWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;components)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.getGeometryComponents" title="mgear.maya.skin.getGeometryComponents"><code class="xref py py-obj docutils literal"><span class="pre">getGeometryComponents</span></code></a>(skinCls)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.getObjsFromSkinFile" title="mgear.maya.skin.getObjsFromSkinFile"><code class="xref py py-obj docutils literal"><span class="pre">getObjsFromSkinFile</span></code></a>([filePath])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.getSkinCluster" title="mgear.maya.skin.getSkinCluster"><code class="xref py py-obj docutils literal"><span class="pre">getSkinCluster</span></code></a>(obj)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.importSkin" title="mgear.maya.skin.importSkin"><code class="xref py py-obj docutils literal"><span class="pre">importSkin</span></code></a>([filePath])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.selectDeformers" title="mgear.maya.skin.selectDeformers"><code class="xref py py-obj docutils literal"><span class="pre">selectDeformers</span></code></a>(*args)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.setBlendWeights" title="mgear.maya.skin.setBlendWeights"><code class="xref py py-obj docutils literal"><span class="pre">setBlendWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;...)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.setData" title="mgear.maya.skin.setData"><code class="xref py py-obj docutils literal"><span class="pre">setData</span></code></a>(skinCls,&nbsp;dataDic)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.setInfluenceWeights" title="mgear.maya.skin.setInfluenceWeights"><code class="xref py py-obj docutils literal"><span class="pre">setInfluenceWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;...)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.skinCopy" title="mgear.maya.skin.skinCopy"><code class="xref py py-obj docutils literal"><span class="pre">skinCopy</span></code></a>([sourceMesh,&nbsp;targetMesh])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mgear.maya.transform.html" class="btn btn-neutral float-right" title="mgear.maya.transform" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mgear.maya.primitive.html" class="btn btn-neutral" title="mgear.maya.primitive" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

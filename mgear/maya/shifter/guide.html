@@ -1,0 +1,829 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.shifter.guide &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
+        <link rel="next" title="mgear.maya.shifter.gui" href="gui.html"/>
+        <link rel="prev" title="mgear.maya.shifter" href="shifter.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter.html">mgear.maya.shifter</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/utils.html">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/widgets.html">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.shifter.guide</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/mgear/maya/shifter/guide.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.shifter.guide">
+<span id="mgear-maya-shifter-guide"></span><h1>mgear.maya.shifter.guide<a class="headerlink" href="#module-mgear.maya.shifter.guide" title="Permalink to this headline">¶</a></h1>
+<p>Shifter&#8217;s MainGuide class and RigGuide class.</p>
+<dl class="class">
+<dt id="mgear.maya.shifter.guide.MainGuide">
+<em class="property">class </em><code class="descclassname">mgear.maya.shifter.guide.</code><code class="descname">MainGuide</code><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main guide class.
+Provide the methods to add parameters, set parameter values, create property...</p>
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.MainGuide.paramNames">
+<code class="descname">paramNames</code><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.paramNames" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> &#8211; List of parameter name cause it&#8217;s actually important to keep them sorted.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.MainGuide.paramDefs">
+<code class="descname">paramDefs</code><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.paramDefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> &#8211; Dictionary of parameter definition.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.MainGuide.values">
+<code class="descname">values</code><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> &#8211; Dictionary of options values.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.MainGuide.valid">
+<code class="descname">valid</code><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.valid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> &#8211; We will check a few things and make sure the guide we are loading is up to date.
+If parameters or object are missing a warning message will be display and
+the guide should be updated.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.MainGuide.addColorParam">
+<code class="descname">addColorParam</code><span class="sig-paren">(</span><em>scriptName</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.addColorParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add color paramenter to the paramenter definition Dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; The name of the color parameter.</li>
+<li><strong>value</strong> (<em>Variant</em>) &#8211; The default color value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly create paramenter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">paramDef</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.MainGuide.addEnumParam">
+<code class="descname">addEnumParam</code><span class="sig-paren">(</span><em>scriptName</em>, <em>enum</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.addEnumParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add FCurve paramenter to the paramenter definition Dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; Attribute fullName</li>
+<li><strong>enum</strong> (<em>list of str</em>) &#8211; The list of elements in the enumerate control.</li>
+<li><strong>value</strong> (<em>int</em>) &#8211; The default value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly create paramenter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">paramDef</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.MainGuide.addFCurveParam">
+<code class="descname">addFCurveParam</code><span class="sig-paren">(</span><em>scriptName</em>, <em>keys</em>, <em>interpolation=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.addFCurveParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add FCurve paramenter to the paramenter definition Dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; Attribute fullName.</li>
+<li><strong>keys</strong> (<em>list</em>) &#8211; The keyframes to define the function curve.</li>
+<li><strong>interpolation</strong> (<em>int</em>) &#8211; the curve interpolation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly create paramenter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">paramDef</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.MainGuide.addParam">
+<code class="descname">addParam</code><span class="sig-paren">(</span><em>scriptName</em>, <em>valueType</em>, <em>value</em>, <em>minimum=None</em>, <em>maximum=None</em>, <em>keyable=False</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em>, <em>niceName=None</em>, <em>shortName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.addParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add paramenter to the paramenter definition Dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; Parameter scriptname.</li>
+<li><strong>valueType</strong> (<em>str</em>) &#8211; The Attribute Type. Exp: &#8216;string&#8217;, &#8216;bool&#8217;, &#8216;long&#8217;, etc..</li>
+<li><strong>value</strong> (<em>float or int</em>) &#8211; Default parameter value.</li>
+<li><strong>niceName</strong> (<em>str</em>) &#8211; Parameter niceName.</li>
+<li><strong>shortName</strong> (<em>str</em>) &#8211; Parameter shortName.</li>
+<li><strong>minimum</strong> (<em>float or int</em>) &#8211; mininum value.</li>
+<li><strong>maximum</strong> (<em>float or int</em>) &#8211; maximum value.</li>
+<li><strong>keyable</strong> (<em>boo</em>) &#8211; If true is keyable</li>
+<li><strong>readable</strong> (<em>boo</em>) &#8211; If true is readable</li>
+<li><strong>storable</strong> (<em>boo</em>) &#8211; If true is storable</li>
+<li><strong>writable</strong> (<em>boo</em>) &#8211; If true is writable</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly create paramenter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">paramDef</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.MainGuide.addPropertyParamenters">
+<code class="descname">addPropertyParamenters</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.addPropertyParamenters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add attributes ( Attribute = Parameters terminology from Softimage) from the parameter definition list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> (<em>dagNode</em>) &#8211; The object to add the attributes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">parent with the attributes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dagNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.MainGuide.setParamDefValue">
+<code class="descname">setParamDefValue</code><span class="sig-paren">(</span><em>scriptName</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.setParamDefValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of parameter with matching scriptname.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; Scriptname of the parameter to edit.</li>
+<li><strong>value</strong> (<em>variant</em>) &#8211; New value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">False if the parameter wasn&#8217;t found.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.MainGuide.setParamDefValuesFromProperty">
+<code class="descname">setParamDefValuesFromProperty</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.MainGuide.setParamDefValuesFromProperty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameter definition values from the attributes of an object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The object with the attributes.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.shifter.guide.RigGuide">
+<em class="property">class </em><code class="descclassname">mgear.maya.shifter.guide.</code><code class="descname">RigGuide</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rig guide class.</p>
+<p>This is the class for complete rig guide definition.</p>
+<blockquote>
+<div><ul class="simple">
+<li>It contains the component guide in correct hierarchy order and the options to generate the rig.</li>
+<li>Provide the methods to add more component, import/export guide.</li>
+</ul>
+</div></blockquote>
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.RigGuide.paramNames">
+<code class="descname">paramNames</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.paramNames" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> &#8211; List of parameter name cause it&#8217;s actually important to keep them sorted.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.RigGuide.paramDefs">
+<code class="descname">paramDefs</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.paramDefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> &#8211; Dictionary of parameter definition.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.RigGuide.values">
+<code class="descname">values</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> &#8211; Dictionary of options values.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.RigGuide.valid">
+<code class="descname">valid</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.valid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> &#8211; We will check a few things and make sure the guide we are loading is up to date. If parameters or object are missing a warning message will be display and the guide should be updated.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.RigGuide.controllers">
+<code class="descname">controllers</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.controllers" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> &#8211; Dictionary of controllers.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.RigGuide.components">
+<code class="descname">components</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.components" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> &#8211; Dictionary of component. Keys are the component fullname (ie. &#8216;arm_L0&#8217;)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.RigGuide.componentsIndex">
+<code class="descname">componentsIndex</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.componentsIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> &#8211; List of component name sorted by order creation (hierarchy order)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.RigGuide.parents">
+<code class="descname">parents</code><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.parents" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> &#8211; List of the parent of each component, in same order as self.components</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.addOptionsValues">
+<code class="descname">addOptionsValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.addOptionsValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather or change some options values according to some others.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For the moment only gets the rig size to adapt size of object to the scale of the character</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.addParameters">
+<code class="descname">addParameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.addParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters for rig options.</p>
+<p>Add more parameter to the parameter definition list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.drawNewComponent">
+<code class="descname">drawNewComponent</code><span class="sig-paren">(</span><em>parent</em>, <em>comp_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.drawNewComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new component to the guide.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; Parent of this new component guide.</li>
+<li><strong>compType</strong> (<em>str</em>) &#8211; Type of component to add.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.drawUpdate">
+<code class="descname">drawUpdate</code><span class="sig-paren">(</span><em>oldRoot</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.drawUpdate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.duplicate">
+<code class="descname">duplicate</code><span class="sig-paren">(</span><em>root</em>, <em>symmetrize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.duplicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicate the guide hierarchy.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Indeed this method is not duplicating. What it is doing is parse the compoment guide,
+and creating an new one base on the current selection.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Don&#8217;t use the default Maya&#8217;s duplicate tool to duplicate a Shifter&#8217;s guide.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> (<em>dagNode</em>) &#8211; The guide root to duplicate.</li>
+<li><strong>symmetrize</strong> (<em>bool</em>) &#8211; If True, duplicate symmetrical in X axis. The guide have to be &#8220;Left&#8221; or &#8220;Right&#8221;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.findComponentRecursive">
+<code class="descname">findComponentRecursive</code><span class="sig-paren">(</span><em>node</em>, <em>branch=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.findComponentRecursive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds components by recursive search.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; Object frome where start the search.</li>
+<li><strong>branch</strong> (<em>bool</em>) &#8211; If True search recursive all the children.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.getComponentGuide">
+<code class="descname">getComponentGuide</code><span class="sig-paren">(</span><em>comp_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.getComponentGuide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the componet guide python object. ie. Finds the guide.py of the component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>comp_type</strong> (<em>str</em>) &#8211; The component type.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The component guide instance class.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.initialHierarchy">
+<code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.initialHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the initial rig guide hierarchy (model, options...)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.setFromHierarchy">
+<code class="descname">setFromHierarchy</code><span class="sig-paren">(</span><em>root</em>, <em>branch=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.setFromHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the guide from given hierarchy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> (<em>dagNode</em>) &#8211; The root of the hierarchy to parse.</li>
+<li><strong>branch</strong> (<em>bool</em>) &#8211; True to parse children components.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.setFromSelection">
+<code class="descname">setFromSelection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.setFromSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the guide hierarchy from selection.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>sel</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the guide if a parameter is missing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.RigGuide.updateProperties">
+<code class="descname">updateProperties</code><span class="sig-paren">(</span><em>root</em>, <em>newName</em>, <em>newSide</em>, <em>newIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.RigGuide.updateProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the Properties of the component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> (<em>dagNode</em>) &#8211; Root of the component.</li>
+<li><strong>newName</strong> (<em>str</em>) &#8211; New name of the component</li>
+<li><strong>newSide</strong> (<em>str</em>) &#8211; New side of the component</li>
+<li><strong>newIndex</strong> (<em>str</em>) &#8211; New index of the component</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.shifter.guide.guideSettings">
+<em class="property">class </em><code class="descclassname">mgear.maya.shifter.guide.</code><code class="descname">guideSettings</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.shifter.guide.guideSettings.create_connections">
+<code class="descname">create_connections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.create_connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the slots connections to the controls functions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.guideSettings.create_controls">
+<code class="descname">create_controls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.create_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the controls for the component base</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.guideSettings.create_layout">
+<code class="descname">create_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.create_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the layout for the component base settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.guideSettings.eventFilter">
+<code class="descname">eventFilter</code><span class="sig-paren">(</span><em>sender</em>, <em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.eventFilter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.guideSettings.populateAvailableSynopticTabs">
+<code class="descname">populateAvailableSynopticTabs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.populateAvailableSynopticTabs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.guideSettings.populate_controls">
+<code class="descname">populate_controls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.populate_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate the controls values from the custom attributes of the component.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.guideSettings.setup_SettingWindow">
+<code class="descname">setup_SettingWindow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.setup_SettingWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.guideSettings.skinLoad">
+<code class="descname">skinLoad</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.skinLoad" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.guide.guideSettings.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettings.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.shifter.guide.guideSettingsTab">
+<em class="property">class </em><code class="descclassname">mgear.maya.shifter.guide.</code><code class="descname">guideSettingsTab</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettingsTab" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.shifter.guide.guideSettingsTab.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.shifter.guide.guideSettingsTab.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.shifter.guide.helperSlots">
+<em class="property">class </em><code class="descclassname">mgear.maya.shifter.guide.</code><code class="descname">helperSlots</code><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.addItem2listWidget">
+<code class="descname">addItem2listWidget</code><span class="sig-paren">(</span><em>listWidget</em>, <em>targetAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.addItem2listWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.close_settings">
+<code class="descname">close_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.close_settings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.copyFromListWidget">
+<code class="descname">copyFromListWidget</code><span class="sig-paren">(</span><em>sourceListWidget</em>, <em>targetListWidget</em>, <em>targetAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.copyFromListWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.moveFromListWidget2ListWidget">
+<code class="descname">moveFromListWidget2ListWidget</code><span class="sig-paren">(</span><em>sourceListWidget</em>, <em>targetListWidget</em>, <em>targetAttrListWidget</em>, <em>targetAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.moveFromListWidget2ListWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.populateCheck">
+<code class="descname">populateCheck</code><span class="sig-paren">(</span><em>targetWidget</em>, <em>sourceAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.populateCheck" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.removeSelectedFromListWidget">
+<code class="descname">removeSelectedFromListWidget</code><span class="sig-paren">(</span><em>listWidget</em>, <em>targetAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.removeSelectedFromListWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.setProfile">
+<code class="descname">setProfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.setProfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateCheck">
+<code class="descname">updateCheck</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateCheck" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateComboBox">
+<code class="descname">updateComboBox</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateComboBox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateComponentName">
+<code class="descname">updateComponentName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateComponentName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateConnector">
+<code class="descname">updateConnector</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>itemsList</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateConnector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateControlShape">
+<code class="descname">updateControlShape</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>ctlList</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateControlShape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateHostUI">
+<code class="descname">updateHostUI</code><span class="sig-paren">(</span><em>lEdit</em>, <em>targetAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateHostUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateLineEdit">
+<code class="descname">updateLineEdit</code><span class="sig-paren">(</span><em>lEdit</em>, <em>targetAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateLineEdit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateListAttr">
+<code class="descname">updateListAttr</code><span class="sig-paren">(</span><em>sourceListWidget</em>, <em>targetAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateListAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the string attribute with values separated by commas.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateSlider">
+<code class="descname">updateSlider</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateSlider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.guide.helperSlots.updateSpinBox">
+<code class="descname">updateSpinBox</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.helperSlots.updateSpinBox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.shifter.guide.stepperTab">
+<em class="property">class </em><code class="descclassname">mgear.maya.shifter.guide.</code><code class="descname">stepperTab</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.guide.stepperTab" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.shifter.guide.stepperTab.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.shifter.guide.stepperTab.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gui.html" class="btn btn-neutral float-right" title="mgear.maya.shifter.gui" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="shifter.html" class="btn btn-neutral" title="mgear.maya.shifter" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

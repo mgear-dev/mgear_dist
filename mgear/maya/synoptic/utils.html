@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
+        <link rel="next" title="mgear.maya.synoptic.widgets" href="widgets.html"/>
+        <link rel="prev" title="mgear.maya.synoptic" href="synoptic.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/shifter.html">mgear.maya.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/guide.html">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.synoptic.utils</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/mgear/maya/synoptic/utils.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.synoptic.utils">
+<span id="mgear-maya-synoptic-utils"></span><h1>mgear.maya.synoptic.utils<a class="headerlink" href="#module-mgear.maya.synoptic.utils" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.bindPose">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">bindPose</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.bindPose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.changeSpace">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">changeSpace</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em>, <em>cnsIndex</em>, <em>ctl_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.changeSpace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getComboIndex">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getComboIndex</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getComboIndex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getComboKeys">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getComboKeys</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getComboKeys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getControlers">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getControlers</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getControlers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getModel">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getModel</code><span class="sig-paren">(</span><em>widget</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getModel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getSynopticWidget">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getSynopticWidget</code><span class="sig-paren">(</span><em>widget</em>, <em>max_iter=20</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getSynopticWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the widget where the synoptic panel is attach
+:param widget:
+:param max_iter:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.ikFkMatch">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">ikFkMatch</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uiHost_name</em>, <em>fk0</em>, <em>fk1</em>, <em>fk2</em>, <em>ik</em>, <em>upv</em>, <em>ikRot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ikFkMatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.keyAll">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keyAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keyAll" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.keyObj">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keyObj</code><span class="sig-paren">(</span><em>model</em>, <em>object_names</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keyObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the keyframe in the controls pass by a list in obj_names variable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> &#8211; Name of the namespace that will define de the model</li>
+<li><strong>object_names</strong> &#8211; names of the controls, without the name space</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.keySel">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keySel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keySel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.mirrorPose">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">mirrorPose</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.mirrorPose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.quickSel">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">quickSel</code><span class="sig-paren">(</span><em>model</em>, <em>channel</em>, <em>mouse_button</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.quickSel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.resetSelTrans">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">resetSelTrans</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.resetSelTrans" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.selAll">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selAll" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.selectObj">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selectObj</code><span class="sig-paren">(</span><em>model</em>, <em>object_names</em>, <em>mouse_button</em>, <em>key_modifier</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selectObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.showSpaceTransferUI">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">showSpaceTransferUI</code><span class="sig-paren">(</span><em>combo</em>, <em>model</em>, <em>uihost</em>, <em>combo_attr</em>, <em>ctrl_name</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.showSpaceTransferUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">spaceTransferUI</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI.create">
+<code class="descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI.create_connections">
+<code class="descname">create_connections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.create_connections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI.create_controls">
+<code class="descname">create_controls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.create_controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI.create_layout">
+<code class="descname">create_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.create_layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI.doSpaceTransfer">
+<code class="descname">doSpaceTransfer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.doSpaceTransfer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI.populateRange">
+<code class="descname">populateRange</code><span class="sig-paren">(</span><em>timeSlider=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.populateRange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001332E708&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.utils.spaceTransferUI.valueChanged">
+<code class="descname">valueChanged</code><em class="property"> = &lt;PySide.QtCore.Signal object at 0x000000001332DEA0&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.valueChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.toggleAttr">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">toggleAttr</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>attr_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.toggleAttr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="widgets.html" class="btn btn-neutral float-right" title="mgear.maya.synoptic.widgets" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="synoptic.html" class="btn btn-neutral" title="mgear.maya.synoptic" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

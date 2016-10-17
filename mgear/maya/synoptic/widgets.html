@@ -1,0 +1,849 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.synoptic.widgets &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
+        <link rel="next" title="Custom Solvers/Nodes" href="../../../solvers.html"/>
+        <link rel="prev" title="mgear.maya.synoptic.utils" href="utils.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/shifter.html">mgear.maya.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/guide.html">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.synoptic.widgets</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/mgear/maya/synoptic/widgets.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.synoptic.widgets">
+<span id="mgear-maya-synoptic-widgets"></span><h1>mgear.maya.synoptic.widgets<a class="headerlink" href="#module-mgear.maya.synoptic.widgets" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.FlipPoseButton">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">FlipPoseButton</code><a class="headerlink" href="#mgear.maya.synoptic.widgets.FlipPoseButton" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.FlipPoseButton.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.FlipPoseButton.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.FlipPoseButton.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.FlipPoseButton.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.MirrorPoseButton">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">MirrorPoseButton</code><a class="headerlink" href="#mgear.maya.synoptic.widgets.MirrorPoseButton" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.MirrorPoseButton.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.MirrorPoseButton.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.MirrorPoseButton.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x00000000133992C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.MirrorPoseButton.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.QuickSelButton">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">QuickSelButton</code><a class="headerlink" href="#mgear.maya.synoptic.widgets.QuickSelButton" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.QuickSelButton.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.QuickSelButton.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.QuickSelButton.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.QuickSelButton.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_Box">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_Box</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_Box" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_Box.drawShape">
+<code class="descname">drawShape</code><span class="sig-paren">(</span><em>painter</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_Box.drawShape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_Box.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_Box.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CFk">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_CFk</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CFk" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CFk.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(0.501961, 0.000000, 0.501961, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CFk.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CFk.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CFk.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CFkBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_CFkBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CFkBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CFkBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399B08&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CFkBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CFkCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_CFkCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CFkCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CFkCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399F88&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CFkCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CIk">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_CIk</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CIk" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CIk.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(0.752941, 0.250980, 0.752941, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CIk.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CIk.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x00000000133995C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CIk.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CIkBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_CIkBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CIkBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CIkBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399B88&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CIkBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CIkCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_CIkCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CIkCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_CIkCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E048&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_CIkCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_Circle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_Circle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_Circle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_Circle.drawShape">
+<code class="descname">drawShape</code><span class="sig-paren">(</span><em>painter</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_Circle.drawShape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_Circle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x00000000133998C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_Circle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LFk">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_LFk</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LFk" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LFk.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(0.752941, 0.000000, 0.000000, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LFk.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LFk.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LFk.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LFkBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_LFkBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LFkBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LFkBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399C08&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LFkBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LFkCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_LFkCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LFkCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LFkCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E0C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LFkCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LIk">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_LIk</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LIk" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LIk.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(0.752941, 0.501961, 0.000000, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LIk.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LIk.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x00000000133996C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LIk.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LIkBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_LIkBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LIkBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LIkBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399C88&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LIkBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LIkCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_LIkCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LIkCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_LIkCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E148&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_LIkCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RFk">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_RFk</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RFk" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RFk.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(0.000000, 0.000000, 0.752941, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RFk.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RFk.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RFk.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RFkBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_RFkBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RFkBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RFkBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399A08&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RFkBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RFkCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_RFkCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RFkCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RFkCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399E88&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RFkCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RIk">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_RIk</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RIk" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RIk.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(0.000000, 0.501961, 0.752941, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RIk.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RIk.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x00000000133994C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RIk.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RIkBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_RIkBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RIkBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RIkBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399A88&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RIkBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RIkCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_RIkCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RIkCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_RIkCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399F08&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_RIkCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_TriangleLeft">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_TriangleLeft</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_TriangleLeft" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_TriangleLeft.drawShape">
+<code class="descname">drawShape</code><span class="sig-paren">(</span><em>painter</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_TriangleLeft.drawShape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_TriangleLeft.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_TriangleLeft.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_TriangleRight">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_TriangleRight</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_TriangleRight" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_TriangleRight.drawShape">
+<code class="descname">drawShape</code><span class="sig-paren">(</span><em>painter</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_TriangleRight.drawShape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_TriangleRight.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_TriangleRight.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_blueCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_blueCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_blueCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_blueCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E348&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_blueCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_darkGreen">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_darkGreen</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_darkGreen" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_darkGreen.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(0.000000, 0.392157, 0.000000, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_darkGreen.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_darkGreen.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_darkGreen.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_darkGreenBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_darkGreenBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_darkGreenBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_darkGreenBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399E08&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_darkGreenBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_green">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_green</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_green" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_green.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(0.000000, 0.752941, 0.000000, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_green.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_green.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x00000000133997C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_green.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_greenBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_greenBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_greenBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_greenBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399D88&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_greenBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_greenCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_greenCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_greenCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_greenCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E1C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_greenCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_greenTriangleLeft">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_greenTriangleLeft</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_greenTriangleLeft" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_greenTriangleLeft.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E448&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_greenTriangleLeft.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_greenTriangleRight">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_greenTriangleRight</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_greenTriangleRight" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_greenTriangleRight.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E3C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_greenTriangleRight.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_redCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_redCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_redCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_redCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E248&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_redCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_yellow">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_yellow</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_yellow" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_yellow.color">
+<code class="descname">color</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(1.000000, 0.752941, 0.000000, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_yellow.color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_yellow.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_yellow.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_yellowBox">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_yellowBox</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_yellowBox" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_yellowBox.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000013399D08&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_yellowBox.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_yellowCircle">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectBtn_yellowCircle</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_yellowCircle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectBtn_yellowCircle.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x000000001339E2C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectBtn_yellowCircle.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.SelectButton">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">SelectButton</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.color_over">
+<code class="descname">color_over</code><em class="property"> = PySide.QtGui.QColor.fromRgbF(1.000000, 1.000000, 1.000000, 1.000000)</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.color_over" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.enterEvent">
+<code class="descname">enterEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.enterEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.leaveEvent">
+<code class="descname">leaveEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.leaveEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.over">
+<code class="descname">over</code><em class="property"> = False</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.over" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.paintEvent">
+<code class="descname">paintEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.paintEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.paintSelected">
+<code class="descname">paintSelected</code><span class="sig-paren">(</span><em>paint=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.paintSelected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.rectangleSelection">
+<code class="descname">rectangleSelection</code><span class="sig-paren">(</span><em>event</em>, <em>firstLoop</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.rectangleSelection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.SelectButton.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x00000000133993C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.SelectButton.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.bakeMocap">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">bakeMocap</code><a class="headerlink" href="#mgear.maya.synoptic.widgets.bakeMocap" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.bakeMocap.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.bakeMocap.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.bakeMocap.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.bakeMocap.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.ikfkMatchButton">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">ikfkMatchButton</code><a class="headerlink" href="#mgear.maya.synoptic.widgets.ikfkMatchButton" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.ikfkMatchButton.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.ikfkMatchButton.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.ikfkMatchButton.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x00000000133991C8&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.ikfkMatchButton.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.resetBindPose">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">resetBindPose</code><a class="headerlink" href="#mgear.maya.synoptic.widgets.resetBindPose" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.resetBindPose.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.resetBindPose.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.resetBindPose.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.resetBindPose.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.resetTransform">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">resetTransform</code><a class="headerlink" href="#mgear.maya.synoptic.widgets.resetTransform" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.resetTransform.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.resetTransform.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.resetTransform.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.resetTransform.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.toggleAttrButton">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">toggleAttrButton</code><a class="headerlink" href="#mgear.maya.synoptic.widgets.toggleAttrButton" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.toggleAttrButton.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.toggleAttrButton.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.toggleAttrButton.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.toggleAttrButton.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.widgets.toggleCombo">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.widgets.</code><code class="descname">toggleCombo</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.toggleCombo" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.widgets.toggleCombo.enterEvent">
+<code class="descname">enterEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.toggleCombo.enterEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.widgets.toggleCombo.handleChanged">
+<code class="descname">handleChanged</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.toggleCombo.handleChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.widgets.toggleCombo.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.widgets.toggleCombo.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.widgets.toggleCombo.wheelEvent">
+<code class="descname">wheelEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.widgets.toggleCombo.wheelEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../solvers.html" class="btn btn-neutral float-right" title="Custom Solvers/Nodes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="utils.html" class="btn btn-neutral" title="mgear.maya.synoptic.utils" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

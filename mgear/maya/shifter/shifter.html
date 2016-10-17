@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.shifter &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
+        <link rel="next" title="mgear.maya.shifter.guide" href="guide.html"/>
+        <link rel="prev" title="mgear.maya.vector" href="../vector.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.html">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/utils.html">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/widgets.html">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.shifter</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/mgear/maya/shifter/shifter.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.shifter">
+<span id="mgear-maya-shifter"></span><h1>mgear.maya.shifter<a class="headerlink" href="#module-mgear.maya.shifter" title="Permalink to this headline">¶</a></h1>
+<p>Shifter base rig class.</p>
+<dl class="class">
+<dt id="mgear.maya.shifter.Rig">
+<em class="property">class </em><code class="descclassname">mgear.maya.shifter.</code><code class="descname">Rig</code><a class="headerlink" href="#mgear.maya.shifter.Rig" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main rig class.</p>
+<dl class="attribute">
+<dt id="mgear.maya.shifter.Rig.guide">
+<code class="descname">guide</code><a class="headerlink" href="#mgear.maya.shifter.Rig.guide" title="Permalink to this definition">¶</a></dt>
+<dd><p>RigGuide() initialization.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.Rig.groups">
+<code class="descname">groups</code><a class="headerlink" href="#mgear.maya.shifter.Rig.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> &#8211; Rig groups (Maya sets)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.Rig.components">
+<code class="descname">components</code><a class="headerlink" href="#mgear.maya.shifter.Rig.components" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> &#8211; Dictionary for the rig components.
+Keys are the component fullname (ie. &#8216;arm_L0&#8217;)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.Rig.componentsIndex">
+<code class="descname">componentsIndex</code><a class="headerlink" href="#mgear.maya.shifter.Rig.componentsIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> &#8211; Components index list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.addCtl">
+<code class="descname">addCtl</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>m</em>, <em>color</em>, <em>icon</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.addCtl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the control and apply the shape, if this is alrealdy stored
+in the guide controllers grp.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The control parent</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The control name.</li>
+<li><strong>m</strong> (<em>matrix</em>) &#8211; The transfromation matrix for the control.</li>
+<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color for the control in idex or RGB.</li>
+<li><strong>icon</strong> (<em>str</em>) &#8211; The controls default shape.</li>
+<li><strong>kwargs</strong> (<em>variant</em>) &#8211; Other arguments for the icon type variations.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The Control.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.addToGroup">
+<code class="descname">addToGroup</code><span class="sig-paren">(</span><em>objects, names=['hidden']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.addToGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the object in a collection for later group creation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>dagNode or list of dagNode</em>) &#8211; Object to put in the group.</li>
+<li><strong>names</strong> (<em>str or list of str</em>) &#8211; Names of the groups to create.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the rig.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.buildFromSelection">
+<code class="descname">buildFromSelection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.buildFromSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the rig from selected guides.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.finalize">
+<code class="descname">finalize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finalize the rig.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.findComponent">
+<code class="descname">findComponent</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.findComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the component from a guide Name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) &#8211; Name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The component</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../transform.html#module-mgear.maya.transform" title="mgear.maya.transform">transform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.findRelative">
+<code class="descname">findRelative</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.findRelative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the objects in the rig matching the guide object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) &#8211; Name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relative object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../transform.html#module-mgear.maya.transform" title="mgear.maya.transform">transform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.findUIHost">
+<code class="descname">findUIHost</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.findUIHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the UI host of the compoent</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) &#8211; Name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relative object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../transform.html#module-mgear.maya.transform" title="mgear.maya.transform">transform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.getComponentName">
+<code class="descname">getComponentName</code><span class="sig-paren">(</span><em>guideName</em>, <em>local=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.getComponentName" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return the component name</p>
+<blockquote>
+<div>ie. &#8220;arm_C0_root&#8221; return &#8220;arm_C0&#8221;</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) &#8211; The guide name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The compnent Name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.getLocalName">
+<code class="descname">getLocalName</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.getLocalName" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return the local name, cutting the Maya fullname
+and taking the latest part.</p>
+<blockquote>
+<div>ie. &#8220;parentA|parentB|arm_C0_root&#8221; will return &#8220;arm_C0_root&#8221;</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) &#8211; The guide name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The local Name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.getRelativeName">
+<code class="descname">getRelativeName</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.getRelativeName" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return the name of the relative in the guide</p>
+<blockquote>
+<div>ie. &#8220;arm_C0_root&#8221; return &#8220;root&#8221;</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) &#8211; The guide name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relative Name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.initialHierarchy">
+<code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.initialHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the initial hierarchy of the rig.
+Create the rig model, the main properties, and a couple of base organisation nulls.
+Get the global size of the rig.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.processComponents">
+<code class="descname">processComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.processComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the components of the rig, following the creation steps.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="guide.html" class="btn btn-neutral float-right" title="mgear.maya.shifter.guide" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../vector.html" class="btn btn-neutral" title="mgear.maya.vector" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

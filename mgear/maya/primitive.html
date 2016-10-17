@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.primitive &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.maya.skin" href="skin.html"/>
+        <link rel="prev" title="mgear.maya.node" href="node.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node.html">mgear.maya.node</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/shifter.html">mgear.maya.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/guide.html">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/utils.html">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/widgets.html">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.primitive</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/mgear/maya/primitive.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.primitive">
+<span id="mgear-maya-primitive"></span><h1>mgear.maya.primitive<a class="headerlink" href="#module-mgear.maya.primitive" title="Permalink to this headline">¶</a></h1>
+<p>Functions to create primitives (Non geometry)</p>
+<dl class="function">
+<dt id="mgear.maya.primitive.add2DChain">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">add2DChain</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>positions</em>, <em>normal</em>, <em>negate=False</em>, <em>vis=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.add2DChain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a 2D joint chain. Like Softimage 2D chain.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function will create un expected results if all the positions are not in the same 2D plane.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the chain.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
+<li><strong>positions</strong> (<em>list of vectors</em>) &#8211; the positons to define the chain.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The normal vector to define the direction of the chain.</li>
+<li><strong>negate</strong> (<em>bool</em>) &#8211; If True will negate the direction of the chain</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Returns;</dt>
+<dd>list of dagNodes: The list containg all the joints of the chain</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">rollRef</span> <span class="o">=</span> <span class="n">pri</span><span class="o">.</span><span class="n">add2DChain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span><span class="s2">&quot;rollChain&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.primitive.add2DChain2">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">add2DChain2</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>positions</em>, <em>normal</em>, <em>negate=False</em>, <em>vis=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.add2DChain2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Experimental 2D Chain creation function. Create a 2D joint chain. Like Softimage 2D chain.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function is WIP and not ready for production.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function will create un expected results if all the positions are not in the same 2D plane.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the chain.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
+<li><strong>positions</strong> (<em>list of vectors</em>) &#8211; the positons to define the chain.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The normal vector to define the direction of the chain.</li>
+<li><strong>negate</strong> (<em>bool</em>) &#8211; If True will negate the direction of the chain</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Returns;</dt>
+<dd>list of dagNodes: The list containg all the joints of the chain</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">chain3bones</span> <span class="o">=</span> <span class="n">pri</span><span class="o">.</span><span class="n">add2DChain2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span><span class="s2">&quot;chain3bones</span><span class="si">%s</span><span class="s2">_jnt&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.primitive.addIkHandle">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addIkHandle</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>chn</em>, <em>solver='ikRPsolver'</em>, <em>poleV=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addIkHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and connect an IKhandle to a joints chain.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the IKhandle.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
+<li><strong>chn</strong> (<em>list</em>) &#8211; List of joints.</li>
+<li><strong>solver</strong> (<em>str</em>) &#8211; the solver to be use for the ikHandel. Default value is &#8220;ikRPsolver&#8221;</li>
+<li><strong>poleV</strong> (<em>dagNode</em>) &#8211; Pole vector for the IKHandle</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The IKHandle</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">ikHandleUpvRef</span> <span class="o">=</span> <span class="n">pri</span><span class="o">.</span><span class="n">addIkHandle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span><span class="s2">&quot;ikHandleLegChainUpvRef&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">legChainUpvRef</span><span class="p">,</span> <span class="s2">&quot;ikSCsolver&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.primitive.addJoint">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addJoint</code><span class="sig-paren">(</span><em>parent, name, m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), vis=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addJoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a joint dagNode.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I&#8217;m not using the joint() comand because this is parenting
+the newly created joint to current selection which might not be desired</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
+<li><strong>m</strong> (<em>matrix</em>) &#8211; The matrix for the node transformation (optional).</li>
+<li><strong>vis</strong> (<em>bool</em>) &#8211; Set the visibility of the new joint.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.primitive.addJointFromPos">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addJointFromPos</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>pos=dt.Vector([0.0</em>, <em>0.0</em>, <em>0.0])</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addJointFromPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a joint dagNode.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I&#8217;m not using the joint() comand because this is parenting
+the newly created joint to current selection which might not be desired</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
+<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The vector for the node position (optional).</li>
+<li><strong>vis</strong> (<em>bool</em>) &#8211; Set the visibility of the new joint.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.primitive.addLocator">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addLocator</code><span class="sig-paren">(</span><em>parent, name, m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), size=1</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addLocator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a space locator dagNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The Node name.</li>
+<li><strong>m</strong> (<em>matrix</em>) &#8211; The matrix for the node transformation (optional).</li>
+<li><strong>size</strong> (<em>float</em>) &#8211; The space locator shape size (optional).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.primitive.addLocatorFromPos">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addLocatorFromPos</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>pos=dt.Vector([0.0</em>, <em>0.0</em>, <em>0.0])</em>, <em>size=1</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addLocatorFromPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a space locator dagNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The Node name.</li>
+<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The vector for the node position (optional).</li>
+<li><strong>size</strong> (<em>float</em>) &#8211; The space locator shape size (optional).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.primitive.addTransform">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addTransform</code><span class="sig-paren">(</span><em>parent, name, m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]])</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a transform dagNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The Node name.</li>
+<li><strong>m</strong> (<em>matrix</em>) &#8211; The matrix for the node transformation (optional).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.primitive.addTransformFromPos">
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addTransformFromPos</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>pos=dt.Vector([0.0</em>, <em>0.0</em>, <em>0.0])</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addTransformFromPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a transform dagNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The Node name.</li>
+<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The vector for the node position (optional).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="skin.html" class="btn btn-neutral float-right" title="mgear.maya.skin" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="node.html" class="btn btn-neutral" title="mgear.maya.node" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

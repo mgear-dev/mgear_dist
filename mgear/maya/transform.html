@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.transform &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.maya.utils" href="utils.html"/>
+        <link rel="prev" title="mgear.maya.skin" href="skin.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/shifter.html">mgear.maya.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/guide.html">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/utils.html">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/widgets.html">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.transform</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/mgear/maya/transform.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.transform">
+<span id="mgear-maya-transform"></span><h1>mgear.maya.transform<a class="headerlink" href="#module-mgear.maya.transform" title="Permalink to this headline">¶</a></h1>
+<p>Functions to work with matrix and transformations.</p>
+<dl class="function">
+<dt id="mgear.maya.transform.convert2TransformMatrix">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">convert2TransformMatrix</code><span class="sig-paren">(</span><em>tm</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.convert2TransformMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a transformation Matrix or a matrix to a transformation matrix in world space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tm</strong> (<em>matrix</em>) &#8211; The input matrix.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The transformation matrix in worldSpace</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">matrix</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getChainTransform">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getChainTransform</code><span class="sig-paren">(</span><em>positions</em>, <em>normal</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getChainTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a tranformation list from a positions list and normal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>positions</strong> (<em>list of vector</em>) &#8211; List with the chain positions.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Normal direction.</li>
+<li><strong>negate</strong> (<em>bool</em>) &#8211; If true invert the chain orientation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The list containing the transformation matrix for the chain.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tra</span><span class="o">.</span><span class="n">getChainTransform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getChainTransform2">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getChainTransform2</code><span class="sig-paren">(</span><em>positions</em>, <em>normal</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getChainTransform2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a tranformation list from a positions list and normal.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">getChainTransform2 is using the latest position on the chain</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>positions</strong> (<em>list of vector</em>) &#8211; List with the chain positions.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Normal direction.</li>
+<li><strong>negate</strong> (<em>bool</em>) &#8211; If true invert the chain orientation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The list containing the transformation matrix for the chain.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tra</span><span class="o">.</span><span class="n">getChainTransform2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getFilteredTransform">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getFilteredTransform</code><span class="sig-paren">(</span><em>m</em>, <em>translation=True</em>, <em>rotation=True</em>, <em>scaling=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getFilteredTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a transformation filtered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>m</strong> (<em>matrix</em>) &#8211; the reference matrix</li>
+<li><strong>translation</strong> (<em>bool</em>) &#8211; If true the return matrix will match the translation.</li>
+<li><strong>rotation</strong> (<em>bool</em>) &#8211; If true the return matrix will match the rotation.</li>
+<li><strong>scaling</strong> (<em>bool</em>) &#8211; If true the return matrix will match the scaling.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The filtered matrix</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getInterpolateTransformMatrix">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getInterpolateTransformMatrix</code><span class="sig-paren">(</span><em>t1</em>, <em>t2</em>, <em>blend=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getInterpolateTransformMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolate 2 matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>t1</strong> (<em>matrix</em>) &#8211; Input matrix 1.</li>
+<li><strong>t2</strong> (<em>matrix</em>) &#8211; Input matrix 2.</li>
+<li><strong>blend</strong> (<em>float</em>) &#8211; The blending value. Default 0.5</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly interpolated transformation matrix.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getInterpolateTransformMatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fk_ctl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">tws1A_npo</span><span class="p">,</span> <span class="o">.</span><span class="mi">3333</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getOffsetPosition">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getOffsetPosition</code><span class="sig-paren">(</span><em>node, offset=[0, 0, 0]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getOffsetPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an offset position from dagNode</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The dagNode with the original position.</li>
+<li><strong>offset</strong> (<em>list of float</em>) &#8211; Ofsset values for xyz. exp : [1.2, 4.6, 32.78]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the new offset position.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addRoot</span><span class="p">()</span>
+<span class="n">vTemp</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getOffsetPosition</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.1</span><span class="p">])</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">knee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addLoc</span><span class="p">(</span><span class="s2">&quot;knee&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">vTemp</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getPositionFromMatrix">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getPositionFromMatrix</code><span class="sig-paren">(</span><em>in_m</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getPositionFromMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the position values from matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>in_m</strong> (<em>matrix</em>) &#8211; The input Matrix.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The position values for xyz.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getRotationFromAxis">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getRotationFromAxis</code><span class="sig-paren">(</span><em>in_a</em>, <em>in_b</em>, <em>axis='xy'</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getRotationFromAxis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the matrix rotation from a given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_a</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Axis A</li>
+<li><strong>in_b</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Axis B</li>
+<li><strong>axis</strong> (<em>str</em>) &#8211; The axis to use for the orientation. Default: &#8220;xy&#8221;</li>
+<li><strong>negate</strong> (<em>bool</em>) &#8211; negates the axis orientation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created matrix.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eff_loc</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">x</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">y</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eff_loc</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getRotationFromAxis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s2">&quot;xz&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getSymmetricalTransform">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getSymmetricalTransform</code><span class="sig-paren">(</span><em>t</em>, <em>axis='yz'</em>, <em>fNegScale=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getSymmetricalTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the symmetrical tranformation matrix from a define 2 axis mirror plane. exp:&#8221;yz&#8221;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>t</strong> (<em>matrix</em>) &#8211; The transformation matrix to mirror.</li>
+<li><strong>axis</strong> (<em>str</em>) &#8211; The mirror plane.</li>
+<li><strong>fNegScale</strong> (<em>bool</em>) &#8211; This function is not yet implemented.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The symmetrical tranformation matrix.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getTransform">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getTransform</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the transformation matrix of the dagNode in worldSpace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The dagNode to get the translation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The transformation matrix</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">matrix</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getTransformFromPos">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getTransformFromPos</code><span class="sig-paren">(</span><em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getTransformFromPos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a transformation Matrix from a given position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Position for the transformation matrix</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The newly created transformation matrix</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">matrix</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransformFromPos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getTransformLookingAt">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getTransformLookingAt</code><span class="sig-paren">(</span><em>pos</em>, <em>lookat</em>, <em>normal</em>, <em>axis='xy'</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getTransformLookingAt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the transformation matrix of the dagNode oriented looking to an specific point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The position for the transformation</li>
+<li><strong>lookat</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The aiming position to stablish the orientation.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The normal control the transformation roll.</li>
+<li><strong>axis</strong> (<em>str</em>) &#8211; The 2 axis used for lookat and normal. Default &#8220;xy&#8221;</li>
+<li><strong>negate</strong> (<em>bool</em>) &#8211; If true, invert the aiming direction.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The transformation matrix</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransformLookingAt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="s2">&quot;heel&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="p">,</span> <span class="s2">&quot;xz&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.getTranslation">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getTranslation</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getTranslation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the position of the dagNode in worldSpace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The dagNode to get the translation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The transformation matrix</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">matrix</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.matchWorldTransform">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">matchWorldTransform</code><span class="sig-paren">(</span><em>source</em>, <em>target</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.matchWorldTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match 2 dagNode transformations in world space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source</strong> (<em>dagNode</em>) &#8211; The source dagNode</li>
+<li><strong>target</strong> (<em>dagNode</em>) &#8211; The target dagNode</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.quaternionDotProd">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">quaternionDotProd</code><span class="sig-paren">(</span><em>q1</em>, <em>q2</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.quaternionDotProd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the dot product of 2 quaternion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>q1</strong> (<em>quaternion</em>) &#8211; Input quaternion 1.</li>
+<li><strong>q2</strong> (<em>quaternion</em>) &#8211; Input quaternion 2.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The dot proct quaternion.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">quaternion</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.quaternionSlerp">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">quaternionSlerp</code><span class="sig-paren">(</span><em>q1</em>, <em>q2</em>, <em>blend</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.quaternionSlerp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an interpolate quaternion based in slerp function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>q1</strong> (<em>quaternion</em>) &#8211; Input quaternion 1.</li>
+<li><strong>q2</strong> (<em>quaternion</em>) &#8211; Input quaternion 2.</li>
+<li><strong>blend</strong> (<em>float</em>) &#8211; Blending value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The interpolated quaternion.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">quaternion</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">quaternionSlerp</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">Quaternion</span><span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">getRotationQuaternion</span><span class="p">()),</span>
+        <span class="n">dt</span><span class="o">.</span><span class="n">Quaternion</span><span class="p">(</span><span class="n">t2</span><span class="o">.</span><span class="n">getRotationQuaternion</span><span class="p">()),</span> <span class="n">blend</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.resetTransform">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">resetTransform</code><span class="sig-paren">(</span><em>node</em>, <em>t=True</em>, <em>r=True</em>, <em>s=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.resetTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the scale, rotation and translation for a given dagNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to reset the transforms.</li>
+<li><strong>t</strong> (<em>bool</em>) &#8211; If true translation will be reseted.</li>
+<li><strong>r</strong> (<em>bool</em>) &#8211; If true rotation will be reseted.</li>
+<li><strong>s</strong> (<em>bool</em>) &#8211; If true scale will be reseted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.setMatrixPosition">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">setMatrixPosition</code><span class="sig-paren">(</span><em>in_m</em>, <em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.setMatrixPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the position for a given matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_m</strong> (<em>matrix</em>) &#8211; The input Matrix.</li>
+<li><strong>pos</strong> (<em>list of float</em>) &#8211; The position values for xyz</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The matrix with the new position</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tnpo</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">setMatrixPosition</span><span class="p">(</span><span class="n">tOld</span><span class="p">,</span> <span class="n">tra</span><span class="o">.</span><span class="n">getPositionFromMatrix</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">setMatrixPosition</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.setMatrixRotation">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">setMatrixRotation</code><span class="sig-paren">(</span><em>m</em>, <em>rot</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.setMatrixRotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the rotation for a given matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_m</strong> (<em>matrix</em>) &#8211; The input Matrix.</li>
+<li><strong>rot</strong> (<em>list of float</em>) &#8211; The rotation values for xyz</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The matrix with the new rotation</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.transform.setMatrixScale">
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">setMatrixScale</code><span class="sig-paren">(</span><em>m, scl=[1, 1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.setMatrixScale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the scale for a given matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_m</strong> (<em>matrix</em>) &#8211; The input Matrix.</li>
+<li><strong>scl</strong> (<em>list of float</em>) &#8211; The scale values for xyz</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The matrix with the new scale</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="utils.html" class="btn btn-neutral float-right" title="mgear.maya.utils" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="skin.html" class="btn btn-neutral" title="mgear.maya.skin" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

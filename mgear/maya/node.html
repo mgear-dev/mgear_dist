@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.node &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.maya.primitive" href="primitive.html"/>
+        <link rel="prev" title="mgear.maya.meshNavigation" href="meshNavigation.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/shifter.html">mgear.maya.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/guide.html">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/utils.html">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/widgets.html">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.node</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/mgear/maya/node.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.node">
+<span id="mgear-maya-node"></span><h1>mgear.maya.node<a class="headerlink" href="#module-mgear.maya.node" title="Permalink to this headline">¶</a></h1>
+<p>Functions to create and connect nodes.</p>
+<dl class="function">
+<dt id="mgear.maya.node.createAddNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createAddNode</code><span class="sig-paren">(</span><em>inputA</em>, <em>inputB</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createAddNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a addition node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputA</strong> (<em>attr or float</em>) &#8211; The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr or float</em>) &#8211; The attribute input B</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">add_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createAddNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">roundness_att</span><span class="p">,</span> <span class="o">.</span><span class="mi">001</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createAddNodeMulti">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createAddNodeMulti</code><span class="sig-paren">(</span><em>inputs=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createAddNodeMulti" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect multiple add nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> (<em>list of attr</em>) &#8211; The list of attributes to add</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The output attributes list.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">angle_outputs</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createAddNodeMulti</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angles_att</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createBlendNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createBlendNode</code><span class="sig-paren">(</span><em>inputA</em>, <em>inputB</em>, <em>blender=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createBlendNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a createBlendNode node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputA</strong> (<em>attr or list of 3 attr</em>) &#8211; The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr or list of 3 attr</em>) &#8211; The attribute input B</li>
+<li><strong>blender</strong> (<em>float or attr</em>) &#8211; Float in 0 to 1 range or attribute string name.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">blend_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createBlendNode</span><span class="p">([</span><span class="n">dm_node</span><span class="o">+</span><span class="s2">&quot;.outputRotate</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">cns</span><span class="o">+</span><span class="s2">&quot;.rotate</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock_ori_att</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createClampNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createClampNode</code><span class="sig-paren">(</span><em>input</em>, <em>in_min</em>, <em>in_max</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createClampNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a clamp node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> (<em>attr, float or list</em>) &#8211; The input value to clamp</li>
+<li><strong>in_min</strong> (<em>float</em>) &#8211; The minimun value to clamp</li>
+<li><strong>in_max</strong> (<em>float</em>) &#8211; The maximun value to clamp</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clamp_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createClampNode</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">roll_att</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_att</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_att</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">180</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createClampNodeMulti">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createClampNodeMulti</code><span class="sig-paren">(</span><em>name</em>, <em>inputs=[]</em>, <em>in_min=[]</em>, <em>in_max=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createClampNodeMulti" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect multiple clamp nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; The name for the new node.</li>
+<li><strong>inputs</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
+<li><strong>in_min</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
+<li><strong>in_max</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The output attributes list.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createConditionNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createConditionNode</code><span class="sig-paren">(</span><em>firstTerm=False</em>, <em>secondTerm=False</em>, <em>operator=0</em>, <em>ifTrue=False</em>, <em>ifFalse=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createConditionNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a condition node.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">operator</th>
+<th class="head">index</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>==</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>!=</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>&gt;</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>&gt;=</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>&lt;</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>&lt;=</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>firstTerm</strong> (<em>attr</em>) &#8211; The attribute string name for the first conditions.</li>
+<li><strong>secondTerm</strong> (<em>attr</em>) &#8211; The attribute string for the second conditions.</li>
+<li><strong>operator</strong> (<em>int</em>) &#8211; The operator to make the condition.</li>
+<li><strong>ifTrue</strong> (<em>bool or attr</em>) &#8211; If an attribute is provided will connect ifTrue output.</li>
+<li><strong>ifFalse</strong> (<em>bool or attr</em>) &#8211; If an attribute is provided will connect ifFalse output.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cond1_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createConditionNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soft_attr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="n">subtract3_node</span><span class="o">+</span><span class="s2">&quot;.output1D&quot;</span><span class="p">,</span> <span class="n">plusTotalLength_node</span><span class="o">+</span><span class="s2">&quot;.output1D&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createCurveInfoNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createCurveInfoNode</code><span class="sig-paren">(</span><em>crv</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createCurveInfoNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a curveInfo node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>crv</strong> (<em>dagNode</em>) &#8211; The curve.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the newly created node.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pyNode</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">crv_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createCurveInfoNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slv_crv</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createDecomposeMatrixNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createDecomposeMatrixNode</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createDecomposeMatrixNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a decomposeMatrix node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>m</strong> (<em>str or attr</em>) &#8211; The matrix attribute name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the newly created node.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pyNode</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dm_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createDecomposeMatrixNode</span><span class="p">(</span><span class="n">mulmat_node</span><span class="o">+</span><span class="s2">&quot;.output&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createDistNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createDistNode</code><span class="sig-paren">(</span><em>objA</em>, <em>objB</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createDistNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a distance node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objA</strong> (<em>dagNode</em>) &#8211; The dagNode A.</li>
+<li><strong>objB</strong> (<em>dagNode</em>) &#8211; The dagNode B.</li>
+<li><strong>output</strong> (<em>attr</em>) &#8211; Output attribute.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">distA_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createDistNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tws0_loc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tws1_loc</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createDivNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createDivNode</code><span class="sig-paren">(</span><em>inputA</em>, <em>inputB</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createDivNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a Divide node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputA</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input B</li>
+<li><strong>output</strong> (<em>attr or list of attr</em>) &#8211; The attribute to connect the output.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Classic Maya style creation and connection = 4 lines</span>
+<span class="n">div1_node</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s2">&quot;multiplyDivide&quot;</span><span class="p">)</span>
+<span class="n">div1_node</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span><span class="s2">&quot;operation&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">div1_node</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span><span class="s2">&quot;input1X&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">connectAttr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rig</span><span class="o">.</span><span class="n">global_ctl</span><span class="o">+</span><span class="s2">&quot;.sx&quot;</span><span class="p">,</span> <span class="n">div1_node</span><span class="o">+</span><span class="s2">&quot;.input2X&quot;</span><span class="p">)</span>
+
+<span class="c1"># mGear style = 1 line</span>
+<span class="n">div1_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createDivNode</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rig</span><span class="o">.</span><span class="n">global_ctl</span><span class="o">+</span><span class="s2">&quot;.sx&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createDivNodeMulti">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createDivNodeMulti</code><span class="sig-paren">(</span><em>name</em>, <em>inputs1=[]</em>, <em>inputs2=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createDivNodeMulti" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect multiple divide nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; The name for the new node.</li>
+<li><strong>inputs1</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
+<li><strong>inputs2</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The output attributes list.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createMulDivNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createMulDivNode</code><span class="sig-paren">(</span><em>inputA</em>, <em>inputB</em>, <em>operation=1</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createMulDivNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a Multiply or Divide node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputA</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input B</li>
+<li><strong>output</strong> (<em>attr or list of attr</em>) &#8211; The attribute to connect the output.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createMulNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createMulNode</code><span class="sig-paren">(</span><em>inputA</em>, <em>inputB</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createMulNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a Multiply node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputA</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input B</li>
+<li><strong>output</strong> (<em>attr or list of attr</em>) &#8211; The attribute to connect the output.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createMulNodeMulti">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createMulNodeMulti</code><span class="sig-paren">(</span><em>name</em>, <em>inputs=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createMulNodeMulti" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect multiple multiply nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; The name for the new node.</li>
+<li><strong>inputs</strong> (<em>list of attr</em>) &#8211; The list of attributes to multiply</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The output attributes list.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createMultMatrixNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createMultMatrixNode</code><span class="sig-paren">(</span><em>mA</em>, <em>mB</em>, <em>target=False</em>, <em>transform='srt'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createMultMatrixNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create Maya multiply Matrix node.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This node have same functionality as the default Maya matrix multiplication.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mA</strong> (<em>matrix</em>) &#8211; input matrix A.</li>
+<li><strong>mB</strong> (<em>matrix</em>) &#8211; input matrix B.</li>
+<li><strong>target</strong> (<em>dagNode</em>) &#8211; object target to apply the transformation</li>
+<li><strong>transform</strong> (<em>str</em>) &#8211; if target is True. out transform  to SRT valid value s r t</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Newly created mGear_multMatrix node</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createNegateNodeMulti">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createNegateNodeMulti</code><span class="sig-paren">(</span><em>name</em>, <em>inputs=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createNegateNodeMulti" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect multiple negate nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; The name for the new node.</li>
+<li><strong>inputs</strong> (<em>list of attr</em>) &#8211; The list of attributes to negate</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The output attributes list.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createPairBlend">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createPairBlend</code><span class="sig-paren">(</span><em>inputA=None</em>, <em>inputB=None</em>, <em>blender=0.5</em>, <em>rotInterpolation=0</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createPairBlend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a PairBlend node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputA</strong> (<em>dagNode</em>) &#8211; The transfomr input 1</li>
+<li><strong>inputB</strong> (<em>dagNode</em>) &#8211; The transfomr input 2</li>
+<li><strong>blender</strong> (<em>float or attr</em>) &#8211; Float in 0 to 1 range or attribute string name.</li>
+<li><strong>rotInterpolation</strong> (<em>int</em>) &#8211; Rotation interpolation option. 0=Euler. 1=Quaternion.</li>
+<li><strong>output</strong> (<em>dagNode</em>) &#8211; The output node with the blend transfomr applied.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">blend_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createPairBlend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">legBonesFK</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">legBonesIK</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">blend_att</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">connectAttr</span><span class="p">(</span><span class="n">blend_node</span> <span class="o">+</span> <span class="s2">&quot;.outRotate&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="s2">&quot;.rotate&quot;</span><span class="p">)</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">connectAttr</span><span class="p">(</span><span class="n">blend_node</span> <span class="o">+</span> <span class="s2">&quot;.outTranslate&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="s2">&quot;.translate&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createPlusMinusAverage1D">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createPlusMinusAverage1D</code><span class="sig-paren">(</span><em>input</em>, <em>operation=1</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createPlusMinusAverage1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a multiple average node 1D.
+:param input: The input values.
+:type input: attr, float or list
+:param operation: Node operation. 0=None, 1=sum, 2=subtract, 3=average
+:type operation: int
+:param output: The attribute to connect the result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the newly created node.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createPowNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createPowNode</code><span class="sig-paren">(</span><em>inputA</em>, <em>inputB</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createPowNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a power node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputA</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input B</li>
+<li><strong>output</strong> (<em>attr or list of attr</em>) &#8211; The attribute to connect the output.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createReverseNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createReverseNode</code><span class="sig-paren">(</span><em>input</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createReverseNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a reverse node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> (<em>attr or list of 3 attr</em>) &#8211; The attribute input.</li>
+<li><strong>output</strong> (<em>attr or list of 3 attr</em>) &#8211; The attribute to connect the output.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fkvis_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createReverseNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blend_att</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.node.createSubNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createSubNode</code><span class="sig-paren">(</span><em>inputA</em>, <em>inputB</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createSubNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and connect a subtraction node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputA</strong> (<em>attr or float</em>) &#8211; The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr or float</em>) &#8211; The attribute input B</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the newly created node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sub_nod</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createSubNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">roll_att</span><span class="p">,</span> <span class="n">angle_outputs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="primitive.html" class="btn btn-neutral float-right" title="mgear.maya.primitive" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="meshNavigation.html" class="btn btn-neutral" title="mgear.maya.meshNavigation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

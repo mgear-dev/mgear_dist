@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.applyop &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.maya.attribute" href="attribute.html"/>
+        <link rel="prev" title="mgear.maya" href="maya.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maya.html">mgear.maya</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/shifter.html">mgear.maya.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/guide.html">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/utils.html">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/widgets.html">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.applyop</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/mgear/maya/applyop.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.applyop">
+<span id="mgear-maya-applyop"></span><h1>mgear.maya.applyop<a class="headerlink" href="#module-mgear.maya.applyop" title="Permalink to this headline">¶</a></h1>
+<p><strong>Apply operator module</strong></p>
+<p>Operators are any node that connected to other nodes creates a rig behaviour:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">I</span><span class="o">.</span><span class="n">E</span><span class="p">:</span> <span class="n">IK</span> <span class="n">solvers</span> <span class="ow">and</span>  <span class="n">constraints</span> <span class="n">are</span> <span class="n">operators</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="mgear.maya.applyop.aimCns">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">aimCns</code><span class="sig-paren">(</span><em>obj, master, axis='xy', wupType=4, wupVector=[0, 1, 0], wupObject=None, maintainOffset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.aimCns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a direction constraint</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<em>dagNode</em>) &#8211; Constrained object.</li>
+<li><strong>master</strong> (<em>dagNode</em>) &#8211; Constraining Object.</li>
+<li><strong>axis</strong> (<em>str</em>) &#8211; Define pointing axis and upvector axis (combination of xyz and -x-y-z).</li>
+<li><strong>wupType</strong> (<em>int</em>) &#8211; 0=scene up, 1=Object up, 2=Object rotation up, 3=Vector, 4=None.</li>
+<li><strong>wupVector</strong> (<em>list of 3 float</em>) &#8211; world up vector. Exp: [0.0,1.0,0.0].</li>
+<li><strong>wupObject</strong> (<em>pyNode</em>) &#8211; world up object.</li>
+<li><strong>maintainOffset</strong> (<em>bool</em>) &#8211; Maintain offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Newly created constraint.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_curvecns_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_curvecns_op</code><span class="sig-paren">(</span><em>crv</em>, <em>inputs=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_curvecns_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>create mGear curvecns node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>crv</strong> (<em>nurbsCurve</em>) &#8211; Nurbs curve.</li>
+<li><strong>inputs</strong> (<em>List of dagNodes</em>) &#8211; Input object to drive the curve. Should be same number as crv points.
+Also the order should be the same as the points</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The curvecns node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_curveslide2_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_curveslide2_op</code><span class="sig-paren">(</span><em>outcrv</em>, <em>incrv</em>, <em>position=0</em>, <em>maxstretch=1</em>, <em>maxsquash=1</em>, <em>softness=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_curveslide2_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a sn_curveslide2_op operator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>outcrv</strong> (<em>NurbsCurve</em>) &#8211; Out Curve.</li>
+<li><strong>incrv</strong> (<em>NurbsCurve</em>) &#8211; In Curve.</li>
+<li><strong>position</strong> (<em>float</em>) &#8211; Default position value (from 0 to 1).</li>
+<li><strong>maxstretch</strong> (<em>float</em>) &#8211; Default maxstretch value (from 1 to infinite).</li>
+<li><strong>maxsquash</strong> (<em>float</em>) &#8211; Default maxsquash value (from 0 to 1).</li>
+<li><strong>softness</strong> (<em>float</em>) &#8211; Default softness value (from 0 to 1).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created operator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_ikfk2bone_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_ikfk2bone_op</code><span class="sig-paren">(</span><em>out=[]</em>, <em>root=None</em>, <em>eff=None</em>, <em>upv=None</em>, <em>fk0=None</em>, <em>fk1=None</em>, <em>fk2=None</em>, <em>lengthA=5</em>, <em>lengthB=3</em>, <em>negate=False</em>, <em>blend=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_ikfk2bone_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a sn_ikfk2bone_op operator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>out</strong> (<em>list of dagNodes</em>) &#8211; The constrained outputs order must be respected (BoneA, BoneB,  Center, CenterN, Eff),
+set it to None if you don&#8217;t want one of the output.</li>
+<li><strong>root</strong> (<em>dagNode</em>) &#8211; Object that will act as the root of the chain.</li>
+<li><strong>eff</strong> (<em>dagNode</em>) &#8211; Object that will act as the eff controler of the chain.</li>
+<li><strong>upv</strong> (<em>dagNode</em>) &#8211; Object that will act as the up vector of the chain.</li>
+<li><strong>fk0</strong> (<em>dagNode</em>) &#8211; Object that will act as the first fk controler of the chain.</li>
+<li><strong>fk1</strong> (<em>dagNode</em>) &#8211; Object that will act as the second fk controler of the chain.</li>
+<li><strong>fk2</strong> (<em>dagNode</em>) &#8211; Object that will act as the fk effector controler of the chain.</li>
+<li><strong>lengthA</strong> (<em>float</em>) &#8211; Length of first bone.</li>
+<li><strong>lengthB</strong> (<em>float</em>) &#8211; Length of second bone.</li>
+<li><strong>negate</strong> (<em>bool</em>) &#8211; Use with negative Scale.</li>
+<li><strong>blend</strong> (<em>float</em>) &#8211; Default blend value (0 for full ik, 1 for full fk).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created operator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_intmatrix_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_intmatrix_op</code><span class="sig-paren">(</span><em>mA</em>, <em>mB</em>, <em>blend=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_intmatrix_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>create mGear interpolate Matrix node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mA</strong> (<em>matrix</em>) &#8211; Input matrix A.</li>
+<li><strong>mB</strong> (<em>matrix</em>) &#8211; Input matrix A.</li>
+<li><strong>blend</strong> (<em>float or connection</em>) &#8211; Blending value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Newly created mGear_intMatrix node</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_inverseRotorder_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_inverseRotorder_op</code><span class="sig-paren">(</span><em>out_obj</em>, <em>in_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_inverseRotorder_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a sn_inverseRotorder_op operator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>out_obj</strong> (<em>dagNode</em>) &#8211; Output object.</li>
+<li><strong>in_obj</strong> (<em>dagNode</em>) &#8211; Input object.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created operator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_mulmatrix_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_mulmatrix_op</code><span class="sig-paren">(</span><em>mA</em>, <em>mB</em>, <em>target=False</em>, <em>transform='srt'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_mulmatrix_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create mGear multiply Matrix node.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This node have same functionality as the default Maya matrix multiplication.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mA</strong> (<em>matrix</em>) &#8211; input matrix A.</li>
+<li><strong>mB</strong> (<em>matrix</em>) &#8211; input matrix B.</li>
+<li><strong>target</strong> (<em>dagNode</em>) &#8211; object target to apply the transformation</li>
+<li><strong>transform</strong> (<em>str</em>) &#8211; if target is True. out transform  to SRT valid value s r t</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Newly created mGear_multMatrix node</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_rollsplinekine_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_rollsplinekine_op</code><span class="sig-paren">(</span><em>out</em>, <em>controlers=[]</em>, <em>u=0.5</em>, <em>subdiv=10</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_rollsplinekine_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a sn_rollsplinekine_op operator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>out</strong> (<em>dagNode</em>) &#8211; onstrained Object.</li>
+<li><strong>controlers</strong> (<em>list of dagNodes</em>) &#8211; Objects that will act as controler of the bezier curve.
+Objects must have a parent that will be used as an input for the operator.</li>
+<li><strong>u</strong> (<em>float</em>) &#8211; Position of the object on the bezier curve (from 0 to 1).</li>
+<li><strong>subdiv</strong> (<em>int</em>) &#8211; spline subdivision precision.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created operator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_spinePointAtOp">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_spinePointAtOp</code><span class="sig-paren">(</span><em>cns</em>, <em>startobj</em>, <em>endobj</em>, <em>blend=0.5</em>, <em>axis='-Z'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_spinePointAtOp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a SpinePointAt operator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cns</strong> (<em>Constraint</em>) &#8211; The constraint to apply the operator on (must be a curve, path or direction constraint).</li>
+<li><strong>startobj</strong> (<em>dagNode</em>) &#8211; Start Reference.</li>
+<li><strong>endobj</strong> (<em>dagNode</em>) &#8211; End Reference.</li>
+<li><strong>blend</strong> (<em>float</em>) &#8211; Blend influence value from 0 to 1.</li>
+<li><strong>axis</strong> (<a class="reference internal" href="../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) &#8211; Axis direction.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created operator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_spinePointAtOpWM">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_spinePointAtOpWM</code><span class="sig-paren">(</span><em>cns</em>, <em>startobj</em>, <em>endobj</em>, <em>blend=0.5</em>, <em>axis='-Z'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_spinePointAtOpWM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a SpinePointAt operator using world matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Constraint</strong> (<em>cns</em>) &#8211; The constraint to apply the operator on (must be a curve, path or direction constraint).</li>
+<li><strong>startobj</strong> (<em>dagNode</em>) &#8211; Start Reference.</li>
+<li><strong>endobj</strong> (<em>dagNode</em>) &#8211; End Reference.</li>
+<li><strong>blend</strong> (<em>float</em>) &#8211; Blend influence value from 0 to 1.</li>
+<li><strong>axis</strong> (<em>str</em>) &#8211; Axis direction.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created operator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_spring_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_spring_op</code><span class="sig-paren">(</span><em>in_obj</em>, <em>goal=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_spring_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply mGear spring node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_obj</strong> (<em>dagNode</em>) &#8211; Constrained object.</li>
+<li><strong>goal</strong> (<em>dagNode</em>) &#8211; By default is False.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Newly created node</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.gear_squashstretch2_op">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_squashstretch2_op</code><span class="sig-paren">(</span><em>out</em>, <em>sclref=None</em>, <em>length=5</em>, <em>axis='x'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_squashstretch2_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a sn_squashstretch2_op operator</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>out</strong> (<em>dagNode</em>) &#8211; Constrained object.</li>
+<li><strong>sclref</strong> (<em>dagNode</em>) &#8211; Global scaling reference object.</li>
+<li><strong>length</strong> (<em>float</em>) &#8211; Rest Length of the S&amp;S.</li>
+<li><strong>axis</strong> (<em>str</em>) &#8211; &#8216;x&#8217; for scale all except x axis...</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created operator.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.oriCns">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">oriCns</code><span class="sig-paren">(</span><em>driver</em>, <em>driven</em>, <em>maintainOffset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.oriCns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply orientation constraint changing XYZ  default connexions by rotate compound connexions</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We have found an evaluation difference in the values if the connexion is compound or by axis</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>driver</strong> (<em>dagNode or dagNode list</em>) &#8211; Driver object.</li>
+<li><strong>driven</strong> (<em>dagNode</em>) &#8211; Driven object.</li>
+<li><strong>maintainOffset</strong> (<em>bool</em>) &#8211; Keep the offset.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Orientation constraintn node.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mgear.maya.applyop</span> <span class="kn">as</span> <span class="nn">aop</span>
+<span class="kn">import</span> <span class="nn">pymel.core</span> <span class="kn">as</span> <span class="nn">pm</span>
+<span class="n">sphere</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">polySphere</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="s1">&#39;sphereDriver&#39;</span><span class="p">)</span>
+<span class="n">cube</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">polyCube</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="s1">&#39;cubeDriven&#39;</span><span class="p">)</span>
+<span class="n">ori_cns</span> <span class="o">=</span> <span class="n">aop</span><span class="o">.</span><span class="n">oriCns</span><span class="p">(</span><span class="n">sphere</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cube</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.pathCns">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">pathCns</code><span class="sig-paren">(</span><em>obj</em>, <em>curve</em>, <em>cnsType=False</em>, <em>u=0</em>, <em>tangent=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.pathCns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a path constraint or curve constraint.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<em>dagNode</em>) &#8211; Constrained object.</li>
+<li><strong>curve</strong> (<em>Nurbscurve</em>) &#8211; Constraining Curve.</li>
+<li><strong>cnsType</strong> (<em>int</em>) &#8211; 0 for Path Constraint, 1 for Curve Constraint (Parametric).</li>
+<li><strong>u</strong> (<em>float</em>) &#8211; Position of the object on the curve (from 0 to 100 for path constraint, from 0 to 1 for Curve cns).</li>
+<li><strong>tangent</strong> (<em>bool</em>) &#8211; Keep tangent orientation option.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created constraint.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.applyop.splineIK">
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">splineIK</code><span class="sig-paren">(</span><em>name</em>, <em>chn</em>, <em>parent=None</em>, <em>cParent=None</em>, <em>curve=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.splineIK" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a splineIK solver to a chain.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Name of the operator node.</li>
+<li><strong>chn</strong> (<em>list of joints</em>) &#8211; List of joints. At less 2 joints should be in the list.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) &#8211; Parent for the ikHandle.</li>
+<li><strong>cParent</strong> (<em>dagNode</em>) &#8211; Parent for the curve.</li>
+<li><strong>curve</strong> (<em>dagNode</em>) &#8211; Specifies the curve to be used by the ikSplineHandle. This param is optional.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ikHandle node and splinecrv in a list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aop</span><span class="o">.</span><span class="n">splineIK</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span><span class="s2">&quot;rollRef&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rollRef</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">cParent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bone0</span> <span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="attribute.html" class="btn btn-neutral float-right" title="mgear.maya.attribute" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="maya.html" class="btn btn-neutral" title="mgear.maya" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

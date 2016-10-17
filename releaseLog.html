@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Release Log &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="index.html"/>
+        <link rel="next" title="License" href="license.html"/>
+        <link rel="prev" title="FAQ" href="FAQ.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Release Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">2.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Release Log</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/releaseLog.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="release-log">
+<h1>Release Log<a class="headerlink" href="#release-log" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>2.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
+<dd><ul class="first last">
+<li><p class="first">New licensing under MIT license terms.</p>
+</li>
+<li><p class="first">New Documentation</p>
+</li>
+<li><p class="first">New Component settings view.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Shifter: Modular rigging sytem rebranded.</dt>
+<dd><ul class="first last simple">
+<li>Single Hierarchy Joint connexion</li>
+<li>Update Guides Command.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Mocap HumanIK mapping tool for standard Shifter biped</p>
+</li>
+<li><p class="first">Gimmick joints basic tools</p>
+</li>
+<li><dl class="first docutils">
+<dt>Enviroment variables</dt>
+<dd><ul class="first last simple">
+<li>Synoptic variable: MGEAR_SYNOPTIC_PATH</li>
+<li>Component variable: MGEAR_SHIFTER_COMPONENT_PATH</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Pre and Post script execution.</p>
+</li>
+</ul>
+</dd>
+<dt><strong>Inprovements</strong></dt>
+<dd><ul class="first last simple">
+<li>Groups and dag pose connected to rig base node. This will avoid lost elements if we export selection.</li>
+<li>Component guides will snap to parent position at creation time.</li>
+<li>Newly created guide components automatic update of the side and uiHost from the parent attributes.</li>
+<li>Guide Blades have new attr to control the  roll offset</li>
+<li>Duplicate symmetry can find partial chain names. Is not needed to duplicate from the top root of the branch.</li>
+<li>mGear version and other useful information in guide root.</li>
+</ul>
+</dd>
+<dt><strong>Components Improvements</strong></dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>Chain_01</dt>
+<dd><ul class="first last simple">
+<li>Scaling</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Control_01</dt>
+<dd><ul class="first last simple">
+<li>uniScale: Option to set uniform scale or independet axis scale</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FAQ.html" class="btn btn-neutral" title="FAQ" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.transform &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../index.html"/>
+        <link rel="up" title="Base Modules" href="../baseModules.html"/>
+        <link rel="next" title="mgear.maya.utils" href="mgear.maya.utils.html"/>
+        <link rel="prev" title="mgear.maya.skin" href="mgear.maya.skin.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.vector.html">mgear.maya.vector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../baseModules.html">Base Modules</a> &raquo;</li>
+      
+    <li>mgear.maya.transform</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/generated/mgear.maya.transform.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.transform">
+<span id="mgear-maya-transform"></span><h1>mgear.maya.transform<a class="headerlink" href="#module-mgear.maya.transform" title="Permalink to this headline">¶</a></h1>
+<p>Functions to work with matrix and transformations.</p>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.convert2TransformMatrix" title="mgear.maya.transform.convert2TransformMatrix"><code class="xref py py-obj docutils literal"><span class="pre">convert2TransformMatrix</span></code></a>(tm)</td>
+<td>Convert a transformation Matrix or a matrix to a transformation matrix in world space.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getChainTransform" title="mgear.maya.transform.getChainTransform"><code class="xref py py-obj docutils literal"><span class="pre">getChainTransform</span></code></a>(positions,&nbsp;normal[,&nbsp;negate])</td>
+<td>Get a tranformation list from a positions list and normal.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getChainTransform2" title="mgear.maya.transform.getChainTransform2"><code class="xref py py-obj docutils literal"><span class="pre">getChainTransform2</span></code></a>(positions,&nbsp;normal[,&nbsp;negate])</td>
+<td>Get a tranformation list from a positions list and normal.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getFilteredTransform" title="mgear.maya.transform.getFilteredTransform"><code class="xref py py-obj docutils literal"><span class="pre">getFilteredTransform</span></code></a>(m[,&nbsp;translation,&nbsp;...])</td>
+<td>Retrieve a transformation filtered.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getInterpolateTransformMatrix" title="mgear.maya.transform.getInterpolateTransformMatrix"><code class="xref py py-obj docutils literal"><span class="pre">getInterpolateTransformMatrix</span></code></a>(t1,&nbsp;t2[,&nbsp;blend])</td>
+<td>Interpolate 2 matrix.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getOffsetPosition" title="mgear.maya.transform.getOffsetPosition"><code class="xref py py-obj docutils literal"><span class="pre">getOffsetPosition</span></code></a>(node[,&nbsp;offset])</td>
+<td>Get an offset position from dagNode</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getPositionFromMatrix" title="mgear.maya.transform.getPositionFromMatrix"><code class="xref py py-obj docutils literal"><span class="pre">getPositionFromMatrix</span></code></a>(in_m)</td>
+<td>Get the position values from matrix</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getRotationFromAxis" title="mgear.maya.transform.getRotationFromAxis"><code class="xref py py-obj docutils literal"><span class="pre">getRotationFromAxis</span></code></a>(in_a,&nbsp;in_b[,&nbsp;axis,&nbsp;negate])</td>
+<td>Get the matrix rotation from a given axis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getSymmetricalTransform" title="mgear.maya.transform.getSymmetricalTransform"><code class="xref py py-obj docutils literal"><span class="pre">getSymmetricalTransform</span></code></a>(t[,&nbsp;axis,&nbsp;fNegScale])</td>
+<td>Get the symmetrical tranformation matrix from a define 2 axis mirror plane.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getTransform" title="mgear.maya.transform.getTransform"><code class="xref py py-obj docutils literal"><span class="pre">getTransform</span></code></a>(node)</td>
+<td>Return the transformation matrix of the dagNode in worldSpace.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getTransformFromPos" title="mgear.maya.transform.getTransformFromPos"><code class="xref py py-obj docutils literal"><span class="pre">getTransformFromPos</span></code></a>(pos)</td>
+<td>Create a transformation Matrix from a given position.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getTransformLookingAt" title="mgear.maya.transform.getTransformLookingAt"><code class="xref py py-obj docutils literal"><span class="pre">getTransformLookingAt</span></code></a>(pos,&nbsp;lookat,&nbsp;normal[,&nbsp;...])</td>
+<td>Return the transformation matrix of the dagNode oriented looking to an specific point.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.getTranslation" title="mgear.maya.transform.getTranslation"><code class="xref py py-obj docutils literal"><span class="pre">getTranslation</span></code></a>(node)</td>
+<td>Return the position of the dagNode in worldSpace.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.matchWorldTransform" title="mgear.maya.transform.matchWorldTransform"><code class="xref py py-obj docutils literal"><span class="pre">matchWorldTransform</span></code></a>(source,&nbsp;target)</td>
+<td>Match 2 dagNode transformations in world space.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.quaternionDotProd" title="mgear.maya.transform.quaternionDotProd"><code class="xref py py-obj docutils literal"><span class="pre">quaternionDotProd</span></code></a>(q1,&nbsp;q2)</td>
+<td>Get the dot product of 2 quaternion.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.quaternionSlerp" title="mgear.maya.transform.quaternionSlerp"><code class="xref py py-obj docutils literal"><span class="pre">quaternionSlerp</span></code></a>(q1,&nbsp;q2,&nbsp;blend)</td>
+<td>Get an interpolate quaternion based in slerp function.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.resetTransform" title="mgear.maya.transform.resetTransform"><code class="xref py py-obj docutils literal"><span class="pre">resetTransform</span></code></a>(node[,&nbsp;t,&nbsp;r,&nbsp;s])</td>
+<td>Reset the scale, rotation and translation for a given dagNode.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.setMatrixPosition" title="mgear.maya.transform.setMatrixPosition"><code class="xref py py-obj docutils literal"><span class="pre">setMatrixPosition</span></code></a>(in_m,&nbsp;pos)</td>
+<td>Set the position for a given matrix</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.setMatrixRotation" title="mgear.maya.transform.setMatrixRotation"><code class="xref py py-obj docutils literal"><span class="pre">setMatrixRotation</span></code></a>(m,&nbsp;rot)</td>
+<td>Set the rotation for a given matrix</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/transform.html#mgear.maya.transform.setMatrixScale" title="mgear.maya.transform.setMatrixScale"><code class="xref py py-obj docutils literal"><span class="pre">setMatrixScale</span></code></a>(m[,&nbsp;scl])</td>
+<td>Set the scale for a given matrix</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mgear.maya.utils.html" class="btn btn-neutral float-right" title="mgear.maya.utils" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mgear.maya.skin.html" class="btn btn-neutral" title="mgear.maya.skin" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

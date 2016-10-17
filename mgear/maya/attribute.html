@@ -1,0 +1,627 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.attribute &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.maya.curve" href="curve.html"/>
+        <link rel="prev" title="mgear.maya.applyop" href="applyop.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node.html">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">mgear.maya.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/shifter.html">mgear.maya.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/guide.html">mgear.maya.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/gui.html">mgear.maya.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/component.html">mgear.maya.shifter.component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter/component/guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/synoptic.html">mgear.maya.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/utils.html">mgear.maya.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic/widgets.html">mgear.maya.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+      
+    <li>mgear.maya.attribute</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/mgear/maya/attribute.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.attribute">
+<span id="mgear-maya-attribute"></span><h1>mgear.maya.attribute<a class="headerlink" href="#module-mgear.maya.attribute" title="Permalink to this headline">¶</a></h1>
+<p>Attribute creation functions.</p>
+<dl class="class">
+<dt id="mgear.maya.attribute.FCurveParamDef">
+<em class="property">class </em><code class="descclassname">mgear.maya.attribute.</code><code class="descname">FCurveParamDef</code><span class="sig-paren">(</span><em>scriptName</em>, <em>keys=None</em>, <em>interpolation=0</em>, <em>extrapolation=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.FCurveParamDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an Fcurve parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; Attribute fullName.</li>
+<li><strong>keys</strong> (<em>list</em>) &#8211; The keyframes to define the function curve.</li>
+<li><strong>interpolation</strong> (<em>int</em>) &#8211; the curve interpolation.</li>
+<li><strong>extrapolation</strong> (<em>int</em>) &#8211; the curve extrapolation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="mgear.maya.attribute.FCurveParamDef.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.FCurveParamDef.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to property using the parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The node to add the attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.attribute.ParamDef">
+<em class="property">class </em><code class="descclassname">mgear.maya.attribute.</code><code class="descname">ParamDef</code><span class="sig-paren">(</span><em>scriptName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.ParamDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>ParamDef (read as Parameter Definition) encapsulate the attribute creation arguments in a handy object.
+Also include a creation method.</p>
+<p class="rubric">Example</p>
+<p>This can be use later to create attr or export the description to xml or json file</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>scriptName (str): Attribute fullName
+paranDef (dic): The stored param definition</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="mgear.maya.attribute.ParamDef.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.ParamDef.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to property using the parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The node to add the attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.attribute.ParamDef2">
+<em class="property">class </em><code class="descclassname">mgear.maya.attribute.</code><code class="descname">ParamDef2</code><span class="sig-paren">(</span><em>scriptName</em>, <em>valueType</em>, <em>value</em>, <em>niceName=None</em>, <em>shortName=None</em>, <em>minimum=None</em>, <em>maximum=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.ParamDef2" title="Permalink to this definition">¶</a></dt>
+<dd><p>ParamDef2 inherit from ParamDef</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; Parameter scriptname.</li>
+<li><strong>valueType</strong> (<em>str</em>) &#8211; The Attribute Type. Exp: &#8216;string&#8217;, &#8216;bool&#8217;, &#8216;long&#8217;, etc..</li>
+<li><strong>value</strong> (<em>float or int</em>) &#8211; Default parameter value.</li>
+<li><strong>niceName</strong> (<em>str</em>) &#8211; Parameter niceName.</li>
+<li><strong>shortName</strong> (<em>str</em>) &#8211; Parameter shortName.</li>
+<li><strong>minimum</strong> (<em>float or int</em>) &#8211; mininum value.</li>
+<li><strong>maximum</strong> (<em>float or int</em>) &#8211; maximum value.</li>
+<li><strong>keyable</strong> (<em>boo</em>) &#8211; If true is keyable</li>
+<li><strong>readable</strong> (<em>boo</em>) &#8211; If true is readable</li>
+<li><strong>storable</strong> (<em>boo</em>) &#8211; If true is storable</li>
+<li><strong>writable</strong> (<em>boo</em>) &#8211; If true is writable</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The stored parameter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#mgear.maya.attribute.ParamDef" title="mgear.maya.attribute.ParamDef">ParamDef</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.addAttribute">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">addAttribute</code><span class="sig-paren">(</span><em>node</em>, <em>longName</em>, <em>attributeType</em>, <em>value</em>, <em>niceName=None</em>, <em>shortName=None</em>, <em>minValue=None</em>, <em>maxValue=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em>, <em>channelBox=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.addAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add attribute to a node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
+<li><strong>attributeType</strong> (<em>str</em>) &#8211; The Attribute Type. Exp: &#8216;string&#8217;, &#8216;bool&#8217;, &#8216;long&#8217;, etc..</li>
+<li><strong>value</strong> (<em>float or int</em>) &#8211; The default value.</li>
+<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) &#8211; The attribute short name. (optional)</li>
+<li><strong>minValue</strong> (<em>float or int</em>) &#8211; minimum value. (optional)</li>
+<li><strong>maxValue</strong> (<em>float or int</em>) &#8211; maximum value. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
+<li><strong>channelBox</strong> (<em>bool</em>) &#8211; Set if the attribute is in the channelBox or not, when the attribute is not keyable. (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The long name of the new attribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.addColorAttribute">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">addColorAttribute</code><span class="sig-paren">(</span><em>node</em>, <em>longName</em>, <em>value=False</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em>, <em>niceName=None</em>, <em>shortName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.addColorAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a color attribute to a node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
+<li><strong>value</strong> (<em>list of flotat</em>) &#8211; The default value in a list for RGB. exp [1.0, 0.99, 0.13].</li>
+<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
+<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) &#8211; The attribute short name. (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The long name of the new attribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.addEnumAttribute">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">addEnumAttribute</code><span class="sig-paren">(</span><em>node</em>, <em>longName</em>, <em>value</em>, <em>enum</em>, <em>niceName=None</em>, <em>shortName=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.addEnumAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an enumerate attribute to a node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
+<li><strong>value</strong> (<em>int</em>) &#8211; The default value.</li>
+<li><strong>enum</strong> (<em>list of str</em>) &#8211; The list of elements in the enumerate control</li>
+<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) &#8211; The attribute short name. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The long name of the new attribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.addFCurve">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">addFCurve</code><span class="sig-paren">(</span><em>node</em>, <em>name='fcurve'</em>, <em>keys=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.addFCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>FCurve attribute (just a animCurveUU node connected to an attribute)</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This Method is deprecated.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to add the new fcurve attribute</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The attribute name</li>
+<li><strong>key</strong> (<em>list</em>) &#8211; list of keyframes and values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Fcurve and attribute name</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.attribute.colorParamDef">
+<em class="property">class </em><code class="descclassname">mgear.maya.attribute.</code><code class="descname">colorParamDef</code><span class="sig-paren">(</span><em>scriptName</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.colorParamDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Color parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; Attribute fullName</li>
+<li><strong>value</strong> (<em>list of float</em>) &#8211; The default value in a list for RGB. exp [1.0, 0.99, 0.13].</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="mgear.maya.attribute.colorParamDef.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.colorParamDef.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to property using the parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The node to add the attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.attribute.enumParamDef">
+<em class="property">class </em><code class="descclassname">mgear.maya.attribute.</code><code class="descname">enumParamDef</code><span class="sig-paren">(</span><em>scriptName</em>, <em>enum</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.enumParamDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an enumarator parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scriptName</strong> (<em>str</em>) &#8211; Attribute fullName</li>
+<li><strong>enum</strong> (<em>list of str</em>) &#8211; The list of elements in the enumerate control.</li>
+<li><strong>value</strong> (<em>int</em>) &#8211; The default value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="mgear.maya.attribute.enumParamDef.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.enumParamDef.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to property using the parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The node to add the attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.lockAttribute">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">lockAttribute</code><span class="sig-paren">(</span><em>node, attributes=['tx', 'ty', 'tz', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz', 'v']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.lockAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lock attributes of a node. By defaul will lock the rotation, scale and translation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The node with the attributes to lock.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) &#8211; The list of the attributes to lock.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">att</span><span class="o">.</span><span class="n">lockAttribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_ctl</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;sx&quot;</span><span class="p">,</span> <span class="s2">&quot;sy&quot;</span><span class="p">,</span> <span class="s2">&quot;sz&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.setInvertMirror">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setInvertMirror</code><span class="sig-paren">(</span><em>node</em>, <em>invList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setInvertMirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set invert mirror pose values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The object to set invert mirror Values</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.setKeyableAttributes">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setKeyableAttributes</code><span class="sig-paren">(</span><em>nodes, params=['tx', 'ty', 'tz', 'ro', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setKeyableAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set keyable attributes of a node. By defaul will set keyable the rotation, scale and translation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The node with the attributes to set keyable.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) &#8211; The list of the attributes to set keyable. Attrs not in the list will be locked
+if None, [&#8220;tx&#8221;, &#8220;ty&#8221;, &#8220;tz&#8221;, &#8220;rorder&#8221;, &#8220;rx&#8221;, &#8220;ry&#8221;, &#8220;rz&#8221;, &#8220;sx&#8221;, &#8220;sy&#8221;, &#8220;sz&#8221;] is used</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.setNotKeyableAttributes">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setNotKeyableAttributes</code><span class="sig-paren">(</span><em>nodes, attributes=['tx', 'ty', 'tz', 'ro', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz', 'v']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setNotKeyableAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set not keyable attributes of a node. By defaul will set not keyable the rotation, scale and translation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The node with the attributes to set keyable.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) &#8211; The list of the attributes to set not keyable.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.setRotOrder">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setRotOrder</code><span class="sig-paren">(</span><em>node</em>, <em>s='XYZ'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setRotOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the rotorder of the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to set the rot order on.</li>
+<li><strong>s</strong> (<em>str</em>) &#8211; Value of the rotorder. Possible values : (&#8220;XYZ&#8221;, &#8220;XZY&#8221;, &#8220;YXZ&#8221;, &#8220;YZX&#8221;, &#8220;ZXY&#8221;, &#8220;ZYX&#8221;)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="curve.html" class="btn btn-neutral float-right" title="mgear.maya.curve" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="applyop.html" class="btn btn-neutral" title="mgear.maya.applyop" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

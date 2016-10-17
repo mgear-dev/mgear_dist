@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.node &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../index.html"/>
+        <link rel="up" title="Base Modules" href="../baseModules.html"/>
+        <link rel="next" title="mgear.maya.primitive" href="mgear.maya.primitive.html"/>
+        <link rel="prev" title="mgear.maya.meshNavigation" href="mgear.maya.meshNavigation.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.html">mgear.maya</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.applyop.html">mgear.maya.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.attribute.html">mgear.maya.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.curve.html">mgear.maya.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.dag.html">mgear.maya.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.fcurve.html">mgear.maya.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.icon.html">mgear.maya.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.log.html">mgear.maya.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.meshNavigation.html">mgear.maya.meshNavigation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.maya.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.primitive.html">mgear.maya.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.skin.html">mgear.maya.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.transform.html">mgear.maya.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.utils.html">mgear.maya.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.maya.vector.html">mgear.maya.vector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">mGear: Rigging Framework</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+      
+          <li><a href="../baseModules.html">Base Modules</a> &raquo;</li>
+      
+    <li>mgear.maya.node</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/generated/mgear.maya.node.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.node">
+<span id="mgear-maya-node"></span><h1>mgear.maya.node<a class="headerlink" href="#module-mgear.maya.node" title="Permalink to this headline">¶</a></h1>
+<p>Functions to create and connect nodes.</p>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createAddNode" title="mgear.maya.node.createAddNode"><code class="xref py py-obj docutils literal"><span class="pre">createAddNode</span></code></a>(inputA,&nbsp;inputB)</td>
+<td>Create and connect a addition node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createAddNodeMulti" title="mgear.maya.node.createAddNodeMulti"><code class="xref py py-obj docutils literal"><span class="pre">createAddNodeMulti</span></code></a>([inputs])</td>
+<td>Create and connect multiple add nodes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createBlendNode" title="mgear.maya.node.createBlendNode"><code class="xref py py-obj docutils literal"><span class="pre">createBlendNode</span></code></a>(inputA,&nbsp;inputB[,&nbsp;blender])</td>
+<td>Create and connect a createBlendNode node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createClampNode" title="mgear.maya.node.createClampNode"><code class="xref py py-obj docutils literal"><span class="pre">createClampNode</span></code></a>(input,&nbsp;in_min,&nbsp;in_max)</td>
+<td>Create and connect a clamp node</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createClampNodeMulti" title="mgear.maya.node.createClampNodeMulti"><code class="xref py py-obj docutils literal"><span class="pre">createClampNodeMulti</span></code></a>(name[,&nbsp;inputs,&nbsp;in_min,&nbsp;...])</td>
+<td>Create and connect multiple clamp nodes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createConditionNode" title="mgear.maya.node.createConditionNode"><code class="xref py py-obj docutils literal"><span class="pre">createConditionNode</span></code></a>([firstTerm,&nbsp;secondTerm,&nbsp;...])</td>
+<td>Create and connect a condition node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createCurveInfoNode" title="mgear.maya.node.createCurveInfoNode"><code class="xref py py-obj docutils literal"><span class="pre">createCurveInfoNode</span></code></a>(crv)</td>
+<td>Create and connect a curveInfo node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createDecomposeMatrixNode" title="mgear.maya.node.createDecomposeMatrixNode"><code class="xref py py-obj docutils literal"><span class="pre">createDecomposeMatrixNode</span></code></a>(m)</td>
+<td>Create and connect a decomposeMatrix node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createDistNode" title="mgear.maya.node.createDistNode"><code class="xref py py-obj docutils literal"><span class="pre">createDistNode</span></code></a>(objA,&nbsp;objB[,&nbsp;output])</td>
+<td>Create and connect a distance node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createDivNode" title="mgear.maya.node.createDivNode"><code class="xref py py-obj docutils literal"><span class="pre">createDivNode</span></code></a>(inputA,&nbsp;inputB[,&nbsp;output])</td>
+<td>Create and connect a Divide node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createDivNodeMulti" title="mgear.maya.node.createDivNodeMulti"><code class="xref py py-obj docutils literal"><span class="pre">createDivNodeMulti</span></code></a>(name[,&nbsp;inputs1,&nbsp;inputs2])</td>
+<td>Create and connect multiple divide nodes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createMulDivNode" title="mgear.maya.node.createMulDivNode"><code class="xref py py-obj docutils literal"><span class="pre">createMulDivNode</span></code></a>(inputA,&nbsp;inputB[,&nbsp;...])</td>
+<td>Create and connect a Multiply or Divide node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createMulNode" title="mgear.maya.node.createMulNode"><code class="xref py py-obj docutils literal"><span class="pre">createMulNode</span></code></a>(inputA,&nbsp;inputB[,&nbsp;output])</td>
+<td>Create and connect a Multiply node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createMulNodeMulti" title="mgear.maya.node.createMulNodeMulti"><code class="xref py py-obj docutils literal"><span class="pre">createMulNodeMulti</span></code></a>(name[,&nbsp;inputs])</td>
+<td>Create and connect multiple multiply nodes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createNegateNodeMulti" title="mgear.maya.node.createNegateNodeMulti"><code class="xref py py-obj docutils literal"><span class="pre">createNegateNodeMulti</span></code></a>(name[,&nbsp;inputs])</td>
+<td>Create and connect multiple negate nodes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createPairBlend" title="mgear.maya.node.createPairBlend"><code class="xref py py-obj docutils literal"><span class="pre">createPairBlend</span></code></a>([inputA,&nbsp;inputB,&nbsp;blender,&nbsp;...])</td>
+<td>Create and connect a PairBlend node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createReverseNode" title="mgear.maya.node.createReverseNode"><code class="xref py py-obj docutils literal"><span class="pre">createReverseNode</span></code></a>(input[,&nbsp;output])</td>
+<td>Create and connect a reverse node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createSubNode" title="mgear.maya.node.createSubNode"><code class="xref py py-obj docutils literal"><span class="pre">createSubNode</span></code></a>(inputA,&nbsp;inputB)</td>
+<td>Create and connect a subtraction node.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mgear.maya.primitive.html" class="btn btn-neutral float-right" title="mgear.maya.primitive" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mgear.maya.meshNavigation.html" class="btn btn-neutral" title="mgear.maya.meshNavigation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
