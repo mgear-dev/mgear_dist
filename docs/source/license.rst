@@ -1,3 +1,5 @@
+License
+=============
 MGEAR is under the terms of the MIT License
 
 Copyright (c) 2016 Jeremie Passerin, Miquel Campos
@@ -20,7 +22,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-Date:       2016 / 10 / 10
+
+=================	========================	============================================================
+Authors:			Email:						Web:
+=================	========================	============================================================
+Jeremie Passerin	geerem@hotmail.com			`www.jeremiepasserin.com <http://www.jeremiepasserin.com>`_
+Miquel Campos 		hello@miquel-campos.com		`www.miquel-campos.com <http://www.miquel-campos.com>`_
+=================	========================	============================================================
+
+Date: 2016 / 10 / 10
+
+
 
