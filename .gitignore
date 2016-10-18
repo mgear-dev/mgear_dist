@@ -37,9 +37,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
-+*.dblite
-+excons.cache
-Add a comment to this line
-+.build
-+release
-+debug
+
+*.dblite
+excons.cache
+/.build/
+/release/
+/debug/
