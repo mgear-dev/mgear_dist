@@ -143,10 +143,10 @@ class Component(MainComponent):
                 if len(ref_names) > 1:
                     self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
         # Ref
-        if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
-            if len(ref_names) > 1:
-                self.ikref_att = self.addAnimEnumParam("ikref", "Ori Ref", 0, self.settings["ikrefarray"].split(","))
+        # if self.settings["ikrefarray"]:
+        #     ref_names = self.settings["ikrefarray"].split(",")
+        #     if len(ref_names) > 1:
+        #         self.ikref_att = self.addAnimEnumParam("ikref", "Ori Ref", 0, self.settings["ikrefarray"].split(","))
 
 
 

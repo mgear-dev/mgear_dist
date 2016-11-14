@@ -331,7 +331,10 @@ def addIkHandle(parent, name, chn, solver="ikRPsolver", poleV=None):
     >>> self.ikHandleUpvRef = pri.addIkHandle(self.root, self.getName("ikHandleLegChainUpvRef"), self.legChainUpvRef, "ikSCsolver")
     """
 
-    node = pm.ikHandle(n=name, sj=chn[0], ee=chn[-1], solver=solver)[0]
+    # creating a crazy name to avoid name clashing before convert to pyNode.
+    node = pm.ikHandle(n=name+"kjfjfklsdf049r58420582y829h3jnf", sj=chn[0], ee=chn[-1], solver=solver)[0]
+    node = pm.PyNode(node)
+    pm.rename(node, name)
     node.attr("visibility").set(False)
 
     if parent:

@@ -33,6 +33,8 @@ Shifter's MainGuide class and RigGuide class.
 ##########################################################
 # Built-in
 import os
+import sys
+import subprocess
 from functools import partial
 import datetime
 import getpass
@@ -58,7 +60,7 @@ from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 import guideUI as guui
-import stepperUI as stui
+import customStepUI as csui
 
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
@@ -326,8 +328,12 @@ class RigGuide(MainGuide):
         # --------------------------------------------------
         # Settings
         self.pJointRig = self.addParam("joint_rig", "bool", True)
-
         self.pSynoptic = self.addParam("synoptic", "string", "")
+
+        self.pDoPreCustomStep = self.addParam("doPreCustomStep", "bool", False)
+        self.pDoPostCustomStep = self.addParam("doPostCustomStep", "bool", False)
+        self.pPreCustomStep = self.addParam("preCustomStep", "string", "")
+        self.pPostCustomStep = self.addParam("postCustomStep", "string", "")
 
         # --------------------------------------------------
         # Comments
@@ -818,6 +824,41 @@ class helperSlots(object):
         self.close()
         gqt.deleteInstances(self, MayaQDockWidget)
 
+    def editFile(self, widgetList):
+        try:
+            filepath = widgetList.selectedItems()[0].text()
+            if filepath:
+                if sys.platform.startswith('darwin'):
+                    subprocess.call(('open', filepath))
+                elif os.name == 'nt':
+                    os.startfile(filepath)
+                elif os.name == 'posix':
+                    subprocess.call(('xdg-open', filepath))
+            else:
+                pm.displayWarning("Please select one item from the list")
+        except:
+            pm.displayError("The step can't be find or does't exists")
+
+    @classmethod
+    def runStep(self, stepPath):
+        with pm.UndoChunk():       
+            try:
+                pm.displayInfo("Executing custom step: %s"%stepPath)
+                execfile(stepPath)
+                pm.displayInfo("Custom step: %s. Succeed!!"%stepPath)
+            except Exception as ex:
+                template = "An exception of type {0} occured. Arguments:\n{1!r}"
+                message = template.format(type(ex).__name__, ex.args)
+                pm.displayError( message)
+                cont = pm.confirmBox("Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message, "Continue", "stop")
+                if not cont:
+                    pm.undo()
+
+    def runManualStep(self, widgetList):
+        selItems = widgetList.selectedItems()        
+        for item in selItems:        
+            self.runStep( item.text())
+
     
 
 
@@ -830,9 +871,9 @@ class guideSettingsTab(QtWidgets.QDialog, guui.Ui_Form):
         super(guideSettingsTab, self).__init__(parent)
         self.setupUi(self)
 
-class stepperTab(QtWidgets.QDialog, stui.Ui_Form):
+class customStepTab(QtWidgets.QDialog, csui.Ui_Form):
     def __init__(self, parent=None):
-        super(stepperTab, self).__init__(parent)
+        super(customStepTab, self).__init__(parent)
         self.setupUi(self)
 
 class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
@@ -847,7 +888,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.root = pm.selected()[0]
 
         self.guideSettingsTab = guideSettingsTab()
-        self.stepperTab = stepperTab()
+        self.customStepTab = customStepTab()
 
         self.setup_SettingWindow()
         self.create_controls()
@@ -861,7 +902,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.setObjectName(self.toolName)
         self.setWindowFlags(QtCore.Qt.Window)
         self.setWindowTitle(TYPE)
-        self.resize(350, 615)    
+        self.resize(370, 615)    
 
     def create_controls(self):
         """
@@ -883,7 +924,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         """
         #populate tab
         self.tabs.insertTab(0, self.guideSettingsTab, "Guide Settings")
-        # self.tabs.insertTab(1, self.stepperTab, "Stepper")
+        self.tabs.insertTab(1, self.customStepTab, "Custom Steps")
 
         #populate main settings
         self.guideSettingsTab.rigName_lineEdit.setText(self.root.attr("rig_name").get())
@@ -894,13 +935,21 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.populateCheck(self.guideSettingsTab.jointRig_checkBox, "joint_rig")
         self.populateAvailableSynopticTabs()
         for item in self.root.attr("synoptic").get().split(","):
-            self.guideSettingsTab.rigTabs_listWidget.addItem(item)
+            self.guideSettingsTab.rigTabs_listWidget.addItem(item)         
         self.guideSettingsTab.L_color_fk_spinBox.setValue(self.root.attr("L_color_fk").get())
         self.guideSettingsTab.L_color_ik_spinBox.setValue(self.root.attr("L_color_ik").get())
         self.guideSettingsTab.C_color_fk_spinBox.setValue(self.root.attr("C_color_fk").get())
         self.guideSettingsTab.C_color_ik_spinBox.setValue(self.root.attr("C_color_ik").get())
         self.guideSettingsTab.R_color_fk_spinBox.setValue(self.root.attr("R_color_fk").get())
         self.guideSettingsTab.R_color_ik_spinBox.setValue(self.root.attr("R_color_ik").get())
+
+        # pupulate custom steps sttings
+        self.populateCheck(self.customStepTab.preCustomStep_checkBox, "doPreCustomStep")
+        for item in self.root.attr("preCustomStep").get().split(","):
+            self.customStepTab.preCustomStep_listWidget.addItem(item)
+            self.populateCheck(self.customStepTab.postCustomStep_checkBox, "doPostCustomStep")
+        for item in self.root.attr("postCustomStep").get().split(","):
+            self.customStepTab.postCustomStep_listWidget.addItem(item)
 
 
     def create_layout(self):
@@ -922,6 +971,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         """
         self.close_button.clicked.connect(self.close_settings)     
 
+        # Setting Tab
         self.guideSettingsTab.rigName_lineEdit.editingFinished.connect(partial(self.updateLineEdit, self.guideSettingsTab.rigName_lineEdit, "rig_name" ) )
         self.guideSettingsTab.mode_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.guideSettingsTab.mode_comboBox, "mode"))
         self.guideSettingsTab.step_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.guideSettingsTab.step_comboBox, "step"))
@@ -940,11 +990,32 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.guideSettingsTab.R_color_fk_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.guideSettingsTab.R_color_fk_spinBox, "R_color_fk"))
         self.guideSettingsTab.R_color_ik_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.guideSettingsTab.R_color_ik_spinBox, "R_color_ik"))
 
+        # custom Step Tab
+        self.customStepTab.preCustomStep_checkBox.stateChanged.connect(partial(self.updateCheck, self.customStepTab.preCustomStep_checkBox, "doPreCustomStep"))
+        self.customStepTab.preCustomStepAdd_pushButton.clicked.connect(self.addCustomStep)
+        self.customStepTab.preCustomStepRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.customStepTab.preCustomStep_listWidget, "preCustomStep"))
+        self.customStepTab.preCustomStep_listWidget.installEventFilter(self)
+        self.customStepTab.preCustomStepRun_pushButton.clicked.connect(partial(self.runManualStep, self.customStepTab.preCustomStep_listWidget))
+        self.customStepTab.preCustomStepEdit_pushButton.clicked.connect(partial(self.editFile, self.customStepTab.preCustomStep_listWidget))
+
+        self.customStepTab.postCustomStep_checkBox.stateChanged.connect(partial(self.updateCheck, self.customStepTab.postCustomStep_checkBox, "doPostCustomStep"))
+        self.customStepTab.postCustomStepAdd_pushButton.clicked.connect(partial(self.addCustomStep, False))
+        self.customStepTab.postCustomStepRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.customStepTab.postCustomStep_listWidget, "postCustomStep"))
+        self.customStepTab.postCustomStep_listWidget.installEventFilter(self)
+        self.customStepTab.postCustomStepRun_pushButton.clicked.connect(partial(self.runManualStep, self.customStepTab.postCustomStep_listWidget))
+        self.customStepTab.postCustomStepEdit_pushButton.clicked.connect(partial(self.editFile, self.customStepTab.postCustomStep_listWidget))
+
+
+
 
     def eventFilter(self, sender, event):
         if event.type() == QtCore.QEvent.ChildRemoved:
             if sender == self.guideSettingsTab.rigTabs_listWidget:
                 self.updateListAttr(sender, "synoptic")
+            elif sender == self.customStepTab.preCustomStep_listWidget:
+                self.updateListAttr(sender, "preCustomStep")
+            elif sender == self.customStepTab.postCustomStep_listWidget:
+                self.updateListAttr(sender, "postCustomStep")
 
     # Slots ########################################################
 
@@ -976,6 +1047,35 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
 
             self.root.attr("skin").set(filePath)
             self.guideSettingsTab.skin_lineEdit.setText(filePath)
+
+    def addCustomStep(self, pre=True, *args):
+        '''
+        stepAttr = string attr name
+        '''
+        if pre:
+            stepAttr = "preCustomStep"
+            stepWidget = self.customStepTab.preCustomStep_listWidget
+        else:
+            stepAttr = "postCustomStep"
+            stepWidget = self.customStepTab.postCustomStep_listWidget
+
+        # startDir = pm.workspace(q=True, rootDirectory=True)
+        startDir = self.root.attr(stepAttr).get()
+        filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Add",
+                                    fileFilter='Custom Step .py (*.py)')
+        if not filePath:
+            return
+        if not isinstance(filePath, basestring):
+            filePath = filePath[0]
+        
+        # Quick clean the first empty item
+        itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        if itemsList and not itemsList[0]:
+            stepWidget.takeItem(0)
+        
+        stepWidget.addItem(filePath)
+        self.updateListAttr(stepWidget, stepAttr)
+
             
 
 

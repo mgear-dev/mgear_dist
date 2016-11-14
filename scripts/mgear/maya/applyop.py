@@ -73,7 +73,13 @@ def splineIK(name, chn, parent=None, cParent=None, curve=None):
     if curve is not None:
         data["curve"] = curve
 
+
     node, effector, splineCrv = pm.ikHandle(**data)
+    #converting to pyNode
+    node = pm.PyNode("|"+node)
+    effector = pm.PyNode(effector)
+    splineCrv = pm.PyNode(splineCrv)
+
     node.setAttr("visibility", False)
     splineCrv.setAttr("visibility", False)
     pm.rename(splineCrv, name + "_crv")

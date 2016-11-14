@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>268</width>
-    <height>500</height>
+    <width>280</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>2</x>
-     <y>320</y>
+     <y>340</y>
      <width>249</width>
      <height>175</height>
     </rect>
@@ -101,7 +101,7 @@
      <x>1</x>
      <y>9</y>
      <width>249</width>
-     <height>121</height>
+     <height>141</height>
     </rect>
    </property>
    <property name="title">
@@ -113,7 +113,7 @@
       <x>10</x>
       <y>10</y>
       <width>221</width>
-      <height>101</height>
+      <height>121</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -137,6 +137,45 @@
         <string>World Space Orientation Align</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="ctlSize_label">
+         <property name="text">
+          <string>Ctl Size</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="ctlSize_doubleSpinBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="wrapping">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="buttonSymbols">
+          <enum>QAbstractSpinBox::PlusMinus</enum>
+         </property>
+         <property name="minimum">
+          <double>0.010000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>200.000000000000000</double>
+         </property>
+         <property name="value">
+          <double>1.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -236,7 +275,7 @@
    <property name="geometry">
     <rect>
      <x>1</x>
-     <y>140</y>
+     <y>160</y>
      <width>251</width>
      <height>171</height>
     </rect>
@@ -249,7 +288,7 @@
      <rect>
       <x>9</x>
       <y>16</y>
-      <width>245</width>
+      <width>241</width>
       <height>145</height>
      </rect>
     </property>

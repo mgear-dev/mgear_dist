@@ -43,6 +43,7 @@ import pymel.core.datatypes as dt
 # mgear
 import mgear
 from mgear.maya.shifter.guide import RigGuide
+from mgear.maya.shifter.guide import helperSlots
 from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
@@ -117,12 +118,28 @@ class Rig(object):
         self.options = self.guide.values
         self.guides = self.guide.components
 
+        self.preCustomStep()
         self.initialHierarchy()
         self.processComponents()
         self.finalize()
+        self.postCustomStep()
 
         return self.model
 
+    def customStep(self, checker, attr):
+        if self.options[checker]:
+            customSteps = self.options[attr].split(",")
+            for step in customSteps:
+                helperSlots.runStep(step)
+    
+    def preCustomStep(self):
+        self.customStep("doPreCustomStep", "preCustomStep")
+
+
+    def postCustomStep(self):
+        self.customStep("doPostCustomStep", "postCustomStep")
+
+        
 
     def initialHierarchy(self):
         """
