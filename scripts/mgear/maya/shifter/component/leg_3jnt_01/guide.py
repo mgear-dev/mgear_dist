@@ -107,6 +107,7 @@ class Guide(ComponentGuide):
         self.pUpvRefArray = self.addParam("upvrefarray", "string", "")
         self.pMaxStretch  = self.addParam("maxstretch", "double", 1.5 , 1, None)
         self.pIKSolver = self.addEnumParam("ikSolver", ["IK Spring", "IK Rotation Plane"], 0)
+        self.pIKOrient = self.addParam("ikOri", "bool", True)
 
 
         # Divisions
@@ -175,6 +176,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.ikfk_spinBox.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
         self.settingsTab.ikSolver_comboBox.setCurrentIndex(self.root.attr("ikSolver").get())
+        self.populateCheck(self.settingsTab.neutralRotation_checkBox, "ikOri")
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
         self.settingsTab.div2_spinBox.setValue(self.root.attr("div2").get())
@@ -200,6 +202,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.ikfk_spinBox.valueChanged.connect(partial(self.updateSlider, self.settingsTab.ikfk_spinBox, "blend"))
         self.settingsTab.maxStretch_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxStretch_spinBox, "maxstretch"))
         self.settingsTab.ikSolver_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.settingsTab.ikSolver_comboBox, "ikSolver"))
+        self.settingsTab.neutralRotation_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.neutralRotation_checkBox, "ikOri"))
         self.settingsTab.div0_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div0_spinBox, "div0"))
         self.settingsTab.div1_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div1_spinBox, "div1"))
         self.settingsTab.div2_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div2_spinBox, "div2"))

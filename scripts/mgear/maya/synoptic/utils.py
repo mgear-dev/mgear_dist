@@ -277,7 +277,7 @@ def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
 # IK FK switch match
 ##################################################
 # ================================================
-def ikFkMatch(model, ikfk_attr, uiHost_name, fk0, fk1, fk2, ik, upv, ikRot=None):
+#
 
     if  len(model.split(":")) == 2:
         nameSpace =  model.split(":")[0] + ":"
@@ -337,6 +337,84 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fk0, fk1, fk2, ik, upv, ikRot=None)
 ##################################################
 # ================================================
 def mirrorPose(flip=False, nodes=False):
+
+    axis = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
+    aDic = {"tx":"invTx", "ty":"invTy", "tz":"invTz", "rx":"invRx", "ry":"invRy", "rz":"invRz", "sx":"invSx", "sy":"invSy", "sz":"invSz"}
+    mapDic = {"L":"R", "R":"L"}
+    if not nodes:
+        nodes = pm.selected()
+    pm.undoInfo(ock=1)
+    try:
+        nameSpace = False
+        if nodes:
+            if  len(nodes[0].split(":")) == 2:
+                nameSpace = nodes[0].split(":")[0]
+        for oSel in nodes:
+            if nameSpace:
+                nameParts = oSel.name().split(":")[1].split("|")[-1]
+            else:
+                nameParts = oSel.name().split("|")[-1]
+
+
+                        
+            if "_L" in nameParts or "_R" in nameParts:
+                if "_L" in nameParts:
+                    nameParts = nameParts.replace("_L", "_R")
+                else:
+                    nameParts = nameParts.replace("_R", "_L")
+                
+                if nameSpace:
+                    nameTarget = nameSpace +":"+ nameParts
+                else:
+                    nameTarget = nameParts
+                oTarget = pm.PyNode(nameTarget)
+                for a in axis:
+                    if not oSel.attr(a).isLocked():
+                        if oSel.attr(aDic[a]).get():
+                            inv = -1
+                        else:
+                            inv = 1
+                        if flip:
+                            flipVal = oTarget.attr(a).get()
+
+                        oTarget.attr(a).set(oSel.attr(a).get()*inv)
+
+                        if flip:
+                            oSel.attr(a).set(flipVal*inv)
+                #custom attr
+                attrs = pm.listAttr(oSel, userDefined=True)
+                for at in attrs:
+                    tat = at
+                    if "_L" in tat:
+                        tat = tat.replace("_L", "_R")
+                    elif "_R" in tat:
+                        tat = tat.replace("_R", "_L")
+
+                    if flip:
+                        flipVal = oTarget.attr(tat).get()
+
+                    oTarget.attr(tat).set(oSel.attr(at).get())
+
+                    if flip:
+                        oSel.attr(at).set(flipVal)
+                            
+            else:
+                if not oSel.attr("tx").isLocked():
+                    oSel.attr("tx").set(oSel.attr("tx").get()*-1)
+                if not oSel.attr("ry").isLocked():
+                    oSel.attr("ry").set(oSel.attr("ry").get()*-1)
+                if not oSel.attr("rz").isLocked():
+                    oSel.attr("rz").set(oSel.attr("rz").get()*-1)
+
+
+
+    except:
+        pm.displayWarning("Flip/Mirror pose fail")
+        pass
+    finally:
+        pm.undoInfo(cck=1)
+
+def mirrorPoseOld(flip=False, nodes=False):
 
     axis = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
     aDic = {"tx":"invTx", "ty":"invTy", "tz":"invTz", "rx":"invRx", "ry":"invRy", "rz":"invRz", "sx":"invSx", "sy":"invSy", "sz":"invSz"}

@@ -35,7 +35,7 @@ import mgear.maya.shifter.component as comp
 import mgear.maya.attribute as att
 
 skelFK = [u'mGear_Mocap_interface_Hips', u'mGear_Mocap_interface_LeftUpLeg', u'mGear_Mocap_interface_LeftLeg', u'mGear_Mocap_interface_LeftFoot', u'mGear_Mocap_interface_LeftToeBase', u'mGear_Mocap_interface_RightUpLeg', u'mGear_Mocap_interface_RightLeg', u'mGear_Mocap_interface_RightFoot', u'mGear_Mocap_interface_RightToeBase', u'mGear_Mocap_interface_Spine', u'mGear_Mocap_interface_Spine1', u'mGear_Mocap_interface_Spine2', u'mGear_Mocap_interface_LeftShoulder', u'mGear_Mocap_interface_LeftArm', u'mGear_Mocap_interface_LeftForeArm', u'mGear_Mocap_interface_LeftHand', u'mGear_Mocap_interface_LeftHandThumb1', u'mGear_Mocap_interface_LeftHandThumb2', u'mGear_Mocap_interface_LeftHandThumb3',  u'mGear_Mocap_interface_LeftHandIndex1', u'mGear_Mocap_interface_LeftHandIndex2', u'mGear_Mocap_interface_LeftHandIndex3',  u'mGear_Mocap_interface_LeftHandMiddle1', u'mGear_Mocap_interface_LeftHandMiddle2', u'mGear_Mocap_interface_LeftHandMiddle3',  u'mGear_Mocap_interface_LeftHandRing1', u'mGear_Mocap_interface_LeftHandRing2', u'mGear_Mocap_interface_LeftHandRing3',  u'mGear_Mocap_interface_LeftHandPinky1', u'mGear_Mocap_interface_LeftHandPinky2', u'mGear_Mocap_interface_LeftHandPinky3',  u'mGear_Mocap_interface_RightShoulder', u'mGear_Mocap_interface_RightArm', u'mGear_Mocap_interface_RightForeArm', u'mGear_Mocap_interface_RightHand', u'mGear_Mocap_interface_RightHandThumb1', u'mGear_Mocap_interface_RightHandThumb2', u'mGear_Mocap_interface_RightHandThumb3',  u'mGear_Mocap_interface_RightHandIndex1', u'mGear_Mocap_interface_RightHandIndex2', u'mGear_Mocap_interface_RightHandIndex3',  u'mGear_Mocap_interface_RightHandMiddle1', u'mGear_Mocap_interface_RightHandMiddle2', u'mGear_Mocap_interface_RightHandMiddle3',  u'mGear_Mocap_interface_RightHandRing1', u'mGear_Mocap_interface_RightHandRing2', u'mGear_Mocap_interface_RightHandRing3',  u'mGear_Mocap_interface_RightHandPinky1', u'mGear_Mocap_interface_RightHandPinky2', u'mGear_Mocap_interface_RightHandPinky3',  u'mGear_Mocap_interface_Neck', u'mGear_Mocap_interface_Neck1', u'mGear_Mocap_interface_Head']
-gearFK = [u'body_C0_ctl', u'leg_L0_fk0_ctl', u'leg_L0_fk1_ctl', u'leg_L0_fk2_ctl', u'foot_L1_fk0_ctl', u'leg_R0_fk0_ctl', u'leg_R0_fk1_ctl', u'leg_R0_fk2_ctl', u'foot_R1_fk0_ctl', u'spine_C0_fk0_ctl', u'spine_C0_fk1_ctl', u'spine_C0_fk2_ctl', u'shoulder_L0_ctl', u'arm_L0_fk0_ctl', u'arm_L0_fk1_ctl', u'arm_L0_fk2_ctl', u'thumb_L0_fk0_ctl', u'thumb_L0_fk1_ctl', u'thumb_L0_fk2_ctl', u'finger_L0_fk0_ctl', u'finger_L0_fk1_ctl', u'finger_L0_fk2_ctl', u'finger_L1_fk0_ctl', u'finger_L1_fk1_ctl', u'finger_L1_fk2_ctl', u'finger_L2_fk0_ctl', u'finger_L2_fk1_ctl', u'finger_L2_fk2_ctl', u'finger_L3_fk0_ctl', u'finger_L3_fk1_ctl', u'finger_L3_fk2_ctl', u'shoulder_R0_ctl', u'arm_R0_fk0_ctl', u'arm_R0_fk1_ctl', u'arm_R0_fk2_ctl', u'thumb_R0_fk0_ctl', u'thumb_R0_fk1_ctl', u'thumb_R0_fk2_ctl', u'finger_R0_fk0_ctl', u'finger_R0_fk1_ctl', u'finger_R0_fk2_ctl', u'finger_R1_fk0_ctl', u'finger_R1_fk1_ctl', u'finger_R1_fk2_ctl', u'finger_R2_fk0_ctl', u'finger_R2_fk1_ctl', u'finger_R2_fk2_ctl', u'finger_R3_fk0_ctl', u'finger_R3_fk1_ctl', u'finger_R3_fk2_ctl', u'neck_C0_fk0_ctl', u'neck_C0_fk1_ctl', u'neck_C0_head_ctl']
+gearFK = [u'body_C0_ctl', u'leg_L0_fk0_ctl', u'leg_L0_fk1_ctl', u'leg_L0_fk2_ctl', u'foot_L0_fk0_ctl', u'leg_R0_fk0_ctl', u'leg_R0_fk1_ctl', u'leg_R0_fk2_ctl', u'foot_R0_fk0_ctl', u'spine_C0_fk0_ctl', u'spine_C0_fk1_ctl', u'spine_C0_fk2_ctl', u'shoulder_L0_ctl', u'arm_L0_fk0_ctl', u'arm_L0_fk1_ctl', u'arm_L0_fk2_ctl', u'thumb_L0_fk0_ctl', u'thumb_L0_fk1_ctl', u'thumb_L0_fk2_ctl', u'finger_L0_fk0_ctl', u'finger_L0_fk1_ctl', u'finger_L0_fk2_ctl', u'finger_L1_fk0_ctl', u'finger_L1_fk1_ctl', u'finger_L1_fk2_ctl', u'finger_L2_fk0_ctl', u'finger_L2_fk1_ctl', u'finger_L2_fk2_ctl', u'finger_L3_fk0_ctl', u'finger_L3_fk1_ctl', u'finger_L3_fk2_ctl', u'shoulder_R0_ctl', u'arm_R0_fk0_ctl', u'arm_R0_fk1_ctl', u'arm_R0_fk2_ctl', u'thumb_R0_fk0_ctl', u'thumb_R0_fk1_ctl', u'thumb_R0_fk2_ctl', u'finger_R0_fk0_ctl', u'finger_R0_fk1_ctl', u'finger_R0_fk2_ctl', u'finger_R1_fk0_ctl', u'finger_R1_fk1_ctl', u'finger_R1_fk2_ctl', u'finger_R2_fk0_ctl', u'finger_R2_fk1_ctl', u'finger_R2_fk2_ctl', u'finger_R3_fk0_ctl', u'finger_R3_fk1_ctl', u'finger_R3_fk2_ctl', u'neck_C0_fk0_ctl', u'neck_C0_fk1_ctl', u'neck_C0_head_ctl']
 skelIK = [u'mGear_Mocap_interface_LeftFoot', u'mGear_Mocap_interface_RightFoot', u'mGear_Mocap_interface_LeftUpLeg', u'mGear_Mocap_interface_RightUpLeg', u'mGear_Mocap_interface_LeftHand', u'mGear_Mocap_interface_LeftForeArm', u'mGear_Mocap_interface_RightHand', u'mGear_Mocap_interface_RightForeArm']
 gearIK = [u'leg_L0_ik_ctl', u'leg_R0_ik_ctl', u'leg_L0_upv_ctl', u'leg_R0_upv_ctl', u'arm_L0_ik_ctl', u'arm_L0_upv_ctl', u'arm_R0_ik_ctl', u'arm_R0_upv_ctl']
 alignFK = [u'arm_L0_fk2_ctl',u'arm_L0_ikcns_ctl', u'arm_L0_fk1_ctl', u'arm_R0_fk2_ctl',u'arm_R0_ikcns_ctl', u'arm_R0_fk1_ctl']
@@ -108,8 +108,11 @@ def characterizeBiped(*args):
         tra.matchWorldTransform(oB, oA)
         if a in [u'arm_L0_upv_ctl', u'arm_R0_upv_ctl']:
             oA.attr("tz").set(-3)
-            for axis in "xyz":
-                oA.attr("r"+axis).set(0.0)
+            # for axis in "xyz":
+            #     try:
+            #         oA.attr("r"+axis).set(0.0)
+            #     except:
+            #         pass
         if a == u'arm_L0_ikcns_ctl':
             oA.attr("rx").set((oA.attr("rx").get()+90))
         if a == u'arm_R0_ikcns_ctl':
@@ -120,19 +123,24 @@ def characterizeBiped(*args):
         oA = pm.PyNode(a)
         oB = pm.PyNode(b)
         print b
-        cns = pm.parentConstraint(oA, oB, mo=True)
-
         pb_node = pm.createNode("pairBlend")
+        try:
+            cns = pm.parentConstraint(oA, oB, mo=True)
+            pm.connectAttr(cns+".constraintRotateX", pb_node+".inRotateX2")
+            pm.connectAttr(cns+".constraintRotateY", pb_node+".inRotateY2")
+            pm.connectAttr(cns+".constraintRotateZ", pb_node+".inRotateZ2")
+            pm.connectAttr( pb_node+".outRotateX", oB+".rotateX", f=True)
+            pm.connectAttr( pb_node+".outRotateY", oB+".rotateY", f=True)
+            pm.connectAttr( pb_node+".outRotateZ", oB+".rotateZ", f=True)
+            pm.setKeyframe( oB, at="rotateX")
+            pm.setKeyframe( oB, at="rotateY")
+            pm.setKeyframe( oB, at="rotateZ")
+        except:
+            cns = pm.pointConstraint(oA, oB, mo=True)
 
-        pm.connectAttr(cns+".constraintRotateX", pb_node+".inRotateX2")
-        pm.connectAttr(cns+".constraintRotateY", pb_node+".inRotateY2")
-        pm.connectAttr(cns+".constraintRotateZ", pb_node+".inRotateZ2")
-        pm.connectAttr( pb_node+".outRotateX", oB+".rotateX", f=True)
-        pm.connectAttr( pb_node+".outRotateY", oB+".rotateY", f=True)
-        pm.connectAttr( pb_node+".outRotateZ", oB+".rotateZ", f=True)
-        pm.setKeyframe( oB, at="rotateX")
-        pm.setKeyframe( oB, at="rotateY")
-        pm.setKeyframe( oB, at="rotateZ")
+        
+
+        
 
         pm.connectAttr(cns+".constraintTranslateX", pb_node+".inTranslateX2")
         pm.connectAttr(cns+".constraintTranslateY", pb_node+".inTranslateY2")
@@ -145,7 +153,7 @@ def characterizeBiped(*args):
         pm.setKeyframe( oB, at="translateZ")
 
         pm.connectAttr(mocapAttach, pb_node.attr("weight"))
-
+   
 def bakeMocap(*args):
     start = pm.playbackOptions(q=True, min=True)
     end = pm.playbackOptions(q=True, max=True)

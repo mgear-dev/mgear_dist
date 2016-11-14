@@ -115,7 +115,6 @@ class Component(MainComponent):
         self.fk3_npo = pri.addTransform(self.fk2_ctl, self.getName("fk3_npo"), t)
         self.fk3_ctl = self.addCtl(self.fk3_npo, "fk3_ctl", t, self.color_fk, "cube", w=self.length3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length3*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk3_ctl)
-        # self.endTws_ref_fk = pri.addTransform(self.fk3_ctl, self.getName("endTws_ref_fk"), tra.getTransform(self.fk3_ctl))
 
 
         self.fk_ctl = [self.fk0_ctl, self.fk1_ctl, self.fk2_ctl, self.fk3_ctl]
@@ -128,7 +127,10 @@ class Component(MainComponent):
         #foot IK
         self.ik_cns = pri.addTransformFromPos(self.root_ctl, self.getName("ik_cns"), self.guide.pos["foot"])
 
-        t = tra.getTransformLookingAt(self.guide.pos["foot"], self.guide.pos["eff"], self.x_axis, "zx", False)
+        if self.settings["ikOri"]:
+            t = tra.getTransformLookingAt(self.guide.pos["foot"], self.guide.pos["eff"], self.x_axis, "zx", False)
+        else:
+            t = tra.getTransformLookingAt(self.guide.apos[3], self.guide.apos[4], self.normal, "z-x", False)
 
         self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", t, self.color_ik, "null", w=self.size*.12)
         att.setInvertMirror(self.ikcns_ctl, ["tx"])
@@ -273,8 +275,10 @@ class Component(MainComponent):
         self.resample_att = self.addSetupParam("resample", "Resample", "bool", True)
         self.absolute_att = self.addSetupParam("absolute", "Absolute", "bool", False)
 
-        self.kneeFlipOffset_att = self.addSetupParam("kneeFlipOffset", "Knee Flip Offset", "double", -20, -180, 180)
-        self.ankleFlipOffset_att = self.addSetupParam("ankleFlipOffset", "Ankle Flip Offset", "double", 20, -180, 180)
+        defValu = self.chain3bones[1].attr("jointOrientZ").get() /2
+        self.kneeFlipOffset_att = self.addSetupParam("kneeFlipOffset", "Knee Flip Offset", "double", defValu, -180, 180)
+        defValu = self.chain3bones[2].attr("jointOrientZ").get()/2
+        self.ankleFlipOffset_att = self.addSetupParam("ankleFlipOffset", "Ankle Flip Offset", "double", defValu, -180, 180)
 
 
     def addOperators(self):
@@ -447,6 +451,7 @@ class Component(MainComponent):
         multTangent_node = nod.createMulNode(self.roundnessAnkle_att, multVal)
         add_node = nod.createAddNode(multTangent_node+".outputX", initRound)
         pm.connectAttr(add_node+".output", self.tws2_rot.attr("sx"))
+        # for x in ["translate"]:
         for x in ["translate", "rotate"]:
             pm.connectAttr(self.ankle_ctl.attr(x), self.tws2_loc.attr(x))
 

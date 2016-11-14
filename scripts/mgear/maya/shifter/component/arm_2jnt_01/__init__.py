@@ -50,6 +50,9 @@ class Component(MainComponent):
 
     def addObjects(self):
 
+        """
+
+        """
         self.WIP = self.options["mode"]
 
         self.normal = self.getNormalFromPos(self.guide.apos)

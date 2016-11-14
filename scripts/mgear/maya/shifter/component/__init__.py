@@ -25,7 +25,7 @@
 # Date:       2016 / 10 / 10
 
 """
-Shifter component rig class.
+Shifter component rig class. 
 """
 
 #############################################

@@ -76,6 +76,10 @@ class SynopticTab(QtWidgets.QDialog, wui.Ui_biped_body):
         self.selJob = pm.scriptJob(e=("SelectionChanged", self.selectChanged), parent=gui)
     
     def selectChanged(self, *args):
+        """
+
+        :param args:
+        """
         sels = []
         [sels.append(x.name()) for x in  pm.ls(sl=1)]
         nameSpace = False
