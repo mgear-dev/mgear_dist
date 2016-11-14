@@ -3,4 +3,5 @@
 scons -j8 with-maya=2014
 scons -j8 with-maya=2015
 scons -j8 with-maya=2016 with-mayadevkit=/usr/autodesk/maya2016/devkitBase
+scons -j8 with-maya=2017
 
