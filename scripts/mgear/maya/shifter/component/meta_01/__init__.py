@@ -102,7 +102,10 @@ class Component(MainComponent):
             if self.settings["intTranslation"]:
                 pm.connectAttr(blendNode.attr("outTranslate"), l.attr("translate"))
             if self.settings["intScale"]:
-                print "scale is not supported yet"
+                scaleA = [self.meta_ctl.attr("sx"),self.meta_ctl.attr("sy"), self.meta_ctl.attr("sz")]
+                scaleB = [self.npoList[i].attr("sx"),self.npoList[i].attr("sy"), self.npoList[i].attr("sz")]
+                scaleBlend = nod.createBlendNode(scaleA, scaleB, val)
+                pm.connectAttr(scaleBlend.attr("output"), l.attr("scale"))
             val += inc
 
 
