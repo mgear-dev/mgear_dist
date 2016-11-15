@@ -81,10 +81,10 @@ class Component(MainComponent):
 
         # Roll ---------------------------------------------
         if self.settings["useRollCtl"]:
-            t = tra.getRotationFromAxis(self.y_axis, self.normal, "yz", self.negate)
+            t = tra.getTransformLookingAt(self.guide.pos["heel"], self.guide.apos[-4], self.normal, "xz", self.negate)
             t = tra.setMatrixPosition(t, self.guide.pos["root"])
 
-            self.roll_np = pri.addTransform(self.root, self.getName("roll_np"), t)
+            self.roll_np = pri.addTransform(self.root, self.getName("roll_npo"), t)
             self.roll_ctl = self.addCtl(self.roll_np, "roll_ctl", t, self.color_ik, "cylinder", w=self.size*.5, h=self.size*.5, ro=dt.Vector(3.1415*.5,0,0))
             att.setKeyableAttributes(self.roll_ctl, ["rx", "rz"])
 
