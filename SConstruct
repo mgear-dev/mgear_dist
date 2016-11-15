@@ -42,7 +42,7 @@ targets = [
       "incdirs": ["src"],
       "srcs": glob.glob("cvwrap/src/*.cpp"),
       "custom": [maya.Require, CVWrapSetup],
-      "libs": ([] if maya.Version(asString=False) < 2016 else ["clew"]),
+      "libs": ([] if maya.Version(asString=False) < 201600 else ["clew"]),
       "install": {"scripts": glob.glob("cvwrap/scripts/*")}
    }
 ]
