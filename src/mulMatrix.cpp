@@ -105,7 +105,7 @@ MStatus mgear_mulMatrix::compute(const MPlug& plug, MDataBlock& data)
 	MMatrix mB = data.inputValue( matrixB ).asMatrix();
 
 	MMatrix mC = mA * mB;
-	double i = mC.matrix[0][0];
+	// double i = mC.matrix[0][0];
 
 
 	// Output

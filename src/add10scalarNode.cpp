@@ -167,7 +167,7 @@ MStatus mgear_add10scalarNode::compute(const MPlug& plug, MDataBlock& data)
 	McheckStatusAndReturnIt(status); // mirar este statment en la documentacion de Maya
 	hOutput.setFloat(output);
 	hOutput.setClean();
-	data.setClean(plug); // Esta linea es un ejemplo. hace lo mismo que la anteriro ya que el pointer apunta \
+	data.setClean(plug); // Esta linea es un ejemplo. hace lo mismo que la anteriro ya que el pointer apunta
 			// a la mis memoria. pero trabajar con handles es mas rapido que con el plug directamente.
 
 	return MS::kSuccess;

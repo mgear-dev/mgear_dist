@@ -157,35 +157,38 @@ MStatus mgear_percentageToU::compute(const MPlug& plug, MDataBlock& data)
 		u_perc[i] = dist[i] / t_length;
 	}
 
-	
-    // Get closest indices
-    unsigned index = findClosestInArray(in_percentage, u_perc);
-	unsigned indexA, indexB;
-    if (in_percentage <= u_perc[index]){
-        indexA = abs(int(index));
-        indexB = index;
-		if ( indexA > indexB){
-			indexA = indexB;
-			indexB = indexA+1;
+	double out_u = 0.0;
+
+	// Get closest indices
+	unsigned index = findClosestInArray(in_percentage, u_perc);
+	if (index != (unsigned)-1) {
+		unsigned indexA, indexB;
+		if (in_percentage <= u_perc[index]){
+			indexA = abs(int(index));
+			indexB = index;
+			if ( indexA > indexB){
+				indexA = indexB;
+				indexB = indexA+1;
+			}
 		}
+		else {
+			indexA = index;
+			indexB = index + 1;
+		}
+
+		// blend value
+		double blend = set01range(in_percentage, u_perc[indexA], u_perc[indexB]);
+
+		out_u = linearInterpolate(u_list[indexA], u_list[indexB], blend);
+
+		if (in_normU)
+			out_u = uToNormalizedU(out_u, crv.numCVs());
 	}
-    else {
-        indexA = index;
-        indexB = index + 1;
-	}
-	
-    // blend value
-    double blend = set01range(in_percentage, u_perc[indexA], u_perc[indexB]);
-            
-    double out_u = linearInterpolate(u_list[indexA], u_list[indexB], blend);
-        
-    if (in_normU)
-        out_u = uToNormalizedU(out_u, crv.numCVs());
-	
+
 	// Ouput
 	MDataHandle h = data.outputValue( u );
-    h.setDouble( out_u );
-    data.setClean( plug );
+	h.setDouble( out_u );
+	data.setClean( plug );
 
 	return MS::kSuccess;
 }
