@@ -97,7 +97,12 @@ class Component(MainComponent):
         val = 0.0
         for i, l in enumerate(self.locList):
             blendNode = nod.createPairBlend( self.npoList[i], self.meta_ctl, blender=val)
-            pm.connectAttr(blendNode.attr("outRotate"), l.attr("rotate"))
+            if self.settings["intRotation"]:
+                pm.connectAttr(blendNode.attr("outRotate"), l.attr("rotate"))
+            if self.settings["intTranslation"]:
+                pm.connectAttr(blendNode.attr("outTranslate"), l.attr("translate"))
+            if self.settings["intScale"]:
+                print "scale is not supported yet"
             val += inc
 
 
