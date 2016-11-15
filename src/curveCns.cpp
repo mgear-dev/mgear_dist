@@ -67,7 +67,7 @@ MStatus mgear_curveCns::initialize()
 }
 
 // COMPUTE ======================================
-MStatus mgear_curveCns::deform( MDataBlock& data, MItGeometry& iter, const MMatrix &mat, unsigned int mIndex )
+MStatus mgear_curveCns::deform( MDataBlock& data, MItGeometry& iter, const MMatrix &mat, unsigned int /* mIndex */ )
 {
     MStatus returnStatus;
 

@@ -165,7 +165,7 @@ double uToNormalizedU(double u, int point_count){
 unsigned findClosestInArray(double value, MDoubleArray in_array){
    
 	double ref = 9999999999.999999;
-	unsigned index;
+	unsigned index = (unsigned)-1;
 	double diff;
 	unsigned count = sizeof(in_array) / sizeof(double);
 	for(unsigned i = 0; i < count; i++){

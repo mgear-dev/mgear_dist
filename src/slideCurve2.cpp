@@ -141,7 +141,7 @@ MStatus mgear_slideCurve2::initialize()
 }
 
 // COMPUTE ======================================
-MStatus mgear_slideCurve2::deform( MDataBlock& data, MItGeometry& iter, const MMatrix &mat, unsigned int mIndex )
+MStatus mgear_slideCurve2::deform( MDataBlock& data, MItGeometry& iter, const MMatrix &mat, unsigned int /* mIndex */ )
 {
     MStatus returnStatus;
 	

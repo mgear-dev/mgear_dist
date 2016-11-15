@@ -116,7 +116,7 @@ MStatus mgear_springNode::initialize()
 	addAttribute(aParentInverse);
 	attributeAffects(aParentInverse, aOutput);*/
 
-	bool _initialized = false;
+	// bool _initialized = false;
 
 	return MS::kSuccess;
 }
@@ -144,9 +144,9 @@ MStatus mgear_springNode::compute(const MPlug& plug, MDataBlock& data)
 	h = data.inputValue(aGoal, &status);
 	McheckStatusAndReturnIt(status);
 	goal = h.asFloatVector();
-	float aGoalX = goal.x;
-	float aGoalY = goal.y;
-	float aGoalZ = goal.z;
+	// float aGoalX = goal.x;
+	// float aGoalY = goal.y;
+	// float aGoalZ = goal.z;
 
 
 	MTime currentTime = data.inputValue(aTime, &status).asTime();
