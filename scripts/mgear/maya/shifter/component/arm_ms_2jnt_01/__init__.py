@@ -22,7 +22,8 @@
 
 # Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
+
+# Date:       2016 / 11 / 16
 
 # ms 2jnt feature -----------------------
 # //done//FK isolation
