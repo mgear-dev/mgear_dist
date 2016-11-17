@@ -1,6 +1,10 @@
 Video Tutorials
 ===============
 
+Please visit 
+`mGear Vimeo Group <https://vimeo.com/groups/mgear/>`_
+
+
 .. raw:: html
 
 	<iframe src="https://player.vimeo.com/video/118387360" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>

@@ -15,8 +15,8 @@ Release Log
 	* Gimmick joints basic tools
 	* Enviroment variables
 		* Synoptic variable: MGEAR_SYNOPTIC_PATH
-		* Component variable: MGEAR_SHIFTER_COMPONENT_PATH
-	* Pre and Post script execution.
+	* Pre and Post custom Steps.
+	* cvWrap deformer included.
 
 **Inprovements**
 	* Groups and dag pose connected to rig base node. This will avoid lost elements if we export selection.
@@ -25,12 +25,9 @@ Release Log
 	* Guide Blades have new attr to control the  roll offset
 	* Duplicate symmetry can find partial chain names. Is not needed to duplicate from the top root of the branch.
 	* mGear version and other useful information in guide root.
+	* Shifter componets full review and functions unified.
 
 
 
-**Components Improvements**
-	* Chain_01
-		* Scaling 
-	* Control_01
-		* uniScale: Option to set uniform scale or independet axis scale
+
 
