@@ -125,13 +125,14 @@ class Component(MainComponent):
         # IK controls --------------------------------------------------------
         
         #foot IK
-        self.ik_cns = pri.addTransformFromPos(self.root_ctl, self.getName("ik_cns"), self.guide.pos["foot"])
+        # self.ik_cns = pri.addTransformFromPos(self.root_ctl, self.getName("ik_cns"), self.guide.pos["foot"])
 
         if self.settings["ikOri"]:
             t = tra.getTransformLookingAt(self.guide.pos["foot"], self.guide.pos["eff"], self.x_axis, "zx", False)
         else:
             t = tra.getTransformLookingAt(self.guide.apos[3], self.guide.apos[4], self.normal, "z-x", False)
 
+        self.ik_cns = pri.addTransform(self.root_ctl, self.getName("ik_cns"), t)
         self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", t, self.color_ik, "null", w=self.size*.12)
         att.setInvertMirror(self.ikcns_ctl, ["tx"])
         att.lockAttribute(self.ikcns_ctl, ["sx", "sy", "sz", "v"])
@@ -143,9 +144,12 @@ class Component(MainComponent):
         att.lockAttribute(self.ik_ctl, ["sx", "sy", "sz", "v"])
 
         # 2 bones ik layer    
-        self.ik2b_ikCtl_ref = pri.addTransformFromPos(self.ik_ctl, self.getName("ik2B_A_ref"), self.guide.pos["foot"])
-        self.ik2b_bone_ref = pri.addTransformFromPos(self.chain3bones[3], self.getName("ik2B_B_ref"), self.guide.pos["foot"])
-        self.ik2b_blend = pri.addTransformFromPos(self.ik_ctl, self.getName("ik2B_blend"), self.guide.pos["foot"])
+        # self.ik2b_ikCtl_ref = pri.addTransformFromPos(self.ik_ctl, self.getName("ik2B_A_ref"), self.guide.pos["foot"])
+        # self.ik2b_bone_ref = pri.addTransformFromPos(self.chain3bones[3], self.getName("ik2B_B_ref"), self.guide.pos["foot"])
+        # self.ik2b_blend = pri.addTransformFromPos(self.ik_ctl, self.getName("ik2B_blend"), self.guide.pos["foot"])
+        self.ik2b_ikCtl_ref = pri.addTransform(self.ik_ctl, self.getName("ik2B_A_ref"), t)
+        self.ik2b_bone_ref = pri.addTransform(self.chain3bones[3], self.getName("ik2B_B_ref"), t)
+        self.ik2b_blend = pri.addTransform(self.ik_ctl, self.getName("ik2B_blend"), t)
         
         self.roll_ctl = self.addCtl(self.ik2b_blend, "roll_ctl", t, self.color_ik, "crossarrow", w=self.length2*.5*self.n_factor)
         self.ik2b_ik_npo = pri.addTransform(self.roll_ctl, self.getName("ik2B_ik_npo"), tra.getTransform(self.chain3bones[-1]))

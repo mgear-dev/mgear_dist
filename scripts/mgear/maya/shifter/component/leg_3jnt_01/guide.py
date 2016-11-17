@@ -77,20 +77,20 @@ class Guide(ComponentGuide):
     ## Add more object to the object definition list.
     # @param self
     def addObjects(self):
-
+        lockAttrs = ["tx", "ry", "rz"]
         self.root = self.addRoot()
         vTemp = tra.getOffsetPosition( self.root, [0,-3,0.1])
         self.knee = self.addLoc("knee", self.root, vTemp)
-        att.lockAttribute(self.knee, "tx")
+        att.lockAttribute(self.knee, lockAttrs)
         vTemp = tra.getOffsetPosition( self.root, [0,-6,0])
         self.ankle = self.addLoc("ankle", self.knee, vTemp)
-        att.lockAttribute(self.ankle, "tx")
+        att.lockAttribute(self.ankle, lockAttrs)
         vTemp = tra.getOffsetPosition( self.root, [0,-9,.2])
         self.foot = self.addLoc("foot", self.ankle, vTemp)
-        att.lockAttribute(self.foot, "tx")
+        att.lockAttribute(self.foot, lockAttrs)
         vTemp = tra.getOffsetPosition( self.root, [0,-9, 1])
         self.eff = self.addLoc("eff", self.foot, vTemp)
-        att.lockAttribute(self.eff, "tx")
+        # att.lockAttribute(self.eff, lockAttrs)
 
         centers = [self.root, self.knee, self.ankle, self.foot, self.eff]
         self.dispcrv = self.addDispCurve("crv1", centers)
