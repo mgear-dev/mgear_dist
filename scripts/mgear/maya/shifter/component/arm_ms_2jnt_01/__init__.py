@@ -22,8 +22,7 @@
 
 # Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-
-# Date:       2016 / 11 / 16
+# Date:       2016 / 10 / 10
 
 # ms 2jnt feature -----------------------
 # //done//FK isolation
@@ -344,19 +343,23 @@ class Component(MainComponent):
         pm.connectAttr(pb_node+".outRotate", self.upv_mtx.attr("rotate"))
         pm.connectAttr(self.auv_att, pb_node+".weight")
 
+      
+
 
         # fk2_npo position constraint to effector------------------------
         node = aop.gear_mulmatrix_op(self.eff_npo.attr("worldMatrix"), self.fk2_npo.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pm.connectAttr(dm_node+".outputTranslate", self.fk2_npo.attr("translate"))
-        # fk2_npo rotation constraint to fk2_mtx (fixed) ------------------------
-        node = aop.gear_mulmatrix_op(self.fk2_mtx.attr("worldMatrix"), self.fk2_npo.attr("parentInverseMatrix"))
+        # fk2_npo rotation constraint to bone1 (bugfixed) ------------------------
+        node = aop.gear_mulmatrix_op(self.bone1.attr("worldMatrix"), self.fk2_npo.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pm.connectAttr(dm_node+".outputRotate", self.fk2_npo.attr("rotate"))
-        # hand ikfk blending --------------------------------
-        node = aop.gear_mulmatrix_op(self.fk_ref.attr("worldMatrix"), self.fk2_npo.attr("parentInverseMatrix"))
+       
+ 
+        # hand ikfk blending from fk ref to ik ref (serious bugfix)--------------------------------
+        node = aop.gear_mulmatrix_op(self.fk_ref.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pb_node = pm.createNode("pairBlend")
         pb_node.attr("rotInterpolation").set (1)
@@ -364,6 +367,11 @@ class Component(MainComponent):
         pm.connectAttr(dm_node+".outputRotate", pb_node+".inRotate1")
         pm.connectAttr(self.blend2_att, pb_node+".weight")
         pm.connectAttr(pb_node+".outRotate", self.eff_loc.attr("rotate"))
+        node = aop.gear_mulmatrix_op(self.ik_ref.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
+        dm_node = pm.createNode("decomposeMatrix")
+        pm.connectAttr(node+".output", dm_node+".inputMatrix")
+        pm.connectAttr(dm_node+".outputRotate", pb_node+".inRotate2")
+
 
         # Twist references ---------------------------------
         node = aop.gear_mulmatrix_op(self.mid_ctl.attr("worldMatrix"), self.tws1_npo.attr("parentInverseMatrix"))
