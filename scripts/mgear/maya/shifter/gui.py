@@ -116,12 +116,7 @@ class Guide_UI(object):
                     continue
 
                 # module = __import__("mgear.maya.rig.component."+comp_name, globals(), locals(), ["*"], -1)
-                try:
-                    module = __import__("mgear.maya.shifter.component."+comp_name+".guide", globals(), locals(), ["*"], -1)
-                except ImportError:
-                    # compbasepath = re.split("[\\\/]", path)[-1]
-                    compbasepath = os.path.basename(path)
-                    module = __import__("{}.{}.guide".format(compbasepath, comp_name), globals(), locals(), ["*"], -1)
+                module = shifter.importComponent(comp_name)
                 reload(module)
                 image = os.path.join(path, comp_name, "icon.jpg")
 

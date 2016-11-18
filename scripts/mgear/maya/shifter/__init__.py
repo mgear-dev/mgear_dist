@@ -290,8 +290,7 @@ class Rig(object):
             guide = self.guides[comp]
             mgear.log("Init : "+ guide.fullName + " ("+guide.type+")")
 
-            module_name = "mgear.maya.shifter.component."+guide.type
-            module = __import__(module_name, globals(), locals(), ["*"], -1)
+            module = importComponent(guide.type)
             Component = getattr(module , "Component")
 
             component = Component(self, guide)
