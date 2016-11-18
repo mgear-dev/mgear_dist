@@ -90,6 +90,16 @@ def gatherComponentsDirectory():
             if not os.path.exists(path):
                 continue
 
+            init_py_path = os.path.join(path, "__init__.py")
+            if not os.path.exists(init_py_path):
+                message = "= GEAR RIG SYSTEM ====== notify:"
+                message += "\n  __init__.py for custom component not found {}".format(init_py_path)
+                message += "\n\n check your module definition file or environment variable 'MGEAR_COMPONENTS_PATH'"
+                message += " or call your system administrator."
+                message += "\n"
+                mgear.log(message, mgear.sev_error)
+                continue
+
             comps = sorted(os.listdir(path))
 
             results[path] = comps
@@ -109,7 +119,9 @@ def getComponentBasePath(comp_type):
             break
     else:
         compbasepath = ""
-        mgear.log("component base directory not found for {}".format(comp_type), mgear.sev_error)
+        message = "= GEAR RIG SYSTEM ======"
+        message += "component base directory not found for {}".format(comp_type)
+        mgear.log(message, mgear.sev_error)
 
     return compbasepath
 
