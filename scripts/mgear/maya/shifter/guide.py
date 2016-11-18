@@ -66,11 +66,6 @@ import customStepUI as csui
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"
 
-COMPONENT_PATH = os.path.join(os.path.dirname(__file__), "component")
-TEMPLATE_PATH = os.path.join(COMPONENT_PATH, "templates")
-SYNOPTIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, "synoptic","tabs"))
-
-
 TYPE = "mgear_guide_root"
 
 ##########################################################
@@ -482,15 +477,18 @@ class RigGuide(MainGuide):
         """
 
         # Check component type
-        path = os.path.join(COMPONENT_PATH, comp_type, "guide.py")
+        '''
+        path = os.path.join(basepath, comp_type, "guide.py")
         if not os.path.exists(path):
             mgear.log("Can't find guide definition for : " + comp_type + ".\n"+ path, mgear.sev_error)
             return False
+        '''
 
         # Import module and get class
-        module_name = "mgear.maya.shifter.component."+comp_type+".guide"
-        module = __import__(module_name, globals(), locals(), ["*"], -1)
-        ComponentGuide = getattr(module , "Guide")
+        import mgear.maya.shifter as shifter
+        module = shifter.importComponentGuide(comp_type)
+
+        ComponentGuide = getattr(module, "Guide")
 
         return ComponentGuide()
 
@@ -1021,9 +1019,10 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
 
     def populateAvailableSynopticTabs(self):
 
+        import mgear.maya.shifter as shifter
         defPath = os.environ.get("MGEAR_SYNOPTIC_PATH", None)
         if not defPath or not os.path.isdir(defPath):
-            defPath = SYNOPTIC_PATH
+            defPath = shifter.SYNOPTIC_PATH
 
         tabsDirectories = [ name for name in os.listdir(defPath) if os.path.isdir(os.path.join(defPath, name)) ]
         # Quick clean the first empty item
