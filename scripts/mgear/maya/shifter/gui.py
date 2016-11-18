@@ -116,7 +116,7 @@ class Guide_UI(object):
                     continue
 
                 # module = __import__("mgear.maya.rig.component."+comp_name, globals(), locals(), ["*"], -1)
-                module = shifter.importComponent(comp_name)
+                module = shifter.importComponentGuide(comp_name)
                 reload(module)
                 image = os.path.join(path, comp_name, "icon.jpg")
 
