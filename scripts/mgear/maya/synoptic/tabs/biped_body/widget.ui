@@ -4212,7 +4212,7 @@
    <property name="geometry">
     <rect>
      <x>256</x>
-     <y>309</y>
+     <y>333</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4223,12 +4223,13 @@
    <property name="object" stdset="0">
     <string>finger_L1_fk1_ctl</string>
    </property>
+   <zorder>w_finger_L1_fk0_ctl</zorder>
   </widget>
   <widget class="SelectBtn_LFkBox" name="w_finger_L1_fk0_ctl" native="true">
    <property name="geometry">
     <rect>
      <x>256</x>
-     <y>333</y>
+     <y>310</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4387,8 +4388,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R1_fk0_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>333</y>
+     <x>65</x>
+     <y>307</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4419,8 +4420,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R3_fk2_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>357</y>
+     <x>32</x>
+     <y>355</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4451,8 +4452,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R2_fk2_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>67</x>
-     <y>357</y>
+     <x>48</x>
+     <y>355</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4467,8 +4468,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R0_fk0_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>34</x>
-     <y>309</y>
+     <x>82</x>
+     <y>308</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4483,8 +4484,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R0_fk1_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>34</x>
-     <y>333</y>
+     <x>82</x>
+     <y>332</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4515,8 +4516,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R2_fk0_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>67</x>
-     <y>309</y>
+     <x>48</x>
+     <y>307</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4531,8 +4532,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R0_fk2_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>34</x>
-     <y>357</y>
+     <x>82</x>
+     <y>356</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4547,8 +4548,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R3_fk0_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>309</y>
+     <x>32</x>
+     <y>307</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4563,8 +4564,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R3_fk1_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>333</y>
+     <x>32</x>
+     <y>331</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4579,8 +4580,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R1_fk2_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>357</y>
+     <x>65</x>
+     <y>356</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4611,8 +4612,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R1_fk1_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>309</y>
+     <x>65</x>
+     <y>331</y>
      <width>10</width>
      <height>20</height>
     </rect>
@@ -4643,8 +4644,8 @@
   <widget class="SelectBtn_RFkBox" name="w_finger_R2_fk1_ctl" native="true">
    <property name="geometry">
     <rect>
-     <x>67</x>
-     <y>333</y>
+     <x>48</x>
+     <y>331</y>
      <width>10</width>
      <height>20</height>
     </rect>

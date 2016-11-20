@@ -125,7 +125,6 @@ class Component(MainComponent):
         # IK controls --------------------------------------------------------
         
         #foot IK
-        # self.ik_cns = pri.addTransformFromPos(self.root_ctl, self.getName("ik_cns"), self.guide.pos["foot"])
 
         if self.settings["ikOri"]:
             t = tra.getTransformLookingAt(self.guide.pos["foot"], self.guide.pos["eff"], self.x_axis, "zx", False)
@@ -144,9 +143,6 @@ class Component(MainComponent):
         att.lockAttribute(self.ik_ctl, ["sx", "sy", "sz", "v"])
 
         # 2 bones ik layer    
-        # self.ik2b_ikCtl_ref = pri.addTransformFromPos(self.ik_ctl, self.getName("ik2B_A_ref"), self.guide.pos["foot"])
-        # self.ik2b_bone_ref = pri.addTransformFromPos(self.chain3bones[3], self.getName("ik2B_B_ref"), self.guide.pos["foot"])
-        # self.ik2b_blend = pri.addTransformFromPos(self.ik_ctl, self.getName("ik2B_blend"), self.guide.pos["foot"])
         self.ik2b_ikCtl_ref = pri.addTransform(self.ik_ctl, self.getName("ik2B_A_ref"), t)
         self.ik2b_bone_ref = pri.addTransform(self.chain3bones[3], self.getName("ik2B_B_ref"), t)
         self.ik2b_blend = pri.addTransform(self.ik_ctl, self.getName("ik2B_blend"), t)
