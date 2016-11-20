@@ -25,9 +25,10 @@ Originally mGear was design and develope by `Jeremie Passerin <http://www.jeremi
 	from Miquel:
 		Big thanks to `Jeremie Passerin <http://www.jeremiepasserin.com/blog/>`_ , he is the real master behind mGear design. I am just following  his steps and continuing what he started.
 
-		Also special big thanks to `Ingo Clemens <http://www.braverabbit.de/>`_ for the OSX solver compilation and `Gaetan Guidet <https://github.com/gatgui>`_ for the Linux solver compilation and guidance in my C++ desert of knowledge.
+		Also special big thanks to `Gaetan Guidet <https://github.com/gatgui>`_ for the Linux solver compilation and guidance in my C++ desert of knowledge.
 
 		Thanks to `Chad Vernon <http://www.chadvernon.com/blog/>`_ , for his fantastic tutorials and open-source tools. Some of mGear's parts wouldn't be possible without it.
+		Thanks to `Ingo Clemens <http://www.braverabbit.de/>`_ for the OSX solver compilation in mGear 1.1
 
 		And thanks!! to all the people who help me and support this project :)
 

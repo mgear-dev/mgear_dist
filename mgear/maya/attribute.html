@@ -465,7 +465,7 @@ paranDef (dic): The stored param definition</dd>
 
 <dl class="function">
 <dt id="mgear.maya.attribute.lockAttribute">
-<code class="descclassname">mgear.maya.attribute.</code><code class="descname">lockAttribute</code><span class="sig-paren">(</span><em>node, attributes=['tx', 'ty', 'tz', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz', 'v']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.lockAttribute" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">lockAttribute</code><span class="sig-paren">(</span><em>node, attributes=['tx', 'ty', 'tz', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz', 'v'], lock=True, keyable=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.lockAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lock attributes of a node. By defaul will lock the rotation, scale and translation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -474,6 +474,8 @@ paranDef (dic): The stored param definition</dd>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>node</strong> (<em>dagNode</em>) &#8211; The node with the attributes to lock.</li>
 <li><strong>attributes</strong> (<em>list of str</em>) &#8211; The list of the attributes to lock.</li>
+<li><strong>lock</strong> (<em>Bool</em>) &#8211; Set the attribute lock when is True.</li>
+<li><strong>keyable</strong> (<em>Bool</em>) &#8211; Set the attribute keyable when is True.</li>
 </ul>
 </td>
 </tr>
