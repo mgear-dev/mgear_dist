@@ -8,6 +8,7 @@ Release Log
 	* New licensing under MIT license terms.
 	* New Documentation 
 	* New Component settings view.
+	* Quadrupeds template and new leg component for 3 bones legs.
 	* Shifter: Modular rigging sytem rebranded.
 		* Single Hierarchy Joint connexion
 		* Update Guides Command.
@@ -17,6 +18,7 @@ Release Log
 		* Synoptic variable: MGEAR_SYNOPTIC_PATH
 	* Pre and Post custom Steps.
 	* cvWrap deformer included.
+	* Updated Synoptic view.
 
 **Inprovements**
 	* Groups and dag pose connected to rig base node. This will avoid lost elements if we export selection.
