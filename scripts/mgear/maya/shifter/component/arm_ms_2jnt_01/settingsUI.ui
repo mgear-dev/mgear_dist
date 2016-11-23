@@ -7,11 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>255</width>
-<<<<<<< HEAD
     <height>650</height>
-=======
-    <height>709</height>
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,11 +17,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-<<<<<<< HEAD
      <y>300</y>
-=======
-     <y>330</y>
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
      <width>249</width>
      <height>169</height>
     </rect>
@@ -116,11 +108,7 @@
      <x>0</x>
      <y>1</y>
      <width>249</width>
-<<<<<<< HEAD
      <height>131</height>
-=======
-     <height>161</height>
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
     </rect>
    </property>
    <property name="title">
@@ -199,52 +187,11 @@
          <property name="minimum">
           <double>1.000000000000000</double>
          </property>
-<<<<<<< HEAD
-=======
-         <property name="singleStep">
-          <double>0.500000000000000</double>
-         </property>
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
          <property name="value">
           <double>2.000000000000000</double>
          </property>
         </widget>
        </item>
-<<<<<<< HEAD
-=======
-       <item row="2" column="1">
-        <widget class="QDoubleSpinBox" name="elbow_spinBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimum">
-          <double>0.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>0.100000000000000</double>
-         </property>
-         <property name="value">
-          <double>0.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="elbow_label">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Elbow Thickness</string>
-         </property>
-        </widget>
-       </item>
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
       </layout>
      </item>
      <item>
@@ -278,7 +225,6 @@
        </item>
       </layout>
      </item>
-<<<<<<< HEAD
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
@@ -292,46 +238,12 @@
      </item>
     </layout>
    </widget>
-=======
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>130</y>
-      <width>229</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetNoConstraint</enum>
-     </property>
-     <item>
-      <widget class="QPushButton" name="squashStretchProfile_pushButton">
-       <property name="text">
-        <string>Squash and Stretch Profile</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <zorder>layoutWidget</zorder>
-   <zorder></zorder>
-   <zorder>squashStretchProfile_pushButton</zorder>
-   <zorder></zorder>
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
   </widget>
   <widget class="QGroupBox" name="upvRefArray_groupBox">
    <property name="geometry">
     <rect>
      <x>0</x>
-<<<<<<< HEAD
      <y>470</y>
-=======
-     <y>500</y>
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
      <width>249</width>
      <height>170</height>
     </rect>
@@ -420,11 +332,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-<<<<<<< HEAD
      <y>132</y>
-=======
-     <y>160</y>
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
      <width>249</width>
      <height>169</height>
     </rect>

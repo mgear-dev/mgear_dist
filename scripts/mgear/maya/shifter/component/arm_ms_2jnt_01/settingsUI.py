@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
 
-<<<<<<< HEAD
 # Form implementation generated from reading ui file 'C:/Users/Mi/OneDrive/MGEAR/mgear_ms/scripts/mgear/maya/shifter/component/arm_ms_2jnt_01/settingsUI.ui'
 #
 # Created: Wed Nov 16 12:48:49 2016
-=======
-# Form implementation generated from reading ui file 'C:/Users/Mi/OneDrive/MGEAR/mgear_ms/scripts/mgear/maya/shifter/component/arm_ms_2jnt_02/settingsUI.ui'
-#
-# Created: Tue Nov 22 15:33:46 2016
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,15 +12,9 @@ from PySide import QtCore, QtGui
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-<<<<<<< HEAD
         Form.resize(255, 650)
         self.ikRefArray_groupBox = QtGui.QGroupBox(Form)
         self.ikRefArray_groupBox.setGeometry(QtCore.QRect(0, 300, 249, 169))
-=======
-        Form.resize(255, 709)
-        self.ikRefArray_groupBox = QtGui.QGroupBox(Form)
-        self.ikRefArray_groupBox.setGeometry(QtCore.QRect(0, 330, 249, 169))
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
         self.ikRefArray_groupBox.setObjectName("ikRefArray_groupBox")
         self.layoutWidget = QtGui.QWidget(self.ikRefArray_groupBox)
         self.layoutWidget.setGeometry(QtCore.QRect(10, 20, 231, 141))
@@ -61,11 +49,7 @@ class Ui_Form(object):
         self.ikRefArray_verticalLayout_2.addItem(spacerItem)
         self.ikRefArray_horizontalLayout.addLayout(self.ikRefArray_verticalLayout_2)
         self.groupBox = QtGui.QGroupBox(Form)
-<<<<<<< HEAD
         self.groupBox.setGeometry(QtCore.QRect(0, 1, 249, 131))
-=======
-        self.groupBox.setGeometry(QtCore.QRect(0, 1, 249, 161))
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
         self.layoutWidget1 = QtGui.QWidget(self.groupBox)
@@ -108,35 +92,9 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.maxStretch_spinBox.sizePolicy().hasHeightForWidth())
         self.maxStretch_spinBox.setSizePolicy(sizePolicy)
         self.maxStretch_spinBox.setMinimum(1.0)
-<<<<<<< HEAD
         self.maxStretch_spinBox.setProperty("value", 2.0)
         self.maxStretch_spinBox.setObjectName("maxStretch_spinBox")
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.maxStretch_spinBox)
-=======
-        self.maxStretch_spinBox.setSingleStep(0.5)
-        self.maxStretch_spinBox.setProperty("value", 2.0)
-        self.maxStretch_spinBox.setObjectName("maxStretch_spinBox")
-        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.maxStretch_spinBox)
-        self.elbow_spinBox = QtGui.QDoubleSpinBox(self.layoutWidget1)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.elbow_spinBox.sizePolicy().hasHeightForWidth())
-        self.elbow_spinBox.setSizePolicy(sizePolicy)
-        self.elbow_spinBox.setMinimum(0.0)
-        self.elbow_spinBox.setSingleStep(0.1)
-        self.elbow_spinBox.setProperty("value", 0.0)
-        self.elbow_spinBox.setObjectName("elbow_spinBox")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.elbow_spinBox)
-        self.elbow_label = QtGui.QLabel(self.layoutWidget1)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.MinimumExpanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.elbow_label.sizePolicy().hasHeightForWidth())
-        self.elbow_label.setSizePolicy(sizePolicy)
-        self.elbow_label.setObjectName("elbow_label")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.elbow_label)
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
         self.verticalLayout.addLayout(self.formLayout)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -154,7 +112,6 @@ class Ui_Form(object):
         self.div1_spinBox.setObjectName("div1_spinBox")
         self.horizontalLayout.addWidget(self.div1_spinBox)
         self.verticalLayout.addLayout(self.horizontalLayout)
-<<<<<<< HEAD
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.squashStretchProfile_pushButton = QtGui.QPushButton(self.layoutWidget1)
@@ -163,20 +120,6 @@ class Ui_Form(object):
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.upvRefArray_groupBox = QtGui.QGroupBox(Form)
         self.upvRefArray_groupBox.setGeometry(QtCore.QRect(0, 470, 249, 170))
-=======
-        self.widget = QtGui.QWidget(self.groupBox)
-        self.widget.setGeometry(QtCore.QRect(10, 130, 229, 25))
-        self.widget.setObjectName("widget")
-        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.widget)
-        self.horizontalLayout_2.setSizeConstraint(QtGui.QLayout.SetNoConstraint)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.squashStretchProfile_pushButton = QtGui.QPushButton(self.widget)
-        self.squashStretchProfile_pushButton.setObjectName("squashStretchProfile_pushButton")
-        self.horizontalLayout_2.addWidget(self.squashStretchProfile_pushButton)
-        self.upvRefArray_groupBox = QtGui.QGroupBox(Form)
-        self.upvRefArray_groupBox.setGeometry(QtCore.QRect(0, 500, 249, 170))
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
         self.upvRefArray_groupBox.setObjectName("upvRefArray_groupBox")
         self.layoutWidget_2 = QtGui.QWidget(self.upvRefArray_groupBox)
         self.layoutWidget_2.setGeometry(QtCore.QRect(10, 20, 231, 141))
@@ -211,11 +154,7 @@ class Ui_Form(object):
         self.upvRefArray_verticalLayout_2.addItem(spacerItem1)
         self.upvRefArray_horizontalLayout.addLayout(self.upvRefArray_verticalLayout_2)
         self.fkRefArray_groupBox = QtGui.QGroupBox(Form)
-<<<<<<< HEAD
         self.fkRefArray_groupBox.setGeometry(QtCore.QRect(0, 132, 249, 169))
-=======
-        self.fkRefArray_groupBox.setGeometry(QtCore.QRect(0, 160, 249, 169))
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
         self.fkRefArray_groupBox.setObjectName("fkRefArray_groupBox")
         self.layoutWidget_3 = QtGui.QWidget(self.fkRefArray_groupBox)
         self.layoutWidget_3.setGeometry(QtCore.QRect(10, 20, 231, 141))
@@ -263,10 +202,6 @@ class Ui_Form(object):
         self.ikRefArrayRemove_pushButton.setText(QtGui.QApplication.translate("Form", ">>", None, QtGui.QApplication.UnicodeUTF8))
         self.ikfk_label.setText(QtGui.QApplication.translate("Form", "FK/IK Blend", None, QtGui.QApplication.UnicodeUTF8))
         self.maxStretch_label.setText(QtGui.QApplication.translate("Form", "Max Stretch", None, QtGui.QApplication.UnicodeUTF8))
-<<<<<<< HEAD
-=======
-        self.elbow_label.setText(QtGui.QApplication.translate("Form", "Elbow Thickness", None, QtGui.QApplication.UnicodeUTF8))
->>>>>>> cb99c615949ab9349af88cdadd3b21e0551fb9e4
         self.divisions_label.setText(QtGui.QApplication.translate("Form", "Divisions", None, QtGui.QApplication.UnicodeUTF8))
         self.squashStretchProfile_pushButton.setText(QtGui.QApplication.translate("Form", "Squash and Stretch Profile", None, QtGui.QApplication.UnicodeUTF8))
         self.upvRefArray_groupBox.setTitle(QtGui.QApplication.translate("Form", "UpV Reference Array", None, QtGui.QApplication.UnicodeUTF8))
