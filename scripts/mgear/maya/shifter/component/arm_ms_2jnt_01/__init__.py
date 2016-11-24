@@ -100,8 +100,11 @@ class Component(MainComponent):
         self.fk2_mtx = pri.addTransform(self.fk1_ctl, self.getName("fk2_mtx"), t)
        
 
-       # fk2_npo is need to take the effector position + bone1 rotation
-        self.fk2_npo = pri.addTransform(self.fk1_ctl, self.getName("fk2_npo"), t) 
+       # fk2_loc is need to take the effector position + bone1 rotation
+        t1= tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[1], self.normal, "-xz", self.negate)
+        self.fk2_loc = pri.addTransform(self.fk1_ctl, self.getName("fk2_loc"), t1)
+
+        self.fk2_npo = pri.addTransform(self.fk2_loc, self.getName("fk2_npo"), t) 
         self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk2_ctl)
 
@@ -109,7 +112,7 @@ class Component(MainComponent):
 
         for  x in self.fk_ctl:
             att.setInvertMirror(x, ["tx", "ty", "tz"])
-
+        att.setInvertMirror(self.fk0_ctl, ["tx", "ty", "tz"])
         
 
 
@@ -364,16 +367,16 @@ class Component(MainComponent):
       
 
 
-        # fk2_npo position constraint to effector------------------------
-        node = aop.gear_mulmatrix_op(self.eff_npo.attr("worldMatrix"), self.fk2_npo.attr("parentInverseMatrix"))
+        # fk2_loc position constraint to effector------------------------
+        node = aop.gear_mulmatrix_op(self.eff_npo.attr("worldMatrix"), self.fk2_loc.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
-        pm.connectAttr(dm_node+".outputTranslate", self.fk2_npo.attr("translate"))
-        # fk2_npo rotation constraint to bone1 (bugfixed) ------------------------
-        node = aop.gear_mulmatrix_op(self.bone1.attr("worldMatrix"), self.fk2_npo.attr("parentInverseMatrix"))
+        pm.connectAttr(dm_node+".outputTranslate", self.fk2_loc.attr("translate"))
+        # fk2_loc rotation constraint to bone1 (bugfixed) ------------------------
+        node = aop.gear_mulmatrix_op(self.bone1.attr("worldMatrix"), self.fk2_loc.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
-        pm.connectAttr(dm_node+".outputRotate", self.fk2_npo.attr("rotate"))
+        pm.connectAttr(dm_node+".outputRotate", self.fk2_loc.attr("rotate"))
        
  
         # hand ikfk blending from fk ref to ik ref (serious bugfix)--------------------------------
