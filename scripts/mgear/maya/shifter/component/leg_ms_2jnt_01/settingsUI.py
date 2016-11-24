@@ -1,10 +1,28 @@
-# -*- coding: utf-8 -*-
+# MGEAR is under the terms of the MIT License
 
-# Form implementation generated from reading ui file 'C:/Users/Mi/OneDrive/MGEAR/mgear_ms/scripts/mgear/maya/shifter/component/leg_ms_2jnt_01/settingsUI.ui'
-#
-# Created: Tue Nov 22 18:24:57 2016
-#      by: pyside-uic 0.2.14 running on PySide 1.2.0
-#
+# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
+# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
+# Date:       2016 / 10 / 10
 # WARNING! All changes made in this file will be lost!
 
 from PySide import QtCore, QtGui
@@ -96,25 +114,25 @@ class Ui_Form(object):
         self.maxStretch_spinBox.setProperty("value", 2.0)
         self.maxStretch_spinBox.setObjectName("maxStretch_spinBox")
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.maxStretch_spinBox)
-        self.elbow_spinBox = QtGui.QDoubleSpinBox(self.layoutWidget1)
+        self.knee_spinBox = QtGui.QDoubleSpinBox(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.elbow_spinBox.sizePolicy().hasHeightForWidth())
-        self.elbow_spinBox.setSizePolicy(sizePolicy)
-        self.elbow_spinBox.setMinimum(0.0)
-        self.elbow_spinBox.setSingleStep(0.1)
-        self.elbow_spinBox.setProperty("value", 0.0)
-        self.elbow_spinBox.setObjectName("elbow_spinBox")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.elbow_spinBox)
-        self.elbow_label = QtGui.QLabel(self.layoutWidget1)
+        sizePolicy.setHeightForWidth(self.knee_spinBox.sizePolicy().hasHeightForWidth())
+        self.knee_spinBox.setSizePolicy(sizePolicy)
+        self.knee_spinBox.setMinimum(0.0)
+        self.knee_spinBox.setSingleStep(0.1)
+        self.knee_spinBox.setProperty("value", 0.0)
+        self.knee_spinBox.setObjectName("knee_spinBox")
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.knee_spinBox)
+        self.knee_label = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.elbow_label.sizePolicy().hasHeightForWidth())
-        self.elbow_label.setSizePolicy(sizePolicy)
-        self.elbow_label.setObjectName("elbow_label")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.elbow_label)
+        sizePolicy.setHeightForWidth(self.knee_label.sizePolicy().hasHeightForWidth())
+        self.knee_label.setSizePolicy(sizePolicy)
+        self.knee_label.setObjectName("knee_label")
+        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.knee_label)
         self.verticalLayout.addLayout(self.formLayout)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -226,7 +244,7 @@ class Ui_Form(object):
         self.ikRefArrayRemove_pushButton.setText(QtGui.QApplication.translate("Form", ">>", None, QtGui.QApplication.UnicodeUTF8))
         self.ikfk_label.setText(QtGui.QApplication.translate("Form", "FK/IK Blend", None, QtGui.QApplication.UnicodeUTF8))
         self.maxStretch_label.setText(QtGui.QApplication.translate("Form", "Max Stretch", None, QtGui.QApplication.UnicodeUTF8))
-        self.elbow_label.setText(QtGui.QApplication.translate("Form", "Knee Thickness", None, QtGui.QApplication.UnicodeUTF8))
+        self.knee_label.setText(QtGui.QApplication.translate("Form", "Knee Thickness", None, QtGui.QApplication.UnicodeUTF8))
         self.divisions_label.setText(QtGui.QApplication.translate("Form", "Divisions", None, QtGui.QApplication.UnicodeUTF8))
         self.squashStretchProfile_pushButton.setText(QtGui.QApplication.translate("Form", "Squash and Stretch Profile", None, QtGui.QApplication.UnicodeUTF8))
         self.upvRefArray_groupBox.setTitle(QtGui.QApplication.translate("Form", "UpV Reference Array", None, QtGui.QApplication.UnicodeUTF8))
