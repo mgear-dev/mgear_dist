@@ -567,8 +567,8 @@ class Component(MainComponent):
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["knee"] = self.settings["div0"] + 2
-        self.jointRelatives["ankle"] = len(self.div_cns)-1
-        self.jointRelatives["eff"] = -1
+        self.jointRelatives["ankle"] = len(self.div_cns)
+        self.jointRelatives["eff"] = len(self.div_cns)
     ## standard connection definition.
     # @param self
     def connect_standard(self):
