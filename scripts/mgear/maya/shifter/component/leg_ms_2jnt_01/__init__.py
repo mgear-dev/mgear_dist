@@ -365,7 +365,8 @@ class Component(MainComponent):
         pm.connectAttr(self.slide_att, node+".slide")
         pm.connectAttr(self.softness_att, node+".softness")
         pm.connectAttr(self.reverse_att, node+".reverse")
-
+        # update issue on effector scale interpolation, disconnect for stability
+        pm.disconnectAttr(self.eff_npo.scale)
         # auto upvector -------------------------------------
         
 
@@ -418,10 +419,15 @@ class Component(MainComponent):
         pm.connectAttr(self.blend2_att, pb_node+".weight")
         pm.connectAttr(pb_node+".outRotate", self.eff_loc.attr("rotate"))
         node = aop.gear_mulmatrix_op(self.ik_ref.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
-        dm_node = pm.createNode("decomposeMatrix")
-        pm.connectAttr(node+".output", dm_node+".inputMatrix")
-        pm.connectAttr(dm_node+".outputRotate", pb_node+".inRotate2")
-
+        dm_node1 = pm.createNode("decomposeMatrix")
+        pm.connectAttr(node+".output", dm_node1+".inputMatrix")
+        pm.connectAttr(dm_node1+".outputRotate", pb_node+".inRotate2")
+        # use blendcolors to blend scale
+        bc_node = pm.createNode("blendColors")
+        pm.connectAttr(self.blend_att, bc_node+".blender")
+        pm.connectAttr(dm_node+".outputScale", bc_node+".color2")
+        pm.connectAttr(dm_node1+".outputScale", bc_node+".color1")
+        pm.connectAttr(bc_node+".output", self.eff_loc.attr("scale"))
 
         # Twist references ---------------------------------
         pm.connectAttr(self.mid_ctl.attr("translate"), self.tws1_npo.attr("translate"))
