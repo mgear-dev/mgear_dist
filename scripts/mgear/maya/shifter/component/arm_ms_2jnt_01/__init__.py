@@ -31,9 +31,9 @@
 # //done//IK auto up vector(default off)
 # //done//T pose centric FK ctl
 # //done//elbow thickness + seperate upper/lower limb roundness ctl
+# //done//elbow scl and hand scl(ik/fk) add to jt scl
 # To Do List -------------------------------
 
-# elbow scl and hand scl(ik/fk) add to jt scl
 # addition limb jt layer ctl(optional)
 # upper sleeve lower sleeve ctl(optional)
 # custom Upper limb 4 pt bezier node with input for rot interpolation
@@ -91,6 +91,7 @@ class Component(MainComponent):
         att.setKeyableAttributes(self.fk0_roll_ctl)
 
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
+
         self.fk1_npo = pri.addTransform(self.fk0_roll_ctl, self.getName("fk1_npo"), t)
         self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk1_ctl)
@@ -102,7 +103,7 @@ class Component(MainComponent):
 
        # fk2_loc is need to take the effector position + bone1 rotation
         t1= tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[1], self.normal, "-xz", self.negate)
-        self.fk2_loc = pri.addTransform(self.fk1_ctl, self.getName("fk2_loc"), t1)
+        self.fk2_loc = pri.addTransform(self.root, self.getName("fk2_loc"), t1)
 
         self.fk2_npo = pri.addTransform(self.fk2_loc, self.getName("fk2_npo"), t) 
         self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
@@ -364,7 +365,6 @@ class Component(MainComponent):
         pm.connectAttr(pb_node+".outRotate", self.upv_mtx.attr("rotate"))
         pm.connectAttr(pb_node+".outTranslate", self.upv_mtx.attr("translate"))
         pm.connectAttr(self.auv_att, pb_node+".weight")
-      
 
 
         # fk2_loc position constraint to effector------------------------
@@ -462,6 +462,10 @@ class Component(MainComponent):
         pm.connectAttr(dm_node+".outputRotate", self.div_mid.attr("rotate"))
 
         # at 0 or 1 the division will follow exactly the rotation of the controler.. and we wont have this nice tangent + roll
+        # linear scaling percentage (1) to effector (2) to elbow
+        scl_1_perc = []
+        scl_2_perc = []
+
         for i, div_cnsUp in enumerate(self.div_cnsUp):
 
             if i < (self.settings["div0"]+1):
@@ -481,7 +485,11 @@ class Component(MainComponent):
                 node = aop.gear_rollsplinekine_op(div_cnsUp, [self.tws0_rot, self.tws1_rot], perc, 20)
             pm.connectAttr(self.resample_att, node+".resample")
             pm.connectAttr(self.absolute_att, node+".absolute")
-
+           
+            scl_1_perc.append(perc/2)
+            scl_2_perc.append(perc)
+        scl_1_perc.append(0.5)
+        scl_2_perc.append(1)
         for i, div_cnsDn in enumerate(self.div_cnsDn):
 
             if i == (0):
@@ -503,7 +511,9 @@ class Component(MainComponent):
                 node = aop.gear_rollsplinekine_op(div_cnsDn, [self.tws2_rot, self.tws3_rot], perc, 20)
             pm.connectAttr(self.resample_att, node+".resample")
             pm.connectAttr(self.absolute_att, node+".absolute")
-        
+           
+            scl_1_perc.append(perc/2+0.5)
+            scl_2_perc.append(1-perc)
         # Squash n Stretch
         for i, div_cns in enumerate(self.div_cns):
             node = aop.gear_squashstretch2_op(div_cns, None, pm.getAttr(self.volDriver_att), "x")
@@ -511,6 +521,26 @@ class Component(MainComponent):
             pm.connectAttr(self.volDriver_att, node+".driver")
             pm.connectAttr(self.st_att[i], node+".stretch")
             pm.connectAttr(self.sq_att[i], node+".squash")
+            # get the first mult_node after sq op
+            mult_node = pm.listHistory(node, future=True )[1]
+            # linear blend effector scale
+            bc_node = pm.createNode("blendColors")
+            bc_node.setAttr("color2R", 1)
+            bc_node.setAttr("color2G", 1)
+            bc_node.setAttr("blender", scl_1_perc[i])
+            pm.connectAttr(self.eff_loc.attr("scale"), bc_node+".color1")
+            # linear blend mid scale
+            bc_node2 = pm.createNode("blendColors")
+            bc_node2.setAttr("color2R", 1)
+            bc_node2.setAttr("color2G", 1)
+            bc_node2.setAttr("blender", scl_2_perc[i])
+            pm.connectAttr(self.mid_ctl.attr("scale"), bc_node2+".color1")
+            # mid_ctl scale * effector scale
+            mult_node2 = pm.createNode("multiplyDivide")
+            pm.connectAttr(bc_node2+".output", mult_node2+".input1")
+            pm.connectAttr(bc_node+".output", mult_node2+".input2")
+            # plug to sq scale
+            pm.connectAttr(mult_node2+".output", mult_node+".input2")
 
         # match IK/FK ref
         pm.connectAttr(self.bone0.attr("rotate"), self.match_fk0.attr("rotate"))
