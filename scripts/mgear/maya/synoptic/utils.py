@@ -96,8 +96,8 @@ def selectObj(model, object_names, mouse_button, key_modifier):
     with pm.UndoChunk():
         nodes = []
         for name in object_names:
-            if  len(model.split(":")) == 2:
-                node = pm.PyNode( model.split(":")[0] + ":" + name)
+            if  len(model.split(":")) >= 2:
+                node = pm.PyNode(":".join(model.split(":")[:-1]) + ":" + name)
             else:
                 node = pm.PyNode(name)
             if not node and len(model.split(":")) == 2:
