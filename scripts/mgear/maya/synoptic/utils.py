@@ -86,6 +86,17 @@ def getControlers(model):
 
     return members
 
+def getNamespace(modelName):
+    if len(modelName.split(":")) >= 2:
+        nameSpace = ":".join(modelName.split(":")[:-1])
+    else:
+        nameSpace = ""
+
+    return nameSpace
+
+def stripNamespace(nodeName):
+    return nodeName.split(":")[-1]
+
 ##################################################
 # SELECT
 ##################################################
@@ -96,12 +107,14 @@ def selectObj(model, object_names, mouse_button, key_modifier):
     with pm.UndoChunk():
         nodes = []
         for name in object_names:
-            if  len(model.split(":")) >= 2:
-                node = pm.PyNode(":".join(model.split(":")[:-1]) + ":" + name)
+            nameSpace = getNamespace(model)
+            if  nameSpace:
+                node = pm.PyNode(nameSpace + ":" + name)
             else:
                 node = pm.PyNode(name)
-            if not node and len(model.split(":")) == 2:
-                mgear.log("Can't find object : %s:%s"%( model.split(":")[0], name), mgear.sev_error)
+
+            if not node and nameSpace:
+                mgear.log("Can't find object : %s:%s"%( nameSpace, name), mgear.sev_error)
             elif not node:
                 mgear.log("Can't find object : %s"%( name), mgear.sev_error)
             nodes.append(node)
@@ -186,12 +199,14 @@ def keyObj(model, object_names):
     """
     nodes = []
     for name in object_names:
-        if  len(model.split(":")) == 2:
-            node = dag.findChild(model, model.split(":")[0] + ":" + name)
+        nameSpace = getNamespace(model)
+        if  nameSpace:
+            node = dag.findChild(nameSpace + ":" + name)
         else:
             node = dag.findChild(model, name)
-        if not node and len(model.split(":")) == 2:
-            mgear.log("Can't find object : %s:%s"%( model.split(":")[0], name), mgear.sev_error)
+
+        if not node and nameSpace:
+            mgear.log("Can't find object : %s:%s"%( nameSpace, name), mgear.sev_error)
         elif not node:
             mgear.log("Can't find object : %s"%( name), mgear.sev_error)
         nodes.append(node)
@@ -212,8 +227,9 @@ def keyAll(model):
 
 def toggleAttr(model, object_name, attr_name):
 
-    if  len(model.split(":")) == 2:
-        node = dag.findChild(model, model.split(":")[0] + ":" + object_name)
+    nameSpace = getNamespace(model)
+    if  nameSpace:
+        node = dag.findChild(nameSpace + ":" + object_name)
     else:
         node = dag.findChild(model, object_name)
 
@@ -233,8 +249,9 @@ def toggleAttr(model, object_name, attr_name):
 # ================================================
 def getComboKeys(model, object_name, combo_attr):
 
-    if  len(model.split(":")) == 2:
-        node = pm.PyNode( model.split(":")[0] + ":" + object_name)
+    nameSpace = getNamespace(model)
+    if  nameSpace:
+        node = pm.PyNode( nameSpace + ":" + object_name)
         # node = dag.findRelative(model, model.split(":")[0] + ":" + object_name)
     else:
         node = pm.PyNode( object_name)
@@ -248,8 +265,9 @@ def getComboKeys(model, object_name, combo_attr):
 
 def getComboIndex(model, object_name, combo_attr):
 
-    if  len(model.split(":")) == 2:
-        node = pm.PyNode( model.split(":")[0] + ":" + object_name)
+    nameSpace = getNamespace(model)
+    if  nameSpace:
+        node = pm.PyNode( nameSpace + ":" + object_name)
     else:
         node = pm.PyNode(object_name)
 
@@ -258,9 +276,10 @@ def getComboIndex(model, object_name, combo_attr):
 
 def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
 
-    if  len(model.split(":")) == 2:
-        node = pm.PyNode( model.split(":")[0] + ":" + object_name)
-        ctl = pm.PyNode( model.split(":")[0] + ":" + ctl_name)
+    nameSpace = getNamespace(model)
+    if  nameSpace:
+        node = pm.PyNode( nameSpace + ":" + object_name)
+        ctl = pm.PyNode( nameSpace + ":" + ctl_name)
     else:
         node = pm.PyNode(object_name)
         ctl = pm.PyNode(ctl_name)
@@ -279,10 +298,7 @@ def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
 # ================================================
 #
 
-    if  len(model.split(":")) == 2:
-        nameSpace =  model.split(":")[0] + ":"
-    else:
-        nameSpace = ""
+    nameSpace = getNamespace(model)
 
     uiNode = pm.PyNode(nameSpace + uiHost_name)
     fk0 = pm.PyNode(nameSpace + fk0)
@@ -347,15 +363,9 @@ def mirrorPose(flip=False, nodes=False):
     try:
         nameSpace = False
         if nodes:
-            if  len(nodes[0].split(":")) == 2:
-                nameSpace = nodes[0].split(":")[0]
+            nameSpace = getNamespace(nodes[0])
         for oSel in nodes:
-            if nameSpace:
-                nameParts = oSel.name().split(":")[1].split("|")[-1]
-            else:
-                nameParts = oSel.name().split("|")[-1]
-
-
+            nameParts = stripNamespace(oSel.name()).split("|")[-1]
                         
             if "_L" in nameParts or "_R" in nameParts:
                 if "_L" in nameParts:
@@ -468,8 +478,9 @@ def mirrorPoseOld(flip=False, nodes=False):
 
 
 def bindPose(model):
-    if len(model.name().split(":")) == 2:
-        dagPoseName = model.name().split(":")[0]+':dagPose1'
+    nameSpace = getNamespace(model.name())
+    if nameSpace:
+        dagPoseName = nameSpace+':dagPose1'
     else:
         dagPoseName = 'dagPose1'
     pm.dagPose( dagPoseName, restore=True )
@@ -578,8 +589,8 @@ class spaceTransferUI(QtWidgets.QDialog):
 
     def doSpaceTransfer(self):
 
-        if  len(self.model.split(":")) == 2:
-            nameSpace = self.model.split(":")[0]
+        nameSpace = getNamespace(self.model)
+        if nameSpace:
             ctrlName = nameSpace+":"+self.ctrl_name
             hostName = nameSpace+":"+self.uihost
         else:
