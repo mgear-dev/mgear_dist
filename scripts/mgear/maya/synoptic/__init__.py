@@ -77,6 +77,7 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         gqt.deleteInstances(self, MayaQDockWidget)
         super(Synoptic, self).__init__(parent)
         self.create_widgets()
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
     def create_widgets(self):
 
