@@ -43,6 +43,7 @@ import pymel.core.datatypes as dt
 
 # mgear
 import mgear
+import mgear.maya.utils
 from mgear.maya.shifter.guide import RigGuide
 from mgear.maya.shifter.guide import helperSlots
 from mgear.maya.shifter.component import MainComponent
@@ -66,91 +67,30 @@ COMPONENT_PATH = os.path.join(os.path.dirname(__file__), "component")
 TEMPLATE_PATH = os.path.join(COMPONENT_PATH, "templates")
 SYNOPTIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, "synoptic","tabs"))
 
+SHIFTER_COMPONENT_ENV_KEY = "MGEAR_COMPONENT_PATH"
 
-def gatherComponentsDirectory():
-        """
-        returns component directory
-
-        Returns:
-            Dict{string: []string}
-            Component base directory
-            Compon
-        """
-
-        results = {}
-
-        # default path
-        path = os.path.join(os.path.dirname(__file__), "component")
-        comps = sorted(os.listdir(path))
-        results[path] = comps
-
-        # from environment variables
-        envvarval = os.environ.get("MGEAR_COMPONENTS_PATH", "")
-        for path in envvarval.split(';'):
-            if not os.path.exists(path):
-                continue
-
-            init_py_path = os.path.join(path, "__init__.py")
-            if not os.path.exists(init_py_path):
-                message = "= GEAR RIG SYSTEM ====== notify:"
-                message += "\n  __init__.py for custom component not found {}".format(init_py_path)
-                message += "\n\n check your module definition file or environment variable 'MGEAR_COMPONENTS_PATH'"
-                message += " or call your system administrator."
-                message += "\n"
-                mgear.log(message, mgear.sev_error)
-                continue
-
-            comps = sorted(os.listdir(path))
-
-            results[path] = comps
-
-        return results
-
-
-COMPONENTS_DIRECTORIES = gatherComponentsDirectory()
-
-
-def getComponentBasePath(comp_type):
-    # search component path
-    import mgear.maya.shifter as shifter
-    for basepath, comps in shifter.COMPONENTS_DIRECTORIES.iteritems():
-        if comp_type in comps:
-            compbasepath = os.path.basename(basepath)
-            break
-    else:
-        compbasepath = ""
-        message = "= GEAR RIG SYSTEM ======"
-        message += "component base directory not found for {}".format(comp_type)
-        mgear.log(message, mgear.sev_error)
-
-    return compbasepath
+COMPONENTS_DIRECTORIES = mgear.maya.utils.gatherCustomModuleDirectories(
+    SHIFTER_COMPONENT_ENV_KEY,
+    os.path.join(os.path.dirname(__file__), "component"))
 
 
 def importComponentGuide(comp_type):
-    compbasepath = getComponentBasePath(comp_type)
-    # Import module and get class
-    try:
-        module_name = "mgear.maya.shifter.component.{}.guide".format(comp_type)
-        module = __import__(module_name, globals(), locals(), ["*"], -1)
+    import mgear.maya.shifter as shifter
+    dirs = shifter.COMPONENTS_DIRECTORIES
+    defFmt = "mgear.maya.shifter.component.{}.guide"
+    customFmt = "{0}.{1}.guide"
 
-    except ImportError:
-        module_name = "{}.{}.guide".format(compbasepath, comp_type)
-        module = __import__(module_name, globals(), locals(), ["*"], -1)
-
+    module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, comp_type)
     return module
 
 
 def importComponent(comp_type):
-    compbasepath = getComponentBasePath(comp_type)
-    # Import module and get class
-    try:
-        module_name = "mgear.maya.shifter.component.{}".format(comp_type)
-        module = __import__(module_name, globals(), locals(), ["*"], -1)
+    import mgear.maya.shifter as shifter
+    dirs = shifter.COMPONENTS_DIRECTORIES
+    defFmt = "mgear.maya.shifter.component.{}"
+    customFmt = "{0}.{1}"
 
-    except ImportError:
-        module_name = "{}.{}".format(compbasepath, comp_type)
-        module = __import__(module_name, globals(), locals(), ["*"], -1)
-
+    module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, comp_type)
     return module
 
 
