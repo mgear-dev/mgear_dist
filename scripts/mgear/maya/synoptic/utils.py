@@ -34,6 +34,7 @@ import pymel.core as pm
 import maya.mel as mel
 import maya.OpenMayaUI as omui
 from functools import partial
+import re
 
 import mgear
 import mgear.maya.dag as dag
@@ -49,6 +50,58 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 SYNOPTIC_WIDGET_NAME = "synoptic_view"
 CTRL_GRP_SUFFIX = "_controllers_grp"
+
+
+EXPR_LEFT_SIDE = re.compile("L(\d+)")
+EXPR_RIGHT_SIDE = re.compile("R(\d+)")
+
+
+##################################################
+# util
+def isNodeSideElements(node):
+    """
+    Returns node is side element
+
+    Arguments:
+        node: (dynamic determined) MFnDGNode or string or unicode
+
+    Returns:
+        bool
+    """
+
+    if "'str'" in str(type(node)) or "'unicode'" in str(type(node)):
+        name = node
+    else:
+        name = node.name()
+
+    nameParts = stripNamespace(name).split("|")[-1]
+
+    for part in nameParts.split("_"):
+        if EXPR_LEFT_SIDE.match(part) or EXPR_RIGHT_SIDE.match(part):
+            return True
+    else:
+        return False
+
+
+def flipSideLabel(name):
+    """
+    Returns fliped name that replaced side label left to right or right to left.
+
+    Arguments:
+        name(str):
+
+    Returns:
+        str
+    """
+
+    for part in name.split("_"):
+        if EXPR_LEFT_SIDE.match(part):
+            return EXPR_LEFT_SIDE.sub(r"R\1", name)
+        if EXPR_RIGHT_SIDE.match(part):
+            return EXPR_RIGHT_SIDE.sub(r"L\1", name)
+
+    else:
+        return name
 
 
 ##################################################
@@ -383,76 +436,113 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
 ##################################################
 # ================================================
 def mirrorPose(flip=False, nodes=False):
-
-    axis = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
-    aDic = {"tx":"invTx", "ty":"invTy", "tz":"invTz", "rx":"invRx", "ry":"invRy", "rz":"invRz", "sx":"invSx", "sy":"invSy", "sz":"invSz"}
-    mapDic = {"L":"R", "R":"L"}
     if not nodes:
         nodes = pm.selected()
+
     pm.undoInfo(ock=1)
     try:
         nameSpace = False
         if nodes:
             nameSpace = getNamespace(nodes[0])
+
+        mirrorEntries = []
         for oSel in nodes:
-            nameParts = stripNamespace(oSel.name()).split("|")[-1]
-                        
-            if "_L" in nameParts or "_R" in nameParts:
-                if "_L" in nameParts:
-                    nameParts = nameParts.replace("_L", "_R")
-                else:
-                    nameParts = nameParts.replace("_R", "_L")
-                
-                if nameSpace:
-                    nameTarget = nameSpace +":"+ nameParts
-                else:
-                    nameTarget = nameParts
-                oTarget = getNode(nameTarget)
-                for a in axis:
-                    if not oSel.attr(a).isLocked():
-                        if oSel.attr(aDic[a]).get():
-                            inv = -1
-                        else:
-                            inv = 1
-                        if flip:
-                            flipVal = oTarget.attr(a).get()
+            mirrorEntries.extend(calculateMirrorData(nameSpace, oSel, flip))
 
-                        oTarget.attr(a).set(oSel.attr(a).get()*inv)
+        for dat in mirrorEntries:
+            applyMirror(nameSpace, dat)
 
-                        if flip:
-                            oSel.attr(a).set(flipVal*inv)
-                #custom attr
-                attrs = pm.listAttr(oSel, userDefined=True)
-                for at in attrs:
-                    tat = at
-                    if "_L" in tat:
-                        tat = tat.replace("_L", "_R")
-                    elif "_R" in tat:
-                        tat = tat.replace("_R", "_L")
-
-                    if flip:
-                        flipVal = oTarget.attr(tat).get()
-
-                    oTarget.attr(tat).set(oSel.attr(at).get())
-
-                    if flip:
-                        oSel.attr(at).set(flipVal)
-                            
-            else:
-                if not oSel.attr("tx").isLocked():
-                    oSel.attr("tx").set(oSel.attr("tx").get()*-1)
-                if not oSel.attr("ry").isLocked():
-                    oSel.attr("ry").set(oSel.attr("ry").get()*-1)
-                if not oSel.attr("rz").isLocked():
-                    oSel.attr("rz").set(oSel.attr("rz").get()*-1)
-
-
-
-    except:
+    except Exception as e:
         pm.displayWarning("Flip/Mirror pose fail")
-        pass
+        import traceback
+        traceback.print_exc()
+        print e
+
     finally:
         pm.undoInfo(cck=1)
+
+
+def applyMirror(nameSpace, mirrorEntry):
+    node = mirrorEntry["target"]
+    attr = mirrorEntry["attr"]
+    val = mirrorEntry["val"]
+
+    try:
+        node.attr(attr).set(val)
+    except AttributeError as e:
+        import traceback
+        traceback.print_exc()
+
+        raise e
+
+
+def calculateMirrorData(nameSpace, node, flip):
+    if isNodeSideElements(node):
+        return calculateMirrorDataForSideObject(nameSpace, node, flip)
+
+    else:
+        return calculateMirrorDataForCenterObject(nameSpace, node)
+
+
+def calculateMirrorDataForSideObject(nameSpace, node, flip=False):
+    axis = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
+    aDic = {"tx": "invTx", "ty": "invTy", "tz": "invTz", "rx": "invRx", "ry": "invRy", "rz": "invRz", "sx": "invSx", "sy": "invSy", "sz": "invSz"}
+    results = []
+
+    # search counter part
+    nameParts = stripNamespace(node.name()).split("|")[-1]
+    nameParts = flipSideLabel(nameParts)
+
+    if nameSpace:
+        nameTarget = nameSpace + ":" + nameParts
+    else:
+        nameTarget = nameParts
+
+    oTarget = getNode(nameTarget)
+
+    # mirror transform of source
+    for a in axis:
+        if node.attr(a).isLocked():
+            continue
+
+        if node.attr(aDic[a]).get():
+            inv = -1
+        else:
+            inv = 1
+
+        if flip:
+            flipVal = oTarget.attr(a).get()
+            results.append({"target": node, "attr": a, "val": flipVal * inv})
+
+        results.append({"target": oTarget, "attr": a, "val": node.attr(a).get() * inv})
+
+    # custom attr
+    attrs = pm.listAttr(node, userDefined=True)
+    for at in attrs:
+        tat = flipSideLabel(at)
+
+        if flip:
+            flipVal = oTarget.attr(tat).get()
+            results.append({"target": node, "attr": at, "val": flipVal})
+
+        results.append({"target": oTarget, "attr": tat, "val": node.attr(at).get()})
+
+    return results
+
+
+def calculateMirrorDataForCenterObject(nameSpace, node):
+    results = []
+    if not node.attr("tx").isLocked():
+        results.append({"target": node, "attr": "tx", "val": node.attr("tx").get() * -1})
+
+    if not node.attr("ry").isLocked():
+        results.append({"target": node, "attr": "ry", "val": node.attr("ry").get() * -1})
+
+    if not node.attr("rz").isLocked():
+        results.append({"target": node, "attr": "rz", "val": node.attr("rz").get() * -1})
+
+    return results
+
 
 def mirrorPoseOld(flip=False, nodes=False):
 
