@@ -159,10 +159,13 @@ class SelectButton(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(SelectButton, self).__init__(parent)
+        self.defaultBGColor = QtGui.QPalette().color(self.backgroundRole())
+        self.setBorderColor(self.defaultBGColor)
         p = self.palette()
         p.setColor(self.foregroundRole(),QtGui.QColor(000, 000, 000, 000))
+        p.setColor(self.backgroundRole(),QtGui.QColor(000, 000, 000, 000))
         self.setPalette(p)
-    
+
 
     def enterEvent(self, event):
         self.over = True
@@ -209,10 +212,22 @@ class SelectButton(QtWidgets.QWidget):
             p = self.palette()
             p.setColor(self.foregroundRole(),QtGui.QColor(255, 255, 255, 255))
             self.setPalette(p)
+            self.setBorderColor(QtGui.QColor(255, 255, 255, 255))
         else:
             p = self.palette()
-            p.setColor(self.foregroundRole(),QtGui.QColor(000, 000, 000, 000))
+            p.setColor(self.foregroundRole(),QtGui.QColor(000, 000, 000, 010))
             self.setPalette(p)
+            self.setBorderColor(self.defaultBGColor)
+
+    def setBorderColor(self, color):
+        self.borderColor = color
+
+    def drawPathWithBorder(self, painter, path, borderWidth):
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+        pen = QtGui.QPen(self.borderColor, borderWidth)
+        painter.setPen(pen)
+        painter.fillPath(path, QtCore.Qt.red)
+        painter.drawPath(path)
 
 
 class SelectBtn_RFk(SelectButton):
@@ -244,21 +259,55 @@ class SelectBtn_darkGreen(SelectButton):
 
 class SelectBtn_Box(SelectButton):
     def drawShape(self, painter):
-        painter.drawRect(0, 0, self.width()-1, self.height()-1)
+        borderWidth = 1
+        t = borderWidth / 2.0
+        l = borderWidth / 2.0
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        if self.height() < self.width():
+            roundRadius = self.height() * 0.25
+        else:
+            roundRadius = self.width() * 0.25
+
+        path = QtGui.QPainterPath()
+        path.addRoundedRect(QtCore.QRectF(t, l, w, h), roundRadius, roundRadius)
+        self.drawPathWithBorder(painter, path, borderWidth)
 
 class SelectBtn_Circle(SelectButton):
     def drawShape(self, painter):
-        painter.drawEllipse(0, 0, self.width()-1, self.height()-1)
+        borderWidth = 1
+        t = borderWidth / 2.0
+        l = borderWidth / 2.0
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        path = QtGui.QPainterPath()
+        path.addEllipse(QtCore.QRectF(t, l, w, h))
+        self.drawPathWithBorder(painter, path, borderWidth)
 
 class SelectBtn_TriangleLeft(SelectButton):
     def drawShape(self, painter):
-        triangle = QtGui.QPolygon([QtCore.QPoint(1, self.height()/2), QtCore.QPoint( self.width()-1, 0), QtCore.QPoint( self.width()-1,self.height()-1)])
-        painter.drawPolygon(triangle)
+        borderWidth = 1
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        triangle = QtGui.QPolygon([QtCore.QPoint(1, h/2), QtCore.QPoint( w-1, 0), QtCore.QPoint( w-1,h-1)])
+        path = QtGui.QPainterPath()
+        path.addPolygon(triangle)
+        self.drawPathWithBorder(painter, path, borderWidth)
+        painter.setClipRegion(triangle, QtCore.Qt.ReplaceClip)
 
 class SelectBtn_TriangleRight(SelectButton):
     def drawShape(self, painter):
-        triangle = QtGui.QPolygon([ QtCore.QPoint(-1, 0), QtCore.QPoint( -1,self.height()-1), QtCore.QPoint(self.width()-1, self.height()/2)])
-        painter.drawPolygon(triangle)
+        borderWidth = 1
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        triangle = QtGui.QPolygon([ QtCore.QPoint(-1, 0), QtCore.QPoint( -1, h-1), QtCore.QPoint(w-1, h/2)])
+        path = QtGui.QPainterPath()
+        path.addPolygon(triangle)
+        self.drawPathWithBorder(painter, path, borderWidth)
         painter.setClipRegion(triangle, QtCore.Qt.ReplaceClip)
 
 # ------------------------------------------
