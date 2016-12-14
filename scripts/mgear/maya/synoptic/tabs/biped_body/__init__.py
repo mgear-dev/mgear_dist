@@ -85,8 +85,8 @@ class SynopticTab(QtWidgets.QDialog, wui.Ui_biped_body):
         nameSpace = False
         if sels:
             oModel = syn_uti.getModel(self)
-            if  len(oModel.split(":")) == 2:
-                nameSpace = oModel.split(":")[0]
+            if  len(oModel.split(":")) >= 2:
+                nameSpace = ":".join(oModel.split(":")[:-1])
 
         selButtons = self.findChildren(mwi.SelectButton)
         for selB in selButtons:
