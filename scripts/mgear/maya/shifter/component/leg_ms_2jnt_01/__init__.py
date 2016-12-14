@@ -22,16 +22,16 @@
 
 # Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 11 / 18
+# Date:       2016 / 10 / 10
 
 # ms 2jnt feature -----------------------
 # //done//FK isolation
 # //done//FK roll ctl
-# //done//Independent IK-FK hand ctl
+# //done//Independent IK-FK foot ctl
 # //done//IK auto up vector(default off)
 # //done//T pose centric FK ctl
-# //done//elbow thickness + seperate upper/lower limb roundness ctl
-# //done//elbow scl and hand scl(ik/fk) add to jt scl
+# //done//knee thickness + seperate upper/lower limb roundness ctl
+# //done//knee scl and foot scl(ik/fk) add to jt scl
 # //done//addition limb jt layer ctl(optional)
 # To Do List -------------------------------
 
@@ -79,7 +79,7 @@ class Component(MainComponent):
 
         self.fk_cns = pri.addTransformFromPos(self.root, self.getName("fk_cns"), self.guide.apos[0])
 
-        tpv = self.guide.apos[0] + ((self.guide.apos[1] - self.guide.apos[0])*[1,0,0])        
+        tpv = self.guide.apos[0] + ((self.guide.apos[1] - self.guide.apos[0])*[0,1,0])        
         t = tra.getTransformLookingAt(self.guide.apos[0], tpv, self.normal, "xz", self.negate)
         # *ms* add FK isolation
         self.fk0_npo = pri.addTransform(self.fk_cns, self.getName("fk0_npo"), t)
@@ -88,59 +88,62 @@ class Component(MainComponent):
         self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0*.7, h=self.size*.1, d=self.size*.1, po=dt.Vector(.35*self.length0*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk0_ctl)
         # *ms* add fk roll control Simage style
-        self.fk0_roll_ctl = self.addCtl(self.fk0_ctl, "fk0_roll_ctl", t, self.color_fk, "cube", w=self.length0*.3, h=self.size*.1, d=self.size*0.1, po=dt.Vector(.85*self.length0*self.n_factor,0,0))
+        self.fk0_roll_ctl = self.addCtl(self.fk0_ctl, "fk0_roll_ctl", t, self.color_fk, "cube", w=self.length0*.3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.85*self.length0*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk0_roll_ctl)
         self.fk0_mtx = pri.addTransform(self.root, self.getName("fk0_mtx"), t)
-
         t = tra.setMatrixPosition(t, self.guide.apos[1])
         self.fk1_ref = pri.addTransform(self.fk0_roll_ctl, self.getName("fk1_ref"), t)
-
-        self.fk1_loc = pri.addTransform(self.root, self.getName("fk1_loc"), t)
+        self.fk1_loc = pri.addTransform(self.root, self.getName("fk1_loc"), t)       
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
-       
+        
         self.fk1_npo = pri.addTransform(self.fk1_loc, self.getName("fk1_npo"), t)
         self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1*.7, h=self.size*.1, d=self.size*.1, po=dt.Vector(.35*self.length1*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk1_ctl)
         self.fk1_mtx = pri.addTransform(self.fk1_ctl, self.getName("fk1_mtx"), t)
         self.fk1_roll_ctl = self.addCtl(self.fk1_ctl, "fk1_roll_ctl", t, self.color_fk, "cube", w=self.length1*.3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.85*self.length1*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk1_roll_ctl)
-        
 
-        t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
-        # *ms* buffer object to feed into ikfk solver for hand seperation
+        
+        # t = tra.getTransformFromPos(self.guide.pos["ankle"])
+        # *ms* buffer object to feed into ikfk solver for foot seperation
+        t= tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "z-x", negate=False)
+
         self.fk2_mtx = pri.addTransform(self.fk1_roll_ctl, self.getName("fk2_mtx"), t)
        
 
        # fk2_loc is need to take the effector position + bone1 rotation
-        t1= tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[1], self.normal, "-xz", self.negate)
-        self.fk2_loc = pri.addTransform(self.root, self.getName("fk2_loc"), t1)
+       # fk2_npo should get offset rotation from fk2_mtx 
+        t= tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[1], self.normal, "-xz", self.negate)
+        self.fk2_loc = pri.addTransform(self.root, self.getName("fk2_loc"), t)
+        t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
 
         self.fk2_npo = pri.addTransform(self.fk2_loc, self.getName("fk2_npo"), t) 
         self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk2_ctl)
 
-        self.fk_ctl = [self.fk0_roll_ctl, self.fk1_mtx, self.fk2_ctl]
+        self.fk_ctl = [self.fk0_roll_ctl, self.fk1_ctl, self.fk2_ctl]
         self.fk_ctls = [self.fk0_ctl,self.fk0_roll_ctl, self.fk1_ctl, self.fk1_roll_ctl, self.fk2_ctl]
-        for x in self.fk_ctls:
+        for  x in self.fk_ctls:
             att.setInvertMirror(x, ["tx", "ty", "tz"])
+
         # att.setInvertMirror(self.fk0_ctl, ["tx", "ty", "tz"])
-        # att.setInvertMirror(self.fk1_ctl, ["tx", "ty", "tz"])
-        
 
 
         # IK Controlers -----------------------------------
 
-        self.ik_cns = pri.addTransformFromPos(self.root, self.getName("ik_cns"), self.guide.pos["wrist"])
+        self.ik_cns = pri.addTransformFromPos(self.root, self.getName("ik_cns"), self.guide.pos["ankle"])
 
-        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["wrist"]), self.color_ik, "null", w=self.size*.12)
-        att.setInvertMirror(self.ikcns_ctl, ["tx", "ty", "tz"])
+        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["ankle"]), self.color_ik, "null", w=self.size*.12)
+        att.setInvertMirror(self.ikcns_ctl, ["tx"])
 
-        if self.negate:
-            m = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "x-y", True)
-        else:
-            m = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "xy", False)
+        # if self.negate:
+        #     m = tra.getTransformLookingAt(self.guide.pos["ankle"], self.guide.pos["eff"], self.normal, "x-y", True)
+        # else:
+        #     m = tra.getTransformLookingAt(self.guide.pos["ankle"], self.guide.pos["eff"], self.normal, "xy", False)
+        m = tra.getTransformFromPos(self.guide.pos["ankle"])
         self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12)
         att.setKeyableAttributes(self.ik_ctl)
+        # att.setRotOrder(self.ik_ctl, "XZY")
         att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
 
         # upv
@@ -161,9 +164,14 @@ class Component(MainComponent):
 
         # References --------------------------------------
         # Calculate  again the transfor for the IK ref. This way align with FK
-        trnIK_ref = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "xz", self.negate)
-        self.ik_ref = pri.addTransform(self.ik_ctl, self.getName("ik_ref"), trnIK_ref)
-        self.fk_ref = pri.addTransform(self.fk_ctl[2], self.getName("fk_ref"), trnIK_ref)
+        # trnIK_ref = tra.getTransformLookingAt(self.guide.pos["ankle"], self.guide.pos["eff"], self.normal, "xz", self.negate)
+        self.ik_ref = pri.addTransform(self.ik_ctl, self.getName("ik_ref"), tra.getTransform(self.ik_ctl))
+        self.fk_ref = pri.addTransform(self.fk_ctl[2], self.getName("fk_ref"), tra.getTransform(self.ik_ctl))
+
+        # auto up vector foot solver
+        self.upv1_auv = pri.addTransform(self.ik_ref, self.getName("upv1_auv"), tra.getTransform(self.ik_ctl))
+        self.upv2_auv = pri.addTransform(self.upv1_auv, self.getName("upv2_auv"), tra.getTransform(self.ik_ctl))
+        self.upv2_auv.setAttr("tz",1)
 
         # Chain --------------------------------------------
         # take outputs of the ikfk2bone solver
@@ -186,11 +194,15 @@ class Component(MainComponent):
         self.eff_npo  = pri.addTransformFromPos(self.root, self.getName("eff_npo"), self.guide.apos[2])
         # eff loc --- take the fk ik blend result
         self.eff_loc  = pri.addTransformFromPos(self.eff_npo, self.getName("eff_loc"), self.guide.apos[2])
+    # tws_ref
+        t = tra.getRotationFromAxis(dt.Vector(0,-1,0), self.normal, "xz", self.negate)
+        t = tra.setMatrixPosition(t, self.guide.pos["ankle"])
+        self.tws_ref = pri.addTransform(self.eff_loc, self.getName("tws_ref"), t)
 
         # Mid Controler ------------------------------------
         self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
         att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
-        # *ms* add elbow thickness
+        # *ms* add knee thickness
 
 
 
@@ -207,12 +219,17 @@ class Component(MainComponent):
         self.tws2_loc = pri.addTransform(self.tws1_npo, self.getName("tws2_loc"), tra.getTransform(self.ctrn_loc))
         self.tws2_rot = pri.addTransform(self.tws2_loc, self.getName("tws2_rot"), tra.getTransform(self.ctrn_loc))
 
-        self.tws3_npo = pri.addTransform(self.root, self.getName("tws3_npo"), tra.getTransform(self.fk_ctl[2]))
-        self.tws3_loc = pri.addTransform(self.tws3_npo, self.getName("tws3_loc"), tra.getTransform(self.fk_ctl[2]))
-        self.tws3_rot = pri.addTransform(self.tws3_loc, self.getName("tws3_rot"), tra.getTransform(self.fk_ctl[2]))
+        # self.tws3_npo = pri.addTransform(self.root, self.getName("tws3_npo"), tra.getTransform(self.fk_ctl[2]))
+        # self.tws3_loc = pri.addTransform(self.tws3_npo, self.getName("tws3_loc"), tra.getTransform(self.fk_ctl[2]))
+        # self.tws3_rot = pri.addTransform(self.tws3_loc, self.getName("tws3_rot"), tra.getTransform(self.fk_ctl[2]))
+        t = t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[1], self.normal, "-xz", self.negate)
+        self.tws3_npo = pri.addTransform(self.root, self.getName("tws3_npo"), t)
+        self.tws3_loc = pri.addTransform(self.tws3_npo, self.getName("tws3_loc"), t)
+        self.tws3_rot = pri.addTransform(self.tws3_loc, self.getName("tws3_rot"), t)
+
 
         # Divisions ----------------------------------------
-        # We have at least one division at the start, the end and one for the elbow. + 2 for elbow angle control
+        # We have at least one division at the start, the end and one for the knee. + 2 for knee angle control
         # separate up and dn limb
         self.divisions = self.settings["div0"] + self.settings["div1"] + 3 + 2
         self.divisions0 = self.settings["div0"] +2
@@ -222,7 +239,6 @@ class Component(MainComponent):
         self.div_cnsUp = []
         self.div_cnsDn = []
         self.div_ctls = []
-        
         self.div_org = pri.addTransform(self.root, self.getName("div_org"), tra.getTransform(self.root))
         
         for i in range(self.divisions0):
@@ -232,8 +248,6 @@ class Component(MainComponent):
                 div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)))
             else:
                 div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)))
-            att.setKeyableAttributes(div_ctl)
-
             self.div_cns.append(div_cns)
             self.div_cnsUp.append(div_cns)
             self.jnt_pos.append([div_ctl,i])
@@ -245,8 +259,6 @@ class Component(MainComponent):
             self.div_mid_ctl = self.addCtl(self.div_mid, self.getName("div%s_ctl" % d), tra.getTransform(self.div_mid), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0), ro=dt.Vector(0,0,dt.radians(90)))
         else:
             self.div_mid_ctl = self.addCtl(self.div_mid, self.getName("div%s_ctl" % d), tra.getTransform(self.div_mid), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*0.05,0), ro=dt.Vector(0,0,dt.radians(90)))
-        att.setKeyableAttributes(self.div_mid_ctl)
-
         self.div_cns.append(self.div_mid)
         self.jnt_pos.append([self.div_mid_ctl,self.divisions0])
         self.div_ctls.append(self.div_mid_ctl)
@@ -259,22 +271,20 @@ class Component(MainComponent):
                 div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)))
             else:
                 div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)))
-            att.setKeyableAttributes(div_ctl)
-
             self.div_cns.append(div_cns)
             self.div_cnsDn.append(div_cns)
             self.jnt_pos.append([div_ctl,i+self.divisions0+1])
             self.div_ctls.append(div_ctl)
 
         # End reference ------------------------------------
-        # To help the deformation on the wrist
+        # To help the deformation on the ankle
         self.jnt_pos.append([self.eff_loc, 'end'])
 
         #match IK FK references
 
         self.match_fk0 = pri.addTransform(self.root, self.getName("fk0_mth"), tra.getTransform(self.fk_ctl[0]))
         self.match_fk1 = pri.addTransform(self.root, self.getName("fk1_mth"), tra.getTransform(self.fk_ctl[1]))
-        self.match_fk2 = pri.addTransform(self.ik_ctl, self.getName("fk2_mth"), tra.getTransform(self.fk_ctl[2]))
+        self.match_fk2 = pri.addTransform(self.ik_ref, self.getName("fk2_mth"), tra.getTransform(self.fk_ctl[2]))
 
         self.match_ik = pri.addTransform(self.fk2_ctl, self.getName("ik_mth"), tra.getTransform(self.ik_ctl))
         self.match_ikUpv = pri.addTransform(self.fk0_roll_ctl, self.getName("upv_mth"), tra.getTransform(self.upv_ctl))
@@ -282,11 +292,11 @@ class Component(MainComponent):
     def addAttributes(self):
 
         # Anim -------------------------------------------
-        self.blend_att = self.addAnimParam("blend", "Fk/Ik Arm", "double", self.settings["blend"], 0, 1)
-        self.blend2_att = self.addAnimParam("blend_hand", "Fk/Ik Hand", "double", self.settings["blend"], 0, 1)
+        self.blend_att = self.addAnimParam("blend", "Fk/Ik Leg", "double", self.settings["blend"], 0, 1)
+        self.blend2_att = self.addAnimParam("blend_foot", "Fk/Ik Foot", "double", self.settings["blend"], 0, 1)
         self.auv_att = self.addAnimParam("auv", "Auto Upvector", "double", 0, 0, 1)
         self.roll_att = self.addAnimParam("roll", "Roll", "double", 0, -180, 180)
-        self.armpit_roll_att = self.addAnimParam("aproll", "Armpit Roll", "double", 0, -360, 360)
+        # self.armpit_roll_att = self.addAnimParam("aproll", "Armpit Roll", "double", 0, -360, 360)
 
         self.scale_att = self.addAnimParam("ikscale", "Scale", "double", 1, .001, 99)
         self.maxstretch_att = self.addAnimParam("maxstretch", "Max Stretch", "double", self.settings["maxstretch"], 1, 99)
@@ -296,8 +306,9 @@ class Component(MainComponent):
         self.roundness0_att = self.addAnimParam("roundness_up", "Roundness Up", "double", 0, 0, 1)
         self.roundness1_att = self.addAnimParam("roundness_dn", "Roundness Dn", "double", 0, 0, 1)
         self.volume_att = self.addAnimParam("volume", "Volume", "double", 1, 0, 1)
-        self.elbow_thickness_att = self.addAnimParam("elbowthickness", "Elbow Thickness", "double", self.settings["elbow"], 0, 5)
+        self.knee_thickness_att = self.addAnimParam("kneethickness", "Knee Thickness", "double", self.settings["knee"], 0, 5)
         self.jntctl_vis_att = self.addAnimParam("jntct_vis", "Joint Ctl Vis", "bool", 0,1,1)
+
         # Ref
         if self.settings["fkrefarray"]:
             ref_names = self.settings["fkrefarray"].split(",")
@@ -339,7 +350,7 @@ class Component(MainComponent):
             pm.connectAttr(fkvis_node+".outputX", shp.attr("visibility"))
         for shp in self.fk1_roll_ctl.getShapes():
             pm.connectAttr(fkvis_node+".outputX", shp.attr("visibility"))
-        
+
         fkvis2_node = nod.createReverseNode(self.blend2_att)
         for shp in self.fk2_ctl.getShapes():
             pm.connectAttr(fkvis2_node+".outputX", shp.attr("visibility"))
@@ -356,15 +367,13 @@ class Component(MainComponent):
         for ctl in (self.div_ctls):
             for shp in ctl.getShapes():
                 pm.connectAttr(self.jntctl_vis_att, shp.attr("visibility"))
-
         # Controls ROT order -----------------------------------
-        att.setRotOrder(self.fk0_ctl, "YZX")
-        att.setRotOrder(self.fk0_roll_ctl, "YZX")
-        att.setRotOrder(self.fk1_ctl, "XYZ")
-        att.setRotOrder(self.fk1_roll_ctl, "XYZ")
-        att.setRotOrder(self.fk2_ctl, "YZX")
-        # att.setRotOrder(self.ik_ctl, "ZYX")
-        att.setRotOrder(self.ik_ctl, "XYZ")
+        # att.setRotOrder(self.fk0_ctl, "XYZ")
+        # att.setRotOrder(self.fk0_roll_ctl, "YZX")
+        # att.setRotOrder(self.fk1_ctl, "XYZ")
+        # att.setRotOrder(self.fk2_ctl, "YZX")
+        att.setRotOrder(self.ik_ctl, "XZY")
+        # att.setRotOrder(self.ik_ctl, "XYZ")
 
 
         # IK Solver -----------------------------------------
@@ -384,13 +393,21 @@ class Component(MainComponent):
         # update issue on effector scale interpolation, disconnect for stability
         pm.disconnectAttr(self.eff_npo.scale)
         # auto upvector -------------------------------------
+        
 
-        if self.negate:
-            node = aop.aimCns(self.upv_auv, self.ik_ctl, axis="-xy", wupType=4, wupVector=[0,1,0], wupObject=self.upv_auv, maintainOffset=False)
-        else:
-            node = aop.aimCns(self.upv_auv, self.ik_ctl, axis="xy", wupType=4, wupVector=[0,1,0], wupObject=self.upv_auv, maintainOffset=False)
+        # leg aim
+        # if self.negate:
+            # node = aop.aimCns(self.upv_auv, self.ik_ctl, axis="yz", wupType=1, wupVector=[0,1,0], wupObject=self.upv2_auv, maintainOffset=False)
+        # else:
+        node = aop.aimCns(self.upv_auv, self.ik_ctl, axis="-yz", wupType=1, wupVector=[0,1,0], wupObject=self.upv2_auv, maintainOffset=False)
 
-        node = aop.gear_mulmatrix_op(self.upv_auv.attr("worldMatrix"), self.upv_mtx.attr("parentInverseMatrix")) 
+
+        # foot aim
+        node = aop.aimCns(self.upv1_auv, self.root, axis="yz", wupType=4, wupVector=[0,1,0], wupObject=self.root, maintainOffset=False)
+        
+
+        # auto upvector connection
+        node = aop.gear_mulmatrix_op(self.upv_auv.attr("worldMatrix"), self.upv_mtx.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")  
         pb_node = pm.createNode("pairBlend")
@@ -401,14 +418,14 @@ class Component(MainComponent):
         pm.connectAttr(pb_node+".outRotate", self.upv_mtx.attr("rotate"))
         pm.connectAttr(pb_node+".outTranslate", self.upv_mtx.attr("translate"))
         pm.connectAttr(self.auv_att, pb_node+".weight")
-
-        # fk0 mtx connection
+      
+        # fk0 mtx parent constraint
         node = aop.gear_mulmatrix_op(self.fk0_roll_ctl.attr("worldMatrix"), self.fk0_mtx.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pm.connectAttr(dm_node+".outputTranslate", self.fk0_mtx.attr("translate"))
         pm.connectAttr(dm_node+".outputRotate", self.fk0_mtx.attr("rotate"))
-        # fk1 loc connect to fk1 ref @ pos and rot, not scl to avoid shearing
+        # fk1 loc to fk1 ref parent constraint
         node = aop.gear_mulmatrix_op(self.fk1_ref.attr("worldMatrix"), self.fk1_loc.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
@@ -421,14 +438,15 @@ class Component(MainComponent):
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pm.connectAttr(dm_node+".outputTranslate", self.fk2_loc.attr("translate"))
-        # fk2_loc rotation constraint to bone1 (bugfixed) ------------------------
+        # fk2_loc rotation constraint to bone1 ------------------------
+       
         node = aop.gear_mulmatrix_op(self.bone1.attr("worldMatrix"), self.fk2_loc.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pm.connectAttr(dm_node+".outputRotate", self.fk2_loc.attr("rotate"))
        
  
-        # hand ikfk blending from fk ref to ik ref (serious bugfix)--------------------------------
+        # foot ikfk blending from fk ref to ik ref (serious bugfix)--------------------------------
         node = aop.gear_mulmatrix_op(self.fk_ref.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
         pb_node = pm.createNode("pairBlend")
@@ -447,7 +465,7 @@ class Component(MainComponent):
         pm.connectAttr(dm_node+".outputScale", bc_node+".color2")
         pm.connectAttr(dm_node1+".outputScale", bc_node+".color1")
         pm.connectAttr(bc_node+".output", self.eff_loc.attr("scale"))
-       
+
         # Twist references ---------------------------------
         pm.connectAttr(self.mid_ctl.attr("translate"), self.tws1_npo.attr("translate"))
         pm.connectAttr(self.mid_ctl.attr("rotate"), self.tws1_npo.attr("rotate"))
@@ -458,16 +476,25 @@ class Component(MainComponent):
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pm.connectAttr(dm_node+".outputTranslate", self.tws3_npo.attr("translate"))
+        node = aop.gear_mulmatrix_op(self.bone1.attr("worldMatrix"), self.tws3_npo.attr("parentInverseMatrix"))
+        dm_node = pm.createNode("decomposeMatrix")
+        pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pm.connectAttr(dm_node+".outputRotate", self.tws3_npo.attr("rotate"))
 
+        node = aop.gear_mulmatrix_op(self.tws_ref.attr("worldMatrix"), self.tws3_rot.attr("parentInverseMatrix"))
+        dm_node = pm.createNode("decomposeMatrix")
+        pm.connectAttr(node+".output", dm_node+".inputMatrix")
+        pm.connectAttr(dm_node+".outputRotate", self.tws3_rot.attr("rotate"))
 
-        att.setRotOrder(self.tws3_rot, "XYZ")
 
-        # elbow thickness connection
+
+        # att.setRotOrder(self.tws3_rot, "XYZ")
+
+        # knee thickness connection
         if self.negate:
-            node = nod.createMulNode([self.elbow_thickness_att,self.elbow_thickness_att], [0.5,-0.5,0], [self.tws1_loc+".translateX",self.tws2_loc+".translateX"])
+            node = nod.createMulNode([self.knee_thickness_att,self.knee_thickness_att], [0.5,-0.5,0], [self.tws1_loc+".translateX",self.tws2_loc+".translateX"])
         else:
-            node = nod.createMulNode([self.elbow_thickness_att,self.elbow_thickness_att], [-0.5,0.5,0], [self.tws1_loc+".translateX",self.tws2_loc+".translateX"])
+            node = nod.createMulNode([self.knee_thickness_att,self.knee_thickness_att], [-0.5,0.5,0], [self.tws1_loc+".translateX",self.tws2_loc+".translateX"])
 
         # connect both tws1 and tws2  (mid tws)     
         self.tws0_rot.setAttr("sx", .001)
@@ -480,7 +507,7 @@ class Component(MainComponent):
         pm.connectAttr(add_node+".output", self.tws2_rot.attr("sx"))
 
 
-        pm.connectAttr(self.armpit_roll_att, self.tws0_rot+".rotateX")
+        # pm.connectAttr(self.armpit_roll_att, self.tws0_rot+".rotateX")
         
         #Roll Shoulder--use aimconstraint withour uovwctor to solve the stable twist
         
@@ -511,7 +538,6 @@ class Component(MainComponent):
         pm.connectAttr(dm_node+".outputRotate", self.div_mid.attr("rotate"))
 
         # at 0 or 1 the division will follow exactly the rotation of the controler.. and we wont have this nice tangent + roll
-        # linear scaling percentage (1) to effector (2) to elbow
         scl_1_perc = []
         scl_2_perc = []
 
@@ -534,7 +560,7 @@ class Component(MainComponent):
                 node = aop.gear_rollsplinekine_op(div_cnsUp, [self.tws0_rot, self.tws1_rot], perc, 20)
             pm.connectAttr(self.resample_att, node+".resample")
             pm.connectAttr(self.absolute_att, node+".absolute")
-           
+
             scl_1_perc.append(perc/2)
             scl_2_perc.append(perc)
         scl_1_perc.append(0.5)
@@ -560,7 +586,7 @@ class Component(MainComponent):
                 node = aop.gear_rollsplinekine_op(div_cnsDn, [self.tws2_rot, self.tws3_rot], perc, 20)
             pm.connectAttr(self.resample_att, node+".resample")
             pm.connectAttr(self.absolute_att, node+".absolute")
-           
+        
             scl_1_perc.append(perc/2+0.5)
             scl_2_perc.append(1-perc)
         # Squash n Stretch
@@ -570,7 +596,7 @@ class Component(MainComponent):
             pm.connectAttr(self.volDriver_att, node+".driver")
             pm.connectAttr(self.st_att[i], node+".stretch")
             pm.connectAttr(self.sq_att[i], node+".squash")
-            # get the first mult_node after sq op
+             # get the first mult_node after sq op
             mult_node = pm.listHistory(node, future=True )[1]
             # linear blend effector scale
             bc_node = pm.createNode("blendColors")
@@ -607,14 +633,14 @@ class Component(MainComponent):
     # TODO: replace bone0 and control objects by loc connections
     def setRelation(self):
         self.relatives["root"] = self.div_cns[0]
-        self.relatives["elbow"] = self.div_cns[self.settings["div0"] + 2]
-        self.relatives["wrist"] = self.div_cns[-1]
+        self.relatives["knee"] = self.div_cns[self.settings["div0"] + 2]
+        self.relatives["ankle"] = self.div_cns[-1]
         self.relatives["eff"] = self.eff_loc
 
         self.jointRelatives["root"] = 0
-        self.jointRelatives["elbow"] = self.settings["div0"] + 2
-        self.jointRelatives["wrist"] = len(self.div_cns)-1
-        self.jointRelatives["eff"] = -1
+        self.jointRelatives["knee"] = self.settings["div0"] + 2
+        self.jointRelatives["ankle"] = len(self.div_cns)
+        self.jointRelatives["eff"] = len(self.div_cns)
     ## standard connection definition.
     # @param self
     def connect_standard(self):

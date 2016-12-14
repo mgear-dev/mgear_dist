@@ -256,6 +256,7 @@ class Component(MainComponent):
     # @param self
     def addConnection(self):
         self.connections["leg_2jnt_01"] = self.connect_leg_2jnt_01
+        self.connections["leg_ms_2jnt_01"] = self.connect_leg_ms_2jnt_01
         self.connections["leg_3jnt_01"] = self.connect_leg_3jnt_01
 
     ## leg connection definition.
@@ -270,6 +271,25 @@ class Component(MainComponent):
         pm.parent(self.root, self.parent_comp.ik_ctl)
         pm.parent(self.parent_comp.ik_ref, self.bk_ctl[-1])
         pm.parentConstraint(self.parent_comp.tws2_rot, self.fk_ref, maintainOffset=True)
+
+        return
+
+    def connect_leg_ms_2jnt_01(self):
+        # If the parent component hasn't been generated we skip the connection
+        if self.parent_comp is None:
+            return
+
+
+        pm.connectAttr(self.parent_comp.blend_att, self.blend_att)
+        pm.parent(self.root, self.parent_comp.ik_ctl)
+        pm.parent(self.parent_comp.ik_ref, self.bk_ctl[-1])
+        pm.parentConstraint(self.parent_comp.tws3_rot, self.fk_ref, maintainOffset=True)
+        cns = pm.scaleConstraint(self.parent_comp.fk_ref, self.parent_comp.ik_ref, self.fk_ref, wal = True)
+        bc_node = pm.createNode("blendColors")
+        pm.connectAttr(bc_node+".outputB",cns+".%sW0"%self.parent_comp.fk_ref)
+        pm.connectAttr(bc_node+".outputR",cns+".%sW1"%self.parent_comp.ik_ref)
+        pm.connectAttr(self.parent_comp.blend_att, bc_node+".blender")
+
 
         return
 
