@@ -33,6 +33,7 @@ Shifter base rig class.
 # GLOBAL
 #############################################
 # Built in
+import os.path
 import datetime
 import getpass
 
@@ -42,6 +43,7 @@ import pymel.core.datatypes as dt
 
 # mgear
 import mgear
+import mgear.maya.utils
 from mgear.maya.shifter.guide import RigGuide
 from mgear.maya.shifter.guide import helperSlots
 from mgear.maya.shifter.component import MainComponent
@@ -59,6 +61,37 @@ if not pm.pluginInfo("mgear_solvers", q=True, l=True):
         pm.displayError("You need the mgear_solvers plugin!")
 if not pm.pluginInfo("matrixNodes", q=True, l=True):
     pm.loadPlugin("matrixNodes")
+
+
+COMPONENT_PATH = os.path.join(os.path.dirname(__file__), "component")
+TEMPLATE_PATH = os.path.join(COMPONENT_PATH, "templates")
+SYNOPTIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, "synoptic","tabs"))
+
+SHIFTER_COMPONENT_ENV_KEY = "MGEAR_COMPONENT_PATH"
+
+COMPONENTS_DIRECTORIES = mgear.maya.utils.gatherCustomModuleDirectories(
+    SHIFTER_COMPONENT_ENV_KEY,
+    os.path.join(os.path.dirname(__file__), "component"))
+
+
+def importComponentGuide(comp_type):
+    import mgear.maya.shifter as shifter
+    dirs = shifter.COMPONENTS_DIRECTORIES
+    defFmt = "mgear.maya.shifter.component.{}.guide"
+    customFmt = "{0}.{1}.guide"
+
+    module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, comp_type)
+    return module
+
+
+def importComponent(comp_type):
+    import mgear.maya.shifter as shifter
+    dirs = shifter.COMPONENTS_DIRECTORIES
+    defFmt = "mgear.maya.shifter.component.{}"
+    customFmt = "{0}.{1}"
+
+    module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, comp_type)
+    return module
 
 
 ##########################################################
@@ -209,8 +242,7 @@ class Rig(object):
             guide = self.guides[comp]
             mgear.log("Init : "+ guide.fullName + " ("+guide.type+")")
 
-            module_name = "mgear.maya.shifter.component."+guide.type
-            module = __import__(module_name, globals(), locals(), ["*"], -1)
+            module = importComponent(guide.type)
             Component = getattr(module , "Component")
 
             component = Component(self, guide)
@@ -472,4 +504,3 @@ class Rig(object):
             self.components[comp_name].ui = pm.UIHost(self.components[comp_name].root)
 
         return self.components[comp_name].ui
-

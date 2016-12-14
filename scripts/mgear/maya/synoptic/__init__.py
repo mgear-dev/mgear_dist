@@ -36,12 +36,17 @@ import pymel.core as pm
 from maya.app.general.mayaMixin import MayaQDockWidget
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 import mgear.maya.pyqt as gqt
+import mgear.maya.utils
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
-TAB_PATH = os.path.join(os.path.dirname(__file__), "tabs")
+# TAB_PATH = os.path.join(os.path.dirname(__file__), "tabs")
 SYNOPTIC_WIDGET_NAME = "synoptic_view"
+SYNOPTIC_ENV_KEY = "MGEAR_SYNOPTIC_PATH"
 
+SYNOPTIC_DIRECTORIES = mgear.maya.utils.gatherCustomModuleDirectories(
+            SYNOPTIC_ENV_KEY,
+            os.path.join(os.path.dirname(__file__), "tabs"))
 
 ##################################################
 # OPEN
@@ -49,6 +54,16 @@ SYNOPTIC_WIDGET_NAME = "synoptic_view"
 def open(*args):
 
     gqt.showDialog(Synoptic)
+
+
+def importTab(tabName):
+    import mgear.maya.synoptic as syn
+    dirs = syn.SYNOPTIC_DIRECTORIES
+    defFmt = "mgear.maya.synoptic.tabs.{}"
+    customFmt = "{0}.{1}"
+
+    module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, tabName)
+    return module
 
 
 ##################################################
@@ -126,16 +141,7 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         for i, tab_name in enumerate(tab_names):
             try:
                 if tab_name:
-                    if not defPath or not os.path.isdir(defPath):
-                        print "Loading default mGear synoptics"
-                        module_name = "mgear.maya.synoptic.tabs."+tab_name
-                    else:
-                        print "Loading Project mGear synoptics"
-                        sys.path.append(pm.dirmap(cd=project_synModule))
-                        module_name = tab_name
-                    module = __import__(module_name, globals(), locals(), ["*"], -1)
-                    print tab_name
-                    print module_name
+                    module = importTab(tab_name)
                     SynopticTab = getattr(module , "SynopticTab")
 
                     tab = SynopticTab()
@@ -143,4 +149,6 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
                 else:
                     pm.displayWarning("No synoptic tabs for %s"%self.model_list.currentText())
             except:
+                import traceback
+                traceback.print_exc()
                 pm.displayError("Synoptic tab: %s Loading fail"%tab_name)
