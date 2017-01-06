@@ -301,60 +301,64 @@ def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
     oVal =  oAttr.set(cnsIndex)
     ctl.setMatrix(sWM, worldSpace=True)
 
+
 ##################################################
 # IK FK switch match
 ##################################################
 # ================================================
-#
+def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
+    # type: (pm.nodetypes.Transform, str, str, List[str], str, str, str) -> None
 
     nameSpace = getNamespace(model)
 
-    uiNode = getNode(nameSpace + uiHost_name)
-    fk0 = getNode(nameSpace + fk0)
-    fk1 = getNode(nameSpace + fk1)
-    fk2 = getNode(nameSpace + fk2)
-    ik = getNode(nameSpace + ik)
-    upv = getNode(nameSpace + upv)
+    def _getNode(name):
+        # type: (str) -> pm.nodetypes.Transform
+        node = getNode(":".join([nameSpace, name]))
+
+        if not node:
+            mgear.log("Can't find object : {0}".format(name), mgear.sev_error)
+
+        return node
+
+    def _getMth(name):
+        # type: (str) -> pm.nodetypes.Transform
+        tmp = name.split("_")
+        tmp[-1] = "mth"
+        return _getNode("_".join(tmp))
+
+    fkCtrls = [_getNode(x) for x in fks]
+    fkTargets = [_getMth(x) for x in fks]
+
+    ikCtrl = _getNode(ik)
+    ikTarget = _getMth(ik)
+
+    upvCtrl = _getNode(upv)
+    upvTarget = _getMth(upv)
+
     if ikRot:
-        ikRot = getNode(nameSpace + ikRot)
+        ikRotNode = _getNode(ikRot)
+        ikRotTarget = _getMth(ikRot)
 
-    tmpName = fk0.split("_")
-    tmpName[-1]="mth"
-    fk0Target = getNode("_".join(tmpName))
-    tmpName = fk1.split("_")
-    tmpName[-1]="mth"
-    fk1Target = getNode("_".join(tmpName))
-    tmpName = fk2.split("_")
-    tmpName[-1]="mth"
-    fk2Target = getNode("_".join(tmpName))
-    tmpName = ik.split("_")
-    tmpName[-1]="mth"
-    ikTarget = getNode("_".join(tmpName))
-    tmpName = upv.split("_")
-    tmpName[-1]="mth"
-    upvTarget = getNode("_".join(tmpName))
-    if ikRot:
-        tmpName = ikRot.split("_")
-        tmpName[-1]="mth"
-        ikRotTarget = getNode("_".join(tmpName))
-
-
-
+    uiNode = _getNode(uiHost_name)
     oAttr = uiNode.attr(ikfk_attr)
     val = oAttr.get()
-    #if is IKw
-    if val == 1.0:
-        tra.matchWorldTransform(fk0Target, fk0)
-        tra.matchWorldTransform(fk1Target, fk1)
-        tra.matchWorldTransform(fk2Target, fk2)
-        oAttr.set(0.0)
-    #if is FK
-    elif val == 0.0:
-        tra.matchWorldTransform(ikTarget, ik)
-        if ikRot:
-            tra.matchWorldTransform(ikRotTarget, ikRot)
 
-        tra.matchWorldTransform(upvTarget, upv)
+    # if is IKw
+    if val == 1.0:
+
+        for target, ctl in zip(fkTargets, fkCtrls):
+            tra.matchWorldTransform(target, ctl)
+
+        oAttr.set(0.0)
+
+    # if is FK
+    elif val == 0.0:
+
+        tra.matchWorldTransform(ikTarget, ikCtrl)
+        if ikRot:
+            tra.matchWorldTransform(ikRotTarget, ikRotNode)
+
+        tra.matchWorldTransform(upvTarget, upvCtrl)
         oAttr.set(1.0)
 
 ##################################################
