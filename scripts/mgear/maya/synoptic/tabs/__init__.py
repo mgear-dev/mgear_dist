@@ -174,18 +174,18 @@ class MainSynopticTab(QtWidgets.QDialog):
                 else:
                     selB.paintSelected(False)
 
-    def mousePressEvent(self, event):
+    def mousePressEvent_(self, event):
         # type: (QtGui.QMouseEvent) -> None
 
         self.origin = event.pos()
         QtWidgets.QWidget.mousePressEvent(self, event)
 
-    def mouseMoveEvent(self, event):
+    def mouseMoveEvent_(self, event):
         # type: (QtGui.QMouseEvent) -> None
 
         QtWidgets.QWidget.mouseMoveEvent(self, event)
 
-    def mouseReleaseEvent(self, event):
+    def mouseReleaseEvent_(self, event):
         # type: (QtGui.QMouseEvent) -> None
 
         if not self.origin:

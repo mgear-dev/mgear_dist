@@ -285,7 +285,7 @@ class SynopticTabWrapper(QtWidgets.QWidget):
         # type: (QtGui.QMouseEvent) -> QtGui.QMouseEvent
 
         offsetev = QtGui.QMouseEvent(
-            QtCore.QEvent.MouseButtonPress,
+            event.type(),
             event.pos() + self.offset,
             event.globalPos(),
             event.button(),
@@ -305,7 +305,7 @@ class SynopticTabWrapper(QtWidgets.QWidget):
         self.rubberband.setGeometry(QtCore.QRect(self.origin, QtCore.QSize()))
         self.rubberband.show()
 
-        self.syn_widget.mousePressEvent(self.offsetEvent(event))
+        self.syn_widget.mousePressEvent_(self.offsetEvent(event))
 
     def mouseMoveEvent(self, event):
         # type: (QtGui.QMouseEvent) -> None
@@ -313,11 +313,11 @@ class SynopticTabWrapper(QtWidgets.QWidget):
         if self.rubberband.isVisible():
             self.rubberband.setGeometry(QtCore.QRect(self.origin, event.pos()).normalized())
 
-        self.syn_widget.mouseMoveEvent(self.offsetEvent(event))
+        self.syn_widget.mouseMoveEvent_(self.offsetEvent(event))
 
     def mouseReleaseEvent(self, event):
         # type: (QtGui.QMouseEvent) -> None
 
         if self.rubberband.isVisible():
             self.rubberband.hide()
-            self.syn_widget.mouseReleaseEvent(self.offsetEvent(event))
+            self.syn_widget.mouseReleaseEvent_(self.offsetEvent(event))
