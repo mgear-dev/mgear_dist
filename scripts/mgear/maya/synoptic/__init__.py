@@ -321,5 +321,3 @@ class SynopticTabWrapper(QtWidgets.QWidget):
         if self.rubberband.isVisible():
             self.rubberband.hide()
             self.syn_widget.mouseReleaseEvent(self.offsetEvent(event))
-
-        self.offset = QtCore.QPoint()

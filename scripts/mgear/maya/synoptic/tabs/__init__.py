@@ -188,9 +188,11 @@ class MainSynopticTab(QtWidgets.QDialog):
     def mouseReleaseEvent(self, event):
         # type: (QtGui.QMouseEvent) -> None
 
-        selected = []
-        rect = QtCore.QRect(self.origin, event.pos())
+        if not self.origin:
+            self.origin = event.pos()
 
+        selected = []
+        rect = QtCore.QRect(self.origin, event.pos()).normalized()
         for child in self.findChildren(mwi.SelectButton):
             if rect.intersects(child.geometry()):
                 selected.append(child)
@@ -207,6 +209,7 @@ class MainSynopticTab(QtWidgets.QDialog):
                 pm.select(cl=True)
                 pm.displayInfo("Clear selection")
 
+        self.origin = None
         QtWidgets.QWidget.mouseReleaseEvent(self, event)
 
     # ============================================
