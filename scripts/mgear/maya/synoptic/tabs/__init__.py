@@ -118,8 +118,6 @@ class MainSynopticTab(QtWidgets.QDialog):
         # self.b_keyAll.clicked.connect(self.keyAll_clicked)
         # self.b_keySel.clicked.connect(self.keySel_clicked)
 
-        self.rubberband = QtWidgets.QRubberBand(QtWidgets.QRubberBand.Rectangle, self)
-
     def connectMaya(self):
         # type: () -> None
         # script job callback
@@ -177,55 +175,60 @@ class MainSynopticTab(QtWidgets.QDialog):
                     selB.paintSelected(False)
 
     def mousePressEvent(self, event):
+        # type: (QtGui.QMouseEvent) -> None
+
         self.origin = event.pos()
-        self.rubberband.setGeometry(QtCore.QRect(self.origin, QtCore.QSize()))
-        self.rubberband.show()
         QtWidgets.QWidget.mousePressEvent(self, event)
 
     def mouseMoveEvent(self, event):
-        if self.rubberband.isVisible():
-            self.rubberband.setGeometry(QtCore.QRect(self.origin, event.pos()).normalized())
+        # type: (QtGui.QMouseEvent) -> None
+
         QtWidgets.QWidget.mouseMoveEvent(self, event)
 
     def mouseReleaseEvent(self, event):
-        if self.rubberband.isVisible():
-            self.rubberband.hide()
-            selected = []
-            rect = self.rubberband.geometry()
+        # type: (QtGui.QMouseEvent) -> None
 
-            for child in self.findChildren(mwi.SelectButton):
-                if rect.intersects(child.geometry()):
-                    selected.append(child)
+        selected = []
+        rect = QtCore.QRect(self.origin, event.pos())
 
-            if selected:
-                firstLoop = True
-                with pm.UndoChunk():
-                    for wi in selected:
-                        wi.rectangleSelection(event, firstLoop)
-                        firstLoop = False
+        for child in self.findChildren(mwi.SelectButton):
+            if rect.intersects(child.geometry()):
+                selected.append(child)
 
-            else:
-                if event.modifiers() == QtCore.Qt.NoModifier:
-                    pm.select(cl=True)
-                    pm.displayInfo("Clear selection")
+        if selected:
+            firstLoop = True
+            with pm.UndoChunk():
+                for wi in selected:
+                    wi.rectangleSelection(event, firstLoop)
+                    firstLoop = False
+
+        else:
+            if event.modifiers() == QtCore.Qt.NoModifier:
+                pm.select(cl=True)
+                pm.displayInfo("Clear selection")
 
         QtWidgets.QWidget.mouseReleaseEvent(self, event)
 
     # ============================================
     # BUTTONS
     def selAll_clicked(self):
+        # type: () -> None
         model = syn_uti.getModel(self)
         syn_uti.selAll(model)
 
     def resetAll_clicked(self):
+        # type: () -> None
         print "resetAll"
 
     def resetSel_clicked(self):
+        # type: () -> None
         print "resetSel"
 
     def keyAll_clicked(self):
+        # type: () -> None
         model = syn_uti.getModel(self)
         syn_uti.keyAll(model)
 
     def keySel_clicked(self):
+        # type: () -> None
         syn_uti.keySel()
