@@ -75,7 +75,18 @@ def getModel(widget):
 
     syn_widget = getSynopticWidget(widget, max_iter=20)
     model_name = syn_widget.model_list.currentText()
-    model = pm.PyNode(model_name)
+
+    if not pm.ls(model_name):
+        return None
+
+    try:
+        model = pm.PyNode(model_name)
+
+    except pm.general.MayaNodeError:
+        mes = traceback.format_exc()
+        mes = "Can't find model {0} for widget: {1}\n{2}".format(model_name, widget, mes)
+        mgear.log(mes, mgear.sev_error)
+        return None
 
     return model
 
@@ -87,6 +98,9 @@ def getControlers(model):
     return members
 
 def getNamespace(modelName):
+    if not modelName:
+        return ""
+
     if len(modelName.split(":")) >= 2:
         nameSpace = ":".join(modelName.split(":")[:-1])
     else:
@@ -110,11 +124,14 @@ def getNode(nodeName):
 # ================================================
 def selectObj(model, object_names, mouse_button, key_modifier):
 
+    if not model:
+        return
+
+    nameSpace = getNamespace(model)
 
     with pm.UndoChunk():
         nodes = []
         for name in object_names:
-            nameSpace = getNamespace(model)
             if  nameSpace:
                 node = getNode(nameSpace + ":" + name)
             else:

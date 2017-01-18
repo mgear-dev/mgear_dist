@@ -30,7 +30,7 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 class Ui_biped_hand(object):
     def setupUi(self, biped_hand):
         biped_hand.setObjectName("biped_hand")
-        biped_hand.resize(879, 790)
+        biped_hand.resize(325, 330)
         self.b_selD = QuickSelButton(biped_hand)
         self.b_selD.setGeometry(QtCore.QRect(219, 287, 31, 31))
         palette = QtGui.QPalette()

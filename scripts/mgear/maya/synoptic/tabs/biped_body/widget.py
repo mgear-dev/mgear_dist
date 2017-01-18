@@ -29,8 +29,8 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 class Ui_biped_body(object):
     def setupUi(self, biped_body):
         biped_body.setObjectName("biped_body")
-        biped_body.resize(375, 840)
-        biped_body.setMinimumSize(QtCore.QSize(375, 0))
+        biped_body.resize(325, 840)
+        biped_body.setMinimumSize(QtCore.QSize(325, 790))
         self.b_selD = QuickSelButton(biped_body)
         self.b_selD.setGeometry(QtCore.QRect(10, 740, 31, 31))
         palette = QtGui.QPalette()
