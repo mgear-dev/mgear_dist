@@ -90,6 +90,7 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         for job in self.script_jobs:
             pm.scriptJob(kill=job)
 
+
     def create_widgets(self):
         self.setupUi()
 
