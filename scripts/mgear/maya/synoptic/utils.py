@@ -97,6 +97,13 @@ def getNamespace(modelName):
 def stripNamespace(nodeName):
     return nodeName.split(":")[-1]
 
+def getNode(nodeName):
+    try:
+        return pm.PyNode(nodeName)
+
+    except pm.MayaNodeError:
+        return None
+
 ##################################################
 # SELECT
 ##################################################
@@ -109,9 +116,12 @@ def selectObj(model, object_names, mouse_button, key_modifier):
         for name in object_names:
             nameSpace = getNamespace(model)
             if  nameSpace:
-                node = pm.PyNode(nameSpace + ":" + name)
+                node = getNode(nameSpace + ":" + name)
             else:
-                node = pm.PyNode(name)
+                node = getNode(name)
+
+            if not node:
+                continue
 
             if not node and nameSpace:
                 mgear.log("Can't find object : %s:%s"%( nameSpace, name), mgear.sev_error)
@@ -251,14 +261,13 @@ def getComboKeys(model, object_name, combo_attr):
 
     nameSpace = getNamespace(model)
     if  nameSpace:
-        node = pm.PyNode( nameSpace + ":" + object_name)
+        node = getNode(nameSpace + ":" + object_name)
         # node = dag.findRelative(model, model.split(":")[0] + ":" + object_name)
     else:
-        node = pm.PyNode( object_name)
+        node = getNode(object_name)
         # node = dag.findRelative(model, object_name)
 
-
-    oAttr =  node.attr(combo_attr)
+    oAttr = node.attr(combo_attr)
     keys = oAttr.getEnums().keys()
     keys.append("++ Space Transfer ++")
     return keys
@@ -267,9 +276,9 @@ def getComboIndex(model, object_name, combo_attr):
 
     nameSpace = getNamespace(model)
     if  nameSpace:
-        node = pm.PyNode( nameSpace + ":" + object_name)
+        node = getNode(nameSpace + ":" + object_name)
     else:
-        node = pm.PyNode(object_name)
+        node = getNode(object_name)
 
     oVal =  node.attr(combo_attr).get()
     return oVal
@@ -278,11 +287,11 @@ def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
 
     nameSpace = getNamespace(model)
     if  nameSpace:
-        node = pm.PyNode( nameSpace + ":" + object_name)
-        ctl = pm.PyNode( nameSpace + ":" + ctl_name)
+        node = getNode( nameSpace + ":" + object_name)
+        ctl = getNode( nameSpace + ":" + ctl_name)
     else:
-        node = pm.PyNode(object_name)
-        ctl = pm.PyNode(ctl_name)
+        node = getNode(object_name)
+        ctl = getNode(ctl_name)
 
     sWM = ctl.getMatrix(worldSpace=True)
 
@@ -292,60 +301,64 @@ def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
     oVal =  oAttr.set(cnsIndex)
     ctl.setMatrix(sWM, worldSpace=True)
 
+
 ##################################################
 # IK FK switch match
 ##################################################
 # ================================================
-#
+def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
+    # type: (pm.nodetypes.Transform, str, str, List[str], str, str, str) -> None
 
     nameSpace = getNamespace(model)
 
-    uiNode = pm.PyNode(nameSpace + uiHost_name)
-    fk0 = pm.PyNode(nameSpace + fk0)
-    fk1 = pm.PyNode(nameSpace + fk1)
-    fk2 = pm.PyNode(nameSpace + fk2)
-    ik = pm.PyNode(nameSpace + ik)
-    upv = pm.PyNode(nameSpace + upv)
+    def _getNode(name):
+        # type: (str) -> pm.nodetypes.Transform
+        node = getNode(":".join([nameSpace, name]))
+
+        if not node:
+            mgear.log("Can't find object : {0}".format(name), mgear.sev_error)
+
+        return node
+
+    def _getMth(name):
+        # type: (str) -> pm.nodetypes.Transform
+        tmp = name.split("_")
+        tmp[-1] = "mth"
+        return _getNode("_".join(tmp))
+
+    fkCtrls = [_getNode(x) for x in fks]
+    fkTargets = [_getMth(x) for x in fks]
+
+    ikCtrl = _getNode(ik)
+    ikTarget = _getMth(ik)
+
+    upvCtrl = _getNode(upv)
+    upvTarget = _getMth(upv)
+
     if ikRot:
-        ikRot = pm.PyNode(nameSpace + ikRot)
+        ikRotNode = _getNode(ikRot)
+        ikRotTarget = _getMth(ikRot)
 
-    tmpName = fk0.split("_")
-    tmpName[-1]="mth"
-    fk0Target = pm.PyNode("_".join(tmpName))
-    tmpName = fk1.split("_")
-    tmpName[-1]="mth"
-    fk1Target = pm.PyNode("_".join(tmpName))
-    tmpName = fk2.split("_")
-    tmpName[-1]="mth"
-    fk2Target = pm.PyNode("_".join(tmpName))
-    tmpName = ik.split("_")
-    tmpName[-1]="mth"
-    ikTarget = pm.PyNode("_".join(tmpName))
-    tmpName = upv.split("_")
-    tmpName[-1]="mth"
-    upvTarget = pm.PyNode("_".join(tmpName))
-    if ikRot:
-        tmpName = ikRot.split("_")
-        tmpName[-1]="mth"
-        ikRotTarget = pm.PyNode("_".join(tmpName))
-
-
-
+    uiNode = _getNode(uiHost_name)
     oAttr = uiNode.attr(ikfk_attr)
     val = oAttr.get()
-    #if is IKw
-    if val == 1.0:
-        tra.matchWorldTransform(fk0Target, fk0)
-        tra.matchWorldTransform(fk1Target, fk1)
-        tra.matchWorldTransform(fk2Target, fk2)
-        oAttr.set(0.0)
-    #if is FK
-    elif val == 0.0:
-        tra.matchWorldTransform(ikTarget, ik)
-        if ikRot:
-            tra.matchWorldTransform(ikRotTarget, ikRot)
 
-        tra.matchWorldTransform(upvTarget, upv)
+    # if is IKw
+    if val == 1.0:
+
+        for target, ctl in zip(fkTargets, fkCtrls):
+            tra.matchWorldTransform(target, ctl)
+
+        oAttr.set(0.0)
+
+    # if is FK
+    elif val == 0.0:
+
+        tra.matchWorldTransform(ikTarget, ikCtrl)
+        if ikRot:
+            tra.matchWorldTransform(ikRotTarget, ikRotNode)
+
+        tra.matchWorldTransform(upvTarget, upvCtrl)
         oAttr.set(1.0)
 
 ##################################################
@@ -377,7 +390,7 @@ def mirrorPose(flip=False, nodes=False):
                     nameTarget = nameSpace +":"+ nameParts
                 else:
                     nameTarget = nameParts
-                oTarget = pm.PyNode(nameTarget)
+                oTarget = getNode(nameTarget)
                 for a in axis:
                     if not oSel.attr(a).isLocked():
                         if oSel.attr(aDic[a]).get():
@@ -456,7 +469,7 @@ def mirrorPoseOld(flip=False, nodes=False):
                     nameTarget = nameSpace+":"+"_".join(nameParts)
                 else:
                     nameTarget = "_".join(nameParts)
-                oTarget = pm.PyNode(nameTarget)
+                oTarget = getNode(nameTarget)
                 for a in axis:
                     if not oSel.attr(a).isLocked():
                         if oSel.attr(aDic[a]).get():
@@ -599,7 +612,7 @@ class spaceTransferUI(QtWidgets.QDialog):
 
 
 
-        self.ctl_node = pm.PyNode(ctrlName)
+        self.ctl_node = getNode(ctrlName)
         startFrame = self.startFrame_value.value()
         endFrame = self.endFrame_value.value()
 

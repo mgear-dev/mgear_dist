@@ -86,20 +86,43 @@ class bakeMocap(QtWidgets.QPushButton):
 
 class ikfkMatchButton(QtWidgets.QPushButton):
 
+    MAXIMUM_TRY_FOR_SEARCHING_FK = 1000
+
+    def __init__(self, *args, **kwargs):
+        super(ikfkMatchButton, self).__init__(*args, **kwargs)
+        self.numFkControllers = None
+
+    def searchNumberOfFkControllers(self):
+        # type: () -> None
+
+        for i in range(self.MAXIMUM_TRY_FOR_SEARCHING_FK):
+            prop = self.property("fk{0}".format(str(i)))
+            if not prop:
+                self.numFkControllers = i
+                break
+
     def mousePressEvent(self, event):
+        # type: (QtCore.QEvent) -> None
+
+        if not self.numFkControllers:
+            self.searchNumberOfFkControllers()
 
         model = syn_uti.getModel(self)
         ikfk_attr = str(self.property("ikfk_attr"))
         uiHost_name = str(self.property("uiHost_name"))
-        fk0 = str(self.property("fk0"))
-        fk1 = str(self.property("fk1"))
-        fk2 = str(self.property("fk2"))
+
+        fks = []
+        for i in range(self.numFkControllers):
+            label = "fk{0}".format(str(i))
+            prop = str(self.property(label))
+            fks.append(prop)
+
         ik = str(self.property("ik"))
         upv = str(self.property("upv"))
 
         mouse_button = event.button()
 
-        syn_uti.ikFkMatch(model, ikfk_attr, uiHost_name, fk0, fk1, fk2, ik, upv)
+        syn_uti.ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv)
 
 class toggleAttrButton(QtWidgets.QPushButton):
 
