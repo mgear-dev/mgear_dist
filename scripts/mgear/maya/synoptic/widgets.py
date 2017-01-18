@@ -159,10 +159,13 @@ class SelectButton(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(SelectButton, self).__init__(parent)
+        self.defaultBGColor = QtGui.QPalette().color(self.backgroundRole())
+        self.setBorderColor(self.defaultBGColor)
         p = self.palette()
-        p.setColor(self.foregroundRole(),QtGui.QColor(000, 000, 000, 000))
+        p.setColor(self.foregroundRole(), QtGui.QColor(000, 000, 000, 000))
+        p.setColor(self.backgroundRole(), QtGui.QColor(000, 000, 000, 000))
         self.setPalette(p)
-    
+
 
     def enterEvent(self, event):
         self.over = True
@@ -209,12 +212,27 @@ class SelectButton(QtWidgets.QWidget):
             p = self.palette()
             p.setColor(self.foregroundRole(),QtGui.QColor(255, 255, 255, 255))
             self.setPalette(p)
+            self.setBorderColor(QtGui.QColor(255, 255, 255, 255))
         else:
             p = self.palette()
-            p.setColor(self.foregroundRole(),QtGui.QColor(000, 000, 000, 000))
+            p.setColor(self.foregroundRole(),QtGui.QColor(000, 000, 000, 010))
             self.setPalette(p)
+            self.setBorderColor(self.defaultBGColor)
+
+    def setBorderColor(self, color):
+        self.borderColor = color
+
+    def drawPathWithBorder(self, painter, path, borderWidth):
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+        pen = QtGui.QPen(self.borderColor, borderWidth)
+        painter.setPen(pen)
+        painter.fillPath(path, QtCore.Qt.red)
+        painter.drawPath(path)
 
 
+##############################################################################
+# Classes for Mixin Color
+##############################################################################
 class SelectBtn_RFk(SelectButton):
     color = QtGui.QColor(0, 0, 192, 255)
 
@@ -242,67 +260,220 @@ class SelectBtn_green(SelectButton):
 class SelectBtn_darkGreen(SelectButton):
     color = QtGui.QColor(0, 100, 0, 255)
 
+
+##############################################################################
+# Classes for Mixin Drawing Shape
+##############################################################################
 class SelectBtn_Box(SelectButton):
+
     def drawShape(self, painter):
-        painter.drawRect(0, 0, self.width()-1, self.height()-1)
+        borderWidth = 1
+        x = borderWidth / 2.0
+        y = borderWidth / 2.0
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        # round radius
+        if self.height() < self.width():
+            rr = self.height() * 0.20
+        else:
+            rr = self.width() * 0.20
+
+        path = QtGui.QPainterPath()
+        path.addRoundedRect(QtCore.QRectF(x, y, w, h), rr, rr)
+        self.drawPathWithBorder(painter, path, borderWidth)
+
+
+class SelectBtn_OutlineBox(SelectButton):
+
+    def drawShape(self, painter):
+        borderWidth = 1
+        x = borderWidth / 2.0
+        y = borderWidth / 2.0
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        # round radius and outline width
+        if self.height() < self.width():
+            rr = self.height() * 0.20
+            ow = self.height() * 0.33
+        else:
+            rr = self.width() * 0.20
+            ow = self.width() * 0.33
+
+        pathOuter = QtGui.QPainterPath()
+        pathOuter.addRoundedRect(QtCore.QRectF(x, y, w, h), rr, rr)
+
+        innX = x + ow
+        innY = y + ow
+        innW = w - (ow * 2)
+        innH = h - (ow * 2)
+        innR = rr * 0.2
+        pathInner = QtGui.QPainterPath()
+        pathInner.addRoundedRect(QtCore.QRectF(innX, innY, innW, innH), innR, innR)
+
+        self.drawPathWithBorder(painter,  pathOuter - pathInner, borderWidth)
+
 
 class SelectBtn_Circle(SelectButton):
+
     def drawShape(self, painter):
-        painter.drawEllipse(0, 0, self.width()-1, self.height()-1)
+        borderWidth = 1
+        x = borderWidth / 2.0
+        y = borderWidth / 2.0
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        path = QtGui.QPainterPath()
+        path.addEllipse(QtCore.QRectF(x, y, w, h))
+        self.drawPathWithBorder(painter, path, borderWidth)
+
+
+class SelectBtn_OutlineCircle(SelectButton):
+
+    def drawShape(self, painter):
+        borderWidth = 1
+        x = borderWidth / 2.0
+        y = borderWidth / 2.0
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        path = QtGui.QPainterPath()
+        path.addEllipse(QtCore.QRectF(x, y, w, h))
+
+        if self.height() < self.width():
+            ow = self.height() * 0.25
+        else:
+            ow = self.width() * 0.25
+
+        innX = x + ow
+        innY = y + ow
+        innW = w - (ow * 2)
+        innH = h - (ow * 2)
+        pathInner = QtGui.QPainterPath()
+        pathInner.addEllipse(QtCore.QRectF(innX, innY, innW, innH))
+        self.drawPathWithBorder(painter, path - pathInner, borderWidth)
+
 
 class SelectBtn_TriangleLeft(SelectButton):
-    def drawShape(self, painter):
-        triangle = QtGui.QPolygon([QtCore.QPoint(1, self.height()/2), QtCore.QPoint( self.width()-1, 0), QtCore.QPoint( self.width()-1,self.height()-1)])
-        painter.drawPolygon(triangle)
 
-class SelectBtn_TriangleRight(SelectButton):
     def drawShape(self, painter):
-        triangle = QtGui.QPolygon([ QtCore.QPoint(-1, 0), QtCore.QPoint( -1,self.height()-1), QtCore.QPoint(self.width()-1, self.height()/2)])
-        painter.drawPolygon(triangle)
+        borderWidth = 1
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        triangle = QtGui.QPolygon([QtCore.QPoint(1, h/2), QtCore.QPoint( w-1, 0), QtCore.QPoint( w-1,h-1)])
+        path = QtGui.QPainterPath()
+        path.addPolygon(triangle)
+        self.drawPathWithBorder(painter, path, borderWidth)
         painter.setClipRegion(triangle, QtCore.Qt.ReplaceClip)
 
+
+class SelectBtn_OutlineTriangleLeft(SelectButton):
+
+    def drawShape(self, painter):
+        borderWidth = 1
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        triangle = QtGui.QPolygon([QtCore.QPoint(1, h/2), QtCore.QPoint( w-1, 0), QtCore.QPoint( w-1,h-1)])
+        path = QtGui.QPainterPath()
+        path.addPolygon(triangle)
+        self.drawPathWithBorder(painter, path, borderWidth)
+        painter.setClipRegion(triangle, QtCore.Qt.ReplaceClip)
+
+
+class SelectBtn_TriangleRight(SelectButton):
+
+    def drawShape(self, painter):
+        borderWidth = 1
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        triangle = QtGui.QPolygon([ QtCore.QPoint(-1, 0), QtCore.QPoint( -1, h-1), QtCore.QPoint(w-1, h/2)])
+        path = QtGui.QPainterPath()
+        path.addPolygon(triangle)
+        self.drawPathWithBorder(painter, path, borderWidth)
+        painter.setClipRegion(triangle, QtCore.Qt.ReplaceClip)
+
+
+class SelectBtn_OutlineTriangleRight(SelectButton):
+
+    def drawShape(self, painter):
+        borderWidth = 1
+        w = self.width() - borderWidth
+        h = self.height() - borderWidth
+
+        triangle = QtGui.QPolygon([ QtCore.QPoint(-1, 0), QtCore.QPoint( -1, h-1), QtCore.QPoint(w-1, h/2)])
+        path = QtGui.QPainterPath()
+        path.addPolygon(triangle)
+        self.drawPathWithBorder(painter, path, borderWidth)
+        painter.setClipRegion(triangle, QtCore.Qt.ReplaceClip)
+
+
 # ------------------------------------------
-class SelectBtn_RFkBox(SelectBtn_RFk, SelectBtn_Box):
-    pass
-class SelectBtn_RIkBox(SelectBtn_RIk, SelectBtn_Box):
-    pass
-class SelectBtn_CFkBox(SelectBtn_CFk, SelectBtn_Box):
-    pass
-class SelectBtn_CIkBox(SelectBtn_CIk, SelectBtn_Box):
-    pass
-class SelectBtn_LFkBox(SelectBtn_LFk, SelectBtn_Box):
-    pass
-class SelectBtn_LIkBox(SelectBtn_LIk, SelectBtn_Box):
-    pass
-class SelectBtn_yellowBox(SelectBtn_yellow, SelectBtn_Box):
-    pass
-class SelectBtn_greenBox(SelectBtn_green, SelectBtn_Box):
-    pass
-class SelectBtn_darkGreenBox(SelectBtn_darkGreen, SelectBtn_Box):
-    pass
+def _boilSelector(selectorName, color, shape):
+    class SelectorClass(color, shape):
+        pass
 
-class SelectBtn_RFkCircle(SelectBtn_RFk, SelectBtn_Circle):
-    pass
-class SelectBtn_RIkCircle(SelectBtn_RIk, SelectBtn_Circle):
-    pass
-class SelectBtn_CFkCircle(SelectBtn_CFk, SelectBtn_Circle):
-    pass
-class SelectBtn_CIkCircle(SelectBtn_CIk, SelectBtn_Circle):
-    pass
-class SelectBtn_LFkCircle(SelectBtn_LFk, SelectBtn_Circle):
-    pass
-class SelectBtn_LIkCircle(SelectBtn_LIk, SelectBtn_Circle):
-    pass
-class SelectBtn_greenCircle(SelectBtn_green, SelectBtn_Circle):
-    pass
-class SelectBtn_redCircle(SelectBtn_LFk, SelectBtn_Circle):
-    pass
-class SelectBtn_yellowCircle(SelectBtn_yellow, SelectBtn_Circle):
-    pass
-class SelectBtn_blueCircle(SelectBtn_RFk, SelectBtn_Circle):
-    pass
+    SelectorClass.__name__ = selectorName
+    return SelectorClass
 
-class SelectBtn_greenTriangleRight(SelectBtn_green, SelectBtn_TriangleRight):
-    pass
-class SelectBtn_greenTriangleLeft(SelectBtn_green, SelectBtn_TriangleLeft):
-    pass
+
+SELECTORS = {
+    # "selector button name":       [ColorClass,          DrawingClass],
+    "SelectBtn_RFkBox":              [SelectBtn_RFk,       SelectBtn_Box],
+    "SelectBtn_RIkBox":              [SelectBtn_RIk,       SelectBtn_Box],
+    "SelectBtn_CFkBox":              [SelectBtn_CFk,       SelectBtn_Box],
+    "SelectBtn_CIkBox":              [SelectBtn_CIk,       SelectBtn_Box],
+    "SelectBtn_LFkBox":              [SelectBtn_LFk,       SelectBtn_Box],
+    "SelectBtn_LIkBox":              [SelectBtn_LIk,       SelectBtn_Box],
+    "SelectBtn_yellowBox":           [SelectBtn_yellow,    SelectBtn_Box],
+    "SelectBtn_greenBox":            [SelectBtn_green,     SelectBtn_Box],
+    "SelectBtn_darkGreenBox":        [SelectBtn_darkGreen, SelectBtn_Box],
+
+    "SelectBtn_RFkCircle":           [SelectBtn_RFk,       SelectBtn_Circle],
+    "SelectBtn_RIkCircle":           [SelectBtn_RIk,       SelectBtn_Circle],
+    "SelectBtn_CFkCircle":           [SelectBtn_CFk,       SelectBtn_Circle],
+    "SelectBtn_CIkCircle":           [SelectBtn_CIk,       SelectBtn_Circle],
+    "SelectBtn_LFkCircle":           [SelectBtn_LFk,       SelectBtn_Circle],
+    "SelectBtn_LIkCircle":           [SelectBtn_LIk,       SelectBtn_Circle],
+    "SelectBtn_greenCircle":         [SelectBtn_green,     SelectBtn_Circle],
+    "SelectBtn_redCircle":           [SelectBtn_LFk,       SelectBtn_Circle],
+    "SelectBtn_yellowCircle":        [SelectBtn_yellow,    SelectBtn_Circle],
+    "SelectBtn_blueCircle":          [SelectBtn_RFk,       SelectBtn_Circle],
+
+    "SelectBtn_RFkOutlineBox":       [SelectBtn_RFk,       SelectBtn_OutlineBox],
+    "SelectBtn_RIkOutlineBox":       [SelectBtn_RIk,       SelectBtn_OutlineBox],
+    "SelectBtn_CFkOutlineBox":       [SelectBtn_CFk,       SelectBtn_OutlineBox],
+    "SelectBtn_CIkOutlineBox":       [SelectBtn_CIk,       SelectBtn_OutlineBox],
+    "SelectBtn_LFkOutlineBox":       [SelectBtn_LFk,       SelectBtn_OutlineBox],
+    "SelectBtn_LIkOutlineBox":       [SelectBtn_LIk,       SelectBtn_OutlineBox],
+    "SelectBtn_yellowOutlineBox":    [SelectBtn_yellow,    SelectBtn_OutlineBox],
+    "SelectBtn_greenOutlineBox":     [SelectBtn_green,     SelectBtn_OutlineBox],
+    "SelectBtn_darkGreenOutlineBox": [SelectBtn_darkGreen, SelectBtn_OutlineBox],
+
+    "SelectBtn_RFkOutlineCircle":    [SelectBtn_RFk,       SelectBtn_OutlineCircle],
+    "SelectBtn_RIkOutlineCircle":    [SelectBtn_RIk,       SelectBtn_OutlineCircle],
+    "SelectBtn_CFkOutlineCircle":    [SelectBtn_CFk,       SelectBtn_OutlineCircle],
+    "SelectBtn_CIkOutlineCircle":    [SelectBtn_CIk,       SelectBtn_OutlineCircle],
+    "SelectBtn_LFkOutlineCircle":    [SelectBtn_LFk,       SelectBtn_OutlineCircle],
+    "SelectBtn_LIkOutlineCircle":    [SelectBtn_LIk,       SelectBtn_OutlineCircle],
+    "SelectBtn_greenOutlineCircle":  [SelectBtn_green,     SelectBtn_OutlineCircle],
+    "SelectBtn_redOutlineCircle":    [SelectBtn_LFk,       SelectBtn_OutlineCircle],
+    "SelectBtn_yellowOutlineCircle": [SelectBtn_yellow,    SelectBtn_OutlineCircle],
+    "SelectBtn_blueOutlineCircle":   [SelectBtn_RFk,       SelectBtn_OutlineCircle],
+
+    "SelectBtn_RFkTriangleRight":  [SelectBtn_RFk,         SelectBtn_TriangleRight],
+    "SelectBtn_RIkTriangleRight":  [SelectBtn_RIk,         SelectBtn_TriangleRight],
+    "SelectBtn_LFkTriangleLeft":   [SelectBtn_LFk,         SelectBtn_TriangleLeft],
+    "SelectBtn_LIkTriangleLeft":   [SelectBtn_LIk,         SelectBtn_TriangleLeft],
+
+    "SelectBtn_greenTriangleRight":  [SelectBtn_green,     SelectBtn_TriangleRight],
+    "SelectBtn_greenTriangleLeft":   [SelectBtn_green,     SelectBtn_TriangleLeft]
+}
+
+
+for name, mixins in SELECTORS.items():
+    klass = _boilSelector(name, mixins[0], mixins[1])
+    globals()[klass.__name__] = klass
