@@ -79,17 +79,11 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
     def __init__(self, parent=None):
         self.toolName = SYNOPTIC_WIDGET_NAME
-        self.script_jobs = list()
         # Delete old instances of the componet settings window.
         gqt.deleteInstances(self, MayaQDockWidget)
         super(Synoptic, self).__init__(parent)
         self.create_widgets()
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-
-    def closeEvent(self, event):
-        for job in self.script_jobs:
-            pm.scriptJob(kill=job)
-
 
     def create_widgets(self):
         self.setupUi()
@@ -221,7 +215,7 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
                 if tab_name:
                     # instantiate SynopticTab widget
                     module = importTab(tab_name)
-                    synoptic_tab = getattr(module, "SynopticTab")(self)
+                    synoptic_tab = getattr(module, "SynopticTab")()
 
                     # set minimum size for auto fit (stretch) scroll area
                     if synoptic_tab.minimumHeight() == 0:
