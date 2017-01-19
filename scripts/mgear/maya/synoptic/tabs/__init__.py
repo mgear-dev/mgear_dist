@@ -124,6 +124,7 @@ class MainSynopticTab(QtWidgets.QDialog):
         ptr = long(shiboken.getCppPointer(self)[0])
         gui = OpenMayaUI.MQtUtil.fullName(ptr)
         self.selJob = pm.scriptJob(e=("SelectionChanged", self.selectChanged), parent=gui)
+        self.parent().script_jobs.append(self.selJob)
 
     def selectChanged(self, *args):
         """
