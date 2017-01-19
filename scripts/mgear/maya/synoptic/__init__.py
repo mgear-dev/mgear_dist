@@ -360,6 +360,7 @@ class SynopticTabWrapper(QtWidgets.QWidget):
 
     def mouseMoveEvent(self, event):
         # type: (QtGui.QMouseEvent) -> None
+        self.syn_widget, self.syn_widget_is_mainsynoptictab = self.searchMainSynopticTab()
 
         if self.rubberband.isVisible():
             self.rubberband.setGeometry(QtCore.QRect(self.origin, event.pos()).normalized())
