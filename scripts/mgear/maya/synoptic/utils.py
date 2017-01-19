@@ -659,7 +659,7 @@ class spaceTransferUI(QtWidgets.QDialog):
         # set the new space value in the synoptic combobox
         self.comboObj.setCurrentIndex(self.comboBoxSpaces.currentIndex())
         pm.undoInfo(cck=True)
-        for c in maya_main_window().children():
+        for c in gqt.maya_main_window().children():
             if isinstance(c, spaceTransferUI):
                 c.deleteLater()
 
@@ -669,7 +669,7 @@ class spaceTransferUI(QtWidgets.QDialog):
 def showSpaceTransferUI(combo, model, uihost, combo_attr, ctrl_name, *args):
 
     try:
-        for c in maya_main_window().children():
+        for c in gqt.maya_main_window().children():
             if isinstance(c, spaceTransferUI):
                 c.deleteLater()
 
