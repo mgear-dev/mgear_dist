@@ -207,7 +207,12 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.tabs.clear()
         # defPath = os.environ.get("MGEAR_SYNOPTIC_PATH", None)
 
-        tab_names = pm.ls(self.model_list.currentText())[0].getAttr("synoptic").split(",")
+        currentModelName = self.model_list.currentText()
+        currentModels = pm.ls(currentModelName)
+        if not currentModels:
+            return
+
+        tab_names = currentModels[0].getAttr("synoptic").split(",")
 
         max_h = 0
         max_w = 0
