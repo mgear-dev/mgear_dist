@@ -187,10 +187,21 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
     # Singal Methods =============================
     def updateModelList(self):
+        # avoiding unnecessory firing currentIndexChanged event before finish to model_list
+        try:
+            self.model_list.currentIndexChanged.disconnect()
+        except RuntimeError:
+            pass
+
         rig_models = [item for item in pm.ls(transforms=True) if item.hasAttr("is_rig")]
         self.model_list.clear()
         for item in rig_models:
-            self.model_list.addItem(item.name(), item.name() )
+            self.model_list.addItem(item.name(), item.name())
+
+        # restore event and update tabs for reflecting self.model_list
+        self.model_list.currentIndexChanged.connect(self.updateTabs)
+        self.updateTabs()
+
 
     def updateTabs(self):
         self.tabs.clear()
