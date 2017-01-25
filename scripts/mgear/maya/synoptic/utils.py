@@ -44,6 +44,7 @@ import traceback
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
+
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
@@ -289,6 +290,7 @@ def getComboKeys(model, object_name, combo_attr):
     keys.append("++ Space Transfer ++")
     return keys
 
+
 def getComboIndex(model, object_name, combo_attr):
 
     nameSpace = getNamespace(model)
@@ -300,12 +302,13 @@ def getComboIndex(model, object_name, combo_attr):
     oVal =  node.attr(combo_attr).get()
     return oVal
 
+
 def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
 
     nameSpace = getNamespace(model)
-    if  nameSpace:
-        node = getNode( nameSpace + ":" + object_name)
-        ctl = getNode( nameSpace + ":" + ctl_name)
+    if nameSpace:
+        node = getNode(nameSpace + ":" + object_name)
+        ctl = getNode(nameSpace + ":" + ctl_name)
     else:
         node = getNode(object_name)
         ctl = getNode(ctl_name)
@@ -314,8 +317,7 @@ def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
 
     oAttr = node.attr(combo_attr)
 
-
-    oVal =  oAttr.set(cnsIndex)
+    oVal = oAttr.set(cnsIndex)
     ctl.setMatrix(sWM, worldSpace=True)
 
 
@@ -522,23 +524,21 @@ def resetSelTrans():
             tra.resetTransform(obj)
 
 
-
-
-
 ##################################################
 # Transfer space
 ##################################################
 # ================================================
-
-class spaceTransferUI(QtWidgets.QDialog):
+class BaseTransferUI(QtWidgets.QDialog):
 
     try:
         valueChanged = QtCore.Signal(int)
-    except:
-        valueChanged = pyqtSignal()
+    except Exception:
+        valueChanged = gqt.pyqtSignal()
 
     def __init__(self, parent=None):
-        super(spaceTransferUI, self).__init__(parent)
+        # type: () -> None
+
+        super(BaseTransferUI, self).__init__(parent)
         self.comboObj = None
         self.comboItems = []
         self.model = None
@@ -546,11 +546,12 @@ class spaceTransferUI(QtWidgets.QDialog):
         self.combo_attr = None
         self.ctrl_name = None
 
-
+        self.kernel = None
 
     def create(self):
+        # type: () -> None
 
-        self.setWindowTitle("Space Transfer ")
+        self.setWindowTitle("Space Transfer")
         self.setWindowFlags(QtCore.Qt.Tool)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, 1)
 
@@ -559,141 +560,452 @@ class spaceTransferUI(QtWidgets.QDialog):
         self.create_connections()
 
     def create_controls(self):
-        self.onlyKeyframes_check = QtGui.QCheckBox('Only Keyframe Frames')
-        self.onlyKeyframes_check.setChecked(True)
-        self.startFrame_label = QtGui.QLabel("Start")
-        self.startFrame_value = QtGui.QSpinBox()
-        self.startFrame_value.setMinimum(-999999)
-        self.startFrame_value.setMaximum(999999)
-        self.endFrame_label = QtGui.QLabel("End")
-        self.endFrame_value = QtGui.QSpinBox()
-        self.endFrame_value.setMinimum(-999999)
-        self.endFrame_value.setMaximum(999999)
-        self.populateRange(True)
-        self.allFrames_button = QtGui.QPushButton("All Frames")
-        self.timeSliderFrames_button = QtGui.QPushButton("Time Slider Frames")
-        self.comboBoxSpaces = QtGui.QComboBox()
-        self.comboBoxSpaces.addItems(self.comboItems)
-        self.comboBoxSpaces.setCurrentIndex(self.comboObj.currentIndex())
-        self.spaceTransfer_button = QtGui.QPushButton("Space Transfer")
+        # type: () -> None
+
+        try:
+            self.onlyKeyframes_check = QtGui.QCheckBox('Only Keyframe Frames')
+            self.onlyKeyframes_check.setChecked(True)
+            self.startFrame_label = QtGui.QLabel("Start")
+            self.startFrame_value = QtGui.QSpinBox()
+            self.startFrame_value = QtGui.QSpinBox()
+            self.startFrame_value.setMinimum(-999999)
+            self.startFrame_value.setMaximum(999999)
+            self.endFrame_label = QtGui.QLabel("End")
+            self.endFrame_value = QtGui.QSpinBox()
+            self.endFrame_value.setMinimum(-999999)
+            self.endFrame_value.setMaximum(999999)
+            self.populateRange(True)
+            self.allFrames_button = QtGui.QPushButton("All Frames")
+            self.timeSliderFrames_button = QtGui.QPushButton("Time Slider Frames")
+
+            self.comboBoxSpaces = QtGui.QComboBox()
+            self.comboBoxSpaces.addItems(self.comboItems)
+            if self.comboObj is not None:
+                self.comboBoxSpaces.setCurrentIndex(self.comboObj.currentIndex())
+
+            self.spaceTransfer_button = QtGui.QPushButton("Space Transfer")
+
+        except AttributeError:
+            self.onlyKeyframes_check = QtWidgets.QCheckBox('Only Keyframe Frames')
+            self.onlyKeyframes_check.setChecked(True)
+            self.startFrame_label = QtWidgets.QLabel("Start")
+            self.startFrame_value = QtWidgets.QSpinBox()
+            self.startFrame_value = QtWidgets.QSpinBox()
+            self.startFrame_value.setMinimum(-999999)
+            self.startFrame_value.setMaximum(999999)
+            self.endFrame_label = QtWidgets.QLabel("End")
+            self.endFrame_value = QtWidgets.QSpinBox()
+            self.endFrame_value.setMinimum(-999999)
+            self.endFrame_value.setMaximum(999999)
+            self.populateRange(True)
+            self.allFrames_button = QtWidgets.QPushButton("All Frames")
+            self.timeSliderFrames_button = QtWidgets.QPushButton("Time Slider Frames")
+
+            self.comboBoxSpaces = QtWidgets.QComboBox()
+            self.comboBoxSpaces.addItems(self.comboItems)
+            if self.comboObj is not None:
+                self.comboBoxSpaces.setCurrentIndex(self.comboObj.currentIndex())
+
+            self.spaceTransfer_button = QtWidgets.QPushButton("Space Transfer")
 
     def create_layout(self):
+        # type: () -> None
 
-        frames_layout = QtGui.QHBoxLayout()
-        frames_layout.setContentsMargins(1,1,1,1)
-        frames_layout.addWidget(self.startFrame_label)
-        frames_layout.addWidget(self.startFrame_value)
-        frames_layout.addWidget(self.endFrame_label)
-        frames_layout.addWidget(self.endFrame_value)
+        try:
+            frames_layout = QtGui.QHBoxLayout()
+            frames_layout.setContentsMargins(1, 1, 1, 1)
+            frames_layout.addWidget(self.startFrame_label)
+            frames_layout.addWidget(self.startFrame_value)
+            frames_layout.addWidget(self.endFrame_label)
+            frames_layout.addWidget(self.endFrame_value)
 
-        framesSetter_layout = QtGui.QHBoxLayout()
-        framesSetter_layout.setContentsMargins(1,1,1,1)
-        framesSetter_layout.addWidget(self.allFrames_button)
-        framesSetter_layout.addWidget(self.timeSliderFrames_button)
+            framesSetter_layout = QtGui.QHBoxLayout()
+            framesSetter_layout.setContentsMargins(1, 1, 1, 1)
+            framesSetter_layout.addWidget(self.allFrames_button)
+            framesSetter_layout.addWidget(self.timeSliderFrames_button)
 
+            spaceTransfer_layout = QtWidgets.QVBoxLayout()
+            spaceTransfer_layout.setContentsMargins(6, 5, 6, 5)
+            spaceTransfer_layout.addWidget(self.onlyKeyframes_check)
+            spaceTransfer_layout.addLayout(frames_layout)
+            spaceTransfer_layout.addLayout(framesSetter_layout)
+            spaceTransfer_layout.addWidget(self.comboBoxSpaces)
+            spaceTransfer_layout.addWidget(self.spaceTransfer_button)
 
-        spaceTransfer_layout = QtWidgets.QVBoxLayout()
-        spaceTransfer_layout.setContentsMargins(6,5,6,5)
-        spaceTransfer_layout.addWidget(self.onlyKeyframes_check)
-        spaceTransfer_layout.addLayout(frames_layout)
-        spaceTransfer_layout.addLayout(framesSetter_layout)
-        spaceTransfer_layout.addWidget(self.comboBoxSpaces)
-        spaceTransfer_layout.addWidget(self.spaceTransfer_button)
+        except AttributeError:
+            frames_layout = QtWidgets.QHBoxLayout()
+            frames_layout.setContentsMargins(1, 1, 1, 1)
+            frames_layout.addWidget(self.startFrame_label)
+            frames_layout.addWidget(self.startFrame_value)
+            frames_layout.addWidget(self.endFrame_label)
+            frames_layout.addWidget(self.endFrame_value)
+
+            framesSetter_layout = QtWidgets.QHBoxLayout()
+            framesSetter_layout.setContentsMargins(1, 1, 1, 1)
+            framesSetter_layout.addWidget(self.allFrames_button)
+            framesSetter_layout.addWidget(self.timeSliderFrames_button)
+
+            spaceTransfer_layout = QtWidgets.QVBoxLayout()
+            spaceTransfer_layout.setContentsMargins(6, 5, 6, 5)
+            spaceTransfer_layout.addWidget(self.onlyKeyframes_check)
+            spaceTransfer_layout.addLayout(frames_layout)
+            spaceTransfer_layout.addLayout(framesSetter_layout)
+            spaceTransfer_layout.addWidget(self.comboBoxSpaces)
+            spaceTransfer_layout.addWidget(self.spaceTransfer_button)
 
         self.setLayout(spaceTransfer_layout)
 
-
     def create_connections(self):
-        self.spaceTransfer_button.clicked.connect(self.doSpaceTransfer)
+        # type: () -> None
+
+        self.spaceTransfer_button.clicked.connect(self.doIt)
         self.allFrames_button.clicked.connect(partial(self.populateRange, False))
         self.timeSliderFrames_button.clicked.connect(partial(self.populateRange, True))
-
 
     # SLOTS ##########################################################
 
     def populateRange(self, timeSlider=False):
+        # type: (bool) -> None
+
         start = pm.playbackOptions(q=True, min=timeSlider, ast=True)
         end = pm.playbackOptions(q=True, max=timeSlider, aet=True)
         self.startFrame_value.setValue(start)
         self.endFrame_value.setValue(end)
 
-    def doSpaceTransfer(self):
+    def setComboBoxItemsFormComboObj(self, combo):
+        # type: (widegts.toggleCombo) -> None
 
-        nameSpace = getNamespace(self.model)
-        if nameSpace:
-            ctrlName = nameSpace+":"+self.ctrl_name
-            hostName = nameSpace+":"+self.uihost
+        del self.comboItems[:]
+        for i in range(combo.count() - 1):
+            self.comboItems.append(combo.itemText(i))
+
+    def setComboBoxItemsFormList(self, lis):
+        # type: (widegts.toggleCombo) -> None
+
+        del self.comboItems[:]
+        for i in range(len(lis)):
+            self.comboItems.append(lis[i])
+
+    # ------------------------------------------------------------------------
+
+    def setComboObj(self, combo):
+        self.comboObj = combo
+
+    def setModel(self, model):
+        self.model = model
+        self.nameSpace = getNamespace(self.model)
+
+    def setUiHost(self, uihost):
+        self.uihost = uihost
+
+    def setComboAttr(self, attr):
+        self.combo_attr = attr
+
+    def setSrcCtrlName(self, ctrl_name):
+        self.src_ctrl_name = ctrl_name
+
+    def setDstCtrlName(self, ctrl_name):
+        self.dst_ctrl_name = ctrl_name
+
+    def getSrcCtrlName(self):
+        if self.nameSpace:
+            ctrlName = self.nameSpace + ":" + self.src_ctrl_name
         else:
-            ctrlName = self.ctrl_name
+            ctrlName = self.src_ctrl_name
+
+        return ctrlName
+
+    def getDstCtrlName(self):
+        if self.nameSpace:
+            ctrlName = self.nameSpace + ":" + self.dst_ctrl_name
+        else:
+            ctrlName = self.dst_ctrl_name
+
+        return ctrlName
+
+    def getHostName(self):
+        if self.nameSpace:
+            hostName = self.nameSpace + ":" + self.uihost
+        else:
             hostName = self.uihost
 
+        return hostName
+
+    def doIt(self):
+        # type: () -> None
+
+        if not self.kernel:
+            mgear.log("Can't find space transfer kernel: %s" % (self), mgear.sev_error)
+            return
+
+        else:
+            self.kernel()
+
+        # set the new space value in the synoptic combobox
+        if self.comboObj is not None:
+            self.comboObj.setCurrentIndex(self.comboBoxSpaces.currentIndex())
+
+        pm.undoInfo(cck=True)
+        for c in gqt.maya_main_window().children():
+            if isinstance(c, BaseTransferUI):
+                c.deleteLater()
 
 
-        self.ctl_node = getNode(ctrlName)
+# ================================================
+# Transfer space
+class ParentSpaceTransferUI(BaseTransferUI):
+
+    def __init__(self, parent=None):
+        super(ParentSpaceTransferUI, self).__init__(parent)
+        self.kernel = self.doSpaceTransfer
+
+    # ------------------------------------------------------------------------
+
+    def getChangeAttrName(self):
+        # type: () -> str
+        return "{}.{}".format(self.getHostName(), self.combo_attr)
+
+    def changeAttr(self):
+        # type: () -> None
+        pm.setAttr(self.getChangeAttrName(), self.getValue())
+
+    def getValue(self):
+        return self.comboBoxSpaces.currentIndex()
+
+    def doSpaceTransfer(self):
+
+        src_ctrl_node = getNode(self.getSrcCtrlName())
+        dst_ctrl_node = getNode(self.getDstCtrlName())
+
         startFrame = self.startFrame_value.value()
         endFrame = self.endFrame_value.value()
 
         # store the current world space position
         wmList = []
-        for x in range(startFrame, endFrame+1):
-            wmList.append(pm.getAttr(self.ctl_node+'.worldMatrix',time=x))
+        for x in range(startFrame, endFrame + 1):
+            wmList.append(pm.getAttr(src_ctrl_node + '.worldMatrix', time=x))
+
         pm.undoInfo(ock=True)
-        keyframeList = list(set(pm.keyframe(self.ctl_node, at=["t","r","s"], q=True)))
+        keyframeList = list(set(pm.keyframe(src_ctrl_node, at=["t", "r", "s"], q=True)))
         keyframeList.sort()
-        for i, x in enumerate(range(startFrame, endFrame+1)):
+        for i, x in enumerate(range(startFrame, endFrame + 1)):
+
             if self.onlyKeyframes_check.isChecked() and x not in keyframeList:
                 continue
+
             pm.currentTime(x)
             # delete animation in the space switch channel
-            pm.cutKey( hostName+"."+self.combo_attr)
+            pm.cutKey(self.getChangeAttrName())
 
             # set the new space in the channel
-            pm.setAttr( hostName+"."+self.combo_attr, self.comboBoxSpaces.currentIndex())
+            self.changeAttr()
 
             # bake the stored transforms to the cotrol
-            self.ctl_node.setMatrix(wmList[i], worldSpace=True)
-            channels = ["tx","ty","tz", "rx","ry","rz", "sx","sy","sz"]
-            pm.setKeyframe( self.ctl_node, at=channels)
-
+            dst_ctrl_node.setMatrix(wmList[i], worldSpace=True)
+            channels = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
+            pm.setKeyframe(dst_ctrl_node, at=channels)
 
         # set the new space value in the synoptic combobox
-        self.comboObj.setCurrentIndex(self.comboBoxSpaces.currentIndex())
-        pm.undoInfo(cck=True)
-        for c in gqt.maya_main_window().children():
-            if isinstance(c, spaceTransferUI):
-                c.deleteLater()
+        if self.comboObj is not None:
+            self.comboObj.setCurrentIndex(self.comboBoxSpaces.currentIndex())
+
+    @classmethod
+    def showUI(cls, combo, model, uihost, combo_attr, ctrl_name, *args):
+        # type: (widgets.toggleCombo, pm.nodetypes.Transform, str, str, str) -> None
+
+        try:
+            for c in gqt.maya_main_window().children():
+                if isinstance(c, ParentSpaceTransferUI):
+                    c.deleteLater()
+
+        except RuntimeError:
+            pass
+
+        # Create minimal UI object
+        cls = ParentSpaceTransferUI(gqt.maya_main_window())
+
+        # Delete the UI if errors occur to avoid causing winEvent
+        # and event errors (in Maya 2014)
+        try:
+            cls.setComboObj(combo)
+            cls.setModel(model)
+            cls.setUiHost(uihost)
+            cls.setComboAttr(combo_attr)
+            cls.setSrcCtrlName(ctrl_name)
+            cls.setDstCtrlName(ctrl_name)
+            cls.setComboBoxItemsFormComboObj(cls.comboObj)
+
+            cls.create()
+            cls.show()
+
+        except Exception as e:
+            cls.deleteLater()
+            traceback.print_exc()
+            mgear.log(e, mgear.sev_error)
 
 
+class IkFkTransferUI(BaseTransferUI):
+
+    def __init__(self, parent=None):
+        super(IkFkTransferUI, self).__init__(parent)
+        self.kernel = self.doIkFkTransfer
+
+    # ------------------------------------------------------------------------
+    # override
+    def getSrcCtrlName(self):
+        if self.nameSpace:
+            ctrlName = self.nameSpace + ":" + self.src_ctrl_name
+        else:
+            ctrlName = self.src_ctrl_name
+
+        return ctrlName
+
+    def getDstCtrlName(self):
+        if self.nameSpace:
+            ctrlName = self.nameSpace + ":" + self.dst_ctrl_name
+        else:
+            ctrlName = self.dst_ctrl_name
+
+        return ctrlName
+
+    # ------------------------------------------------------------------------
+
+    def getChangeAttrName(self):
+        # type: () -> str
+        return "{}.{}".format(self.getHostName(), self.combo_attr)
+
+    def changeAttr(self):
+        # type: () -> None
+        pm.setAttr(self.getChangeAttrName(), self.getValue())
+
+    def getValue(self):
+        if self.comboBoxSpaces.currentIndex() == 0:  # IK
+            return 1.0
+        elif self.comboBoxSpaces.currentIndex() == 1:  # FK
+            return 0.0
+        else:
+            return 1.0
+
+    def getKeyedFrames(self, objects, start, end):
+
+        # keyframeList = list(set(pm.keyframe(src_ctrl_nodes, at=["t", "r", "s"], q=True)))
+        keyframeList.sort()
+
+    def _getNode(self, name):
+        # type: (str) -> pm.nodetypes.Transform
+        node = getNode(":".join([self.nameSpace, name]))
+
+        if not node:
+            mgear.log("Can't find object : {0}".format(name), mgear.sev_error)
+
+        return node
+
+    def _getMth(self, name):
+        # type: (str) -> pm.nodetypes.Transform
+
+        tmp = name.split("_")
+        tmp[-1] = "mth"
+        return self._getNode("_".join(tmp))
+
+    def setCtrls(self, fks, ik, upv):
+
+        self.fkCtrls = [self._getNode(x) for x in fks]
+        self.fkTargets = [self._getMth(x) for x in fks]
+
+        self.ikCtrl = self._getNode(ik)
+        self.ikTarget = self._getMth(ik)
+
+        self.upvCtrl = self._getNode(upv)
+        self.upvTarget = self._getMth(upv)
+
+    # ------------------------------------------------------------------------
+
+    def doIkFkTransfer(self):
+
+        if self.comboBoxSpaces.currentIndex() == 0:  # to IK
+
+            src_target_nodes = [self.ikTarget, self.upvTarget]
+            src_ctrl_nodes = self.fkCtrls
+            dst_ctrl_nodes = [self.ikCtrl, self.upvCtrl]
+
+        elif self.comboBoxSpaces.currentIndex() == 1:  # to FK
+
+            src_target_nodes = self.fkTargets
+            src_ctrl_nodes = [self.ikCtrl, self.upvCtrl]
+            dst_ctrl_nodes = self.fkCtrls
+
+        startFrame = self.startFrame_value.value()
+        endFrame = self.endFrame_value.value()
+
+        # store the current world space position
+        wmList = []
+        for x in range(startFrame, endFrame + 1):
+            tmp = []
+            for n in src_target_nodes:
+                tmp.append(pm.getAttr(n + '.worldMatrix', time=x))
+
+            wmList.append(tmp)
+
+        pm.undoInfo(ock=True)
+        keyframeList = list(set(pm.keyframe(src_ctrl_nodes, at=["t", "r", "s"], q=True)))
+        keyframeList.sort()
+        for i, x in enumerate(range(startFrame, endFrame + 1)):
+
+            if self.onlyKeyframes_check.isChecked() and x not in keyframeList:
+                continue
+
+            pm.currentTime(x)
+            # delete animation in the space switch channel
+            pm.cutKey(self.getChangeAttrName())
+
+            # set the new space in the channel
+            self.changeAttr()
+
+            # bake the stored transforms to the cotrol
+            for j, n in enumerate(dst_ctrl_nodes):
+                n.setMatrix(wmList[i][j], worldSpace=True)
+
+            channels = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
+            pm.setKeyframe(dst_ctrl_nodes, at=channels)
+
+        # set the new space value in the synoptic combobox
+        if self.comboObj is not None:
+            self.comboObj.setCurrentIndex(self.comboBoxSpaces.currentIndex())
+
+    # ------------------------------------------------------------------------
+    # def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
+    # type: (pm.nodetypes.Transform, str, str, List[str], str, str, str) -> None
+
+    @classmethod
+    def showUI(cls, model, ikfk_attr, uihost, fks, ik, upv, *args):
+        # type: (pm.nodetypes.Transform, str, str, List[str], str, str, str) -> None
+
+        try:
+            for c in gqt.maya_main_window().children():
+                if isinstance(c, IkFkTransferUI):
+                    c.deleteLater()
+
+        except RuntimeError:
+            pass
+
+        # Create minimal UI object
+        cls = IkFkTransferUI(gqt.maya_main_window())
+
+        # Delete the UI if errors occur to avoid causing winEvent
+        # and event errors (in Maya 2014)
+        try:
+            cls.setComboObj(None)
+            cls.setModel(model)
+            cls.setUiHost(uihost)
+            cls.setComboAttr(ikfk_attr)
+            cls.setCtrls(fks, ik, upv)
+            cls.setComboBoxItemsFormList(["IK", "FK"])
 
 
-def showSpaceTransferUI(combo, model, uihost, combo_attr, ctrl_name, *args):
+            cls.create()
+            cls.show()
 
-    try:
-        for c in gqt.maya_main_window().children():
-            if isinstance(c, spaceTransferUI):
-                c.deleteLater()
-
-    except:
-        pass
-
-
-
-    # Create minimal UI object
-    spaceTransfer = spaceTransferUI(gqt.maya_main_window())
-
-    # Delete the UI if errors occur to avoid causing winEvent
-    # and event errors (in Maya 2014)
-    try:
-        spaceTransfer.comboObj =  combo
-        spaceTransfer.model = model
-        spaceTransfer.uihost = uihost
-        spaceTransfer.combo_attr = combo_attr
-        spaceTransfer.ctrl_name = ctrl_name
-        for i in range(spaceTransfer.comboObj.count()-1):
-            spaceTransfer.comboItems.append(spaceTransfer.comboObj.itemText(i))
-        spaceTransfer.create()
-        spaceTransfer.show()
-
-    except:
-        spaceTransfer.deleteLater()
-        traceback.print_exc()
+        except Exception as e:
+            cls.deleteLater()
+            traceback.print_exc()
+            mgear.log(e, mgear.sev_error)
