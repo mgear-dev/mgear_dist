@@ -72,7 +72,7 @@ class toggleCombo(QtWidgets.QComboBox):
                 print "Space Transfer"
                 self.setCurrentIndex(syn_uti.getComboIndex( self.model, self.uihost_name, self.combo_attr))
                 # self.setCurrentIndex(0)
-                syn_uti.ParentSpaceTransferUI.showUI(self, self.model, self.uihost_name, self.combo_attr, self.ctl_name)
+                syn_uti.ParentSpaceTransfer.showUI(self, self.model, self.uihost_name, self.combo_attr, self.ctl_name)
 
             else:
                 syn_uti.changeSpace(self.model, self.uihost_name, self.combo_attr, self.currentIndex(), self.ctl_name)
