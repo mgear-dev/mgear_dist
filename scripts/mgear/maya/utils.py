@@ -31,6 +31,11 @@ Utilitie functions.
 # GLOBAL
 ##########################################################
 import os
+from functools import wraps
+
+from maya import cmds
+from maya import mel
+
 import mgear
 
 
@@ -141,3 +146,54 @@ def importFromStandardOrCustomDirectories(directories, defaultFormatter, customF
         module = __import__(module_name, globals(), locals(), ["*"], -1)
 
     return module
+
+
+# -----------------------------------------------------------------------------
+# Decorators
+# -----------------------------------------------------------------------------
+def viewport_off(func):
+    # type: (function) -> function
+    """
+    Decorator - turn off Maya display while func is running.
+    if func will fail, the error will be raised after.
+    """
+    @wraps(func)
+    def wrap(*args, **kwargs):
+        # type: (*str, **str) -> None
+
+        # Turn $gMainPane Off:
+        gMainPane = mel.eval('global string $gMainPane; $temp = $gMainPane;')
+        cmds.paneLayout(gMainPane, edit=True, manage=False)
+
+        try:
+            return func(*args, **kwargs)
+
+        except Exception as e:
+            raise e
+
+        finally:
+            cmds.paneLayout(gMainPane, edit=True, manage=True)
+
+    return wrap
+
+
+def one_undo(func):
+    # type: (function) -> function
+    """
+    Decorator - guarantee close chunk.
+    """
+    @wraps(func)
+    def wrap(*args, **kwargs):
+        # type: (*str, **str) -> None
+
+        try:
+            cmds.undoInfo(openChunk=True)
+            return func(*args, **kwargs)
+
+        except Exception as e:
+            raise e
+
+        finally:
+            cmds.undoInfo(closeChunk=True)
+
+    return wrap

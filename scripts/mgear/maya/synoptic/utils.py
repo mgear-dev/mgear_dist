@@ -38,6 +38,7 @@ from functools import partial
 import mgear
 import mgear.maya.dag as dag
 import mgear.maya.transform as tra
+import mgear.maya.utils as mutils
 import traceback
 
 
@@ -560,6 +561,8 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
     def create_controls(self):
         # type: () -> None
 
+        self.groupBox = QtWidgets.QGroupBox()
+        self.setGroupBoxTitle()  # must be implemented in each specialized classes
         self.onlyKeyframes_check = QtWidgets.QCheckBox('Only Keyframe Frames')
         self.onlyKeyframes_check.setChecked(True)
         self.startFrame_label = QtWidgets.QLabel("Start")
@@ -597,13 +600,16 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         framesSetter_layout.addWidget(self.allFrames_button)
         framesSetter_layout.addWidget(self.timeSliderFrames_button)
 
+        paremeter_layout = QtWidgets.QVBoxLayout(self.groupBox)
+        paremeter_layout.setContentsMargins(6, 5, 6, 5)
+        paremeter_layout.addWidget(self.onlyKeyframes_check)
+        paremeter_layout.addLayout(frames_layout)
+        paremeter_layout.addLayout(framesSetter_layout)
+        paremeter_layout.addWidget(self.comboBoxSpaces)
+        paremeter_layout.addWidget(self.spaceTransfer_button)
+
         spaceTransfer_layout = QtWidgets.QVBoxLayout()
-        spaceTransfer_layout.setContentsMargins(6, 5, 6, 5)
-        spaceTransfer_layout.addWidget(self.onlyKeyframes_check)
-        spaceTransfer_layout.addLayout(frames_layout)
-        spaceTransfer_layout.addLayout(framesSetter_layout)
-        spaceTransfer_layout.addWidget(self.comboBoxSpaces)
-        spaceTransfer_layout.addWidget(self.spaceTransfer_button)
+        spaceTransfer_layout.addWidget(self.groupBox)
 
         self.setLayout(spaceTransfer_layout)
 
@@ -639,6 +645,11 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
             self.comboItems.append(comboList[i])
 
     # ----------------------------------------------------------------
+
+    def setGroupBoxTitle(self):
+        # type: (str) -> None
+        # raise NotImplementedError("must implement transfer in each specialized class")
+        pass
 
     def setComboObj(self, combo):
         # type: (widgets.toggleCombo) -> None
@@ -677,7 +688,7 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
 
     def transfer(self, startFrame, endFrame, onlyKeyframes, *args, **kwargs):
         # type: (int, int, bool, *str, **str) -> None
-        raise NotImplementedError("must implement transfer in each specialized class")
+        raise NotImplementedError("must be implemented in each specialized class")
 
     def doItByUI(self):
         # type: () -> None
@@ -698,6 +709,8 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
             if isinstance(c, AbstractAnimationTransfer):
                 c.deleteLater()
 
+    @mutils.one_undo
+    @mutils.viewport_off
     def bakeAnimation(self, switch_attr_name, val_src_nodes, key_src_nodes, key_dst_nodes,
                       startFrame, endFrame, onlyKeyframes=True):
         # type: (str, List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], int, int, bool) -> None
@@ -707,32 +720,25 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         keyframeList = list(set(pm.keyframe(key_src_nodes, at=["t", "r", "s"], q=True)))
         keyframeList.sort()
 
-        pm.undoInfo(openChunk=True)
-        try:
-            for i, x in enumerate(range(startFrame, endFrame + 1)):
+        # delete animation in the space switch channel and destination ctrls
+        pm.cutKey(key_dst_nodes, at=channels, time=(startFrame, endFrame))
+        pm.cutKey(switch_attr_name, time=(startFrame, endFrame))
 
-                if onlyKeyframes and x not in keyframeList:
-                    continue
+        for i, x in enumerate(range(startFrame, endFrame + 1)):
 
-                pm.currentTime(x)
+            if onlyKeyframes and x not in keyframeList:
+                continue
 
-                # delete animation in the space switch channel
-                pm.cutKey(switch_attr_name)
+            pm.currentTime(x)
 
-                # set the new space in the channel
-                self.changeAttrToBoundValue()
+            # set the new space in the channel
+            self.changeAttrToBoundValue()
 
-                # bake the stored transforms to the cotrols
-                for j, n in enumerate(key_dst_nodes):
-                    n.setMatrix(worldMatrixList[i][j], worldSpace=True)
+            # bake the stored transforms to the cotrols
+            for j, n in enumerate(key_dst_nodes):
+                n.setMatrix(worldMatrixList[i][j], worldSpace=True)
 
-                pm.setKeyframe(key_dst_nodes, at=channels)
-
-        except Exception as e:
-            raise e
-
-        finally:
-            pm.undoInfo(closeChunk=True)
+            pm.setKeyframe(key_dst_nodes, at=channels)
 
 
 # ================================================
@@ -760,6 +766,12 @@ class ParentSpaceTransfer(AbstractAnimationTransfer):
     def getValue(self):
         # type: () -> int
         return self.comboBoxSpaces.currentIndex()
+
+    def setGroupBoxTitle(self):
+        if hasattr(self, "groupBox"):
+            # TODO: extract logic with naming convention
+            part = "_".join(self.ctrlNode.name().split(":")[-1].split("_")[:-1])
+            self.groupBox.setTitle(part)
 
     def transfer(self, startFrame, endFrame, onlyKeyframes, *args, **kwargs):
         # type: (int, int, bool, *str, **str) -> None
@@ -858,6 +870,12 @@ class IkFkTransfer(AbstractAnimationTransfer):
 
         self.upvCtrl = self._getNode(upv)
         self.upvTarget = self._getMth(upv)
+
+    def setGroupBoxTitle(self):
+        if hasattr(self, "groupBox"):
+            # TODO: extract logic with naming convention
+            part = "_".join(self.ikCtrl.name().split(":")[-1].split("_")[:-2])
+            self.groupBox.setTitle(part)
 
     # ----------------------------------------------------------------
 
