@@ -84,11 +84,13 @@ class bakeMocap(QtWidgets.QPushButton):
         model = syn_uti.getModel(self)
         syn_uti.bakeMocap(model)
 
+
 class ikfkMatchButton(QtWidgets.QPushButton):
 
     MAXIMUM_TRY_FOR_SEARCHING_FK = 1000
 
     def __init__(self, *args, **kwargs):
+        # type: (*str, **str) -> None
         super(ikfkMatchButton, self).__init__(*args, **kwargs)
         self.numFkControllers = None
 
@@ -104,12 +106,14 @@ class ikfkMatchButton(QtWidgets.QPushButton):
     def mousePressEvent(self, event):
         # type: (QtCore.QEvent) -> None
 
-        if not self.numFkControllers:
-            self.searchNumberOfFkControllers()
+        mouse_button = event.button()
 
         model = syn_uti.getModel(self)
         ikfk_attr = str(self.property("ikfk_attr"))
         uiHost_name = str(self.property("uiHost_name"))
+
+        if not self.numFkControllers:
+            self.searchNumberOfFkControllers()
 
         fks = []
         for i in range(self.numFkControllers):
@@ -120,9 +124,14 @@ class ikfkMatchButton(QtWidgets.QPushButton):
         ik = str(self.property("ik"))
         upv = str(self.property("upv"))
 
-        mouse_button = event.button()
+        if mouse_button == QtCore.Qt.RightButton:
+            syn_uti.IkFkTransfer.showUI(model, ikfk_attr, uiHost_name, fks, ik, upv)
+            return
 
-        syn_uti.ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv)
+        else:
+            syn_uti.ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv)
+            return
+
 
 class toggleAttrButton(QtWidgets.QPushButton):
 
