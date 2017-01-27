@@ -48,17 +48,22 @@ FILE_EXT = ".gSkin"
 ######################################
 
 def getSkinCluster(obj):
+    
+    skinCluster = None
 
     if  isinstance(obj, basestring):
         obj = pm.PyNode(obj)
     try:
         if pm.nodeType(obj.getShape()) in ["mesh", "nurbsSurface", "nurbsCurve"]:
+            
             for shape in obj.getShapes():
-                skinCluster = pm.listHistory(shape, type="skinCluster")[0]
-                if skinCluster:
+                try:
+                    skinCluster = pm.listHistory(shape, type="skinCluster")[0]
+                except:
                     pass
     except:
-        skinCluster = None
+        pm.displayWarning("%s: is not supported."% obj.name())
+    
     return skinCluster
 
 def getGeometryComponents(skinCls):
