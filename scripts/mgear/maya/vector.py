@@ -183,8 +183,8 @@ def getTransposedVector(v, position0, position1, inverse=False):
     vector = rotateAlongAxis(v, axis, ra)
 
     # Check if the rotation has been set in the right order
-    ra2 = (math.pi *.5 ) - v1.angle(vector)
-    vector = rotateAlongAxis(v, axis, -ra2)
+    # ra2 = (math.pi *.5 ) - v1.angle(vector)
+    # vector = rotateAlongAxis(v, axis, -ra2)
 
     return vector
 
