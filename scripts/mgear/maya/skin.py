@@ -54,36 +54,12 @@ def getSkinCluster(obj):
     try:
         if pm.nodeType(obj.getShape()) in ["mesh", "nurbsSurface", "nurbsCurve"]:
             for shape in obj.getShapes():
-                    skinCluster = pm.listHistory(shape, type="skinCluster")[0]
-                if skycluster:
+                skinCluster = pm.listHistory(shape, type="skinCluster")[0]
+                if skinCluster:
                     pass
     except:
         skinCluster = None
     return skinCluster
-
-# Old Experimental getSkinCluster. Deprecated.
-# def getSkinCluster(obj):
-
-#     if  isinstance(obj, basestring):
-#         obj = pm.PyNode(obj)
-#     try:
-#         if pm.nodeType(obj.getShape()) in ["mesh", "nurbsSurface", "nurbsCurve"]:
-#             # experiment try to find skycluster from referenced geo
-#             if pm.referenceQuery( obj, isNodeReferenced=True ):
-#                 fullName = obj.getShape().name()
-#                 if len(fullName.split(":"))>1:
-#                     name = fullName.split(":")[-1]
-#                     nameSpace = fullName.split(":")[:-1]
-#                     deformed = pm.PyNode( name+"Deformed")
-#                 else:
-#                     deformed = pm.PyNode(fullName)
-                
-#                 skinCluster = pm.listHistory(deformed, type="skinCluster")[0]
-#             else:
-#                 skinCluster = pm.listHistory(obj.getShape(), type="skinCluster")[0]
-#     except:
-#         skinCluster = None
-#     return skinCluster
 
 def getGeometryComponents(skinCls):
     fnSet = OpenMaya.MFnSet(skinCls.__apimfn__().deformerSet())
