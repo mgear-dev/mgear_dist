@@ -34,6 +34,7 @@ import pymel.core as pm
 import maya.mel as mel
 import maya.OpenMayaUI as omui
 from functools import partial
+import re
 
 import mgear
 import mgear.maya.dag as dag
@@ -51,6 +52,55 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 SYNOPTIC_WIDGET_NAME = "synoptic_view"
 CTRL_GRP_SUFFIX = "_controllers_grp"
+
+
+EXPR_LEFT_SIDE = re.compile("L(\d+)")
+EXPR_RIGHT_SIDE = re.compile("R(\d+)")
+
+
+##################################################
+# util
+def isSideElement(name):
+    # type: (str) -> bool
+    """
+    Returns is name(str) side element?
+
+    Arguments:
+        node: str
+
+    Returns:
+        bool
+    """
+
+    nameParts = stripNamespace(name).split("|")[-1]
+
+    for part in nameParts.split("_"):
+        if EXPR_LEFT_SIDE.match(part) or EXPR_RIGHT_SIDE.match(part):
+            return True
+    else:
+        return False
+
+
+def swapSideLabel(name):
+    # type: (str) -> str
+    """
+    Returns fliped name that replaced side label left to right or right to left.
+
+    Arguments:
+        name(str):
+
+    Returns:
+        str
+    """
+
+    for part in name.split("_"):
+        if EXPR_LEFT_SIDE.match(part):
+            return EXPR_LEFT_SIDE.sub(r"R\1", name)
+        if EXPR_RIGHT_SIDE.match(part):
+            return EXPR_RIGHT_SIDE.sub(r"L\1", name)
+
+    else:
+        return name
 
 
 ##################################################
@@ -119,6 +169,22 @@ def getNode(nodeName):
 
     except pm.MayaNodeError:
         return None
+
+
+def listAttrForMirror(node):
+    # type: (pm.nodetypes.Transform) -> list[str]
+
+    res = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]  # FIXME: should "ro" be here?
+    res.extend(pm.listAttr(node, userDefined=True, shortNames=True))
+    res = list(filter(lambda x: not x.startswith("inv"), res))
+
+    return res
+
+
+def getInvertCheckButtonAttrName(str):
+    # type: (str) -> str
+    return "inv{0}".format(str.lower().capitalize())
+
 
 ##################################################
 # SELECT
@@ -381,81 +447,122 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
         tra.matchWorldTransform(upvTarget, upvCtrl)
         oAttr.set(1.0)
 
+
 ##################################################
 # POSE
 ##################################################
 # ================================================
-def mirrorPose(flip=False, nodes=False):
+def mirrorPose(flip=False, nodes=None):
+    # type(bool, List[pm.nodetypes.Transform]) -> None
 
-    axis = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
-    aDic = {"tx":"invTx", "ty":"invTy", "tz":"invTz", "rx":"invRx", "ry":"invRy", "rz":"invRz", "sx":"invSx", "sy":"invSy", "sz":"invSz"}
-    mapDic = {"L":"R", "R":"L"}
-    if not nodes:
+    if nodes is None:
         nodes = pm.selected()
+
     pm.undoInfo(ock=1)
     try:
         nameSpace = False
         if nodes:
             nameSpace = getNamespace(nodes[0])
+
+        mirrorEntries = []
         for oSel in nodes:
-            nameParts = stripNamespace(oSel.name()).split("|")[-1]
-                        
-            if "_L" in nameParts or "_R" in nameParts:
-                if "_L" in nameParts:
-                    nameParts = nameParts.replace("_L", "_R")
-                else:
-                    nameParts = nameParts.replace("_R", "_L")
-                
-                if nameSpace:
-                    nameTarget = nameSpace +":"+ nameParts
-                else:
-                    nameTarget = nameParts
-                oTarget = getNode(nameTarget)
-                for a in axis:
-                    if not oSel.attr(a).isLocked():
-                        if oSel.attr(aDic[a]).get():
-                            inv = -1
-                        else:
-                            inv = 1
-                        if flip:
-                            flipVal = oTarget.attr(a).get()
+            mirrorEntries.extend(gatherMirrorData(nameSpace, oSel, flip))
 
-                        oTarget.attr(a).set(oSel.attr(a).get()*inv)
+        for dat in mirrorEntries:
+            applyMirror(nameSpace, dat)
 
-                        if flip:
-                            oSel.attr(a).set(flipVal*inv)
-                #custom attr
-                attrs = pm.listAttr(oSel, userDefined=True)
-                for at in attrs:
-                    tat = at
-                    if "_L" in tat:
-                        tat = tat.replace("_L", "_R")
-                    elif "_R" in tat:
-                        tat = tat.replace("_R", "_L")
-
-                    if flip:
-                        flipVal = oTarget.attr(tat).get()
-
-                    oTarget.attr(tat).set(oSel.attr(at).get())
-
-                    if flip:
-                        oSel.attr(at).set(flipVal)
-                            
-            else:
-                if not oSel.attr("tx").isLocked():
-                    oSel.attr("tx").set(oSel.attr("tx").get()*-1)
-                if not oSel.attr("ry").isLocked():
-                    oSel.attr("ry").set(oSel.attr("ry").get()*-1)
-                if not oSel.attr("rz").isLocked():
-                    oSel.attr("rz").set(oSel.attr("rz").get()*-1)
-
-
-
-    except:
+    except Exception as e:
         pm.displayWarning("Flip/Mirror pose fail")
-        pass
+        import traceback
+        traceback.print_exc()
+        print e
+
     finally:
         pm.undoInfo(cck=1)
+
+
+def applyMirror(nameSpace, mirrorEntry):
+    node = mirrorEntry["target"]
+    attr = mirrorEntry["attr"]
+    val = mirrorEntry["val"]
+
+    try:
+        if (
+            pm.attributeQuery(attr, node=node, shortName=True, exists=True) and
+            not node.attr(attr).isLocked()
+        ):
+            node.attr(attr).set(val)
+
+    except RuntimeError as e:
+        mgear.log("applyMirror failed: {0} {1}: {2}".format(node.name(), attr, e), mgear.sev_error)
+
+
+def gatherMirrorData(nameSpace, node, flip):
+    # type: (str, pm.datatypes.Transform, bool) -> List[dict[str]]
+
+    if isSideElement(node.name()):
+
+        nameParts = stripNamespace(node.name()).split("|")[-1]
+        nameParts = swapSideLabel(nameParts)
+        nameTarget = ":".join([nameSpace, nameParts])
+
+        oTarget = getNode(nameTarget)
+
+        return calculateMirrorData(node, oTarget, flip=flip)
+
+    else:
+        '''
+        if not node.attr("tx").isLocked():
+            results.append({"target": node, "attr": "tx", "val": node.attr("tx").get() * -1})
+
+        if not node.attr("ry").isLocked():
+            results.append({"target": node, "attr": "ry", "val": node.attr("ry").get() * -1})
+
+        if not node.attr("rz").isLocked():
+            results.append({"target": node, "attr": "rz", "val": node.attr("rz").get() * -1})
+        '''
+        return calculateMirrorData(node, node, flip=False)
+
+
+def calculateMirrorData(srcNode, targetNode, flip=False):
+    # type: (str, pm.datatypes.Transform, bool) -> List[dict[str]]
+    """returns [{"target": node, "attr": at, "val": flipVal}]"""
+
+    results = []
+
+    # mirror attribute of source
+    for attrName in listAttrForMirror(srcNode):
+
+        # whether does attribute "invTx" exists when attrName is "tx"
+        invCheckName = getInvertCheckButtonAttrName(attrName)
+        if not pm.attributeQuery(invCheckName, node=srcNode, shortName=True, exists=True):
+
+            # if not exists, straight
+            inv = 1
+
+        else:
+            # if exists, check its value
+            invAttr = srcNode.attr(invCheckName)
+            if invAttr.get():
+                inv = -1
+            else:
+                inv = 1
+
+        # if attr name is side specified, record inverted attr name
+        if isSideElement(attrName):
+            invAttrName = swapSideLabel(attrName)
+        else:
+            invAttrName = attrName
+
+        # if flip enabled record self also
+        if flip:
+            flipVal = targetNode.attr(attrName).get()
+            results.append({"target": srcNode, "attr": invAttrName, "val": flipVal * inv})
+
+        results.append({"target": targetNode, "attr": invAttrName, "val": srcNode.attr(attrName).get() * inv})
+
+    return results
+
 
 def mirrorPoseOld(flip=False, nodes=False):
 
