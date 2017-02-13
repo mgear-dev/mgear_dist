@@ -30,10 +30,11 @@ Utilitie functions.
 ##########################################################
 # GLOBAL
 ##########################################################
-import os
+import os, sys
 from functools import wraps
 
 from maya import cmds
+import pymel.core as pm
 from maya import mel
 
 import mgear
@@ -56,7 +57,7 @@ def is_odd(num):
     return num % 2
 
 
-def gatherCustomModuleDirectories(envvarkey, defaultModulePath):
+def gatherCustomModuleDirectories(envvarkey, defaultModulePath, component=False):
     """
     returns component directory
 
@@ -89,16 +90,16 @@ def gatherCustomModuleDirectories(envvarkey, defaultModulePath):
 
         if not path or not os.path.exists(path):
             continue
-
+        if component:
         init_py_path = os.path.join(path, "__init__.py")
-        if not os.path.exists(init_py_path):
-            message = "= GEAR RIG SYSTEM ====== notify:"
-            message += "\n  __init__.py for custom component not found {}".format(init_py_path)
-            message += "\n\n check your module definition file or environment variable 'MGEAR_COMPONENTS_PATH'"
-            message += " or call your system administrator."
-            message += "\n"
-            mgear.log(message, mgear.sev_error)
-            continue
+            if not os.path.exists(init_py_path):
+                message = "= GEAR RIG SYSTEM ====== notify:"
+                message += "\n  __init__.py for custom component not found {}".format(init_py_path)
+                message += "\n\n check your module definition file or environment variable 'MGEAR_COMPONENTS_PATH'"
+                message += " or call your system administrator."
+                message += "\n"
+                mgear.log(message, mgear.sev_error)
+                continue
 
         modules = sorted(os.listdir(path))
         modules = [x for x in modules if os.path.isdir(os.path.join(path, x))]
@@ -112,7 +113,8 @@ def getModuleBasePath(directories, moduleName):
     # search component path
     for basepath, modules in directories.iteritems():
         if moduleName in modules:
-            moduleBasePath = os.path.basename(basepath)
+            # moduleBasePath = os.path.basename(basepath)
+            moduleBasePath = basepath
             break
     else:
         moduleBasePath = ""
@@ -140,10 +142,13 @@ def importFromStandardOrCustomDirectories(directories, defaultFormatter, customF
         module_name = defaultFormatter.format(moduleName)
         module = __import__(module_name, globals(), locals(), ["*"], -1)
 
+    #TODO: the custom path should be checked first
     except ImportError:
         moduleBasePath = getModuleBasePath(directories, moduleName)
-        module_name = customFormatter.format(moduleBasePath, moduleName)
-        module = __import__(module_name, globals(), locals(), ["*"], -1)
+        # module_name = customFormatter.format(moduleBasePath, moduleName)
+        sys.path.append(pm.dirmap(cd=moduleBasePath))
+        module = __import__(moduleName, globals(), locals(), ["*"], -1)
+        # module = __import__(module_name, globals(), locals(), ["*"], -1)
 
     return module
 
