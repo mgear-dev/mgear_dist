@@ -91,7 +91,7 @@ def gatherCustomModuleDirectories(envvarkey, defaultModulePath, component=False)
         if not path or not os.path.exists(path):
             continue
         if component:
-        init_py_path = os.path.join(path, "__init__.py")
+            init_py_path = os.path.join(path, "__init__.py")
             if not os.path.exists(init_py_path):
                 message = "= GEAR RIG SYSTEM ====== notify:"
                 message += "\n  __init__.py for custom component not found {}".format(init_py_path)
