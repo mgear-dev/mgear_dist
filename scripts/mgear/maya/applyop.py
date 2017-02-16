@@ -539,7 +539,7 @@ def gear_rollsplinekine_op(out, controlers=[], u=.5, subdiv=10):
 
     return node
 
-def gear_squashstretch2_op(out, sclref=None, length=5, axis="x"):
+def gear_squashstretch2_op(out, sclref=None, length=5, axis="x", scaleComp=None):
     """
     Apply a sn_squashstretch2_op operator
 
@@ -548,6 +548,7 @@ def gear_squashstretch2_op(out, sclref=None, length=5, axis="x"):
         sclref (dagNode): Global scaling reference object.
         length (float): Rest Length of the S&S.
         axis (str): 'x' for scale all except x axis...
+        scaleComp (list of float): extra scale compensation to avoid double scale in some situations.
     
     Returns:
         pyNode: The newly created operator.
@@ -563,12 +564,13 @@ def gear_squashstretch2_op(out, sclref=None, length=5, axis="x"):
     pm.setAttr(node+".axis", "xyz".index(axis))
 
     # we use a mult div node to force the evaluation in a composed attribute in osx
-    # TODO: review the solver to find if is better way to do this.
-    # pm.connectAttr(node+".output", out+".scale") # This is the original line
+    # Also helper connection for scale compensation (scaleComp)
     mult_node = pm.createNode("multiplyDivide")
     pm.connectAttr(node+".output", mult_node+".input1")
     for axis in "XYZ":
         pm.connectAttr(mult_node+".output%s"%axis, out+".scale%s"%axis)
+    if scaleComp:
+        pm.connectAttr(scaleComp, mult_node+".input2")
 
     if sclref is not None:
         dm_node = pm.createNode("decomposeMatrix")

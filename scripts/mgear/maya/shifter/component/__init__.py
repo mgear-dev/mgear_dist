@@ -707,7 +707,7 @@ class MainComponent(object):
             refArray (string): List of driver objects divided by ",". 
             cns_obj (dagNode): The driven object.
             upVAttr (bool): Set if the ref Array is for IK or Up vector
-            init_ref (list of dagNode):
+            init_ref (list of dagNode): Set the initial default ref connections
             skipTranslate (bool): if True will skip the translation connections
         """
 
