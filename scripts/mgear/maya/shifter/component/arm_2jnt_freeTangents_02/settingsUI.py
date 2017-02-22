@@ -1,35 +1,18 @@
-# MGEAR is under the terms of the MIT License
+# -*- coding: utf-8 -*-
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
+# Form implementation generated from reading ui file 'C:/datawork/repo/mgear_GitHub/scripts/mgear/maya/shifter/component/arm_2jnt_freeTangents_02/settingsUI.ui'
+#
+# Created: Wed Feb 22 09:41:11 2017
+#      by: pyside2-uic  running on PySide2 2.0.0~alpha0
+#
+# WARNING! All changes made in this file will be lost!
 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-import mgear.maya.pyqt as gqt
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+from PySide2 import QtCore, QtGui, QtWidgets
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(255, 478)
+        Form.resize(255, 697)
         self.ikRefArray_groupBox = QtWidgets.QGroupBox(Form)
         self.ikRefArray_groupBox.setGeometry(QtCore.QRect(0, 130, 249, 169))
         self.ikRefArray_groupBox.setObjectName("ikRefArray_groupBox")
@@ -69,32 +52,32 @@ class Ui_Form(object):
         self.groupBox.setGeometry(QtCore.QRect(0, 1, 249, 131))
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
-        self.widget = QtWidgets.QWidget(self.groupBox)
-        self.widget.setGeometry(QtCore.QRect(11, 10, 231, 111))
-        self.widget.setObjectName("widget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
+        self.layoutWidget1 = QtWidgets.QWidget(self.groupBox)
+        self.layoutWidget1.setGeometry(QtCore.QRect(11, 10, 231, 111))
+        self.layoutWidget1.setObjectName("layoutWidget1")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.formLayout = QtWidgets.QFormLayout()
         self.formLayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setObjectName("formLayout")
-        self.ikfk_label = QtWidgets.QLabel(self.widget)
+        self.ikfk_label = QtWidgets.QLabel(self.layoutWidget1)
         self.ikfk_label.setObjectName("ikfk_label")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.ikfk_label)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.ikfk_slider = QtWidgets.QSlider(self.widget)
+        self.ikfk_slider = QtWidgets.QSlider(self.layoutWidget1)
         self.ikfk_slider.setMinimumSize(QtCore.QSize(0, 15))
         self.ikfk_slider.setMaximum(100)
         self.ikfk_slider.setOrientation(QtCore.Qt.Horizontal)
         self.ikfk_slider.setObjectName("ikfk_slider")
         self.horizontalLayout_3.addWidget(self.ikfk_slider)
-        self.ikfk_spinBox = QtWidgets.QSpinBox(self.widget)
+        self.ikfk_spinBox = QtWidgets.QSpinBox(self.layoutWidget1)
         self.ikfk_spinBox.setMaximum(100)
         self.ikfk_spinBox.setObjectName("ikfk_spinBox")
         self.horizontalLayout_3.addWidget(self.ikfk_spinBox)
         self.formLayout.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_3)
-        self.maxStretch_label = QtWidgets.QLabel(self.widget)
+        self.maxStretch_label = QtWidgets.QLabel(self.layoutWidget1)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -102,7 +85,7 @@ class Ui_Form(object):
         self.maxStretch_label.setSizePolicy(sizePolicy)
         self.maxStretch_label.setObjectName("maxStretch_label")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.maxStretch_label)
-        self.maxStretch_spinBox = QtWidgets.QDoubleSpinBox(self.widget)
+        self.maxStretch_spinBox = QtWidgets.QDoubleSpinBox(self.layoutWidget1)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -115,15 +98,15 @@ class Ui_Form(object):
         self.verticalLayout.addLayout(self.formLayout)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.divisions_label = QtWidgets.QLabel(self.widget)
+        self.divisions_label = QtWidgets.QLabel(self.layoutWidget1)
         self.divisions_label.setObjectName("divisions_label")
         self.horizontalLayout.addWidget(self.divisions_label)
-        self.div0_spinBox = QtWidgets.QSpinBox(self.widget)
+        self.div0_spinBox = QtWidgets.QSpinBox(self.layoutWidget1)
         self.div0_spinBox.setMinimum(1)
         self.div0_spinBox.setProperty("value", 2)
         self.div0_spinBox.setObjectName("div0_spinBox")
         self.horizontalLayout.addWidget(self.div0_spinBox)
-        self.div1_spinBox = QtWidgets.QSpinBox(self.widget)
+        self.div1_spinBox = QtWidgets.QSpinBox(self.layoutWidget1)
         self.div1_spinBox.setMinimum(1)
         self.div1_spinBox.setProperty("value", 2)
         self.div1_spinBox.setObjectName("div1_spinBox")
@@ -131,7 +114,7 @@ class Ui_Form(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.squashStretchProfile_pushButton = QtWidgets.QPushButton(self.widget)
+        self.squashStretchProfile_pushButton = QtWidgets.QPushButton(self.layoutWidget1)
         self.squashStretchProfile_pushButton.setObjectName("squashStretchProfile_pushButton")
         self.horizontalLayout_2.addWidget(self.squashStretchProfile_pushButton)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
@@ -170,6 +153,41 @@ class Ui_Form(object):
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.upvRefArray_verticalLayout_2.addItem(spacerItem1)
         self.upvRefArray_horizontalLayout.addLayout(self.upvRefArray_verticalLayout_2)
+        self.pinRefArray_groupBox = QtWidgets.QGroupBox(Form)
+        self.pinRefArray_groupBox.setGeometry(QtCore.QRect(1, 477, 249, 169))
+        self.pinRefArray_groupBox.setObjectName("pinRefArray_groupBox")
+        self.layoutWidget_3 = QtWidgets.QWidget(self.pinRefArray_groupBox)
+        self.layoutWidget_3.setGeometry(QtCore.QRect(10, 20, 231, 141))
+        self.layoutWidget_3.setObjectName("layoutWidget_3")
+        self.pinRefArray_horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget_3)
+        self.pinRefArray_horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.pinRefArray_horizontalLayout.setObjectName("pinRefArray_horizontalLayout")
+        self.pinRefArray_verticalLayout = QtWidgets.QVBoxLayout()
+        self.pinRefArray_verticalLayout.setObjectName("pinRefArray_verticalLayout")
+        self.pinRefArray_listWidget = QtWidgets.QListWidget(self.layoutWidget_3)
+        self.pinRefArray_listWidget.setDragDropOverwriteMode(True)
+        self.pinRefArray_listWidget.setDragDropMode(QtWidgets.QAbstractItemView.InternalMove)
+        self.pinRefArray_listWidget.setDefaultDropAction(QtCore.Qt.MoveAction)
+        self.pinRefArray_listWidget.setAlternatingRowColors(True)
+        self.pinRefArray_listWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.pinRefArray_listWidget.setSelectionRectVisible(False)
+        self.pinRefArray_listWidget.setObjectName("pinRefArray_listWidget")
+        self.pinRefArray_verticalLayout.addWidget(self.pinRefArray_listWidget)
+        self.pinRefArray_copyRef_pushButton = QtWidgets.QPushButton(self.layoutWidget_3)
+        self.pinRefArray_copyRef_pushButton.setObjectName("pinRefArray_copyRef_pushButton")
+        self.pinRefArray_verticalLayout.addWidget(self.pinRefArray_copyRef_pushButton)
+        self.pinRefArray_horizontalLayout.addLayout(self.pinRefArray_verticalLayout)
+        self.pinRefArray_verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.pinRefArray_verticalLayout_2.setObjectName("pinRefArray_verticalLayout_2")
+        self.pinRefArrayAdd_pushButton = QtWidgets.QPushButton(self.layoutWidget_3)
+        self.pinRefArrayAdd_pushButton.setObjectName("pinRefArrayAdd_pushButton")
+        self.pinRefArray_verticalLayout_2.addWidget(self.pinRefArrayAdd_pushButton)
+        self.pinRefArrayRemove_pushButton = QtWidgets.QPushButton(self.layoutWidget_3)
+        self.pinRefArrayRemove_pushButton.setObjectName("pinRefArrayRemove_pushButton")
+        self.pinRefArray_verticalLayout_2.addWidget(self.pinRefArrayRemove_pushButton)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.pinRefArray_verticalLayout_2.addItem(spacerItem2)
+        self.pinRefArray_horizontalLayout.addLayout(self.pinRefArray_verticalLayout_2)
 
         self.retranslateUi(Form)
         QtCore.QObject.connect(self.ikfk_slider, QtCore.SIGNAL("sliderMoved(int)"), self.ikfk_spinBox.setValue)
@@ -177,17 +195,21 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(gqt.fakeTranslate("Form", "Form", None, -1))
-        self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
-        self.ikRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from UpV Ref", None, -1))
-        self.ikRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
-        self.ikRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
-        self.ikfk_label.setText(gqt.fakeTranslate("Form", "IK/FK Blend", None, -1))
-        self.maxStretch_label.setText(gqt.fakeTranslate("Form", "Max Stretch", None, -1))
-        self.divisions_label.setText(gqt.fakeTranslate("Form", "Divisions", None, -1))
-        self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
-        self.upvRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "UpV Reference Array", None, -1))
-        self.upvRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from IK Ref", None, -1))
-        self.upvRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
-        self.upvRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
+        Form.setWindowTitle(QtWidgets.QApplication.translate("Form", "Form", None, -1))
+        self.ikRefArray_groupBox.setTitle(QtWidgets.QApplication.translate("Form", "IK Reference Array", None, -1))
+        self.ikRefArray_copyRef_pushButton.setText(QtWidgets.QApplication.translate("Form", "Copy from UpV Ref", None, -1))
+        self.ikRefArrayAdd_pushButton.setText(QtWidgets.QApplication.translate("Form", "<<", None, -1))
+        self.ikRefArrayRemove_pushButton.setText(QtWidgets.QApplication.translate("Form", ">>", None, -1))
+        self.ikfk_label.setText(QtWidgets.QApplication.translate("Form", "IK/FK Blend", None, -1))
+        self.maxStretch_label.setText(QtWidgets.QApplication.translate("Form", "Max Stretch", None, -1))
+        self.divisions_label.setText(QtWidgets.QApplication.translate("Form", "Divisions", None, -1))
+        self.squashStretchProfile_pushButton.setText(QtWidgets.QApplication.translate("Form", "Squash and Stretch Profile", None, -1))
+        self.upvRefArray_groupBox.setTitle(QtWidgets.QApplication.translate("Form", "UpV Reference Array", None, -1))
+        self.upvRefArray_copyRef_pushButton.setText(QtWidgets.QApplication.translate("Form", "Copy from IK Ref", None, -1))
+        self.upvRefArrayAdd_pushButton.setText(QtWidgets.QApplication.translate("Form", "<<", None, -1))
+        self.upvRefArrayRemove_pushButton.setText(QtWidgets.QApplication.translate("Form", ">>", None, -1))
+        self.pinRefArray_groupBox.setTitle(QtWidgets.QApplication.translate("Form", "Pin Elbow Reference Array", None, -1))
+        self.pinRefArray_copyRef_pushButton.setText(QtWidgets.QApplication.translate("Form", "Copy from IK Ref", None, -1))
+        self.pinRefArrayAdd_pushButton.setText(QtWidgets.QApplication.translate("Form", "<<", None, -1))
+        self.pinRefArrayRemove_pushButton.setText(QtWidgets.QApplication.translate("Form", ">>", None, -1))
 

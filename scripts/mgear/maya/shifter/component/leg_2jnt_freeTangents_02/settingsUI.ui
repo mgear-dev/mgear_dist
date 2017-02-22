@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>255</width>
-    <height>478</height>
+    <height>799</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -312,6 +312,95 @@
        </item>
        <item>
         <spacer name="upvRefArray_verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="pinRefArray_groupBox">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>477</y>
+     <width>249</width>
+     <height>169</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Pin Elbow Reference Array</string>
+   </property>
+   <widget class="QWidget" name="layoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>231</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="pinRefArray_horizontalLayout">
+     <item>
+      <layout class="QVBoxLayout" name="pinRefArray_verticalLayout">
+       <item>
+        <widget class="QListWidget" name="pinRefArray_listWidget">
+         <property name="dragDropOverwriteMode">
+          <bool>true</bool>
+         </property>
+         <property name="dragDropMode">
+          <enum>QAbstractItemView::InternalMove</enum>
+         </property>
+         <property name="defaultDropAction">
+          <enum>Qt::MoveAction</enum>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+         <property name="selectionRectVisible">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pinRefArray_copyRef_pushButton">
+         <property name="text">
+          <string>Copy from IK Ref</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="pinRefArray_verticalLayout_2">
+       <item>
+        <widget class="QPushButton" name="pinRefArrayAdd_pushButton">
+         <property name="text">
+          <string>&lt;&lt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pinRefArrayRemove_pushButton">
+         <property name="text">
+          <string>&gt;&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="pinRefArray_verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

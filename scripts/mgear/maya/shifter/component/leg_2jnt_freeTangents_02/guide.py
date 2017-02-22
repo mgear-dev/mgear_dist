@@ -99,6 +99,7 @@ class Guide(ComponentGuide):
         self.pBlend       = self.addParam("blend", "double", 1, 0, 1)
         self.pIkRefArray  = self.addParam("ikrefarray", "string", "")
         self.pUpvRefArray = self.addParam("upvrefarray", "string", "")
+        self.pUpvRefArray = self.addParam("pinrefarray", "string", "")
         self.pMaxStretch  = self.addParam("maxstretch", "double", 1.5 , 1, None)
 
         # Divisions
@@ -146,7 +147,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.setObjectName(self.toolName)
         self.setWindowFlags(QtCore.Qt.Window)
         self.setWindowTitle(TYPE)
-        self.resize(280, 580)
+        self.resize(280, 780)
 
     def create_componentControls(self):
         return
@@ -172,6 +173,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         upvRefArrayItems = self.root.attr("upvrefarray").get().split(",")
         for item in upvRefArrayItems:
             self.settingsTab.upvRefArray_listWidget.addItem(item)
+        pinRefArrayItems = self.root.attr("pinrefarray").get().split(",")
+        for item in pinRefArrayItems:
+            self.settingsTab.pinRefArray_listWidget.addItem(item)
 
 
     def create_componentLayout(self):
@@ -203,12 +207,19 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.upvRefArray_copyRef_pushButton.clicked.connect(partial(self.copyFromListWidget, self.settingsTab.ikRefArray_listWidget, self.settingsTab.upvRefArray_listWidget, "upvrefarray"))
         self.settingsTab.upvRefArray_listWidget.installEventFilter(self)
 
+        self.settingsTab.pinRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.pinRefArray_listWidget, "pinrefarray"))
+        self.settingsTab.pinRefArrayRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.settingsTab.pinRefArray_listWidget, "pinrefarray"))
+        self.settingsTab.pinRefArray_copyRef_pushButton.clicked.connect(partial(self.copyFromListWidget, self.settingsTab.ikRefArray_listWidget, self.settingsTab.pinRefArray_listWidget, "pinrefarray"))
+        self.settingsTab.pinRefArray_listWidget.installEventFilter(self)
+
     def eventFilter(self, sender, event):
         if event.type() == QtCore.QEvent.ChildRemoved:
             if sender == self.settingsTab.ikRefArray_listWidget:
                 self.updateListAttr(sender, "ikrefarray")
             elif sender == self.settingsTab.upvRefArray_listWidget:
                 self.updateListAttr(sender, "upvrefarray")
+            elif sender == self.settingsTab.pinRefArray_listWidget:
+                self.updateListAttr(sender, "pinrefarray")
 
 
 

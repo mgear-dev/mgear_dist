@@ -62,6 +62,10 @@ class Component(MainComponent):
         self.length1 = vec.getDistance(self.guide.apos[1], self.guide.apos[2])
         self.length2 = vec.getDistance(self.guide.apos[2], self.guide.apos[3])
 
+        # 1 bone chain for upv ref
+        self.armChainUpvRef= pri.add2DChain(self.root, self.getName("armUpvRef%s_jnt"), [self.guide.apos[0],self.guide.apos[2]], self.normal, False, self.WIP)
+        self.armChainUpvRef[1].setAttr("jointOrientZ", self.armChainUpvRef[1].getAttr("jointOrientZ")*-1)
+
         # FK Controlers -----------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root, self.getName("fk0_npo"), t)
@@ -161,7 +165,12 @@ class Component(MainComponent):
         self.eff_loc  = pri.addTransformFromPos(self.root, self.getName("eff_loc"), self.guide.apos[2])
 
         # Mid Controler ------------------------------------
-        self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+        # self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+        # att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
+
+        t = tra.getTransform(self.ctrn_loc)
+        self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
         att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
 
         #Roll join ref---------------------------------
@@ -266,6 +275,7 @@ class Component(MainComponent):
         self.elbowTangent_npo = pri.addTransform(self.mid_ctl, self.getName("elbowTangent_npo"), t)
         self.elbowTangent_ctl = self.addCtl(self.elbowTangent_npo, "elbowTangent_ctl", t, self.color_fk, "circle", w=self.size*.15, ro=dt.Vector(0,0,1.570796))
 
+       
     def addAttributes(self):
 
         # Anim -------------------------------------------
@@ -287,12 +297,24 @@ class Component(MainComponent):
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
 
+        # if self.settings["upvrefarray"]:
+        #     ref_names = self.settings["upvrefarray"].split(",")
+        #     if len(ref_names) > 1:
+        #         self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, self.settings["upvrefarray"].split(","))
+        # else:
+        #     self.upvref_att = None
+
         if self.settings["upvrefarray"]:
             ref_names = self.settings["upvrefarray"].split(",")
+            ref_names = ["Auto"] + ref_names
             if len(ref_names) > 1:
-                self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, self.settings["upvrefarray"].split(","))
-        else:
-            self.upvref_att = None
+                self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
+
+        if self.settings["pinrefarray"]:
+            ref_names = self.settings["pinrefarray" ].split(",")
+            ref_names = ["Auto"] + ref_names
+            if len(ref_names) > 1:
+                self.pin_att = self.addAnimEnumParam("elbowref", "Elbow Ref", 0, ref_names)
 
         # Setup ------------------------------------------
         # Eval Fcurve
@@ -306,6 +328,11 @@ class Component(MainComponent):
         self.absolute_att = self.addSetupParam("absolute", "Absolute", "bool", False)
 
     def addOperators(self):
+
+        # 1 bone chain Upv ref =====================================================================================
+        self.ikHandleUpvRef = pri.addIkHandle(self.root, self.getName("ikHandleLegChainUpvRef"), self.armChainUpvRef, "ikSCsolver")
+        pm.pointConstraint(self.ik_ctl, self.ikHandleUpvRef)
+        pm.parentConstraint( self.armChainUpvRef[0],  self.upv_cns, mo=True)
 
         # Visibilities -------------------------------------
         # fk
@@ -336,6 +363,22 @@ class Component(MainComponent):
         # IK Solver -----------------------------------------
         out = [self.bone0, self.bone1, self.ctrn_loc, self.eff_loc]
         node = aop.gear_ikfk2bone_op(out, self.root, self.ik_ref, self.upv_ctl, self.fk_ctl[0], self.fk_ctl[1], self.fk_ref, self.length0, self.length1, self.negate)
+
+        # pm.connectAttr(self.blend_att, node+".blend")
+        # pm.connectAttr(self.roll_att, node+".roll")
+        # pm.connectAttr(self.scale_att, node+".scaleA")
+        # pm.connectAttr(self.scale_att, node+".scaleB")
+        # pm.connectAttr(self.maxstretch_att, node+".maxstretch")
+        # pm.connectAttr(self.slide_att, node+".slide")
+        # pm.connectAttr(self.softness_att, node+".softness")
+        # pm.connectAttr(self.reverse_att, node+".reverse")
+
+        #scale: this fix the scalin popping issue
+        intM_node = aop.gear_intmatrix_op(self.fk2_ctl.attr("worldMatrix"), self.ik_ctl.attr("worldMatrix"),  node.attr("blend"))
+        mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
+        dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
+        dm_node.attr("outputScale") >> self.eff_loc.attr("scale") 
+        
 
         pm.connectAttr(self.blend_att, node+".blend")
         pm.connectAttr(self.roll_att, node+".roll")
@@ -541,4 +584,7 @@ class Component(MainComponent):
     ## standard connection definition.
     # @param self
     def connect_standard(self):
-        self.connect_standardWithIkRef()     
+        self.connect_standardWithIkRef()
+        if self.settings["pinrefarray"]:
+            self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
+    
