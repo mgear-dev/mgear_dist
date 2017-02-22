@@ -244,22 +244,22 @@ class Component(MainComponent):
         self.jnt_pos.append([self.end_ref, 'end'])
 
         # Tangent controls
-        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .3333)
+        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .5)
         self.uplegTangentA_loc = pri.addTransform(self.root_ctl, self.getName("uplegTangentA_loc"), self.fk_ctl[0].getMatrix(worldSpace=True))
         self.uplegTangentA_npo = pri.addTransform(self.uplegTangentA_loc, self.getName("uplegTangentA_npo"), t)
         self.uplegTangentA_ctl = self.addCtl(self.uplegTangentA_npo, "uplegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
 
-        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .6666)
+        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .9)
         self.uplegTangentB_npo = pri.addTransform(self.tws1A_loc, self.getName("uplegTangentB_npo"), t)
-        self.uplegTangentB_ctl = self.addCtl(self.uplegTangentB_npo, "uplegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.uplegTangentB_ctl = self.addCtl(self.uplegTangentB_npo, "uplegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
 
         tC = self.tws1B_npo.getMatrix(worldSpace=True)
         tC = tra.setMatrixPosition(tC, self.guide.apos[2])
-        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .3333)
+        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .1)
         self.lowlegTangentA_npo = pri.addTransform(self.tws1B_loc, self.getName("lowlegTangentA_npo"), t)
-        self.lowlegTangentA_ctl = self.addCtl(self.lowlegTangentA_npo, "lowlegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.lowlegTangentA_ctl = self.addCtl(self.lowlegTangentA_npo, "lowlegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
 
-        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .6666)
+        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .5)
         self.lowlegTangentB_loc = pri.addTransform(self.root, self.getName("lowlegTangentB_loc"), tC)
         self.lowlegTangentB_npo = pri.addTransform(self.lowlegTangentB_loc, self.getName("lowlegTangentB_npo"), t)
         self.lowlegTangentB_ctl = self.addCtl(self.lowlegTangentB_npo, "lowlegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
@@ -559,7 +559,7 @@ class Component(MainComponent):
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["knee"] = self.settings["div0"] + 2
-        self.jointRelatives["ankle"] = len(self.div_cns)-1
+        self.jointRelatives["ankle"] = len(self.div_cns)
         self.jointRelatives["eff"] = len(self.div_cns)
 
     ## standard connection definition.
