@@ -335,8 +335,9 @@ class Rig(object):
             dagNode: The Control.
 
         """
-        if name in self.guide.controllers.keys():
-            ctl_ref = self.guide.controllers[name]
+        bufferName =  name+"_controlBuffer"
+        if bufferName in self.guide.controllers.keys():
+            ctl_ref = self.guide.controllers[bufferName]
             ctl = pri.addTransform(parent, name, m)
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
