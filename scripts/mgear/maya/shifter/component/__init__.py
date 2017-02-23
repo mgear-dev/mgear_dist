@@ -330,8 +330,9 @@ class MainComponent(object):
 
         """
         fullName = self.getName(name)
-        if fullName in self.rig.guide.controllers.keys():
-            ctl_ref = self.rig.guide.controllers[fullName]
+        bufferName =  fullName+"_controlBuffer"
+        if bufferName in self.rig.guide.controllers.keys():
+            ctl_ref = self.rig.guide.controllers[bufferName]
             ctl = pri.addTransform(parent, fullName, m)
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
