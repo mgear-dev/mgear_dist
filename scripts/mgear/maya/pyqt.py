@@ -31,6 +31,7 @@ pyQt/pySide widgets and helper functions for mGear
 #############################################
 # GLOBAL
 #############################################
+import os
 import pymel.core as pm
 import maya.cmds as cmds
 
@@ -39,6 +40,38 @@ from maya.app.general.mayaMixin import MayaQDockWidget
 from functools import partial
 import traceback
 import maya.OpenMayaUI as omui
+
+def _qt_import(binding, shi=False):
+    QtGui = None
+    QtCore = None
+    QtWidgets = None
+    wrapInstance = None
+
+    if binding == "PySide2":
+        from PySide2 import QtGui, QtCore, QtWidgets
+        import shiboken2 as shiboken
+        from shiboken2 import wrapInstance
+
+    elif binding == "PySide":
+        from PySide import QtGui, QtCore
+        import PySide.QtGui as QtWidgets
+        import shiboken
+        from shiboken import wrapInstance
+
+    elif binding == "PyQt4":
+        from PyQt4 import QtGui
+        from PyQt4 import QtCore
+        import PyQt4.QtGui as QtWidgets
+        from PyQt4.QtCore import QObject, pyqtSignal
+        from sip import wrapinstance as wrapInstance
+
+    else:
+        raise Exception("Unsupported python Qt binding '%s'" % binding)
+
+    if shi:
+        return QtGui, QtCore, QtWidgets, wrapInstance, shiboken
+    else:
+        return QtGui, QtCore, QtWidgets, wrapInstance
 
 ##  Master qt import function ##
 def qt_import(shi=False):
@@ -49,31 +82,20 @@ def qt_import(shi=False):
         multi: QtGui, QtCore, QtWidgets, wrapInstance
 
     """
-    QtGui = None
-    QtCore = None
-    QtWidgets = None
-    wrapInstance = None
+    lookup = ["PySide2", "PySide", "PyQt4"]
 
-    try:
-        from PySide import QtGui, QtCore
-        import PySide.QtGui as QtWidgets
-        import shiboken
-        from shiboken import wrapInstance
-    except ImportError:
-        from PySide2 import QtGui, QtCore, QtWidgets
-        import shiboken2 as shiboken
-        from shiboken2 import wrapInstance
-    except ImportError:
-        from PyQt4 import QtGui
-        from PyQt4 import QtCore
-        import PyQt4.QtGui as QtWidgets
-        from PyQt4.QtCore import QObject, pyqtSignal
-        from sip import wrapinstance as wrapInstance
+    preferredBinding = os.environ.get("MGEAR_PYTHON_QT_BINDING", None)
+    if preferredBinding is not None and preferredBinding in lookup:
+        lookup.remove(preferredBinding)
+        lookup.insert(0, preferredBinding)
 
-    if shi:
-        return QtGui, QtCore, QtWidgets, wrapInstance, shiboken
-    else:
-        return QtGui, QtCore, QtWidgets, wrapInstance
+    for binding in lookup:
+        try:
+            return _qt_import(binding, shi)
+        except:
+            pass
+
+    raise _qt_import("ThisBindingSurelyDoesNotExist", False)
 
 
 QtGui, QtCore, QtWidgets, wrapInstance = qt_import()
