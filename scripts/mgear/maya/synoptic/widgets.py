@@ -463,6 +463,8 @@ SELECTORS = {
     "SelectBtn_yellowBox":           [SelectBtn_yellow,    SelectBtn_Box],
     "SelectBtn_greenBox":            [SelectBtn_green,     SelectBtn_Box],
     "SelectBtn_darkGreenBox":        [SelectBtn_darkGreen, SelectBtn_Box],
+    "SelectBtn_blueBox":             [SelectBtn_RFk,       SelectBtn_Box],
+    "SelectBtn_redBox":              [SelectBtn_LFk,       SelectBtn_Box],
 
     "SelectBtn_RFkCircle":           [SelectBtn_RFk,       SelectBtn_Circle],
     "SelectBtn_RIkCircle":           [SelectBtn_RIk,       SelectBtn_Circle],

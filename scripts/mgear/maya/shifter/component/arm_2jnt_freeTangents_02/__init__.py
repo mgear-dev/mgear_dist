@@ -579,7 +579,7 @@ class Component(MainComponent):
         self.jointRelatives["root"] = 0
         self.jointRelatives["elbow"] = self.settings["div0"] + 2
         self.jointRelatives["wrist"] = len(self.div_cns)-2
-        self.jointRelatives["eff"] =len(self.div_cns)-1
+        self.jointRelatives["eff"] = -1
 
     ## standard connection definition.
     # @param self

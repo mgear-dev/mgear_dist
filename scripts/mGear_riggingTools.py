@@ -332,7 +332,7 @@ def createInterpolateTransform(*args):
 
 
 
-def addBlendedJoint(oSel=None, *args):
+def addBlendedJoint(oSel=None, compScale=True, *args):
 
     if not oSel:
         oSel = pm.selected()
@@ -364,6 +364,8 @@ def addBlendedJoint(oSel=None, *args):
             
             jnt.attr("overrideEnabled").set(1)
             jnt.attr("overrideColor").set(17)
+            
+            jnt.attr("segmentScaleCompensate").set(compScale)
             
             try:
                 defSet = pm.PyNode("rig_deformers_grp")
