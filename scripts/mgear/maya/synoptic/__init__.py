@@ -201,6 +201,14 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.tabs.clear()
         # defPath = os.environ.get("MGEAR_SYNOPTIC_PATH", None)
 
+        # safety clean of  synoticTab script jobs
+        # this is neded when we switch models witout close synopticwindow.
+        oldJobs = pm.scriptJob(listJobs=True)
+        for oldjob in oldJobs:
+            if "SynopticTab" in str(oldjob):
+                id = oldjob.split(" ")[0][:-1]
+                pm.scriptJob(kill=int(id), force=True)
+
         currentModelName = self.model_list.currentText()
         currentModels = pm.ls(currentModelName)
         if not currentModels:
