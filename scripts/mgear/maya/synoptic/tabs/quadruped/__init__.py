@@ -45,7 +45,7 @@ class SynopticTab(MainSynopticTab, wui.Ui_biped_body):
 
     description = "biped body"
     name = "biped_body"
-    bgPath = os.path.join(os.path.dirname(__file__), "background.bmp")
+    # bgPath = os.path.join(os.path.dirname(__file__), "background.bmp")
 
     # ============================================
     # INIT
