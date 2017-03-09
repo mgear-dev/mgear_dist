@@ -119,7 +119,7 @@ def maya_main_window():
 
 
 
-def showDialog(dialog, *args):
+def showDialog(dialog, dInst=True, *args):
     """
     Show the defined dialog window
 
@@ -127,13 +127,13 @@ def showDialog(dialog, *args):
         dialog (QDialog): The window to show.
 
     """
-
-    try:
-        for c in maya_main_window().children():
-            if isinstance(c, dialog):
-                c.deleteLater()
-    except:
-        pass
+    if dInst:
+        try:
+            for c in maya_main_window().children():
+                if isinstance(c, dialog):
+                    c.deleteLater()
+        except:
+            pass
 
     # Create minimal dialog object
     windw = dialog(maya_main_window())

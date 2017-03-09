@@ -54,8 +54,8 @@ SYNOPTIC_DIRECTORIES = mgear.maya.utils.gatherCustomModuleDirectories(
 # OPEN
 ##################################################
 def open(*args):
-
-    gqt.showDialog(Synoptic)
+    # open the synoptic dialog, without clean old instances
+    gqt.showDialog(Synoptic, False)
 
 
 def importTab(tabName):
