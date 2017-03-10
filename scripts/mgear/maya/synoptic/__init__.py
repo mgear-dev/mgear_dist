@@ -94,7 +94,6 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
         # Initialise
         self.updateModelList()
-        self.updateTabs()
 
     def setupUi(self):
         # Widgets
