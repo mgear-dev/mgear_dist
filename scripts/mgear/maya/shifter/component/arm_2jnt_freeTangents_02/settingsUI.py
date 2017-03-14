@@ -1,13 +1,30 @@
-# -*- coding: utf-8 -*-
+# MGEAR is under the terms of the MIT License
 
-# Form implementation generated from reading ui file 'C:/datawork/repo/mgear_GitHub/scripts/mgear/maya/shifter/component/arm_2jnt_freeTangents_02/settingsUI.ui'
-#
-# Created: Wed Feb 22 09:41:11 2017
-#      by: pyside2-uic  running on PySide2 2.0.0~alpha0
-#
-# WARNING! All changes made in this file will be lost!
+# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
 
-from PySide2 import QtCore, QtGui, QtWidgets
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
+# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
+# Date:       2016 / 10 / 10
+import mgear.maya.pyqt as gqt
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -195,21 +212,21 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QtWidgets.QApplication.translate("Form", "Form", None, -1))
-        self.ikRefArray_groupBox.setTitle(QtWidgets.QApplication.translate("Form", "IK Reference Array", None, -1))
-        self.ikRefArray_copyRef_pushButton.setText(QtWidgets.QApplication.translate("Form", "Copy from UpV Ref", None, -1))
-        self.ikRefArrayAdd_pushButton.setText(QtWidgets.QApplication.translate("Form", "<<", None, -1))
-        self.ikRefArrayRemove_pushButton.setText(QtWidgets.QApplication.translate("Form", ">>", None, -1))
-        self.ikfk_label.setText(QtWidgets.QApplication.translate("Form", "IK/FK Blend", None, -1))
-        self.maxStretch_label.setText(QtWidgets.QApplication.translate("Form", "Max Stretch", None, -1))
-        self.divisions_label.setText(QtWidgets.QApplication.translate("Form", "Divisions", None, -1))
-        self.squashStretchProfile_pushButton.setText(QtWidgets.QApplication.translate("Form", "Squash and Stretch Profile", None, -1))
-        self.upvRefArray_groupBox.setTitle(QtWidgets.QApplication.translate("Form", "UpV Reference Array", None, -1))
-        self.upvRefArray_copyRef_pushButton.setText(QtWidgets.QApplication.translate("Form", "Copy from IK Ref", None, -1))
-        self.upvRefArrayAdd_pushButton.setText(QtWidgets.QApplication.translate("Form", "<<", None, -1))
-        self.upvRefArrayRemove_pushButton.setText(QtWidgets.QApplication.translate("Form", ">>", None, -1))
-        self.pinRefArray_groupBox.setTitle(QtWidgets.QApplication.translate("Form", "Pin Elbow Reference Array", None, -1))
-        self.pinRefArray_copyRef_pushButton.setText(QtWidgets.QApplication.translate("Form", "Copy from IK Ref", None, -1))
-        self.pinRefArrayAdd_pushButton.setText(QtWidgets.QApplication.translate("Form", "<<", None, -1))
-        self.pinRefArrayRemove_pushButton.setText(QtWidgets.QApplication.translate("Form", ">>", None, -1))
+        Form.setWindowTitle(gqt.fakeTranslate("Form", "Form", None, -1))
+        self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
+        self.ikRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from UpV Ref", None, -1))
+        self.ikRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
+        self.ikRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
+        self.ikfk_label.setText(gqt.fakeTranslate("Form", "IK/FK Blend", None, -1))
+        self.maxStretch_label.setText(gqt.fakeTranslate("Form", "Max Stretch", None, -1))
+        self.divisions_label.setText(gqt.fakeTranslate("Form", "Divisions", None, -1))
+        self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
+        self.upvRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "UpV Reference Array", None, -1))
+        self.upvRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from IK Ref", None, -1))
+        self.upvRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
+        self.upvRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
+        self.pinRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "Pin Elbow Reference Array", None, -1))
+        self.pinRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from IK Ref", None, -1))
+        self.pinRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
+        self.pinRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
 
