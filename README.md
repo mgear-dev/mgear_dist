@@ -11,3 +11,5 @@ MGEAR is under the terms of the MIT License
 For the official release, with compiled solvers and example data please download mGear from: https://gumroad.com/l/mgear
 
 Official Documentation: https://miquelcampos.github.io/mgear/
+
+mGear Goggle group: https://groups.google.com/forum/#!forum/mgearusergroup
