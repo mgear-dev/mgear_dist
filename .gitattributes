@@ -1,0 +1,79 @@
+*              text=auto
+
+# C/C++ source files
+*.cpp          text eol=lf
+*.cxx          text eol=lf
+*.cc           text eol=lf
+*.c            text eol=lf
+*.hpp          text eol=lf
+*.hxx          text eol=lf
+*.hh           text eol=lf
+*.h            text eol=lf
+
+# Arnold files
+*.mtd          text eol=lf
+*.ass          text eol=lf
+
+# Structured files
+*.xml          text eol=lf
+*.json         text eol=lf
+*.yml          text eol=lf
+
+# C# source files
+*.cs           text eol=lf
+
+# Python source files
+*.py           text eol=lf
+
+# Ruby source files
+*.rb           text eol=lf
+
+# Maya MEL source files
+*.mel          text eol=lf
+
+# Environment files
+*.env          text eol=lf
+*.template     text eol=lf
+
+# Shader source files
+*.cg           text eol=lf
+*.cginc        text eol=lf
+*.shader       text eol=lf
+*.glsl         text eol=lf
+*.hlsl         text eol=lf
+*.sl           text eol=lf
+*.osl          text eol=lf
+*.frag         text eol=lf
+*.vert         text eol=lf
+
+# Markdown files
+*.md           text eol=lf
+
+# Unity metadata files
+*.meta         text eol=lf
+
+# Shell scripts
+*.bat          text eol=crlf
+*.sh           text eol=lf
+
+# Visual Studio files
+*.sln          text eol=crlf
+*.suo          text eol=crlf
+*.vcxproj*     text eol=crlf
+*.csproj       text eol=crlf
+
+# Build system files
+SConstruct     text eol=lf
+SConscript     text eol=lf
+Makefile       text eol=lf
+CMakeLists.txt text eol=lf
+
+# Source Version Control
+.git*          text eol=lf
+.hg*           text eol=lf
+
+# Other known text files
+*.desc         text eol=lf
+*.txt          text eol=lf
+LICENSE        text eol=lf
+
