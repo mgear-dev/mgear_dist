@@ -78,6 +78,7 @@ class MainSynopticTab(QtWidgets.QDialog):
         klass.setBackground()
         klass.connectSignals()
         klass.connectMaya()
+        self._buttonGeometry = {}  # for cachinig
 
         # This is necessary for not to be zombie job on close.
         # Qt does not actually destroy the object by just pressing
@@ -140,6 +141,8 @@ class MainSynopticTab(QtWidgets.QDialog):
             mes = "error has occur in scriptJob SelectionChanged\n{0}".format(mes)
             mes = "{0}\n{1}".format(mes, e)
             mgear.log(mes, mgear.sev_error)
+            pm.scriptJob(kill=self.selJob)
+            self.close()
 
     def __selectChanged(self, *args):
 
@@ -148,10 +151,10 @@ class MainSynopticTab(QtWidgets.QDialog):
 
         oModel = syn_uti.getModel(self)
         if not oModel:
-            mes = "model not found for synoptic"
+            mes = "model not found for synoptic {}".format(self.name)
             mgear.log(mes, mgear.sev_info)
 
-            self.close()
+            # self.close()
 
             syn_widget = syn_uti.getSynopticWidget(self)
             syn_widget.updateModelList()
@@ -174,6 +177,21 @@ class MainSynopticTab(QtWidgets.QDialog):
                 else:
                     selB.paintSelected(False)
 
+    def _getButtonAbsoluteGeometry(self, button):
+        # type: (mwi.SelectButton) -> QtCore.QSize
+
+        if button in self._buttonGeometry.keys():
+            return self._buttonGeometry[button]
+
+        geo = button.geometry()
+        point = button.mapTo(self, geo.topLeft())
+        point -= geo.topLeft()
+        geo = QtCore.QRect(point, geo.size())
+
+        self._buttonGeometry[button] = geo
+
+        return geo
+
     def mousePressEvent_(self, event):
         # type: (QtGui.QMouseEvent) -> None
 
@@ -194,7 +212,8 @@ class MainSynopticTab(QtWidgets.QDialog):
         selected = []
         rect = QtCore.QRect(self.origin, event.pos()).normalized()
         for child in self.findChildren(mwi.SelectButton):
-            if rect.intersects(child.geometry()):
+            # if rect.intersects(child.geometry()):
+            if rect.intersects(self._getButtonAbsoluteGeometry(child)):
                 selected.append(child)
 
         if selected:
