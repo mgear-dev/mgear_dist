@@ -1,6 +1,7 @@
-import excons
+import os
 import sys
 import glob
+import excons
 import excons.tools.maya as maya
 
 
@@ -51,7 +52,20 @@ maya.SetupMscver()
 
 env = excons.MakeBaseEnv()
 
-excons.DeclareTargets(env, targets)
+td = excons.DeclareTargets(env, targets)
+
+outdir = excons.OutputBaseDirectory()
+td["python"] = filter(lambda x: os.path.splitext(x)[1] != ".mel", glob.glob(outdir + "/scripts/*"))
+td["scripts"] = glob.glob(outdir + "/scripts/*.mel")
+
+pluginsdir = "/plug-ins/%s/%s" % (maya.Version(nice=True), excons.EcosystemPlatform())
+
+ecodirs = {"mgear_solvers": pluginsdir,
+           "cvwrap": pluginsdir,
+           "python": "/python",
+           "scripts": "/scripts"}
+
+excons.EcosystemDist(env, "mgear.env", ecodirs, version="2.0.11", targets=td)
 
 Default(["mgear_solvers", "cvwrap"])
 
