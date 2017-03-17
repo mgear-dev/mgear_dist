@@ -14,6 +14,9 @@
 *.mtd          text eol=lf
 *.ass          text eol=lf
 
+# QT Designer files
+*.ui 	       text eol=lf
+
 # Structured files
 *.xml          text eol=lf
 *.json         text eol=lf
