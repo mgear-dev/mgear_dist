@@ -50,6 +50,12 @@ class Component(MainComponent):
 
     def addObjects(self):
 
+        self.WIP = self.options["mode"]
+
+        # Auto bend with position controls  ------------------------------------
+        self.autoBendChain= pri.add2DChain(self.root, self.getName("autoBend%s_jnt"), [self.guide.apos[0],self.guide.apos[1]], self.guide.blades["blade"].z*-1, False, self.WIP)
+
+
         # Ik Controlers ------------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.guide.blades["blade"].z * -1, "yx", self.negate)
         self.ik0_npo = pri.addTransform(self.root, self.getName("ik0_npo"), t)
@@ -58,8 +64,11 @@ class Component(MainComponent):
         att.setRotOrder(self.ik0_ctl, "ZXY")
 
         t = tra.setMatrixPosition(t, self.guide.apos[1])
-        self.ik1_npo = pri.addTransform(self.root, self.getName("ik1_npo"), t)
-        self.ik1_ctl = self.addCtl(self.ik1_npo, "ik1_ctl", t, self.color_ik, "compas", w=self.size)
+        self.autoBend_npo = pri.addTransform(self.root, self.getName("spinePosition_npo"), t)
+        self.autoBend_ctl = self.addCtl(self.autoBend_npo, "spinePosition_ctl", t, self.color_ik, "square", w=self.size)
+        self.ik1_npo = pri.addTransform(self.autoBendChain[0], self.getName("ik1_npo"), t)
+        self.ik1autoRot_lvl = pri.addTransform(self.ik1_npo, self.getName("ik1autoRot_lvl"), t)
+        self.ik1_ctl = self.addCtl(self.ik1autoRot_lvl, "ik1_ctl", t, self.color_ik, "compas", w=self.size)
         att.setKeyableAttributes(self.ik1_ctl)
         att.setRotOrder(self.ik1_ctl, "ZXY")
 
@@ -154,6 +163,9 @@ class Component(MainComponent):
         # Volume
         self.volume_att = self.addAnimParam("volume", "Volume", "double", 1, 0, 1)
 
+        self.sideBend_att = self.addAnimParam("sideBend", "Side Bend", "double", .5, 0, 2)
+        self.frontBend_att = self.addAnimParam("frontBend", "Front Bend", "double", .5, 0, 2)
+
         # Setup ------------------------------------------
         # Eval Fcurve
         self.st_value = fcu.getFCurveValues(self.settings["st_profile"], self.settings["division"])
@@ -163,6 +175,13 @@ class Component(MainComponent):
         self.sq_att = [self.addSetupParam("squash_%s"%i, "Squash %s"%i, "double", self.sq_value[i], 0, 1) for i in range(self.settings["division"])]
 
     def addOperators(self):
+
+        # Auto bend ----------------------------
+        mul_node = nod.createMulNode([self.autoBendChain[0].ry, self.autoBendChain[0].rz ], [self.sideBend_att, self.frontBend_att])
+        mul_node.outputX >> self.ik1autoRot_lvl.rz
+        mul_node.outputY >> self.ik1autoRot_lvl.rx
+
+        self.ikHandleAutoBend = pri.addIkHandle(self.autoBend_ctl, self.getName("ikHandleAutoBend"), self.autoBendChain, "ikSCsolver")
 
         # Tangent position ---------------------------------
         # common part

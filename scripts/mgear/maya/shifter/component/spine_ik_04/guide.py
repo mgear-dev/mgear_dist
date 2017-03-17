@@ -47,7 +47,7 @@ AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
 VERSION = [1, 0, 0]
-TYPE = "spine_ik_01"
+TYPE = "spine_ik_04"
 NAME = "spine"
 DESCRIPTION = """an ik spine with an over top layer of fk controllers
 that follow the ik position.
