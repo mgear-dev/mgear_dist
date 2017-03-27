@@ -119,7 +119,7 @@ def createDistNode(objA, objB, output=None):
     pm.connectAttr(dm_nodeB+".outputTranslate", node+".point2")
 
     if output:
-        pm.connectAttr(node+".distance", destination)
+        pm.connectAttr(node+".distance", output)
 
     return node
 
