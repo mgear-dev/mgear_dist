@@ -60,8 +60,7 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, axis="yx", negate=self.negate)
 
         self.ctl_npo = pri.addTransform(self.root, self.getName("ctl_npo"), t)
-        self.ctl = self.addCtl(self.ctl_npo, "base_ctl", t, self.color_ik, "square", w=1.0)
-        # att.setKeyableAttributes(self.ctl, ["tx", "ty", "tz", "rx", "ry", "rz",] )
+        self.ctl = self.addCtl(self.ctl_npo, "base_ctl", t, self.color_ik, "crossarrow", w=1.0)
 
         self.ref_base = pri.addTransform(self.ctl, self.getName("ref_base"), t)
 
@@ -88,8 +87,6 @@ class Component(MainComponent):
     # @param self
     def addAttributes(self):
 
-        # self.highSquash_att = self.addAnimParam("highSquash", "highSquash", "double", .5, -5, 5)
-        # self.wideSquash_att = self.addAnimParam("wideSquash", "wideSquash", "double", -.5, -5, 5)
         # Ref
         if self.settings["ikrefarray"]:
             ref_names = self.settings["ikrefarray"].split(",")
