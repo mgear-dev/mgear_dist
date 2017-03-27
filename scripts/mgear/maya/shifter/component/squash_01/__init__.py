@@ -115,9 +115,8 @@ class Component(MainComponent):
 
         d = vec.getDistance(self.guide.apos[0], self.guide.apos[1])
         dist_node = nod.createDistNode(self.squash_ctl, self.ctl)
-        rootWorld_node = nod.createDecomposeMatrixNode(self.root.attr("worldMatrix"))
-        div_node = nod.createDivNode(dist_node+".distance", rootWorld_node+".outputScaleX")
-        div_node = nod.createDivNode(div_node+".outputX", self.ctl.scaleX)
+        rootWorld_node = nod.createDecomposeMatrixNode(self.ctl.attr("worldMatrix"))
+        div_node = nod.createDivNode(dist_node+".distance", rootWorld_node+".outputScaleY")
         div_node = nod.createDivNode(div_node+".outputX", d)
         rev_node = nod.createReverseNode(div_node+".outputX")
         add_node = pm.createNode("plusMinusAverage")
