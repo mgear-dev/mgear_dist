@@ -58,18 +58,18 @@ class Component(MainComponent):
 
         ctlSize = vec.getDistance(self.guide.apos[0], self.guide.apos[1])/3.0
 
-        t = self.guide.tra["root"]
-        t = tra.setMatrixScale(t)
+        t_root = self.guide.tra["root"]
+        t_root = tra.setMatrixScale(t_root)
 
-        self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
+        self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t_root)
 
-        t = tra.setMatrixPosition(t, self.guide.pos["top"])
+        t = tra.setMatrixPosition(t_root, self.guide.pos["top"])
 
         self.top_npo = pri.addTransform(self.ik_cns, self.getName("top_npo"), t)
         self.top_ctl = self.addCtl(self.top_npo, "top_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0))
         att.setKeyableAttributes(self.top_ctl, ["ty"] )
 
-        t = tra.setMatrixPosition(t, self.guide.pos["bottom"])
+        t = tra.setMatrixPosition(t_root, self.guide.pos["bottom"])
         self.bottom_npo = pri.addTransform(self.top_npo, self.getName("bottom_npo"), t)
         self.bottom_npo.rz.set(180)
         self.bottom_ctl = self.addCtl(self.bottom_npo, "bottom_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0))
@@ -77,14 +77,14 @@ class Component(MainComponent):
         att.setKeyableAttributes(self.bottom_ctl, ["ty"] )
         self.bottom_pivot = pri.addTransform(self.bottom_npo, self.getName("bottom_pivot"), tra.getTransform(self.top_ctl))
 
-        t = tra.setMatrixPosition(t, self.guide.pos["ext"])
+        t = tra.setMatrixPosition(t_root, self.guide.pos["ext"])
         self.ext_npo = pri.addTransform(self.bottom_pivot, self.getName("ext_npo"), t)
         self.ext_npo.rz.set(-90)
         self.ext_ctl = self.addCtl(self.ext_npo, "ext_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0))
         self.ext_ctl.rz.set(0)
         att.setKeyableAttributes(self.ext_ctl, ["ty"] )
 
-        t = tra.setMatrixPosition(t, self.guide.pos["int"])
+        t = tra.setMatrixPosition(t_root, self.guide.pos["int"])
         self.int_npo = pri.addTransform(self.ext_npo, self.getName("int_npo"), t)
         self.int_npo.rz.set(180)
         self.int_ctl = self.addCtl(self.int_npo, "int_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0))
@@ -129,14 +129,15 @@ class Component(MainComponent):
 
         for pair in pairs:
             d = vec.getDistance(self.guide.apos[pair[2]], self.guide.apos[pair[3]])
+            print d
             sum_node = nod.createPlusMinusAverage1D([d, pair[0].ty])
             mul_node = nod.createMulNode(pair[0].ty, self.volume_att)
             sum2_node = nod.createPlusMinusAverage1D([d, mul_node.outputX])
             mul2_node = nod.createDivNode([sum2_node.output1D, sum_node.output1D, sum2_node.output1D], [d, d, d])
             sum3D_node = pm.createNode("plusMinusAverage")
             sum3D_node.attr("operation").set(2)
-            sum3D_node.input3D[0].input3Dx.set(d)
-            sum3D_node.input3D[0].input3Dz.set(d)
+            sum3D_node.input3D[0].input3Dx.set(2)
+            sum3D_node.input3D[0].input3Dz.set(2)
             mul2_node.outputX >> sum3D_node.input3D[1].input3Dx
             mul2_node.outputZ >> sum3D_node.input3D[1].input3Dz
             sum3D_node.output3D.output3Dx >> pair[1].sx
