@@ -67,28 +67,27 @@ COMPONENT_PATH = os.path.join(os.path.dirname(__file__), "component")
 TEMPLATE_PATH = os.path.join(COMPONENT_PATH, "templates")
 SYNOPTIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, "synoptic","tabs"))
 
-SHIFTER_COMPONENT_ENV_KEY = "MGEAR_COMPONENT_PATH"
+SHIFTER_COMPONENT_ENV_KEY = "MGEAR_SHIFTER_COMPONENT_PATH"
 
-COMPONENTS_DIRECTORIES = mgear.maya.utils.gatherCustomModuleDirectories(
-    SHIFTER_COMPONENT_ENV_KEY,
-    os.path.join(os.path.dirname(__file__), "component"))
+def getComponentDirectories():
+    return mgear.maya.utils.gatherCustomModuleDirectories(
+        SHIFTER_COMPONENT_ENV_KEY,
+        os.path.join(os.path.dirname(__file__), "component"))
 
 
 def importComponentGuide(comp_type):
-    import mgear.maya.shifter as shifter
-    dirs = shifter.COMPONENTS_DIRECTORIES
+    dirs = getComponentDirectories()
     defFmt = "mgear.maya.shifter.component.{}.guide"
-    customFmt = "{0}.{1}.guide"
+    customFmt = "{}.guide"
 
     module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, comp_type)
     return module
 
 
 def importComponent(comp_type):
-    import mgear.maya.shifter as shifter
-    dirs = shifter.COMPONENTS_DIRECTORIES
+    dirs = getComponentDirectories()
     defFmt = "mgear.maya.shifter.component.{}"
-    customFmt = "{0}.{1}"
+    customFmt = "{}"
 
     module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, comp_type)
     return module
@@ -164,7 +163,7 @@ class Rig(object):
             customSteps = self.options[attr].split(",")
             for step in customSteps:
                 helperSlots.runStep(step)
-    
+
     def preCustomStep(self):
         self.customStep("doPreCustomStep", "preCustomStep")
 
@@ -172,7 +171,6 @@ class Rig(object):
     def postCustomStep(self):
         self.customStep("doPostCustomStep", "postCustomStep")
 
-        
 
     def initialHierarchy(self):
         """
@@ -287,7 +285,6 @@ class Rig(object):
         masterSet = pm.sets(n=self.model.name()+"_sets_grp", em=True)
         pm.connectAttr(masterSet.message, self.model.rigGroups[groupIdx])
         groupIdx += 1
-        
 
         # Creating all groups
         pm.select(cl=True)
@@ -297,8 +294,6 @@ class Rig(object):
             pm.connectAttr(s.message, self.model.rigGroups[groupIdx])
             groupIdx += 1
             masterSet.add(s)
-
-
 
 
         # Bind pose ---------------------------------------
