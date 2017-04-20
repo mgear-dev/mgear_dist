@@ -84,6 +84,7 @@ def gatherCustomModuleDirectories(envvarkey, defaultModulePath, component=False)
     modules = sorted(os.listdir(defaultModulePath))
     results[defaultModulePath] = modules
 
+
     # from environment variables
     envvarval = os.environ.get(envvarkey, "")
     for path in envvarval.split(os.pathsep):
@@ -105,6 +106,7 @@ def gatherCustomModuleDirectories(envvarkey, defaultModulePath, component=False)
         modules = [x for x in modules if os.path.isdir(os.path.join(path, x))]
 
         results[path] = modules
+
 
     return results
 
@@ -142,13 +144,11 @@ def importFromStandardOrCustomDirectories(directories, defaultFormatter, customF
         module_name = defaultFormatter.format(moduleName)
         module = __import__(module_name, globals(), locals(), ["*"], -1)
 
-    #TODO: the custom path should be checked first
     except ImportError:
         moduleBasePath = getModuleBasePath(directories, moduleName)
-        # module_name = customFormatter.format(moduleBasePath, moduleName)
+        module_name = customFormatter.format(moduleName)
         sys.path.append(pm.dirmap(cd=moduleBasePath))
-        module = __import__(moduleName, globals(), locals(), ["*"], -1)
-        # module = __import__(module_name, globals(), locals(), ["*"], -1)
+        module = __import__(module_name, globals(), locals(), ["*"], -1)
 
     return module
 
