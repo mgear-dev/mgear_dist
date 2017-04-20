@@ -38,6 +38,7 @@ import subprocess
 from functools import partial
 import datetime
 import getpass
+import traceback
 
 
 # pymel
@@ -812,12 +813,12 @@ class helperSlots(object):
     def updateControlShape(self, sourceWidget, ctlList, targetAttr, *args):
         curIndx = sourceWidget.currentIndex()
         self.root.attr(targetAttr).set(ctlList[curIndx])
-    
+
     def setProfile(self):
         pm.select(self.root,  r=True)
         pm.runtime.GraphEditor()
 
-    
+
     def close_settings(self):
         self.close()
         gqt.deleteInstances(self, MayaQDockWidget)
@@ -839,7 +840,7 @@ class helperSlots(object):
 
     @classmethod
     def runStep(self, stepPath):
-        with pm.UndoChunk():       
+        with pm.UndoChunk():
             try:
                 pm.displayInfo("Executing custom step: %s"%stepPath)
                 execfile(stepPath)
@@ -848,17 +849,16 @@ class helperSlots(object):
                 template = "An exception of type {0} occured. Arguments:\n{1!r}"
                 message = template.format(type(ex).__name__, ex.args)
                 pm.displayError( message)
-                cont = pm.confirmBox("Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message, "Continue", "stop")
+                # traceback.print_exc()
+                pm.displayError(traceback.format_exc())
+                cont = pm.confirmBox("Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Undo this Step")
                 if not cont:
                     pm.undo()
 
     def runManualStep(self, widgetList):
-        selItems = widgetList.selectedItems()        
-        for item in selItems:        
+        selItems = widgetList.selectedItems()
+        for item in selItems:
             self.runStep( item.text())
-
-    
-
 
 
 ##################
