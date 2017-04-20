@@ -336,6 +336,7 @@ class MainComponent(object):
             ctl = pri.addTransform(parent, fullName, m)
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
+                pm.rename(shape, fullName+"Shape")
             ico.setcolor(ctl, color)
         else:
             ctl = ico.create(parent, fullName, m, color, icon, **kwargs)
