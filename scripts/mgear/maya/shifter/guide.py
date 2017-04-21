@@ -39,6 +39,7 @@ from functools import partial
 import datetime
 import getpass
 import traceback
+import imp
 
 
 # pymel
@@ -839,26 +840,34 @@ class helperSlots(object):
             pm.displayError("The step can't be find or does't exists")
 
     @classmethod
-    def runStep(self, stepPath):
+    def runStep(self, stepPath, storedDic):
         with pm.UndoChunk():
             try:
                 pm.displayInfo("Executing custom step: %s"%stepPath)
-                execfile(stepPath)
-                pm.displayInfo("Custom step: %s. Succeed!!"%stepPath)
+                fileName = os.path.split(stepPath)[1].split(".")[0]
+                customStep = imp.load_source(fileName, stepPath)
+                if hasattr(customStep, "CustomShifterStep"):
+                    cs = customStep.CustomShifterStep()
+                    cs.run(storedDic)
+                    storedDic[cs.name] = cs
+                    pm.displayInfo("Custom Shifter Step Class: %s. Succeed!!"%stepPath)
+                else:
+                    pm.displayInfo("Custom Step simple script: %s. Succeed!!"%stepPath)
+
             except Exception as ex:
                 template = "An exception of type {0} occured. Arguments:\n{1!r}"
                 message = template.format(type(ex).__name__, ex.args)
                 pm.displayError( message)
-                # traceback.print_exc()
                 pm.displayError(traceback.format_exc())
                 cont = pm.confirmBox("Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Undo this Step")
                 if not cont:
                     pm.undo()
 
+
     def runManualStep(self, widgetList):
         selItems = widgetList.selectedItems()
         for item in selItems:
-            self.runStep( item.text())
+            self.runStep( item.text(), storedDic={})
 
 
 ##################
