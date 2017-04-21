@@ -220,7 +220,7 @@ class MainComponent(object):
         """
         return
 
-    def addJoint(self, obj, name, newActiveJnt=None, UniScale=True):
+    def addJoint(self, obj, name, newActiveJnt=None, UniScale=True, segComp=0):
         """
         Add joint as child of the active joint or under driver object.
 
@@ -257,7 +257,7 @@ class MainComponent(object):
                 pm.connectAttr(dm_node+".outputScale", jnt+".s")
 
             # Segment scale compensate Off to avoid issues with the global scale
-            jnt.setAttr("segmentScaleCompensate", 0)
+            jnt.setAttr("segmentScaleCompensate", segComp)
 
             jnt.setAttr("jointOrient", 0, 0, 0)
 
