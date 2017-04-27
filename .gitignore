@@ -45,4 +45,5 @@ excons.cache
 /debug/
 /eco/
 /mgear.env.tmp
+/mgear.config
 

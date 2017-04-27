@@ -35,7 +35,7 @@ mGear init module.
 import os
 import sys, string, exceptions
 
-## Debug mode for the logger
+# Debug mode for the logger
 logDebug = False
 
 # Severity for logged messages
@@ -47,7 +47,7 @@ sev_verbose = 16
 sev_comment = 32
 
 # gear version
-VERSION = [2,0,5]
+VERSION = @MGEAR_VERSION@
 
 
 ##########################################################
