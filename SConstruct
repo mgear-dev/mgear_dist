@@ -80,3 +80,5 @@ ecodirs = {"mgear_solvers": pluginsdir,
            "scripts": "/scripts"}
 
 excons.EcosystemDist(env, "mgear.env", ecodirs, version=versionstr, targets=td)
+
+Default(["mgear"])
