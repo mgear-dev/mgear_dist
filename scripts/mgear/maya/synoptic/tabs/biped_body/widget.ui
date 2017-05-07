@@ -23,7 +23,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>740</y>
+     <y>777</y>
      <width>31</width>
      <height>31</height>
     </rect>
@@ -460,7 +460,7 @@
    <property name="geometry">
     <rect>
      <x>43</x>
-     <y>740</y>
+     <y>777</y>
      <width>31</width>
      <height>31</height>
     </rect>
@@ -897,7 +897,7 @@
    <property name="geometry">
     <rect>
      <x>43</x>
-     <y>707</y>
+     <y>744</y>
      <width>31</width>
      <height>31</height>
     </rect>
@@ -1337,7 +1337,7 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>673</y>
+     <y>710</y>
      <width>96</width>
      <height>31</height>
     </rect>
@@ -1765,7 +1765,7 @@
    <property name="geometry">
     <rect>
      <x>76</x>
-     <y>740</y>
+     <y>777</y>
      <width>31</width>
      <height>31</height>
     </rect>
@@ -2202,7 +2202,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>674</y>
+     <y>711</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -2642,7 +2642,7 @@
    <property name="geometry">
     <rect>
      <x>76</x>
-     <y>707</y>
+     <y>744</y>
      <width>31</width>
      <height>31</height>
     </rect>
@@ -3079,7 +3079,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>707</y>
+     <y>744</y>
      <width>31</width>
      <height>31</height>
     </rect>
@@ -3516,7 +3516,7 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>706</y>
+     <y>743</y>
      <width>96</width>
      <height>31</height>
     </rect>
@@ -4223,7 +4223,6 @@
    <property name="object" stdset="0">
     <string>finger_L1_fk1_ctl</string>
    </property>
-   <zorder>w_finger_L1_fk0_ctl</zorder>
   </widget>
   <widget class="SelectBtn_LFkBox" name="w_finger_L1_fk0_ctl" native="true">
    <property name="geometry">
@@ -5205,7 +5204,7 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>674</y>
+     <y>711</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -5645,7 +5644,7 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>707</y>
+     <y>744</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -6085,7 +6084,7 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>740</y>
+     <y>777</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -6525,7 +6524,7 @@
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>740</y>
+     <y>777</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -7029,7 +7028,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>620</y>
+     <y>657</y>
      <width>291</width>
      <height>51</height>
     </rect>
@@ -7179,7 +7178,7 @@
    <property name="geometry">
     <rect>
      <x>22</x>
-     <y>555</y>
+     <y>592</y>
      <width>96</width>
      <height>31</height>
     </rect>
@@ -7628,7 +7627,7 @@
    <property name="geometry">
     <rect>
      <x>22</x>
-     <y>523</y>
+     <y>560</y>
      <width>96</width>
      <height>31</height>
     </rect>
@@ -8077,7 +8076,7 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>555</y>
+     <y>592</y>
      <width>96</width>
      <height>31</height>
     </rect>
@@ -8526,7 +8525,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>593</y>
+     <y>630</y>
      <width>291</width>
      <height>24</height>
     </rect>
@@ -8628,7 +8627,7 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>523</y>
+     <y>560</y>
      <width>96</width>
      <height>31</height>
     </rect>
@@ -9072,6 +9071,70 @@
    <property name="upv" stdset="0">
     <string>arm_L0_upv_ctl</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>530</y>
+     <width>291</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMinimumSize</enum>
+    </property>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <item>
+       <widget class="toggleCombo" name="comboBox_8">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="Object" stdset="0">
+         <string>spineUI_C0_ctl</string>
+        </property>
+        <property name="Attr" stdset="0">
+         <string>neck_C0_headref</string>
+        </property>
+        <property name="ik_ctl" stdset="0">
+         <string>neck_C0_head_ctl</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_8">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>head</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
  </widget>
  <customwidgets>
