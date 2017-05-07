@@ -62,7 +62,7 @@ def importTab(tabName):
     import mgear.maya.synoptic as syn
     dirs = syn.SYNOPTIC_DIRECTORIES
     defFmt = "mgear.maya.synoptic.tabs.{}"
-    customFmt = "{0}.{1}"
+    customFmt = "{0}"
 
     module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, tabName)
     return module
