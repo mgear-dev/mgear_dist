@@ -111,8 +111,18 @@ def createCTL(type = "square", child=False, *args):
 
 
 def addJnt(obj=False, parent=False, noReplace=False, *args):
+
     """
+
     Create one joint for each selected object.
+
+    Args:
+        obj:
+        parent:
+        noReplace:
+        *args:
+
+    Returns:
 
     """
     if not obj:
@@ -259,6 +269,20 @@ def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
                 pm.connectAttr(source + ".rotate", target + ".rotate")
     else:
         pm.displayWarning("Please at less select 2 objects. Source + target/s")
+
+def connectUseDefinedChannels(source, targets):
+    """
+    Connects the user defined channels between 2 objects with the same channels. Usually a copy of the same object.
+    """
+    udc = source.listAttr(ud=True)
+    if not isinstance(targets, list):
+        targets = [targets]
+    for c in udc:
+        for t in targets:
+            try:
+                pm.connectAttr(c, t.attr(c.name().split(".")[-1]))
+            except:
+                pm.displayWarning("%s don't have contrapart channel on %s"%(c, t))
 
 def replaceShape(*args):
     """

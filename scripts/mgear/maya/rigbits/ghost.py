@@ -53,6 +53,7 @@ def createGhostCtl(ctl, parent=None):
         pm.parent(newCtl, oTra)
 
     rigbits.connectLocalTransform(newCtl, ctl)
+    rigbits.connectUseDefinedChannels(newCtl, ctl)
 
     return newCtl
 
@@ -74,3 +75,4 @@ def createDoritoGhostCtl(ctl, parent=None):
     pm.parent(doritoParent, oTra)
 
     rigbits.connectLocalTransform(ghostBaseParent, doritoParent)
+    rigbits.connectUseDefinedChannels(ghostBaseParent, doritoParent)

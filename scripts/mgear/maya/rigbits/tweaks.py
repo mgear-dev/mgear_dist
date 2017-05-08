@@ -50,24 +50,25 @@ def doritosMagic(mesh, joint, jointBase):
         if pm.objExists('static_jnt') != True:
             static_jnt = pri.addJoint(parent, "static_jnt", m=dt.Matrix(), vis=True)
         static_jnt = pm.PyNode("static_jnt")
-        
+
         #apply initial skincluster
         skinCluster = pm.skinCluster(static_jnt, mesh, tsb=True, nw=2, n='%s_skinCluster'%mesh.name())
-        
+
     pm.skinCluster(skinCluster, e=True,  ai=joint, lw=True, wt=0)
     cn = joint.listConnections(p=True, type="skinCluster")
     for x in cn:
         if x.type()=="matrix":
-            pm.connectAttr(jointBase + ".worldInverseMatrix[0]", skinCluster + ".bindPreMatrix["+str(x.index())+"]")
+            # We force to avoid errors in case the joint is already connected
+            pm.connectAttr(jointBase + ".worldInverseMatrix[0]", skinCluster + ".bindPreMatrix["+str(x.index())+"]", f=True)
 
 
 def createJntTweak(mesh, parentJnt, ctlParent):
-        
+
     if not isinstance(mesh, list):
         mesh = [mesh]
 
     name = "_".join(parentJnt.name().split("_")[:3])
-    
+
     # create joints
     jointBase = pri.addJoint(jnt, name +"_tweak_jnt_lvl", parentJnt.getMatrix(worldSpace=True))
     resetJntLocalSRT(jointBase)
@@ -91,28 +92,28 @@ def createJntTweak(mesh, parentJnt, ctlParent):
         pm.connectAttr(iconBase + t, jointBase + t)
         pm.connectAttr(icon + t, joint + t)
 
-    
+
     #magic of doritos connection
     for m in mesh:
         doritosMagic(m, joint, jointBase)
 
 
-def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None): 
+def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
 
     blendShape = bsp.getBlendShape(mesh)
 
-    
+
     inputMesh = blendShape.listConnections(sh=True, t="shape", d=False)[0]
 
     oRivet = rvt.rivet()
     base = oRivet.create(inputMesh, edgePair[0], edgePair[1], parent)
-    
+
 
     name = name + "_tweak"
     pm.rename(base, name)
-    
+
     #connection ctlParent
-    
+
 
     #Joints NPO
     npo = pm.PyNode(pm.createNode("transform", n=name+"_npo", p=ctlParent, ss=True))
@@ -152,23 +153,23 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
     for t in [".translate", ".scale", ".rotate"]:
         pm.connectAttr(icon + t, joint + t)
 
-    
+
     #magic of doritos connection
     doritosMagic(mesh, joint)
-    
-    # reset axis and inver behaviour     
+
+    # reset axis and inver behaviour
     for axis in "XYZ":
         pm.setAttr(jointBase+".jointOrient"+axis, 0)
         pm.setAttr(npo+".translate"+axis, 0)
         pm.setAttr(jointBase+".translate"+axis, 0)
-        
+
     p = icon.getParent().getParent()
     pp = p.getParent()
     pm.parent(p, w=True)
     for axis in "xyz":
         p.attr("r"+axis).set(0)
     pm.parent(p, pp)
-    
+
 
 
 
@@ -176,22 +177,21 @@ def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlPare
 
     for i, pair in enumerate(edgeIndexPairList):
         createTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent)
-        
+
 
 
 def createRivetTweakLayer(layerMesh, bst, edgeList, tweakName, parent=None, ctlParent=None):
-    
+
     #Apply blendshape from blendshapes layer mesh
     bsp.connectWithBlendshape(layerMesh, bst)
-    
+
     #create static joint
     if pm.objExists('static_jnt') != True:
         static_jnt = pri.addJoint(parent, "static_jnt", m=dt.Matrix(), vis=True)
     static_jnt = pm.PyNode("static_jnt")
-    
+
     #apply initial skincluster
     skinCluster = pm.skinCluster(static_jnt, layerMesh, tsb=True, nw=2, n='%s_skinCluster'%layerMesh.name())
-    
-    #create doritos    
+
+    #create doritos
     createTweakFromList(layerMesh, edgeList, tweakName, parent, ctlParent)
-    
