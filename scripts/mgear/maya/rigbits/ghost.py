@@ -30,6 +30,19 @@ import mgear.maya.rigbits as rigbits
 
 
 def createGhostCtl(ctl, parent=None):
+    """
+    Create a duplicate of the control and rename the original with _ghost. Later connect the local transforms and the
+    Channels.
+    This is useful to connect local rig controls with the final rig control.
+
+    Args:
+        ctl (dagNode): Original Control to duplicate
+        parent (dagNode): Parent for the new created control
+
+    Returns:
+       pyNode: The new created control
+
+    """
     if  isinstance(ctl, basestring):
         ctl = pm.PyNode(ctl)
     if parent:
@@ -59,6 +72,16 @@ def createGhostCtl(ctl, parent=None):
 
 
 def createDoritoGhostCtl(ctl, parent=None):
+    """
+    Create a duplicate of the dorito/tweak and rename the original with _ghost. Later connect the local transforms and the
+    Channels.
+    This is useful to connect local rig controls with the final rig control.
+
+    Args:
+        ctl (dagNode): Original Control to duplicate
+        parent (dagNode): Parent for the new created control
+
+    """
     if  isinstance(ctl, basestring):
         ctl = pm.PyNode(ctl)
     if parent:
