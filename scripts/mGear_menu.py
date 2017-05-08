@@ -116,9 +116,9 @@ def CreateMenu():
 
     pm.menuItem(subMenu=True, tearOff=True, label='Connect local SRT')
     pm.menuItem(label="connect SRT", command=partial(rigbits.connectLocalTransform, 1, 1, 1))
-    pm.menuItem(label="connect T", command=partial(rigbits.connectLocalTransform, 0, 0, 1))
-    pm.menuItem(label="connect R", command=partial(rigbits.connectLocalTransform, 0, 1, 0))
-    pm.menuItem(label="connect S", command=partial(rigbits.connectLocalTransform, 1, 0, 0))
+    pm.menuItem(label="connect T", command=partial(rigbits.connectLocalTransform, None, 0, 0, 1))
+    pm.menuItem(label="connect R", command=partial(rigbits.connectLocalTransform, None, 0, 1, 0))
+    pm.menuItem(label="connect S", command=partial(rigbits.connectLocalTransform, None, 1, 0, 0))
     pm.setParent(riggingM, menu=True)
     pm.menuItem( divider=True )
     pm.menuItem(label="Spring", command=partial(mGear_postSpring.spring_UI))

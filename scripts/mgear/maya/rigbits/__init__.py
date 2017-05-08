@@ -238,7 +238,7 @@ def alignToPointsLoop(points=None, loc=None, name=None, *args):
     loc.setTransformation(trans)
 
 
-def connectLocalTransform(s=True, r=True, t=True, objects=None, *args):
+def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
     """
     Connect scale, rotatio and translation.
     """
