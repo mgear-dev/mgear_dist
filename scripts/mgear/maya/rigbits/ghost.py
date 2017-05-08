@@ -1,3 +1,6 @@
+# MGEAR is under the terms of the MIT License
+
+# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -48,14 +51,12 @@ def createGhostCtl(ctl, parent=None):
         oTra = pm.createNode("transform", n= newCtl.name() + "_npo", p=parent, ss=True)
         oTra.setTransformation(newCtl.getMatrix())
         pm.parent(newCtl, oTra)
-   
-    rigbits.connectLocalTransforms(newCtl, ctl)
-    
 
+    rigbits.connectLocalTransforms(newCtl, ctl)
 
     return newCtl
-    
-    
+
+
 def createDoritoGhostCtl(ctl, parent=None):
     if  isinstance(ctl, basestring):
         ctl = pm.PyNode(ctl)
@@ -71,5 +72,5 @@ def createDoritoGhostCtl(ctl, parent=None):
     oTra = pm.createNode("transform", n= doritoParent.name() + "_npo", p=doritoParent.getParent(), ss=True)
     oTra.setTransformation(doritoParent.getMatrix())
     pm.parent(doritoParent, oTra)
-    
+
     rigbits.connectLocalTransforms(ghostBaseParent, doritoParent)

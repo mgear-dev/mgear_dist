@@ -1,3 +1,6 @@
+# MGEAR is under the terms of the MIT License
+
+# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -45,10 +48,9 @@ def getBlendShape(obj):
 
 
 def connectWithBlendshape(mesh, bst):
-    
+
     if isinstance(mesh, basestring):
             mesh = pm.PyNode(mesh)
-            
     if isinstance(bst, basestring):
             bst = pm.PyNode(bst)
 
