@@ -52,7 +52,7 @@ def createGhostCtl(ctl, parent=None):
         oTra.setTransformation(newCtl.getMatrix())
         pm.parent(newCtl, oTra)
 
-    rigbits.connectLocalTransforms(newCtl, ctl)
+    rigbits.connectLocalTransform(newCtl, ctl)
 
     return newCtl
 
@@ -73,4 +73,4 @@ def createDoritoGhostCtl(ctl, parent=None):
     oTra.setTransformation(doritoParent.getMatrix())
     pm.parent(doritoParent, oTra)
 
-    rigbits.connectLocalTransforms(ghostBaseParent, doritoParent)
+    rigbits.connectLocalTransform(ghostBaseParent, doritoParent)
