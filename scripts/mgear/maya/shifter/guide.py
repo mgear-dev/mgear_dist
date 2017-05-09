@@ -70,6 +70,8 @@ GUIDE_DOCK_NAME = "Guide_Components"
 
 TYPE = "mgear_guide_root"
 
+MGEAR_SHIFTER_CUSTOMSTEP_KEY = "MGEAR_SHIFTER_CUSTOMSTEP_PATH"
+
 ##########################################################
 # GUIDE
 ##########################################################
@@ -827,14 +829,17 @@ class helperSlots(object):
     def editFile(self, widgetList):
         try:
             filepath = widgetList.selectedItems()[0].text().split("|")[-1][1:]
-            print filepath
+            if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                editPath = os.path.join( os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "") , filepath)
+            else:
+                editPath = filepath
             if filepath:
                 if sys.platform.startswith('darwin'):
-                    subprocess.call(('open', filepath))
+                    subprocess.call(('open', editPath))
                 elif os.name == 'nt':
-                    os.startfile(filepath)
+                    os.startfile(editPath)
                 elif os.name == 'posix':
-                    subprocess.call(('xdg-open', filepath))
+                    subprocess.call(('xdg-open', editPath))
             else:
                 pm.displayWarning("Please select one item from the list")
         except:
@@ -846,7 +851,11 @@ class helperSlots(object):
             try:
                 pm.displayInfo("Executing custom step: %s"%stepPath)
                 fileName = os.path.split(stepPath)[1].split(".")[0]
-                customStep = imp.load_source(fileName, stepPath)
+                if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                    runPath = os.path.join( os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "") , stepPath)
+                else:
+                    runPath = stepPath
+                customStep = imp.load_source(fileName, runPath)
                 if hasattr(customStep, "CustomShifterStep"):
                     cs = customStep.CustomShifterStep()
                     cs.run(customStepDic)
@@ -1045,7 +1054,6 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
                 self.guideSettingsTab.available_listWidget.addItem(tab)
 
     def skinLoad(self, *args):
-            # startDir = pm.workspace(q=True, rootDirectory=True)
             startDir = self.root.attr("skin").get()
             filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Apply",
                                         fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
@@ -1068,8 +1076,10 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             stepAttr = "postCustomStep"
             stepWidget = self.customStepTab.postCustomStep_listWidget
 
-        # startDir = pm.workspace(q=True, rootDirectory=True)
-        startDir = self.root.attr(stepAttr).get()
+        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+            startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
+        else:
+            startDir = self.root.attr(stepAttr).get()
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Add",
                                     fileFilter='Custom Step .py (*.py)')
         if not filePath:
@@ -1081,9 +1091,13 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             stepWidget.takeItem(0)
-        print filePath
 
-        print filePath.split("/")[-1]
+        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+            filePath = os.path.abspath(filePath)
+            baseReplace = os.path.abspath(os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
+            filePath = filePath.replace(baseReplace, "")[1:]
+
+
         fileName = os.path.split(filePath)[1].split(".")[0]
         stepWidget.addItem(fileName +" | "+filePath)
         self.updateListAttr(stepWidget, stepAttr)
