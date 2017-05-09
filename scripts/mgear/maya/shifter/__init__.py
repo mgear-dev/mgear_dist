@@ -118,6 +118,8 @@ class Rig(object):
         self.components = {}
         self.componentsIndex = []
 
+        self.customStepDic = {}
+
     def buildFromSelection(self):
         """
         Build the rig from selected guides.
@@ -150,19 +152,20 @@ class Rig(object):
         self.options = self.guide.values
         self.guides = self.guide.components
 
+        self.customStepDic["mgearRun"] = self
+
         self.preCustomStep()
         self.initialHierarchy()
         self.processComponents()
         self.finalize()
         self.postCustomStep()
-
         return self.model
 
     def customStep(self, checker, attr):
         if self.options[checker]:
             customSteps = self.options[attr].split(",")
             for step in customSteps:
-                helperSlots.runStep(step)
+                helperSlots.runStep(step.split("|")[-1][1:], self.customStepDic)
 
     def preCustomStep(self):
         self.customStep("doPreCustomStep", "preCustomStep")

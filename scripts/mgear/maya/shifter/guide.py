@@ -408,7 +408,7 @@ class RigGuide(MainGuide):
                         if element is not None and element == compChild_parent:
                             compChild.parentComponent = compParent
                             compChild.parentLocalName = localName
-                            
+
 
             # More option values
             self.addOptionsValues()
@@ -551,8 +551,8 @@ class RigGuide(MainGuide):
 
                 parent_root = parent_root.getParent()
 
-        comp_guide.drawFromUI(parent)  
-    
+        comp_guide.drawFromUI(parent)
+
     def drawUpdate(self, oldRoot, parent=None):
 
         # Initial hierarchy
@@ -573,7 +573,7 @@ class RigGuide(MainGuide):
         for name in self.componentsIndex:
             comp_guide = self.components[name]
             oldParentName = comp_guide.root.getParent().name()
-            
+
             try:
                 parent = pm.PyNode(oldParentName.replace(oldParentName.split("|")[0], newParentName))
             except:
@@ -715,7 +715,7 @@ class helperSlots(object):
 
     def addItem2listWidget(self, listWidget, targetAttr=None):
 
-        items = pm.selected()        
+        items = pm.selected()
         itemsList = [i.text() for i in listWidget.findItems("", QtCore.Qt.MatchContains)]
         # Quick clean the first empty item
         if itemsList and not itemsList[0]:
@@ -726,7 +726,7 @@ class helperSlots(object):
             if item.name() not in itemsList:
                 if item.hasAttr("isGearGuide"):
                     listWidget.addItem(item.name())
-                    
+
                 else:
                     pm.displayWarning("The object: %s, is not a valid reference, Please select only guide componet roots and guide locators."%item.name())
             else:
@@ -746,7 +746,7 @@ class helperSlots(object):
         itemsList = [i.text() for i in targetAttrListWidget.findItems("", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             targetAttrListWidget.takeItem(0)
-        
+
         for item in sourceListWidget.selectedItems():
             targetListWidget.addItem(item.text())
             sourceListWidget.takeItem(sourceListWidget.row(item))
@@ -764,7 +764,7 @@ class helperSlots(object):
         if targetAttr:
             self.updateListAttr(sourceListWidget, targetAttr)
 
-    
+
     def updateListAttr(self, sourceListWidget, targetAttr):
         """
         Update the string attribute with values separated by commas.
@@ -773,7 +773,7 @@ class helperSlots(object):
         newValue = ",".join([i.text() for i in sourceListWidget.findItems("", QtCore.Qt.MatchContains)])
         self.root.attr(targetAttr).set(newValue)
 
-    
+
     def updateComponentName(self):
 
         newName = self.mainSettingsTab.name_lineEdit.text()
@@ -790,9 +790,9 @@ class helperSlots(object):
         #sync index
         self.mainSettingsTab.componentIndex_spinBox.setValue(self.root.attr("comp_index").get())
 
-    def updateConnector(self, sourceWidget, itemsList, *args):        
+    def updateConnector(self, sourceWidget, itemsList, *args):
         self.root.attr("connector").set(itemsList[sourceWidget.currentIndex()])
-    
+
     def populateCheck(self, targetWidget, sourceAttr, *args):
         if self.root.attr(sourceAttr).get():
             targetWidget.setCheckState(QtCore.Qt.Checked)
@@ -840,7 +840,7 @@ class helperSlots(object):
             pm.displayError("The step can't be find or does't exists")
 
     @classmethod
-    def runStep(self, stepPath, storedDic):
+    def runStep(self, stepPath, customStepDic):
         with pm.UndoChunk():
             try:
                 pm.displayInfo("Executing custom step: %s"%stepPath)
@@ -848,8 +848,8 @@ class helperSlots(object):
                 customStep = imp.load_source(fileName, stepPath)
                 if hasattr(customStep, "CustomShifterStep"):
                     cs = customStep.CustomShifterStep()
-                    cs.run(storedDic)
-                    storedDic[cs.name] = cs
+                    cs.run(customStepDic)
+                    customStepDic[cs.name] = cs
                     pm.displayInfo("Custom Shifter Step Class: %s. Succeed!!"%stepPath)
                 else:
                     pm.displayInfo("Custom Step simple script: %s. Succeed!!"%stepPath)
@@ -867,7 +867,7 @@ class helperSlots(object):
     def runManualStep(self, widgetList):
         selItems = widgetList.selectedItems()
         for item in selItems:
-            self.runStep( item.text(), storedDic={})
+            self.runStep( item.text().split("|")[-1][1:], customStepDic={})
 
 
 ##################
@@ -909,12 +909,12 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.setObjectName(self.toolName)
         self.setWindowFlags(QtCore.Qt.Window)
         self.setWindowTitle(TYPE)
-        self.resize(370, 615)    
+        self.resize(370, 615)
 
     def create_controls(self):
         """
         Create the controls for the component base
-        
+
         """
         self.tabs = QtWidgets.QTabWidget()
         self.tabs.setObjectName("settings_tab")
@@ -942,7 +942,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.populateCheck(self.guideSettingsTab.jointRig_checkBox, "joint_rig")
         self.populateAvailableSynopticTabs()
         for item in self.root.attr("synoptic").get().split(","):
-            self.guideSettingsTab.rigTabs_listWidget.addItem(item)         
+            self.guideSettingsTab.rigTabs_listWidget.addItem(item)
         self.guideSettingsTab.L_color_fk_spinBox.setValue(self.root.attr("L_color_fk").get())
         self.guideSettingsTab.L_color_ik_spinBox.setValue(self.root.attr("L_color_ik").get())
         self.guideSettingsTab.C_color_fk_spinBox.setValue(self.root.attr("C_color_fk").get())
@@ -962,7 +962,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
     def create_layout(self):
         """
         Create the layout for the component base settings
-        
+
         """
         self.settings_layout = QtWidgets.QVBoxLayout()
         self.settings_layout.addWidget(self.tabs)
@@ -974,9 +974,9 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
     def create_connections(self):
         """
         Create the slots connections to the controls functions
-        
+
         """
-        self.close_button.clicked.connect(self.close_settings)     
+        self.close_button.clicked.connect(self.close_settings)
 
         # Setting Tab
         self.guideSettingsTab.rigName_lineEdit.editingFinished.connect(partial(self.updateLineEdit, self.guideSettingsTab.rigName_lineEdit, "rig_name" ) )
@@ -1075,19 +1075,22 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             return
         if not isinstance(filePath, basestring):
             filePath = filePath[0]
-        
+
         # Quick clean the first empty item
         itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             stepWidget.takeItem(0)
-        
-        stepWidget.addItem(filePath)
+        print filePath
+
+        print filePath.split("/")[-1]
+        fileName = os.path.split(filePath)[1].split(".")[0]
+        stepWidget.addItem(fileName +" | "+filePath)
         self.updateListAttr(stepWidget, stepAttr)
 
-            
 
 
-   
+
+
 
 
 
