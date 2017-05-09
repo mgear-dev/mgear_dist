@@ -826,7 +826,8 @@ class helperSlots(object):
 
     def editFile(self, widgetList):
         try:
-            filepath = widgetList.selectedItems()[0].text()
+            filepath = widgetList.selectedItems()[0].text().split("|")[-1][1:]
+            print filepath
             if filepath:
                 if sys.platform.startswith('darwin'):
                     subprocess.call(('open', filepath))
