@@ -1066,9 +1066,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             self.guideSettingsTab.skin_lineEdit.setText(filePath)
 
     def addCustomStep(self, pre=True, *args):
-        '''
-        stepAttr = string attr name
-        '''
+
         if pre:
             stepAttr = "preCustomStep"
             stepWidget = self.customStepTab.preCustomStep_listWidget
@@ -1076,10 +1074,12 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             stepAttr = "postCustomStep"
             stepWidget = self.customStepTab.postCustomStep_listWidget
 
+        # Check if we have a custom enviroment for the custom steps initial folder
         if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
         else:
             startDir = self.root.attr(stepAttr).get()
+
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Add",
                                     fileFilter='Custom Step .py (*.py)')
         if not filePath:
@@ -1101,13 +1101,3 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         fileName = os.path.split(filePath)[1].split(".")[0]
         stepWidget.addItem(fileName +" | "+filePath)
         self.updateListAttr(stepWidget, stepAttr)
-
-
-
-
-
-
-
-
-
-
