@@ -919,7 +919,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.setObjectName(self.toolName)
         self.setWindowFlags(QtCore.Qt.Window)
         self.setWindowTitle(TYPE)
-        self.resize(370, 615)
+        self.resize(500, 615)
 
     def create_controls(self):
         """
