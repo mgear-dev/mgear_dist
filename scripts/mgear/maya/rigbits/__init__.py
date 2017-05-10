@@ -270,7 +270,7 @@ def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
     else:
         pm.displayWarning("Please at less select 2 objects. Source + target/s")
 
-def connectUseDefinedChannels(source, targets):
+def connectUserDefinedChannels(source, targets):
     """
     Connects the user defined channels between 2 objects with the same channels. Usually a copy of the same object.
     """

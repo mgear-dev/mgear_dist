@@ -29,7 +29,7 @@ import pymel.core as pm
 import mgear.maya.rigbits as rigbits
 
 
-def createGhostCtl(ctl, parent=None):
+def createGhostCtl(ctl, parent=None, connect=True):
     """
     Create a duplicate of the control and rename the original with _ghost. Later connect the local transforms and the
     Channels.
@@ -64,9 +64,9 @@ def createGhostCtl(ctl, parent=None):
         oTra = pm.createNode("transform", n= newCtl.name() + "_npo", p=parent, ss=True)
         oTra.setTransformation(newCtl.getMatrix())
         pm.parent(newCtl, oTra)
-
-    rigbits.connectLocalTransform(newCtl, ctl)
-    rigbits.connectUseDefinedChannels(newCtl, ctl)
+    if connect:
+        rigbits.connectLocalTransform([newCtl, ctl])
+        rigbits.connectUserDefinedChannels(newCtl, ctl)
 
     return newCtl
 
