@@ -129,7 +129,6 @@ class Component(MainComponent):
 
         for pair in pairs:
             d = vec.getDistance(self.guide.apos[pair[2]], self.guide.apos[pair[3]])
-            print d
             sum_node = nod.createPlusMinusAverage1D([d, pair[0].ty])
             mul_node = nod.createMulNode(pair[0].ty, self.volume_att)
             sum2_node = nod.createPlusMinusAverage1D([d, mul_node.outputX])
