@@ -119,7 +119,7 @@ def createDistNode(objA, objB, output=None):
     pm.connectAttr(dm_nodeB+".outputTranslate", node+".point2")
 
     if output:
-        pm.connectAttr(node+".distance", destination)
+        pm.connectAttr(node+".distance", output)
 
     return node
 
@@ -550,7 +550,10 @@ def createPlusMinusAverage1D(input, operation=1, output=None):
     node.attr("operation").set(operation)
 
     for i, x in enumerate(input):
-        pm.connectAttr(x, node+".input1D[%s]"%str(i))
+        try:
+            pm.connectAttr(x, node+".input1D[%s]"%str(i))
+        except:
+            pm.setAttr( node+".input1D[%s]"%str(i), x)
 
     if output:
         pm.connectAttr(node+".output1D", output)
