@@ -53,13 +53,19 @@ def doritosMagic(mesh, joint, jointBase):
 
         #apply initial skincluster
         skinCluster = pm.skinCluster(static_jnt, mesh, tsb=True, nw=2, n='%s_skinCluster'%mesh.name())
-
-    pm.skinCluster(skinCluster, e=True,  ai=joint, lw=True, wt=0)
+    try:
+        # we try to add the joint to the skin cluster. Will fail if is already in the skin cluster
+        pm.skinCluster(skinCluster, e=True,  ai=joint, lw=True, wt=0)
+    except:
+        pm.displayInfo("The Joint: %s  is already in the %s."%(joint.name(),skinCluster.name()) )
+        pass
     cn = joint.listConnections(p=True, type="skinCluster")
     for x in cn:
         if x.type()=="matrix":
-            # We force to avoid errors in case the joint is already connected
-            pm.connectAttr(jointBase + ".worldInverseMatrix[0]", skinCluster + ".bindPreMatrix["+str(x.index())+"]", f=True)
+            if x.name().split(".")[0] == skinCluster.name():
+                # We force to avoid errors in case the joint is already connected
+                pm.connectAttr(jointBase + ".worldInverseMatrix[0]", skinCluster + ".bindPreMatrix["+str(x.index())+"]", f=True)
+
 
 
 def createJntTweak(mesh, parentJnt, ctlParent):
