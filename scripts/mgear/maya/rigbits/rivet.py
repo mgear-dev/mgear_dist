@@ -28,7 +28,7 @@ import pymel.core as pm
 # Thanks to http://jinglezzz.tumblr.com for the tutorial :)
 class rivet():
 
-    def create(self, mesh, edge1, edge2, parent):
+    def create(self, mesh, edge1, edge2, parent, name=None):
         self.sources = {
             'oMesh' : mesh,
             'edgeIndex1' : edge1,
@@ -40,9 +40,10 @@ class rivet():
         self.setAttributes()
         if parent:
             pm.parent( self.node['locator'].getParent(), parent)
+        if name:
+            pm.rename(self.node['locator'].getParent(), name)
+
         return self.node['locator'].getParent()
-
-
 
 
     def createNodes(self, *args):

@@ -110,7 +110,7 @@ def createCTL(type = "square", child=False, *args):
         pass
 
 
-def addJnt(obj=False, parent=False, noReplace=False, *args):
+def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
 
     """
 
@@ -144,13 +144,16 @@ def addJnt(obj=False, parent=False, noReplace=False, *args):
             jntName = "_".join(obj.name().split("_")[:-1])+"_jnt"
         jnt = pm.createNode("joint", n=jntName)
 
-        try:
-            defSet = pm.PyNode("rig_deformers_grp")
-            pm.sets(defSet, add=jnt)
-        except:
-            pm.sets(n="rig_deformers_grp")
-            defSet = pm.PyNode("rig_deformers_grp")
-            pm.sets(defSet, add=jnt)
+        if grp:
+            grp.add(jnt)
+        else:
+            try:
+                defSet = pm.PyNode("rig_deformers_grp")
+                pm.sets(defSet, add=jnt)
+            except:
+                pm.sets(n="rig_deformers_grp")
+                defSet = pm.PyNode("rig_deformers_grp")
+                pm.sets(defSet, add=jnt)
 
         oParent.addChild(jnt)
 
@@ -283,6 +286,20 @@ def connectUserDefinedChannels(source, targets):
                 pm.connectAttr(c, t.attr(c.name().split(".")[-1]))
             except:
                 pm.displayWarning("%s don't have contrapart channel on %s"%(c, t))
+
+def connectInvertSRT(source, target, srt="srt", axis="xyz"):
+
+    for t in srt:
+        soureList = []
+        invList = []
+        targetList = []
+        for a in axis:
+            soureList.append(source.attr(t+a))
+            invList.append(-1)
+            targetList.append(target.attr(t+a))
+
+        if soureList:
+            nod.createMulNode(soureList, invList, targetList)
 
 def replaceShape(*args):
     """
