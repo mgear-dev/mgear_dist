@@ -62,7 +62,7 @@ def createGhostCtl(ctl, parent=None, connect=True):
     if parent:
         pm.parent(newCtl, parent)
         oTra = pm.createNode("transform", n= newCtl.name() + "_npo", p=parent, ss=True)
-        oTra.setTransformation(newCtl.getMatrix())
+        oTra.setMatrix(ctl.getParent().getMatrix(worldSpace=True), worldSpace=True)
         pm.parent(newCtl, oTra)
     if connect:
         rigbits.connectLocalTransform([newCtl, ctl])

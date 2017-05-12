@@ -31,7 +31,6 @@ import pymel.core.datatypes as dt
 import mgear.maya.skin as ski
 import mgear.maya.primitive as pri
 import mgear.maya.icon as ico
-import mgear.maya.node as nod
 import mgear.maya.transform as tra
 
 import mgear.maya.rigbits.blendShapes as bsp
@@ -44,11 +43,11 @@ def resetJntLocalSRT(jnt):
         pm.setAttr(jnt+".rotate"+axis, 0)
         pm.setAttr(jnt+".translate"+axis, 0)
 
-def doritosMagic(mesh, joint, jointBase):
+def doritosMagic(mesh, joint, jointBase, parent=None):
     #magic of doritos connection
     skinCluster = ski.getSkinCluster(mesh)
     if not skinCluster:
-        if pm.objExists('static_jnt') != True:
+        if pm.objExists('static_jnt') is not True:
             static_jnt = pri.addJoint(parent, "static_jnt", m=dt.Matrix(), vis=True)
         static_jnt = pm.PyNode("static_jnt")
 
@@ -77,7 +76,7 @@ def createJntTweak(mesh, parentJnt, ctlParent):
     name = "_".join(parentJnt.name().split("_")[:3])
 
     # create joints
-    jointBase = pri.addJoint(jnt, name +"_tweak_jnt_lvl", parentJnt.getMatrix(worldSpace=True))
+    jointBase = pri.addJoint(parentJnt, name +"_tweak_jnt_lvl", parentJnt.getMatrix(worldSpace=True))
     resetJntLocalSRT(jointBase)
     joint = pri.addJoint(jointBase, name +"_tweak_jnt", parentJnt.getMatrix(worldSpace=True))
     resetJntLocalSRT(joint)
@@ -183,7 +182,7 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
 def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlParent=None):
 
     for i, pair in enumerate(edgeIndexPairList):
-        createTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent)
+        createRivetTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent)
 
 
 
@@ -193,12 +192,12 @@ def createRivetTweakLayer(layerMesh, bst, edgeList, tweakName, parent=None, ctlP
     bsp.connectWithBlendshape(layerMesh, bst)
 
     #create static joint
-    if pm.objExists('static_jnt') != True:
+    if pm.objExists('static_jnt') is not True:
         static_jnt = pri.addJoint(parent, "static_jnt", m=dt.Matrix(), vis=True)
     static_jnt = pm.PyNode("static_jnt")
 
     #apply initial skincluster
-    skinCluster = pm.skinCluster(static_jnt, layerMesh, tsb=True, nw=2, n='%s_skinCluster'%layerMesh.name())
+    pm.skinCluster(static_jnt, layerMesh, tsb=True, nw=2, n='%s_skinCluster'%layerMesh.name())
 
     #create doritos
-    createTweakFromList(layerMesh, edgeList, tweakName, parent, ctlParent)
+    createRivetTweak(layerMesh, edgeList, tweakName, parent, ctlParent)

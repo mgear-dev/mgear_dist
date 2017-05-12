@@ -450,5 +450,3 @@ def addSupportJoint(oSel=None, *args):
 
         else:
             pm.displayWarning("Support Joint can't be added to: %s. Because is not blend joint"%x.name())
-
-

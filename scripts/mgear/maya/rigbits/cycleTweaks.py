@@ -42,7 +42,7 @@ def inverseTranslateParent(obj):
         obj = [obj]
     for x in obj:
         nod.createMulNode([x.attr("tx"), x.attr("ty"), x.attr("tz")], [-1, -1, -1],
-                             [x.getParent().attr("tx"), x.getParent().attr("ty"), x.getParent().attr("tz")])
+                          [x.getParent().attr("tx"), x.getParent().attr("ty"), x.getParent().attr("tz")])
 
 
 
@@ -56,8 +56,8 @@ def initCycleTweakBase(outMesh, baseMesh, rotMesh, transMesh, staticJnt=None):
     pm.skinCluster(staticJnt, rotMesh, tsb=True, nw=2, n='%s_skinCluster'%rotMesh.name())
     pm.skinCluster(staticJnt, transMesh, tsb=True, nw=2, n='%s_skinCluster'%transMesh.name())
 
-def cycleTweak(edgePair, baseMesh, rotMesh, transMesh, setupParent, ctlParent, name, jntOrg=None, grp=None,
-                invertAxis=False, iconType="square", size=.025, color=13, ro=dt.Vector(1.5708,0,1.5708/2)):
+def cycleTweak(name, edgePair, mirrorAxis, baseMesh, rotMesh, transMesh, setupParent, ctlParent, jntOrg=None, grp=None,
+               iconType="square", size=.025, color=13, ro=dt.Vector(1.5708,0,1.5708/2)):
 
     # rotation sctructure
     rRivet = rvt.rivet()
@@ -76,7 +76,7 @@ def cycleTweak(edgePair, baseMesh, rotMesh, transMesh, setupParent, ctlParent, n
     tweakBase.setMatrix(dt.Matrix(), worldSpace=True)
     tweakNpo = pm.createNode("transform", n=name+"_tweakNpo", p=tweakBase)
     tweakBase.setTranslation(pos, space="world")
-    tweakCtl = ico.create(tweakNpo, name+"_tweak_ctl", tweakNpo.getMatrix(worldSpace=True), color, iconType, w=size, d=size, ro=ro)
+    tweakCtl = ico.create(tweakNpo, name+"_ctl", tweakNpo.getMatrix(worldSpace=True), color, iconType, w=size, d=size, ro=ro)
     inverseTranslateParent(tweakCtl)
     pm.pointConstraint(tBase, tweakBase )
 
@@ -87,7 +87,7 @@ def cycleTweak(edgePair, baseMesh, rotMesh, transMesh, setupParent, ctlParent, n
     rotJointDriver = pm.createNode("transform", n=name+"_rotJointDriver", p=rotNPO)
     rotBase.setTranslation(pos, space="world")
     nod.createMulNode([rotNPO.attr("tx"), rotNPO.attr("ty"), rotNPO.attr("tz")], [-1, -1, -1],
-                             [rotJointDriver.attr("tx"), rotJointDriver.attr("ty"), rotJointDriver.attr("tz")])
+                      [rotJointDriver.attr("tx"), rotJointDriver.attr("ty"), rotJointDriver.attr("tz")])
     pm.pointConstraint(rBase, rotNPO )
     pm.connectAttr(tweakCtl.r, rotNPO.r )
     pm.connectAttr(tweakCtl.s, rotNPO.s )
@@ -97,6 +97,12 @@ def cycleTweak(edgePair, baseMesh, rotMesh, transMesh, setupParent, ctlParent, n
     posJointDriver = pm.createNode("transform", n=name+"_posJointDriver", p=posNPO)
     posNPO.setTranslation(pos, space="world")
     pm.connectAttr(tweakCtl.t, posJointDriver.t )
+
+    # mirror behaviour
+    if mirrorAxis:
+        tweakBase.attr("ry").set(tweakBase.attr("ry").get() + 180)
+        rotBase.attr("ry").set(rotBase.attr("ry").get() + 180)
+        posNPO.attr("ry").set(posNPO.attr("ry").get() + 180)
 
     #create joints
     rJoint =  rigbits.addJnt(rotJointDriver, jntOrg, True, grp)

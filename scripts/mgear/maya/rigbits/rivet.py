@@ -25,8 +25,12 @@ import pymel.core as pm
 
 
 
-# Thanks to http://jinglezzz.tumblr.com for the tutorial :)
+
 class rivet():
+    """
+    Create a rivet
+    Thanks to http://jinglezzz.tumblr.com for the tutorial :)
+    """
 
     def create(self, mesh, edge1, edge2, parent, name=None):
         self.sources = {
