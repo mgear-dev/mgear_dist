@@ -56,14 +56,13 @@ import mgear.maya.pyqt as gqt
 import mgear.string as string
 import mgear.maya.skin as skin
 
+import guideUI as guui
+import customStepUI as csui
+
 # pyside
 from maya.app.general.mayaMixin import MayaQDockWidget
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
-
-import guideUI as guui
-import customStepUI as csui
-
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"
@@ -128,7 +127,7 @@ class MainGuide(object):
             bool: False if the parameter wasn't found.
 
         """
-        if not scriptName in self.paramDefs.keys():
+        if scriptName not in self.paramDefs.keys():
             mgear.log("Can't find parameter definition for : " + scriptName, mgear.sev_warning)
             return False
 
@@ -1056,7 +1055,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
     def skinLoad(self, *args):
             startDir = self.root.attr("skin").get()
             filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Apply",
-                                        fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
+                                      fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
             if not filePath:
                 return
             if not isinstance(filePath, basestring):
@@ -1081,7 +1080,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             startDir = self.root.attr(stepAttr).get()
 
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Add",
-                                    fileFilter='Custom Step .py (*.py)')
+                                  fileFilter='Custom Step .py (*.py)')
         if not filePath:
             return
         if not isinstance(filePath, basestring):

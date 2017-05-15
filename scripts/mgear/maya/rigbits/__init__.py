@@ -251,6 +251,13 @@ def alignToPointsLoop(points=None, loc=None, name=None, *args):
     loc.setTransformation(trans)
 
 
+def connectWorldTransform(source, target):
+    mulmat_node = nod.createMultMatrixNode(source + ".worldMatrix", target + ".parentInverseMatrix")
+    dm_node = nod.createDecomposeMatrixNode(mulmat_node+".matrixSum")
+    pm.connectAttr(dm_node+".outputTranslate", target+".t")
+    pm.connectAttr(dm_node+".outputRotate", target+".r")
+    pm.connectAttr(dm_node+".outputScale", target+".s")
+
 def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
     """
     Connect scale, rotatio and translation.
@@ -263,6 +270,7 @@ def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
         else :
             source = pm.selected()[0]
             targets = pm.selected()[1:]
+
         for target in targets:
             if t:
                 pm.connectAttr(source + ".translate", target + ".translate")
@@ -361,21 +369,28 @@ def spaceJump(ref=None, space=None, *args):
     return spaceLocal
 
 
-def createInterpolateTransform(*args):
+def createInterpolateTransform(objects=None, *args):
     """
     Create space locator and apply gear_intmatrix_op, to interpolate the his pose between 2 selected objects.
     """
+    if objects or len(pm.selected()) >= 2:
+        if objects:
+            refA = objects[0]
+            refB = objects[1]
 
-    if len(pm.selected()) ==2:
-        refA = pm.selected()[0]
-        refB = pm.selected()[1]
+        else :
+            refA = pm.selected()[0]
+            refB = pm.selected()[1]
+
         intMatrix = aop.gear_intmatrix_op(refA.attr("worldMatrix"), refB.attr("worldMatrix"), .5)
         intTrans = pri.addTransform(refA, refA.name()+"_INTER_"+refB.name(), dt.Matrix())
         aop.gear_mulmatrix_op(intMatrix.attr("output"), intTrans.attr("parentInverseMatrix[0]"), intTrans)
         pm.displayInfo("Interpolated Transform: " + intTrans.name() + "created")
     else:
         pm.displayWarning("Please select 2 objects. ")
+        return
 
+    return intTrans
 
 
 def addBlendedJoint(oSel=None, compScale=True, *args):

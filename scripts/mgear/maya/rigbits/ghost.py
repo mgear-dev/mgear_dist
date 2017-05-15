@@ -24,8 +24,14 @@
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
 
+#maya
 import pymel.core as pm
 
+#mgear
+import mgear.maya.primitive as pri
+import mgear.maya.node as nod
+
+#rigbits
 import mgear.maya.rigbits as rigbits
 
 
@@ -99,3 +105,62 @@ def createDoritoGhostCtl(ctl, parent=None):
 
     rigbits.connectLocalTransform(ghostBaseParent, doritoParent)
     rigbits.connectUseDefinedChannels(ghostBaseParent, doritoParent)
+
+
+def ghostSlider(ghostControls, surface, sliderParent):
+
+    if  not isinstance(ghostControls, list):
+        ghostControls = [ghostControls]
+
+    #Seleccionamos los controles Ghost que queremos mover sobre el surface
+
+    surfaceShape = surface.getShape()
+    # sliderParent = pm.PyNode("mouth_setup")
+
+    for ctlGhost in ghostControls:
+        ctl = pm.listConnections(ctlGhost, t="transform")[-1]
+        t = ctl.getMatrix(worldSpace=True)
+
+        gDriver = pri.addTransform(ctlGhost.getParent(), ctl.name()+"_slideDriver", t)
+
+        try:
+            pm.connectAttr(ctl + ".translate", gDriver + ".translate")
+            pm.disconnectAttr(ctl + ".translate", ctlGhost + ".translate")
+        except:
+            pass
+
+        try:
+            pm.connectAttr(ctl + ".scale", gDriver + ".scale")
+            pm.disconnectAttr(ctl + ".scale", ctlGhost + ".scale")
+        except:
+            pass
+
+        try:
+            pm.connectAttr(ctl + ".rotate", gDriver + ".rotate")
+            pm.disconnectAttr(ctl + ".rotate", ctlGhost + ".rotate")
+        except:
+            pass
+
+
+        oParent = ctlGhost.getParent()
+        npoName = "_".join(ctlGhost.name().split("_")[:-1]) +  "_npo"
+        oTra = pm.PyNode(pm.createNode("transform", n=npoName, p=oParent, ss=True))
+        oTra.setTransformation(ctlGhost.getMatrix())
+        pm.parent(ctlGhost, oTra)
+
+        slider = pri.addTransform(sliderParent, ctl.name()+"_slideDriven", t)
+
+        #connexion
+
+        dm_node = nod.createDecomposeMatrixNode(gDriver.attr("worldMatrix[0]"))
+        cps_node = pm.createNode("closestPointOnSurface")
+        dm_node.attr("outputTranslate") >> cps_node.attr("inPosition")
+        surfaceShape.attr("worldSpace[0]") >> cps_node.attr("inputSurface")
+        cps_node.attr("position") >> slider.attr("translate")
+
+
+        #normalConstraint -weight 1 -aimVector 0 0 1 -upVector 0 1 0 -worldUpType "objectrotation" -worldUpVector 0 1 0 -worldUpObject eyebrow_R0_ctl_slideDriver_ghost;
+
+        pm.normalConstraint(surfaceShape, slider, aimVector=[0,0,1] , upVector=[0,1,0], worldUpType="objectrotation", worldUpVector=[0,1,0], worldUpObject=gDriver)
+
+        pm.parent(ctlGhost.getParent(), slider)
