@@ -54,7 +54,9 @@ def createGhostCtl(ctl, parent=None, connect=True):
     if parent:
         if  isinstance(parent, basestring):
             parent = pm.PyNode(parent)
-
+    grps = ctl.listConnections(t="objectSet")
+    for grp in grps:
+        grp.remove(ctl)
     oName = ctl.name()
     pm.rename(ctl, oName + "_ghost")
     newCtl =   pm.duplicate(ctl, po=True)[0]
@@ -73,7 +75,8 @@ def createGhostCtl(ctl, parent=None, connect=True):
     if connect:
         rigbits.connectLocalTransform([newCtl, ctl])
         rigbits.connectUserDefinedChannels(newCtl, ctl)
-
+    for grp in grps:
+        grp.add(newCtl)
     return newCtl
 
 

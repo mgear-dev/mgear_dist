@@ -70,7 +70,7 @@ def CreateMenu():
 
     ## Rigging Tools
     riggingM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Rigging')
-    pm.menuItem(label="Add NPO", command=partial(rigbits.addNPO))
+    pm.menuItem(label="Add NPO", command=partial(rigbits.addNPO, None))
     pm.menuItem(subMenu=True, tearOff=True, label='Gimmick Joints')
     pm.menuItem(label="Add Joint", command=partial(rigbits.addJnt, False, False))
     pm.menuItem( divider=True )

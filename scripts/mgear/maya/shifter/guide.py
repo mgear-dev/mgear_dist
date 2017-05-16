@@ -848,7 +848,7 @@ class helperSlots(object):
     def runStep(self, stepPath, customStepDic):
         with pm.UndoChunk():
             try:
-                pm.displayInfo("Executing custom step: %s"%stepPath)
+                pm.displayInfo("EXEC: Executing custom step: %s"%stepPath)
                 fileName = os.path.split(stepPath)[1].split(".")[0]
                 if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
                     runPath = os.path.join( os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "") , stepPath)
@@ -859,16 +859,16 @@ class helperSlots(object):
                     cs = customStep.CustomShifterStep()
                     cs.run(customStepDic)
                     customStepDic[cs.name] = cs
-                    pm.displayInfo("Custom Shifter Step Class: %s. Succeed!!"%stepPath)
+                    pm.displayInfo("SUCCEED: Custom Shifter Step Class: %s. Succeed!!"%stepPath)
                 else:
-                    pm.displayInfo("Custom Step simple script: %s. Succeed!!"%stepPath)
+                    pm.displayInfo("SUCCEED: Custom Step simple script: %s. Succeed!!"%stepPath)
 
             except Exception as ex:
                 template = "An exception of type {0} occured. Arguments:\n{1!r}"
                 message = template.format(type(ex).__name__, ex.args)
                 pm.displayError( message)
                 pm.displayError(traceback.format_exc())
-                cont = pm.confirmBox("Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Undo this Step")
+                cont = pm.confirmBox("FAIL: Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Undo this Step")
                 if not cont:
                     pm.undo()
 

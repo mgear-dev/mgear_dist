@@ -39,14 +39,17 @@ import mgear.maya.meshNavigation as mnav
 import mgear.string
 
 
-def addNPO(*args):
+def addNPO(objs=None, *args):
     """
     Add a transform node as a parent and in the same pose of each of the selected objects.
     This way neutralize the local transfromation values.
     NPO stands for "neutral position" terminology from the all mighty Softimage ;)
     """
-    oSel = pm.selected()
-    for obj in oSel:
+    if not objs:
+        objs = pm.selected()
+    if not isinstance(objs, list):
+        objs = [objs]
+    for obj in objs:
         oParent = obj.getParent()
         oTra = pm.createNode("transform", n= obj.name() + "_npo", p=oParent, ss=True)
         oTra.setTransformation(obj.getMatrix())
@@ -86,8 +89,8 @@ def createCTL(type = "square", child=False, *args):
                     pm.parent(child, icon)
         else:
 
-           icon = ic.create(None, type + "_ctl", pm.datatypes.Matrix(), [1, 0, 0], type)
-           iconList.append(icon)
+            icon = ic.create(None, type + "_ctl", pm.datatypes.Matrix(), [1, 0, 0], type)
+            iconList.append(icon)
     else:
         if len(pm.selected()) > 0:
             for x in pm.selected():
@@ -98,8 +101,8 @@ def createCTL(type = "square", child=False, *args):
                 pm.parent(x, icon)
         else:
 
-           icon = ic.create(None, type + "_ctl", pm.datatypes.Matrix(), [1, 0, 0], type)
-           iconList.append(icon)
+            icon = ic.create(None, type + "_ctl", pm.datatypes.Matrix(), [1, 0, 0], type)
+            iconList.append(icon)
 
     try:
         defSet = pm.PyNode("rig_controlers_grp")
