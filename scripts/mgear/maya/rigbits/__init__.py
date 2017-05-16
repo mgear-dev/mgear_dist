@@ -45,6 +45,8 @@ def addNPO(objs=None, *args):
     This way neutralize the local transfromation values.
     NPO stands for "neutral position" terminology from the all mighty Softimage ;)
     """
+    npoList = []
+
     if not objs:
         objs = pm.selected()
     if not isinstance(objs, list):
@@ -54,6 +56,9 @@ def addNPO(objs=None, *args):
         oTra = pm.createNode("transform", n= obj.name() + "_npo", p=oParent, ss=True)
         oTra.setTransformation(obj.getMatrix())
         pm.parent(obj, oTra)
+        npoList.append(oTra)
+
+    return npoList
 
 
 def selectDeformers(*args):
