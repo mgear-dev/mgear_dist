@@ -30,9 +30,9 @@ mGear utilitie tools.
 
 import sys, pprint
 try:
-    from pysideuic import compileUi
-except:
     from pyside2uic import compileUi
+except:
+    from pysideuic import compileUi
 
 import pymel.core as pm
 
