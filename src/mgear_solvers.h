@@ -62,6 +62,8 @@ Date:       2016 / 10 / 10
 #include <maya/MGlobal.h>
 #include <maya/MPxNode.h>
 #include <maya/MPxDeformerNode.h>
+#include <maya/MFnDependencyNode.h>
+
 
 #include <maya/MPlug.h>
 #include <maya/MDataBlock.h>
@@ -72,6 +74,8 @@ Date:       2016 / 10 / 10
 #include <maya/MFnMatrixAttribute.h>
 #include <maya/MFnEnumAttribute.h>
 #include <maya/MFnUnitAttribute.h>
+#include <maya/MFnCompoundAttribute.h>
+
 
 #include <maya/MQuaternion.h>
 #include <maya/MVector.h>
@@ -91,6 +95,10 @@ Date:       2016 / 10 / 10
 #include <maya/MItGeometry.h>
 #include <maya/MDagModifier.h>
 #include <maya/MPointArray.h>
+#include <maya/MFnMeshData.h>
+#include <maya/MFnMatrixData.h>
+
+
 
 #include <maya/MFnNurbsCurve.h>
 #include <maya/MPoint.h>
@@ -570,6 +578,31 @@ class mgear_trigonometryAngle : public MPxNode
 
 };
 
+class mgear_vertexPosition : public MPxNode
+{
+ public:
+      mgear_vertexPosition();
+   virtual	 ~mgear_vertexPosition();
+
+   virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   static void* creator();
+   static MStatus initialize();
+
+ public:
+	static MTypeId id;
+
+	// Input
+	static	MObject	inputShape;
+	static	MObject	vertexIndex;
+	static	MObject	constraintParentInverseMatrix;
+
+	// Output
+	static MObject	output;
+    static MObject	outputX;
+    static MObject	outputY;
+    static MObject	outputZ;
+
+};
 
 /////////////////////////////////////////////////
 // METHODS
