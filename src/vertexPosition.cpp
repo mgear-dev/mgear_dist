@@ -132,8 +132,6 @@ MStatus mgear_vertexPosition::compute( const MPlug& plug, MDataBlock& data )
         MDataHandle outputHandle = data.outputValue( mgear_vertexPosition::output );
         MDataHandle vertHandle = data.inputValue( vertexIndex, &returnStatus );
         MDataHandle inverseMatrixHandle	=	data.inputValue(constraintParentInverseMatrix, &returnStatus);
-        MFnDependencyNode nodeFn;
-
 
         if( returnStatus != MS::kSuccess )
             MGlobal::displayError( "Node mgear_vertexPosition cannot get value\n" );
