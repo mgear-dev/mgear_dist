@@ -219,7 +219,7 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
         inputB (dagNode): The transfomr input 2
         blender (float or attr): Float in 0 to 1 range or attribute string name.
         rotInterpolation (int): Rotation interpolation option. 0=Euler. 1=Quaternion.
-        output (dagNode): The output node with the blend transfomr applied. 
+        output (dagNode): The output node with the blend transfomr applied.
 
     Returns:
         pyNode: the newly created node.
@@ -234,7 +234,7 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
 
     node = pm.createNode("pairBlend")
     node.attr("rotInterpolation").set(rotInterpolation)
-    
+
     if inputA:
         pm.connectAttr(inputA+".translate", node+".inTranslate1")
         pm.connectAttr(inputA+".rotate", node+".inRotate1")
@@ -247,7 +247,7 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
         pm.connectAttr(blender, node+".weight")
     else:
         pm.setAttr(node+".weight", blender)
-    
+
     if output:
         pm.connectAttr(node+".outRotate", output+".rotate")
         pm.connectAttr(node+".outTranslate", output+".translate")
@@ -500,7 +500,7 @@ def createClampNode(input, in_min, in_max):
         pyNode: the newly created node.
 
     >>> clamp_node = nod.createClampNode([self.roll_att, self.bank_att, self.bank_att], [0, -180, 0], [180,0,180])
-    
+
     """
     node = pm.createNode("clamp")
 
@@ -533,7 +533,7 @@ def createClampNode(input, in_min, in_max):
 
 def createPlusMinusAverage1D(input, operation=1, output=None):
     """
-    Create a multiple average node 1D. 
+    Create a multiple average node 1D.
     Args:
         input (attr, float or list): The input values.
         operation (int): Node operation. 0=None, 1=sum, 2=subtract, 3=average
@@ -560,6 +560,21 @@ def createPlusMinusAverage1D(input, operation=1, output=None):
 
 
     return node
+
+
+def createVertexPositionNode(inShape, vId=0, output=None, name="mgear_vertexPosition"):
+    """
+    Creates a mgear_vertexPosition node
+    """
+    node = pm.createNode("mgear_vertexPosition", n=name)
+    inShape.worldMesh.connect(node.inputShape)
+    node.vertex.set(vId)
+    if output:
+        pm.connectAttr(output.parentInverseMatrix, node.drivenParentInverseMatrix)
+        pm.connectAttr(node.output, output.translate)
+
+    return node
+
 
 
 #############################################
@@ -703,7 +718,7 @@ def createClampNodeMulti(name, inputs=[], in_min=[], in_max=[]):
 
     Args:
         name (str): The name for the new node.
-        inputs (list of attr): The list of attributes 
+        inputs (list of attr): The list of attributes
         in_min (list of attr): The list of attributes
         in_max (list of attr): The list of attributes
 
@@ -737,6 +752,3 @@ def createClampNodeMulti(name, inputs=[], in_min=[], in_max=[]):
         count = (count+1)%3
 
     return outputs
-
-
-

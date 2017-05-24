@@ -377,7 +377,7 @@ def spaceJump(ref=None, space=None, *args):
     return spaceLocal
 
 
-def createInterpolateTransform(objects=None, *args):
+def createInterpolateTransform(objects=None, blend=.5, *args):
     """
     Create space locator and apply gear_intmatrix_op, to interpolate the his pose between 2 selected objects.
     """
@@ -390,7 +390,7 @@ def createInterpolateTransform(objects=None, *args):
             refA = pm.selected()[0]
             refB = pm.selected()[1]
 
-        intMatrix = aop.gear_intmatrix_op(refA.attr("worldMatrix"), refB.attr("worldMatrix"), .5)
+        intMatrix = aop.gear_intmatrix_op(refA.attr("worldMatrix"), refB.attr("worldMatrix"), blend)
         intTrans = pri.addTransform(refA, refA.name()+"_INTER_"+refB.name(), dt.Matrix())
         aop.gear_mulmatrix_op(intMatrix.attr("output"), intTrans.attr("parentInverseMatrix[0]"), intTrans)
         pm.displayInfo("Interpolated Transform: " + intTrans.name() + "created")
