@@ -393,7 +393,7 @@ def createInterpolateTransform(objects=None, blend=.5, *args):
         intMatrix = aop.gear_intmatrix_op(refA.attr("worldMatrix"), refB.attr("worldMatrix"), blend)
         intTrans = pri.addTransform(refA, refA.name()+"_INTER_"+refB.name(), dt.Matrix())
         aop.gear_mulmatrix_op(intMatrix.attr("output"), intTrans.attr("parentInverseMatrix[0]"), intTrans)
-        pm.displayInfo("Interpolated Transform: " + intTrans.name() + "created")
+        pm.displayInfo("Interpolated Transform: " + intTrans.name() + " created")
     else:
         pm.displayWarning("Please select 2 objects. ")
         return

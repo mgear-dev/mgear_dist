@@ -254,6 +254,47 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
 
     return node
 
+def createSetRangeNode(input, oldMin, oldMax, newMin=0, newMax=1, output=None, name="setRange"):
+    node = pm.createNode("setRange", n=name)
+
+    if not isinstance(input, list):
+        input = [input]
+
+    for item, s in zip(input, "XYZ"):
+        if isinstance(item, str) or isinstance(item, unicode) or isinstance(item, pm.Attribute):
+            pm.connectAttr(item, node+".value"+s)
+        else:
+            pm.setAttr(node+".value"+s, item)
+
+        if isinstance(oldMin, str) or isinstance(oldMin, unicode) or isinstance(oldMin, pm.Attribute):
+            pm.connectAttr(oldMin, node+".oldMin"+s)
+        else:
+            pm.setAttr(node+".oldMin"+s, oldMin)
+
+        if isinstance(oldMax, str) or isinstance(oldMax, unicode) or isinstance(oldMax, pm.Attribute):
+            pm.connectAttr(oldMax, node+".oldMax"+s)
+        else:
+            pm.setAttr(node+".oldMax"+s, oldMax)
+
+        if isinstance(newMin, str) or isinstance(newMin, unicode) or isinstance(newMin, pm.Attribute):
+            pm.connectAttr(newMin, node+".min"+s)
+        else:
+            pm.setAttr(node+".min"+s, newMin)
+
+        if isinstance(newMax, str) or isinstance(newMax, unicode) or isinstance(newMax, pm.Attribute):
+            pm.connectAttr(newMax, node+".max"+s)
+        else:
+            pm.setAttr(node+".max"+s, newMax)
+
+
+    if output:
+        if not isinstance(output, list):
+            output = [output]
+        for out, s in zip(output, "XYZ"):
+            pm.connectAttr(node+".outValue"+s, out, f=True)
+
+
+    return node
 
 def createReverseNode(input, output=None):
     """
