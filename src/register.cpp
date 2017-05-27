@@ -42,7 +42,7 @@ Date:       2016 / 10 / 10
 PLUGIN_EXPORT MStatus initializePlugin( MObject obj )
 {
 	MStatus status;
-	MFnPlugin plugin( obj, "Jeremie Passerin, Miquel Campos", "2.0.3", "Any");
+	MFnPlugin plugin( obj, "Jeremie Passerin, Miquel Campos", "2.1.0", "Any");
 
 	status = plugin.registerNode( "mgear_curveCns", mgear_curveCns::id, mgear_curveCns::creator, mgear_curveCns::initialize, MPxNode::kDeformerNode );
 		if (!status) {status.perror("registerNode() failed."); return status;}
@@ -85,9 +85,14 @@ PLUGIN_EXPORT MStatus initializePlugin( MObject obj )
 
 	status = plugin.registerNode("mgear_add10scalarNode", mgear_add10scalarNode::id, mgear_add10scalarNode::creator, mgear_add10scalarNode::initialize);
 		if (!status) { status.perror("registerNode() failed."); return status; }
+
 	status = plugin.registerNode("mgear_rayCastPosition", mgear_rayCastPosition::id, mgear_rayCastPosition::creator, mgear_rayCastPosition::initialize);
 		if (!status) { status.perror("registerNode() failed."); return status; }
+
 	status = plugin.registerNode("mgear_trigonometryAngle", mgear_trigonometryAngle::id, mgear_trigonometryAngle::creator, mgear_trigonometryAngle::initialize);
+		if (!status) { status.perror("registerNode() failed."); return status; }
+
+	status = plugin.registerNode("mgear_vertexPosition", mgear_vertexPosition::id, mgear_vertexPosition::creator, mgear_vertexPosition::initialize);
 		if (!status) { status.perror("registerNode() failed."); return status; }
 
 
@@ -109,8 +114,6 @@ PLUGIN_EXPORT MStatus uninitializePlugin( MObject obj)
 		if (!status) {status.perror("deregisterNode() failed."); return status;}
 	status = plugin.deregisterNode( mgear_squashStretch2::id );
 		if (!status) {status.perror("deregisterNode() failed."); return status;}
-
-
 	status = plugin.deregisterNode( mgear_ikfk2Bone::id );
 		if (!status) {status.perror("deregisterNode() failed."); return status;}
 	status = plugin.deregisterNode( mgear_inverseRotOrder::id );
@@ -121,7 +124,6 @@ PLUGIN_EXPORT MStatus uninitializePlugin( MObject obj)
 		if (!status) {status.perror("deregisterNode() failed."); return status;}
 	status = plugin.deregisterNode( mgear_percentageToU::id );
 		if (!status) {status.perror("deregisterNode() failed."); return status;}
-
 	status = plugin.deregisterNode( mgear_spinePointAt::id );
 		if (!status) {status.perror("deregisterNode() failed."); return status;}
 	status = plugin.deregisterNode( mgear_uToPercentage::id );
@@ -132,11 +134,11 @@ PLUGIN_EXPORT MStatus uninitializePlugin( MObject obj)
 		if (!status) { status.perror("deregisterNode() failed."); return status; }
 	status = plugin.deregisterNode(mgear_add10scalarNode::id);
 		if (!status) { status.perror("deregisterNode() failed."); return status; }
-
 	status = plugin.deregisterNode(mgear_rayCastPosition::id);
 		if (!status) { status.perror("deregisterNode() failed."); return status; }
-
 	status = plugin.deregisterNode(mgear_trigonometryAngle::id);
+		if (!status) { status.perror("deregisterNode() failed."); return status; }
+	status = plugin.deregisterNode(mgear_vertexPosition::id);
 		if (!status) { status.perror("deregisterNode() failed."); return status; }
 
 
