@@ -29,10 +29,8 @@ mGear utilitie tools.
 """
 
 import sys, pprint
-try:
-    from pyside2uic import compileUi
-except:
-    from pysideuic import compileUi
+
+from mGear_pyqt import compileUi
 
 import pymel.core as pm
 
@@ -47,6 +45,8 @@ def ui2py(filePath=None, *args):
         startDir = pm.workspace(q=True, rootDirectory=True)
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir,
                                     fileFilter='PyQt Designer (*%s)' % UI_EXT, okc="Compile to .py")
+        if not filePath:
+            return False
         filePath = filePath[0]
     if not filePath:
         return False
