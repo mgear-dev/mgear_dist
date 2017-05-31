@@ -29,10 +29,8 @@ mGear utilitie tools.
 """
 
 import sys, pprint
-try:
-    from pyside2uic import compileUi
-except:
-    from pysideuic import compileUi
+
+from mGear_pyqt import compileUi
 
 import pymel.core as pm
 
