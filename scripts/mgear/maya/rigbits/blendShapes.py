@@ -47,7 +47,7 @@ def getBlendShape(obj):
     return blendShape
 
 
-def connectWithBlendshape(mesh, bst):
+def connectWithBlendshape(mesh, bst, wgt=1.0):
 
     if isinstance(mesh, basestring):
             mesh = pm.PyNode(mesh)
@@ -58,7 +58,7 @@ def connectWithBlendshape(mesh, bst):
         wc = pm.blendShape( bsnode, q=True, wc=True )
         # print wc
         pm.blendShape( bsnode, edit=True, t=(mesh, wc, bst, 1.0) )
-        bsnode.attr(bst.name()).set(1.0)
+        bsnode.attr(bst.name()).set(wgt)
         bs = bsnode
     else:
         bs = pm.blendShape(bst, mesh, name="_".join([mesh.name(), "blendShape"]), foc=True, w=[(0, 1.0)])
