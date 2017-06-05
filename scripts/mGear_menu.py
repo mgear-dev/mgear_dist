@@ -134,8 +134,8 @@ def CreateMenu():
 
     ## Modeling tools
     modelM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Modeling')
-    pm.menuItem(label="Proxy Slicer", command=partial(mGear_proxySlicer.slice))
-    pm.menuItem(label="Proxy Slicer Parenting", command=partial(mGear_proxySlicer.slice, True))
+    pm.menuItem(label="Proxy Slicer", command=partial(rigbits.proxySlicer.slice))
+    pm.menuItem(label="Proxy Slicer Parenting", command=partial(rigbits.proxySlicer.slice, True))
 
     ## Animation Tools
     animationM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Animation')

@@ -25,4 +25,4 @@
 # Date:       2016 / 10 / 10
 
 from mgear.maya.rigbits.postSpring import *
-print("[mgear] DEPRECATED: You should import mgear.maya.rigbits.rope instead of mGear_postSpring.")
+print("[mgear] DEPRECATED: You should import mgear.maya.rigbits.postSpring instead of mGear_postSpring.")
