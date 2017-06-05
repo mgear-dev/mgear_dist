@@ -28,9 +28,7 @@ from functools import partial
 import pymel.core as pm
 
 #mGear Tools
-import mGear_postSpring
 import mGear_proxySlicer
-import mGear_rope
 import mGear_guidesTemplates
 import mGear_utils
 
@@ -121,10 +119,8 @@ def CreateMenu():
     pm.menuItem(label="connect S", command=partial(rigbits.connectLocalTransform, None, 1, 0, 0))
     pm.setParent(riggingM, menu=True)
     pm.menuItem( divider=True )
-    pm.menuItem(label="Spring", command=partial(mGear_postSpring.spring_UI))
-    pm.menuItem(label="Rope", command=partial(mGear_rope.rope_UI))
-
-    
+    pm.menuItem(label="Spring", command=partial(rigbits.postSpring.spring_UI))
+    pm.menuItem(label="Rope", command=partial(rigbits.rope.rope_UI))
 
     ## skinning tools
     skinM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Skinning')
@@ -135,7 +131,6 @@ def CreateMenu():
     pm.menuItem(label="Export Skin", command=partial(skin.exportSkin, None, None))
     pm.menuItem( divider=True )
     pm.menuItem(label="Get Names in gSkin File", command=partial(skin.getObjsFromSkinFile, None, False))
-
 
     ## Modeling tools
     modelM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Modeling')
@@ -150,7 +145,6 @@ def CreateMenu():
     pm.menuItem(label="Characterize Biped", command=partial(mGear_mocapTools.characterizeBiped))
     pm.menuItem(label="Bake Mocap Biped", command=partial(mGear_mocapTools.bakeMocap))
 
-
     ## util Tools
     pm.setParent(mGearM, menu=True)
     pm.menuItem( divider=True )
@@ -160,4 +154,3 @@ def CreateMenu():
     pm.menuItem(label="Compile PyQt ui", command=partial(mGear_utils.ui2py, None))
     pm.menuItem( divider=True )
     pm.menuItem(label="Create mGear Hotkeys", command=partial(mGear_utils.createHotkeys, None))
-
