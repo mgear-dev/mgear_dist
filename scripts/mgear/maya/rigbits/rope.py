@@ -28,7 +28,7 @@ import pymel.core as pm
 
 
 import mgear.maya.applyop as aop
-import mGear_riggingTools as rt
+import mgear.maya.rigbits as rt
 
 
 def rope(DEF_nb=10, ropeName="rope",  keepRatio=False, lvlType="transform", oSel=None):

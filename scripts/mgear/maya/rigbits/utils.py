@@ -273,7 +273,7 @@ walkParent()
 
 '''
 
-    createRunTimeCommand("mGear_walkTransformChild", rCmd, ann="")
+    createRunTimeCommand("mGear_walkTransformParent", rCmd, ann="")
 
     # walk transform Left
     rCmd = '''
