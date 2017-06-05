@@ -123,9 +123,8 @@ class ikfkMatchButton(QtWidgets.QPushButton):
 
         ik = str(self.property("ik"))
         upv = str(self.property("upv"))
-        try:
-            ikRot = str(self.property("ikRot"))
-        except:
+        ikRot = str(self.property("ikRot"))
+        if ikRot == "None":
             ikRot = None
 
         if mouse_button == QtCore.Qt.RightButton:

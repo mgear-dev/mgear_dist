@@ -825,6 +825,10 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
                       startFrame, endFrame, onlyKeyframes=True):
         # type: (str, List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], int, int, bool) -> None
 
+        # Temporaly turn off cycle check to avoid misleading cycle message
+        # TODO: review if we can clean the cycle message without deactivating the message
+        pm.cycleCheck(e=False)
+
         channels = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
         worldMatrixList = self.getWorldMatrices(startFrame, endFrame, val_src_nodes)
         keyframeList = list(set(pm.keyframe(key_src_nodes, at=["t", "r", "s"], q=True)))
@@ -850,6 +854,7 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
 
             pm.setKeyframe(key_dst_nodes, at=channels)
 
+        pm.cycleCheck(e=True)
 
 # ================================================
 # Transfer space
