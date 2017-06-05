@@ -24,5 +24,5 @@
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
 
-print("[mgear] DEPRECATED: You should import mgear.maya.rigbits instead of mGear_riggingTools.")
 from mgear.maya.rigbits import *
+print("[mgear] DEPRECATED: You should import mgear.maya.rigbits instead of mGear_riggingTools.")

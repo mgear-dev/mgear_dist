@@ -101,7 +101,7 @@ def deleteInstances(dialog, checkinstance):
         checkinstance (QDialog): The instance to check the type of dialog.
 
     """
-    
+
     mayaMainWindow = maya_main_window()
     for obj in mayaMainWindow.children():
         if type( obj ) == checkinstance:
@@ -109,21 +109,13 @@ def deleteInstances(dialog, checkinstance):
                 print 'Deleting instance {0}'.format(obj)
                 mayaMainWindow.removeDockWidget(obj)
                 obj.setParent(None)
-                obj.deleteLater()        
-
-
-def createStandardContextMenu(lineEdit):
-        menu = QLineEdit.createStandardContextMenu(self.lineEdit())
-        menu.addSeparator()
-        menu.addAction(_('&Edit authors'), self.edit_authors)
-        return menu
-
+                obj.deleteLater()
 
 def fakeTranslate(*args):
     """
-    fake QApplication.translate. This function helps to bypass the incompativility 
+    fake QApplication.translate. This function helps to bypass the incompativility
     for the Unicode utf8  deprecated in pyside2
-    
+
 
     """
 
