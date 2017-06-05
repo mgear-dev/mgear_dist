@@ -179,7 +179,7 @@ class Component(MainComponent):
         # We have at least one division at the start, the end and one for the elbow. + 2 for elbow angle control
         self.divisions = self.settings["div0"] + self.settings["div1"] + 3 + 2
 
-        self.div_cns = []        
+        self.div_cns = []
         for i in range(self.divisions):
 
             div_cns = pri.addTransform(self.root, self.getName("div%s_loc" % i))
@@ -198,7 +198,14 @@ class Component(MainComponent):
         self.match_fk1_off = pri.addTransform(self.root, self.getName("matchFk1_npo"), tra.getTransform(self.fk_ctl[2]))
         # self.match_fk1_off.attr("tx").set(1.0)
         self.match_fk1 = pri.addTransform(self.match_fk1_off, self.getName("fk1_mth"), tra.getTransform(self.fk_ctl[1]))
-        self.match_fk2 = pri.addTransform(self.ik_ctl, self.getName("fk2_mth"), tra.getTransform(self.fk_ctl[2]))
+
+        if self.settings["ikTR"]:
+            reference = self.ikRot_ctl
+            self.match_ikRot = pri.addTransform(self.fk2_ctl, self.getName("ikRot_mth"), tra.getTransform(self.ikRot_ctl))
+        else:
+            reference = self.ik_ctl
+
+        self.match_fk2 = pri.addTransform(reference, self.getName("fk2_mth"), tra.getTransform(self.fk_ctl[2]))
 
         self.match_ik = pri.addTransform(self.fk2_ctl, self.getName("ik_mth"), tra.getTransform(self.ik_ctl))
         self.match_ikUpv = pri.addTransform(self.fk0_ctl, self.getName("upv_mth"), tra.getTransform(self.upv_ctl))
@@ -223,7 +230,7 @@ class Component(MainComponent):
             ref_names = self.settings["ikrefarray"].split(",")
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
-        
+
         if self.settings["ikTR"]:
             ref_names = ["Auto", "ik_ctl"]
             if self.settings["ikrefarray"]:
@@ -301,28 +308,28 @@ class Component(MainComponent):
         if self.settings["ikTR"]:
             #connect the control inputs
             outEff_dm = node.listConnections(c=True)[-1][1]
-                
-            outEff_dm.attr("outputTranslate") >> self.ikRot_npo.attr("translate")
-            outEff_dm.attr("outputScale") >> self.ikRot_npo.attr("scale") 
-            dm_node = nod.createDecomposeMatrixNode(node.attr("outB"))
-            dm_node.attr("outputRotate") >> self.ikRot_npo.attr("rotate") 
 
-             #rotation
+            outEff_dm.attr("outputTranslate") >> self.ikRot_npo.attr("translate")
+            outEff_dm.attr("outputScale") >> self.ikRot_npo.attr("scale")
+            dm_node = nod.createDecomposeMatrixNode(node.attr("outB"))
+            dm_node.attr("outputRotate") >> self.ikRot_npo.attr("rotate")
+
+            #rotation
 
             # intM_node = aop.gear_intmatrix_op(node.attr("outEff"), self.ikRot_ctl.attr("worldMatrix"), node.attr("blend"))
             # mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
-            # dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output")) 
+            # dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
             mulM_node = aop.gear_mulmatrix_op(self.ikRot_ctl.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
             intM_node = aop.gear_intmatrix_op(node.attr("outEff"), mulM_node.attr("output"), node.attr("blend"))
             dm_node = nod.createDecomposeMatrixNode(intM_node.attr("output"))
-            dm_node.attr("outputRotate") >> self.eff_loc.attr("rotate") 
-            
+            dm_node.attr("outputRotate") >> self.eff_loc.attr("rotate")
+
         #scale: this fix the scalin popping issue
         intM_node = aop.gear_intmatrix_op(self.fk2_ctl.attr("worldMatrix"), self.ik_ctl.attr("worldMatrix"),  node.attr("blend"))
         mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
         dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
-        dm_node.attr("outputScale") >> self.eff_loc.attr("scale") 
-        
+        dm_node.attr("outputScale") >> self.eff_loc.attr("scale")
+
 
         pm.connectAttr(self.blend_att, node+".blend")
         pm.connectAttr(self.roll_att, node+".roll")
@@ -416,6 +423,9 @@ class Component(MainComponent):
         # match IK/FK ref
         pm.parentConstraint(self.bone0, self.match_fk0_off, mo=True)
         pm.parentConstraint(self.bone1, self.match_fk1_off, mo=True)
+        if self.settings["ikTR"]:
+            tra.matchWorldTransform(self.ikRot_ctl,self.match_ikRot )
+            tra.matchWorldTransform(self.fk_ctl[2], self.match_fk2 )
 
         return
 
@@ -438,12 +448,12 @@ class Component(MainComponent):
     ## standard connection definition.
     # @param self
     def connect_standard(self):
-        
+
         if self.settings["ikTR"]:
             self.parent.addChild(self.root)
             self.connectRef(self.settings["ikrefarray"], self.ik_cns)
             self.connectRef(self.settings["upvrefarray"], self.upv_cns, True)
-            
+
             if self.settings["ikrefarray"]:
                 ikRotRefArray = "Auto,ik_ctl,"+self.settings["ikrefarray"]
             else:
