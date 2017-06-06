@@ -447,6 +447,8 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
         tra.matchWorldTransform(upvTarget, upvCtrl)
         oAttr.set(1.0)
 
+        roll_att = uiNode.attr(ikfk_attr.replace("blend", "roll"))
+        roll_att.set(0.0)
 
 ##################################################
 # POSE
