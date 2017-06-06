@@ -119,9 +119,9 @@ class Component(MainComponent):
 
         #IK rotation controls
         if self.settings["ikTR"]:
-            self.ikRot_npo = pri.addTransform(self.root, self.getName("ikRot_npo"), m)
-            self.ikRot_cns = pri.addTransform(self.ikRot_npo, self.getName("ikRot_cns"), m)
-            self.ikRot_ctl = self.addCtl(self.ikRot_cns, "ikRot_ctl", m, self.color_ik, "sphere", w=self.size*.12)
+            self.ikRot_npo = pri.addTransform(self.root, self.getName("ikRot_npo"), t)
+            self.ikRot_cns = pri.addTransform(self.ikRot_npo, self.getName("ikRot_cns"), t)
+            self.ikRot_ctl = self.addCtl(self.ikRot_cns, "ikRot_ctl", t, self.color_ik, "sphere", w=self.size*.12)
             att.setKeyableAttributes(self.ikRot_ctl, ["rx", "ry", "rz"])
 
 
@@ -177,7 +177,7 @@ class Component(MainComponent):
         # We have at least one division at the start, the end and one for the elbow. + 2 for elbow angle control
         self.divisions = self.settings["div0"] + self.settings["div1"] + 3 + 2
 
-        self.div_cns = []        
+        self.div_cns = []
         for i in range(self.divisions):
 
             div_cns = pri.addTransform(self.root, self.getName("div%s_loc" % i))
@@ -221,7 +221,7 @@ class Component(MainComponent):
             ref_names = self.settings["ikrefarray"].split(",")
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
-        
+
         if self.settings["ikTR"]:
             ref_names = ["Auto", "ik_ctl"]
             if self.settings["ikrefarray"]:
@@ -293,28 +293,32 @@ class Component(MainComponent):
         if self.settings["ikTR"]:
             #connect the control inputs
             outEff_dm = node.listConnections(c=True)[-1][1]
-                
-            outEff_dm.attr("outputTranslate") >> self.ikRot_npo.attr("translate")
-            outEff_dm.attr("outputScale") >> self.ikRot_npo.attr("scale") 
-            dm_node = nod.createDecomposeMatrixNode(node.attr("outB"))
-            dm_node.attr("outputRotate") >> self.ikRot_npo.attr("rotate") 
 
-             #rotation
+            outEff_dm.attr("outputTranslate") >> self.ikRot_npo.attr("translate")
+            outEff_dm.attr("outputScale") >> self.ikRot_npo.attr("scale")
+            # mulM_node = aop.gear_mulmatrix_op(node.attr("outB"), self.ikRot_npo.attr("parentInverseMatrix"))
+            # dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
+            dm_node = nod.createDecomposeMatrixNode(node.attr("outB"))
+            dm_node.attr("outputRotate") >> self.ikRot_npo.attr("rotate")
+
+            #rotation
 
             # intM_node = aop.gear_intmatrix_op(node.attr("outEff"), self.ikRot_ctl.attr("worldMatrix"), node.attr("blend"))
             # mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
-            # dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output")) 
+            # dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
             mulM_node = aop.gear_mulmatrix_op(self.ikRot_ctl.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
             intM_node = aop.gear_intmatrix_op(node.attr("outEff"), mulM_node.attr("output"), node.attr("blend"))
             dm_node = nod.createDecomposeMatrixNode(intM_node.attr("output"))
-            dm_node.attr("outputRotate") >> self.eff_loc.attr("rotate") 
-            
+            dm_node.attr("outputRotate") >> self.eff_loc.attr("rotate")
+
+            tra.matchWorldTransform(self.fk2_ctl, self.ikRot_cns)
+
         #scale: this fix the scalin popping issue
         intM_node = aop.gear_intmatrix_op(self.fk2_ctl.attr("worldMatrix"), self.ik_ctl.attr("worldMatrix"),  node.attr("blend"))
         mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
         dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
-        dm_node.attr("outputScale") >> self.eff_loc.attr("scale") 
-        
+        dm_node.attr("outputScale") >> self.eff_loc.attr("scale")
+
 
         pm.connectAttr(self.blend_att, node+".blend")
         pm.connectAttr(self.roll_att, node+".roll")
@@ -430,7 +434,7 @@ class Component(MainComponent):
     ## standard connection definition.
     # @param self
     def connect_standard(self):
-        
+
         if self.settings["ikTR"]:
             self.parent.addChild(self.root)
             self.connectRef(self.settings["ikrefarray"], self.ik_cns)

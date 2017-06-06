@@ -323,6 +323,7 @@ class Component(MainComponent):
             intM_node = aop.gear_intmatrix_op(node.attr("outEff"), mulM_node.attr("output"), node.attr("blend"))
             dm_node = nod.createDecomposeMatrixNode(intM_node.attr("output"))
             dm_node.attr("outputRotate") >> self.eff_loc.attr("rotate")
+            tra.matchWorldTransform(self.fk2_ctl, self.ikRot_cns)
 
         #scale: this fix the scalin popping issue
         intM_node = aop.gear_intmatrix_op(self.fk2_ctl.attr("worldMatrix"), self.ik_ctl.attr("worldMatrix"),  node.attr("blend"))
