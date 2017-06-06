@@ -946,6 +946,10 @@ class IkFkTransfer(AbstractAnimationTransfer):
         # type: () -> str
         return "{}.{}".format(self.getHostName(), self.switchedAttrShortName)
 
+    def getChangeRollAttrName(self):
+        # type: () -> str
+        return "{}.{}".format(self.getHostName(), self.switchedAttrShortName.replace("blend", "roll"))
+
     def changeAttrToBoundValue(self):
         # type: () -> None
         pm.setAttr(self.getChangeAttrName(), self.getValue())
@@ -1024,6 +1028,11 @@ class IkFkTransfer(AbstractAnimationTransfer):
                     val_src_nodes.append(self.ikRotTarget)
                     key_dst_nodes.append(self.ikRotCtl)
 
+                # reset roll channel:
+                roll_att = self.getChangeRollAttrName()
+                pm.cutKey(roll_att, time=(startFrame, endFrame), cl=True)
+                pm.setAttr(roll_att, 0)
+
         else:
             if self.comboBoxSpaces.currentIndex() != 0:  # to FK
 
@@ -1041,6 +1050,11 @@ class IkFkTransfer(AbstractAnimationTransfer):
                 if ikRot:
                     val_src_nodes.append(self.ikRotTarget)
                     key_dst_nodes.append(self.ikRotCtl)
+
+                # reset roll channel:
+                roll_att = self.getChangeRollAttrName()
+                pm.cutKey(roll_att, time=(startFrame, endFrame))
+                pm.setAttr(roll_att, 0)
 
         self.bakeAnimation(self.getChangeAttrName(), val_src_nodes, key_src_nodes, key_dst_nodes,
                            startFrame, endFrame, onlyKeyframes)
