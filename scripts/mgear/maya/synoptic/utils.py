@@ -31,6 +31,7 @@
 
 
 import pymel.core as pm
+from pymel import versions
 import maya.mel as mel
 import maya.OpenMayaUI as omui
 from functools import partial
@@ -827,9 +828,10 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
                       startFrame, endFrame, onlyKeyframes=True):
         # type: (str, List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], int, int, bool) -> None
 
-        # Temporaly turn off cycle check to avoid misleading cycle message
-        # TODO: review if we can clean the cycle message without deactivating the message
-        # pm.cycleCheck(e=False)
+        # Temporaly turn off cycle check to avoid misleading cycle message on Maya 2016.  With Maya 2016.5 and 2017 the cycle warning doesn't show up
+        if versions.current() < 201650:
+            pm.cycleCheck(e=False)
+            pm.displayWarning("Maya version older than: 2016.5: CycleCheck temporal turn OFF")
 
         channels = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
         worldMatrixList = self.getWorldMatrices(startFrame, endFrame, val_src_nodes)
@@ -856,7 +858,9 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
 
             pm.setKeyframe(key_dst_nodes, at=channels)
 
-        # pm.cycleCheck(e=True)
+        if versions.current() < 201650:
+            pm.cycleCheck(e=True)
+            pm.displayWarning("CycleCheck turned back ON")
 
 # ================================================
 # Transfer space
