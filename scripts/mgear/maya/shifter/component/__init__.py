@@ -119,6 +119,8 @@ class MainComponent(object):
         self.jnt_pos = []
         self.jointList = []
 
+        self.transform2Lock = []
+
         # --------------------------------------------------
         # Step
         self.stepMethods = [eval("self.step_0%s"%i) for i in range(len(self.steps))]
@@ -362,6 +364,10 @@ class MainComponent(object):
         att.addAttribute(ctl, "invSz", "bool", 0,  keyable=False, niceName="Invert Mirror SZ")
 
         self.addToGroup(ctl, "controllers")
+
+        #lock the control parent attributes if is not a control
+        if parent not in self.groups["controllers"]:
+            self.transform2Lock.append(parent)
 
         return ctl
 
@@ -863,6 +869,9 @@ class MainComponent(object):
         """
         Finalize and clean the rig builing.
         """
+        #locking the attributes for all the ctl parents that are not ctl itself.
+        for t in self.transform2Lock:
+            att.lockAttribute(t)
         #TODO: clean jnt_org transforms without childs
         return
 
