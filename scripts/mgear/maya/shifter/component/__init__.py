@@ -872,7 +872,7 @@ class MainComponent(object):
         #locking the attributes for all the ctl parents that are not ctl itself.
         for t in self.transform2Lock:
             att.lockAttribute(t)
-        #TODO: clean jnt_org transforms without childs
+
         return
 
     def postScript(self):
