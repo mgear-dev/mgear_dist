@@ -91,11 +91,11 @@ class Component(MainComponent):
         self.teethlow_ctl = self.addCtl(self.teethlow_npo, "teethlow_ctl", t, self.color_fk, "square", w=.7)
 
 
-        self.jnt_pos.append([self.jawLow_rot, "jaw", "parent_relative_jnt"])
-        self.jnt_pos.append([self.lipup_ctl, "lipup", "parent_relative_jnt"])
-        self.jnt_pos.append([self.liplow_ctl, "liplow", "jaw"]) # relative 0 is the jaw jnt
-        self.jnt_pos.append([self.teethup_ctl, "teethup", "parent_relative_jnt"])
-        self.jnt_pos.append([self.teethlow_ctl, "teethlow", "jaw"])
+        self.jnt_pos.append([self.jawLow_rot, "jaw", "parent_relative_jnt", False])
+        self.jnt_pos.append([self.lipup_ctl, "lipup", "parent_relative_jnt", False])
+        self.jnt_pos.append([self.liplow_ctl, "liplow", "jaw", False]) # relative 0 is the jaw jnt
+        self.jnt_pos.append([self.teethup_ctl, "teethup", "parent_relative_jnt", False])
+        self.jnt_pos.append([self.teethlow_ctl, "teethlow", "jaw", False])
 
 
 
