@@ -77,7 +77,7 @@ def createHotkeys(*args):
     rCmd = '''
 import pymel.core as pm
 import mgear.maya.shifter.gui as gui
-import import mgear.maya.rigbits as rigbits
+import mgear.maya.rigbits as rigbits
 if isinstance(pm.selected()[0], pm.MeshFace):
     pm.polyExtrudeFacet(constructionHistory=True,keepFacesTogether=True )
 else:
@@ -94,7 +94,7 @@ else:
     rCmd = '''
 import pymel.core as pm
 import mgear.maya.shifter.gui as gui
-import import mgear.maya.rigbits as rigbits
+import mgear.maya.rigbits as rigbits
 if isinstance(pm.selected()[0], pm.MeshFace):
     pm.polyExtrudeFacet(constructionHistory=True,keepFacesTogether=True )
 else:
@@ -163,6 +163,7 @@ else:
 
     # toggle visibility Softimage style
     rCmd = '''
+import pymel.core as pm
 for obj in pm.selected():
     if pm.selected()[0].nodeType() == "transform":
 
