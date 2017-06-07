@@ -462,4 +462,5 @@ class Component(MainComponent):
         else:
             self.connect_standardWithIkRef()
 
-        self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
+        if self.settings["pinrefarray"]:
+            self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
