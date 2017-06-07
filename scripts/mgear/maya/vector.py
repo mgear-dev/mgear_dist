@@ -65,7 +65,7 @@ def getDistance2(obj0, obj1):
         obj0 (dagNode): Object A
         obj1 (dagNode): Object B
 
-    Returns:  
+    Returns:
         float: Distance length
     """
     v0 = obj0.getTranslation(space="world")
@@ -239,4 +239,3 @@ class Blade(object):
         self.x = dt.Vector(x.x, x.y, x.z)
         self.y = dt.Vector(y.x, y.y, y.z)
         self.z = dt.Vector(z.x, z.y, z.z)
-

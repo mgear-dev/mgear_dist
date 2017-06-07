@@ -48,14 +48,23 @@ FILE_EXT = ".gSkin"
 ######################################
 
 def getSkinCluster(obj):
-    
+    """
+    Get the skincluster of a given object
+
+    Args:
+        obj (dagNode): The object to get skincluster
+
+    Returns:
+        pyNode: The skin cluster pynode object
+    """
+
     skinCluster = None
 
     if  isinstance(obj, basestring):
         obj = pm.PyNode(obj)
     try:
         if pm.nodeType(obj.getShape()) in ["mesh", "nurbsSurface", "nurbsCurve"]:
-            
+
             for shape in obj.getShapes():
                 try:
                     skinCluster = pm.listHistory(shape, type="skinCluster")[0]
@@ -63,10 +72,20 @@ def getSkinCluster(obj):
                     pass
     except:
         pm.displayWarning("%s: is not supported."% obj.name())
-    
+
     return skinCluster
 
 def getGeometryComponents(skinCls):
+    """
+    Get the geometry components from skincluster
+
+    Args:
+        skinCls (PyNode): The skincluster node
+
+    Returns:
+        dagPath: The dagpath for the components
+        componets: The skincluster componets
+    """
     fnSet = OpenMaya.MFnSet(skinCls.__apimfn__().deformerSet())
     members = OpenMaya.MSelectionList()
     fnSet.getMembers(members, False)
@@ -76,6 +95,17 @@ def getGeometryComponents(skinCls):
     return dagPath, components
 
 def getCurrentWeights(skinCls, dagPath, components):
+    """
+    Get the skincluster weights
+
+    Args:
+        skinCls (PyNode): The skincluster node
+        dagPath (MDagPath): The skincluster dagpath
+        components (MObject): The skincluster components
+
+    Returns:
+        MDoubleArray: The skincluster weights
+    """
     weights = OpenMaya.MDoubleArray()
     util = OpenMaya.MScriptUtil()
     util.createFromInt(0)
@@ -97,7 +127,7 @@ def collectInfluenceWeights(skinCls, dagPath, components, dataDic):
         influenceName = influencePaths[ii].partialPathName()
         influenceWithoutNamespace = pm.PyNode(influenceName).stripNamespace()
         dataDic['weights'][influenceWithoutNamespace] = \
-                [weights[jj*numInfluences+ii] for jj in range(numComponentsPerInfluence)]
+               [weights[jj*numInfluences+ii] for jj in range(numComponentsPerInfluence)]
 
 
 def collectBlendWeights(skinCls, dagPath, components, dataDic):
@@ -131,16 +161,15 @@ def exportSkin(filePath=None, objs=None, *args):
             pm.displayWarning("Please Select One or more objects")
             return False
 
-    packDic = {
-            "objs":[],
-            "objDDic":[],
-            "bypassObj":[]
-            }
+    packDic = { "objs":[],
+                "objDDic":[],
+                "bypassObj":[]
+                }
 
     if not filePath:
         startDir = pm.workspace(q=True, rootDirectory=True)
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir,
-                                    fileFilter='mGear Skin (*%s)' % FILE_EXT)
+                                  fileFilter='mGear Skin (*%s)' % FILE_EXT)
         filePath = filePath[0]
     if not filePath:
         return False
@@ -156,13 +185,12 @@ def exportSkin(filePath=None, objs=None, *args):
             pass
         else:
 
-            dataDic = {
-                'weights':{},
-                'blendWeights':[],
-                'skinClsName':"",
-                'objName':"",
-                'nameSpace':""
-                }
+            dataDic = { 'weights':{},
+                        'blendWeights':[],
+                        'skinClsName':"",
+                        'objName':"",
+                        'nameSpace':""
+                        }
 
             dataDic["objName"] = obj.name()
             dataDic["nameSpace"] = obj.namespace()
@@ -173,7 +201,7 @@ def exportSkin(filePath=None, objs=None, *args):
             packDic["objs"].append(obj.name())
             packDic["objDDic"].append(dataDic)
             pm.displayInfo( 'Exported skinCluster %s (%d influences, %d vertices) %s' % ( skinCls.name(),
-            len(dataDic['weights'].keys()), len(dataDic['blendWeights']), obj.name()))
+                            len(dataDic['weights'].keys()), len(dataDic['blendWeights']), obj.name()))
 
 
     fh = open(filePath, 'wb')
@@ -235,7 +263,7 @@ def getObjsFromSkinFile(filePath=None, *args):
     if not filePath:
         startDir = pm.workspace(q=True, rootDirectory=True)
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir,
-                                    fileFilter='mGear Skin (*%s)' % FILE_EXT)
+                                  fileFilter='mGear Skin (*%s)' % FILE_EXT)
     if not filePath:
         return
     if not isinstance(filePath, basestring):
@@ -253,7 +281,7 @@ def importSkin(filePath=None, *args):
     if not filePath:
         startDir = pm.workspace(q=True, rootDirectory=True)
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir,
-                                    fileFilter='mGear Skin (*%s)' % FILE_EXT)
+                                  fileFilter='mGear Skin (*%s)' % FILE_EXT)
     if not filePath:
         return
     if not isinstance(filePath, basestring):
@@ -275,7 +303,7 @@ def importSkin(filePath=None, *args):
             importedVertices = len(data['blendWeights'])
             if meshVertices != importedVertices:
                 pm.displayWarning('Vertex counts do not match. %d != %d' %
-                        (meshVertices, importedVertices))
+                                  (meshVertices, importedVertices))
                 continue
 
             if  getSkinCluster(objNode):
@@ -286,8 +314,7 @@ def importSkin(filePath=None, *args):
                     skinCluster = pm.skinCluster(joints, objNode, tsb=True, nw=2, n=data['skinClsName'])
                 except:
                     notFound = data['weights'].keys()
-                    sceneJoints = set([pm.PyNode(x).name()
-                              for x in pm.ls(type='joint')])
+                    sceneJoints = set([pm.PyNode(x).name() for x in pm.ls(type='joint')])
 
                     for j in notFound:
                         if j in sceneJoints:
@@ -347,6 +374,3 @@ def selectDeformers(*args):
             pm.displayError("Select one object with skinCluster")
     else:
         pm.displayWarning("Select one object with skinCluster")
-
-
-

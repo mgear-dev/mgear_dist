@@ -43,6 +43,7 @@ def resetJntLocalSRT(jnt):
         pm.setAttr(jnt+".rotate"+axis, 0)
         pm.setAttr(jnt+".translate"+axis, 0)
 
+
 def doritosMagic(mesh, joint, jointBase, parent=None):
     #magic of doritos connection
     skinCluster = ski.getSkinCluster(mesh)
@@ -65,7 +66,6 @@ def doritosMagic(mesh, joint, jointBase, parent=None):
             if x.name().split(".")[0] == skinCluster.name():
                 # We force to avoid errors in case the joint is already connected
                 pm.connectAttr(jointBase + ".worldInverseMatrix[0]", skinCluster + ".bindPreMatrix["+str(x.index())+"]", f=True)
-
 
 
 def createJntTweak(mesh, parentJnt, ctlParent):
@@ -98,7 +98,6 @@ def createJntTweak(mesh, parentJnt, ctlParent):
         pm.connectAttr(iconBase + t, jointBase + t)
         pm.connectAttr(icon + t, joint + t)
 
-
     #magic of doritos connection
     for m in mesh:
         doritosMagic(m, joint, jointBase)
@@ -108,18 +107,13 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
 
     blendShape = bsp.getBlendShape(mesh)
 
-
     inputMesh = blendShape.listConnections(sh=True, t="shape", d=False)[0]
 
     oRivet = rvt.rivet()
     base = oRivet.create(inputMesh, edgePair[0], edgePair[1], parent)
 
-
     name = name + "_tweak"
     pm.rename(base, name)
-
-    #connection ctlParent
-
 
     #Joints NPO
     npo = pm.PyNode(pm.createNode("transform", n=name+"_npo", p=ctlParent, ss=True))
@@ -159,7 +153,6 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
     for t in [".translate", ".scale", ".rotate"]:
         pm.connectAttr(icon + t, joint + t)
 
-
     #magic of doritos connection
     doritosMagic(mesh, joint)
 
@@ -177,13 +170,10 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
     pm.parent(p, pp)
 
 
-
-
 def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlParent=None):
 
     for i, pair in enumerate(edgeIndexPairList):
         createRivetTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent)
-
 
 
 def createRivetTweakLayer(layerMesh, bst, edgeList, tweakName, parent=None, ctlParent=None):

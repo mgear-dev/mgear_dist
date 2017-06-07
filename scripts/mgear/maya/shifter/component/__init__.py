@@ -25,7 +25,7 @@
 # Date:       2016 / 10 / 10
 
 """
-Shifter component rig class. 
+Shifter component rig class.
 """
 
 #############################################
@@ -279,13 +279,14 @@ class MainComponent(object):
 
             m = mulmat_node.attr('matrixSum').get()
             im = m.inverse()
-            mulmat_node2 = nod.createMultMatrixNode(mulmat_node.attr('matrixSum'), im, jnt,'r')
+            nod.createMultMatrixNode(mulmat_node.attr('matrixSum'), im, jnt,'r')
 
         else:
             jnt = pri.addJoint(obj, self.getName(str(name)+"_jnt"), tra.getTransform(obj))
             pm.connectAttr(self.rig.jntVis_att, jnt.attr("visibility"))
 
         self.addToGroup(jnt, "deformers")
+
         return jnt
 
 
@@ -721,7 +722,7 @@ class MainComponent(object):
         Connect the cns_obj to a multiple object using parentConstraint.
 
         Args:
-            refArray (string): List of driver objects divided by ",". 
+            refArray (string): List of driver objects divided by ",".
             cns_obj (dagNode): The driven object.
             upVAttr (bool): Set if the ref Array is for IK or Up vector
             init_ref (list of dagNode): Set the initial default ref connections
@@ -741,7 +742,7 @@ class MainComponent(object):
                     else:
                         ref.append(self.rig.findRelative(ref_name))
                 if init_ref:
-                    ref = init_ref + ref 
+                    ref = init_ref + ref
                 ref.append(cns_obj)
                 if skipTranslate:
                     cns_node = pm.parentConstraint(*ref, maintainOffset=True, skipTranslate=["x","y","z"])

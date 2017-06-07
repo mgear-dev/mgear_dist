@@ -96,7 +96,7 @@ def addAttribute(node, longName, attributeType, value, niceName=None, shortName=
 
 
 def addColorAttribute(node, longName, value=False, keyable=True, readable=True, storable=True,
-                        writable=True, niceName=None, shortName=None):
+                      writable=True, niceName=None, shortName=None):
 
     """
     Add a color attribute to a node
@@ -246,7 +246,7 @@ def setNotKeyableAttributes(nodes, attributes=["tx", "ty", "tz", "ro", "rx", "ry
 
     Args:
         node(dagNode): The node with the attributes to set keyable.
-        attributes (list of str): The list of the attributes to set not keyable. 
+        attributes (list of str): The list of the attributes to set not keyable.
     """
 
     if not isinstance(nodes, list):

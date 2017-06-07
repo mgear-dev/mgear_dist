@@ -118,7 +118,6 @@ def ghostSlider(ghostControls, surface, sliderParent):
     #Seleccionamos los controles Ghost que queremos mover sobre el surface
 
     surfaceShape = surface.getShape()
-    # sliderParent = pm.PyNode("mouth_setup")
 
     for ctlGhost in ghostControls:
         ctl = pm.listConnections(ctlGhost, t="transform")[-1]
@@ -160,9 +159,6 @@ def ghostSlider(ghostControls, surface, sliderParent):
         dm_node.attr("outputTranslate") >> cps_node.attr("inPosition")
         surfaceShape.attr("worldSpace[0]") >> cps_node.attr("inputSurface")
         cps_node.attr("position") >> slider.attr("translate")
-
-
-        #normalConstraint -weight 1 -aimVector 0 0 1 -upVector 0 1 0 -worldUpType "objectrotation" -worldUpVector 0 1 0 -worldUpObject eyebrow_R0_ctl_slideDriver_ghost;
 
         pm.normalConstraint(surfaceShape, slider, aimVector=[0,0,1] , upVector=[0,1,0], worldUpType="objectrotation", worldUpVector=[0,1,0], worldUpObject=gDriver)
 

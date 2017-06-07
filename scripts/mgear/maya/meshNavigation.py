@@ -70,16 +70,16 @@ def getExtremeVertexFromLoop(edgeList=None):
 
     for x in vertexList:
         pos = x.getPosition(space='world')
-        if maxX == None or pos[0] > maxX:
+        if maxX is None or pos[0] > maxX:
             maxX = pos[0]
             outPos = x
-        if maxY == None or pos[1] > maxY:
+        if maxY is None or pos[1] > maxY:
             maxY = pos[1]
             upPos = x
-        if minX == None or pos[0] < minX:
+        if minX is None or pos[0] < minX:
             minX = pos[0]
             inPos = x
-        if minY == None or pos[1] < minY:
+        if minY is None or pos[1] < minY:
             minY = pos[1]
             lowPos = x
     return upPos,lowPos,inPos,outPos, edgeList, vertexList

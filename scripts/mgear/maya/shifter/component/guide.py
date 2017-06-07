@@ -54,17 +54,13 @@ import mgear.maya.pyqt as gqt
 
 
 from mgear.maya.shifter.guide import MainGuide
-from mgear.maya.shifter.guide import RigGuide
 from mgear.maya.shifter.guide import helperSlots
 import mgear.maya.shifter.gui as gui
 
-
-
-from maya.app.general.mayaMixin import MayaQDockWidget
+import mainSettingsUI as msui
 
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
-import mainSettingsUI as msui
 
 
 ##########################################################
@@ -799,19 +795,17 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         self.create_layout()
         self.create_connections()
 
-        
 
     def create_controls(self):
         """
         Create the controls for the component base
-        
+
         """
         self.tabs = QtWidgets.QTabWidget()
         self.tabs.setObjectName("settings_tab")
 
         # Close Button
         self.close_button = QtWidgets.QPushButton("Close")
-
 
 
     def populate_controls(self):
@@ -836,12 +830,10 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         self.mainSettingsTab.host_lineEdit.setText(self.root.attr("ui_host").get())
 
 
-
-
     def create_layout(self):
         """
         Create the layout for the component base settings
-        
+
         """
         return
 
@@ -849,9 +841,9 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
     def create_connections(self):
         """
         Create the slots connections to the controls functions
-        
+
         """
-        self.close_button.clicked.connect(self.close_settings)     
+        self.close_button.clicked.connect(self.close_settings)
 
         self.mainSettingsTab.name_lineEdit.editingFinished.connect(self.updateComponentName )
         self.mainSettingsTab.side_comboBox.currentIndexChanged.connect(self.updateComponentName )
@@ -859,5 +851,3 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         self.mainSettingsTab.useJointIndex_checkBox.stateChanged.connect(partial(self.updateCheck, self.mainSettingsTab.useJointIndex_checkBox, "useIndex"))
         self.mainSettingsTab.parentJointIndex_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.mainSettingsTab.parentJointIndex_spinBox, "parentJointIndex"))
         self.mainSettingsTab.host_pushButton.clicked.connect(partial(self.updateHostUI, self.mainSettingsTab.host_lineEdit, "ui_host"))
-
-
