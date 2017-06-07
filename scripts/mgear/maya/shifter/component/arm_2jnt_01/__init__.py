@@ -296,16 +296,13 @@ class Component(MainComponent):
 
             outEff_dm.attr("outputTranslate") >> self.ikRot_npo.attr("translate")
             outEff_dm.attr("outputScale") >> self.ikRot_npo.attr("scale")
-            # mulM_node = aop.gear_mulmatrix_op(node.attr("outB"), self.ikRot_npo.attr("parentInverseMatrix"))
-            # dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
+
             dm_node = nod.createDecomposeMatrixNode(node.attr("outB"))
             dm_node.attr("outputRotate") >> self.ikRot_npo.attr("rotate")
 
             #rotation
 
-            # intM_node = aop.gear_intmatrix_op(node.attr("outEff"), self.ikRot_ctl.attr("worldMatrix"), node.attr("blend"))
-            # mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
-            # dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
+
             mulM_node = aop.gear_mulmatrix_op(self.ikRot_ctl.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
             intM_node = aop.gear_intmatrix_op(node.attr("outEff"), mulM_node.attr("output"), node.attr("blend"))
             dm_node = nod.createDecomposeMatrixNode(intM_node.attr("output"))
@@ -321,7 +318,11 @@ class Component(MainComponent):
 
 
         pm.connectAttr(self.blend_att, node+".blend")
-        pm.connectAttr(self.roll_att, node+".roll")
+        if self.negate:
+            mulVal = -1
+        else:
+            mulVal = 1
+        nod.createMulNode(self.roll_att, mulVal, node+".roll")
         pm.connectAttr(self.scale_att, node+".scaleA")
         pm.connectAttr(self.scale_att, node+".scaleB")
         pm.connectAttr(self.maxstretch_att, node+".maxstretch")

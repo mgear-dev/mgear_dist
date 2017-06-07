@@ -51,7 +51,7 @@ class Component(MainComponent):
     def addObjects(self):
 
 
-        
+
         self.WIP = self.options["mode"]
 
 
@@ -145,10 +145,8 @@ class Component(MainComponent):
 
         #match IK FK references
         self.match_fk0_off = pri.addTransform(self.root, self.getName("matchFk0_npo"), tra.getTransform(self.fk_ctl[1]))
-        # self.match_fk0_off.attr("tx").set(1.0)
         self.match_fk0 = pri.addTransform(self.match_fk0_off, self.getName("fk0_mth"), tra.getTransform(self.fk_ctl[0]))
         self.match_fk1_off = pri.addTransform(self.root, self.getName("matchFk1_npo"), tra.getTransform(self.fk_ctl[2]))
-        # self.match_fk1_off.attr("tx").set(1.0)
         self.match_fk1 = pri.addTransform(self.match_fk1_off, self.getName("fk1_mth"), tra.getTransform(self.fk_ctl[1]))
         self.match_fk2 = pri.addTransform(self.ik_ctl, self.getName("fk2_mth"), tra.getTransform(self.fk_ctl[2]))
 
@@ -338,7 +336,11 @@ class Component(MainComponent):
         node = aop.gear_ikfk2bone_op(out, self.root, self.ik_ref, self.upv_ctl, self.fk_ctl[0], self.fk_ctl[1], self.fk_ref, self.length0, self.length1, self.negate)
 
         pm.connectAttr(self.blend_att, node+".blend")
-        pm.connectAttr(self.roll_att, node+".roll")
+        if self.negate:
+            mulVal = -1
+        else:
+            mulVal = 1
+        nod.createMulNode(self.roll_att, mulVal, node+".roll")
         pm.connectAttr(self.scale_att, node+".scaleA")
         pm.connectAttr(self.scale_att, node+".scaleB")
         pm.connectAttr(self.maxstretch_att, node+".maxstretch")
@@ -509,7 +511,7 @@ class Component(MainComponent):
 
         # return
 
-        # NOTE: next line fix the issue on meters. 
+        # NOTE: next line fix the issue on meters.
         # This is special case becasuse the IK solver from mGear use the scale as lenght and we have shear
         # TODO: check for a more clean and elegant solution instead of re-match the world matrix again
         tra.matchWorldTransform(self.fk_ctl[0], self.match_fk0_off)
@@ -541,4 +543,4 @@ class Component(MainComponent):
     ## standard connection definition.
     # @param self
     def connect_standard(self):
-        self.connect_standardWithIkRef()     
+        self.connect_standardWithIkRef()

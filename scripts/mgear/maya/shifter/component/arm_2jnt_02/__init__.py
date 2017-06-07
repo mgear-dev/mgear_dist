@@ -193,10 +193,8 @@ class Component(MainComponent):
         self.jnt_pos.append([self.eff_loc, 'end'])
         #match IK FK references
         self.match_fk0_off = pri.addTransform(self.root, self.getName("matchFk0_npo"), tra.getTransform(self.fk_ctl[1]))
-        # self.match_fk0_off.attr("tx").set(1.0)
         self.match_fk0 = pri.addTransform(self.match_fk0_off, self.getName("fk0_mth"), tra.getTransform(self.fk_ctl[0]))
         self.match_fk1_off = pri.addTransform(self.root, self.getName("matchFk1_npo"), tra.getTransform(self.fk_ctl[2]))
-        # self.match_fk1_off.attr("tx").set(1.0)
         self.match_fk1 = pri.addTransform(self.match_fk1_off, self.getName("fk1_mth"), tra.getTransform(self.fk_ctl[1]))
 
         if self.settings["ikTR"]:
@@ -316,9 +314,6 @@ class Component(MainComponent):
 
             #rotation
 
-            # intM_node = aop.gear_intmatrix_op(node.attr("outEff"), self.ikRot_ctl.attr("worldMatrix"), node.attr("blend"))
-            # mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
-            # dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
             mulM_node = aop.gear_mulmatrix_op(self.ikRot_ctl.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
             intM_node = aop.gear_intmatrix_op(node.attr("outEff"), mulM_node.attr("output"), node.attr("blend"))
             dm_node = nod.createDecomposeMatrixNode(intM_node.attr("output"))
@@ -333,7 +328,11 @@ class Component(MainComponent):
 
 
         pm.connectAttr(self.blend_att, node+".blend")
-        pm.connectAttr(self.roll_att, node+".roll")
+        if self.negate:
+            mulVal = -1
+        else:
+            mulVal = 1
+        nod.createMulNode(self.roll_att, mulVal, node+".roll")
         pm.connectAttr(self.scale_att, node+".scaleA")
         pm.connectAttr(self.scale_att, node+".scaleB")
         pm.connectAttr(self.maxstretch_att, node+".maxstretch")
