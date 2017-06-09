@@ -23,6 +23,7 @@
 # Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
+
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
