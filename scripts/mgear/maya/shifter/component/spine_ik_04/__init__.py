@@ -53,8 +53,9 @@ class Component(MainComponent):
         self.WIP = self.options["mode"]
 
         # Auto bend with position controls  ------------------------------------
-        self.autoBendChain= pri.add2DChain(self.root, self.getName("autoBend%s_jnt"), [self.guide.apos[0],self.guide.apos[1]], self.guide.blades["blade"].z*-1, False, self.WIP)
-
+        self.autoBendChain= pri.add2DChain(self.root, self.getName("autoBend%s_jnt"), [self.guide.apos[0],self.guide.apos[1]], self.guide.blades["blade"].z*-1, False, True)
+        for j in self.autoBendChain:
+            j.drawStyle.set(2)
 
         # Ik Controlers ------------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.guide.blades["blade"].z * -1, "yx", self.negate)
