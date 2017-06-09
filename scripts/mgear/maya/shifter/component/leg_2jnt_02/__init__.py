@@ -222,7 +222,7 @@ class Component(MainComponent):
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
 
-        ref_names = ["Auto", "ikFoot"] 
+        ref_names = ["Auto", "ikFoot"]
         if self.settings["upvrefarray"]:
             ref_names = ref_names + self.settings["upvrefarray"].split(",")
         self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
@@ -365,7 +365,7 @@ class Component(MainComponent):
 
 
 
-        # NOTE: next line fix the issue on meters. 
+        # NOTE: next line fix the issue on meters.
         # This is special case becasuse the IK solver from mGear use the scale as lenght and we have shear
         # TODO: check for a more clean and elegant solution instead of re-match the world matrix again
         # tra.matchWorldTransform(self.fk_ctl[0], self.match_fk0_off)
@@ -407,4 +407,5 @@ class Component(MainComponent):
         else:
             self.connectRef("Auto,ikFoot", self.upv_cns, True)
 
-        self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
+        if self.settings["pinrefarray"]:
+            self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
