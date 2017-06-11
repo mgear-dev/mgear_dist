@@ -161,7 +161,7 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
 
 
     #magic of doritos connection
-    doritosMagic(mesh, joint)
+    doritosMagic(mesh, joint, jointBase)
 
     # reset axis and inver behaviour
     for axis in "XYZ":
