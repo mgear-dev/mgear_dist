@@ -57,8 +57,8 @@ class Component(MainComponent):
         self.eye_npo = pri.addTransform(self.root, self.getName("eye_npo"), t)
         self.eyeFK_ctl = self.addCtl(self.eye_npo, "fk_ctl", t, self.color_fk, "arrow", w=1)
         # sq st controls
-        self.sqUp_ctl = self.addCtl(self.root, "squashUp_ctl", t, self.color_ik, "arrow", w=.1)
-        self.sqLow_ctl = self.addCtl(self.root, "squashDown_ctl", t, self.color_ik, "arrow", w=.1)
+        # self.sqUp_ctl = self.addCtl(self.root, "squashUp_ctl", t, self.color_ik, "arrow", w=.1)
+        # self.sqLow_ctl = self.addCtl(self.root, "squashDown_ctl", t, self.color_ik, "arrow", w=.1)
 
         # look at
         t = tra.getTransformFromPos(self.guide.pos["look"])
@@ -67,11 +67,11 @@ class Component(MainComponent):
         self.eyeIK_ctl = self.addCtl(self.eyeIK_npo, "ik_ctl", t, self.color_fk, "circle", w=.5)
 
         self.jnt_pos.append([self.eyeFK_ctl, "eye", "parent_relative_jnt"])
-        self.jnt_pos.append([self.eyeOver_ctl, "eyeOver", "parent_relative_jnt"])
+        self.jnt_pos.append([self.eyeOver_ctl, "eyeOver", "parent_relative_jnt", False])
 
         #Envelopes for lattice
-        self.jnt_pos.append([self.sqUp_ctl, "LatticeSqUp", "parent_relative_jnt"])
-        self.jnt_pos.append([self.sqLow_ctl, "LatticeSqLow", "parent_relative_jnt"])
+        # self.jnt_pos.append([self.sqUp_ctl, "LatticeSqUp", "parent_relative_jnt"])
+        # self.jnt_pos.append([self.sqLow_ctl, "LatticeSqLow", "parent_relative_jnt"])
 
 
     # =====================================================
