@@ -29,7 +29,6 @@
 ##################################################
 import os
 
-# import maya.OpenMayaUI as mui
 import pymel.core as pm
 
 from maya.app.general.mayaMixin import MayaQDockWidget
@@ -41,7 +40,6 @@ import mgear.maya.utils
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
-# TAB_PATH = os.path.join(os.path.dirname(__file__), "tabs")
 SYNOPTIC_WIDGET_NAME = "synoptic_view"
 SYNOPTIC_ENV_KEY = "MGEAR_SYNOPTIC_PATH"
 
@@ -180,7 +178,7 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
     # Singal Methods =============================
     def updateModelList(self):
-        # avoiding unnecessory firing currentIndexChanged event before finish to model_list
+        # avoiding unnecessary firing currentIndexChanged event before finish to model_list
         try:
             self.model_list.currentIndexChanged.disconnect()
         except RuntimeError:
@@ -201,7 +199,6 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         for i in range(self.tabs.count()):
             self.tabs.widget(i).close()
         self.tabs.clear()
-        # defPath = os.environ.get("MGEAR_SYNOPTIC_PATH", None)
 
         # safety clean of  synoticTab script jobs
         # this is neded when we switch models witout close synopticwindow.
@@ -274,8 +271,6 @@ class Synoptic(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
         spacer_left = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         spacer_right = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        # spacer_left.setObjectName("spacer_left")  # QSpacerItem has not this props...
-        # spacer_right.setObjectName("spacer_right")
         wrapperWidget.setSpacerLeft(spacer_left)
 
         horizontalLayout.addItem(spacer_left)

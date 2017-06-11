@@ -27,10 +27,12 @@
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
+
+
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(402, 408)
+        Form.resize(402, 529)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.mainSettings_groupBox = QtWidgets.QGroupBox(Form)
@@ -140,6 +142,8 @@ class Ui_Form(object):
         self.horizontalLayout_2.addWidget(self.host_pushButton)
         self.gridLayout_2.addLayout(self.horizontalLayout_2, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.groupBox, 2, 0, 1, 1)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout.addItem(spacerItem, 3, 0, 1, 1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -160,4 +164,3 @@ class Ui_Form(object):
         self.groupBox.setTitle(gqt.fakeTranslate("Form", "Channels Host Settings", None, -1))
         self.host_label.setText(gqt.fakeTranslate("Form", "Host:", None, -1))
         self.host_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
-

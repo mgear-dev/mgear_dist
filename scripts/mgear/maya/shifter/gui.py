@@ -34,26 +34,15 @@ from functools import partial
 
 # pymel
 import pymel.core as pm
-import pymel.core.datatypes as dt
 
 # mgear
 import mgear
-import mgear.maya.attribute as att
-import mgear.maya.dag as dag
-import mgear.maya.vector as vec
-
 import mgear.maya.shifter as shifter
 import mgear.maya.skin as skin
-
 import mgear.maya.pyqt as gqt
-
-import mgear.maya.shifter.component as comp
-
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"
-
-# VERSION = 2.0
 
 
 ##############################
@@ -95,7 +84,7 @@ class Guide_UI(object):
         pm.setParent( '..' )
 
         self.ui_tabs = pm.tabLayout(width=panelWeight, innerMarginWidth=5, innerMarginHeight=5)
-        tabWidth = pm.tabLayout(self.ui_tabs, q=True, width=True)
+        pm.tabLayout(self.ui_tabs, q=True, width=True)
 
         #
         self.ui_compColumn = pm.columnLayout(adj=True, rs=3)
@@ -132,11 +121,11 @@ class Guide_UI(object):
 
                 buttonSize = 25
                 textDesc = "Name: "+module.NAME+"\nType:: "+module.TYPE+"\n===========\nAuthor: "+module.AUTHOR+"\nWeb: "+module.URL+\
-                        "\nEmail: "+module.EMAIL+"\n===========\nDescription:\n"+module.DESCRIPTION
+                           "\nEmail: "+module.EMAIL+"\n===========\nDescription:\n"+module.DESCRIPTION
 
-                row = pm.rowLayout(numberOfColumns=2, columnWidth=([1, buttonSize]), adjustableColumn=2, columnAttach=([1, "both", 0], [2, "both", 5]))
+                pm.rowLayout(numberOfColumns=2, columnWidth=([1, buttonSize]), adjustableColumn=2, columnAttach=([1, "both", 0], [2, "both", 5]))
                 pm.symbolButton(ann=textDesc, width=buttonSize, height=buttonSize, bgc=[0,0,0], ebg=False, i=image, command=partial(self.drawComp, module.TYPE))
-                textColumn = pm.columnLayout(columnAlign="center")
+                pm.columnLayout(columnAlign="center")
                 pm.text(align="center", width=panelWeight*.6, label=module.TYPE, ann=textDesc, fn="plainLabelFont")
 
                 pm.setParent(self.ui_compList_column)
@@ -158,7 +147,7 @@ class Guide_UI(object):
 
         guide.drawNewComponent(parent, compType)
 
-        
+
     def buildFromSelection(self, *args):
 
         print mgear.logInfos()
@@ -197,14 +186,11 @@ class Guide_UI(object):
             root = root.getParent()
             pm.select(root)
 
- 
+
         if comp_type:
-            # try:
             guide = shifter.importComponentGuide(comp_type)
             gqt.showDialog(guide.componentSettings)
 
-            # except:
-            #     pm.displayError("Component of type: %s Loading fail"%comp_type)
         elif guide_root:
             module_name = "mgear.maya.shifter.guide"
             guide = __import__(module_name, globals(), locals(), ["*"], -1)
@@ -232,7 +218,7 @@ class Guide_UI(object):
         def skinLoad(root, *args):
             startDir = root.attr("skin").get()
             filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir,
-                                        fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
+                                      fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
             if not filePath:
                 return
             if not isinstance(filePath, basestring):
@@ -294,10 +280,6 @@ class Guide_UI(object):
                     pm.formLayout(fl, e=1, af=(pSide, "left", 90))
                     oriVal = root.attr("comp_side").get()
                     pSide.setValue(oriVal )
-                    # if oriVal in sideSet:
-                    #     pSide.setValue(oriVal )
-                    # else:
-                    #     pSide.setValue(sideSet[0])
                 elif attr == "mode":
                     fl = pm.formLayout()
                     pMode = pm.optionMenu(l="mode")

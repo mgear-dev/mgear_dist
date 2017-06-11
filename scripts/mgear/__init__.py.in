@@ -33,7 +33,9 @@ mGear init module.
 ##########################################################
 # built-in
 import os
-import sys, string, exceptions
+import sys
+import string
+import exceptions
 
 # Debug mode for the logger
 logDebug = False
@@ -191,7 +193,7 @@ def getInfos(level):
 
     Args:
         level (int): Level
-    
+
     Returns:
         str: The info
     """

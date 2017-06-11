@@ -51,7 +51,7 @@ class Component(MainComponent):
     def addObjects(self):
 
 
-        
+
         self.WIP = self.options["mode"]
 
 
@@ -165,8 +165,6 @@ class Component(MainComponent):
         self.eff_loc  = pri.addTransformFromPos(self.root, self.getName("eff_loc"), self.guide.apos[2])
 
         # Mid Controler ------------------------------------
-        # self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
-        # att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
 
         t = tra.getTransform(self.ctrn_loc)
         self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
@@ -275,7 +273,7 @@ class Component(MainComponent):
         self.elbowTangent_npo = pri.addTransform(self.mid_ctl, self.getName("elbowTangent_npo"), t)
         self.elbowTangent_ctl = self.addCtl(self.elbowTangent_npo, "elbowTangent_ctl", t, self.color_fk, "circle", w=self.size*.15, ro=dt.Vector(0,0,1.570796))
 
-       
+
     def addAttributes(self):
 
         # Anim -------------------------------------------
@@ -296,13 +294,6 @@ class Component(MainComponent):
             ref_names = self.settings["ikrefarray"].split(",")
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
-
-        # if self.settings["upvrefarray"]:
-        #     ref_names = self.settings["upvrefarray"].split(",")
-        #     if len(ref_names) > 1:
-        #         self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, self.settings["upvrefarray"].split(","))
-        # else:
-        #     self.upvref_att = None
 
         if self.settings["upvrefarray"]:
             ref_names = self.settings["upvrefarray"].split(",")
@@ -363,25 +354,19 @@ class Component(MainComponent):
         # IK Solver -----------------------------------------
         out = [self.bone0, self.bone1, self.ctrn_loc, self.eff_loc]
         node = aop.gear_ikfk2bone_op(out, self.root, self.ik_ref, self.upv_ctl, self.fk_ctl[0], self.fk_ctl[1], self.fk_ref, self.length0, self.length1, self.negate)
-
-        # pm.connectAttr(self.blend_att, node+".blend")
-        # pm.connectAttr(self.roll_att, node+".roll")
-        # pm.connectAttr(self.scale_att, node+".scaleA")
-        # pm.connectAttr(self.scale_att, node+".scaleB")
-        # pm.connectAttr(self.maxstretch_att, node+".maxstretch")
-        # pm.connectAttr(self.slide_att, node+".slide")
-        # pm.connectAttr(self.softness_att, node+".softness")
-        # pm.connectAttr(self.reverse_att, node+".reverse")
-
         #scale: this fix the scalin popping issue
         intM_node = aop.gear_intmatrix_op(self.fk2_ctl.attr("worldMatrix"), self.ik_ctl.attr("worldMatrix"),  node.attr("blend"))
         mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
         dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
-        dm_node.attr("outputScale") >> self.eff_loc.attr("scale") 
-        
+        dm_node.attr("outputScale") >> self.eff_loc.attr("scale")
+
 
         pm.connectAttr(self.blend_att, node+".blend")
-        pm.connectAttr(self.roll_att, node+".roll")
+        if self.negate:
+            mulVal = -1
+        else:
+            mulVal = 1
+        nod.createMulNode(self.roll_att, mulVal, node+".roll")
         pm.connectAttr(self.scale_att, node+".scaleA")
         pm.connectAttr(self.scale_att, node+".scaleB")
         pm.connectAttr(self.maxstretch_att, node+".maxstretch")
@@ -552,7 +537,7 @@ class Component(MainComponent):
 
         # return
 
-        # NOTE: next line fix the issue on meters. 
+        # NOTE: next line fix the issue on meters.
         # This is special case becasuse the IK solver from mGear use the scale as lenght and we have shear
         # TODO: check for a more clean and elegant solution instead of re-match the world matrix again
         tra.matchWorldTransform(self.fk_ctl[0], self.match_fk0_off)
@@ -587,4 +572,3 @@ class Component(MainComponent):
         self.connect_standardWithIkRef()
         if self.settings["pinrefarray"]:
             self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
-    

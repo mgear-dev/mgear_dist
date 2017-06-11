@@ -385,7 +385,7 @@ def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
 
     oAttr = node.attr(combo_attr)
 
-    oVal = oAttr.set(cnsIndex)
+    oAttr.set(cnsIndex)
     ctl.setMatrix(sWM, worldSpace=True)
 
 
@@ -514,16 +514,6 @@ def gatherMirrorData(nameSpace, node, flip):
         return calculateMirrorData(node, oTarget, flip=flip)
 
     else:
-        '''
-        if not node.attr("tx").isLocked():
-            results.append({"target": node, "attr": "tx", "val": node.attr("tx").get() * -1})
-
-        if not node.attr("ry").isLocked():
-            results.append({"target": node, "attr": "ry", "val": node.attr("ry").get() * -1})
-
-        if not node.attr("rz").isLocked():
-            results.append({"target": node, "attr": "rz", "val": node.attr("rz").get() * -1})
-        '''
         return calculateMirrorData(node, node, flip=False)
 
 

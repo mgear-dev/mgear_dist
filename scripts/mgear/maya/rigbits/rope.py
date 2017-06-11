@@ -104,7 +104,9 @@ def rope(DEF_nb=10, ropeName="rope",  keepRatio=False, lvlType="transform", oSel
         shd = rt.addJnt(oTrans)
         shds.append(shd[0])
         i += step
+
     return shds
+
 
 def rope_UI(*args):
     """
