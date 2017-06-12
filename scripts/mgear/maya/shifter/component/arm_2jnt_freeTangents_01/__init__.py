@@ -113,7 +113,13 @@ class Component(MainComponent):
         self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
         self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
-        att.setInvertMirror(self.upv_ctl, ["tx"])
+
+        if self.settings["mirrorMid"]:
+            if self.negate:
+                self.upv_cns.rz.set(180)
+                self.upv_cns.sy.set(-1)
+        else:
+            att.setInvertMirror(self.upv_ctl, ["tx"])
 
         # References --------------------------------------
         # Calculate  again the transfor for the IK ref. This way align with FK
@@ -149,10 +155,8 @@ class Component(MainComponent):
 
         #match IK FK references
         self.match_fk0_off = pri.addTransform(self.root, self.getName("matchFk0_npo"), tra.getTransform(self.fk_ctl[1]))
-        # self.match_fk0_off.attr("tx").set(1.0)
         self.match_fk0 = pri.addTransform(self.match_fk0_off, self.getName("fk0_mth"), tra.getTransform(self.fk_ctl[0]))
         self.match_fk1_off = pri.addTransform(self.root, self.getName("matchFk1_npo"), tra.getTransform(self.fk_ctl[2]))
-        # self.match_fk1_off.attr("tx").set(1.0)
         self.match_fk1 = pri.addTransform(self.match_fk1_off, self.getName("fk1_mth"), tra.getTransform(self.fk_ctl[1]))
         self.match_fk2 = pri.addTransform(self.ik_ctl, self.getName("fk2_mth"), tra.getTransform(self.fk_ctl[2]))
 
@@ -169,7 +173,12 @@ class Component(MainComponent):
         t = tra.getTransform(self.ctrn_loc)
         self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
         self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
-        att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
+        if self.settings["mirrorMid"]:
+            if self.negate:
+                self.mid_cns.rz.set(180)
+                self.mid_cns.sz.set(-1)
+        else:
+            att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
 
         #Roll join ref---------------------------------
         self.tws0_loc = pri.addTransform(self.root, self.getName("tws0_loc"), tra.getTransform(self.fk_ctl[0]))
