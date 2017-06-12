@@ -253,25 +253,40 @@ class Component(MainComponent):
         self.armTangentA_loc = pri.addTransform(self.root, self.getName("armTangentA_loc"), self.fk_ctl[0].getMatrix(worldSpace=True))
         self.armTangentA_npo = pri.addTransform(self.armTangentA_loc, self.getName("armTangentA_npo"), t)
         self.armTangentA_ctl = self.addCtl(self.armTangentA_npo, "armTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.armTangentA_npo.rz.set(180)
+            self.armTangentA_npo.sz.set(-1)
 
         t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .9)
         self.armTangentB_npo = pri.addTransform(self.tws1A_loc, self.getName("armTangentB_npo"), t)
         self.armTangentB_ctl = self.addCtl(self.armTangentB_npo, "armTangentB_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.armTangentB_npo.rz.set(180)
+            self.armTangentB_npo.sz.set(-1)
 
         tC = self.tws1B_npo.getMatrix(worldSpace=True)
         tC = tra.setMatrixPosition(tC, self.guide.apos[2])
         t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .1)
         self.forearmTangentA_npo = pri.addTransform(self.tws1B_loc, self.getName("forearmTangentA_npo"), t)
         self.forearmTangentA_ctl = self.addCtl(self.forearmTangentA_npo, "forearmTangentA_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.forearmTangentA_npo.rz.set(180)
+            self.forearmTangentA_npo.sz.set(-1)
 
         t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .5)
         self.forearmTangentB_loc = pri.addTransform(self.root, self.getName("forearmTangentB_loc"), tC)
         self.forearmTangentB_npo = pri.addTransform(self.forearmTangentB_loc, self.getName("forearmTangentB_npo"), t)
         self.forearmTangentB_ctl = self.addCtl(self.forearmTangentB_npo, "forearmTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.forearmTangentB_npo.rz.set(180)
+            self.forearmTangentB_npo.sz.set(-1)
 
         t = self.mid_ctl.getMatrix(worldSpace=True)
         self.elbowTangent_npo = pri.addTransform(self.mid_ctl, self.getName("elbowTangent_npo"), t)
         self.elbowTangent_ctl = self.addCtl(self.elbowTangent_npo, "elbowTangent_ctl", t, self.color_fk, "circle", w=self.size*.15, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.elbowTangent_npo.rz.set(180)
+            self.elbowTangent_npo.sz.set(-1)
 
 
     def addAttributes(self):
