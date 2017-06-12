@@ -50,7 +50,7 @@ import mgear.maya.fcurve as fcu
 class Component(MainComponent):
 
     def addObjects(self):
-       
+
         self.setup = pri.addTransformFromPos(self.setupWS,  self.getName("WS"))
         att.lockAttribute(self.setup)
 
@@ -123,7 +123,7 @@ class Component(MainComponent):
             att.setInvertMirror(x, ["tx", "ty", "tz"])
 
         # IK controls --------------------------------------------------------
-        
+
         #foot IK
 
         if self.settings["ikOri"]:
@@ -142,11 +142,11 @@ class Component(MainComponent):
         att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
         att.lockAttribute(self.ik_ctl, ["sx", "sy", "sz", "v"])
 
-        # 2 bones ik layer    
+        # 2 bones ik layer
         self.ik2b_ikCtl_ref = pri.addTransform(self.ik_ctl, self.getName("ik2B_A_ref"), t)
         self.ik2b_bone_ref = pri.addTransform(self.chain3bones[3], self.getName("ik2B_B_ref"), t)
         self.ik2b_blend = pri.addTransform(self.ik_ctl, self.getName("ik2B_blend"), t)
-        
+
         self.roll_ctl = self.addCtl(self.ik2b_blend, "roll_ctl", t, self.color_ik, "crossarrow", w=self.length2*.5*self.n_factor)
         self.ik2b_ik_npo = pri.addTransform(self.roll_ctl, self.getName("ik2B_ik_npo"), tra.getTransform(self.chain3bones[-1]))
         self.ik2b_ik_ref = pri.addTransformFromPos(self.ik2b_ik_npo, self.getName("ik2B_ik_ref"), self.guide.pos["ankle"])
@@ -164,7 +164,7 @@ class Component(MainComponent):
 
         self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
         att.setInvertMirror(self.upv_ctl, ["tx"])
- 
+
         # Soft IK objects 3 bones chain --------------------------------------------------------------------------------------------
         t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["foot"], self.x_axis, "zx", False)
         self.aim_tra = pri.addTransform(self.root_ctl, self.getName("aimSoftIK"), t)
@@ -174,7 +174,7 @@ class Component(MainComponent):
 
         self.softblendLoc = pri.addTransform(self.root, self.getName("softblendLoc"), t)
 
-        # Soft IK objects 2 Bones chain --------------------------------------------------------------------------------------------        
+        # Soft IK objects 2 Bones chain --------------------------------------------------------------------------------------------
         t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["ankle"], self.x_axis, "zx", False)
         self.aim_tra2 = pri.addTransform(self.root_ctl, self.getName("aimSoftIK2"), t)
 
@@ -298,7 +298,7 @@ class Component(MainComponent):
         for xjnt, midJ in zip(self.legBones[1:3], [self.mid1_jnt, self.mid2_jnt]):
             nod.createPairBlend(None, xjnt, .5, 1, midJ)
             pm.connectAttr(xjnt+".translate", midJ+".translate", f=True)
-            
+
         pm.parentConstraint(self.mid1_jnt, self.knee_lvl)
         pm.parentConstraint(self.mid2_jnt, self.ankle_lvl)
 
@@ -308,17 +308,17 @@ class Component(MainComponent):
         multJnt3_node = nod.createMulNode(self.boneCLenght_attr, self.boneCLenghtMult_attr)
 
         # # IK 3 bones ======================================================================================================
-        
+
         self.ikHandle = pri.addIkHandle(self.softblendLoc, self.getName("ik3BonesHandle"), self.chain3bones, self.ikSolver, self.upv_ctl)
-        
+
         # TwistTest
         if [round(elem, 4) for elem in tra.getTranslation(self.chain3bones[1])] != [round(elem, 4) for elem in  self.guide.apos[1]]:
             add_nodeTwist = nod.createAddNode(180.0, self.roll_att)
             pm.connectAttr(add_nodeTwist+".output", self.ikHandle.attr("twist"))
         else:
             pm.connectAttr(self.roll_att, self.ikHandle.attr("twist"))
-        
-        # stable spring solver doble rotation 
+
+        # stable spring solver doble rotation
         pm.pointConstraint(self.root_ctl, self.chain3bones[0])
 
         # softIK 3 bones operators
@@ -328,7 +328,7 @@ class Component(MainComponent):
         subtract1_node = nod.createPlusMinusAverage1D([plusTotalLength_node.attr("output1D"), self.soft_attr],2)
 
         distance1_node = nod.createDistNode(self.ik_ref, self.aim_tra)
-        div1_node = nod.createDivNode(1.0, self.rig.global_ctl+".sx")      
+        div1_node = nod.createDivNode(1.0, self.rig.global_ctl+".sx")
         mult1_node = nod.createMulNode(distance1_node+".distance", div1_node+".outputX")
         subtract2_node = nod.createPlusMinusAverage1D([mult1_node.attr("outputX"), subtract1_node.attr("output1D")],2)
         div2_node = nod.createDivNode(subtract2_node+".output1D", self.soft_attr)
@@ -350,7 +350,7 @@ class Component(MainComponent):
         #Stretch
         distance2_node = nod.createDistNode(self.softblendLoc, self.wristSoftIK)
         mult4_node = nod.createMulNode(distance2_node+".distance", div1_node+".outputX")
-     
+
         #bones
         for i, mulNode in enumerate([multJnt1_node, multJnt2_node, multJnt3_node]):
             div3_node = nod.createDivNode(mulNode+".outputX", plusTotalLength_node+".output1D")
@@ -365,9 +365,9 @@ class Component(MainComponent):
         self.ikHandle2 = pri.addIkHandle(self.softblendLoc2, self.getName("ik2BonesHandle"), self.chain2bones, self.ikSolver, self.upv_ctl)
         pm.connectAttr(self.roll_att, self.ikHandle2.attr("twist"))
 
-        # stable spring solver doble rotation 
+        # stable spring solver doble rotation
         pm.pointConstraint(self.root_ctl, self.chain2bones[0])
- 
+
         parentc_node = pm.parentConstraint( self.ik2b_ikCtl_ref, self.ik2b_bone_ref, self.ik2b_blend)
         reverse_node = nod.createReverseNode(self.fullIK_attr,  parentc_node+".target[0].targetWeight")
         pm.connectAttr(self.fullIK_attr, parentc_node+".target[1].targetWeight", f=True)
@@ -411,7 +411,7 @@ class Component(MainComponent):
 
 
 
-        ###  IK/FK connections 
+        ###  IK/FK connections
 
         for i, x in enumerate(self.fk_ctl):
             pm.parentConstraint( x, self.legBonesFK[i], mo=True)
@@ -445,15 +445,20 @@ class Component(MainComponent):
         multTangent_node = nod.createMulNode(self.roundnessKnee_att, multVal)
         add_node = nod.createAddNode(multTangent_node+".outputX", initRound)
         pm.connectAttr(add_node+".output", self.tws1_rot.attr("sx"))
-        for x in ["translate", "rotate"]:
+        # for x in ["translate", "rotate"]:
+        for x in ["translate"]:
             pm.connectAttr(self.knee_ctl.attr(x), self.tws1_loc.attr(x))
+        for x in "xy":
+            pm.connectAttr(self.knee_ctl.attr("r"+x), self.tws1_loc.attr("r"+x))
 
         multTangent_node = nod.createMulNode(self.roundnessAnkle_att, multVal)
         add_node = nod.createAddNode(multTangent_node+".outputX", initRound)
         pm.connectAttr(add_node+".output", self.tws2_rot.attr("sx"))
-        # for x in ["translate"]:
-        for x in ["translate", "rotate"]:
+        # for x in ["translate", "rotate"]:
+        for x in ["translate"]:
             pm.connectAttr(self.ankle_ctl.attr(x), self.tws2_loc.attr(x))
+        for x in "xy":
+            pm.connectAttr(self.ankle_ctl.attr("r"+x), self.tws2_loc.attr("r"+x))
 
 
         # Volume -------------------------------------------
@@ -475,7 +480,7 @@ class Component(MainComponent):
         # Flip Offset ----------------------------------------
         pm.connectAttr(self.ankleFlipOffset_att, self.tws2_loc.attr("rz"))
         pm.connectAttr(self.kneeFlipOffset_att, self.tws1_loc.attr("rz"))
-        # Divisions ----------------------------------------        
+        # Divisions ----------------------------------------
         # at 0 or 1 the division will follow exactly the rotation of the controler.. and we wont have this nice tangent + roll
         for i, div_cns in enumerate(self.div_cns):
             subdiv = False
@@ -492,7 +497,7 @@ class Component(MainComponent):
             else:
                 perc = .5 + (i-self.settings["div0"]-3.0)*.5 / (self.settings["div1"]+1.0)
 
-            if i < (self.settings["div0"]+2):        
+            if i < (self.settings["div0"]+2):
                 perc = i*.333 / (self.settings["div0"]+1.0)
 
             elif i < (self.settings["div0"] + self.settings["div1"]+3):
