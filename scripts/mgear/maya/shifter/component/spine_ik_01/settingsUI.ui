@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>259</width>
-    <height>223</height>
+    <height>227</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -213,6 +213,34 @@
             </property>
             <property name="value">
              <number>2</number>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="autoBend_checkBox">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="autoBend_label">
+            <property name="text">
+             <string>Auto Bend Control</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QCheckBox" name="centralTangent_checkBox">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="centralTangent_label">
+            <property name="text">
+             <string>Central Tangent</string>
             </property>
            </widget>
           </item>

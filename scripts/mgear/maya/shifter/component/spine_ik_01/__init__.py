@@ -50,6 +50,12 @@ class Component(MainComponent):
 
     def addObjects(self):
 
+        # Auto bend with position controls  ------------------------------------
+        if self.settings["autoBend"]:
+            self.autoBendChain= pri.add2DChain(self.root, self.getName("autoBend%s_jnt"), [self.guide.apos[0],self.guide.apos[1]], self.guide.blades["blade"].z*-1, False, True)
+            for j in self.autoBendChain:
+                j.drawStyle.set(2)
+
         # Ik Controlers ------------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.guide.blades["blade"].z*-1, "yx", self.negate)
         self.ik0_npo = pri.addTransform(self.root, self.getName("ik0_npo"), t)
@@ -58,21 +64,50 @@ class Component(MainComponent):
         att.setRotOrder(self.ik0_ctl, "ZXY")
 
         t = tra.setMatrixPosition(t, self.guide.apos[1])
-        self.ik1_npo = pri.addTransform(self.root, self.getName("ik1_npo"), t)
-        self.ik1_ctl = self.addCtl(self.ik1_npo, "ik1_ctl", t, self.color_ik, "compas", w=self.size)
+        if self.settings["autoBend"]:
+            self.autoBend_npo = pri.addTransform(self.root, self.getName("spinePosition_npo"), t)
+            self.autoBend_ctl = self.addCtl(self.autoBend_npo, "spinePosition_ctl", t, self.color_ik, "square", w=self.size)
+            self.ik1_npo = pri.addTransform(self.autoBendChain[0], self.getName("ik1_npo"), t)
+            self.ik1autoRot_lvl = pri.addTransform(self.ik1_npo, self.getName("ik1autoRot_lvl"), t)
+            self.ik1_ctl = self.addCtl(self.ik1autoRot_lvl, "ik1_ctl", t, self.color_ik, "compas", w=self.size)
+        else:
+            t = tra.setMatrixPosition(t, self.guide.apos[1])
+            self.ik1_npo = pri.addTransform(self.root, self.getName("ik1_npo"), t)
+            self.ik1_ctl = self.addCtl(self.ik1_npo, "ik1_ctl", t, self.color_ik, "compas", w=self.size)
+
         att.setKeyableAttributes(self.ik1_ctl)
         att.setRotOrder(self.ik1_ctl, "ZXY")
 
         # Tangent controllers -------------------------------
-        t = tra.setMatrixPosition(t, vec.linearlyInterpolate(self.guide.apos[0], self.guide.apos[1], .33))
-        self.tan0_npo = pri.addTransform(self.ik0_ctl, self.getName("tan0_npo"), t)
-        self.tan0_ctl = self.addCtl(self.tan0_npo, "tan0_ctl", t, self.color_ik, "sphere", w=self.size*.2)
-        att.setKeyableAttributes(self.tan0_ctl, self.t_params)
+        if self.settings["centralTangent"]:
+            t = tra.setMatrixPosition(t, vec.linearlyInterpolate(self.guide.apos[0], self.guide.apos[1], .33))
+            self.tan0_npo = pri.addTransform(self.ik0_ctl, self.getName("tan0_npo"), t)
+            self.tan0_off = pri.addTransform(self.tan0_npo, self.getName("tan0_off"), t)
+            self.tan0_ctl = self.addCtl(self.tan0_off, "tan0_ctl", t, self.color_ik, "sphere", w=self.size*.1)
+            att.setKeyableAttributes(self.tan0_ctl, self.t_params)
 
-        t = tra.setMatrixPosition(t, vec.linearlyInterpolate(self.guide.apos[0], self.guide.apos[1], .66))
-        self.tan1_npo = pri.addTransform(self.ik1_ctl, self.getName("tan1_npo"), t)
-        self.tan1_ctl = self.addCtl(self.tan1_npo, "tan1_ctl", t, self.color_ik, "sphere", w=self.size*.2)
-        att.setKeyableAttributes(self.tan1_ctl, self.t_params)
+            t = tra.setMatrixPosition(t, vec.linearlyInterpolate(self.guide.apos[0], self.guide.apos[1], .66))
+            self.tan1_npo = pri.addTransform(self.ik1_ctl, self.getName("tan1_npo"), t)
+            self.tan1_off = pri.addTransform(self.tan1_npo, self.getName("tan1_off"), t)
+            self.tan1_ctl = self.addCtl(self.tan1_off, "tan1_ctl", t, self.color_ik, "sphere", w=self.size*.1)
+            att.setKeyableAttributes(self.tan1_ctl, self.t_params)
+
+            # Tangent mid control
+            t = tra.setMatrixPosition(t, vec.linearlyInterpolate(self.guide.apos[0], self.guide.apos[1], .5))
+            self.tan_npo = pri.addTransform(self.tan0_npo, self.getName("tan_npo"), t)
+            self.tan_ctl = self.addCtl(self.tan_npo, "tan_ctl", t, self.color_fk, "sphere", w=self.size*.2)
+            att.setKeyableAttributes(self.tan_ctl, self.t_params)
+
+        else:
+            t = tra.setMatrixPosition(t, vec.linearlyInterpolate(self.guide.apos[0], self.guide.apos[1], .33))
+            self.tan0_npo = pri.addTransform(self.ik0_ctl, self.getName("tan0_npo"), t)
+            self.tan0_ctl = self.addCtl(self.tan0_npo, "tan0_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+            att.setKeyableAttributes(self.tan0_ctl, self.t_params)
+
+            t = tra.setMatrixPosition(t, vec.linearlyInterpolate(self.guide.apos[0], self.guide.apos[1], .66))
+            self.tan1_npo = pri.addTransform(self.ik1_ctl, self.getName("tan1_npo"), t)
+            self.tan1_ctl = self.addCtl(self.tan1_npo, "tan1_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+            att.setKeyableAttributes(self.tan1_ctl, self.t_params)
 
         # Curves -------------------------------------------
         self.mst_crv = cur.addCnsCurve(self.root, self.getName("mst_crv"), [self.ik0_ctl, self.tan0_ctl, self.tan1_ctl, self.ik1_ctl], 3)
@@ -88,7 +123,7 @@ class Component(MainComponent):
         self.div_cns = []
         self.fk_ctl = []
         self.fk_npo = []
-        self.scl_npo = []
+        self.scl_transforms = []
         self.twister = []
         self.ref_twist = []
 
@@ -104,25 +139,25 @@ class Component(MainComponent):
             self.div_cns.append(div_cns)
             parentdiv = div_cns
 
-            scl_npo = pri.addTransform(parentctl, self.getName("%s_scl_npo"%i), tra.getTransform(parentctl))
             # Controlers (First and last one are fake)
             if i in [0, self.settings["division"] - 1]:
-                fk_ctl = pri.addTransform(scl_npo, self.getName("%s_loc"%i), tra.getTransform(parentctl))
+                fk_ctl = pri.addTransform(parentctl, self.getName("%s_loc"%i), tra.getTransform(parentctl))
                 fk_npo = fk_ctl
             else:
-                fk_npo = pri.addTransform(scl_npo, self.getName("fk%s_npo"%(i-1)), tra.getTransform(parentctl))
+                fk_npo = pri.addTransform(parentctl, self.getName("fk%s_npo"%(i-1)), tra.getTransform(parentctl))
                 fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%(i-1), tra.getTransform(parentctl), self.color_fk, "cube", w=self.size, h=self.size*.05, d=self.size)
                 att.setKeyableAttributes(self.fk_ctl)
                 att.setRotOrder(fk_ctl, "ZXY")
 
             # setAttr(fk_npo+".inheritsTransform", False)
-            self.scl_npo.append(scl_npo)
             self.fk_npo.append(fk_npo)
             self.fk_ctl.append(fk_ctl)
             parentctl = fk_ctl
+            scl_ref = pri.addTransform(parentctl, self.getName("%s_scl_ref"%i), tra.getTransform(parentctl))
+            self.scl_transforms.append(scl_ref)
 
             # Deformers (Shadow)
-            self.jnt_pos.append([fk_ctl, i])
+            self.jnt_pos.append([scl_ref, i])
 
             #Twist references (This objects will replace the spinlookup slerp solver behavior)
             t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.guide.blades["blade"].z*-1, "yx", self.negate)
@@ -154,6 +189,10 @@ class Component(MainComponent):
         # Volume
         self.volume_att = self.addAnimParam("volume", "Volume", "double", 1, 0, 1)
 
+        if self.settings["autoBend"]:
+            self.sideBend_att = self.addAnimParam("sideBend", "Side Bend", "double", .5, 0, 2)
+            self.frontBend_att = self.addAnimParam("frontBend", "Front Bend", "double", .5, 0, 2)
+
         # Setup ------------------------------------------
         # Eval Fcurve
         self.st_value = fcu.getFCurveValues(self.settings["st_profile"], self.settings["division"])
@@ -163,6 +202,15 @@ class Component(MainComponent):
         self.sq_att = [ self.addSetupParam("squash_%s"%i, "Squash %s"%i, "double", self.sq_value[i], 0, 1) for i in range(self.settings["division"]) ]
 
     def addOperators(self):
+
+        # Auto bend ----------------------------
+        if self.settings["autoBend"]:
+            mul_node = nod.createMulNode([self.autoBendChain[0].ry, self.autoBendChain[0].rz ], [self.sideBend_att, self.frontBend_att])
+            mul_node.outputX >> self.ik1autoRot_lvl.rz
+            mul_node.outputY >> self.ik1autoRot_lvl.rx
+
+            self.ikHandleAutoBend = pri.addIkHandle(self.autoBend_ctl, self.getName("ikHandleAutoBend"), self.autoBendChain, "ikSCsolver")
+
 
         # Tangent position ---------------------------------
         # common part
@@ -181,6 +229,14 @@ class Component(MainComponent):
         mul_node = nod.createMulNode(self.tan1_att, self.tan1_npo.getAttr("ty"))
         res_node = nod.createMulNode(mul_node+".outputX", div_node+".outputX")
         pm.connectAttr( res_node+".outputX", self.tan1_npo.attr("ty"))
+
+        # Tangent Mid --------------------------------------
+        if self.settings["centralTangent"]:
+            tanIntMat = aop.gear_intmatrix_op(self.tan0_npo.attr("worldMatrix"), self.tan1_npo.attr("worldMatrix"), .5)
+            aop.gear_mulmatrix_op(tanIntMat.attr("output"), self.tan_npo.attr("parentInverseMatrix[0]"), self.tan_npo)
+            pm.connectAttr(self.tan_ctl.attr("translate"), self.tan0_off.attr("translate"))
+            pm.connectAttr(self.tan_ctl.attr("translate"), self.tan1_off.attr("translate"))
+
 
         # Curves -------------------------------------------
         op = aop.gear_curveslide2_op(self.slv_crv, self.mst_crv, 0, 1.5, .5, .5)
@@ -214,40 +270,34 @@ class Component(MainComponent):
 
             pm.connectAttr(self.ref_twist[i]+".translate", cns+".worldUpVector")
 
+            #compensate scale reference
+            div_node = nod.createDivNode([1,1,1], [rootWorld_node+".outputScaleX", rootWorld_node+".outputScaleY", rootWorld_node+".outputScaleZ"])
+
+
             # Squash n Stretch
-            op = aop.gear_squashstretch2_op(self.fk_npo[i], self.root, pm.arclen(self.slv_crv), "y")
+            op = aop.gear_squashstretch2_op(self.scl_transforms[i], self.root, pm.arclen(self.slv_crv), "y", div_node+".output" )
             pm.connectAttr(self.volume_att, op+".blend")
             pm.connectAttr(crv_node+".arcLength", op+".driver")
             pm.connectAttr(self.st_att[i], op+".stretch")
             pm.connectAttr(self.sq_att[i], op+".squash")
 
-            # scl compensation
-
-            if i == 0:
-                dm_node = nod.createDecomposeMatrixNode(self.root+".worldMatrix")
-                div_node = nod.createDivNode([1,1,1], [dm_node+".outputScaleX", dm_node+".outputScaleY", dm_node+".outputScaleZ"])
-                pm.connectAttr(div_node+".output", self.scl_npo[i]+".scale")
-
-            elif i == 1:
-                div_node = nod.createDivNode([1,1,1], [self.fk_npo[i-1]+".sx", self.fk_npo[i-1]+".sy", self.fk_npo[i-1]+".sz"])
-                pm.connectAttr(div_node+".output", self.scl_npo[i]+".scale")
-
-
-            else:
-                div_node = nod.createDivNode([1,1,1], [self.fk_npo[i-1]+".sx", self.fk_npo[i-1]+".sy", self.fk_npo[i-1]+".sz"])
-                pm.connectAttr(div_node+".output", self.scl_npo[i]+".scale")
-
-
             # Controlers
             if i == 0:
                 mulmat_node = aop.gear_mulmatrix_op(self.div_cns[i].attr("worldMatrix"),
-                                                    self.scl_npo[0].attr("worldInverseMatrix"))
+                                                    self.root.attr("worldInverseMatrix"))
+                dm_node = nod.createDecomposeMatrixNode(mulmat_node+".output")
+                pm.connectAttr(dm_node+".outputTranslate", self.fk_npo[i].attr("t"))
+
             else:
                 mulmat_node = aop.gear_mulmatrix_op(self.div_cns[i].attr("worldMatrix"),
                                                     self.div_cns[i - 1].attr("worldInverseMatrix"))
-            dm_node = nod.createDecomposeMatrixNode(mulmat_node+".output")
-            pm.connectAttr(dm_node+".outputTranslate", self.fk_npo[i].attr("t"))
+                dm_node = nod.createDecomposeMatrixNode(mulmat_node+".output")
+                mul_node = nod.createMulNode(div_node+".output", dm_node+".outputTranslate")
+                pm.connectAttr(mul_node+".output", self.fk_npo[i].attr("t"))
+
             pm.connectAttr(dm_node+".outputRotate", self.fk_npo[i].attr("r"))
+
+
 
             # Orientation Lock
             if i == 0 :
