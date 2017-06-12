@@ -98,6 +98,7 @@ class Guide(ComponentGuide):
         self.pUpvRefArray = self.addParam("pinrefarray", "string", "")
         self.pMaxStretch  = self.addParam("maxstretch", "double", 1.5 , 1, None)
         self.pIKTR       = self.addParam("ikTR", "bool", False)
+        self.pMirrorMid = self.addParam("mirrorMid", "bool", False)
 
         # Divisions
         self.pDiv0 = self.addParam("div0", "long", 2, 1, None)
@@ -165,6 +166,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.ikfk_spinBox.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
         self.populateCheck(self.settingsTab.ikTR_checkBox, "ikTR")
+        self.populateCheck(self.settingsTab.mirrorMid_checkBox, "mirrorMid")
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
@@ -195,8 +197,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.div1_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div1_spinBox, "div1"))
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(self.setProfile)
         self.settingsTab.ikTR_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.ikTR_checkBox, "ikTR"))
-
-
+        self.settingsTab.mirrorMid_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.mirrorMid_checkBox, "mirrorMid"))
 
         self.settingsTab.ikRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
         self.settingsTab.ikRefArrayRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))

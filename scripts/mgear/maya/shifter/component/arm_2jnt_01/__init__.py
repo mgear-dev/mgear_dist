@@ -113,9 +113,13 @@ class Component(MainComponent):
         self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
         self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
+        if self.settings["mirrorMid"]:
+            if self.negate:
+                self.upv_cns.rz.set(180)
+                self.upv_cns.sy.set(-1)
+        else:
+            att.setInvertMirror(self.upv_ctl, ["tx"])
         att.setKeyableAttributes(self.upv_ctl, self.t_params)
-        att.setInvertMirror(self.upv_ctl, ["tx"])
-
 
         #IK rotation controls
         if self.settings["ikTR"]:
@@ -155,8 +159,15 @@ class Component(MainComponent):
         t = tra.getTransform(self.ctrn_loc)
         self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
         self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
-        att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
-
+        if self.settings["mirrorMid"]:
+            if self.negate:
+                self.mid_cns.rz.set(180)
+                self.mid_cns.sz.set(-1)
+            self.mid_ctl_twst_npo = pri.addTransform(self.mid_ctl, self.getName("mid_twst_npo"), t)
+            self.mid_ctl_twst_ref = pri.addTransform(self.mid_ctl_twst_npo, self.getName("mid_twst_ref"), t)
+        else:
+            self.mid_ctl_twst_ref = self.mid_ctl
+            att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
 
 
         #Roll join ref
@@ -342,9 +353,9 @@ class Component(MainComponent):
 
         # Twist references ---------------------------------
 
-        pm.pointConstraint(self.mid_ctl, self.tws1_npo, maintainOffset=False)
-        pm.scaleConstraint(self.mid_ctl, self.tws1_npo, maintainOffset=False)
-        pm.orientConstraint(self.mid_ctl, self.tws1_npo, maintainOffset=False)
+        pm.pointConstraint(self.mid_ctl_twst_ref, self.tws1_npo, maintainOffset=False)
+        pm.scaleConstraint(self.mid_ctl_twst_ref, self.tws1_npo, maintainOffset=False)
+        pm.orientConstraint(self.mid_ctl_twst_ref, self.tws1_npo, maintainOffset=False)
 
         node = aop.gear_mulmatrix_op(self.eff_loc.attr("worldMatrix"), self.root.attr("worldInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
