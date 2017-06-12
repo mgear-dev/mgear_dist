@@ -28,8 +28,6 @@
 # GLOBAL
 #############################################
 from functools import partial
-# pyMel
-import pymel.core as pm
 
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
@@ -41,15 +39,14 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Miquel Campos"
 URL = "www.miquel-campos.com"
 EMAIL = "hello@miquel-campos.com"
-VERSION = [1,0,0]
+VERSION = [1,1,0]
 TYPE = "leg_3jnt_01"
 NAME = "leg"
 DESCRIPTION = "3 bones leg for quadrupeds and other animals"
@@ -103,6 +100,7 @@ class Guide(ComponentGuide):
 
         # Default Values
         self.pBlend       = self.addParam("blend", "double", 1, 0, 1)
+        self.pFull3BoneIK = self.addParam("full3BonesIK", "double", 1, 0, 1)
         self.pIkRefArray  = self.addParam("ikrefarray", "string", "")
         self.pUpvRefArray = self.addParam("upvrefarray", "string", "")
         self.pMaxStretch  = self.addParam("maxstretch", "double", 1.5 , 1, None)
@@ -161,7 +159,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """
@@ -174,6 +172,8 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         #populate component settings
         self.settingsTab.ikfk_slider.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.ikfk_spinBox.setValue(int(self.root.attr("blend").get()*100))
+        self.settingsTab.full3BonesIK_slider.setValue(int(self.root.attr("full3BonesIK").get()*100))
+        self.settingsTab.full3BonesIK_spinBox.setValue(int(self.root.attr("full3BonesIK").get()*100))
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
         self.settingsTab.ikSolver_comboBox.setCurrentIndex(self.root.attr("ikSolver").get())
         self.populateCheck(self.settingsTab.neutralRotation_checkBox, "ikOri")
@@ -200,6 +200,8 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
         self.settingsTab.ikfk_slider.valueChanged.connect(partial(self.updateSlider, self.settingsTab.ikfk_slider, "blend"))
         self.settingsTab.ikfk_spinBox.valueChanged.connect(partial(self.updateSlider, self.settingsTab.ikfk_spinBox, "blend"))
+        self.settingsTab.full3BonesIK_slider.valueChanged.connect(partial(self.updateSlider, self.settingsTab.full3BonesIK_slider, "full3BonesIK"))
+        self.settingsTab.full3BonesIK_spinBox.valueChanged.connect(partial(self.updateSlider, self.settingsTab.full3BonesIK_spinBox, "full3BonesIK"))
         self.settingsTab.maxStretch_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxStretch_spinBox, "maxstretch"))
         self.settingsTab.ikSolver_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.settingsTab.ikSolver_comboBox, "ikSolver"))
         self.settingsTab.neutralRotation_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.neutralRotation_checkBox, "ikOri"))
@@ -231,5 +233,3 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def dockCloseEventTriggered(self):
         gqt.deleteInstances(self, MayaQDockWidget)
-
-

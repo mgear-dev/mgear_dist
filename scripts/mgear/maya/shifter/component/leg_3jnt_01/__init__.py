@@ -31,7 +31,6 @@
 # Maya
 import pymel.core as pm
 import pymel.core.datatypes as dt
-import maya.OpenMaya as om
 
 # mgear
 from mgear.maya.shifter.component import MainComponent
@@ -235,7 +234,7 @@ class Component(MainComponent):
     def addAttributes(self):
 
         self.blend_att = self.addAnimParam("blend", "Fk/Ik Blend", "double", self.settings["blend"], 0, 1)
-        self.fullIK_attr = self.addAnimParam("fullIK", "Full 3 bones IK", "double", 1,0,1)
+        self.fullIK_attr = self.addAnimParam("fullIK", "Full 3 bones IK", "double", self.settings["full3BonesIK"],0,1)
         self.soft_attr = self.addAnimParam("softIKRange", "Soft IK Range", "double", 0.0001, 0.0001,100)
         self.softSpeed_attr = self.addAnimParam("softIKSpeed", "Soft IK Speed", "double", 2.5,1.001,10)
         self.stretch_attr = self.addAnimParam("stretch", "Stretch", "double", 0,0,1)
@@ -356,7 +355,7 @@ class Component(MainComponent):
             div3_node = nod.createDivNode(mulNode+".outputX", plusTotalLength_node+".output1D")
             mult5_node = nod.createMulNode(mult4_node+".outputX", div3_node+".outputX")
             mult6_node = nod.createMulNode(self.stretch_attr, mult5_node+".outputX")
-            plus1_node = nod.createPlusMinusAverage1D([mulNode.attr("outputX"), mult6_node.attr("outputX")],1, self.chain3bones[i+1]+".tx")
+            nod.createPlusMinusAverage1D([mulNode.attr("outputX"), mult6_node.attr("outputX")],1, self.chain3bones[i+1]+".tx")
 
 
 
@@ -369,7 +368,7 @@ class Component(MainComponent):
         pm.pointConstraint(self.root_ctl, self.chain2bones[0])
 
         parentc_node = pm.parentConstraint( self.ik2b_ikCtl_ref, self.ik2b_bone_ref, self.ik2b_blend)
-        reverse_node = nod.createReverseNode(self.fullIK_attr,  parentc_node+".target[0].targetWeight")
+        nod.createReverseNode(self.fullIK_attr,  parentc_node+".target[0].targetWeight")
         pm.connectAttr(self.fullIK_attr, parentc_node+".target[1].targetWeight", f=True)
 
         # softIK 2 bones operators
@@ -407,7 +406,7 @@ class Component(MainComponent):
             div3_node = nod.createDivNode(mulNode+".outputX", plusTotalLength_node+".output1D")
             mult5_node = nod.createMulNode(mult4_node+".outputX", div3_node+".outputX")
             mult6_node = nod.createMulNode(self.stretch_attr, mult5_node+".outputX")
-            plus1_node = nod.createPlusMinusAverage1D([mulNode.attr("outputX"), mult6_node.attr("outputX")],1, self.chain2bones[i+1]+".tx")
+            nod.createPlusMinusAverage1D([mulNode.attr("outputX"), mult6_node.attr("outputX")],1, self.chain2bones[i+1]+".tx")
 
 
 
@@ -425,10 +424,10 @@ class Component(MainComponent):
         # foot twist roll
         pm.orientConstraint(self.ik_ref, self.legBonesIK[-1], mo=True)
 
-        multInvert_node = nod.createMulNode(-1, self.chain3bones[-1].attr("tx"), self.ik2b_ik_ref.attr("tx"))
+        nod.createMulNode(-1, self.chain3bones[-1].attr("tx"), self.ik2b_ik_ref.attr("tx"))
 
         for i, x in enumerate(self.legBones):
-            blend_node = nod.createPairBlend(self.legBonesFK[i], self.legBonesIK[i], self.blend_att, 1, x)
+            nod.createPairBlend(self.legBonesFK[i], self.legBonesIK[i], self.blend_att, 1, x)
 
 
         # Twist references ----------------------------------------
@@ -571,7 +570,3 @@ class Component(MainComponent):
         self.connectRef(self.settings["ikrefarray"], self.ik_cns)
         if self.settings["upvrefarray"]:
             self.connectRef("Auto,"+self.settings["upvrefarray"], self.upv_cns, True)
-
-
-
-

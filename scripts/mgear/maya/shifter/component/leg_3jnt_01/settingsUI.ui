@@ -63,7 +63,7 @@
               </item>
              </layout>
             </item>
-            <item row="1" column="0">
+            <item row="2" column="0">
              <widget class="QLabel" name="maxStretch_label">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -76,7 +76,7 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
+            <item row="2" column="1">
              <widget class="QDoubleSpinBox" name="maxStretch_spinBox">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -92,14 +92,14 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
+            <item row="3" column="0">
              <widget class="QLabel" name="ikSolver_label">
               <property name="text">
                <string>IK Solver</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="3" column="1">
              <widget class="QComboBox" name="ikSolver_comboBox">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -117,6 +117,40 @@
                 <string>Rotation Plane</string>
                </property>
               </item>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <widget class="QSlider" name="full3BonesIK_slider">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>15</height>
+                 </size>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="full3BonesIK_spinBox">
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="full3bonesIK_label">
+              <property name="text">
+               <string>Full 3 Bones IK</string>
+              </property>
              </widget>
             </item>
            </layout>
@@ -355,12 +389,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>144</x>
-     <y>47</y>
+     <x>197</x>
+     <y>42</y>
     </hint>
     <hint type="destinationlabel">
-     <x>220</x>
-     <y>45</y>
+     <x>245</x>
+     <y>42</y>
     </hint>
    </hints>
   </connection>
@@ -377,6 +411,38 @@
     <hint type="destinationlabel">
      <x>182</x>
      <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>full3BonesIK_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>full3BonesIK_spinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>212</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>full3BonesIK_spinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>full3BonesIK_slider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>214</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>180</x>
+     <y>54</y>
     </hint>
    </hints>
   </connection>
