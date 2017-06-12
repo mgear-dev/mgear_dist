@@ -27,6 +27,7 @@
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
+
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -41,6 +42,7 @@ class Ui_Form(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName("formLayout")
         self.softness_label = QtWidgets.QLabel(self.groupBox)
         self.softness_label.setObjectName("softness_label")
@@ -105,6 +107,13 @@ class Ui_Form(object):
         self.division_spinBox.setProperty("value", 2)
         self.division_spinBox.setObjectName("division_spinBox")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.division_spinBox)
+        self.tangentControls_checkBox = QtWidgets.QCheckBox(self.groupBox)
+        self.tangentControls_checkBox.setText("")
+        self.tangentControls_checkBox.setObjectName("tangentControls_checkBox")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.tangentControls_checkBox)
+        self.tangentControls_label = QtWidgets.QLabel(self.groupBox)
+        self.tangentControls_label.setObjectName("tangentControls_label")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.tangentControls_label)
         self.verticalLayout.addLayout(self.formLayout)
         self.squashStretchProfile_pushButton = QtWidgets.QPushButton(self.groupBox)
         self.squashStretchProfile_pushButton.setObjectName("squashStretchProfile_pushButton")
@@ -191,6 +200,7 @@ class Ui_Form(object):
         self.maxStretch_label.setText(gqt.fakeTranslate("Form", "Max Stretch", None, -1))
         self.maxSquash_label.setText(gqt.fakeTranslate("Form", "Max Squash", None, -1))
         self.divisions_label.setText(gqt.fakeTranslate("Form", "Divisions", None, -1))
+        self.tangentControls_label.setText(gqt.fakeTranslate("Form", "Tangent Controls", None, -1))
         self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
         self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
         self.ikRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from Head Ref", None, -1))
