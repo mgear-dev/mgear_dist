@@ -315,20 +315,15 @@ def setMatrixRotation(m, rot):
     Returns:
         matrix: The matrix with the new rotation
     """
-    # X = rot[0]
-    # Y = rot[1]
-    # Z = rot[2]
+    X = rot[0]
+    Y = rot[1]
+    Z = rot[2]
 
-    # m[0] = [X[0], X[1], X[2], 0.0]
-    # m[1] = [Y[0], Y[1], Y[2], 0.0]
-    # m[2] = [Z[0], Z[1], Z[2], 0.0]
-    tm = dt.TransformationMatrix(m)
-    tm.setRotation(rot)
-
-    m = dt.Matrix(tm)
+    m[0] = [X[0], X[1], X[2], 0.0]
+    m[1] = [Y[0], Y[1], Y[2], 0.0]
+    m[2] = [Z[0], Z[1], Z[2], 0.0]
 
     return m
-
 
 def setMatrixScale(m, scl=[1,1,1]):
     """
