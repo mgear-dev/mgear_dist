@@ -7,17 +7,19 @@ Release Log
 **New Features**
 	* mGear solvers: New vertes position node.  This node gets the vertex position in worldspace.
 	* Rigbits: New rigging commont library with toos and functions to help the rigging system. This library is meant to be use with custom steps or other rigging tools.
-	* Shifter: Components: New  Component Animal neck
-	* Shifter: Components: New  Components from Miles Cheng "arm_ms_2jnt_01" and "leg_ms_2jnt_01"
+	* Shifter: Components: New  Components from Miles Cheng "arm_ms_2jnt_01", "shoulder_ms_2jnt_01" and "leg_ms_2jnt_01"
 	* Shifter: Components: New enviroment variable: MGEAR_SHIFTER_COMPONENT_PATH (only project components)
 	* Shifter: Custom Step: New enviroment variable: MGEAR_SHIFTER_CUSTOMSTEP_PATH to stablish relative paths for the custom steps data.
 
 **Improvements**
 	* Improved error logging for custom steps and Synoptic.
 	* Shifter: Clean up jnt_org empty groups after rig build.
+	* Shifter: Components: Updated neck with optiona tangent controls.
 	* Shifter: Components: Arm have a new option to separate the IK controls in rotation and translation control
 	* Shifter: Components: Control extraction name buffer to avoid name clashing for ctl extraction on guides
 	* Shifter: Components: Pin elbow/knee
+	* Shifter: Components: Spine updated: Autobend optional control and optional mid tangent control
+	* Shifter: Components: Arms mid ctl and upv with optinal mirror behaviour.
 	* Shifter: Custom step using class implementation
 	* Shifter: Track information (rig Asset, components used version and mGear version)
 	* Synoptic: General visual and structure improvement. Big Thanks to Yamahigashi-san.
@@ -25,7 +27,9 @@ Release Log
 
 **Bug Fix**
 	* Bad layout on setting windows with HDPI displays.
-	* Shifter: Components: General clean up and bug fixing.
+	* Shifter: Components: General clean up and bug fixing (Please check github commint for more info).
+	* Issue #9  leg_3jnt: Flip offset rz double connection
+	* Issue #13  Chain_01 IK refs not being connected
 
 2.0
 ---
