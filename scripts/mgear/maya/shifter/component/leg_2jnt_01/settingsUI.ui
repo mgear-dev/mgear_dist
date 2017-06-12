@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>264</width>
-    <height>698</height>
+    <width>255</width>
+    <height>799</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -122,13 +122,6 @@
            </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="ikTR_checkBox">
-          <property name="text">
-           <string>IK separated Trans and Rot ctl</string>
-          </property>
-         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
