@@ -118,7 +118,7 @@ class Component(MainComponent):
         parent = self.root
         for i, t in enumerate(tra.getChainTransform(self.guide.apos, self.normal, self.negate)):
             loc = pri.addTransform(parent, self.getName("%s_loc"%i), t)
-            
+
             self.loc.append(loc)
             self.jnt_pos.append([loc, i])
             parent = loc
@@ -142,13 +142,6 @@ class Component(MainComponent):
                 ref_names = self.settings["ikrefarray"].split(",")
                 if len(ref_names) > 1:
                     self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
-        # Ref
-        # if self.settings["ikrefarray"]:
-        #     ref_names = self.settings["ikrefarray"].split(",")
-        #     if len(ref_names) > 1:
-        #         self.ikref_att = self.addAnimEnumParam("ikref", "Ori Ref", 0, self.settings["ikrefarray"].split(","))
-
-
 
     # =====================================================
     # OPERATORS
@@ -242,14 +235,13 @@ class Component(MainComponent):
         self.connections["orientation"] = self.connect_orientation
         self.connections["parent"] = self.connect_parent
 
-
-
     def connect_orientation(self):
         self.connect_orientCns()
 
     ## standard connection definition.
+    def connect_standard(self):
+        self.connect_standardWithSimpleIkRef()
+
     # @param self
     def connect_parent(self):
         self.connect_standardWithSimpleIkRef()
-
-    
