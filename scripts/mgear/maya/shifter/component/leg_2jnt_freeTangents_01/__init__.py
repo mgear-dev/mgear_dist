@@ -150,7 +150,12 @@ class Component(MainComponent):
         self.tws_ref = pri.addTransform(self.eff_loc, self.getName("tws_ref"), t)
 
         # Mid Controler ------------------------------------
-        self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+        # self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+        # att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
+
+        t = tra.getTransform(self.ctrn_loc)
+        self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
         att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
 
         # Twist references ---------------------------------
@@ -239,22 +244,22 @@ class Component(MainComponent):
         self.jnt_pos.append([self.end_ref, 'end'])
 
         # Tangent controls
-        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .3333)
+        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .5)
         self.uplegTangentA_loc = pri.addTransform(self.root_ctl, self.getName("uplegTangentA_loc"), self.fk_ctl[0].getMatrix(worldSpace=True))
         self.uplegTangentA_npo = pri.addTransform(self.uplegTangentA_loc, self.getName("uplegTangentA_npo"), t)
         self.uplegTangentA_ctl = self.addCtl(self.uplegTangentA_npo, "uplegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
 
-        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .6666)
+        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .9)
         self.uplegTangentB_npo = pri.addTransform(self.tws1A_loc, self.getName("uplegTangentB_npo"), t)
-        self.uplegTangentB_ctl = self.addCtl(self.uplegTangentB_npo, "uplegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.uplegTangentB_ctl = self.addCtl(self.uplegTangentB_npo, "uplegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
 
         tC = self.tws1B_npo.getMatrix(worldSpace=True)
         tC = tra.setMatrixPosition(tC, self.guide.apos[2])
-        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .3333)
+        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .1)
         self.lowlegTangentA_npo = pri.addTransform(self.tws1B_loc, self.getName("lowlegTangentA_npo"), t)
-        self.lowlegTangentA_ctl = self.addCtl(self.lowlegTangentA_npo, "lowlegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.lowlegTangentA_ctl = self.addCtl(self.lowlegTangentA_npo, "lowlegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
 
-        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .6666)
+        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .5)
         self.lowlegTangentB_loc = pri.addTransform(self.root, self.getName("lowlegTangentB_loc"), tC)
         self.lowlegTangentB_npo = pri.addTransform(self.lowlegTangentB_loc, self.getName("lowlegTangentB_npo"), t)
         self.lowlegTangentB_ctl = self.addCtl(self.lowlegTangentB_npo, "lowlegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
@@ -300,6 +305,12 @@ class Component(MainComponent):
             ref_names = ["Auto"] + ref_names
             if len(ref_names) > 1:
                 self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
+
+        if self.settings["pinrefarray"]:
+            ref_names = self.settings["pinrefarray" ].split(",")
+            ref_names = ["Auto"] + ref_names
+            if len(ref_names) > 1:
+                self.pin_att = self.addAnimEnumParam("kneeref", "Knee Ref", 0, ref_names)
 
 
         # Setup ------------------------------------------
@@ -548,7 +559,7 @@ class Component(MainComponent):
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["knee"] = self.settings["div0"] + 2
-        self.jointRelatives["ankle"] = len(self.div_cns)-1
+        self.jointRelatives["ankle"] = len(self.div_cns)
         self.jointRelatives["eff"] = len(self.div_cns)
 
     ## standard connection definition.
@@ -561,3 +572,5 @@ class Component(MainComponent):
         self.connectRef(self.settings["ikrefarray"], self.ik_cns)
         if self.settings["upvrefarray"]:
             self.connectRef("Auto,"+self.settings["upvrefarray"], self.upv_cns, True)
+        if self.settings["pinrefarray"]:
+            self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)

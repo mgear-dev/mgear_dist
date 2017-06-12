@@ -62,6 +62,10 @@ class Component(MainComponent):
         self.length1 = vec.getDistance(self.guide.apos[1], self.guide.apos[2])
         self.length2 = vec.getDistance(self.guide.apos[2], self.guide.apos[3])
 
+        # 1 bone chain for upv ref
+        self.armChainUpvRef= pri.add2DChain(self.root, self.getName("armUpvRef%s_jnt"), [self.guide.apos[0],self.guide.apos[2]], self.normal, False, self.WIP)
+        self.armChainUpvRef[1].setAttr("jointOrientZ", self.armChainUpvRef[1].getAttr("jointOrientZ")*-1)
+
         # FK Controlers -----------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root, self.getName("fk0_npo"), t)
@@ -145,8 +149,10 @@ class Component(MainComponent):
 
         #match IK FK references
         self.match_fk0_off = pri.addTransform(self.root, self.getName("matchFk0_npo"), tra.getTransform(self.fk_ctl[1]))
+        # self.match_fk0_off.attr("tx").set(1.0)
         self.match_fk0 = pri.addTransform(self.match_fk0_off, self.getName("fk0_mth"), tra.getTransform(self.fk_ctl[0]))
         self.match_fk1_off = pri.addTransform(self.root, self.getName("matchFk1_npo"), tra.getTransform(self.fk_ctl[2]))
+        # self.match_fk1_off.attr("tx").set(1.0)
         self.match_fk1 = pri.addTransform(self.match_fk1_off, self.getName("fk1_mth"), tra.getTransform(self.fk_ctl[1]))
         self.match_fk2 = pri.addTransform(self.ik_ctl, self.getName("fk2_mth"), tra.getTransform(self.fk_ctl[2]))
 
@@ -159,7 +165,10 @@ class Component(MainComponent):
         self.eff_loc  = pri.addTransformFromPos(self.root, self.getName("eff_loc"), self.guide.apos[2])
 
         # Mid Controler ------------------------------------
-        self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+
+        t = tra.getTransform(self.ctrn_loc)
+        self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
         att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
 
         #Roll join ref---------------------------------
@@ -240,29 +249,30 @@ class Component(MainComponent):
         self.jnt_pos.append([self.end_ref, "end"])
 
         # Tangent controls
-        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .3333)
+        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .5)
         self.armTangentA_loc = pri.addTransform(self.root, self.getName("armTangentA_loc"), self.fk_ctl[0].getMatrix(worldSpace=True))
         self.armTangentA_npo = pri.addTransform(self.armTangentA_loc, self.getName("armTangentA_npo"), t)
         self.armTangentA_ctl = self.addCtl(self.armTangentA_npo, "armTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
 
-        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .6666)
+        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .9)
         self.armTangentB_npo = pri.addTransform(self.tws1A_loc, self.getName("armTangentB_npo"), t)
-        self.armTangentB_ctl = self.addCtl(self.armTangentB_npo, "armTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.armTangentB_ctl = self.addCtl(self.armTangentB_npo, "armTangentB_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
 
         tC = self.tws1B_npo.getMatrix(worldSpace=True)
         tC = tra.setMatrixPosition(tC, self.guide.apos[2])
-        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .3333)
+        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .1)
         self.forearmTangentA_npo = pri.addTransform(self.tws1B_loc, self.getName("forearmTangentA_npo"), t)
-        self.forearmTangentA_ctl = self.addCtl(self.forearmTangentA_npo, "forearmTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.forearmTangentA_ctl = self.addCtl(self.forearmTangentA_npo, "forearmTangentA_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
 
-        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .6666)
+        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .5)
         self.forearmTangentB_loc = pri.addTransform(self.root, self.getName("forearmTangentB_loc"), tC)
         self.forearmTangentB_npo = pri.addTransform(self.forearmTangentB_loc, self.getName("forearmTangentB_npo"), t)
         self.forearmTangentB_ctl = self.addCtl(self.forearmTangentB_npo, "forearmTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
 
         t = self.mid_ctl.getMatrix(worldSpace=True)
         self.elbowTangent_npo = pri.addTransform(self.mid_ctl, self.getName("elbowTangent_npo"), t)
-        self.elbowTangent_ctl = self.addCtl(self.elbowTangent_npo, "elbowTangent_ctl", t, self.color_fk, "circle", w=self.size*.25, ro=dt.Vector(0,0,1.570796))
+        self.elbowTangent_ctl = self.addCtl(self.elbowTangent_npo, "elbowTangent_ctl", t, self.color_fk, "circle", w=self.size*.15, ro=dt.Vector(0,0,1.570796))
+
 
     def addAttributes(self):
 
@@ -287,10 +297,15 @@ class Component(MainComponent):
 
         if self.settings["upvrefarray"]:
             ref_names = self.settings["upvrefarray"].split(",")
+            ref_names = ["Auto"] + ref_names
             if len(ref_names) > 1:
-                self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, self.settings["upvrefarray"].split(","))
-        else:
-            self.upvref_att = None
+                self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
+
+        if self.settings["pinrefarray"]:
+            ref_names = self.settings["pinrefarray" ].split(",")
+            ref_names = ["Auto"] + ref_names
+            if len(ref_names) > 1:
+                self.pin_att = self.addAnimEnumParam("elbowref", "Elbow Ref", 0, ref_names)
 
         # Setup ------------------------------------------
         # Eval Fcurve
@@ -304,6 +319,11 @@ class Component(MainComponent):
         self.absolute_att = self.addSetupParam("absolute", "Absolute", "bool", False)
 
     def addOperators(self):
+
+        # 1 bone chain Upv ref =====================================================================================
+        self.ikHandleUpvRef = pri.addIkHandle(self.root, self.getName("ikHandleLegChainUpvRef"), self.armChainUpvRef, "ikSCsolver")
+        pm.pointConstraint(self.ik_ctl, self.ikHandleUpvRef)
+        pm.parentConstraint( self.armChainUpvRef[0],  self.upv_cns, mo=True)
 
         # Visibilities -------------------------------------
         # fk
@@ -334,6 +354,12 @@ class Component(MainComponent):
         # IK Solver -----------------------------------------
         out = [self.bone0, self.bone1, self.ctrn_loc, self.eff_loc]
         node = aop.gear_ikfk2bone_op(out, self.root, self.ik_ref, self.upv_ctl, self.fk_ctl[0], self.fk_ctl[1], self.fk_ref, self.length0, self.length1, self.negate)
+        #scale: this fix the scalin popping issue
+        intM_node = aop.gear_intmatrix_op(self.fk2_ctl.attr("worldMatrix"), self.ik_ctl.attr("worldMatrix"),  node.attr("blend"))
+        mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
+        dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
+        dm_node.attr("outputScale") >> self.eff_loc.attr("scale")
+
 
         pm.connectAttr(self.blend_att, node+".blend")
         if self.negate:
@@ -538,9 +564,11 @@ class Component(MainComponent):
         self.jointRelatives["root"] = 0
         self.jointRelatives["elbow"] = self.settings["div0"] + 2
         self.jointRelatives["wrist"] = len(self.div_cns)-2
-        self.jointRelatives["eff"] =len(self.div_cns)-1
+        self.jointRelatives["eff"] = -1
 
     ## standard connection definition.
     # @param self
     def connect_standard(self):
         self.connect_standardWithIkRef()
+        if self.settings["pinrefarray"]:
+            self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)

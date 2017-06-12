@@ -146,7 +146,11 @@ class Component(MainComponent):
         self.tws_ref = pri.addTransform(self.eff_loc, self.getName("tws_ref"), t)
 
         # Mid Controler ------------------------------------
-        self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+        # self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+        # att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
+        t = tra.getTransform(self.ctrn_loc)
+        self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
         att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
 
         # Twist references ---------------------------------
@@ -218,10 +222,17 @@ class Component(MainComponent):
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
 
-        ref_names = ["Auto", "ikFoot"] 
+        ref_names = ["Auto", "ikFoot"]
         if self.settings["upvrefarray"]:
             ref_names = ref_names + self.settings["upvrefarray"].split(",")
         self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
+
+        if self.settings["pinrefarray"]:
+            ref_names = self.settings["pinrefarray" ].split(",")
+            ref_names = ["Auto"] + ref_names
+            if len(ref_names) > 1:
+                self.pin_att = self.addAnimEnumParam("kneeref", "Knee Ref", 0, ref_names)
+
 
         # Setup ------------------------------------------
         # Eval Fcurve
@@ -354,7 +365,7 @@ class Component(MainComponent):
 
 
 
-        # NOTE: next line fix the issue on meters. 
+        # NOTE: next line fix the issue on meters.
         # This is special case becasuse the IK solver from mGear use the scale as lenght and we have shear
         # TODO: check for a more clean and elegant solution instead of re-match the world matrix again
         # tra.matchWorldTransform(self.fk_ctl[0], self.match_fk0_off)
@@ -395,3 +406,6 @@ class Component(MainComponent):
             self.connectRef("Auto,ikFoot,"+self.settings["upvrefarray"], self.upv_cns, True)
         else:
             self.connectRef("Auto,ikFoot", self.upv_cns, True)
+
+        if self.settings["pinrefarray"]:
+            self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
