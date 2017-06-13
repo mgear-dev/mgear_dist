@@ -231,7 +231,7 @@ class Component(MainComponent):
         self.slide_att = self.addAnimParam("slide", "Slide", "double", .5, 0, 1)
         self.softness_att = self.addAnimParam("softness", "Softness", "double", 0, 0, 1)
         self.reverse_att = self.addAnimParam("reverse", "Reverse", "double", 0, 0, 1)
-        self.roundness_att = self.addAnimParam("roundness", "Roundness", "double", 0, 0, 1)
+        self.roundness_att = self.addAnimParam("roundness", "Roundness", "double", 0, 0, self.size)
         self.volume_att = self.addAnimParam("volume", "Volume", "double", 1, 0, 1)
 
         # Ref

@@ -241,8 +241,8 @@ class Component(MainComponent):
         self.volume_att = self.addAnimParam("volume", "Volume", "double", 1, 0, 1)
         self.roll_att = self.addAnimParam("roll", "Roll", "double", 0, -180, 180)
 
-        self.roundnessKnee_att = self.addAnimParam("roundnessKnee", "Roundness Knee", "double", 0, 0, 1)
-        self.roundnessAnkle_att = self.addAnimParam("roundnessAnkle", "Roundness Ankle", "double", 0, 0, 1)
+        self.roundnessKnee_att = self.addAnimParam("roundnessKnee", "Roundness Knee", "double", 0, 0, self.size)
+        self.roundnessAnkle_att = self.addAnimParam("roundnessAnkle", "Roundness Ankle", "double", 0, 0, self.size)
 
         self.boneALenghtMult_attr = self.addAnimParam("boneALenMult", "Bone A Mult", "double", 1)
         self.boneBLenghtMult_attr = self.addAnimParam("boneBLenMult", "Bone B Mult", "double", 1)

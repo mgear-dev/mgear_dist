@@ -111,7 +111,7 @@ class Component(MainComponent):
         self.fk2_mtx = pri.addTransform(self.fk1_roll_ctl, self.getName("fk2_mtx"), t)
 
 
-       # fk2_loc is need to take the effector position + bone1 rotation
+        # fk2_loc is need to take the effector position + bone1 rotation
         t1= tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[1], self.normal, "-xz", self.negate)
         self.fk2_loc = pri.addTransform(self.root, self.getName("fk2_loc"), t1)
 
@@ -290,8 +290,8 @@ class Component(MainComponent):
         self.slide_att = self.addAnimParam("slide", "Slide", "double", .5, 0, 1)
         self.softness_att = self.addAnimParam("softness", "Softness", "double", 0, 0, 1)
         self.reverse_att = self.addAnimParam("reverse", "Reverse", "double", 0, 0, 1)
-        self.roundness0_att = self.addAnimParam("roundness_up", "Roundness Up", "double", 0, 0, 1)
-        self.roundness1_att = self.addAnimParam("roundness_dn", "Roundness Dn", "double", 0, 0, 1)
+        self.roundness0_att = self.addAnimParam("roundness_up", "Roundness Up", "double", 0, 0, self.size)
+        self.roundness1_att = self.addAnimParam("roundness_dn", "Roundness Dn", "double", 0, 0, self.size)
         self.volume_att = self.addAnimParam("volume", "Volume", "double", 1, 0, 1)
         self.elbow_thickness_att = self.addAnimParam("elbowthickness", "Elbow Thickness", "double", self.settings["elbow"], 0, 5)
         self.jntctl_vis_att = self.addAnimParam("jntct_vis", "Joint Ctl Vis", "bool", 0,1,1)
