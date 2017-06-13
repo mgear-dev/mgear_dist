@@ -45,7 +45,7 @@ What I get out of the box?
 	* Shifter: Modular rigging system. (Exp: bipeds, quadrupeds, birds, creatures, robots, mechanical props, unlimited limbs, etc... )
 	* C++ Solvers: High performance rigs.
 	* Synoptic viewer: Animators interface and picker
-	* General purpose rigging tools.
+	* Rigbits: General purpose rigging tools.
 
 Why should I add mGear to my pipeline?
 **************************************
@@ -60,4 +60,4 @@ Why should I add mGear to my pipeline?
 Who is currently developing mGear?
 ****************************************
 
-	Miquel Campos is the curret main developer.	
+	Miquel Campos is the curret main developer.

@@ -16,6 +16,8 @@ Contributors:
 	Miles Cheng
 	Yamahigashi-san
 
+`Join the mGear Google user group <https://groups.google.com/forum/#!forum/mgearusergroup/>`_
+
 .. figure:: images/studioAKA_mGear_A.jpg
     :width: 800px
     :align: center
