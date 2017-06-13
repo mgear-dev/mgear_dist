@@ -123,7 +123,6 @@ class Component(MainComponent):
             t = tra.getTransform(bk_ctl)
             dist = vec.getDistance(self.guide.apos[i+1], self.guide.apos[i+2])
 
-            # fk_npo = pri.addTransform(parent, self.getName("fk%s_npo"%i), t)
             fk_loc = pri.addTransform(parent, self.getName("fk%s_loc"%i), t)
             fk_ctl = self.addCtl(fk_loc, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.5, d=self.size*.5, po=dt.Vector(dist*.5*self.n_factor,0,0))
             att.setKeyableAttributes(fk_ctl)
@@ -251,7 +250,7 @@ class Component(MainComponent):
         if self.div_count > 0:
             self.relatives["%s_loc"%self.div_count] = self.fk_ctl[-1]
             self.jointRelatives["%s_loc"%self.div_count] = self.div_count-1
- 
+
     ## Add more connection definition to the set.
     # @param self
     def addConnection(self):

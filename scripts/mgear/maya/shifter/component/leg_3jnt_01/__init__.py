@@ -434,17 +434,12 @@ class Component(MainComponent):
 
         self.ikhArmRef, self.tmpCrv = aop.splineIK(self.getName("legRollRef"), self.rollRef, parent=self.root, cParent=self.legBones[0] )
 
-        # if self.negate:
-        #     initRound = -.001
-        #     multVal = -1
-        # else:
         initRound = .001
         multVal = 1
 
         multTangent_node = nod.createMulNode(self.roundnessKnee_att, multVal)
         add_node = nod.createAddNode(multTangent_node+".outputX", initRound)
         pm.connectAttr(add_node+".output", self.tws1_rot.attr("sx"))
-        # for x in ["translate", "rotate"]:
         for x in ["translate"]:
             pm.connectAttr(self.knee_ctl.attr(x), self.tws1_loc.attr(x))
         for x in "xy":
@@ -453,7 +448,6 @@ class Component(MainComponent):
         multTangent_node = nod.createMulNode(self.roundnessAnkle_att, multVal)
         add_node = nod.createAddNode(multTangent_node+".outputX", initRound)
         pm.connectAttr(add_node+".output", self.tws2_rot.attr("sx"))
-        # for x in ["translate", "rotate"]:
         for x in ["translate"]:
             pm.connectAttr(self.ankle_ctl.attr(x), self.tws2_loc.attr(x))
         for x in "xy":
@@ -513,9 +507,6 @@ class Component(MainComponent):
             perc = max(.001, min(.999, perc))
 
             # Roll
-            # if self.negate:
-            #     node = aop.gear_rollsplinekine_op(div_cns, [self.tws3_rot, self.tws2_rot, self.tws1_rot, self.tws0_rot], 1-perc, subdiv)
-            # else:
             node = aop.gear_rollsplinekine_op(div_cns, [self.tws0_rot, self.tws1_rot, self.tws2_rot, self.tws3_rot], perc, subdiv)
 
             pm.connectAttr(self.resample_att, node+".resample")

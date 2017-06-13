@@ -54,7 +54,6 @@ class Component(MainComponent):
     # @param self
     def addObjects(self):
 
-       
         # blades computation
         self.normal = self.guide.blades["blade"].z
         self.binormal = self.guide.blades["blade"].x
@@ -120,7 +119,7 @@ class Component(MainComponent):
         for i, tar in enumerate(self.spring_target):
             aDamping = self.addAnimParam( "damping_%s"%i, "damping_%s"%i, "double", 0.5, 0, 1)
             self.aDamping.append(aDamping)
-            
+
         for i, tar in enumerate(self.spring_target):
             aStiffness = self.addAnimParam( "stiffness_%s"%i, "stiffness_%s"%i, "double", 0.5, 0, 1)
             self.aStiffness.append(aStiffness)
@@ -139,7 +138,7 @@ class Component(MainComponent):
         # Chain of deformers -------------------------------
         for i, loc in enumerate(self.loc):
             pm.parentConstraint(self.fk_ctl[i], loc, maintainOffset=False)
-        
+
         # spring operators
         #settings aim contraints
         for i, tranCns in enumerate(self.spring_aim):
@@ -147,7 +146,7 @@ class Component(MainComponent):
                 aimAxis = "-xy"
             else:
                 aimAxis = "xy"
-            cns = aop.aimCns(tranCns, self.spring_target[i], aimAxis, 2, [0,1,0], self.fk_npo[i], False)
+            aop.aimCns(tranCns, self.spring_target[i], aimAxis, 2, [0,1,0], self.fk_npo[i], False)
             aop.oriCns(tranCns, self.spring_cns[i])
 
             springOP = aop.gear_spring_op(self.spring_target[i])

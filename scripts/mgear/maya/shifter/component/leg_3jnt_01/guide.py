@@ -87,7 +87,6 @@ class Guide(ComponentGuide):
         att.lockAttribute(self.foot, lockAttrs)
         vTemp = tra.getOffsetPosition( self.root, [0,-9, 1])
         self.eff = self.addLoc("eff", self.foot, vTemp)
-        # att.lockAttribute(self.eff, lockAttrs)
 
         centers = [self.root, self.knee, self.ankle, self.foot, self.eff]
         self.dispcrv = self.addDispCurve("crv1", centers)

@@ -31,16 +31,12 @@
 import pymel.core as pm
 import pymel.core.datatypes as dt
 
-import maya.OpenMaya as om
-
 # mgear
 from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
-import mgear.maya.attribute as att
 import mgear.maya.node as nod
-import mgear.maya.icon as ico
 import mgear.maya.vector as vec
 
 ##########################################################
@@ -110,8 +106,6 @@ class Component(MainComponent):
             # Chain
             self.chain = pri.add2DChain(self.root, self.getName("chain"), self.guide.apos, self.normal, self.negate)
             self.chain[0].attr("visibility").set(self.WIP)
-
-
 
         # Chain of deformers -------------------------------
         self.loc = []

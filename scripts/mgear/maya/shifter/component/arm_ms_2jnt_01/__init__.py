@@ -79,11 +79,11 @@ class Component(MainComponent):
 
         self.fk_cns = pri.addTransformFromPos(self.root, self.getName("fk_cns"), self.guide.apos[0])
 
-        tpv = self.guide.apos[0] + ((self.guide.apos[1] - self.guide.apos[0])*[1,0,0])        
+        tpv = self.guide.apos[0] + ((self.guide.apos[1] - self.guide.apos[0])*[1,0,0])
         t = tra.getTransformLookingAt(self.guide.apos[0], tpv, self.normal, "xz", self.negate)
         # *ms* add FK isolation
         self.fk0_npo = pri.addTransform(self.fk_cns, self.getName("fk0_npo"), t)
-        
+
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0*.7, h=self.size*.1, d=self.size*.1, po=dt.Vector(.35*self.length0*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk0_ctl)
@@ -97,25 +97,25 @@ class Component(MainComponent):
 
         self.fk1_loc = pri.addTransform(self.root, self.getName("fk1_loc"), t)
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
-       
+
         self.fk1_npo = pri.addTransform(self.fk1_loc, self.getName("fk1_npo"), t)
         self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1*.7, h=self.size*.1, d=self.size*.1, po=dt.Vector(.35*self.length1*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk1_ctl)
         self.fk1_mtx = pri.addTransform(self.fk1_ctl, self.getName("fk1_mtx"), t)
         self.fk1_roll_ctl = self.addCtl(self.fk1_ctl, "fk1_roll_ctl", t, self.color_fk, "cube", w=self.length1*.3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.85*self.length1*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk1_roll_ctl)
-        
+
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
         # *ms* buffer object to feed into ikfk solver for hand seperation
         self.fk2_mtx = pri.addTransform(self.fk1_roll_ctl, self.getName("fk2_mtx"), t)
-       
+
 
        # fk2_loc is need to take the effector position + bone1 rotation
         t1= tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[1], self.normal, "-xz", self.negate)
         self.fk2_loc = pri.addTransform(self.root, self.getName("fk2_loc"), t1)
 
-        self.fk2_npo = pri.addTransform(self.fk2_loc, self.getName("fk2_npo"), t) 
+        self.fk2_npo = pri.addTransform(self.fk2_loc, self.getName("fk2_npo"), t)
         self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
         att.setKeyableAttributes(self.fk2_ctl)
 
@@ -123,9 +123,6 @@ class Component(MainComponent):
         self.fk_ctls = [self.fk0_ctl,self.fk0_roll_ctl, self.fk1_ctl, self.fk1_roll_ctl, self.fk2_ctl]
         for x in self.fk_ctls:
             att.setInvertMirror(x, ["tx", "ty", "tz"])
-        # att.setInvertMirror(self.fk0_ctl, ["tx", "ty", "tz"])
-        # att.setInvertMirror(self.fk1_ctl, ["tx", "ty", "tz"])
-        
 
 
         # IK Controlers -----------------------------------
@@ -222,9 +219,9 @@ class Component(MainComponent):
         self.div_cnsUp = []
         self.div_cnsDn = []
         self.div_ctls = []
-        
+
         self.div_org = pri.addTransform(self.root, self.getName("div_org"), tra.getTransform(self.root))
-        
+
         for i in range(self.divisions0):
 
             div_cns = pri.addTransform(self.div_org, self.getName("div%s_loc" % i))
@@ -339,7 +336,7 @@ class Component(MainComponent):
             pm.connectAttr(fkvis_node+".outputX", shp.attr("visibility"))
         for shp in self.fk1_roll_ctl.getShapes():
             pm.connectAttr(fkvis_node+".outputX", shp.attr("visibility"))
-        
+
         fkvis2_node = nod.createReverseNode(self.blend2_att)
         for shp in self.fk2_ctl.getShapes():
             pm.connectAttr(fkvis2_node+".outputX", shp.attr("visibility"))
@@ -352,7 +349,7 @@ class Component(MainComponent):
         for shp in self.ik_ctl.getShapes():
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
 
-        # jnt ctl 
+        # jnt ctl
         for ctl in (self.div_ctls):
             for shp in ctl.getShapes():
                 pm.connectAttr(self.jntctl_vis_att, shp.attr("visibility"))
@@ -369,7 +366,7 @@ class Component(MainComponent):
 
         # IK Solver -----------------------------------------
         out = [self.bone0, self.bone1, self.ctrn_loc, self.eff_npo]
-        
+
         #self.fk_ctl = [self.fk0_roll_ctl, self.fk1_ctl, self.fk2_mtx]
         node = aop.gear_ikfk2bone_op(out, self.root, self.ik_ref, self.upv_ctl, self.fk0_mtx, self.fk1_mtx, self.fk2_mtx, self.length0, self.length1, self.negate)
 
@@ -390,9 +387,9 @@ class Component(MainComponent):
         else:
             node = aop.aimCns(self.upv_auv, self.ik_ctl, axis="xy", wupType=4, wupVector=[0,1,0], wupObject=self.upv_auv, maintainOffset=False)
 
-        node = aop.gear_mulmatrix_op(self.upv_auv.attr("worldMatrix"), self.upv_mtx.attr("parentInverseMatrix")) 
+        node = aop.gear_mulmatrix_op(self.upv_auv.attr("worldMatrix"), self.upv_mtx.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
-        pm.connectAttr(node+".output", dm_node+".inputMatrix")  
+        pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pb_node = pm.createNode("pairBlend")
         pb_node.attr("rotInterpolation").set (1)
         pm.connectAttr(dm_node+".outputTranslate", pb_node+".inTranslate2")
@@ -426,8 +423,8 @@ class Component(MainComponent):
         dm_node = pm.createNode("decomposeMatrix")
         pm.connectAttr(node+".output", dm_node+".inputMatrix")
         pm.connectAttr(dm_node+".outputRotate", self.fk2_loc.attr("rotate"))
-       
- 
+
+
         # hand ikfk blending from fk ref to ik ref (serious bugfix)--------------------------------
         node = aop.gear_mulmatrix_op(self.fk_ref.attr("worldMatrix"), self.eff_loc.attr("parentInverseMatrix"))
         dm_node = pm.createNode("decomposeMatrix")
@@ -447,7 +444,7 @@ class Component(MainComponent):
         pm.connectAttr(dm_node+".outputScale", bc_node+".color2")
         pm.connectAttr(dm_node1+".outputScale", bc_node+".color1")
         pm.connectAttr(bc_node+".output", self.eff_loc.attr("scale"))
-       
+
         # Twist references ---------------------------------
         pm.connectAttr(self.mid_ctl.attr("translate"), self.tws1_npo.attr("translate"))
         pm.connectAttr(self.mid_ctl.attr("rotate"), self.tws1_npo.attr("rotate"))
@@ -469,7 +466,7 @@ class Component(MainComponent):
         else:
             node = nod.createMulNode([self.elbow_thickness_att,self.elbow_thickness_att], [-0.5,0.5,0], [self.tws1_loc+".translateX",self.tws2_loc+".translateX"])
 
-        # connect both tws1 and tws2  (mid tws)     
+        # connect both tws1 and tws2  (mid tws)
         self.tws0_rot.setAttr("sx", .001)
         self.tws3_rot.setAttr("sx", .001)
 
@@ -481,14 +478,14 @@ class Component(MainComponent):
 
 
         pm.connectAttr(self.armpit_roll_att, self.tws0_rot+".rotateX")
-        
+
         #Roll Shoulder--use aimconstraint withour uovwctor to solve the stable twist
-        
+
         if self.negate:
             node = aop.aimCns(self.tws0_loc, self.mid_ctl, axis="-xy", wupType=4, wupVector=[0,1,0], wupObject=self.tws0_npo, maintainOffset=False)
         else:
             node = aop.aimCns(self.tws0_loc, self.mid_ctl, axis="xy", wupType=4, wupVector=[0,1,0], wupObject=self.tws0_npo, maintainOffset=False)
-           
+
 
         # Volume -------------------------------------------
         distA_node = nod.createDistNode(self.tws0_loc, self.tws1_npo)
@@ -526,15 +523,13 @@ class Component(MainComponent):
 
             # Roll
             if self.negate:
-                # node = aop.gear_rollsplinekine_op(div_cns, [self.tws3_rot, self.tws1_rot, self.tws0_rot], 1-perc, 40)
                 node = aop.gear_rollsplinekine_op(div_cnsUp, [self.tws1_rot, self.tws0_rot], 1-perc, 20)
 
             else:
-                # node = aop.gear_rollsplinekine_op(div_cns, [self.tws0_rot, self.tws1_rot, self.tws3_rot], perc, 40)
                 node = aop.gear_rollsplinekine_op(div_cnsUp, [self.tws0_rot, self.tws1_rot], perc, 20)
             pm.connectAttr(self.resample_att, node+".resample")
             pm.connectAttr(self.absolute_att, node+".absolute")
-           
+
             scl_1_perc.append(perc/2)
             scl_2_perc.append(perc)
         scl_1_perc.append(0.5)
@@ -552,15 +547,13 @@ class Component(MainComponent):
 
             # Roll
             if self.negate:
-                # node = aop.gear_rollsplinekine_op(div_cns, [self.tws3_rot, self.tws1_rot, self.tws0_rot], 1-perc, 40)
                 node = aop.gear_rollsplinekine_op(div_cnsDn, [self.tws3_rot, self.tws2_rot], 1-perc, 20)
 
             else:
-                # node = aop.gear_rollsplinekine_op(div_cns, [self.tws0_rot, self.tws1_rot, self.tws3_rot], perc, 40)
                 node = aop.gear_rollsplinekine_op(div_cnsDn, [self.tws2_rot, self.tws3_rot], perc, 20)
             pm.connectAttr(self.resample_att, node+".resample")
             pm.connectAttr(self.absolute_att, node+".absolute")
-           
+
             scl_1_perc.append(perc/2+0.5)
             scl_2_perc.append(1-perc)
         # Squash n Stretch

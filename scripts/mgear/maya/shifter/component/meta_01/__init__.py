@@ -36,7 +36,6 @@ from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
-import mgear.maya.applyop as aop
 import mgear.maya.node as nod
 
 ##########################################################
@@ -54,8 +53,6 @@ class Component(MainComponent):
 
         self.normal = self.guide.blades["blade"].z
         self.binormal = self.guide.blades["blade"].x
-
-
 
         # Chain of deformers -------------------------------
         self.locList = []

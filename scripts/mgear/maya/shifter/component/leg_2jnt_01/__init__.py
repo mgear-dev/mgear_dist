@@ -30,7 +30,6 @@
 # Maya
 import pymel.core as pm
 import pymel.core.datatypes as dt
-import maya.OpenMaya as om
 
 # mgear
 from mgear.maya.shifter.component import MainComponent
@@ -146,8 +145,6 @@ class Component(MainComponent):
         self.tws_ref = pri.addTransform(self.eff_loc, self.getName("tws_ref"), t)
 
         # Mid Controler ------------------------------------
-        # self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
-        # att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
         t = tra.getTransform(self.ctrn_loc)
         self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
         self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
@@ -397,7 +394,6 @@ class Component(MainComponent):
     ## standard connection definition.
     # @param self
     def connect_standard(self):
-        # self.connect_standardWithIkRef()
         self.parent.addChild(self.root)
 
         # Set the Ik Reference

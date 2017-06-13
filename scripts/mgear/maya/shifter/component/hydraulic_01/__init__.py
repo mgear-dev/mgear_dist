@@ -27,9 +27,6 @@
 ##########################################################
 # GLOBAL
 ##########################################################
-# Maya
-import pymel.core.datatypes as dt
-
 # mgear
 from mgear.maya.shifter.component import MainComponent
 
@@ -37,7 +34,6 @@ import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
 import mgear.maya.applyop as aop
 
-import mgear.maya.vector as vec
 
 ##########################################################
 # COMPONENT
@@ -66,11 +62,11 @@ class Component(MainComponent):
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
         self.tip_npo = pri.addTransform(self.ik_cns, self.getName("tip_npo"), t)
         self.tip_ctl = self.addCtl(self.tip_npo, "tip_ctl", t, self.color_ik, "square", w=1.0)
-        
+
         self.ref_tip = pri.addTransform(self.tip_ctl, self.getName("ref_tip"), t)
 
         self.div_cns = []
-      
+
         for i in range(self.settings["div"]):
 
             div_cns = pri.addTransform(self.root, self.getName("div%s_loc" % i))
@@ -90,7 +86,7 @@ class Component(MainComponent):
             ref_names = self.settings["ikrefarray"].split(",")
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
-        
+
 
     # =====================================================
     # OPERATORS
@@ -100,8 +96,8 @@ class Component(MainComponent):
     # we shouldn't create any new object in this method.
     # @param self
     def addOperators(self):
-        aim_base = aop.aimCns(self.ref_base, self.tip_ctl, axis="yx", wupType=2, wupVector=[1,0,0], wupObject=self.ctl, maintainOffset=False)
-        aim_tip = aop.aimCns(self.ref_tip, self.ctl, axis="-yx", wupType=2, wupVector=[1,0,0], wupObject=self.tip_ctl, maintainOffset=False)
+        aop.aimCns(self.ref_base, self.tip_ctl, axis="yx", wupType=2, wupVector=[1,0,0], wupObject=self.ctl, maintainOffset=False)
+        aop.aimCns(self.ref_tip, self.ctl, axis="-yx", wupType=2, wupVector=[1,0,0], wupObject=self.tip_ctl, maintainOffset=False)
         bIncrement = 1.0/ (self.settings["div"]-1)
         blend=0
         for i, div_cns in enumerate(self.div_cns):
@@ -123,7 +119,7 @@ class Component(MainComponent):
         for i in range(0, len(self.div_cns)-1):
             self.relatives["%s_loc"%i] = self.div_cns[i+1]
             self.jointRelatives["%s_loc"%i] = i+1
-        
+
         self.relatives["%s_loc"%(len(self.div_cns)-1)] = self.div_cns[-1]
         self.jointRelatives["%s_loc"%(len(self.div_cns)-1)] = len(self.div_cns)-1
 

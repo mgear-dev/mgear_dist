@@ -146,9 +146,7 @@ class Component(MainComponent):
 
             self.jnt_pos.append([fk_ctl, i])
 
-            # t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["neck"], self.normal, "yx", self.negate)
             t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["neck"], self.guide.blades["blade"].z*-1, "yx", self.negate)
-            # t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.guide.blades["blade"].z*-1, "yx", self.negate)
             twister = pri.addTransform(parent_twistRef, self.getName("%s_rot_ref"%i), t)
             ref_twist = pri.addTransform(parent_twistRef, self.getName("%s_pos_ref"%i), t)
             ref_twist.setTranslation(dt.Vector(0.0,0,1.0), space="preTransform")
@@ -252,7 +250,6 @@ class Component(MainComponent):
             cns.setAttr("upAxis", 2)# front axis is 'Z'
 
             # Roll
-            #  aop.gear_spinePointAtOp(cns, self.root, self.ik_ctl, u, "Z")
             intMatrix = aop.gear_intmatrix_op(self.intMRef+".worldMatrix", self.ik_ctl+".worldMatrix", u)
             dm_node = nod.createDecomposeMatrixNode(intMatrix+".output")
             pm.connectAttr(dm_node+".outputRotate", self.twister[i].attr("rotate"))
