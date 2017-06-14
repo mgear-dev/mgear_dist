@@ -35,6 +35,7 @@ from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
+import mgear.maya.attribute as att
 import mgear.maya.applyop as aop
 
 ##########################################################
@@ -62,6 +63,7 @@ class Component(MainComponent):
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
         self.eyeIK_npo = pri.addTransform(self.ik_cns, self.getName("ik_npo"), t)
         self.eyeIK_ctl = self.addCtl(self.eyeIK_npo, "ik_ctl", t, self.color_fk, "circle", w=.5)
+        att.setKeyableAttributes(self.eyeIK_ctl, self.t_params)
 
         self.jnt_pos.append([self.eyeFK_ctl, "eye", "parent_relative_jnt"])
         self.jnt_pos.append([self.eyeOver_ctl, "eyeOver", "parent_relative_jnt", False])

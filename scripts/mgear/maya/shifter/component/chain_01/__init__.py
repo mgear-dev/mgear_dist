@@ -36,6 +36,7 @@ from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
+import mgear.maya.attribute as att
 import mgear.maya.node as nod
 import mgear.maya.vector as vec
 
@@ -93,6 +94,7 @@ class Component(MainComponent):
             self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
             self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", t, self.color_ik, "null", w=self.size)
             self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", t, self.color_ik, "cube", w=self.size*.3, h=self.size*.3, d=self.size*.3)
+            att.setKeyableAttributes(self.ik_ctl, self.t_params)
 
             v = self.guide.apos[-1] - self.guide.apos[0]
             v = v ^ self.normal
@@ -102,6 +104,7 @@ class Component(MainComponent):
             self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
             self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.1)
+            att.setKeyableAttributes(self.upv_ctl, self.t_params)
 
             # Chain
             self.chain = pri.add2DChain(self.root, self.getName("chain"), self.guide.apos, self.normal, self.negate)

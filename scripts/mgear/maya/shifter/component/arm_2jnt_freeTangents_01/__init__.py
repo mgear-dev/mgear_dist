@@ -70,12 +70,12 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root, self.getName("fk0_npo"), t)
         self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
-        att.setKeyableAttributes(self.fk0_ctl)
+        att.setKeyableAttributes(self.fk0_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
         self.fk1_npo = pri.addTransform(self.fk0_ctl, self.getName("fk1_npo"), t)
         self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0))
-        att.setKeyableAttributes(self.fk1_ctl)
+        att.setKeyableAttributes(self.fk1_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
         self.fk2_npo = pri.addTransform(self.fk1_ctl, self.getName("fk2_npo"), t)
@@ -120,6 +120,7 @@ class Component(MainComponent):
                 self.upv_cns.sy.set(-1)
         else:
             att.setInvertMirror(self.upv_ctl, ["tx"])
+        att.setKeyableAttributes(self.upv_ctl, self.t_params)
 
         # References --------------------------------------
         # Calculate  again the transfor for the IK ref. This way align with FK
@@ -179,6 +180,7 @@ class Component(MainComponent):
                 self.mid_cns.sz.set(-1)
         else:
             att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
+        att.setKeyableAttributes(self.mid_ctl, self.t_params)
 
         #Roll join ref---------------------------------
         self.tws0_loc = pri.addTransform(self.root, self.getName("tws0_loc"), tra.getTransform(self.fk_ctl[0]))
@@ -265,6 +267,7 @@ class Component(MainComponent):
         if self.negate:
             self.armTangentA_npo.rz.set(180)
             self.armTangentA_npo.sz.set(-1)
+        att.setKeyableAttributes(self.armTangentA_ctl, self.t_params)
 
         t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .9)
         self.armTangentB_npo = pri.addTransform(self.tws1A_loc, self.getName("armTangentB_npo"), t)
@@ -272,6 +275,7 @@ class Component(MainComponent):
         if self.negate:
             self.armTangentB_npo.rz.set(180)
             self.armTangentB_npo.sz.set(-1)
+        att.setKeyableAttributes(self.armTangentB_ctl, self.t_params)
 
         tC = self.tws1B_npo.getMatrix(worldSpace=True)
         tC = tra.setMatrixPosition(tC, self.guide.apos[2])
@@ -281,6 +285,7 @@ class Component(MainComponent):
         if self.negate:
             self.forearmTangentA_npo.rz.set(180)
             self.forearmTangentA_npo.sz.set(-1)
+        att.setKeyableAttributes(self.forearmTangentA_ctl, self.t_params)
 
         t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .5)
         self.forearmTangentB_loc = pri.addTransform(self.root, self.getName("forearmTangentB_loc"), tC)
@@ -289,6 +294,7 @@ class Component(MainComponent):
         if self.negate:
             self.forearmTangentB_npo.rz.set(180)
             self.forearmTangentB_npo.sz.set(-1)
+        att.setKeyableAttributes(self.forearmTangentB_ctl, self.t_params)
 
         t = self.mid_ctl.getMatrix(worldSpace=True)
         self.elbowTangent_npo = pri.addTransform(self.mid_ctl, self.getName("elbowTangent_npo"), t)
@@ -296,6 +302,7 @@ class Component(MainComponent):
         if self.negate:
             self.elbowTangent_npo.rz.set(180)
             self.elbowTangent_npo.sz.set(-1)
+        att.setKeyableAttributes(self.elbowTangent_ctl, self.t_params)
 
 
     def addAttributes(self):
@@ -535,11 +542,16 @@ class Component(MainComponent):
         aop.gear_curvecns_op(self.forearmTwistCrv, [ self.elbowTangent_ctl, self.forearmTangentA_ctl, self.forearmTangentB_ctl,self.forearmTangentB_loc ])
 
         #Tangent controls vis
-        pm.connectAttr( self.tangentVis_att, self.armTangentA_ctl.attr("visibility"))
-        pm.connectAttr( self.tangentVis_att, self.armTangentB_ctl.attr("visibility"))
-        pm.connectAttr( self.tangentVis_att, self.forearmTangentA_ctl.attr("visibility"))
-        pm.connectAttr( self.tangentVis_att, self.forearmTangentB_ctl.attr("visibility"))
-        pm.connectAttr( self.tangentVis_att, self.elbowTangent_ctl.attr("visibility"))
+        for shp in self.armTangentA_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
+        for shp in self.armTangentB_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
+        for shp in self.forearmTangentA_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
+        for shp in self.forearmTangentB_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
+        for shp in self.elbowTangent_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
 
         # Divisions ----------------------------------------
         # at 0 or 1 the division will follow exactly the rotation of the controler.. and we wont have this nice tangent + roll

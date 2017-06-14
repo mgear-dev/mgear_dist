@@ -89,7 +89,8 @@ class Component(MainComponent):
         att.setKeyableAttributes(self.fk0_ctl)
         # *ms* add fk roll control Simage style
         self.fk0_roll_ctl = self.addCtl(self.fk0_ctl, "fk0_roll_ctl", t, self.color_fk, "cube", w=self.length0*.3, h=self.size*.1, d=self.size*0.1, po=dt.Vector(.85*self.length0*self.n_factor,0,0))
-        att.setKeyableAttributes(self.fk0_roll_ctl)
+        att.setRotOrder(self.fk0_roll_ctl, "YZX")
+        att.setKeyableAttributes(self.fk0_roll_ctl, ["rx"])
         self.fk0_mtx = pri.addTransform(self.root, self.getName("fk0_mtx"), t)
 
         t = tra.setMatrixPosition(t, self.guide.apos[1])
@@ -103,7 +104,8 @@ class Component(MainComponent):
         att.setKeyableAttributes(self.fk1_ctl)
         self.fk1_mtx = pri.addTransform(self.fk1_ctl, self.getName("fk1_mtx"), t)
         self.fk1_roll_ctl = self.addCtl(self.fk1_ctl, "fk1_roll_ctl", t, self.color_fk, "cube", w=self.length1*.3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.85*self.length1*self.n_factor,0,0))
-        att.setKeyableAttributes(self.fk1_roll_ctl)
+        att.setRotOrder(self.fk1_roll_ctl, "XYZ")
+        att.setKeyableAttributes(self.fk1_roll_ctl, ["rx"])
 
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
@@ -356,18 +358,14 @@ class Component(MainComponent):
 
         # Controls ROT order -----------------------------------
         att.setRotOrder(self.fk0_ctl, "YZX")
-        att.setRotOrder(self.fk0_roll_ctl, "YZX")
         att.setRotOrder(self.fk1_ctl, "XYZ")
-        att.setRotOrder(self.fk1_roll_ctl, "XYZ")
         att.setRotOrder(self.fk2_ctl, "YZX")
-        # att.setRotOrder(self.ik_ctl, "ZYX")
         att.setRotOrder(self.ik_ctl, "XYZ")
 
 
         # IK Solver -----------------------------------------
         out = [self.bone0, self.bone1, self.ctrn_loc, self.eff_npo]
 
-        #self.fk_ctl = [self.fk0_roll_ctl, self.fk1_ctl, self.fk2_mtx]
         node = aop.gear_ikfk2bone_op(out, self.root, self.ik_ref, self.upv_ctl, self.fk0_mtx, self.fk1_mtx, self.fk2_mtx, self.length0, self.length1, self.negate)
 
         pm.connectAttr(self.blend_att, node+".blend")
@@ -394,7 +392,6 @@ class Component(MainComponent):
         pb_node.attr("rotInterpolation").set (1)
         pm.connectAttr(dm_node+".outputTranslate", pb_node+".inTranslate2")
         pm.connectAttr(dm_node+".outputRotate", pb_node+".inRotate2")
-        # pm.connectAttr(node+".outRotate", pb_node+".inRotate2")
         pm.connectAttr(pb_node+".outRotate", self.upv_mtx.attr("rotate"))
         pm.connectAttr(pb_node+".outTranslate", self.upv_mtx.attr("translate"))
         pm.connectAttr(self.auv_att, pb_node+".weight")

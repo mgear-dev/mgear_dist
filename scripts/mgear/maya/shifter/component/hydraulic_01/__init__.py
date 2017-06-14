@@ -32,6 +32,7 @@ from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
+import mgear.maya.attribute as att
 import mgear.maya.applyop as aop
 
 
@@ -55,6 +56,7 @@ class Component(MainComponent):
 
         self.ctl_npo = pri.addTransform(self.root, self.getName("ctl_npo"), t)
         self.ctl = self.addCtl(self.ctl_npo, "base_ctl", t, self.color_ik, "square", w=1.0)
+        att.setKeyableAttributes(self.ctl, self.tr_params)
 
         self.ref_base = pri.addTransform(self.ctl, self.getName("ref_base"), t)
 
@@ -62,6 +64,7 @@ class Component(MainComponent):
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
         self.tip_npo = pri.addTransform(self.ik_cns, self.getName("tip_npo"), t)
         self.tip_ctl = self.addCtl(self.tip_npo, "tip_ctl", t, self.color_ik, "square", w=1.0)
+        att.setKeyableAttributes(self.tip_ctl, self.tr_params)
 
         self.ref_tip = pri.addTransform(self.tip_ctl, self.getName("ref_tip"), t)
 

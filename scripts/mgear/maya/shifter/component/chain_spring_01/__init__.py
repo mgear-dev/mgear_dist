@@ -38,6 +38,7 @@ from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
+import mgear.maya.attribute as att
 import mgear.maya.vector as vec
 import mgear.maya.applyop as aop
 
@@ -91,6 +92,7 @@ class Component(MainComponent):
 
             self.fk_npo.append(fk_npo)
             self.fk_ctl.append(fk_ctl)
+            att.setKeyableAttributes(self.fk_ctl, self.tr_params)
 
             self.spring_target.append(spring_target)
 

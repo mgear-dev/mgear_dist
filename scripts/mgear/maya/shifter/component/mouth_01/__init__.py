@@ -29,12 +29,14 @@
 ##########################################################
 # Maya
 import pymel.core as pm
+import pymel.core.datatypes as dt
 
 # mgear
 from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
+import mgear.maya.attribute as att
 
 ##########################################################
 # COMPONENT
@@ -53,7 +55,8 @@ class Component(MainComponent):
         #jaw control
         t = tra.getTransformFromPos(self.guide.pos["jaw"])
         self.ctl_npo = pri.addTransform(self.root, self.getName("ctl_npo"), t)
-        self.jaw_ctl = self.addCtl(self.ctl_npo, "jaw_ctl", t, self.color_fk, "circle", w=1)
+        self.jaw_ctl = self.addCtl(self.ctl_npo, "jaw_ctl", t, self.color_fk, "circle", w=1, ro=dt.Vector([1.5708,0,0]))
+        att.setKeyableAttributes(self.jaw_ctl, ["tx", "ty", "tz", "rz"])
 
         #mouth center
         t = tra.getTransformFromPos(self.guide.pos["rotcenter"])
@@ -75,20 +78,20 @@ class Component(MainComponent):
         #lips
         t = tra.getTransformFromPos(self.guide.pos["lipup"])
         self.lipup_npo = pri.addTransform(self.jawUp_rot, self.getName("lipup_npo"), t)
-        self.lipup_ctl = self.addCtl(self.lipup_npo, "lipup_ctl", t, self.color_fk, "square", w=1)
+        self.lipup_ctl = self.addCtl(self.lipup_npo, "lipup_ctl", t, self.color_fk, "square", d=.15, w=1, ro=dt.Vector([1.5708,0,0]))
 
         t = tra.getTransformFromPos(self.guide.pos["liplow"])
         self.liplow_npo = pri.addTransform(self.jawLow_rot, self.getName("liplow_npo"), t)
-        self.liplow_ctl = self.addCtl(self.liplow_npo, "liplow_ctl", t, self.color_fk, "square", w=1)
+        self.liplow_ctl = self.addCtl(self.liplow_npo, "liplow_ctl", t, self.color_fk, "square", d=.15, w=1, ro=dt.Vector([1.5708,0,0]))
 
         #teeth
         t = tra.getTransformFromPos(self.guide.pos["lipup"])
         self.teethup_npo = pri.addTransform(self.jawUp_rot, self.getName("teethup_npo"), t)
-        self.teethup_ctl = self.addCtl(self.teethup_npo, "teethup_ctl", t, self.color_fk, "square", w=.7)
+        self.teethup_ctl = self.addCtl(self.teethup_npo, "teethup_ctl", t, self.color_ik, "square", d=.1, w=.7, ro=dt.Vector([1.5708,0,0]))
 
         t = tra.getTransformFromPos(self.guide.pos["liplow"])
         self.teethlow_npo = pri.addTransform(self.jawLow_rot, self.getName("teethlow_npo"), t)
-        self.teethlow_ctl = self.addCtl(self.teethlow_npo, "teethlow_ctl", t, self.color_fk, "square", w=.7)
+        self.teethlow_ctl = self.addCtl(self.teethlow_npo, "teethlow_ctl", t, self.color_ik, "square", d=.1, w=.7, ro=dt.Vector([1.5708,0,0]))
 
 
         self.jnt_pos.append([self.jawLow_rot, "jaw", "parent_relative_jnt", False])
