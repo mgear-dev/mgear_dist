@@ -65,7 +65,7 @@ class Component(MainComponent):
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
 
         self.ik_ctl = self.addCtl(self.ik_cns, "ik_ctl", t, self.color_ik, "compas", w=self.size*.5)
-        att.setKeyableAttributes(self.ik_ctl, self.t_params)
+        att.setKeyableAttributes(self.ik_ctl, self.tr_params)
         att.setRotOrder(self.ik_ctl, "ZXY")
 
         # Tangents -----------------------------------------
