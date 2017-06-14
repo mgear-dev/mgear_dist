@@ -67,6 +67,7 @@ class Component(MainComponent):
         self.ik_ctl = self.addCtl(self.ik_cns, "ik_ctl", t, self.color_ik, "compas", w=self.size*.5)
         att.setKeyableAttributes(self.ik_ctl, self.tr_params)
         att.setRotOrder(self.ik_ctl, "ZXY")
+        att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
 
         # Tangents -----------------------------------------
         if self.settings["tangentControls"]:
@@ -74,12 +75,14 @@ class Component(MainComponent):
             self.tan1_loc = pri.addTransform(self.ik_ctl, self.getName("tan1_loc"), t)
             self.tan1_ctl = self.addCtl(self.tan1_loc, "tan1_ctl", t, self.color_ik, "sphere", w=self.size*.2)
             att.setKeyableAttributes(self.tan1_ctl, self.t_params)
+            att.setInvertMirror(self.tan1_ctl, ["tx"])
 
             t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["tan0"], self.normal, "yx", self.negate)
             t = tra.setMatrixPosition(t, self.guide.pos["tan0"])
             self.tan0_loc = pri.addTransform(self.root, self.getName("tan0_loc"), t)
             self.tan0_ctl = self.addCtl(self.tan0_loc, "tan0_ctl", t, self.color_ik, "sphere", w=self.size*.2)
             att.setKeyableAttributes(self.tan0_ctl, self.t_params)
+            att.setInvertMirror(self.tan0_ctl, ["tx"])
 
             # Curves -------------------------------------------
             self.mst_crv = cur.addCnsCurve(self.root, self.getName("mst_crv"), [self.root, self.tan0_ctl, self.tan1_ctl, self.ik_ctl], 3)
@@ -137,11 +140,11 @@ class Component(MainComponent):
                 fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, tra.getTransform(parentctl), self.color_fk, "cube", w=self.size*.2, h=self.size*.05, d=self.size*.2)
                 att.setKeyableAttributes(self.fk_ctl)
                 att.setRotOrder(fk_ctl, "ZXY")
+                self.fk_ctl.append(fk_ctl)
 
 
             self.scl_npo.append(scl_npo)
             self.fk_npo.append(fk_npo)
-            self.fk_ctl.append(fk_ctl)
             parentctl = fk_ctl
 
             self.jnt_pos.append([fk_ctl, i])
@@ -154,6 +157,9 @@ class Component(MainComponent):
             self.twister.append(twister)
             self.ref_twist.append(ref_twist)
 
+        for  x in self.fk_ctl:
+            att.setInvertMirror(x, ["tx", "rz", "ry"])
+
         # Head ---------------------------------------------
         t = tra.getTransformLookingAt(self.guide.pos["head"], self.guide.pos["eff"], self.normal, "yx", self.negate)
         self.head_cns = pri.addTransform(self.root, self.getName("head_cns"), t)
@@ -161,6 +167,7 @@ class Component(MainComponent):
         dist = vec.getDistance(self.guide.pos["head"], self.guide.pos["eff"])
         self.head_ctl = self.addCtl(self.head_cns, "head_ctl", t, self.color_fk, "cube", w=self.size*.5, h=dist, d=self.size*.5, po=dt.Vector(0,dist*.5,0))
         att.setRotOrder(self.head_ctl, "ZXY")
+        att.setInvertMirror(self.head_ctl, ["tx", "rz", "ry"])
 
         self.jnt_pos.append([self.head_ctl, "head"])
 

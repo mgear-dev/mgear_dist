@@ -62,12 +62,14 @@ class Component(MainComponent):
         self.ik0_ctl = self.addCtl(self.ik0_npo, "ik0_ctl", t, self.color_ik, "compas", w=self.size)
         att.setKeyableAttributes(self.ik0_ctl, self.tr_params)
         att.setRotOrder(self.ik0_ctl, "ZXY")
+        att.setInvertMirror(self.ik0_ctl, ["tx", "ry", "rz"])
 
         t = tra.setMatrixPosition(t, self.guide.apos[1])
         if self.settings["autoBend"]:
             self.autoBend_npo = pri.addTransform(self.root, self.getName("spinePosition_npo"), t)
             self.autoBend_ctl = self.addCtl(self.autoBend_npo, "spinePosition_ctl", t, self.color_ik, "square", w=self.size)
             att.setKeyableAttributes(self.autoBend_ctl, ["tx", "ty", "tz", "ry"])
+            att.setInvertMirror(self.autoBend_ctl, ["tx", "ry"])
 
             self.ik1_npo = pri.addTransform(self.autoBendChain[0], self.getName("ik1_npo"), t)
             self.ik1autoRot_lvl = pri.addTransform(self.ik1_npo, self.getName("ik1autoRot_lvl"), t)
@@ -79,6 +81,7 @@ class Component(MainComponent):
 
         att.setKeyableAttributes(self.ik1_ctl, self.tr_params)
         att.setRotOrder(self.ik1_ctl, "ZXY")
+        att.setInvertMirror(self.ik1_ctl, ["tx", "ry", "rz"])
 
         # Tangent controllers -------------------------------
         if self.settings["centralTangent"]:
@@ -99,6 +102,7 @@ class Component(MainComponent):
             self.tan_npo = pri.addTransform(self.tan0_npo, self.getName("tan_npo"), t)
             self.tan_ctl = self.addCtl(self.tan_npo, "tan_ctl", t, self.color_fk, "sphere", w=self.size*.2)
             att.setKeyableAttributes(self.tan_ctl, self.t_params)
+            att.setInvertMirror(self.tan_ctl, ["tx"])
 
         else:
             t = tra.setMatrixPosition(t, vec.linearlyInterpolate(self.guide.apos[0], self.guide.apos[1], .33))
@@ -110,6 +114,9 @@ class Component(MainComponent):
             self.tan1_npo = pri.addTransform(self.ik1_ctl, self.getName("tan1_npo"), t)
             self.tan1_ctl = self.addCtl(self.tan1_npo, "tan1_ctl", t, self.color_ik, "sphere", w=self.size*.2)
             att.setKeyableAttributes(self.tan1_ctl, self.t_params)
+
+        att.setInvertMirror(self.tan0_ctl, ["tx"])
+        att.setInvertMirror(self.tan1_ctl, ["tx"])
 
         # Curves -------------------------------------------
         self.mst_crv = cur.addCnsCurve(self.root, self.getName("mst_crv"), [self.ik0_ctl, self.tan0_ctl, self.tan1_ctl, self.ik1_ctl], 3)
@@ -150,10 +157,10 @@ class Component(MainComponent):
                 fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%(i-1), tra.getTransform(parentctl), self.color_fk, "cube", w=self.size, h=self.size*.05, d=self.size)
                 att.setKeyableAttributes(self.fk_ctl)
                 att.setRotOrder(fk_ctl, "ZXY")
+                self.fk_ctl.append(fk_ctl)
 
             # setAttr(fk_npo+".inheritsTransform", False)
             self.fk_npo.append(fk_npo)
-            self.fk_ctl.append(fk_ctl)
             parentctl = fk_ctl
             scl_ref = pri.addTransform(parentctl, self.getName("%s_scl_ref"%i), tra.getTransform(parentctl))
             self.scl_transforms.append(scl_ref)
@@ -169,6 +176,9 @@ class Component(MainComponent):
 
             self.twister.append(twister)
             self.ref_twist.append(ref_twist)
+
+            for  x in self.fk_ctl:
+                att.setInvertMirror(x, ["tx", "rz", "ry"])
 
         # Connections (Hooks) ------------------------------
         self.cnx0 = pri.addTransform(self.root, self.getName("0_cnx"))
