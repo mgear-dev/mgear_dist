@@ -247,6 +247,12 @@ class Component(MainComponent):
     def setRelation(self):
         self.relatives["root"] = self.root
         self.relatives["jaw"] = self.jawLow_rot
+        self.relatives["rotcenter"] = self.jawLow_rot
+        self.relatives["lipup"] = self.lipup_ctl
+        self.relatives["liplow"] = self.liplow_ctl
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["jaw"] = 0
+        self.jointRelatives["rotcenter"] = 0
+        self.jointRelatives["lipup"] = 1
+        self.jointRelatives["liplow"] = 2
