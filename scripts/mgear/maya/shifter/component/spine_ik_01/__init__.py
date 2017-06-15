@@ -326,8 +326,8 @@ class Component(MainComponent):
         # Connections (Hooks) ------------------------------
         pm.pointConstraint(self.div_cns[0], self.cnx0)
         pm.orientConstraint(self.div_cns[0], self.cnx0)
-        pm.pointConstraint(self.fk_ctl[-1], self.cnx1)
-        pm.orientConstraint(self.fk_ctl[-1], self.cnx1)
+        pm.pointConstraint(self.div_cns[-1], self.cnx1)
+        pm.orientConstraint(self.div_cns[-1], self.cnx1)
 
     # =====================================================
     # CONNECTOR
