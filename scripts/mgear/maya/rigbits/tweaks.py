@@ -103,7 +103,7 @@ def createJntTweak(mesh, parentJnt, ctlParent):
         doritosMagic(m, joint, jointBase)
 
 
-def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
+def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[0,0,0]):
 
     blendShape = bsp.getBlendShape(mesh)
 
@@ -149,7 +149,7 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
     pm.sets(defSet, add=joint)
 
     controlType = "sphere"
-    icon = ico.create(jointBase, name + "_ctl", pm.datatypes.Matrix(), [1, 0, 0], controlType, w=.04)
+    icon = ico.create(jointBase, name + "_ctl", pm.datatypes.Matrix(), color, controlType, w=.04)
     for t in [".translate", ".scale", ".rotate"]:
         pm.connectAttr(icon + t, joint + t)
 
@@ -170,10 +170,10 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
     pm.parent(p, pp)
 
 
-def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlParent=None):
+def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlParent=None,  color=[0,0,0]):
 
     for i, pair in enumerate(edgeIndexPairList):
-        createRivetTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent)
+        createRivetTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent, color)
 
 
 def createRivetTweakLayer(layerMesh, bst, edgeList, tweakName, parent=None, ctlParent=None):
