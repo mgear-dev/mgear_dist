@@ -304,7 +304,14 @@ def connectUserDefinedChannels(source, targets):
                 pm.displayWarning("%s don't have contrapart channel on %s"%(c, t))
 
 def connectInvertSRT(source, target, srt="srt", axis="xyz"):
+    """Summary
 
+    Args:
+        source (TYPE): Description
+        target (TYPE): Description
+        srt (str, optional): Description
+        axis (str, optional): Description
+    """
     for t in srt:
         soureList = []
         invList = []
@@ -317,26 +324,38 @@ def connectInvertSRT(source, target, srt="srt", axis="xyz"):
         if soureList:
             nod.createMulNode(soureList, invList, targetList)
 
-def replaceShape(*args):
+def replaceShape(source=None, targets=None, *args):
     """
     Replace the shape of one object by another.
+
+    Args:
+        source (None, PyNode): Source object with the original shape.
+        targets (None, list of pyNode): Targets object to apply the source shape.
+        *args: Maya's dummy
+
+    Returns:
+
+        None: Return non if nothing is selected or the source and targets are none
     """
-    oSel =  pm.selected()
+    if not source and not targets:
+        oSel =  pm.selected()
+        if len(oSel) <2:
+            pm.displayWarning( "At less 2 objects must be selected")
+            return None
+        else:
+            source = oSel[0]
+            targets = oSel[1:]
 
-    if len(oSel) !=2:
-        print "2 objects must be selected"
-    else:
-        source = oSel[0]
+    for target in targets:
         source2 = pm.duplicate(source)[0]
-        targets = oSel[1:]
-        for target in targets:
-            shape = target.getShape()
-            pm.delete(shape)
-            pm.parent(source2.getShape(), target, r=True, s=True)
+        shape = target.getShapes()
+        pm.delete(shape)
+        pm.parent(source2.getShapes(), target, r=True, s=True)
 
-            pm.rename( target.getShape(), target.name() + "Shape" )
+        for  i, sh in enumerate(target.getShapes()):
+            pm.rename( sh, target.name() + "_%s_Shape"%str(i) )
 
-            pm.delete(source2)
+        pm.delete(source2)
 
 
 def matchPosfromBBox(*args):
@@ -358,6 +377,14 @@ def matchPosfromBBox(*args):
 def spaceJump(ref=None, space=None, *args):
     """
     This function create a local reference space from another space in the hierarchy
+
+    Args:
+        ref (None, optional): Transform reference
+        space (None, optional): Space reference
+        *args: Maya dummy
+
+    Returns:
+        pyNode: Transform
     """
 
     if not ref and not space:

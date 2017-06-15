@@ -77,7 +77,7 @@ def CreateMenu():
     pm.menuItem(label="Add Support Joint", command=partial(rigbits.addSupportJoint, False, False))
     pm.setParent(riggingM, menu=True)
     pm.menuItem( divider=True )
-    pm.menuItem(label="Replace Shape", command=partial(rigbits.replaceShape))
+    pm.menuItem(label="Replace Shape", command=partial(rigbits.replaceShape, None, None))
     pm.menuItem( divider=True )
     pm.menuItem(label="Match All Transform", command=partial(rigbits.matchWorldXform))
     pm.menuItem(label="Match Pos with BBox", command=partial(rigbits.matchPosfromBBox))
