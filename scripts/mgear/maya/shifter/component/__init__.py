@@ -231,7 +231,7 @@ class MainComponent(object):
         """
         return
 
-    def addJoint(self, obj, name, newActiveJnt=None, UniScale=True, segComp=0):
+    def addJoint(self, obj, name, newActiveJnt=None, UniScale=True, segComp=0, gearMulMatrix=True):
         """
         Add joint as child of the active joint or under driver object.
 
@@ -240,6 +240,11 @@ class MainComponent(object):
             name (str): The joint name.
             newActiveJnt (bool or dagNode): If a joint is pass, this joint will be the active joint
                 and parent of the newly created joint.
+            UniScale (bool): Connects the joint scale with the Z axis for a unifor scalin, if set False
+                will connect with each axis separated.
+            segComp (bool): Set True or False the segment compensation in the joint..
+            gearMulMatrix (bool): Use the custom gear_multiply matrix node, if False will use
+                 Maya's default mulMatrix node.
 
         Returns:
             dagNode: The newly created joint.
@@ -254,8 +259,14 @@ class MainComponent(object):
             #All new jnts are the active by default
             self.active_jnt = jnt
 
-            mulmat_node = nod.createMultMatrixNode(obj + ".worldMatrix", jnt + ".parentInverseMatrix")
-            dm_node = nod.createDecomposeMatrixNode(mulmat_node+".matrixSum")
+            if gearMulMatrix:
+                mulmat_node = aop.gear_mulmatrix_op(obj + ".worldMatrix", jnt + ".parentInverseMatrix")
+                dm_node = nod.createDecomposeMatrixNode(mulmat_node+".output")
+                m = mulmat_node.attr('output').get()
+            else:
+                mulmat_node = nod.createMultMatrixNode(obj + ".worldMatrix", jnt + ".parentInverseMatrix")
+                dm_node = nod.createDecomposeMatrixNode(mulmat_node+".matrixSum")
+                m = mulmat_node.attr('matrixSum').get()
             pm.connectAttr(dm_node+".outputTranslate", jnt+".t")
             pm.connectAttr(dm_node+".outputRotate", jnt+".r")
             # TODO: fix squash stretch solver to scale the joint uniform
@@ -277,9 +288,12 @@ class MainComponent(object):
             jnt.attr("jointOrientY").set(jnt.attr("ry").get())
             jnt.attr("jointOrientZ").set(jnt.attr("rz").get())
 
-            m = mulmat_node.attr('matrixSum').get()
             im = m.inverse()
-            nod.createMultMatrixNode(mulmat_node.attr('matrixSum'), im, jnt,'r')
+
+            if gearMulMatrix:
+                aop.gear_mulmatrix_op(mulmat_node.attr('output'), im, jnt,'r')
+            else:
+                nod.createMultMatrixNode(mulmat_node.attr('matrixSum'), im, jnt,'r')
 
         else:
             jnt = pri.addJoint(obj, self.getName(str(name)+"_jnt"), tra.getTransform(obj))
