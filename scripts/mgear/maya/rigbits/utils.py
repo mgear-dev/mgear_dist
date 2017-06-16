@@ -72,7 +72,12 @@ def createRunTimeCommand(name, rCmd, ann=""):
     pm.displayInfo("Hotkey: " +name+ " created" )
 
 def createHotkeys(*args):
+    """Create  mGear custom hotkey functions ready to be use.
+    This command doesn't set the hotkey binding. Only create the functions.
 
+    Args:
+        *args: Maya's dummy
+    """
     # duplicate sym
     rCmd = '''
 import pymel.core as pm

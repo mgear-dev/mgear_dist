@@ -121,16 +121,18 @@ def createCTL(type = "square", child=False, *args):
 def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
 
     """
-
     Create one joint for each selected object.
 
     Args:
-        obj:
-        parent:
-        noReplace:
-        *args:
+        obj (bool or dagNode, optional): The object to drive the new joint. If False will use the current selection.
+        parent (bool or dagNode, optional): The parent for the joint. If False will try to parent to jnt_org.
+            If jnt_org doesn't exist will parent the joint under the obj
+        noReplace (bool, optional): If True will add the extension "_jnt" to the new joint name
+        grp (pyNode or None, optional): The set to add the new joint. If none will use "rig_deformers_grp"
+        *args: Maya's dummy
 
     Returns:
+        pyNode: The New created joint.
 
     """
     if not obj:
@@ -216,6 +218,15 @@ def matchWorldXform(*args):
 def alignToPointsLoop(points=None, loc=None, name=None, *args):
     """
     Create space locator align to the plain define by at less 3 vertex
+
+    Args:
+        points (None or vertex list, optional): The reference vertex to align the ref locator
+        loc (None or dagNode, optional): If none will create a new locator
+        name (None or string, optional): Name of the new locator
+        *args: Description
+
+    Returns:
+        TYPE: Description
     """
 
     if not points:
@@ -260,6 +271,12 @@ def alignToPointsLoop(points=None, loc=None, name=None, *args):
 
 
 def connectWorldTransform(source, target):
+    """Connect the source world transform of one object to another object.
+
+    Args:
+        source (dagNode): Source dagNode.
+        target (dagNode): target dagNode.
+    """
     mulmat_node = nod.createMultMatrixNode(source + ".worldMatrix", target + ".parentInverseMatrix")
     dm_node = nod.createDecomposeMatrixNode(mulmat_node+".matrixSum")
     pm.connectAttr(dm_node+".outputTranslate", target+".t")
@@ -269,6 +286,13 @@ def connectWorldTransform(source, target):
 def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
     """
     Connect scale, rotatio and translation.
+
+    Args:
+        objects (None or list of dagNode, optional): If None will use the current selection.
+        s (bool, optional): If True will connect the local scale
+        r (bool, optional): If True will connect the local rotation
+        t (bool, optional): If True will connect the local translation
+        *args: Maya's dummy
     """
     if objects or len(pm.selected()) >= 2:
         if objects:
@@ -292,6 +316,10 @@ def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
 def connectUserDefinedChannels(source, targets):
     """
     Connects the user defined channels between 2 objects with the same channels. Usually a copy of the same object.
+
+    Args:
+        source (dagNode): The dagNode with the source user defined channels
+        targets (list of dagNode): The list of dagNodes with the same user defined channels to be connected.
     """
     udc = source.listAttr(ud=True)
     if not isinstance(targets, list):
@@ -304,13 +332,15 @@ def connectUserDefinedChannels(source, targets):
                 pm.displayWarning("%s don't have contrapart channel on %s"%(c, t))
 
 def connectInvertSRT(source, target, srt="srt", axis="xyz"):
-    """Summary
+    """Connect the locat transformations with inverted values.
 
     Args:
-        source (TYPE): Description
-        target (TYPE): Description
-        srt (str, optional): Description
-        axis (str, optional): Description
+        source (dagNode): The source driver dagNode
+        target (dagNode): The target driven dagNode
+        srt (string, optional): String value for the scale(s), rotate(r), translation(t). Default
+            value is "srt". Posible values "s", "r", "t" or any combination
+        axis (string, optional):  String value for the axis. Default
+            value is "xyz". Posible values "x", "y", "z" or any combination
     """
     for t in srt:
         soureList = []
@@ -407,6 +437,14 @@ def spaceJump(ref=None, space=None, *args):
 def createInterpolateTransform(objects=None, blend=.5, *args):
     """
     Create space locator and apply gear_intmatrix_op, to interpolate the his pose between 2 selected objects.
+
+    Args:
+        objects (None or list of 2 dagNode, optional): The 2 dagNode to interpolate the transform.
+        blend (float, optional): The interpolation blend factor.
+        *args: Maya's dummy
+
+    Returns:
+        pyNode: The new transformation witht the interpolate matrix node applied.
     """
     if objects or len(pm.selected()) >= 2:
         if objects:
@@ -429,7 +467,14 @@ def createInterpolateTransform(objects=None, blend=.5, *args):
 
 
 def addBlendedJoint(oSel=None, compScale=True, *args):
+    """Create a joint that rotate 50% of the selected joint. This operation is done using a
+    pairBlend node.
 
+    Args:
+        oSel (None or joint, optional): If None will use the selected joints.
+        compScale (bool, optional): Set the compScale option of the blended joint. Default is True.
+        *args: Maya's dummy
+    """
     if not oSel:
         oSel = pm.selected()
     elif not isinstance(oSel, list):
@@ -475,6 +520,12 @@ def addBlendedJoint(oSel=None, compScale=True, *args):
             pm.displayWarning("Blended Joint can't be added to: %s. Because is not ot type Joint"%x.name())
 
 def addSupportJoint(oSel=None, *args):
+    """Add an extra joint to the blended joint. This is meant to be use with SDK for game style deformation.
+
+    Args:
+        oSel (None or blended joint, optional): If None will use the current selection.
+        *args: Mays's dummy
+    """
     if not oSel:
         oSel = pm.selected()
     elif not isinstance(oSel, list):

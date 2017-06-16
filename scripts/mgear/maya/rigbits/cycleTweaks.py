@@ -37,7 +37,11 @@ import mgear.maya.rigbits.rivet as rvt
 import mgear.maya.rigbits.blendShapes as bshp
 
 def inverseTranslateParent(obj):
+    """Invert the parent transformation
 
+    Args:
+        obj (dagNode): The source dagNode to inver parent transformation.
+    """
     if not isinstance(obj, list):
         obj = [obj]
     for x in obj:
@@ -48,6 +52,15 @@ def inverseTranslateParent(obj):
 
 
 def initCycleTweakBase(outMesh, baseMesh, rotMesh, transMesh, staticJnt=None):
+    """Initialice the cycle tweak setup structure
+
+    Args:
+        outMesh (Mesh): The output mesh after the tweak deformation
+        baseMesh (Mesh): The base mesh for the cycle tweak.
+        rotMesh (Mesh): The mesh that will support the rotation transformations for the cycle tweak
+        transMesh (Mesh): The mesh that will support the translation and scale transformations for the cycle tweak
+        staticJnt (None or joint, optional): The static joint for the static vertex.
+    """
     bshp.connectWithBlendshape(rotMesh, baseMesh )
     bshp.connectWithBlendshape(transMesh, rotMesh)
     bshp.connectWithBlendshape(outMesh, transMesh)
@@ -58,7 +71,29 @@ def initCycleTweakBase(outMesh, baseMesh, rotMesh, transMesh, staticJnt=None):
 
 def cycleTweak(name, edgePair, mirrorAxis, baseMesh, rotMesh, transMesh, setupParent, ctlParent, jntOrg=None, grp=None,
                iconType="square", size=.025, color=13, ro=dt.Vector(1.5708,0,1.5708/2)):
+    """The command to create a cycle tweak.
+    A cycle tweak is a tweak that cycles to the parent position but doesn't create a cycle of dependency. This type of tweaks
+    are very useful to create facial tweakers.
 
+    Args:
+        name (string): Name for the cycle tweak
+        edgePair (list): List of edge pair to attach the cycle tweak
+        mirrorAxis (bool): If true, will mirror the x axis behaviour.
+        baseMesh (Mesh): The base mesh for the cycle tweak.
+        rotMesh (Mesh): The mesh that will support the rotation transformations for the cycle tweak
+        transMesh (Mesh): The mesh that will support the translation and scale transformations for the cycle tweak
+        setupParent (dagNode): The parent for the setup objects
+        ctlParent (dagNode): The parent for the control objects
+        jntOrg (None or dagNode, optional): The parent for the joints
+        grp (None or set, optional): The set to add the controls
+        iconType (str, optional): The controls shape
+        size (float, optional): The control size
+        color (int, optional): The control color
+        ro (TYPE, optional): The control shape rotation offset
+
+    Returns:
+        multi: the tweak control and the list of related joints.
+    """
     # rotation sctructure
     rRivet = rvt.rivet()
     rBase = rRivet.create(baseMesh, edgePair[0], edgePair[1], setupParent, name + "_rRivet_loc")

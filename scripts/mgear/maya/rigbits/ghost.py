@@ -111,7 +111,13 @@ def createDoritoGhostCtl(ctl, parent=None):
 
 
 def ghostSlider(ghostControls, surface, sliderParent):
+    """Modify the ghost control behaviour to slide on top of a surface
 
+    Args:
+        ghostControls (dagNode): The ghost control
+        surface (Surface): The NURBS surface
+        sliderParent (dagNode): The parent for the slider.
+    """
     if  not isinstance(ghostControls, list):
         ghostControls = [ghostControls]
 

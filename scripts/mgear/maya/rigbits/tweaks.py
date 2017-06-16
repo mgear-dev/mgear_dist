@@ -38,6 +38,11 @@ import mgear.maya.rigbits.rivet as rvt
 
 
 def resetJntLocalSRT(jnt):
+    """Reset the local SRT and jointOrient of a joint
+
+    Args:
+        jnt (joint): The joint to reset the local SRT
+    """
     for axis in "XYZ":
         pm.setAttr(jnt+".jointOrient"+axis, 0)
         pm.setAttr(jnt+".rotate"+axis, 0)
@@ -69,7 +74,13 @@ def doritosMagic(mesh, joint, jointBase, parent=None):
 
 
 def createJntTweak(mesh, parentJnt, ctlParent):
+    """Create a joint tweak
 
+    Args:
+        mesh (mesh): The object to deform with the tweak
+        parentJnt (dagNode): The parent for the new joint
+        ctlParent (dagNode): The parent for the control.
+    """
     if not isinstance(mesh, list):
         mesh = [mesh]
 
@@ -104,7 +115,16 @@ def createJntTweak(mesh, parentJnt, ctlParent):
 
 
 def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[0,0,0]):
+    """Create a tweak joint attached to the mesh using a rivet
 
+    Args:
+        mesh (mesh): The object to add the tweak
+        edgePair (pari list): The edge pairt to create the rivet
+        name (str): The name for the tweak
+        parent (None or dagNode, optional): The parent for the tweak
+        ctlParent (None or dagNode, optional): The parent for the tweak control
+        color (list, optional): The color for the control
+    """
     blendShape = bsp.getBlendShape(mesh)
 
     inputMesh = blendShape.listConnections(sh=True, t="shape", d=False)[0]
@@ -171,13 +191,31 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
 
 
 def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlParent=None,  color=[0,0,0]):
+    """Create multiple rivet tweaks from a list of edge pairs
 
+    Args:
+        mesh (mesh): The object to add the tweak
+        edgeIndexPairList (list of list): The edge pair list of list
+        name (str): The name for the tweak
+        parent (None or dagNode, optional): The parent for the tweak
+        ctlParent (None or dagNode, optional): The parent for the tweak control
+        color (list, optional): The color for the control
+    """
     for i, pair in enumerate(edgeIndexPairList):
         createRivetTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent, color)
 
 
 def createRivetTweakLayer(layerMesh, bst, edgeList, tweakName, parent=None, ctlParent=None):
+    """Create a rivet tweak layer
 
+    Args:
+        layerMesh (mesh): The tweak layer mesh
+        bst (mesh): The mesh blendshape target
+        edgeList (list): List of edges
+        tweakName (string): The name for the tweak
+        parent (None or dagNode, optional): The parent for the tweak
+        ctlParent (None or dagNode, optional): the parent for the tweak control
+    """
     #Apply blendshape from blendshapes layer mesh
     bsp.connectWithBlendshape(layerMesh, bst)
 
