@@ -229,19 +229,19 @@ def selectObj(model, object_names, mouse_button, key_modifier):
         elif key_modifier == QtCore.Qt.NoModifier:# No Key
             pm.select(nodes)
         elif key_modifier == QtCore.Qt.ControlModifier: # ctrl
-            pm.select(nodes, add=True)
+            pm.select(nodes, deselect=True)
         elif key_modifier == QtCore.Qt.ShiftModifier: # shift
             pm.select(nodes, toggle=True)
-        elif int(key_modifier) == QtCore.Qt.ControlModifier + QtCore.Qt.ShiftModifier: # ctrl + shift
-            pm.select(nodes, deselect=True)
+        elif int(key_modifier) == (QtCore.Qt.ControlModifier | QtCore.Qt.ShiftModifier): # ctrl + shift
+            pm.select(nodes, add=True)
         elif key_modifier == QtCore.Qt.AltModifier: # alt
             pm.select(nodes)
-        elif int(key_modifier) == QtCore.Qt.ControlModifier + QtCore.Qt.AltModifier: # ctrl + alt
-            pm.select(nodes, add=True)
-        elif int(key_modifier) == QtCore.Qt.ShiftModifier + QtCore.Qt.AltModifier: # shift + alt
-            pm.select(nodes, toggle=True)
-        elif int(key_modifier) == QtCore.Qt.ControlModifier + QtCore.Qt.AltModifier + QtCore.Qt.ShiftModifier: # Ctrl + alt + shift
+        elif int(key_modifier) == (QtCore.Qt.ControlModifier | QtCore.Qt.AltModifier): # ctrl + alt
             pm.select(nodes, deselect=True)
+        elif int(key_modifier) == (QtCore.Qt.ShiftModifier | QtCore.Qt.AltModifier): # shift + alt
+            pm.select(nodes, toggle=True)
+        elif int(key_modifier) == (QtCore.Qt.ControlModifier | QtCore.Qt.AltModifier | QtCore.Qt.ShiftModifier): # Ctrl + alt + shift
+            pm.select(nodes, add=True)
         else:
             pm.select(nodes)
 
@@ -293,24 +293,28 @@ def keyObj(model, object_names):
     :param object_names: names of the controls, without the name space
     :return: None
     """
-    nodes = []
-    for name in object_names:
+    with pm.UndoChunk():
+        nodes = []
         nameSpace = getNamespace(model)
-        if  nameSpace:
-            node = dag.findChild(nameSpace + ":" + name)
-        else:
-            node = dag.findChild(model, name)
+        for name in object_names:
+            if  nameSpace:
+                node = getNode(nameSpace + ":" + name)
+            else:
+                node = getNode(name)
 
-        if not node and nameSpace:
-            mgear.log("Can't find object : %s:%s"%( nameSpace, name), mgear.sev_error)
-        elif not node:
-            mgear.log("Can't find object : %s"%( name), mgear.sev_error)
-        nodes.append(node)
+            if not node:
+                continue
 
-    if not nodes:
-        return
+            if not node and nameSpace:
+                mgear.log("Can't find object : %s:%s"%( nameSpace, name), mgear.sev_error)
+            elif not node:
+                mgear.log("Can't find object : %s"%( name), mgear.sev_error)
+            nodes.append(node)
 
-    pm.setKeyframe(*nodes)
+        if not nodes:
+            return
+
+        pm.setKeyframe(*nodes)
 
 # ================================================
 def keyAll(model):

@@ -216,7 +216,11 @@ class SelectButton(QtWidgets.QWidget):
         if firstLoop:
             key_modifier = event.modifiers()
         else:
-            key_modifier = QtCore.Qt.ShiftModifier
+            if event.modifiers():
+                key_modifier = event.modifiers()
+            else:
+                # key_modifier = QtCore.Qt.ShiftModifier
+                key_modifier = (QtCore.Qt.ControlModifier | QtCore.Qt.ShiftModifier)
         model = syn_uti.getModel(self)
         object = str(self.property("object")).split(",")
 
