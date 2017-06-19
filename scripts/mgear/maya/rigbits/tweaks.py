@@ -131,12 +131,20 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
 
     oRivet = rvt.rivet()
     base = oRivet.create(inputMesh, edgePair[0], edgePair[1], parent)
+    # get side
+    if base.getTranslation(space='world')[0] < -0.01:
+        side = "R"
+    elif base.getTranslation(space='world')[0] > 0.01:
+        side = "L"
+    else:
+        side = "C"
 
-    name = name + "_tweak"
-    pm.rename(base, name)
+    nameSide = name + "_tweak_" + side
+    nameNeutral = name + "_tweak"
+    pm.rename(base, nameSide)
 
     #Joints NPO
-    npo = pm.PyNode(pm.createNode("transform", n=name+"_npo", p=ctlParent, ss=True))
+    npo = pm.PyNode(pm.createNode("transform", n=nameSide+"_npo", p=ctlParent, ss=True))
     pm.pointConstraint(base, npo)
 
     # set proper orientation
@@ -155,8 +163,8 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
     pm.delete(temp)
 
     # create joints
-    jointBase = pri.addJoint(npo, name +"_jnt_lvl")
-    joint = pri.addJoint(jointBase, name +"_jnt")
+    jointBase = pri.addJoint(npo, nameNeutral +"_jnt_lvl")
+    joint = pri.addJoint(jointBase, nameNeutral +"_jnt")
 
     #hidding joint base by changing the draw mode
     pm.setAttr(jointBase+".drawStyle", 2)
@@ -169,7 +177,7 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
     pm.sets(defSet, add=joint)
 
     controlType = "sphere"
-    icon = ico.create(jointBase, name + "_ctl", pm.datatypes.Matrix(), color, controlType, w=.04)
+    icon = ico.create(jointBase, nameSide + "_ctl", pm.datatypes.Matrix(), color, controlType, w=.04)
     for t in [".translate", ".scale", ".rotate"]:
         pm.connectAttr(icon + t, joint + t)
 
@@ -187,6 +195,8 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
     pm.parent(p, w=True)
     for axis in "xyz":
         p.attr("r"+axis).set(0)
+    if side == "R":
+        p.attr("ry").set(180)
     pm.parent(p, pp)
 
 
