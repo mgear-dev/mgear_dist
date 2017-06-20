@@ -36,6 +36,7 @@ from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
+import mgear.maya.applyop as aop
 import mgear.maya.attribute as att
 import mgear.maya.node as nod
 import mgear.maya.vector as vec
@@ -67,19 +68,29 @@ class Component(MainComponent):
         if self.isFk:
             self.fk_npo = []
             self.fk_ctl = []
+            self.fk_ref = []
+            self.fk_off = []
             t = self.guide.tra["root"]
             self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
             parent = self.ik_cns
             tOld = False
+            fk_ctl = None
             for i, t in enumerate(tra.getChainTransform(self.guide.apos, self.normal, self.negate)):
                 dist = vec.getDistance(self.guide.apos[i], self.guide.apos[i+1])
                 if self.settings["neutralpose"] or not tOld:
                     tnpo = t
                 else:
                     tnpo = tra.setMatrixPosition(tOld, tra.getPositionFromMatrix(t))
-                fk_npo = pri.addTransform(parent, self.getName("fk%s_npo"%i), tnpo)
+                if i:
+                    tref = tra.setMatrixPosition(tOld, tra.getPositionFromMatrix(t))
+                    fk_ref = pri.addTransform(fk_ctl, self.getName("fk%s_ref"%i), tref)
+                    self.fk_ref.append(fk_ref)
+                else:
+                    tref = t
+                fk_off = pri.addTransform(parent, self.getName("fk%s_off"%i), tref)
+                fk_npo = pri.addTransform(fk_off, self.getName("fk%s_npo"%i), tnpo)
                 fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.1, d=self.size*.1, po=dt.Vector(dist*.5*self.n_factor,0,0))
-                parent = fk_ctl
+                self.fk_off.append(fk_off)
                 self.fk_npo.append(fk_npo)
                 self.fk_ctl.append(fk_ctl)
                 tOld = t
@@ -117,8 +128,7 @@ class Component(MainComponent):
             loc = pri.addTransform(parent, self.getName("%s_loc"%i), t)
 
             self.loc.append(loc)
-            self.jnt_pos.append([loc, i])
-            parent = loc
+            self.jnt_pos.append([loc, i, None, False])
 
     # =====================================================
     # PROPERTY
@@ -167,6 +177,10 @@ class Component(MainComponent):
             for shp in self.ik_ctl.getShapes():
                 pm.connectAttr(self.blend_att, shp.attr("visibility"))
 
+        # FK Chain -----------------------------------------
+        if self.isFk:
+            for off, ref in zip(self.fk_off[1:], self.fk_ref):
+                aop.gear_mulmatrix_op(ref.worldMatrix, off.parentInverseMatrix, off, "rt")
         # IK Chain -----------------------------------------
         if self.isIk:
             self.ikh = pri.addIkHandle(self.root, self.getName("ikh"), self.chain)
@@ -199,6 +213,7 @@ class Component(MainComponent):
 
                 # orientation
                 cns = pm.parentConstraint(self.fk_ctl[i], self.chain[i], loc, maintainOffset=False)
+                cns.interpType.set(0)
                 weight_att = pm.parentConstraint(cns, query=True, weightAliasList=True)
                 pm.connectAttr(rev_node+".outputX", weight_att[0])
                 pm.connectAttr(self.blend_att, weight_att[1])
