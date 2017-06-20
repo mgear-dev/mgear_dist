@@ -558,8 +558,10 @@ class Component(MainComponent):
         for i, div_cns in enumerate(self.div_cns):
             if i < (self.settings["div0"]+2):
                 mulmat_node = aop.gear_mulmatrix_op(self.armTwistChain[i]+".worldMatrix", div_cns+".parentInverseMatrix")
+                lastArmDiv = div_cns
             else:
                 mulmat_node = aop.gear_mulmatrix_op(self.forearmTwistChain[i-(self.settings["div0"]+2)]+".worldMatrix", div_cns+".parentInverseMatrix")
+                lastForeDiv = div_cns
             dm_node = nod.createDecomposeMatrixNode(mulmat_node+".output")
             pm.connectAttr(dm_node+".outputTranslate", div_cns+".t")
             pm.connectAttr(dm_node+".outputRotate", div_cns+".r")
@@ -570,6 +572,10 @@ class Component(MainComponent):
             pm.connectAttr(self.volDriver_att, node+".driver")
             pm.connectAttr(self.st_att[i], node+".stretch")
             pm.connectAttr(self.sq_att[i], node+".squash")
+
+        #force translation for last loc arm and foreamr
+        aop.gear_mulmatrix_op(self.elbowTangent_ctl.worldMatrix,lastArmDiv.parentInverseMatrix, lastArmDiv, "t" )
+        aop.gear_mulmatrix_op(self.tws2_loc.worldMatrix,lastForeDiv.parentInverseMatrix, lastForeDiv, "t" )
 
         # return
 
