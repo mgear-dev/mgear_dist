@@ -32,6 +32,7 @@ import mgear.maya.skin as ski
 import mgear.maya.primitive as pri
 import mgear.maya.icon as ico
 import mgear.maya.transform as tra
+import mgear.maya.attribute as att
 
 import mgear.maya.rigbits.blendShapes as bsp
 import mgear.maya.rigbits.rivet as rvt
@@ -114,7 +115,7 @@ def createJntTweak(mesh, parentJnt, ctlParent):
         doritosMagic(m, joint, jointBase)
 
 
-def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[0,0,0]):
+def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[0,0,0], size=.04):
     """Create a tweak joint attached to the mesh using a rivet
 
     Args:
@@ -177,9 +178,20 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
     pm.sets(defSet, add=joint)
 
     controlType = "sphere"
-    icon = ico.create(jointBase, nameSide + "_ctl", pm.datatypes.Matrix(), color, controlType, w=.04)
+    icon = ico.create(jointBase, nameSide + "_ctl", pm.datatypes.Matrix(), color, controlType, w=size)
     for t in [".translate", ".scale", ".rotate"]:
         pm.connectAttr(icon + t, joint + t)
+
+    # create the attributes to handlde mirror and symetrical pose
+    att.addAttribute(icon, "invTx", "bool", 0,  keyable=False, niceName="Invert Mirror TX")
+    att.addAttribute(icon, "invTy", "bool", 0,  keyable=False, niceName="Invert Mirror TY")
+    att.addAttribute(icon, "invTz", "bool", 0,  keyable=False, niceName="Invert Mirror TZ")
+    att.addAttribute(icon, "invRx", "bool", 0,  keyable=False, niceName="Invert Mirror RX")
+    att.addAttribute(icon, "invRy", "bool", 0,  keyable=False, niceName="Invert Mirror RY")
+    att.addAttribute(icon, "invRz", "bool", 0,  keyable=False, niceName="Invert Mirror RZ")
+    att.addAttribute(icon, "invSx", "bool", 0,  keyable=False, niceName="Invert Mirror SX")
+    att.addAttribute(icon, "invSy", "bool", 0,  keyable=False, niceName="Invert Mirror SY")
+    att.addAttribute(icon, "invSz", "bool", 0,  keyable=False, niceName="Invert Mirror SZ")
 
     #magic of doritos connection
     doritosMagic(mesh, joint, jointBase)
