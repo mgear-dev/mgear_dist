@@ -277,6 +277,7 @@ class MainComponent(object):
                 pm.connectAttr(dm_node+".outputScaleZ", jnt+".sz")
             else:
                 pm.connectAttr(dm_node+".outputScale", jnt+".s")
+                pm.connectAttr(dm_node+".outputShear", jnt+".shear")
 
             # Segment scale compensate Off to avoid issues with the global scale
             jnt.setAttr("segmentScaleCompensate", segComp)
