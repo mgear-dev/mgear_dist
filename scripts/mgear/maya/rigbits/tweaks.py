@@ -164,8 +164,8 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
     pm.delete(temp)
 
     # create joints
-    jointBase = pri.addJoint(npo, nameNeutral +"_jnt_lvl")
-    joint = pri.addJoint(jointBase, nameNeutral +"_jnt")
+    jointBase = pri.addJoint(npo, nameSide +"_jnt_lvl")
+    joint = pri.addJoint(jointBase, nameSide +"_jnt")
 
     #hidding joint base by changing the draw mode
     pm.setAttr(jointBase+".drawStyle", 2)
