@@ -34,6 +34,7 @@ Shifter component rig class.
 # pymel
 import pymel.core as pm
 import pymel.core.datatypes as dt
+from pymel import versions
 
 # mgear
 import mgear
@@ -145,6 +146,7 @@ class MainComponent(object):
         Step 01. Get the properties host, create parameters and set layout and logic.
         """
         self.getHost()
+        self.validateProxyChannels()
         self.addFullNameParam()
         self.addAttributes()
         return
@@ -419,6 +421,17 @@ class MainComponent(object):
         """
         self.uihost = self.rig.findRelative(self.settings["ui_host"])
 
+    def validateProxyChannels(self):
+        """
+        Check the Maya version to determinate if we can use proxy channels
+        and check user setting on the guide.
+        This feature is available from 2016.5
+        """
+
+        if versions.current() >= 201650 and  self.options["proxyChannels"]:
+            self.validProxyChannels = True
+        else:
+            self.validProxyChannels = False
 
     def addAttributes(self):
         """
@@ -438,7 +451,11 @@ class MainComponent(object):
 
         """
 
-        attr = self.addAnimEnumParam("", "", 0, ["---------------"] )
+        # attr = self.addAnimEnumParam("", "", 0, ["---------------"] )
+        if self.options["classicChannelNames"]:
+            attr = self.addAnimEnumParam(self.getName(), "__________", 0, [self.getName()] )
+        else:
+            attr = self.addAnimEnumParam(self.guide.compName, "__________", 0, [self.guide.compName] )
 
         return attr
 
@@ -464,7 +481,13 @@ class MainComponent(object):
             str: The long name of the new attribute
 
         """
-        attr = att.addAttribute(self.uihost, self.getName(longName), attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        if self.options["classicChannelNames"]:
+            attr = att.addAttribute(self.uihost, self.getName(longName), attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        else:
+            if self.uihost.hasAttr(self.getCompName(longName)):
+                attr = self.uihost.attr(self.getCompName(longName))
+            else:
+                attr = att.addAttribute(self.uihost, self.getCompName(longName), attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
 
         return attr
 
@@ -491,7 +514,13 @@ class MainComponent(object):
             str: The long name of the new attribute
 
         """
-        attr = att.addEnumAttribute(self.uihost, self.getName(longName), value, enum, niceName, None, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        if self.options["classicChannelNames"]:
+            attr = att.addEnumAttribute(self.uihost, self.getName(longName), value, enum, niceName, None, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        else:
+            if self.uihost.hasAttr(self.getCompName(longName)):
+                attr = self.uihost.attr(self.getCompName(longName))
+            else:
+                attr = att.addEnumAttribute(self.uihost, self.getCompName(longName), value, enum, niceName, None, keyable=keyable, readable=readable, storable=storable, writable=writable)
 
         return attr
 
@@ -517,7 +546,7 @@ class MainComponent(object):
             str: The long name of the new attribute
 
         """
-        attr = att.addAttribute(self.root, self.getName(longName), attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        attr = att.addAttribute(self.root, longName, attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
 
         return attr
 
@@ -923,6 +952,21 @@ class MainComponent(object):
             return "_".join([self.name, side+str(self.index), name])
         else:
             return self.fullName
+
+
+    def getCompName(self, name=""):
+        """
+        Return the component type name
+
+        Args:
+            name (str): The name to concatenate to the component name.
+        Returns:
+            str: The name.
+
+        """
+
+        return "_".join([self.guide.compName, name])
+
 
     # =====================================================
     # PROPERTIES
