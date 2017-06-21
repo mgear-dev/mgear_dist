@@ -68,7 +68,7 @@ class SynopticTab(MainSynopticTab, wui.Ui_biped_body):
         object_names = ["finger_R%s_fk%s_ctl"%(i,j) for i in range(4) for j in range(3)]
         thumb_names = ["thumb_R0_fk%s_ctl"%j for j in range(3)]
         object_names.extend(thumb_names)
-        modifiers = QtGui.QApplication.keyboardModifiers()
+        modifiers = QtWidgets.QApplication.keyboardModifiers()
         syn_uti.selectObj(model, object_names, None, modifiers)
 
     def selLeft_clicked(self):
@@ -77,7 +77,7 @@ class SynopticTab(MainSynopticTab, wui.Ui_biped_body):
         object_names = ["finger_L%s_fk%s_ctl"%(i,j) for i in range(4) for j in range(3)]
         thumb_names = ["thumb_L0_fk%s_ctl"%j for j in range(3)]
         object_names.extend(thumb_names)
-        modifiers = QtGui.QApplication.keyboardModifiers()
+        modifiers = QtWidgets.QApplication.keyboardModifiers()
         syn_uti.selectObj(model, object_names, None, modifiers)
 
     def keyRight_clicked(self):
