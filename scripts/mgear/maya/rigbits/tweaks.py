@@ -211,6 +211,7 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
         p.attr("ry").set(180)
     pm.parent(p, pp)
 
+    return icon
 
 def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlParent=None,  color=[0,0,0]):
     """Create multiple rivet tweaks from a list of edge pairs
@@ -223,9 +224,11 @@ def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlPare
         ctlParent (None or dagNode, optional): The parent for the tweak control
         color (list, optional): The color for the control
     """
+    ctlList = []
     for i, pair in enumerate(edgeIndexPairList):
-        createRivetTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent, color)
-
+        ctl = createRivetTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent, color)
+        ctlList.append(ctl)
+    return ctlList
 
 def createRivetTweakLayer(layerMesh, bst, edgeList, tweakName, parent=None, ctlParent=None):
     """Create a rivet tweak layer
