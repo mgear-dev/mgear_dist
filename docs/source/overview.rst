@@ -9,14 +9,8 @@ Originally mGear was design and develope by `Jeremie Passerin <http://www.jeremi
 
 																			**Jeremie Passerin**
 
-Contributors:
-	Akagi-san
-	Gaetan Guidet
-	Lior Ben Horin
-	Miles Cheng
-	Yamahigashi-san
-
 `Join the mGear Google user group <https://groups.google.com/forum/#!forum/mgearusergroup/>`_
+_____________________________________________________________________________________________
 
 .. figure:: images/studioAKA_mGear_A.jpg
     :width: 800px
@@ -26,6 +20,13 @@ Contributors:
     :figclass: align-center
 
     mGear have been used at Studio AKA for San Pellegrino ‘Dining By Starlight’. Rigged by Adam Avery
+
+Contributors (in alphabetical order):
+	- Akagi-san
+	- Gaetan Guidet
+	- Lior Ben Horin
+	- Miles Cheng
+	- Yamahigashi-san
 
 .. note::
 
