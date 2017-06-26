@@ -298,6 +298,8 @@ class RigGuide(MainGuide):
         self.pMode = self.addEnumParam("mode", ["Final", "WIP"], 0)
         self.pStep = self.addEnumParam("step", ["All Steps", "Objects", "Properties", "Operators", "Connect", "Joints", "Finalize"], 6)
         self.pIsModel = self.addParam("ismodel", "bool", True)
+        self.pClassicChannelNames = self.addParam("classicChannelNames", "bool", True)
+        self.pProxyChannels = self.addParam("proxyChannels", "bool", False)
 
         # --------------------------------------------------
         # skin
@@ -946,6 +948,8 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.guideSettingsTab.rigName_lineEdit.setText(self.root.attr("rig_name").get())
         self.guideSettingsTab.mode_comboBox.setCurrentIndex(self.root.attr("mode").get())
         self.guideSettingsTab.step_comboBox.setCurrentIndex(self.root.attr("step").get())
+        self.populateCheck(self.guideSettingsTab.proxyChannels_checkBox, "proxyChannels")
+        self.populateCheck(self.guideSettingsTab.classicChannelNames_checkBox, "classicChannelNames")
         self.populateCheck(self.guideSettingsTab.importSkin_checkBox, "importSkin")
         self.guideSettingsTab.skin_lineEdit.setText(self.root.attr("skin").get())
         self.populateCheck(self.guideSettingsTab.jointRig_checkBox, "joint_rig")
@@ -991,6 +995,9 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.guideSettingsTab.rigName_lineEdit.editingFinished.connect(partial(self.updateLineEdit, self.guideSettingsTab.rigName_lineEdit, "rig_name" ) )
         self.guideSettingsTab.mode_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.guideSettingsTab.mode_comboBox, "mode"))
         self.guideSettingsTab.step_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.guideSettingsTab.step_comboBox, "step"))
+
+        self.guideSettingsTab.proxyChannels_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.proxyChannels_checkBox, "proxyChannels"))
+        self.guideSettingsTab.classicChannelNames_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.classicChannelNames_checkBox, "classicChannelNames"))
 
         self.guideSettingsTab.importSkin_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.importSkin_checkBox, "importSkin"))
         self.guideSettingsTab.jointRig_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.jointRig_checkBox, "joint_rig"))

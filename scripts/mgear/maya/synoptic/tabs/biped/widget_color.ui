@@ -3959,7 +3959,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../biped_body/background.bmp</pixmap>
+    <pixmap>background.bmp</pixmap>
    </property>
   </widget>
   <widget class="MirrorPoseButton" name="b_mirrorPose">
@@ -5749,7 +5749,7 @@
          <string>armUI_R0_ctl</string>
         </property>
         <property name="Attr" stdset="0">
-         <string>arm_R0_ikref</string>
+         <string>arm_ikref</string>
         </property>
         <property name="ik_ctl" stdset="0">
          <string>arm_R0_ik_ctl</string>
@@ -5762,7 +5762,7 @@
          <string>armUI_R0_ctl</string>
         </property>
         <property name="Attr" stdset="0">
-         <string>arm_R0_upvref</string>
+         <string>arm_upvref</string>
         </property>
         <property name="ik_ctl" stdset="0">
          <string>arm_R0_upv_ctl</string>
@@ -5848,7 +5848,7 @@
          <string>armUI_L0_ctl</string>
         </property>
         <property name="Attr" stdset="0">
-         <string>arm_L0_ikref</string>
+         <string>arm_ikref</string>
         </property>
         <property name="ik_ctl" stdset="0">
          <string>arm_L0_ik_ctl</string>
@@ -5861,7 +5861,7 @@
          <string>armUI_L0_ctl</string>
         </property>
         <property name="Attr" stdset="0">
-         <string>arm_L0_upvref</string>
+         <string>arm_upvref</string>
         </property>
         <property name="ik_ctl" stdset="0">
          <string>arm_L0_upv_ctl</string>
@@ -6300,7 +6300,7 @@
     <string>IK/FK Leg Right</string>
    </property>
    <property name="ikfk_attr" stdset="0">
-    <string>leg_R0_blend</string>
+    <string>leg_blend</string>
    </property>
    <property name="uiHost_name" stdset="0">
     <string>legUI_R0_ctl</string>
@@ -6749,7 +6749,7 @@
     <string>IK/FK Arm Right</string>
    </property>
    <property name="ikfk_attr" stdset="0">
-    <string>arm_R0_blend</string>
+    <string>arm_blend</string>
    </property>
    <property name="uiHost_name" stdset="0">
     <string>armUI_R0_ctl</string>
@@ -7198,7 +7198,7 @@
     <string>IK/FK Leg Left</string>
    </property>
    <property name="ikfk_attr" stdset="0">
-    <string>leg_L0_blend</string>
+    <string>leg_blend</string>
    </property>
    <property name="uiHost_name" stdset="0">
     <string>legUI_L0_ctl</string>
@@ -7246,7 +7246,7 @@
          <string>armUI_R0_ctl</string>
         </property>
         <property name="Attr" stdset="0">
-         <string>shoulder_R0_rotRef</string>
+         <string>shoulder_rotRef</string>
         </property>
         <property name="ik_ctl" stdset="0">
          <string>shoulder_R0_orbit_ctl</string>
@@ -7310,7 +7310,7 @@
          <string>armUI_L0_ctl</string>
         </property>
         <property name="Attr" stdset="0">
-         <string>shoulder_L0_rotRef</string>
+         <string>shoulder_rotRef</string>
         </property>
         <property name="ik_ctl" stdset="0">
          <string>shoulder_L0_orbit_ctl</string>
@@ -7749,7 +7749,7 @@
     <string>IK/FK Arm Left</string>
    </property>
    <property name="ikfk_attr" stdset="0">
-    <string>arm_L0_blend</string>
+    <string>arm_blend</string>
    </property>
    <property name="uiHost_name" stdset="0">
     <string>armUI_L0_ctl</string>
@@ -7797,7 +7797,7 @@
          <string>spineUI_C0_ctl</string>
         </property>
         <property name="Attr" stdset="0">
-         <string>neck_C0_headref</string>
+         <string>neck_headref</string>
         </property>
         <property name="ik_ctl" stdset="0">
          <string>neck_C0_head_ctl</string>

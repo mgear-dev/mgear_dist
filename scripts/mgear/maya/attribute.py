@@ -196,6 +196,24 @@ def addEnumAttribute(node, longName, value, enum, niceName=None, shortName=None,
 
     return node.attr(longName)
 
+def addProxyAttribute(sourceAttrs, targets):
+    """Add proxy paramenter to a list of target dagNode
+
+    Args:
+        sourceAttrs (attr or list of attr): The parameters to be connected as proxy
+        targets (dagNode or list of dagNode): The list of dagNode to add the proxy paramenter
+    """
+    if not isinstance(targets, list):
+        targets = [targets]
+    if not isinstance(sourceAttrs, list):
+        sourceAttrs = [sourceAttrs]
+    for sourceAttr in sourceAttrs:
+        for target in targets:
+            if not target.hasAttr(sourceAttr.longName()):
+                target.addAttr(sourceAttr.longName(), pxy=sourceAttr)
+            else:
+                pm.displayWarning("The proxy channel %s already exist on: %s."%(sourceAttr.longName(), target.name()))
+
 def lockAttribute(node, attributes=["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz", "v"]):
     """
     Lock attributes of a node. By defaul will lock the rotation, scale and translation.
