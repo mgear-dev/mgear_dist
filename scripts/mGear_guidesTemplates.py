@@ -37,7 +37,7 @@ import mgear.maya.shifter.component as comp
 
 def guideUI(*args):
     """
-    Open shifter UI.        
+    Open shifter UI.
     """
     gui.Guide_UI()
 
@@ -73,11 +73,3 @@ def quadrupedGuide(*args):
     """
     path = os.path.dirname(comp.__file__)
     pm.importFile(os.path.join(path, "_templates", "quadruped.ma"))
-
-
-
-
-
-
-
-

@@ -41,65 +41,7 @@ from functools import partial
 import traceback
 import maya.OpenMayaUI as omui
 
-def _qt_import(binding, shi=False):
-    QtGui = None
-    QtCore = None
-    QtWidgets = None
-    wrapInstance = None
-
-    if binding == "PySide2":
-        from PySide2 import QtGui, QtCore, QtWidgets
-        import shiboken2 as shiboken
-        from shiboken2 import wrapInstance
-
-    elif binding == "PySide":
-        from PySide import QtGui, QtCore
-        import PySide.QtGui as QtWidgets
-        import shiboken
-        from shiboken import wrapInstance
-
-    elif binding == "PyQt4":
-        from PyQt4 import QtGui
-        from PyQt4 import QtCore
-        import PyQt4.QtGui as QtWidgets
-        from PyQt4.QtCore import QObject, pyqtSignal
-        from sip import wrapinstance as wrapInstance
-
-    else:
-        raise Exception("Unsupported python Qt binding '%s'" % binding)
-
-    if shi:
-        return QtGui, QtCore, QtWidgets, wrapInstance, shiboken
-    else:
-        return QtGui, QtCore, QtWidgets, wrapInstance
-
-##  Master qt import function ##
-def qt_import(shi=False):
-    """
-    import pyside/pyQt
-
-    Returns:
-        multi: QtGui, QtCore, QtWidgets, wrapInstance
-
-    """
-    lookup = ["PySide2", "PySide", "PyQt4"]
-
-    preferredBinding = os.environ.get("MGEAR_PYTHON_QT_BINDING", None)
-    if preferredBinding is not None and preferredBinding in lookup:
-        lookup.remove(preferredBinding)
-        lookup.insert(0, preferredBinding)
-
-    for binding in lookup:
-        try:
-            return _qt_import(binding, shi)
-        except:
-            pass
-
-    raise _qt_import("ThisBindingSurelyDoesNotExist", False)
-
-
-QtGui, QtCore, QtWidgets, wrapInstance = qt_import()
-
+from mGear_pyqt import QtGui, QtCore, QtWidgets, wrapInstance, qt_import
 
 #############################################
 # helper Maya pyQt functions
@@ -159,7 +101,7 @@ def deleteInstances(dialog, checkinstance):
         checkinstance (QDialog): The instance to check the type of dialog.
 
     """
-    
+
     mayaMainWindow = maya_main_window()
     for obj in mayaMainWindow.children():
         if type( obj ) == checkinstance:
@@ -167,21 +109,13 @@ def deleteInstances(dialog, checkinstance):
                 print 'Deleting instance {0}'.format(obj)
                 mayaMainWindow.removeDockWidget(obj)
                 obj.setParent(None)
-                obj.deleteLater()        
-
-
-def createStandardContextMenu(lineEdit):
-        menu = QLineEdit.createStandardContextMenu(self.lineEdit())
-        menu.addSeparator()
-        menu.addAction(_('&Edit authors'), self.edit_authors)
-        return menu
-
+                obj.deleteLater()
 
 def fakeTranslate(*args):
     """
-    fake QApplication.translate. This function helps to bypass the incompativility 
+    fake QApplication.translate. This function helps to bypass the incompativility
     for the Unicode utf8  deprecated in pyside2
-    
+
 
     """
 

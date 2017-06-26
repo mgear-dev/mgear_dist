@@ -27,10 +27,6 @@
 ##########################################################
 # GLOBAL
 ##########################################################
-from functools import partial
-# pyMel
-import pymel.core as pm
-
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
 import mgear.maya.transform as tra
@@ -41,7 +37,6 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
@@ -99,17 +94,10 @@ class Guide(ComponentGuide):
         self.pUseIndex = self.addParam("useIndex", "bool", False)
         self.pParentJointIndex = self.addParam("parentJointIndex", "long", -1, None, None)
 
-       
+
 ##########################################################
 # Setting Page
 ##########################################################
-
-# class settingsTab(QtWidgets.QDialog, sui.Ui_Form):
-
-#     def __init__(self, parent=None):
-#         super(settingsTab, self).__init__(parent)
-#         self.setupUi(self)
-
 
 class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
@@ -119,7 +107,6 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         gqt.deleteInstances(self, MayaQDockWidget)
 
         super(self.__class__, self).__init__(parent = parent)
-        # self.settingsTab = settingsTab()
 
 
         self.setup_componentSettingWindow()
@@ -138,7 +125,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """

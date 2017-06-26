@@ -28,8 +28,6 @@
 # GLOBAL
 #############################################
 from functools import partial
-# pyMel
-import pymel.core as pm
 
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
@@ -40,19 +38,19 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1,0,0]
+VERSION = [2,0,0]
 TYPE = "spine_ik_01"
 NAME = "spine"
-DESCRIPTION = """an ik spine with an over top layer of fk controllers
-that follow the ik position.
+DESCRIPTION = """An ik spine with an over top layer of fk controllers
+that follow the ik position. Optional auto bend ik control and central
+tangent control.
 """
 
 ##########################################################
@@ -103,6 +101,8 @@ class Guide(ComponentGuide):
 
         # Options
         self.pDivision = self.addParam("division", "long", 5, 3)
+        self.pAutoBend = self.addParam("autoBend", "bool", False)
+        self.pCentralTangent = self.addParam("centralTangent", "bool", False)
 
         # FCurves
         self.pSt_profile = self.addFCurveParam("st_profile", [[0,0],[.5,-1],[1,0]])
@@ -150,7 +150,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """
@@ -170,7 +170,8 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
         self.settingsTab.maxSquash_spinBox.setValue(self.root.attr("maxsquash").get())
         self.settingsTab.division_spinBox.setValue(self.root.attr("division").get())
-
+        self.populateCheck(self.settingsTab.autoBend_checkBox, "autoBend")
+        self.populateCheck(self.settingsTab.centralTangent_checkBox, "centralTangent")
 
 
     def create_componentLayout(self):
@@ -192,6 +193,8 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.maxStretch_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxStretch_spinBox, "maxstretch"))
         self.settingsTab.maxSquash_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxSquash_spinBox, "maxsquash"))
         self.settingsTab.division_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.division_spinBox, "division"))
+        self.settingsTab.autoBend_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.autoBend_checkBox, "autoBend"))
+        self.settingsTab.centralTangent_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.centralTangent_checkBox, "centralTangent"))
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(self.setProfile)
 
 

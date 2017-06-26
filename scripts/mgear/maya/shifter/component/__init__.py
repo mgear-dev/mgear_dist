@@ -25,7 +25,7 @@
 # Date:       2016 / 10 / 10
 
 """
-Shifter component rig class. 
+Shifter component rig class.
 """
 
 #############################################
@@ -34,6 +34,7 @@ Shifter component rig class.
 # pymel
 import pymel.core as pm
 import pymel.core.datatypes as dt
+from pymel import versions
 
 # mgear
 import mgear
@@ -119,6 +120,8 @@ class MainComponent(object):
         self.jnt_pos = []
         self.jointList = []
 
+        self.transform2Lock = []
+
         # --------------------------------------------------
         # Step
         self.stepMethods = [eval("self.step_0%s"%i) for i in range(len(self.steps))]
@@ -143,6 +146,7 @@ class MainComponent(object):
         Step 01. Get the properties host, create parameters and set layout and logic.
         """
         self.getHost()
+        self.validateProxyChannels()
         self.addFullNameParam()
         self.addAttributes()
         return
@@ -229,7 +233,7 @@ class MainComponent(object):
         """
         return
 
-    def addJoint(self, obj, name, newActiveJnt=None, UniScale=True, segComp=0):
+    def addJoint(self, obj, name, newActiveJnt=None, UniScale=True, segComp=0, gearMulMatrix=True):
         """
         Add joint as child of the active joint or under driver object.
 
@@ -238,6 +242,11 @@ class MainComponent(object):
             name (str): The joint name.
             newActiveJnt (bool or dagNode): If a joint is pass, this joint will be the active joint
                 and parent of the newly created joint.
+            UniScale (bool): Connects the joint scale with the Z axis for a unifor scalin, if set False
+                will connect with each axis separated.
+            segComp (bool): Set True or False the segment compensation in the joint..
+            gearMulMatrix (bool): Use the custom gear_multiply matrix node, if False will use
+                 Maya's default mulMatrix node.
 
         Returns:
             dagNode: The newly created joint.
@@ -252,8 +261,14 @@ class MainComponent(object):
             #All new jnts are the active by default
             self.active_jnt = jnt
 
-            mulmat_node = nod.createMultMatrixNode(obj + ".worldMatrix", jnt + ".parentInverseMatrix")
-            dm_node = nod.createDecomposeMatrixNode(mulmat_node+".matrixSum")
+            if gearMulMatrix:
+                mulmat_node = aop.gear_mulmatrix_op(obj + ".worldMatrix", jnt + ".parentInverseMatrix")
+                dm_node = nod.createDecomposeMatrixNode(mulmat_node+".output")
+                m = mulmat_node.attr('output').get()
+            else:
+                mulmat_node = nod.createMultMatrixNode(obj + ".worldMatrix", jnt + ".parentInverseMatrix")
+                dm_node = nod.createDecomposeMatrixNode(mulmat_node+".matrixSum")
+                m = mulmat_node.attr('matrixSum').get()
             pm.connectAttr(dm_node+".outputTranslate", jnt+".t")
             pm.connectAttr(dm_node+".outputRotate", jnt+".r")
             # TODO: fix squash stretch solver to scale the joint uniform
@@ -264,6 +279,7 @@ class MainComponent(object):
                 pm.connectAttr(dm_node+".outputScaleZ", jnt+".sz")
             else:
                 pm.connectAttr(dm_node+".outputScale", jnt+".s")
+                pm.connectAttr(dm_node+".outputShear", jnt+".shear")
 
             # Segment scale compensate Off to avoid issues with the global scale
             jnt.setAttr("segmentScaleCompensate", segComp)
@@ -275,15 +291,19 @@ class MainComponent(object):
             jnt.attr("jointOrientY").set(jnt.attr("ry").get())
             jnt.attr("jointOrientZ").set(jnt.attr("rz").get())
 
-            m = mulmat_node.attr('matrixSum').get()
             im = m.inverse()
-            mulmat_node2 = nod.createMultMatrixNode(mulmat_node.attr('matrixSum'), im, jnt,'r')
+
+            if gearMulMatrix:
+                aop.gear_mulmatrix_op(mulmat_node.attr('output'), im, jnt,'r')
+            else:
+                nod.createMultMatrixNode(mulmat_node.attr('matrixSum'), im, jnt,'r')
 
         else:
             jnt = pri.addJoint(obj, self.getName(str(name)+"_jnt"), tra.getTransform(obj))
             pm.connectAttr(self.rig.jntVis_att, jnt.attr("visibility"))
 
         self.addToGroup(jnt, "deformers")
+
         return jnt
 
 
@@ -363,6 +383,10 @@ class MainComponent(object):
 
         self.addToGroup(ctl, "controllers")
 
+        #lock the control parent attributes if is not a control
+        if parent not in self.groups["controllers"]:
+            self.transform2Lock.append(parent)
+
         return ctl
 
 
@@ -397,6 +421,17 @@ class MainComponent(object):
         """
         self.uihost = self.rig.findRelative(self.settings["ui_host"])
 
+    def validateProxyChannels(self):
+        """
+        Check the Maya version to determinate if we can use proxy channels
+        and check user setting on the guide.
+        This feature is available from 2016.5
+        """
+
+        if versions.current() >= 201650 and  self.options["proxyChannels"]:
+            self.validProxyChannels = True
+        else:
+            self.validProxyChannels = False
 
     def addAttributes(self):
         """
@@ -416,7 +451,11 @@ class MainComponent(object):
 
         """
 
-        attr = self.addAnimEnumParam("", "", 0, ["---------------"] )
+        # attr = self.addAnimEnumParam("", "", 0, ["---------------"] )
+        if self.options["classicChannelNames"]:
+            attr = self.addAnimEnumParam(self.getName(), "__________", 0, [self.getName()] )
+        else:
+            attr = self.addAnimEnumParam(self.guide.compName, "__________", 0, [self.guide.compName] )
 
         return attr
 
@@ -442,7 +481,13 @@ class MainComponent(object):
             str: The long name of the new attribute
 
         """
-        attr = att.addAttribute(self.uihost, self.getName(longName), attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        if self.options["classicChannelNames"]:
+            attr = att.addAttribute(self.uihost, self.getName(longName), attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        else:
+            if self.uihost.hasAttr(self.getCompName(longName)):
+                attr = self.uihost.attr(self.getCompName(longName))
+            else:
+                attr = att.addAttribute(self.uihost, self.getCompName(longName), attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
 
         return attr
 
@@ -469,7 +514,13 @@ class MainComponent(object):
             str: The long name of the new attribute
 
         """
-        attr = att.addEnumAttribute(self.uihost, self.getName(longName), value, enum, niceName, None, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        if self.options["classicChannelNames"]:
+            attr = att.addEnumAttribute(self.uihost, self.getName(longName), value, enum, niceName, None, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        else:
+            if self.uihost.hasAttr(self.getCompName(longName)):
+                attr = self.uihost.attr(self.getCompName(longName))
+            else:
+                attr = att.addEnumAttribute(self.uihost, self.getCompName(longName), value, enum, niceName, None, keyable=keyable, readable=readable, storable=storable, writable=writable)
 
         return attr
 
@@ -495,7 +546,7 @@ class MainComponent(object):
             str: The long name of the new attribute
 
         """
-        attr = att.addAttribute(self.root, self.getName(longName), attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
+        attr = att.addAttribute(self.root, longName, attType, value, niceName, None, minValue=minValue, maxValue=maxValue, keyable=keyable, readable=readable, storable=storable, writable=writable)
 
         return attr
 
@@ -715,7 +766,7 @@ class MainComponent(object):
         Connect the cns_obj to a multiple object using parentConstraint.
 
         Args:
-            refArray (string): List of driver objects divided by ",". 
+            refArray (string): List of driver objects divided by ",".
             cns_obj (dagNode): The driven object.
             upVAttr (bool): Set if the ref Array is for IK or Up vector
             init_ref (list of dagNode): Set the initial default ref connections
@@ -735,7 +786,7 @@ class MainComponent(object):
                     else:
                         ref.append(self.rig.findRelative(ref_name))
                 if init_ref:
-                    ref = init_ref + ref 
+                    ref = init_ref + ref
                 ref.append(cns_obj)
                 if skipTranslate:
                     cns_node = pm.parentConstraint(*ref, maintainOffset=True, skipTranslate=["x","y","z"])
@@ -863,7 +914,10 @@ class MainComponent(object):
         """
         Finalize and clean the rig builing.
         """
-        #TODO: clean jnt_org transforms without childs
+        #locking the attributes for all the ctl parents that are not ctl itself.
+        for t in self.transform2Lock:
+            att.lockAttribute(t)
+
         return
 
     def postScript(self):
@@ -898,6 +952,21 @@ class MainComponent(object):
             return "_".join([self.name, side+str(self.index), name])
         else:
             return self.fullName
+
+
+    def getCompName(self, name=""):
+        """
+        Return the component type name
+
+        Args:
+            name (str): The name to concatenate to the component name.
+        Returns:
+            str: The name.
+
+        """
+
+        return "_".join([self.guide.compName, name])
+
 
     # =====================================================
     # PROPERTIES

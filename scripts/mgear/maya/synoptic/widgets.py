@@ -48,7 +48,7 @@ class toggleCombo(QtWidgets.QComboBox):
 
         self.currentIndexChanged['QString'].connect(self.handleChanged)
 
-        
+
     def wheelEvent (self, event):
         event.ignore()
 
@@ -64,7 +64,7 @@ class toggleCombo(QtWidgets.QComboBox):
             self.addItems(list1)
 
         self.setCurrentIndex(syn_uti.getComboIndex( self.model, self.uihost_name, self.combo_attr))
-        self.firstUpdate = True 
+        self.firstUpdate = True
 
     def handleChanged(self):
         if self.firstUpdate:
@@ -123,13 +123,16 @@ class ikfkMatchButton(QtWidgets.QPushButton):
 
         ik = str(self.property("ik"))
         upv = str(self.property("upv"))
+        ikRot = str(self.property("ikRot"))
+        if ikRot == "None":
+            ikRot = None
 
         if mouse_button == QtCore.Qt.RightButton:
-            syn_uti.IkFkTransfer.showUI(model, ikfk_attr, uiHost_name, fks, ik, upv)
+            syn_uti.IkFkTransfer.showUI(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot)
             return
 
         else:
-            syn_uti.ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv)
+            syn_uti.ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot)
             return
 
 
@@ -213,7 +216,11 @@ class SelectButton(QtWidgets.QWidget):
         if firstLoop:
             key_modifier = event.modifiers()
         else:
-            key_modifier = QtCore.Qt.ShiftModifier
+            if event.modifiers():
+                key_modifier = event.modifiers()
+            else:
+                # key_modifier = QtCore.Qt.ShiftModifier
+                key_modifier = (QtCore.Qt.ControlModifier | QtCore.Qt.ShiftModifier)
         model = syn_uti.getModel(self)
         object = str(self.property("object")).split(",")
 

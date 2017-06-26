@@ -29,8 +29,7 @@
 ##########################################################
 
 from functools import partial
-# pyMel
-import pymel.core as pm
+
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
 #Pyside
@@ -38,9 +37,8 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
 # guide info

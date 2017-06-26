@@ -40,9 +40,8 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos"
@@ -103,7 +102,6 @@ class Guide(ComponentGuide):
     # @param self
     def addParameters(self):
 
-        # self.pRoll = self.addParam("roll", "long", 0, 0, 1)
         self.pRoll       = self.addParam("useRollCtl", "bool", True)
         self.pUseIndex       = self.addParam("useIndex", "bool", False)
         self.pParentJointIndex = self.addParam("parentJointIndex", "long", -1, None, None)
@@ -147,7 +145,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """

@@ -24,12 +24,18 @@
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
 
+#maya
 import pymel.core as pm
 
+#mgear
+import mgear.maya.primitive as pri
+import mgear.maya.node as nod
+
+#rigbits
 import mgear.maya.rigbits as rigbits
 
 
-def createGhostCtl(ctl, parent=None):
+def createGhostCtl(ctl, parent=None, connect=True):
     """
     Create a duplicate of the control and rename the original with _ghost. Later connect the local transforms and the
     Channels.
@@ -48,7 +54,9 @@ def createGhostCtl(ctl, parent=None):
     if parent:
         if  isinstance(parent, basestring):
             parent = pm.PyNode(parent)
-
+    grps = ctl.listConnections(t="objectSet")
+    for grp in grps:
+        grp.remove(ctl)
     oName = ctl.name()
     pm.rename(ctl, oName + "_ghost")
     newCtl =   pm.duplicate(ctl, po=True)[0]
@@ -62,12 +70,13 @@ def createGhostCtl(ctl, parent=None):
     if parent:
         pm.parent(newCtl, parent)
         oTra = pm.createNode("transform", n= newCtl.name() + "_npo", p=parent, ss=True)
-        oTra.setTransformation(newCtl.getMatrix())
+        oTra.setMatrix(ctl.getParent().getMatrix(worldSpace=True), worldSpace=True)
         pm.parent(newCtl, oTra)
-
-    rigbits.connectLocalTransform(newCtl, ctl)
-    rigbits.connectUseDefinedChannels(newCtl, ctl)
-
+    if connect:
+        rigbits.connectLocalTransform([newCtl, ctl])
+        rigbits.connectUserDefinedChannels(newCtl, ctl)
+    for grp in grps:
+        grp.add(newCtl)
     return newCtl
 
 
@@ -99,3 +108,64 @@ def createDoritoGhostCtl(ctl, parent=None):
 
     rigbits.connectLocalTransform(ghostBaseParent, doritoParent)
     rigbits.connectUseDefinedChannels(ghostBaseParent, doritoParent)
+
+
+def ghostSlider(ghostControls, surface, sliderParent):
+    """Modify the ghost control behaviour to slide on top of a surface
+
+    Args:
+        ghostControls (dagNode): The ghost control
+        surface (Surface): The NURBS surface
+        sliderParent (dagNode): The parent for the slider.
+    """
+    if  not isinstance(ghostControls, list):
+        ghostControls = [ghostControls]
+
+    #Seleccionamos los controles Ghost que queremos mover sobre el surface
+
+    surfaceShape = surface.getShape()
+
+    for ctlGhost in ghostControls:
+        ctl = pm.listConnections(ctlGhost, t="transform")[-1]
+        t = ctl.getMatrix(worldSpace=True)
+
+        gDriver = pri.addTransform(ctlGhost.getParent(), ctl.name()+"_slideDriver", t)
+
+        try:
+            pm.connectAttr(ctl + ".translate", gDriver + ".translate")
+            pm.disconnectAttr(ctl + ".translate", ctlGhost + ".translate")
+        except:
+            pass
+
+        try:
+            pm.connectAttr(ctl + ".scale", gDriver + ".scale")
+            pm.disconnectAttr(ctl + ".scale", ctlGhost + ".scale")
+        except:
+            pass
+
+        try:
+            pm.connectAttr(ctl + ".rotate", gDriver + ".rotate")
+            pm.disconnectAttr(ctl + ".rotate", ctlGhost + ".rotate")
+        except:
+            pass
+
+
+        oParent = ctlGhost.getParent()
+        npoName = "_".join(ctlGhost.name().split("_")[:-1]) +  "_npo"
+        oTra = pm.PyNode(pm.createNode("transform", n=npoName, p=oParent, ss=True))
+        oTra.setTransformation(ctlGhost.getMatrix())
+        pm.parent(ctlGhost, oTra)
+
+        slider = pri.addTransform(sliderParent, ctl.name()+"_slideDriven", t)
+
+        #connexion
+
+        dm_node = nod.createDecomposeMatrixNode(gDriver.attr("worldMatrix[0]"))
+        cps_node = pm.createNode("closestPointOnSurface")
+        dm_node.attr("outputTranslate") >> cps_node.attr("inPosition")
+        surfaceShape.attr("worldSpace[0]") >> cps_node.attr("inputSurface")
+        cps_node.attr("position") >> slider.attr("translate")
+
+        pm.normalConstraint(surfaceShape, slider, aimVector=[0,0,1] , upVector=[0,1,0], worldUpType="objectrotation", worldUpVector=[0,1,0], worldUpObject=gDriver)
+
+        pm.parent(ctlGhost.getParent(), slider)

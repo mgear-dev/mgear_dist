@@ -28,12 +28,7 @@ from functools import partial
 import pymel.core as pm
 
 #mGear Tools
-import mGear_postSpring
-import mGear_proxySlicer
-import mGear_rope
 import mGear_guidesTemplates
-import mGear_utils
-
 import mGear_mocapTools
 
 
@@ -44,6 +39,10 @@ import mgear.maya.skin as skin
 
 #import rigbits
 import mgear.maya.rigbits as rigbits
+import mgear.maya.rigbits.postSpring as postSpring
+import mgear.maya.rigbits.rope as rope
+import mgear.maya.rigbits.proxySlicer as proxySlicer
+import mgear.maya.rigbits.utils as utils
 
 
 def CreateMenu():
@@ -70,7 +69,7 @@ def CreateMenu():
 
     ## Rigging Tools
     riggingM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Rigging')
-    pm.menuItem(label="Add NPO", command=partial(rigbits.addNPO))
+    pm.menuItem(label="Add NPO", command=partial(rigbits.addNPO, None))
     pm.menuItem(subMenu=True, tearOff=True, label='Gimmick Joints')
     pm.menuItem(label="Add Joint", command=partial(rigbits.addJnt, False, False))
     pm.menuItem( divider=True )
@@ -78,7 +77,7 @@ def CreateMenu():
     pm.menuItem(label="Add Support Joint", command=partial(rigbits.addSupportJoint, False, False))
     pm.setParent(riggingM, menu=True)
     pm.menuItem( divider=True )
-    pm.menuItem(label="Replace Shape", command=partial(rigbits.replaceShape))
+    pm.menuItem(label="Replace Shape", command=partial(rigbits.replaceShape, None, None))
     pm.menuItem( divider=True )
     pm.menuItem(label="Match All Transform", command=partial(rigbits.matchWorldXform))
     pm.menuItem(label="Match Pos with BBox", command=partial(rigbits.matchPosfromBBox))
@@ -115,16 +114,14 @@ def CreateMenu():
     pm.menuItem(label="Interpolated Transform", command=partial(rigbits.createInterpolateTransform))
 
     pm.menuItem(subMenu=True, tearOff=True, label='Connect local SRT')
-    pm.menuItem(label="connect SRT", command=partial(rigbits.connectLocalTransform, 1, 1, 1))
+    pm.menuItem(label="connect SRT", command=partial(rigbits.connectLocalTransform, None, 1, 1, 1))
     pm.menuItem(label="connect T", command=partial(rigbits.connectLocalTransform, None, 0, 0, 1))
     pm.menuItem(label="connect R", command=partial(rigbits.connectLocalTransform, None, 0, 1, 0))
     pm.menuItem(label="connect S", command=partial(rigbits.connectLocalTransform, None, 1, 0, 0))
     pm.setParent(riggingM, menu=True)
     pm.menuItem( divider=True )
-    pm.menuItem(label="Spring", command=partial(mGear_postSpring.spring_UI))
-    pm.menuItem(label="Rope", command=partial(mGear_rope.rope_UI))
-
-    
+    pm.menuItem(label="Spring", command=partial(postSpring.spring_UI))
+    pm.menuItem(label="Rope", command=partial(rope.rope_UI))
 
     ## skinning tools
     skinM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Skinning')
@@ -136,11 +133,10 @@ def CreateMenu():
     pm.menuItem( divider=True )
     pm.menuItem(label="Get Names in gSkin File", command=partial(skin.getObjsFromSkinFile, None, False))
 
-
     ## Modeling tools
     modelM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Modeling')
-    pm.menuItem(label="Proxy Slicer", command=partial(mGear_proxySlicer.slice))
-    pm.menuItem(label="Proxy Slicer Parenting", command=partial(mGear_proxySlicer.slice, True))
+    pm.menuItem(label="Proxy Slicer", command=partial(proxySlicer.slice))
+    pm.menuItem(label="Proxy Slicer Parenting", command=partial(proxySlicer.slice, True))
 
     ## Animation Tools
     animationM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Animation')
@@ -150,14 +146,12 @@ def CreateMenu():
     pm.menuItem(label="Characterize Biped", command=partial(mGear_mocapTools.characterizeBiped))
     pm.menuItem(label="Bake Mocap Biped", command=partial(mGear_mocapTools.bakeMocap))
 
-
     ## util Tools
     pm.setParent(mGearM, menu=True)
     pm.menuItem( divider=True )
     utilM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Utilities')
     pm.menuItem(label="reload", command=partial(mgear.reloadModule, "mgear"))
     pm.menuItem( divider=True )
-    pm.menuItem(label="Compile PyQt ui", command=partial(mGear_utils.ui2py, None))
+    pm.menuItem(label="Compile PyQt ui", command=partial(utils.ui2py, None))
     pm.menuItem( divider=True )
-    pm.menuItem(label="Create mGear Hotkeys", command=partial(mGear_utils.createHotkeys, None))
-
+    pm.menuItem(label="Create mGear Hotkeys", command=partial(utils.createHotkeys, None))

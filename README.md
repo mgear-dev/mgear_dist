@@ -6,7 +6,7 @@ Originally mGear was design and develope by Jeremie Passerin , since 2013 Miquel
 
 MGEAR is under the terms of the MIT License
 
-*Latest release: 2.0.4
+*Latest release: 2.1.1
 
 For the official release, with compiled solvers and example data please download mGear from: https://gumroad.com/l/mgear
 

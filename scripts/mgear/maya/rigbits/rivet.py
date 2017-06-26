@@ -25,26 +25,31 @@ import pymel.core as pm
 
 
 
-# Thanks to http://jinglezzz.tumblr.com for the tutorial :)
-class rivet():     
 
-    def create(self, mesh, edge1, edge2, parent):   
+class rivet():
+    """
+    Create a rivet
+    Thanks to http://jinglezzz.tumblr.com for the tutorial :)
+    """
+
+    def create(self, mesh, edge1, edge2, parent, name=None):
         self.sources = {
             'oMesh' : mesh,
             'edgeIndex1' : edge1,
             'edgeIndex2' : edge2
-        }        
-         
+        }
+
         self.createNodes()
         self.createConnections()
         self.setAttributes()
         if parent:
             pm.parent( self.node['locator'].getParent(), parent)
+        if name:
+            pm.rename(self.node['locator'].getParent(), name)
+
         return self.node['locator'].getParent()
 
- 
- 
-                                 
+
     def createNodes(self, *args):
         self.node = {
             'meshEdgeNode1'     : pm.createNode('curveFromMeshEdge'),
@@ -55,11 +60,11 @@ class rivet():
             'loftNode'          : pm.createNode('loft'),
             'locator'           : pm.createNode('locator')
         }
- 
- 
+
+
     def createConnections(self, *args):
         self.sources['oMesh'].worldMesh.connect(self.node['meshEdgeNode1'].inputMesh)
-        self.sources['oMesh'].worldMesh.connect(self.node['meshEdgeNode2'].inputMesh)   
+        self.sources['oMesh'].worldMesh.connect(self.node['meshEdgeNode2'].inputMesh)
         self.node['meshEdgeNode1'].outputCurve.connect(self.node['loftNode'].inputCurve[0])
         self.node['meshEdgeNode2'].outputCurve.connect(self.node['loftNode'].inputCurve[1])
         self.node['loftNode'].outputSurface.connect(self.node['ptOnSurfaceIn'].inputSurface)
@@ -77,21 +82,21 @@ class rivet():
         self.node['ptOnSurfaceIn'].positionZ.connect(self.node['matrixNode'].in32)
         self.node['matrixNode'].output.connect(self.node['decomposeMatrix'].inputMatrix)
         self.node['decomposeMatrix'].outputTranslate.connect(self.node['locator'].getParent().translate)
-        self.node['decomposeMatrix'].outputRotate.connect(self.node['locator'].getParent().rotate) 
-        self.node['locator'].attr("visibility").set(False) 
+        self.node['decomposeMatrix'].outputRotate.connect(self.node['locator'].getParent().rotate)
+        self.node['locator'].attr("visibility").set(False)
 
     def setAttributes(self):
         self.node['meshEdgeNode1'].isHistoricallyInteresting.set(1)
         self.node['meshEdgeNode2'].isHistoricallyInteresting.set(1)
-        self.node['meshEdgeNode1'].edgeIndex[0].set(self.main['edgeIndex1'])
-        self.node['meshEdgeNode2'].edgeIndex[0].set(self.main['edgeIndex2'])
-         
+        self.node['meshEdgeNode1'].edgeIndex[0].set(self.sources['edgeIndex1'])
+        self.node['meshEdgeNode2'].edgeIndex[0].set(self.sources['edgeIndex2'])
+
         self.node['loftNode'].reverseSurfaceNormals.set(1)
         self.node['loftNode'].inputCurve.set(size=2)
         self.node['loftNode'].uniform.set(True)
-        self.node['loftNode'].sectionSpans.set(3)        
-        self.node['loftNode'].caching.set(True) 
-             
+        self.node['loftNode'].sectionSpans.set(3)
+        self.node['loftNode'].caching.set(True)
+
         self.node['ptOnSurfaceIn'].turnOnPercentage.set(True)
         self.node['ptOnSurfaceIn'].parameterU.set(0.5)
         self.node['ptOnSurfaceIn'].parameterV.set(0.5)

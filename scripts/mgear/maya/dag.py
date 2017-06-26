@@ -43,7 +43,7 @@ def getTopParent(node):
         node (dagNode): The input node to search.
 
     Returns:
-        dagNode: The top parent of the input node 
+        dagNode: The top parent of the input node
 
     """
     return node.getParent(generations=-1)

@@ -24,53 +24,71 @@
 
 
 import pymel.core as pm
+import pymel.core.datatypes as dt
 
 
 
 import mgear.maya.skin as ski
 import mgear.maya.primitive as pri
 import mgear.maya.icon as ico
-import mgear.maya.node as nod
 import mgear.maya.transform as tra
+import mgear.maya.attribute as att
 
 import mgear.maya.rigbits.blendShapes as bsp
 import mgear.maya.rigbits.rivet as rvt
 
 
 def resetJntLocalSRT(jnt):
+    """Reset the local SRT and jointOrient of a joint
+
+    Args:
+        jnt (joint): The joint to reset the local SRT
+    """
     for axis in "XYZ":
         pm.setAttr(jnt+".jointOrient"+axis, 0)
         pm.setAttr(jnt+".rotate"+axis, 0)
         pm.setAttr(jnt+".translate"+axis, 0)
 
-def doritosMagic(mesh, joint, jointBase):
+
+def doritosMagic(mesh, joint, jointBase, parent=None):
     #magic of doritos connection
     skinCluster = ski.getSkinCluster(mesh)
     if not skinCluster:
-        if pm.objExists('static_jnt') != True:
+        if pm.objExists('static_jnt') is not True:
             static_jnt = pri.addJoint(parent, "static_jnt", m=dt.Matrix(), vis=True)
         static_jnt = pm.PyNode("static_jnt")
 
         #apply initial skincluster
         skinCluster = pm.skinCluster(static_jnt, mesh, tsb=True, nw=2, n='%s_skinCluster'%mesh.name())
-
-    pm.skinCluster(skinCluster, e=True,  ai=joint, lw=True, wt=0)
+    try:
+        # we try to add the joint to the skin cluster. Will fail if is already in the skin cluster
+        pm.skinCluster(skinCluster, e=True,  ai=joint, lw=True, wt=0)
+    except:
+        pm.displayInfo("The Joint: %s  is already in the %s."%(joint.name(),skinCluster.name()) )
+        pass
     cn = joint.listConnections(p=True, type="skinCluster")
     for x in cn:
         if x.type()=="matrix":
-            # We force to avoid errors in case the joint is already connected
-            pm.connectAttr(jointBase + ".worldInverseMatrix[0]", skinCluster + ".bindPreMatrix["+str(x.index())+"]", f=True)
+            if x.name().split(".")[0] == skinCluster.name():
+                # We force to avoid errors in case the joint is already connected
+                pm.connectAttr(jointBase + ".worldInverseMatrix[0]", skinCluster + ".bindPreMatrix["+str(x.index())+"]", f=True)
 
 
 def createJntTweak(mesh, parentJnt, ctlParent):
+    """Create a joint tweak
 
+    Args:
+        mesh (mesh): The object to deform with the tweak
+        parentJnt (dagNode): The parent for the new joint
+        ctlParent (dagNode): The parent for the control.
+    """
     if not isinstance(mesh, list):
         mesh = [mesh]
 
     name = "_".join(parentJnt.name().split("_")[:3])
 
     # create joints
-    jointBase = pri.addJoint(jnt, name +"_tweak_jnt_lvl", parentJnt.getMatrix(worldSpace=True))
+    jointBase = pri.addJoint(parentJnt, name +"_tweak_jnt_lvl", parentJnt.getMatrix(worldSpace=True))
     resetJntLocalSRT(jointBase)
     joint = pri.addJoint(jointBase, name +"_tweak_jnt", parentJnt.getMatrix(worldSpace=True))
     resetJntLocalSRT(joint)
@@ -92,31 +110,42 @@ def createJntTweak(mesh, parentJnt, ctlParent):
         pm.connectAttr(iconBase + t, jointBase + t)
         pm.connectAttr(icon + t, joint + t)
 
-
     #magic of doritos connection
     for m in mesh:
         doritosMagic(m, joint, jointBase)
 
 
-def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
+def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[0,0,0], size=.04):
+    """Create a tweak joint attached to the mesh using a rivet
 
+    Args:
+        mesh (mesh): The object to add the tweak
+        edgePair (pari list): The edge pairt to create the rivet
+        name (str): The name for the tweak
+        parent (None or dagNode, optional): The parent for the tweak
+        ctlParent (None or dagNode, optional): The parent for the tweak control
+        color (list, optional): The color for the control
+    """
     blendShape = bsp.getBlendShape(mesh)
-
 
     inputMesh = blendShape.listConnections(sh=True, t="shape", d=False)[0]
 
     oRivet = rvt.rivet()
     base = oRivet.create(inputMesh, edgePair[0], edgePair[1], parent)
+    # get side
+    if base.getTranslation(space='world')[0] < -0.01:
+        side = "R"
+    elif base.getTranslation(space='world')[0] > 0.01:
+        side = "L"
+    else:
+        side = "C"
 
-
-    name = name + "_tweak"
-    pm.rename(base, name)
-
-    #connection ctlParent
-
+    nameSide = name + "_tweak_" + side
+    nameNeutral = name + "_tweak"
+    pm.rename(base, nameSide)
 
     #Joints NPO
-    npo = pm.PyNode(pm.createNode("transform", n=name+"_npo", p=ctlParent, ss=True))
+    npo = pm.PyNode(pm.createNode("transform", n=nameSide+"_npo", p=ctlParent, ss=True))
     pm.pointConstraint(base, npo)
 
     # set proper orientation
@@ -135,8 +164,8 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
     pm.delete(temp)
 
     # create joints
-    jointBase = pri.addJoint(npo, name +"_jnt_lvl")
-    joint = pri.addJoint(jointBase, name +"_jnt")
+    jointBase = pri.addJoint(npo, nameSide +"_jnt_lvl")
+    joint = pri.addJoint(jointBase, nameSide +"_jnt")
 
     #hidding joint base by changing the draw mode
     pm.setAttr(jointBase+".drawStyle", 2)
@@ -149,13 +178,23 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
     pm.sets(defSet, add=joint)
 
     controlType = "sphere"
-    icon = ico.create(jointBase, name + "_ctl", pm.datatypes.Matrix(), [1, 0, 0], controlType, w=.04)
+    icon = ico.create(jointBase, nameSide + "_ctl", pm.datatypes.Matrix(), color, controlType, w=size)
     for t in [".translate", ".scale", ".rotate"]:
         pm.connectAttr(icon + t, joint + t)
 
+    # create the attributes to handlde mirror and symetrical pose
+    att.addAttribute(icon, "invTx", "bool", 0,  keyable=False, niceName="Invert Mirror TX")
+    att.addAttribute(icon, "invTy", "bool", 0,  keyable=False, niceName="Invert Mirror TY")
+    att.addAttribute(icon, "invTz", "bool", 0,  keyable=False, niceName="Invert Mirror TZ")
+    att.addAttribute(icon, "invRx", "bool", 0,  keyable=False, niceName="Invert Mirror RX")
+    att.addAttribute(icon, "invRy", "bool", 0,  keyable=False, niceName="Invert Mirror RY")
+    att.addAttribute(icon, "invRz", "bool", 0,  keyable=False, niceName="Invert Mirror RZ")
+    att.addAttribute(icon, "invSx", "bool", 0,  keyable=False, niceName="Invert Mirror SX")
+    att.addAttribute(icon, "invSy", "bool", 0,  keyable=False, niceName="Invert Mirror SY")
+    att.addAttribute(icon, "invSz", "bool", 0,  keyable=False, niceName="Invert Mirror SZ")
 
     #magic of doritos connection
-    doritosMagic(mesh, joint)
+    doritosMagic(mesh, joint, jointBase)
 
     # reset axis and inver behaviour
     for axis in "XYZ":
@@ -168,30 +207,50 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None):
     pm.parent(p, w=True)
     for axis in "xyz":
         p.attr("r"+axis).set(0)
+    if side == "R":
+        p.attr("ry").set(180)
     pm.parent(p, pp)
 
+    return icon
 
+def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlParent=None,  color=[0,0,0]):
+    """Create multiple rivet tweaks from a list of edge pairs
 
-
-def createRivetTweakFromList(mesh, edgeIndexPairList, name, parent=None, ctlParent=None):
-
+    Args:
+        mesh (mesh): The object to add the tweak
+        edgeIndexPairList (list of list): The edge pair list of list
+        name (str): The name for the tweak
+        parent (None or dagNode, optional): The parent for the tweak
+        ctlParent (None or dagNode, optional): The parent for the tweak control
+        color (list, optional): The color for the control
+    """
+    ctlList = []
     for i, pair in enumerate(edgeIndexPairList):
-        createTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent)
-
-
+        ctl = createRivetTweak(mesh, [pair[0], pair[1]], name + str(i).zfill(3), parent, ctlParent, color)
+        ctlList.append(ctl)
+    return ctlList
 
 def createRivetTweakLayer(layerMesh, bst, edgeList, tweakName, parent=None, ctlParent=None):
+    """Create a rivet tweak layer
 
+    Args:
+        layerMesh (mesh): The tweak layer mesh
+        bst (mesh): The mesh blendshape target
+        edgeList (list): List of edges
+        tweakName (string): The name for the tweak
+        parent (None or dagNode, optional): The parent for the tweak
+        ctlParent (None or dagNode, optional): the parent for the tweak control
+    """
     #Apply blendshape from blendshapes layer mesh
     bsp.connectWithBlendshape(layerMesh, bst)
 
     #create static joint
-    if pm.objExists('static_jnt') != True:
+    if pm.objExists('static_jnt') is not True:
         static_jnt = pri.addJoint(parent, "static_jnt", m=dt.Matrix(), vis=True)
     static_jnt = pm.PyNode("static_jnt")
 
     #apply initial skincluster
-    skinCluster = pm.skinCluster(static_jnt, layerMesh, tsb=True, nw=2, n='%s_skinCluster'%layerMesh.name())
+    pm.skinCluster(static_jnt, layerMesh, tsb=True, nw=2, n='%s_skinCluster'%layerMesh.name())
 
     #create doritos
-    createTweakFromList(layerMesh, edgeList, tweakName, parent, ctlParent)
+    createRivetTweak(layerMesh, edgeList, tweakName, parent, ctlParent)

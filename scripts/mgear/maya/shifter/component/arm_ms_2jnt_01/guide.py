@@ -28,8 +28,6 @@
 # GLOBAL
 ##########################################################
 from functools import partial
-# pyMel
-import pymel.core as pm
 
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
@@ -40,9 +38,8 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos, Miles Cheng"
@@ -152,7 +149,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """
@@ -169,7 +166,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.elbow_spinBox.setValue(self.root.attr("elbow").get())
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
-        
+
         fkRefArrayItems = self.root.attr("fkrefarray").get().split(",")
         for item in fkRefArrayItems:
             self.settingsTab.fkRefArray_listWidget.addItem(item)

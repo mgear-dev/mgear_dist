@@ -45,7 +45,7 @@ def getFCurveValues(fcv_node, division, factor=1):
         fcv_node (pyNode or str): The FCurve to evaluate.
         division (int): The number of division you want to evaluate on the FCurve.
         factor (float): Multiplication factor. Default = 1. (optional)
-    
+
     Returns:
         list of float: The values in a list float.
 

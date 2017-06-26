@@ -56,14 +56,13 @@ import mgear.maya.pyqt as gqt
 import mgear.string as string
 import mgear.maya.skin as skin
 
+import guideUI as guui
+import customStepUI as csui
+
 # pyside
 from maya.app.general.mayaMixin import MayaQDockWidget
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
-
-import guideUI as guui
-import customStepUI as csui
-
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"
@@ -128,7 +127,7 @@ class MainGuide(object):
             bool: False if the parameter wasn't found.
 
         """
-        if not scriptName in self.paramDefs.keys():
+        if scriptName not in self.paramDefs.keys():
             mgear.log("Can't find parameter definition for : " + scriptName, mgear.sev_warning)
             return False
 
@@ -299,6 +298,8 @@ class RigGuide(MainGuide):
         self.pMode = self.addEnumParam("mode", ["Final", "WIP"], 0)
         self.pStep = self.addEnumParam("step", ["All Steps", "Objects", "Properties", "Operators", "Connect", "Joints", "Finalize"], 6)
         self.pIsModel = self.addParam("ismodel", "bool", True)
+        self.pClassicChannelNames = self.addParam("classicChannelNames", "bool", True)
+        self.pProxyChannels = self.addParam("proxyChannels", "bool", False)
 
         # --------------------------------------------------
         # skin
@@ -849,7 +850,7 @@ class helperSlots(object):
     def runStep(self, stepPath, customStepDic):
         with pm.UndoChunk():
             try:
-                pm.displayInfo("Executing custom step: %s"%stepPath)
+                pm.displayInfo("EXEC: Executing custom step: %s"%stepPath)
                 fileName = os.path.split(stepPath)[1].split(".")[0]
                 if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
                     runPath = os.path.join( os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "") , stepPath)
@@ -860,16 +861,16 @@ class helperSlots(object):
                     cs = customStep.CustomShifterStep()
                     cs.run(customStepDic)
                     customStepDic[cs.name] = cs
-                    pm.displayInfo("Custom Shifter Step Class: %s. Succeed!!"%stepPath)
+                    pm.displayInfo("SUCCEED: Custom Shifter Step Class: %s. Succeed!!"%stepPath)
                 else:
-                    pm.displayInfo("Custom Step simple script: %s. Succeed!!"%stepPath)
+                    pm.displayInfo("SUCCEED: Custom Step simple script: %s. Succeed!!"%stepPath)
 
             except Exception as ex:
                 template = "An exception of type {0} occured. Arguments:\n{1!r}"
                 message = template.format(type(ex).__name__, ex.args)
                 pm.displayError( message)
                 pm.displayError(traceback.format_exc())
-                cont = pm.confirmBox("Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Undo this Step")
+                cont = pm.confirmBox("FAIL: Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Undo this Step")
                 if not cont:
                     pm.undo()
 
@@ -947,6 +948,8 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.guideSettingsTab.rigName_lineEdit.setText(self.root.attr("rig_name").get())
         self.guideSettingsTab.mode_comboBox.setCurrentIndex(self.root.attr("mode").get())
         self.guideSettingsTab.step_comboBox.setCurrentIndex(self.root.attr("step").get())
+        self.populateCheck(self.guideSettingsTab.proxyChannels_checkBox, "proxyChannels")
+        self.populateCheck(self.guideSettingsTab.classicChannelNames_checkBox, "classicChannelNames")
         self.populateCheck(self.guideSettingsTab.importSkin_checkBox, "importSkin")
         self.guideSettingsTab.skin_lineEdit.setText(self.root.attr("skin").get())
         self.populateCheck(self.guideSettingsTab.jointRig_checkBox, "joint_rig")
@@ -992,6 +995,9 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.guideSettingsTab.rigName_lineEdit.editingFinished.connect(partial(self.updateLineEdit, self.guideSettingsTab.rigName_lineEdit, "rig_name" ) )
         self.guideSettingsTab.mode_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.guideSettingsTab.mode_comboBox, "mode"))
         self.guideSettingsTab.step_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.guideSettingsTab.step_comboBox, "step"))
+
+        self.guideSettingsTab.proxyChannels_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.proxyChannels_checkBox, "proxyChannels"))
+        self.guideSettingsTab.classicChannelNames_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.classicChannelNames_checkBox, "classicChannelNames"))
 
         self.guideSettingsTab.importSkin_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.importSkin_checkBox, "importSkin"))
         self.guideSettingsTab.jointRig_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.jointRig_checkBox, "joint_rig"))
@@ -1056,7 +1062,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
     def skinLoad(self, *args):
             startDir = self.root.attr("skin").get()
             filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Apply",
-                                        fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
+                                      fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
             if not filePath:
                 return
             if not isinstance(filePath, basestring):
@@ -1081,7 +1087,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             startDir = self.root.attr(stepAttr).get()
 
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Add",
-                                    fileFilter='Custom Step .py (*.py)')
+                                  fileFilter='Custom Step .py (*.py)')
         if not filePath:
             return
         if not isinstance(filePath, basestring):

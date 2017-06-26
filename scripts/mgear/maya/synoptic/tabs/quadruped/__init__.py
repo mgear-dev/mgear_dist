@@ -27,7 +27,6 @@
 ##################################################
 # GLOBAL
 ##################################################
-import os
 import mgear.maya.pyqt as gqt
 
 from mgear.maya.synoptic.tabs import MainSynopticTab
@@ -45,7 +44,6 @@ class SynopticTab(MainSynopticTab, wui.Ui_biped_body):
 
     description = "biped body"
     name = "biped_body"
-    # bgPath = os.path.join(os.path.dirname(__file__), "background.bmp")
 
     # ============================================
     # INIT

@@ -65,20 +65,41 @@ class Component(MainComponent):
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
 
         self.ik_ctl = self.addCtl(self.ik_cns, "ik_ctl", t, self.color_ik, "compas", w=self.size*.5)
-        att.setKeyableAttributes(self.ik_ctl)
+        att.setKeyableAttributes(self.ik_ctl, self.tr_params)
         att.setRotOrder(self.ik_ctl, "ZXY")
+        att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
 
         # Tangents -----------------------------------------
-        t = tra.setMatrixPosition(t, self.guide.pos["tan1"])
-        self.tan1_loc = pri.addTransform(self.ik_ctl, self.getName("tan1_loc"), t)
+        if self.settings["tangentControls"]:
+            t = tra.setMatrixPosition(t, self.guide.pos["tan1"])
+            self.tan1_loc = pri.addTransform(self.ik_ctl, self.getName("tan1_loc"), t)
+            self.tan1_ctl = self.addCtl(self.tan1_loc, "tan1_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+            att.setKeyableAttributes(self.tan1_ctl, self.t_params)
+            att.setInvertMirror(self.tan1_ctl, ["tx"])
 
-        t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["tan0"], self.normal, "yx", self.negate)
-        t = tra.setMatrixPosition(t, self.guide.pos["tan0"])
-        self.tan0_loc = pri.addTransform(self.root, self.getName("tan0_loc"), t)
+            t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["tan0"], self.normal, "yx", self.negate)
+            t = tra.setMatrixPosition(t, self.guide.pos["tan0"])
+            self.tan0_loc = pri.addTransform(self.root, self.getName("tan0_loc"), t)
+            self.tan0_ctl = self.addCtl(self.tan0_loc, "tan0_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+            att.setKeyableAttributes(self.tan0_ctl, self.t_params)
+            att.setInvertMirror(self.tan0_ctl, ["tx"])
 
-        # Curves -------------------------------------------
-        self.mst_crv = cur.addCnsCurve(self.root, self.getName("mst_crv"), [self.root, self.tan0_loc, self.tan1_loc, self.ik_ctl], 3)
-        self.slv_crv = cur.addCurve(self.root, self.getName("slv_crv"), [dt.Vector()]*10, False, 3)
+            # Curves -------------------------------------------
+            self.mst_crv = cur.addCnsCurve(self.root, self.getName("mst_crv"), [self.root, self.tan0_ctl, self.tan1_ctl, self.ik_ctl], 3)
+            self.slv_crv = cur.addCurve(self.root, self.getName("slv_crv"), [dt.Vector()]*10, False, 3)
+            self.mst_crv.setAttr("visibility", False)
+
+        else:
+            t = tra.setMatrixPosition(t, self.guide.pos["tan1"])
+            self.tan1_loc = pri.addTransform(self.ik_ctl, self.getName("tan1_loc"), t)
+
+            t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["tan0"], self.normal, "yx", self.negate)
+            t = tra.setMatrixPosition(t, self.guide.pos["tan0"])
+            self.tan0_loc = pri.addTransform(self.root, self.getName("tan0_loc"), t)
+
+            # Curves -------------------------------------------
+            self.mst_crv = cur.addCnsCurve(self.root, self.getName("mst_crv"), [self.root, self.tan0_loc, self.tan1_loc, self.ik_ctl], 3)
+            self.slv_crv = cur.addCurve(self.root, self.getName("slv_crv"), [dt.Vector()]*10, False, 3)
         self.mst_crv.setAttr("visibility", False)
         self.slv_crv.setAttr("visibility", False)
 
@@ -96,11 +117,13 @@ class Component(MainComponent):
         self.ref_twist = []
 
         parent_twistRef = pri.addTransform(self.root, self.getName("reference"), tra.getTransform(self.root))
+        t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["neck"], self.normal, "yx", self.negate)
+        self.intMRef = pri.addTransform(self.root, self.getName("intMRef"), t)
 
         for i in range(self.settings["division"]):
 
             # References
-            div_cns = pri.addTransform(parentdiv, self.getName("%s_cns"%i))
+            div_cns = pri.addTransform(parentdiv, self.getName("%s_cns"%i), t)
             pm.setAttr(div_cns+".inheritsTransform", False)
             self.div_cns.append(div_cns)
             parentdiv = div_cns
@@ -117,24 +140,25 @@ class Component(MainComponent):
                 fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, tra.getTransform(parentctl), self.color_fk, "cube", w=self.size*.2, h=self.size*.05, d=self.size*.2)
                 att.setKeyableAttributes(self.fk_ctl)
                 att.setRotOrder(fk_ctl, "ZXY")
+                self.fk_ctl.append(fk_ctl)
 
 
             self.scl_npo.append(scl_npo)
             self.fk_npo.append(fk_npo)
-            self.fk_ctl.append(fk_ctl)
             parentctl = fk_ctl
 
             self.jnt_pos.append([fk_ctl, i])
 
-            #Twist references (This objects will replace the spinlookup slerp solver behavior)
-            twister = pri.addTransform(parent_twistRef, self.getName("%s_rot_ref"%i), tra.getTransform(parent_twistRef))
-            t = tra.getTransform(self.root)
-            t[3] = [t[3][0], t[3][1], 1.0, 1.0]
-
+            t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["neck"], self.guide.blades["blade"].z*-1, "yx", self.negate)
+            twister = pri.addTransform(parent_twistRef, self.getName("%s_rot_ref"%i), t)
             ref_twist = pri.addTransform(parent_twistRef, self.getName("%s_pos_ref"%i), t)
+            ref_twist.setTranslation(dt.Vector(0.0,0,1.0), space="preTransform")
 
             self.twister.append(twister)
             self.ref_twist.append(ref_twist)
+
+        for  x in self.fk_ctl:
+            att.setInvertMirror(x, ["tx", "rz", "ry"])
 
         # Head ---------------------------------------------
         t = tra.getTransformLookingAt(self.guide.pos["head"], self.guide.pos["eff"], self.normal, "yx", self.negate)
@@ -143,6 +167,7 @@ class Component(MainComponent):
         dist = vec.getDistance(self.guide.pos["head"], self.guide.pos["eff"])
         self.head_ctl = self.addCtl(self.head_cns, "head_ctl", t, self.color_fk, "cube", w=self.size*.5, h=dist, d=self.size*.5, po=dt.Vector(0,dist*.5,0))
         att.setRotOrder(self.head_ctl, "ZXY")
+        att.setInvertMirror(self.head_ctl, ["tx", "rz", "ry"])
 
         self.jnt_pos.append([self.head_ctl, "head"])
 
@@ -232,8 +257,7 @@ class Component(MainComponent):
             cns.setAttr("upAxis", 2)# front axis is 'Z'
 
             # Roll
-            #  aop.gear_spinePointAtOp(cns, self.root, self.ik_ctl, u, "Z")
-            intMatrix = aop.gear_intmatrix_op(self.root+".worldMatrix", self.ik_ctl+".worldMatrix", u)
+            intMatrix = aop.gear_intmatrix_op(self.intMRef+".worldMatrix", self.ik_ctl+".worldMatrix", u)
             dm_node = nod.createDecomposeMatrixNode(intMatrix+".output")
             pm.connectAttr(dm_node+".outputRotate", self.twister[i].attr("rotate"))
 
@@ -241,6 +265,8 @@ class Component(MainComponent):
 
 
             pm.connectAttr(self.ref_twist[i]+".translate", cns+".worldUpVector")
+
+
 
 
             # Squash n Stretch

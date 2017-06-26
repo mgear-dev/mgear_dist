@@ -67,13 +67,13 @@ class Component(MainComponent):
         self.loc = pri.addTransform(self.mtx, self.getName("loc"), t2)
 
         self.end = pri.addTransform(self.ctl, self.getName("end"), t1)
-  
+
         self.jnt_pos.append([self.mtx, "root"])
         self.jnt_pos.append([self.loc, 'end'])
 
         att.setKeyableAttributes(self.ctl)
         att.setInvertMirror(self.ctl, ["tx","ty", "tz"])
-        # self.jnt_pos.append([self.loc, "shoulder"])
+
     # =====================================================
     # PROPERTY
     # =====================================================
@@ -82,7 +82,6 @@ class Component(MainComponent):
     def addAttributes(self):
         return
 
-    
 
     # =====================================================
     # OPERATORS
@@ -106,6 +105,8 @@ class Component(MainComponent):
         pm.connectAttr(dm_node+".outputTranslate", pb_node+".inTranslate2")
         pm.connectAttr(pb_node+".outTranslate", self.loc.attr("translate"))
         return
+
+
     # =====================================================
     # CONNECTOR
     # =====================================================
@@ -122,4 +123,3 @@ class Component(MainComponent):
     # @param self
     def connect_standard(self):
         self.parent.addChild(self.root)
-        # self.connect_standardWithRotRef(self.settings["refArray"], self.orbit_cns )

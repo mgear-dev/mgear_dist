@@ -30,7 +30,8 @@ Utilitie functions.
 ##########################################################
 # GLOBAL
 ##########################################################
-import os, sys
+import os
+import sys
 from functools import wraps
 
 from maya import cmds

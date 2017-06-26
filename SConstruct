@@ -9,16 +9,18 @@ maya.SetupMscver()
 env = excons.MakeBaseEnv()
 
 
-version = (2, 1, 0)
+version = (2, 2, 0)
 versionstr = "%d.%d.%d" % version
 platname = {"win32": "windows", "darwin": "osx"}.get(sys.platform, "linux")
 outprefix = "platforms/%s/%s/%s/plug-ins" % (maya.Version(nice=True), platname, excons.arch_dir)
 
 outdir = excons.OutputBaseDirectory()
 
-pygen = excons.config.AddGenerator(env, "mgear", {"MGEAR_VERSION": "[%d, %d, %d]" % version})
+gen = excons.config.AddGenerator(env, "mgear", {"MGEAR_VERSION": "[%d, %d, %d]" % version,
+                                                "MGEAR_MAJMIN_VERSION": "%d.%d" % (version[0], version[1])})
 
-mgearinit = pygen(outdir + "/scripts/mgear/__init__.py", "scripts/mgear/__init__.py.in")
+mgearinit = gen(outdir + "/scripts/mgear/__init__.py", "scripts/mgear/__init__.py.in")
+mgearmod = gen("mGear.mod", "mGear.mod.in")
 
 defines = []
 if sys.platform == "win32":
@@ -44,7 +46,7 @@ targets = [
       "custom": [maya.Require],
       "install": {"scripts": excons.glob("scripts/*.py"),
                   "scripts/mgear": filter(lambda x: not x.endswith(".py.in"), excons.glob("scripts/mgear/*")),
-                  "": ["mGear.mod"]},
+                  "": mgearmod},
       "deps": mgearinit
    },
    {

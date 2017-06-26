@@ -119,7 +119,7 @@ def createDistNode(objA, objB, output=None):
     pm.connectAttr(dm_nodeB+".outputTranslate", node+".point2")
 
     if output:
-        pm.connectAttr(node+".distance", destination)
+        pm.connectAttr(node+".distance", output)
 
     return node
 
@@ -219,7 +219,7 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
         inputB (dagNode): The transfomr input 2
         blender (float or attr): Float in 0 to 1 range or attribute string name.
         rotInterpolation (int): Rotation interpolation option. 0=Euler. 1=Quaternion.
-        output (dagNode): The output node with the blend transfomr applied. 
+        output (dagNode): The output node with the blend transfomr applied.
 
     Returns:
         pyNode: the newly created node.
@@ -234,7 +234,7 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
 
     node = pm.createNode("pairBlend")
     node.attr("rotInterpolation").set(rotInterpolation)
-    
+
     if inputA:
         pm.connectAttr(inputA+".translate", node+".inTranslate1")
         pm.connectAttr(inputA+".rotate", node+".inRotate1")
@@ -247,13 +247,54 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
         pm.connectAttr(blender, node+".weight")
     else:
         pm.setAttr(node+".weight", blender)
-    
+
     if output:
         pm.connectAttr(node+".outRotate", output+".rotate")
         pm.connectAttr(node+".outTranslate", output+".translate")
 
     return node
 
+def createSetRangeNode(input, oldMin, oldMax, newMin=0, newMax=1, output=None, name="setRange"):
+    node = pm.createNode("setRange", n=name)
+
+    if not isinstance(input, list):
+        input = [input]
+
+    for item, s in zip(input, "XYZ"):
+        if isinstance(item, str) or isinstance(item, unicode) or isinstance(item, pm.Attribute):
+            pm.connectAttr(item, node+".value"+s)
+        else:
+            pm.setAttr(node+".value"+s, item)
+
+        if isinstance(oldMin, str) or isinstance(oldMin, unicode) or isinstance(oldMin, pm.Attribute):
+            pm.connectAttr(oldMin, node+".oldMin"+s)
+        else:
+            pm.setAttr(node+".oldMin"+s, oldMin)
+
+        if isinstance(oldMax, str) or isinstance(oldMax, unicode) or isinstance(oldMax, pm.Attribute):
+            pm.connectAttr(oldMax, node+".oldMax"+s)
+        else:
+            pm.setAttr(node+".oldMax"+s, oldMax)
+
+        if isinstance(newMin, str) or isinstance(newMin, unicode) or isinstance(newMin, pm.Attribute):
+            pm.connectAttr(newMin, node+".min"+s)
+        else:
+            pm.setAttr(node+".min"+s, newMin)
+
+        if isinstance(newMax, str) or isinstance(newMax, unicode) or isinstance(newMax, pm.Attribute):
+            pm.connectAttr(newMax, node+".max"+s)
+        else:
+            pm.setAttr(node+".max"+s, newMax)
+
+
+    if output:
+        if not isinstance(output, list):
+            output = [output]
+        for out, s in zip(output, "XYZ"):
+            pm.connectAttr(node+".outValue"+s, out, f=True)
+
+
+    return node
 
 def createReverseNode(input, output=None):
     """
@@ -500,7 +541,7 @@ def createClampNode(input, in_min, in_max):
         pyNode: the newly created node.
 
     >>> clamp_node = nod.createClampNode([self.roll_att, self.bank_att, self.bank_att], [0, -180, 0], [180,0,180])
-    
+
     """
     node = pm.createNode("clamp")
 
@@ -533,7 +574,7 @@ def createClampNode(input, in_min, in_max):
 
 def createPlusMinusAverage1D(input, operation=1, output=None):
     """
-    Create a multiple average node 1D. 
+    Create a multiple average node 1D.
     Args:
         input (attr, float or list): The input values.
         operation (int): Node operation. 0=None, 1=sum, 2=subtract, 3=average
@@ -550,13 +591,31 @@ def createPlusMinusAverage1D(input, operation=1, output=None):
     node.attr("operation").set(operation)
 
     for i, x in enumerate(input):
-        pm.connectAttr(x, node+".input1D[%s]"%str(i))
+        try:
+            pm.connectAttr(x, node+".input1D[%s]"%str(i))
+        except:
+            pm.setAttr( node+".input1D[%s]"%str(i), x)
 
     if output:
         pm.connectAttr(node+".output1D", output)
 
 
     return node
+
+
+def createVertexPositionNode(inShape, vId=0, output=None, name="mgear_vertexPosition"):
+    """
+    Creates a mgear_vertexPosition node
+    """
+    node = pm.createNode("mgear_vertexPosition", n=name)
+    inShape.worldMesh.connect(node.inputShape)
+    node.vertex.set(vId)
+    if output:
+        pm.connectAttr(output.parentInverseMatrix, node.drivenParentInverseMatrix)
+        pm.connectAttr(node.output, output.translate)
+
+    return node
+
 
 
 #############################################
@@ -700,7 +759,7 @@ def createClampNodeMulti(name, inputs=[], in_min=[], in_max=[]):
 
     Args:
         name (str): The name for the new node.
-        inputs (list of attr): The list of attributes 
+        inputs (list of attr): The list of attributes
         in_min (list of attr): The list of attributes
         in_max (list of attr): The list of attributes
 
@@ -734,6 +793,3 @@ def createClampNodeMulti(name, inputs=[], in_min=[], in_max=[]):
         count = (count+1)%3
 
     return outputs
-
-
-

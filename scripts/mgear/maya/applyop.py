@@ -441,7 +441,7 @@ def gear_ikfk2bone_op(out=[], root=None, eff=None, upv=None, fk0=None, fk1=None,
         lengthB (float): Length of second bone.
         negate (bool):  Use with negative Scale.
         blend (float): Default blend value (0 for full ik, 1 for full fk).
-    
+
     Returns:
         pyNode: The newly created operator.
     """
@@ -512,7 +512,7 @@ def gear_rollsplinekine_op(out, controlers=[], u=.5, subdiv=10):
             Objects must have a parent that will be used as an input for the operator.
         u (float): Position of the object on the bezier curve (from 0 to 1).
         subdiv (int): spline subdivision precision.
-    
+
     Returns:
         pyNode: The newly created operator.
     """
@@ -549,7 +549,7 @@ def gear_squashstretch2_op(out, sclref=None, length=5, axis="x", scaleComp=None)
         length (float): Rest Length of the S&S.
         axis (str): 'x' for scale all except x axis...
         scaleComp (list of float): extra scale compensation to avoid double scale in some situations.
-    
+
     Returns:
         pyNode: The newly created operator.
     """
