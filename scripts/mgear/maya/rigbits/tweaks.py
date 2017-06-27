@@ -115,7 +115,7 @@ def createJntTweak(mesh, parentJnt, ctlParent):
         doritosMagic(m, joint, jointBase)
 
 
-def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[0,0,0], size=.04):
+def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[0,0,0], size=.04, defSet=None):
     """Create a tweak joint attached to the mesh using a rivet
 
     Args:
@@ -169,12 +169,12 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
 
     #hidding joint base by changing the draw mode
     pm.setAttr(jointBase+".drawStyle", 2)
-
-    try:
-        defSet = pm.PyNode("rig_deformers_grp")
-    except:
-        pm.sets(n="rig_deformers_grp")
-        defSet = pm.PyNode("rig_deformers_grp")
+    if not defSet:
+        try:
+            defSet = pm.PyNode("rig_deformers_grp")
+        except:
+            pm.sets(n="rig_deformers_grp")
+            defSet = pm.PyNode("rig_deformers_grp")
     pm.sets(defSet, add=joint)
 
     controlType = "sphere"
@@ -209,6 +209,7 @@ def createRivetTweak(mesh, edgePair, name, parent=None, ctlParent=None,  color=[
         p.attr("r"+axis).set(0)
     if side == "R":
         p.attr("ry").set(180)
+        p.attr("sz").set(-1)
     pm.parent(p, pp)
 
     return icon
