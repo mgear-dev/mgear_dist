@@ -387,6 +387,10 @@ class MainComponent(object):
         if parent not in self.groups["controllers"]:
             self.transform2Lock.append(parent)
 
+        # Set the control shapes isHistoricallyInteresting
+        for oShape in ctl.getShapes():
+            oShape.isHistoricallyInteresting.set(False)
+
         return ctl
 
 
