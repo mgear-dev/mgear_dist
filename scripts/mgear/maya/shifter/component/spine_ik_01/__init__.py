@@ -149,9 +149,14 @@ class Component(MainComponent):
             parentdiv = div_cns
 
             # Controlers (First and last one are fake)
+            # if i in [0]:
+            # TODO: add option setting to add or not the first and last controller for the fk
+            # if i in [0, self.settings["division"] - 1] and False:
             if i in [0, self.settings["division"] - 1]:
                 fk_ctl = pri.addTransform(parentctl, self.getName("%s_loc"%i), tra.getTransform(parentctl))
                 fk_npo = fk_ctl
+                if i in [ self.settings["division"] - 1]:
+                    self.fk_ctl.append(fk_ctl)
             else:
                 fk_npo = pri.addTransform(parentctl, self.getName("fk%s_npo"%(i-1)), tra.getTransform(parentctl))
                 fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%(i-1), tra.getTransform(parentctl), self.color_fk, "cube", w=self.size, h=self.size*.05, d=self.size)
@@ -177,7 +182,8 @@ class Component(MainComponent):
             self.twister.append(twister)
             self.ref_twist.append(ref_twist)
 
-            for  x in self.fk_ctl:
+            #TODO: update this part with the optiona FK controls update
+            for  x in self.fk_ctl[:-1]:
                 att.setInvertMirror(x, ["tx", "rz", "ry"])
 
         # Connections (Hooks) ------------------------------
@@ -324,10 +330,11 @@ class Component(MainComponent):
                 pm.connectAttr(blend_node+".output", self.div_cns[i]+".rotate")
 
         # Connections (Hooks) ------------------------------
-        pm.pointConstraint(self.div_cns[0], self.cnx0)
-        pm.orientConstraint(self.div_cns[0], self.cnx0)
-        pm.pointConstraint(self.fk_ctl[-1], self.cnx1)
-        pm.orientConstraint(self.fk_ctl[-1], self.cnx1)
+
+        pm.parentConstraint(self.scl_transforms[0], self.cnx0)
+        pm.scaleConstraint(self.scl_transforms[0], self.cnx0)
+        pm.parentConstraint(self.scl_transforms[-1], self.cnx1)
+        pm.scaleConstraint(self.scl_transforms[-1], self.cnx1)
 
     # =====================================================
     # CONNECTOR
