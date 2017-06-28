@@ -40,6 +40,7 @@ import getpass
 # Maya
 import pymel.core as pm
 import pymel.core.datatypes as dt
+from pymel import versions
 
 # mgear
 import mgear
@@ -354,6 +355,11 @@ class Rig(object):
         # Set the control shapes isHistoricallyInteresting
         for oShape in ctl.getShapes():
             oShape.isHistoricallyInteresting.set(False)
+
+        #set controller tag
+        if versions.current() >= 201650:
+            pm.controller(ctl)
+            ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
 
         return ctl
 
