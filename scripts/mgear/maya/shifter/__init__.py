@@ -359,7 +359,7 @@ class Rig(object):
         #set controller tag
         if versions.current() >= 201650:
             pm.controller(ctl)
-            ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
+
 
         return ctl
 
@@ -470,6 +470,30 @@ class Rig(object):
         if comp_name not in self.components.keys():
             return self.global_ctl
         return self.components[comp_name].getRelation(relative_name)
+
+
+    def findControlRelative(self, guideName):
+        """
+        Return the control objects in the rig matching the guide object.
+
+        Args:
+            guideName (str): Name of the guide object.
+
+        Returns:
+           transform: The relative control object
+
+        """
+
+        if guideName is None:
+            return self.global_ctl
+
+        # localName = self.getLocalName(guideName)
+        comp_name = self.getComponentName(guideName)
+        relative_name = self.getRelativeName(guideName)
+
+        if comp_name not in self.components.keys():
+            return self.global_ctl
+        return self.components[comp_name].getControlRelation(relative_name)
 
     # TODO: update findComponent and other find methods with new funtions like
     # comp_name and others.  Better composability

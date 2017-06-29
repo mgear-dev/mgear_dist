@@ -63,23 +63,23 @@ class Component(MainComponent):
         self.length2 = vec.getDistance(self.guide.apos[2], self.guide.apos[3])
 
         # 1 bone chain for upv ref
-        self.armChainUpvRef= pri.add2DChain(self.root, self.getName("armUpvRef%s_jnt"), [self.guide.apos[0],self.guide.apos[2]], self.normal, False, self.WIP)
+        self.armChainUpvRef = pri.add2DChain(self.root, self.getName("armUpvRef%s_jnt"), [self.guide.apos[0],self.guide.apos[2]], self.normal, False, self.WIP)
         self.armChainUpvRef[1].setAttr("jointOrientZ", self.armChainUpvRef[1].getAttr("jointOrientZ")*-1)
 
         # FK Controlers -----------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root, self.getName("fk0_npo"), t)
-        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
+        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0),tp=self.parentCtlTag)
         att.setKeyableAttributes(self.fk0_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
         self.fk1_npo = pri.addTransform(self.fk0_ctl, self.getName("fk1_npo"), t)
-        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0))
+        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0),tp=self.fk0_ctl )
         att.setKeyableAttributes(self.fk1_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
         self.fk2_npo = pri.addTransform(self.fk1_ctl, self.getName("fk2_npo"), t)
-        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
+        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0), tp=self.fk1_ctl)
         att.setKeyableAttributes(self.fk2_ctl)
 
         self.fk_ctl = [self.fk0_ctl, self.fk1_ctl, self.fk2_ctl]
@@ -461,6 +461,11 @@ class Component(MainComponent):
         self.jointRelatives["elbow"] = self.settings["div0"] + 2
         self.jointRelatives["wrist"] = len(self.div_cns)-1
         self.jointRelatives["eff"] = -1
+
+        self.controlRelatives["root"] = self.fk0_ctl
+        self.controlRelatives["elbow"] = self.fk1_ctl
+        self.controlRelatives["wrist"] = self.fk2_ctl
+        self.controlRelatives["eff"] = self.fk2_ctl
     ## standard connection definition.
     # @param self
     def connect_standard(self):
