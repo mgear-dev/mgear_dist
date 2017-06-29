@@ -55,7 +55,7 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, axis="yx", negate=self.negate)
 
         self.ctl_npo = pri.addTransform(self.root, self.getName("ctl_npo"), t)
-        self.ctl = self.addCtl(self.ctl_npo, "base_ctl", t, self.color_ik, "square", w=1.0)
+        self.ctl = self.addCtl(self.ctl_npo, "base_ctl", t, self.color_ik, "square", w=1.0, tp=self.parentCtlTag)
         att.setKeyableAttributes(self.ctl, self.tr_params)
 
         self.ref_base = pri.addTransform(self.ctl, self.getName("ref_base"), t)
@@ -63,7 +63,7 @@ class Component(MainComponent):
         t = tra.setMatrixPosition(t, self.guide.apos[1])
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
         self.tip_npo = pri.addTransform(self.ik_cns, self.getName("tip_npo"), t)
-        self.tip_ctl = self.addCtl(self.tip_npo, "tip_ctl", t, self.color_ik, "square", w=1.0)
+        self.tip_ctl = self.addCtl(self.tip_npo, "tip_ctl", t, self.color_ik, "square", w=1.0, tp=self.ctl)
         att.setKeyableAttributes(self.tip_ctl, self.tr_params)
 
         self.ref_tip = pri.addTransform(self.tip_ctl, self.getName("ref_tip"), t)
@@ -118,6 +118,9 @@ class Component(MainComponent):
     def setRelation(self):
         self.relatives["root"] = self.ref_base
         self.relatives["tip"] = self.ref_tip
+
+        self.controlRelatives["root"] = self.base_ctl
+        self.controlRelatives["tip"] = self.tip_ctl
 
         for i in range(0, len(self.div_cns)-1):
             self.relatives["%s_loc"%i] = self.div_cns[i+1]

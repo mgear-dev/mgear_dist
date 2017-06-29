@@ -62,14 +62,14 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, axis="yx", negate=self.negate)
 
         self.ctl_npo = pri.addTransform(self.root, self.getName("ctl_npo"), t)
-        self.ctl = self.addCtl(self.ctl_npo, "base_ctl", t, self.color_ik, "square", w=1.0)
+        self.ctl = self.addCtl(self.ctl_npo, "base_ctl", t, self.color_ik, "square", w=1.0, tp=self.parentCtlTag)
 
         self.ref_base = pri.addTransform(self.ctl, self.getName("ref_base"), t)
 
         t = tra.setMatrixPosition(t, self.guide.apos[1])
         self.ik_cns = pri.addTransform(self.ctl, self.getName("ik_cns"), t)
         self.squash_npo = pri.addTransform(self.ik_cns, self.getName("squash_npo"), t)
-        self.squash_ctl = self.addCtl(self.squash_npo, "squash_ctl", t, self.color_ik, "crossarrow", w=1.0, ro=dt.Vector(1.5708,0,0))
+        self.squash_ctl = self.addCtl(self.squash_npo, "squash_ctl", t, self.color_ik, "crossarrow", w=1.0, ro=dt.Vector(1.5708,0,0), tp=self.ctl)
         att.setKeyableAttributes(self.squash_ctl, ["tx", "ty", "tz"] )
 
         self.ref_squash = pri.addTransform(self.squash_ctl, self.getName("ref_squash"), t)
@@ -138,6 +138,9 @@ class Component(MainComponent):
     def setRelation(self):
         self.relatives["root"] = self.ref_base
         self.relatives["squash"] = self.ref_squash
+
+        self.controlRelatives["root"] = self.ctl
+        self.controlRelatives["squash"] = self.squash_ctl
 
         for i in range(0, len(self.div_cns)-1):
             self.relatives["%s_loc"%i] = self.div_cns[i+1]

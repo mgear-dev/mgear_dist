@@ -68,22 +68,22 @@ class Component(MainComponent):
         t = tra.getTransformFromPos(self.guide.apos[0])
 
         self.root_npo = pri.addTransform(self.root, self.getName("root_npo"), t)
-        self.root_ctl = self.addCtl(self.root_npo, "root_ctl", t, self.color_fk, "circle", w=self.length0/6)
+        self.root_ctl = self.addCtl(self.root_npo, "root_ctl", t, self.color_fk, "circle", w=self.length0/6, tp=self.parentCtlTag)
 
         # FK Controlers -----------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root_ctl, self.getName("fk0_npo"), t)
-        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
+        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0), tp=self.root_ctl)
         att.setKeyableAttributes(self.fk0_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
         self.fk1_npo = pri.addTransform(self.fk0_ctl, self.getName("fk1_npo"), t)
-        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0))
+        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0), tp=self.fk0_ctl)
         att.setKeyableAttributes(self.fk1_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
         self.fk2_npo = pri.addTransform(self.fk1_ctl, self.getName("fk2_npo"), t)
-        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
+        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0), tp=self.fk1_ctl)
         att.setKeyableAttributes(self.fk2_ctl)
 
         self.fk_ctl = [self.fk0_ctl, self.fk1_ctl, self.fk2_ctl]
@@ -95,11 +95,11 @@ class Component(MainComponent):
 
         self.ik_cns = pri.addTransformFromPos(self.root_ctl, self.getName("ik_cns"), self.guide.pos["ankle"])
 
-        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["ankle"]), self.color_ik, "null", w=self.size*.12)
+        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["ankle"]), self.color_ik, "null", w=self.size*.12, tp=self.root_ctl)
         att.setInvertMirror(self.ikcns_ctl, ["tx"])
 
         m = tra.getTransformLookingAt(self.guide.pos["ankle"], self.guide.pos["eff"], self.x_axis, "zx", False)
-        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", tra.getTransformFromPos(self.guide.pos["ankle"]), self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12)
+        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", tra.getTransformFromPos(self.guide.pos["ankle"]), self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12, tp=self.ikcns_ctl)
         att.setKeyableAttributes(self.ik_ctl)
         att.setRotOrder(self.ik_ctl, "XZY")
         att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
@@ -113,7 +113,7 @@ class Component(MainComponent):
 
         self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
-        self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
+        self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12, tp=self.root_ctl)
         att.setInvertMirror(self.upv_ctl, ["tx"])
         att.setKeyableAttributes(self.upv_ctl, self.t_params)
 
@@ -153,7 +153,7 @@ class Component(MainComponent):
         # Mid Controler ------------------------------------
         t = tra.getTransform(self.ctrn_loc)
         self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
-        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2, tp=self.root_ctl)
         att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
         att.setKeyableAttributes(self.mid_ctl, self.t_params)
 
@@ -245,7 +245,7 @@ class Component(MainComponent):
         t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .5)
         self.uplegTangentA_loc = pri.addTransform(self.root_ctl, self.getName("uplegTangentA_loc"), self.fk_ctl[0].getMatrix(worldSpace=True))
         self.uplegTangentA_npo = pri.addTransform(self.uplegTangentA_loc, self.getName("uplegTangentA_npo"), t)
-        self.uplegTangentA_ctl = self.addCtl(self.uplegTangentA_npo, "uplegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.uplegTangentA_ctl = self.addCtl(self.uplegTangentA_npo, "uplegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796), tp=self.mid_ctl)
         if self.negate:
             self.uplegTangentA_npo.rz.set(180)
             self.uplegTangentA_npo.sz.set(-1)
@@ -253,7 +253,7 @@ class Component(MainComponent):
 
         t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .9)
         self.uplegTangentB_npo = pri.addTransform(self.tws1A_loc, self.getName("uplegTangentB_npo"), t)
-        self.uplegTangentB_ctl = self.addCtl(self.uplegTangentB_npo, "uplegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
+        self.uplegTangentB_ctl = self.addCtl(self.uplegTangentB_npo, "uplegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796), tp=self.mid_ctl)
         if self.negate:
             self.uplegTangentB_npo.rz.set(180)
             self.uplegTangentB_npo.sz.set(-1)
@@ -263,7 +263,7 @@ class Component(MainComponent):
         tC = tra.setMatrixPosition(tC, self.guide.apos[2])
         t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .1)
         self.lowlegTangentA_npo = pri.addTransform(self.tws1B_loc, self.getName("lowlegTangentA_npo"), t)
-        self.lowlegTangentA_ctl = self.addCtl(self.lowlegTangentA_npo, "lowlegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
+        self.lowlegTangentA_ctl = self.addCtl(self.lowlegTangentA_npo, "lowlegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796), tp=self.mid_ctl)
         if self.negate:
             self.lowlegTangentA_npo.rz.set(180)
             self.lowlegTangentA_npo.sz.set(-1)
@@ -272,7 +272,7 @@ class Component(MainComponent):
         t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .5)
         self.lowlegTangentB_loc = pri.addTransform(self.root, self.getName("lowlegTangentB_loc"), tC)
         self.lowlegTangentB_npo = pri.addTransform(self.lowlegTangentB_loc, self.getName("lowlegTangentB_npo"), t)
-        self.lowlegTangentB_ctl = self.addCtl(self.lowlegTangentB_npo, "lowlegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.lowlegTangentB_ctl = self.addCtl(self.lowlegTangentB_npo, "lowlegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796), tp=self.mid_ctl)
         if self.negate:
             self.lowlegTangentB_npo.rz.set(180)
             self.lowlegTangentB_npo.sz.set(-1)
@@ -280,7 +280,7 @@ class Component(MainComponent):
 
         t = self.mid_ctl.getMatrix(worldSpace=True)
         self.kneeTangent_npo = pri.addTransform(self.mid_ctl, self.getName("kneeTangent_npo"), t)
-        self.kneeTangent_ctl = self.addCtl(self.kneeTangent_npo, "kneeTangent_ctl", t, self.color_fk, "circle", w=self.size*.25, ro=dt.Vector(0,0,1.570796))
+        self.kneeTangent_ctl = self.addCtl(self.kneeTangent_npo, "kneeTangent_ctl", t, self.color_fk, "circle", w=self.size*.25, ro=dt.Vector(0,0,1.570796), tp=self.mid_ctl)
         if self.negate:
             self.kneeTangent_npo.rz.set(180)
             self.kneeTangent_npo.sz.set(-1)
@@ -586,6 +586,11 @@ class Component(MainComponent):
         self.relatives["knee"] = self.div_cns[self.settings["div0"] +  2]
         self.relatives["ankle"] = self.div_cns[-1]
         self.relatives["eff"] = self.end_ref
+
+        self.controlRelatives["root"] = self.fk0_ctl
+        self.controlRelatives["knee"] = self.fk1_ctl
+        self.controlRelatives["ankle"] = self.ik_ctl
+        self.controlRelatives["eff"] = self.fk2_ctl
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["knee"] = self.settings["div0"] + 2

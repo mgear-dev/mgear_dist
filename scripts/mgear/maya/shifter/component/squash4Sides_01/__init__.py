@@ -66,13 +66,13 @@ class Component(MainComponent):
         t = tra.setMatrixPosition(t_root, self.guide.pos["top"])
 
         self.top_npo = pri.addTransform(self.ik_cns, self.getName("top_npo"), t)
-        self.top_ctl = self.addCtl(self.top_npo, "top_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0))
+        self.top_ctl = self.addCtl(self.top_npo, "top_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0), tp=self.parentCtlTag)
         att.setKeyableAttributes(self.top_ctl, ["ty"] )
 
         t = tra.setMatrixPosition(t_root, self.guide.pos["bottom"])
         self.bottom_npo = pri.addTransform(self.top_npo, self.getName("bottom_npo"), t)
         self.bottom_npo.rz.set(180)
-        self.bottom_ctl = self.addCtl(self.bottom_npo, "bottom_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0))
+        self.bottom_ctl = self.addCtl(self.bottom_npo, "bottom_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0), tp=self.parentCtlTag)
         self.bottom_ctl.rz.set(0)
         att.setKeyableAttributes(self.bottom_ctl, ["ty"] )
         self.bottom_pivot = pri.addTransform(self.bottom_npo, self.getName("bottom_pivot"), tra.getTransform(self.top_ctl))
@@ -80,14 +80,14 @@ class Component(MainComponent):
         t = tra.setMatrixPosition(t_root, self.guide.pos["ext"])
         self.ext_npo = pri.addTransform(self.bottom_pivot, self.getName("ext_npo"), t)
         self.ext_npo.rz.set(-90)
-        self.ext_ctl = self.addCtl(self.ext_npo, "ext_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0))
+        self.ext_ctl = self.addCtl(self.ext_npo, "ext_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0), tp=self.parentCtlTag)
         self.ext_ctl.rz.set(0)
         att.setKeyableAttributes(self.ext_ctl, ["ty"] )
 
         t = tra.setMatrixPosition(t_root, self.guide.pos["int"])
         self.int_npo = pri.addTransform(self.ext_npo, self.getName("int_npo"), t)
         self.int_npo.rz.set(180)
-        self.int_ctl = self.addCtl(self.int_npo, "int_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0))
+        self.int_ctl = self.addCtl(self.int_npo, "int_ctl", t, self.color_ik, "arrow", w=ctlSize,  ro=dt.Vector(1.5708,1.5708,0), tp=self.parentCtlTag)
         self.int_ctl.rz.set(0)
         att.setKeyableAttributes(self.int_ctl, ["ty"] )
         self.int_pivot = pri.addTransform(self.int_npo, self.getName("int_pivot"), tra.getTransform(self.ext_ctl))
@@ -157,6 +157,14 @@ class Component(MainComponent):
         self.relatives["bottom"] = self.anchor
         self.relatives["int"] = self.anchor
         self.relatives["ext"] = self.anchor
+
+        self.controlRelatives["root"] = self.parentCtlTag
+        self.controlRelatives["top"] = self.top_ctl
+        self.controlRelatives["bottom"] = self.bottom_ctl
+        self.controlRelatives["int"] = self.int_ctl
+        self.controlRelatives["ext"] = self.ext_ctl
+
+
         if self.settings["joint"]:
             self.jointRelatives["root"] = 0
             self.jointRelatives["top"] = 0

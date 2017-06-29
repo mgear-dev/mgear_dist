@@ -92,14 +92,14 @@ class Component(MainComponent):
 
         self.ik_cns = pri.addTransformFromPos(self.root, self.getName("ik_cns"), self.guide.pos["wrist"])
 
-        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["wrist"]), self.color_ik, "null", w=self.size*.12)
+        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["wrist"]), self.color_ik, "null", w=self.size*.12, tp=self.parentCtlTag)
         att.setInvertMirror(self.ikcns_ctl, ["tx", "ty", "tz"])
 
         if self.negate:
             m = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "x-y", True)
         else:
             m = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "xy", False)
-        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12)
+        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12, tp=self.ikcns_ctl)
         att.setKeyableAttributes(self.ik_ctl)
         att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
 
@@ -112,7 +112,7 @@ class Component(MainComponent):
 
         self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
-        self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
+        self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12, tp=self.parentCtlTag)
         if self.settings["mirrorMid"]:
             if self.negate:
                 self.upv_cns.rz.set(180)
@@ -125,7 +125,7 @@ class Component(MainComponent):
         if self.settings["ikTR"]:
             self.ikRot_npo = pri.addTransform(self.root, self.getName("ikRot_npo"), m)
             self.ikRot_cns = pri.addTransform(self.ikRot_npo, self.getName("ikRot_cns"), m)
-            self.ikRot_ctl = self.addCtl(self.ikRot_cns, "ikRot_ctl", m, self.color_ik, "sphere", w=self.size*.12)
+            self.ikRot_ctl = self.addCtl(self.ikRot_cns, "ikRot_ctl", m, self.color_ik, "sphere", w=self.size*.12, tp=self.ik_ctl)
             att.setKeyableAttributes(self.ikRot_ctl, self.r_params)
 
 
@@ -158,7 +158,7 @@ class Component(MainComponent):
         # Mid Controler ------------------------------------
         t = tra.getTransform(self.ctrn_loc)
         self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
-        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2, tp=self.parentCtlTag)
         if self.settings["mirrorMid"]:
             if self.negate:
                 self.mid_cns.rz.set(180)

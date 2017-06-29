@@ -75,6 +75,7 @@ class Component(MainComponent):
             parent = self.ik_cns
             tOld = False
             fk_ctl = None
+            self.previusTag = self.parentCtlTag
             for i, t in enumerate(tra.getChainTransform(self.guide.apos, self.normal, self.negate)):
                 dist = vec.getDistance(self.guide.apos[i], self.guide.apos[i+1])
                 if self.settings["neutralpose"] or not tOld:
@@ -89,11 +90,12 @@ class Component(MainComponent):
                     tref = t
                 fk_off = pri.addTransform(parent, self.getName("fk%s_off"%i), tref)
                 fk_npo = pri.addTransform(fk_off, self.getName("fk%s_npo"%i), tnpo)
-                fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.1, d=self.size*.1, po=dt.Vector(dist*.5*self.n_factor,0,0))
+                fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.1, d=self.size*.1, po=dt.Vector(dist*.5*self.n_factor,0,0), tp=self.previusTag)
                 self.fk_off.append(fk_off)
                 self.fk_npo.append(fk_npo)
                 self.fk_ctl.append(fk_ctl)
                 tOld = t
+                self.previusTag = fk_ctl
 
         # IK controllers ------------------------------------
         if self.isIk:
@@ -103,8 +105,8 @@ class Component(MainComponent):
             t = tra.setMatrixPosition(t, self.guide.apos[-1])
 
             self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
-            self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", t, self.color_ik, "null", w=self.size)
-            self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", t, self.color_ik, "cube", w=self.size*.3, h=self.size*.3, d=self.size*.3)
+            self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", t, self.color_ik, "null", w=self.size, tp=self.parentCtlTag)
+            self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", t, self.color_ik, "cube", w=self.size*.3, h=self.size*.3, d=self.size*.3, tp=self.ikcns_ctl)
             att.setKeyableAttributes(self.ik_ctl, self.t_params)
 
             v = self.guide.apos[-1] - self.guide.apos[0]
@@ -114,7 +116,7 @@ class Component(MainComponent):
             v += self.guide.apos[1]
             self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
-            self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.1)
+            self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.1, tp=self.parentCtlTag)
             att.setKeyableAttributes(self.upv_ctl, self.t_params)
 
             # Chain
@@ -233,11 +235,14 @@ class Component(MainComponent):
     def setRelation(self):
 
         self.relatives["root"] = self.loc[0]
+        self.controlRelatives["root"] = self.fk_ctl[0]
         self.jointRelatives["root"] = 0
         for i in range(0, len(self.loc)-1):
             self.relatives["%s_loc"%i] = self.loc[i+1]
+            self.controlRelatives["%s_loc"%i] = self.fk_ctl[i+1]
             self.jointRelatives["%s_loc"%i] = i+1
         self.relatives["%s_loc"%(len(self.loc)-1)] = self.loc[-1]
+        self.controlRelatives["%s_loc"%(len(self.loc)-1)] = self.fk_ctl[-1]
         self.jointRelatives["%s_loc"%(len(self.loc)-1)] = len(self.loc)-1
 
 

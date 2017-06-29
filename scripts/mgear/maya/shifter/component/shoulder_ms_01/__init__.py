@@ -59,7 +59,7 @@ class Component(MainComponent):
 
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, axis="xy", negate=self.negate)
         self.npo = pri.addTransform(self.root, self.getName("npo"), t)
-        self.ctl = self.addCtl(self.npo, "ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
+        self.ctl = self.addCtl(self.npo, "ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0), tp=self.parentCtlTag)
         self.mtx = pri.addTransform(self.npo, self.getName("mtx"), t)
 
         t1 = tra.setMatrixPosition(t,self.guide.apos[1])
@@ -115,6 +115,10 @@ class Component(MainComponent):
     def setRelation(self):
         self.relatives["root"] = self.root
         self.relatives["tip"] = self.loc
+
+        self.controlRelatives["root"] = self.ctl
+        self.controlRelatives["tip"] = self.ctl
+
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["tip"] = 1

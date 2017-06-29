@@ -91,28 +91,28 @@ class Component(MainComponent):
         # base Controlers -----------------------------------
         t = tra.getTransformFromPos(self.guide.apos[0])
         self.root_npo = pri.addTransform(self.root, self.getName("root_npo"), t)
-        self.root_ctl = self.addCtl(self.root_npo, "root_ctl", t, self.color_fk, "circle", w=self.length0/6)
+        self.root_ctl = self.addCtl(self.root_npo, "root_ctl", t, self.color_fk, "circle", w=self.length0/6, tp=self.parentCtlTag)
         att.lockAttribute(self.root_ctl, ["sx", "sy", "sz", "v"])
 
         # FK Controlers -----------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root_ctl, self.getName("fk0_npo"), t)
-        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
+        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0), tp=self.root_ctl)
         att.setKeyableAttributes(self.fk0_ctl)
 
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
         self.fk1_npo = pri.addTransform(self.fk0_ctl, self.getName("fk1_npo"), t)
-        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0))
+        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0), tp=self.fk0_ctl)
         att.setKeyableAttributes(self.fk1_ctl)
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
         self.fk2_npo = pri.addTransform(self.fk1_ctl, self.getName("fk2_npo"), t)
-        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
+        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0), tp=self.fk1_ctl)
         att.setKeyableAttributes(self.fk2_ctl)
 
         t = tra.getTransformLookingAt(self.guide.apos[3], self.guide.apos[4], self.normal, "xz", self.negate)
         self.fk3_npo = pri.addTransform(self.fk2_ctl, self.getName("fk3_npo"), t)
-        self.fk3_ctl = self.addCtl(self.fk3_npo, "fk3_ctl", t, self.color_fk, "cube", w=self.length3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length3*self.n_factor,0,0))
+        self.fk3_ctl = self.addCtl(self.fk3_npo, "fk3_ctl", t, self.color_fk, "cube", w=self.length3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length3*self.n_factor,0,0), tp=self.fk2_ctl)
         att.setKeyableAttributes(self.fk3_ctl)
 
 
@@ -120,6 +120,16 @@ class Component(MainComponent):
 
         for  x in self.fk_ctl:
             att.setInvertMirror(x, ["tx", "ty", "tz"])
+
+        # Mid Controlers ------------------------------------
+        self.knee_lvl = pri.addTransform(self.root, self.getName("knee_lvl"), tra.getTransform(self.mid1_jnt))
+        self.knee_ctl = self.addCtl(self.knee_lvl, "knee_ctl", tra.getTransform(self.mid1_jnt), self.color_ik, "sphere", w=self.size*.2, tp=self.root_ctl)
+        att.setInvertMirror(self.knee_ctl, ["tx", "ty", "tz"])
+        att.lockAttribute(self.knee_ctl, ["sx", "sy", "sz", "v"])
+        self.ankle_lvl = pri.addTransform(self.root, self.getName("ankle_lvl"), tra.getTransform(self.mid2_jnt))
+        self.ankle_ctl = self.addCtl(self.ankle_lvl, "ankle_ctl", tra.getTransform(self.mid2_jnt), self.color_ik, "sphere", w=self.size*.2, tp=self.knee_ctl)
+        att.setInvertMirror(self.ankle_ctl, ["tx", "ty", "tz"])
+        att.lockAttribute(self.ankle_ctl, ["sx", "sy", "sz", "v"])
 
         # IK controls --------------------------------------------------------
 
@@ -131,11 +141,11 @@ class Component(MainComponent):
             t = tra.getTransformLookingAt(self.guide.apos[3], self.guide.apos[4], self.normal, "z-x", False)
 
         self.ik_cns = pri.addTransform(self.root_ctl, self.getName("ik_cns"), t)
-        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", t, self.color_ik, "null", w=self.size*.12)
+        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", t, self.color_ik, "null", w=self.size*.12, tp=self.ankle_ctl)
         att.setInvertMirror(self.ikcns_ctl, ["tx"])
         att.lockAttribute(self.ikcns_ctl, ["sx", "sy", "sz", "v"])
 
-        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", t, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12)
+        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", t, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12, tp=self.ikcns_ctl)
         att.setKeyableAttributes(self.ik_ctl)
         att.setRotOrder(self.ik_ctl, "XZY")
         att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
@@ -146,7 +156,7 @@ class Component(MainComponent):
         self.ik2b_bone_ref = pri.addTransform(self.chain3bones[3], self.getName("ik2B_B_ref"), t)
         self.ik2b_blend = pri.addTransform(self.ik_ctl, self.getName("ik2B_blend"), t)
 
-        self.roll_ctl = self.addCtl(self.ik2b_blend, "roll_ctl", t, self.color_ik, "crossarrow", w=self.length2*.5*self.n_factor)
+        self.roll_ctl = self.addCtl(self.ik2b_blend, "roll_ctl", t, self.color_ik, "crossarrow", w=self.length2*.5*self.n_factor, tp=self.ik_ctl)
         self.ik2b_ik_npo = pri.addTransform(self.roll_ctl, self.getName("ik2B_ik_npo"), tra.getTransform(self.chain3bones[-1]))
         self.ik2b_ik_ref = pri.addTransformFromPos(self.ik2b_ik_npo, self.getName("ik2B_ik_ref"), self.guide.pos["ankle"])
         att.lockAttribute(self.roll_ctl, ["tx", "ty", "tz", "sx", "sy", "sz", "v"])
@@ -161,8 +171,9 @@ class Component(MainComponent):
         self.upv_lvl = pri.addTransformFromPos(self.root, self.getName("upv_lvl"), v)
         self.upv_cns = pri.addTransformFromPos(self.upv_lvl, self.getName("upv_cns"), v)
 
-        self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
+        self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12, tp=self.ik_ctl)
         att.setInvertMirror(self.upv_ctl, ["tx"])
+        att.setKeyableAttributes(self.upv_ctl, ["tx", "ty", "tz"])
 
         # Soft IK objects 3 bones chain --------------------------------------------------------------------------------------------
         t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["foot"], self.x_axis, "zx", False)
@@ -186,15 +197,6 @@ class Component(MainComponent):
         self.ik_ref = pri.addTransform(self.ik_ctl, self.getName("ik_ref"), tra.getTransform(self.ik_ctl))
         self.fk_ref = pri.addTransform(self.fk_ctl[3], self.getName("fk_ref"), tra.getTransform(self.ik_ctl))
 
-        # Mid Controlers ------------------------------------
-        self.knee_lvl = pri.addTransform(self.root, self.getName("knee_lvl"), tra.getTransform(self.mid1_jnt))
-        self.knee_ctl = self.addCtl(self.knee_lvl, "knee_ctl", tra.getTransform(self.mid1_jnt), self.color_ik, "sphere", w=self.size*.2)
-        att.setInvertMirror(self.knee_ctl, ["tx", "ty", "tz"])
-        att.lockAttribute(self.knee_ctl, ["sx", "sy", "sz", "v"])
-        self.ankle_lvl = pri.addTransform(self.root, self.getName("ankle_lvl"), tra.getTransform(self.mid2_jnt))
-        self.ankle_ctl = self.addCtl(self.ankle_lvl, "ankle_ctl", tra.getTransform(self.mid2_jnt), self.color_ik, "sphere", w=self.size*.2)
-        att.setInvertMirror(self.ankle_ctl, ["tx", "ty", "tz"])
-        att.lockAttribute(self.ankle_ctl, ["sx", "sy", "sz", "v"])
 
         # twist references --------------------------------------
         self.rollRef = pri.add2DChain(self.root, self.getName("rollChain"), self.guide.apos[:2], self.normal, False, self.WIP)
@@ -546,6 +548,12 @@ class Component(MainComponent):
         self.relatives["ankle"] = self.legBones[2]
         self.relatives["foot"] = self.legBones[3]
         self.relatives["eff"] = self.legBones[3]
+
+        self.controlRelatives["root"] = self.fk0_ctl
+        self.controlRelatives["knee"] = self.fk1_ctl
+        self.controlRelatives["ankle"] = self.fk2_ctl
+        self.controlRelatives["foot"] = self.ik_ctl
+        self.controlRelatives["eff"] = self.fk3_ctl
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["knee"] = self.settings["div0"] + 2
