@@ -400,6 +400,7 @@ class MainComponent(object):
             if tp:
                 ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
                 tpTagNode = pm.PyNode(pm.controller(tp, q=True)[0])
+                # tpTagNode.cycleWalkSibling.set(True)
                 pm.connectAttr(tpTagNode.prepopulate, ctt.prepopulate, f=True)
                 # The connectAttr to the children attribute is giving error
                 # i.e:  pm.connectAttr(ctt.attr("parent"), tpTagNode.attr("children"), na=True)
