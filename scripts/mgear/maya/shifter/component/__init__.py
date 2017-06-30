@@ -397,10 +397,12 @@ class MainComponent(object):
         #set controller tag
         if versions.current() >= 201650:
             pm.controller(ctl)
+
+
             if tp:
                 ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
                 tpTagNode = pm.PyNode(pm.controller(tp, q=True)[0])
-                # tpTagNode.cycleWalkSibling.set(True)
+                tpTagNode.cycleWalkSibling.set(True)
                 pm.connectAttr(tpTagNode.prepopulate, ctt.prepopulate, f=True)
                 # The connectAttr to the children attribute is giving error
                 # i.e:  pm.connectAttr(ctt.attr("parent"), tpTagNode.attr("children"), na=True)
@@ -420,6 +422,7 @@ class MainComponent(object):
                         if i >100:
                             pm.displayWarning("The controller tag for %s has reached the limit index of 100 children"%ctl.name())
                             break
+
 
 
         return ctl
