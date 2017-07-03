@@ -315,9 +315,16 @@ class Component(MainComponent):
         # TwistTest
         if [round(elem, 4) for elem in tra.getTranslation(self.chain3bones[1])] != [round(elem, 4) for elem in  self.guide.apos[1]]:
             add_nodeTwist = nod.createAddNode(180.0, self.roll_att)
-            pm.connectAttr(add_nodeTwist+".output", self.ikHandle.attr("twist"))
+            # pm.connectAttr(add_nodeTwist+".output", self.ikHandle.attr("twist"))
         else:
-            pm.connectAttr(self.roll_att, self.ikHandle.attr("twist"))
+            add_nodeTwist = nod.createAddNode(0, self.roll_att)
+            # pm.connectAttr(self.roll_att, self.ikHandle.attr("twist"))
+        if self.negate:
+            mulVal = -1
+        else:
+            mulVal = 1
+        nod.createMulNode(add_nodeTwist+".output", mulVal, self.ikHandle.attr("twist"))
+        # pm.connectAttr(add_nodeTwist+".output", self.ikHandle.attr("twist"))
 
         # stable spring solver doble rotation
         pm.pointConstraint(self.root_ctl, self.chain3bones[0])
@@ -364,7 +371,9 @@ class Component(MainComponent):
         # IK 2 bones ======================================================================================================
 
         self.ikHandle2 = pri.addIkHandle(self.softblendLoc2, self.getName("ik2BonesHandle"), self.chain2bones, self.ikSolver, self.upv_ctl)
-        pm.connectAttr(self.roll_att, self.ikHandle2.attr("twist"))
+
+        nod.createMulNode(self.roll_att, mulVal,self.ikHandle2.attr("twist"))
+        # pm.connectAttr(self.roll_att, self.ikHandle2.attr("twist"))
 
         # stable spring solver doble rotation
         pm.pointConstraint(self.root_ctl, self.chain2bones[0])

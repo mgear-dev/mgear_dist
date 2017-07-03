@@ -377,7 +377,12 @@ class Component(MainComponent):
         node = aop.gear_ikfk2bone_op(out, self.root, self.ik_ref, self.upv_ctl, self.fk0_mtx, self.fk1_mtx, self.fk2_mtx, self.length0, self.length1, self.negate)
 
         pm.connectAttr(self.blend_att, node+".blend")
-        pm.connectAttr(self.roll_att, node+".roll")
+        if self.negate:
+            mulVal = -1
+        else:
+            mulVal = 1
+        nod.createMulNode(self.roll_att, mulVal, node+".roll")
+        # pm.connectAttr(self.roll_att, node+".roll")
         pm.connectAttr(self.scale_att, node+".scaleA")
         pm.connectAttr(self.scale_att, node+".scaleB")
         pm.connectAttr(self.maxstretch_att, node+".maxstretch")
