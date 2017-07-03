@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>255</width>
-    <height>697</height>
+    <width>268</width>
+    <height>687</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
       <string/>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
@@ -122,6 +122,13 @@
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="ikTR_checkBox">
+          <property name="text">
+           <string>IK separated Trans and Rot ctl</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="mirrorMid_checkBox">
