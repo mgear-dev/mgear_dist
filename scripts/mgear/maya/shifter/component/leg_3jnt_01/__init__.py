@@ -320,9 +320,9 @@ class Component(MainComponent):
             add_nodeTwist = nod.createAddNode(0, self.roll_att)
             # pm.connectAttr(self.roll_att, self.ikHandle.attr("twist"))
         if self.negate:
-            mulVal = -1
-        else:
             mulVal = 1
+        else:
+            mulVal = -1
         nod.createMulNode(add_nodeTwist+".output", mulVal, self.ikHandle.attr("twist"))
         # pm.connectAttr(add_nodeTwist+".output", self.ikHandle.attr("twist"))
 

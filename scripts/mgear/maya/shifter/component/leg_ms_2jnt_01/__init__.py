@@ -118,7 +118,7 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
 
         self.fk2_npo = pri.addTransform(self.fk2_loc, self.getName("fk2_npo"), t)
-        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0), tp=self.fk2_ctl)
+        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0), tp=self.fk1_roll_ctl)
         att.setKeyableAttributes(self.fk2_ctl)
 
         self.fk_ctl = [self.fk0_roll_ctl, self.fk1_ctl, self.fk2_ctl]
