@@ -98,6 +98,7 @@ class Guide(ComponentGuide):
         self.pUpvRefArray = self.addParam("upvrefarray", "string", "")
         self.pUpvRefArray = self.addParam("pinrefarray", "string", "")
         self.pMaxStretch  = self.addParam("maxstretch", "double", 1.5 , 1, None)
+        self.pIKTR       = self.addParam("ikTR", "bool", False)
         self.pMirrorMid = self.addParam("mirrorMid", "bool", False)
 
 
@@ -111,6 +112,7 @@ class Guide(ComponentGuide):
 
         self.pUseIndex       = self.addParam("useIndex", "bool", False)
         self.pParentJointIndex = self.addParam("parentJointIndex", "long", -1, None, None)
+
 
 
 ##########################################################
@@ -165,9 +167,10 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.ikfk_slider.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.ikfk_spinBox.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
+        self.populateCheck(self.settingsTab.ikTR_checkBox, "ikTR")
+        self.populateCheck(self.settingsTab.mirrorMid_checkBox, "mirrorMid")
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
-        self.populateCheck(self.settingsTab.mirrorMid_checkBox, "mirrorMid")
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
         for item in ikRefArrayItems:
             self.settingsTab.ikRefArray_listWidget.addItem(item)
@@ -194,10 +197,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.maxStretch_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxStretch_spinBox, "maxstretch"))
         self.settingsTab.div0_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div0_spinBox, "div0"))
         self.settingsTab.div1_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div1_spinBox, "div1"))
-        self.settingsTab.mirrorMid_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.mirrorMid_checkBox, "mirrorMid"))
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(self.setProfile)
-
-
+        self.settingsTab.ikTR_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.ikTR_checkBox, "ikTR"))
+        self.settingsTab.mirrorMid_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.mirrorMid_checkBox, "mirrorMid"))
 
         self.settingsTab.ikRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
         self.settingsTab.ikRefArrayRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
