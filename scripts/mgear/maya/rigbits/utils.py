@@ -248,16 +248,11 @@ mGear_guidesTemplates.buildFromSelection()
     # walk transform child
     rCmd = '''
 import pymel.core as pm
+import mgear.maya.pickWalk as pw
 
-def walkChild():
-    oSel = pm.selected()[0]
-    oChild = oSel.listRelatives(typ='transform')
-    if oChild:
-        pm.select(oChild[0])
-    else:
-        pm.displayWarning("No child to walk Down.")
+pw.walkDown(pm.selected())
 
-walkChild()
+
 
 '''
     createRunTimeCommand("mGear_walkTransformChild", rCmd, ann="")
@@ -265,17 +260,9 @@ walkChild()
     # walk transform Parent
     rCmd = '''
 import pymel.core as pm
+import mgear.maya.pickWalk as pw
 
-
-def walkParent():
-    oSel = pm.selected()[0]
-    oParent = oSel.listRelatives(p=True)
-    if oParent:
-        pm.select(oParent)
-    else:
-        pm.displayWarning("No parent to walk Up.")
-
-walkParent()
+pw.walkUp(pm.selected())
 
 '''
 
@@ -284,15 +271,9 @@ walkParent()
     # walk transform Left
     rCmd = '''
 import pymel.core as pm
+import mgear.maya.pickWalk as pw
 
-def walkLeft():
-    pm.runtime.PickWalkLeft()
-    oSel = pm.selected()[0]
-    while oSel.type()!='transform':
-        pm.runtime.PickWalkLeft()
-        oSel = pm.selected()[0]
-
-walkLeft()
+pw.walkLeft(pm.selected())
 
 '''
     createRunTimeCommand("mGear_walkTransformLeft", rCmd, ann="")
@@ -300,17 +281,23 @@ walkLeft()
     # walk transform Right
     rCmd = '''
 import pymel.core as pm
+import mgear.maya.pickWalk as pw
 
-def walkRight():
-    pm.runtime.PickWalkRight()
-    oSel = pm.selected()[0]
-    while oSel.type()!='transform':
-        pm.runtime.PickWalkRight()
-        oSel = pm.selected()[0]
-walkRight()
+pw.walkRight(pm.selected())
 
 '''
     createRunTimeCommand("mGear_walkTransformRight", rCmd, ann="")
+
+    # walk mirror
+    rCmd = '''
+import pymel.core as pm
+import mgear.maya.pickWalk as pw
+
+pw.walkMirror(pm.selected())
+
+'''
+    createRunTimeCommand("mGear_walkMirror", rCmd, ann="")
+
 
     # reset camera persp
     rCmd = '''
@@ -322,3 +309,58 @@ pm.viewSet(p=True, fit=True)
     createRunTimeCommand("mGear_resetCameraPersp", rCmd, ann="")
 
     pm.displayInfo("mGear Hotkeys creation finish.")
+
+
+    # walk transform child add
+    rCmd = '''
+import pymel.core as pm
+import mgear.maya.pickWalk as pw
+
+pw.walkDown(pm.selected(), True)
+
+
+
+'''
+    createRunTimeCommand("mGear_walkTransformChildAdd", rCmd, ann="")
+
+    # walk transform Parent
+    rCmd = '''
+import pymel.core as pm
+import mgear.maya.pickWalk as pw
+
+pw.walkUp(pm.selected(), True)
+
+'''
+
+    createRunTimeCommand("mGear_walkTransformParentAdd", rCmd, ann="")
+
+    # walk transform Left
+    rCmd = '''
+import pymel.core as pm
+import mgear.maya.pickWalk as pw
+
+pw.walkLeft(pm.selected(), True)
+
+'''
+    createRunTimeCommand("mGear_walkTransformLeftAdd", rCmd, ann="")
+
+    # walk transform Right
+    rCmd = '''
+import pymel.core as pm
+import mgear.maya.pickWalk as pw
+
+pw.walkRight(pm.selected(), True)
+
+'''
+    createRunTimeCommand("mGear_walkTransformRightAdd", rCmd, ann="")
+
+    # walk mirror
+    rCmd = '''
+import pymel.core as pm
+import mgear.maya.pickWalk as pw
+
+pw.walkMirror(pm.selected(), True)
+
+'''
+    createRunTimeCommand("mGear_walkMirrorAdd", rCmd, ann="")
+
