@@ -713,7 +713,8 @@ class helperSlots(object):
             pm.displayWarning("Please select first the object.")
 
     def updateLineEdit(self, lEdit, targetAttr):
-        self.root.attr(targetAttr).set(lEdit.text())
+        name = string.removeInvalidCharacter(lEdit.text())
+        self.root.attr(targetAttr).set(name)
 
 
     def addItem2listWidget(self, listWidget, targetAttr=None):

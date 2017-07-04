@@ -116,6 +116,7 @@ class Rig(object):
         self.guide = RigGuide()
 
         self.groups = {}
+        self.subGroups = {}
 
         self.components = {}
         self.componentsIndex = []
@@ -290,6 +291,8 @@ class Rig(object):
             component = self.components[name]
             for name, objects in component.groups.items():
                 self.addToGroup(objects, name)
+            for name, objects in component.subGroups.items():
+                self.addToSubGroup(objects, name)
 
 
         #Create master set to group all the groups
@@ -305,6 +308,14 @@ class Rig(object):
             pm.connectAttr(s.message, self.model.rigGroups[groupIdx])
             groupIdx += 1
             masterSet.add(s)
+        for parentGroup, subgroups in self.subGroups.items():
+            pg = pm.PyNode(self.model.name()+"_"+parentGroup+"_grp")
+            for sg in subgroups:
+                sub = pm.PyNode(self.model.name()+"_"+sg+"_grp")
+                if sub in masterSet.members():
+                    masterSet.remove(sub)
+                pg.add(sub)
+
 
 
         # Bind pose ---------------------------------------
@@ -384,6 +395,27 @@ class Rig(object):
                 self.groups[name] = []
 
             self.groups[name].extend(objects)
+
+    def addToSubGroup(self, subGroups, parentGroups=["hidden"]):
+        """
+        Add the object in a collection for later SubGroup creation.
+
+        Args:
+            subGroups (dagNode or list of dagNode): Groups (maya set) to add as a Subgroup.
+            namparentGroupses (str or list of str): Names of the parent groups to create.
+
+        """
+
+        if not isinstance(parentGroups, list):
+            parentGroups = [parentGroups]
+
+        if not isinstance(subGroups, list):
+            subGroups = [subGroups]
+
+        for pg in parentGroups:
+            if pg not in self.subGroups.keys():
+                self.subGroups[pg] = []
+            self.subGroups[pg].extend(subGroups)
 
 
     def getLocalName(self, guideName):

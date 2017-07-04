@@ -104,6 +104,7 @@ class MainComponent(object):
         # --------------------------------------------------
         # Builder init
         self.groups = {} ## Dictionary of groups
+        self.subGroups = {} ## Dictionary of subGroups
         self.controlers = [] ## List of all the controllers of the component
 
         # --------------------------------------------------
@@ -384,10 +385,15 @@ class MainComponent(object):
         att.addAttribute(ctl, "invSy", "bool", 0,  keyable=False, niceName="Invert Mirror SY")
         att.addAttribute(ctl, "invSz", "bool", 0,  keyable=False, niceName="Invert Mirror SZ")
 
-        self.addToGroup(ctl, "controllers")
+        if self.settings["ctlGrp"]:
+            ctlGrp = self.settings["ctlGrp"]
+            self.addToGroup(ctl, ctlGrp,  "controllers")
+        else:
+            ctlGrp = "controllers"
+            self.addToGroup(ctl, ctlGrp)
 
         #lock the control parent attributes if is not a control
-        if parent not in self.groups["controllers"]:
+        if parent not in self.groups[ctlGrp]:
             self.transform2Lock.append(parent)
 
         # Set the control shapes isHistoricallyInteresting
@@ -428,7 +434,7 @@ class MainComponent(object):
         return ctl
 
 
-    def addToGroup(self, objects, names=["hidden"]):
+    def addToGroup(self, objects, names=["hidden"], parentGrp=None):
         """
         Add the object in a collection for later group creation.
 
@@ -448,6 +454,14 @@ class MainComponent(object):
                 self.groups[name] = []
 
             self.groups[name].extend(objects)
+
+            if parentGrp:
+                if parentGrp not in self.subGroups.keys():
+                    self.subGroups[parentGrp] = []
+                if name not in self.subGroups[parentGrp]:
+                    self.subGroups[parentGrp].append(name)
+
+
 
     # =====================================================
     # PROPERTY
