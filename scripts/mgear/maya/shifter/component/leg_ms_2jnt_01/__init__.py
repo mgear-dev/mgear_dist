@@ -241,9 +241,9 @@ class Component(MainComponent):
 
             div_cns = pri.addTransform(self.div_org, self.getName("div%s_loc" % i))
             if self.negate:
-                div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
+                div_ctl = self.addCtl(div_cns, self.getName("div%s_ctl" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
             else:
-                div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
+                div_ctl = self.addCtl(div_cns, self.getName("div%s_ctl" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
             self.previousCtlTag = div_ctl
             self.div_cns.append(div_cns)
             self.div_cnsUp.append(div_cns)
@@ -266,9 +266,9 @@ class Component(MainComponent):
             dd = i +self.divisions1+1
             div_cns = pri.addTransform(self.div_org, self.getName("div%s_loc" % dd))
             if self.negate:
-                div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
+                div_ctl = self.addCtl(div_cns, self.getName("div%s_ctl" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
             else:
-                div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
+                div_ctl = self.addCtl(div_cns, self.getName("div%s_ctl" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
             self.previousCtlTag = div_ctl
             self.div_cns.append(div_cns)
             self.div_cnsDn.append(div_cns)
