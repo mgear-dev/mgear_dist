@@ -33,7 +33,9 @@ Shifter's MainGuide class and RigGuide class.
 ##########################################################
 # Built-in
 import os
+import shutil
 import sys
+import json
 import subprocess
 from functools import partial
 import datetime
@@ -1017,6 +1019,10 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         # custom Step Tab
         self.customStepTab.preCustomStep_checkBox.stateChanged.connect(partial(self.updateCheck, self.customStepTab.preCustomStep_checkBox, "doPreCustomStep"))
         self.customStepTab.preCustomStepAdd_pushButton.clicked.connect(self.addCustomStep)
+        self.customStepTab.preCustomStepNew_pushButton.clicked.connect(self.newCustomStep)
+        self.customStepTab.preCustomStepDuplicate_pushButton.clicked.connect(self.duplicateCustomStep)
+        self.customStepTab.preCustomStepExport_pushButton.clicked.connect(self.exportCustomStep)
+        self.customStepTab.preCustomStepImport_pushButton.clicked.connect(self.importCustomStep)
         self.customStepTab.preCustomStepRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.customStepTab.preCustomStep_listWidget, "preCustomStep"))
         self.customStepTab.preCustomStep_listWidget.installEventFilter(self)
         self.customStepTab.preCustomStepRun_pushButton.clicked.connect(partial(self.runManualStep, self.customStepTab.preCustomStep_listWidget))
@@ -1024,6 +1030,10 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
 
         self.customStepTab.postCustomStep_checkBox.stateChanged.connect(partial(self.updateCheck, self.customStepTab.postCustomStep_checkBox, "doPostCustomStep"))
         self.customStepTab.postCustomStepAdd_pushButton.clicked.connect(partial(self.addCustomStep, False))
+        self.customStepTab.postCustomStepNew_pushButton.clicked.connect(partial(self.newCustomStep, False))
+        self.customStepTab.postCustomStepDuplicate_pushButton.clicked.connect(partial(self.duplicateCustomStep, False))
+        self.customStepTab.postCustomStepExport_pushButton.clicked.connect(partial(self.exportCustomStep, False))
+        self.customStepTab.postCustomStepImport_pushButton.clicked.connect(partial(self.importCustomStep, False))
         self.customStepTab.postCustomStepRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.customStepTab.postCustomStep_listWidget, "postCustomStep"))
         self.customStepTab.postCustomStep_listWidget.installEventFilter(self)
         self.customStepTab.postCustomStepRun_pushButton.clicked.connect(partial(self.runManualStep, self.customStepTab.postCustomStep_listWidget))
@@ -1073,6 +1083,15 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             self.guideSettingsTab.skin_lineEdit.setText(filePath)
 
     def addCustomStep(self, pre=True, *args):
+        """Add a new custom step
+
+        Args:
+            pre (bool, optional): If true adds the steps to the pre step list
+            *args: Maya's Dummy
+
+        Returns:
+            None: None
+        """
 
         if pre:
             stepAttr = "preCustomStep"
@@ -1108,3 +1127,254 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         fileName = os.path.split(filePath)[1].split(".")[0]
         stepWidget.addItem(fileName +" | "+filePath)
         self.updateListAttr(stepWidget, stepAttr)
+
+    def newCustomStep(self, pre=True, *args):
+        """Creates a new custom step
+
+        Args:
+            pre (bool, optional): If true adds the steps to the pre step list
+            *args: Maya's Dummy
+
+        Returns:
+            None: None
+        """
+
+        if pre:
+            stepAttr = "preCustomStep"
+            stepWidget = self.customStepTab.preCustomStep_listWidget
+        else:
+            stepAttr = "postCustomStep"
+            stepWidget = self.customStepTab.postCustomStep_listWidget
+
+        # Check if we have a custom enviroment for the custom steps initial folder
+        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+            startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
+        else:
+            startDir = self.root.attr(stepAttr).get()
+
+        filePath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir, okc="New",
+                                  fileFilter='Custom Step .py (*.py)')
+        if not filePath:
+            return
+        if not isinstance(filePath, basestring):
+            filePath = filePath[0]
+
+        n, e = os.path.splitext(filePath)
+        stepName = os.path.split(n)[-1]
+        # raw custome step string
+        rawString = r'''
+import mgear.maya.shifter.customStep as cstp
+
+
+class CustomShifterStep(cstp.customShifterMainStep):
+    def __init__(self):
+        self.name = "%s"
+
+
+    def run(self, stepDict):
+        """Run method.
+
+            i.e:  stepDict["mgearRun"].global_ctl  gets the global_ctl from shifter rig on post step
+            i.e:  stepDict["otherCustomStepName"].ctlMesh  gets the ctlMesh from a previous custom
+                    step called "otherCustomStepName"
+        Args:
+            stepDict (dic): Dictionary containing the objects from the previous steps
+
+        Returns:
+            None: None
+        """
+        return'''%stepName
+        f = open(filePath, 'w')
+        f.write(rawString + "\n")
+        f.close()
+
+        # Quick clean the first empty item
+        itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        if itemsList and not itemsList[0]:
+            stepWidget.takeItem(0)
+
+        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+            filePath = os.path.abspath(filePath)
+            baseReplace = os.path.abspath(os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
+            filePath = filePath.replace(baseReplace, "")[1:]
+
+        fileName = os.path.split(filePath)[1].split(".")[0]
+        stepWidget.addItem(fileName +" | "+filePath)
+        self.updateListAttr(stepWidget, stepAttr)
+
+    def duplicateCustomStep(self, pre=True, *args):
+        """Duplicate the selected step
+
+        Args:
+            pre (bool, optional): If true adds the steps to the pre step list
+            *args: Maya's Dummy
+
+        Returns:
+            None: None
+        """
+
+        if pre:
+            stepAttr = "preCustomStep"
+            stepWidget = self.customStepTab.preCustomStep_listWidget
+        else:
+            stepAttr = "postCustomStep"
+            stepWidget = self.customStepTab.postCustomStep_listWidget
+
+        # Check if we have a custom enviroment for the custom steps initial folder
+        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+            startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
+        else:
+            startDir = self.root.attr(stepAttr).get()
+
+        if stepWidget.selectedItems():
+            sourcePath = stepWidget.selectedItems()[0].text().split("|")[-1][1:]
+
+        filePath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir, okc="New",
+                                  fileFilter='Custom Step .py (*.py)')
+        if not filePath:
+            return
+        if not isinstance(filePath, basestring):
+            filePath = filePath[0]
+
+        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+            sourcePath = os.path.join(startDir, sourcePath)
+        shutil.copy(sourcePath, filePath)
+
+          # Quick clean the first empty item
+        itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        if itemsList and not itemsList[0]:
+            stepWidget.takeItem(0)
+
+        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+            filePath = os.path.abspath(filePath)
+            baseReplace = os.path.abspath(os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
+            filePath = filePath.replace(baseReplace, "")[1:]
+
+
+        fileName = os.path.split(filePath)[1].split(".")[0]
+        stepWidget.addItem(fileName +" | "+filePath)
+        self.updateListAttr(stepWidget, stepAttr)
+
+    def exportCustomStep(self, pre=True, *args):
+        """Export custom steps to a json file
+
+        Args:
+            pre (bool, optional): If true takes the steps from the pre step list
+            *args: Maya's Dummy
+
+        Returns:
+            None: None
+        """
+        if pre:
+            stepAttr = "preCustomStep"
+            stepWidget = self.customStepTab.preCustomStep_listWidget
+        else:
+            stepAttr = "postCustomStep"
+            stepWidget = self.customStepTab.postCustomStep_listWidget
+
+
+        # Check if we have a custom enviroment for the custom steps initial folder
+        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+            startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
+            itemsList = [os.path.join(startDir, i.text().split("|")[-1][1:]) for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        else:
+            itemsList = [i.text().split("|")[-1][1:] for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+            if itemsList:
+                startDir = os.path.split(itemsList[-1])[0]
+            else:
+                pm.displayWarning("No custom steps to export.")
+                return
+
+        stepsDict = {}
+        stepsDict["itemsList"] =  itemsList
+        for item in itemsList:
+            step = open(item, "r")
+            data = step.read()
+            stepsDict[item] = data
+            step.close()
+
+        data_string = json.dumps(stepsDict, indent=4, sort_keys=True)
+        filePath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir,
+                                  fileFilter='Shifter Custom Steps (*%s)' %".scs")
+        if not filePath:
+            return
+        if not isinstance(filePath, basestring):
+            filePath = filePath[0]
+        f = open(filePath, 'w')
+        f.write(data_string)
+        f.close()
+
+    def importCustomStep(self, pre=True, *args):
+        """Import custom steps from a json file
+
+        Args:
+            pre (bool, optional): If true import to pre steps list
+            *args: Maya's Dummy
+
+        Returns:
+            None: None
+        """
+        if pre:
+            stepAttr = "preCustomStep"
+            stepWidget = self.customStepTab.preCustomStep_listWidget
+        else:
+            stepAttr = "postCustomStep"
+            stepWidget = self.customStepTab.postCustomStep_listWidget
+
+        # option import only paths or unpack steps
+        option = pm.confirmDialog(  title='Shifter Custom Step Import Style',
+                                    message='Do you want to import only the path or unpack and import?',
+                                    button=['Only Path','Unpack', 'Cancel'], defaultButton='Only Path',
+                                    cancelButton='Cancel', dismissString='Cancel' )
+
+        if option in ['Only Path',  'Unpack' ]:
+            if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
+            else:
+                startDir = pm.workspace(q=True, rootDirectory=True)
+
+            filePath = pm.fileDialog2(  dialogStyle=2, fileMode=1, startingDirectory=startDir,
+                                        fileFilter='Shifter Custom Steps (*%s)' %".scs")
+            if not filePath:
+                return
+            if not isinstance(filePath, basestring):
+                filePath = filePath[0]
+            stepDict = json.load(open(filePath))
+            stepsList = []
+
+        if option =='Only Path':
+            for item in stepDict["itemsList"]:
+                stepsList.append(item)
+
+        elif option == 'Unpack':
+            unPackDir = pm.fileDialog2(dialogStyle=2, fileMode=2, startingDirectory=startDir)
+            if not filePath:
+                return
+            if not isinstance(unPackDir, basestring):
+                unPackDir = unPackDir[0]
+
+            for item in stepDict["itemsList"]:
+                fileName = os.path.split(item)[1]
+                fileNewPath = os.path.join(unPackDir, fileName)
+                stepsList.append(fileNewPath)
+                f = open(fileNewPath, 'w')
+                f.write(stepDict[item])
+                f.close()
+
+        if option in ['Only Path',  'Unpack' ]:
+
+            for item in stepsList:
+                # Quick clean the first empty item
+                itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+                if itemsList and not itemsList[0]:
+                    stepWidget.takeItem(0)
+
+                if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                    item = os.path.abspath(item)
+                    baseReplace = os.path.abspath(os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
+                    item = item.replace(baseReplace, "")[1:]
+
+
+                fileName = os.path.split(item)[1].split(".")[0]
+                stepWidget.addItem(fileName +" | "+item)
+                self.updateListAttr(stepWidget, stepAttr)

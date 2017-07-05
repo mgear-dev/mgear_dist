@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>344</width>
-    <height>522</height>
+    <height>593</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -72,6 +72,33 @@
                </widget>
               </item>
               <item>
+               <widget class="QPushButton" name="preCustomStepNew_pushButton">
+                <property name="text">
+                 <string>New</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="preCustomStep_verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="preCustomStepDuplicate_pushButton">
+                <property name="text">
+                 <string>Duplicate</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="preCustomStepRemove_pushButton">
                 <property name="text">
                  <string>Remove</string>
@@ -89,6 +116,20 @@
                <widget class="QPushButton" name="preCustomStepEdit_pushButton">
                 <property name="text">
                  <string>Edit</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="preCustomStepExport_pushButton">
+                <property name="text">
+                 <string>Export</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="preCustomStepImport_pushButton">
+                <property name="text">
+                 <string>Import</string>
                 </property>
                </widget>
               </item>
@@ -177,6 +218,20 @@
                </widget>
               </item>
               <item>
+               <widget class="QPushButton" name="postCustomStepNew_pushButton">
+                <property name="text">
+                 <string>New</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="postCustomStepDuplicate_pushButton">
+                <property name="text">
+                 <string>Duplicate</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="postCustomStepRemove_pushButton">
                 <property name="text">
                  <string>Remove</string>
@@ -194,6 +249,20 @@
                <widget class="QPushButton" name="postCustomStepEdit_pushButton">
                 <property name="text">
                  <string>Edit</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="postCustomStepExport_pushButton">
+                <property name="text">
+                 <string>Export</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="postCustomStepImport_pushButton">
+                <property name="text">
+                 <string>Import</string>
                 </property>
                </widget>
               </item>
