@@ -28,11 +28,12 @@
 # GLOBAL
 ##################################################
 import mgear.maya.pyqt as gqt
-from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
-from maya.app.general.mayaMixin import MayaQDockWidget
+# from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
+# from maya.app.general.mayaMixin import MayaQDockWidget
+import mgear.maya.synoptic.utils as syn_uti
+
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
-import mgear.maya.synoptic.utils as syn_uti
 
 
 ##################################################
@@ -134,6 +135,26 @@ class ikfkMatchButton(QtWidgets.QPushButton):
         else:
             syn_uti.ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot)
             return
+
+class selGroup(QtWidgets.QPushButton):
+
+    def mousePressEvent(self, event):
+
+        model = syn_uti.getModel(self)
+        group_suffix = str(self.property("groupSuffix"))
+        mouse_button = event.button()
+
+        syn_uti.selGroup(model, group_suffix)
+
+class keyGroup(QtWidgets.QPushButton):
+
+    def mousePressEvent(self, event):
+
+        model = syn_uti.getModel(self)
+        group_suffix = str(self.property("groupSuffix"))
+        mouse_button = event.button()
+
+        syn_uti.keyGroup(model, group_suffix)
 
 
 class toggleAttrButton(QtWidgets.QPushButton):

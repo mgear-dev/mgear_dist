@@ -32,8 +32,8 @@
 
 import pymel.core as pm
 from pymel import versions
-import maya.mel as mel
-import maya.OpenMayaUI as omui
+# import maya.mel as mel
+# import maya.OpenMayaUI as omui
 from functools import partial
 import re
 
@@ -45,8 +45,8 @@ import traceback
 
 
 import mgear.maya.pyqt as gqt
-from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
-from maya.app.general.mayaMixin import MayaQDockWidget
+# from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
+# from maya.app.general.mayaMixin import MayaQDockWidget
 
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
@@ -143,9 +143,9 @@ def getModel(widget):
 
     return model
 
-def getControlers(model):
+def getControlers(model, gSuffix=CTRL_GRP_SUFFIX):
 
-    ctl_set = pm.PyNode(model.name()+CTRL_GRP_SUFFIX)
+    ctl_set = pm.PyNode(model.name()+gSuffix)
     members = ctl_set.members()
 
     return members
@@ -276,6 +276,13 @@ def selAll(model):
     controlers = getControlers(model)
     pm.select(controlers)
 
+# ================================================
+def selGroup(model, groupSuffix):
+
+    controlers = getControlers(model, groupSuffix)
+    pm.select(controlers)
+
+
 ##################################################
 # KEY
 ##################################################
@@ -320,6 +327,12 @@ def keyObj(model, object_names):
 def keyAll(model):
 
     controlers = getControlers(model)
+    pm.setKeyframe(controlers)
+
+# ================================================
+def keyGroup(model, groupSuffix):
+
+    controlers = getControlers(model, groupSuffix)
     pm.setKeyframe(controlers)
 
 # ================================================
