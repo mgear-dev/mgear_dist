@@ -143,7 +143,10 @@ def CreateMenu():
     pm.menuItem(label="Select Skin Deformers", command=partial(skin.selectDeformers))
     pm.menuItem( divider=True )
     pm.menuItem(label="Import Skin", command=partial(skin.importSkin, None, False))
+    pm.menuItem(label="Import Skin Pack", command=partial(skin.importSkinPack, None))
+    pm.menuItem( divider=True )
     pm.menuItem(label="Export Skin", command=partial(skin.exportSkin, None, None))
+    pm.menuItem(label="Export Skin Pack", command=partial(skin.exportSkinPack, None, None))
     pm.menuItem( divider=True )
     pm.menuItem(label="Get Names in gSkin File", command=partial(skin.getObjsFromSkinFile, None, False))
 

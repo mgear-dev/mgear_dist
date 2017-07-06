@@ -36,12 +36,16 @@ This module is derivated from Chad Vernon's Skin IO.
 #############################################
 # GLOBAL
 #############################################
+import os
 import cPickle as pickle
+import json
+from functools import partial
 
 import pymel.core as pm
 import maya.OpenMaya as OpenMaya
 
 FILE_EXT = ".gSkin"
+PACK_EXT = ".gSkinPack"
 
 ######################################
 ##   Skin getters
@@ -210,6 +214,51 @@ def exportSkin(filePath=None, objs=None, *args):
 
     return True
 
+def exportSkinPack(packPath=None, objs=None, *args):
+
+    if not objs:
+        if pm.selected():
+            objs = pm.selected()
+        else:
+            pm.displayWarning("Please Select Some Objects")
+            return
+
+
+    packDic = {
+            "packFiles":[],
+            "rootPath":[]
+            }
+
+    startDir = pm.workspace(q=True, rootDirectory=True)
+    packPath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir,
+                                    fileFilter='mGear skinPack (*%s)' % PACK_EXT)
+    if not packPath:
+        return
+    packPath = packPath[0]
+    if not packPath.endswith(PACK_EXT):
+        packPath += PACK_EXT
+
+    packDic["rootPath"], packName =  os.path.split(packPath)
+
+    for obj in objs:
+        fileName = obj.stripNamespace() + FILE_EXT
+        filePath = os.path.join(packDic["rootPath"], fileName)
+        if exportSkin(filePath, [obj]):
+            packDic["packFiles"].append(fileName)
+            pm.displayInfo( filePath)
+        else:
+            pm.displayWarning(obj.name() + ": Skiped because don't have Skin Cluster")
+
+    if packDic["packFiles"]:
+        data_string = json.dumps(packDic, indent=4, sort_keys=True)
+        f = open(packPath, 'w')
+        f.write(data_string + "\n")
+        f.close()
+        pm.displayInfo("Skin Pack exported: " + packPath)
+    else:
+        pm.displayWarning("Any of the selected objects have Skin Cluster. Skin Pack export aborted.")
+
+
 ######################################
 ##   Skin setters
 ######################################
@@ -328,6 +377,22 @@ def importSkin(filePath=None, *args):
 
         except:
             pm.displayWarning("Object: " + objName + " Skiped. Can NOT be found in the scene" )
+
+
+def importSkinPack(filePath=None, *args):
+    if not filePath:
+        startDir = pm.workspace(q=True, rootDirectory=True)
+        filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir,
+                                    fileFilter='mGear skinPack (*%s)' % PACK_EXT)
+    if not filePath:
+        return
+    if not isinstance(filePath, basestring):
+        filePath = filePath[0]
+
+    packDic = json.load(open(filePath))
+    for pFile in packDic["packFiles"]:
+        filePath = os.path.join(os.path.split(filePath)[0], pFile)
+        importSkin(filePath, True)
 
 ######################################
 ##   Skin Copy
