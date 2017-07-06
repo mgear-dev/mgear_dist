@@ -1244,7 +1244,7 @@ class CustomShifterStep(cstp.customShifterMainStep):
             sourcePath = os.path.join(startDir, sourcePath)
         shutil.copy(sourcePath, filePath)
 
-          # Quick clean the first empty item
+        # Quick clean the first empty item
         itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             stepWidget.takeItem(0)
@@ -1276,6 +1276,10 @@ class CustomShifterStep(cstp.customShifterMainStep):
             stepAttr = "postCustomStep"
             stepWidget = self.customStepTab.postCustomStep_listWidget
 
+        # Quick clean the first empty item
+        itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        if itemsList and not itemsList[0]:
+            stepWidget.takeItem(0)
 
         # Check if we have a custom enviroment for the custom steps initial folder
         if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
@@ -1299,7 +1303,7 @@ class CustomShifterStep(cstp.customShifterMainStep):
 
         data_string = json.dumps(stepsDict, indent=4, sort_keys=True)
         filePath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir,
-                                  fileFilter='Shifter Custom Steps (*%s)' %".scs")
+                                  fileFilter='Shifter Custom Steps .scs (*%s)' %".scs")
         if not filePath:
             return
         if not isinstance(filePath, basestring):
@@ -1338,7 +1342,7 @@ class CustomShifterStep(cstp.customShifterMainStep):
                 startDir = pm.workspace(q=True, rootDirectory=True)
 
             filePath = pm.fileDialog2(  dialogStyle=2, fileMode=1, startingDirectory=startDir,
-                                        fileFilter='Shifter Custom Steps (*%s)' %".scs")
+                                        fileFilter='Shifter Custom Steps .scs (*%s)' %".scs")
             if not filePath:
                 return
             if not isinstance(filePath, basestring):
