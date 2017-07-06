@@ -66,7 +66,16 @@ WIP = False
 
 
 def bBoxData(obj=None, yZero=True, *args):
+    """Calculate the bounding box data
 
+    Args:
+        obj (None, optional): The object to calculate the bounding box
+        yZero (bool, optional): If true, sets the hight to the lowest point
+        *args: Maya dummy
+
+    Returns:
+        TYPE: Description
+    """
     volCenter = False
 
     if not obj:
@@ -82,11 +91,21 @@ def bBoxData(obj=None, yZero=True, *args):
     return volCenter, radio, bb
 
 def getMayaWindow():
+    """Gets Maya main window
+
+    Returns:
+        QMainWindow: Maya window
+    """
     ptr = OpenMayaUI.MQtUtil.mainWindow()
     return wrapInstance(long(ptr), QtWidgets.QMainWindow)
 
 def cnsPart(source, target):
+    """Constraint target to source with parent and scale constraint
 
+    Args:
+        source (dagNode): Source object
+        target (dagNode): target object
+    """
     if not WIP:
         pm.parentConstraint(source, target, mo=True)
         pm.scaleConstraint(source, target, mo=True)
@@ -114,11 +133,17 @@ def cnsPart(source, target):
 ###########################################
 
 # ========================================================
-## Create a simple 1Click rig.
-# # @param rigName String - Name of the rig.
-# # @param wCntCtl Bool -  Place the Golbal control in the wolrd center or use the general BBox of the selection.
 def simpleRig(rigName="rig", wCntCtl=False, *args):
+    """Create a simple 1Click rig.
 
+    Args:
+        rigName (str, optional): Name of the rig.
+        wCntCtl (bool, optional): Place the Golbal control in the wolrd center or use the general BBox of the selection.
+        *args: Description
+
+    Returns:
+        dagNode: Rig top node
+    """
     meshList = []
     ctlList = []
     lvlList = []
@@ -197,10 +222,10 @@ def simpleRig(rigName="rig", wCntCtl=False, *args):
                     t = uPivot.getMatrix(worldSpace=True)
                     lvlParent = pm.listRelatives(uPivot, p=True)[0].name().split("_")[0]+"_ctl"
                     lvl = pm.createNode('transform', n=uPivot.split("_")[0] + "_npo")
-                    att.setKeyableAttributes(lvl, [])
+                    lvl.setTransformation(t)
                     ctl = ico.create(lvl, uPivot.split("_")[0] + "_ctl", t, 15, icon="cube", w=bbRadio*2, h=bbRadio*2, d=bbRadio*2)
                     pm.parent(lvl, lvlParent)
-                    lvl.setTransformation(t)
+                    att.setKeyableAttributes(lvl, [])
                     uPivotCtl.append(ctl)
                     #Constraint
                     cnsPart(ctl, pgrp)
@@ -253,9 +278,23 @@ def simpleRig(rigName="rig", wCntCtl=False, *args):
 
 
 def setUserRigPivot(*args):
+    """Set user pivot for a part of the rig.
+
+
+    Args:
+        *args: Maya dummy
+
+    Returns:
+        dagNode, dagNode: the axis and the group
+    """
     listSelection = [oSel for oSel in  pm.selected()]
-    parent = listSelection[0].listRelatives(p=True)[0]
     if listSelection:
+        parent = listSelection[0].listRelatives(p=True)
+        if parent:
+            parent = parent[0]
+        else:
+            pm.displayWarning("In order to set user pivot, the selected object must have one parent or Root")
+            return False, False
         dialog = NameUIDialog(getMayaWindow())
         dialog.exec_()
         oName  = dialog.rootName
@@ -266,11 +305,19 @@ def setUserRigPivot(*args):
         pgrp = pm.group(listSelection, p=parent, n=oName  + "_"+ PGROUP_EXTENSION)
         return axis, pgrp
     else:
-        pm.displayWarning("please select the objects to set and the parent root/userPivot")
+        pm.displayWarning("Please select the objects to set and the parent root/userPivot")
         return False, False
 
 
 def selectObjectInUserRootPivot(*args):
+    """Selects the object under the group transform contrapart of a user pivot
+
+    Args:
+        *args: Maya dummy
+
+    Returns:
+        list of dagNode: The objects under the user pivot group
+    """
     oSel = pm.selected()[0]
     try:
         pgrp = pm.PyNode(oSel.name().split('_')[0]+"_"+PGROUP_EXTENSION)
@@ -281,6 +328,15 @@ def selectObjectInUserRootPivot(*args):
         return False
 
 def addToUserPivot(*args):
+    """Add the selected objects to a user pivot.
+    First select the objects and last the pivot
+
+    Args:
+        *args: Maya dummy
+
+    Returns:
+        None: None
+    """
     oSel = pm.selected()[:-1]
     pivot = pm.selected()[-1]
     try:
@@ -292,6 +348,14 @@ def addToUserPivot(*args):
 
 
 def createRoot(*args):
+    """Create new root to organise the rig
+
+    Args:
+        *args: Maya Dummy
+
+    Returns:
+        dagNode: The group
+    """
     group = False
     dialog = NameUIDialog(getMayaWindow())
     dialog.exec_()
@@ -307,8 +371,9 @@ def createRoot(*args):
 # UI
 ###########################################
 class NameUIDialog(QtWidgets.QDialog):
+    """Ui dialog for names input
 
-
+    """
     def __init__(self, parent=None):
         super(NameUIDialog, self).__init__(parent)
         self.setWindowTitle('Name')
@@ -336,5 +401,7 @@ class NameUIDialog(QtWidgets.QDialog):
 
 
     def getName(self):
+        """Get the name of from the dialog
+        """
         self.rootName = st.removeInvalidCharacter(self.line.text())
         self.close()
