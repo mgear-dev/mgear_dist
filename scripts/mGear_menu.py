@@ -41,6 +41,9 @@ import mgear
 import mgear.maya.synoptic as syn
 import mgear.maya.skin as skin
 
+# simple rig
+import mgear.maya.simpleRig as srig
+
 #import rigbits
 import mgear.maya.rigbits as rigbits
 import mgear.maya.rigbits.postSpring as postSpring
@@ -78,6 +81,19 @@ def CreateMenu():
     pm.menuItem(label="Update Guide", command=partial(mGear_guidesTemplates.updateGuide))
 
 
+    pm.setParent(mGearM, menu=True)
+    pm.menuItem( divider=True )
+
+    #simple rig
+
+    pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Simple Rig')
+    pm.menuItem(label="Simple Rig Generate", command=partial(srig.simpleRig, "rig", False))
+    pm.menuItem( divider=True )
+    pm.menuItem(label="Create Root", command=partial(srig.createRoot))
+    pm.menuItem( divider=True )
+    pm.menuItem(label="Set User Pivot", command=partial(srig.setUserRigPivot))
+    pm.menuItem(label="Add To User Pivot", command=partial(srig.addToUserPivot))
+    pm.menuItem(label="Select Objects In User Pivot", command=partial(srig.selectObjectInUserRootPivot))
     pm.setParent(mGearM, menu=True)
     pm.menuItem( divider=True )
 
