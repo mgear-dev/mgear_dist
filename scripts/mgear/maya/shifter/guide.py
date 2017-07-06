@@ -810,6 +810,7 @@ class helperSlots(object):
 
     def updateSpinBox(self, sourceWidget, targetAttr, *args):
         self.root.attr(targetAttr).set(sourceWidget.value())
+        return True
 
     def updateSlider(self, sourceWidget, targetAttr, *args):
         self.root.attr(targetAttr).set(float(sourceWidget.value())/100)
@@ -1050,6 +1051,9 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
                 self.updateListAttr(sender, "preCustomStep")
             elif sender == self.customStepTab.postCustomStep_listWidget:
                 self.updateListAttr(sender, "postCustomStep")
+            return True
+        else:
+            return QtWidgets.QDialog.eventFilter(self, sender, event)
 
     # Slots ########################################################
 

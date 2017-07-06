@@ -1,4 +1,4 @@
-# MGEAR is under the terms of the MIT License
+    # MGEAR is under the terms of the MIT License
 
 # Copyright (c) 2016 Jeremie Passerin, Miquel Campos
 
@@ -222,6 +222,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
                 self.updateListAttr(sender, "upvrefarray")
             elif sender == self.settingsTab.pinRefArray_listWidget:
                 self.updateListAttr(sender, "pinrefarray")
+            return True
+        else:
+            return QtWidgets.QDialog.eventFilter(self, sender, event)
 
 
 

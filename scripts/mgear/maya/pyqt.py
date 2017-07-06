@@ -84,8 +84,6 @@ def showDialog(dialog, dInst=True, *args):
     # Delete the UI if errors occur to avoid causing winEvent
     # and event errors (in Maya 2014)
     try:
-        # windw.create()
-        # windw.show(dockable = True)
         windw.show()
     except:
         windw.deleteLater()

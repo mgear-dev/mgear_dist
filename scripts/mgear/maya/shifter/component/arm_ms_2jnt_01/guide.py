@@ -221,6 +221,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
                 self.updateListAttr(sender, "fkrefarray")
             elif sender == self.settingsTab.upvRefArray_listWidget:
                 self.updateListAttr(sender, "upvrefarray")
+            return True
+        else:
+            return QtWidgets.QDialog.eventFilter(self, sender, event)
 
 
     def dockCloseEventTriggered(self):

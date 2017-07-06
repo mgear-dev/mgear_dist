@@ -227,6 +227,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
                 self.updateListAttr(sender, "ikrefarray")
             elif sender == self.settingsTab.upvRefArray_listWidget:
                 self.updateListAttr(sender, "upvrefarray")
+            return True
+        else:
+            return QtWidgets.QDialog.eventFilter(self, sender, event)
 
 
 
