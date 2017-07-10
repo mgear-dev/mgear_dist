@@ -40,12 +40,13 @@ import maya.OpenMaya as OpenMaya
 # Vertex
 #############################################
 
-def getExtremeVertexFromLoop(edgeList=None):
+def getExtremeVertexFromLoop(edgeList=None, sideRange=False):
     """
     Get extreme vertex X and  Y, min and max positions from edge loop
 
     Args:
         edgeList (list): Edge list
+        sideRange (bool): If True will calculate the extreme position of Z instead of X
     Returns:
         list: upPos, lowPos, inPos, outPos, edgeList, vertexList
     """
@@ -67,22 +68,29 @@ def getExtremeVertexFromLoop(edgeList=None):
     lowPos = None
     inPos = None
     outPos = None
-
+    # index for X or Z
+    if sideRange:
+        axisIndex = 2
+    else:
+        axisIndex = 0
     for x in vertexList:
         pos = x.getPosition(space='world')
-        if maxX is None or pos[0] > maxX:
-            maxX = pos[0]
+        if maxX is None or pos[axisIndex] > maxX:
+            maxX = pos[axisIndex]
             outPos = x
         if maxY is None or pos[1] > maxY:
             maxY = pos[1]
             upPos = x
-        if minX is None or pos[0] < minX:
-            minX = pos[0]
+        if minX is None or pos[axisIndex] < minX:
+            minX = pos[axisIndex]
             inPos = x
         if minY is None or pos[1] < minY:
             minY = pos[1]
             lowPos = x
-    return upPos,lowPos,inPos,outPos, edgeList, vertexList
+    if sideRange:
+        return upPos,lowPos,outPos,inPos, edgeList, vertexList
+    else:
+        return upPos,lowPos,inPos,outPos, edgeList, vertexList
 
 
 def getConcentricVertexLoop(loop, nbLoops ):
@@ -217,7 +225,7 @@ def edgeRangeInLoopFromMid(edgeList, midPos, endA, endB):
         count +=1
         if count > 50:
             break
-    loopRange = midEdges + extremeEdges
+    loopRange = set(midEdges + extremeEdges)
     return loopRange
 
 
