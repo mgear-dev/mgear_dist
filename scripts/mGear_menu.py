@@ -24,6 +24,10 @@
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
 
+import os
+import sys
+import subprocess
+
 from functools import partial
 import pymel.core as pm
 
@@ -43,6 +47,16 @@ import mgear.maya.rigbits.postSpring as postSpring
 import mgear.maya.rigbits.rope as rope
 import mgear.maya.rigbits.proxySlicer as proxySlicer
 import mgear.maya.rigbits.utils as utils
+
+
+def openFile(file, *args):
+
+    if sys.platform.startswith('darwin'):
+        subprocess.call(('open', file))
+    elif os.name == 'nt':
+        os.startfile(file)
+    elif os.name == 'posix':
+        subprocess.call(('xdg-open', file))
 
 
 def CreateMenu():
@@ -150,8 +164,19 @@ def CreateMenu():
     pm.setParent(mGearM, menu=True)
     pm.menuItem( divider=True )
     utilM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Utilities')
-    pm.menuItem(label="reload", command=partial(mgear.reloadModule, "mgear"))
+    pm.menuItem(label="Reload", command=partial(mgear.reloadModule, "mgear"))
     pm.menuItem( divider=True )
     pm.menuItem(label="Compile PyQt ui", command=partial(utils.ui2py, None))
     pm.menuItem( divider=True )
     pm.menuItem(label="Create mGear Hotkeys", command=partial(utils.createHotkeys, None))
+
+    ## Help
+    pm.setParent(mGearM, menu=True)
+    pm.menuItem( divider=True )
+    helpM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Help')
+    pm.menuItem(label="Documentation", command=partial(openFile, "https://miquelcampos.github.io/mgear/"))
+    pm.menuItem(label="Release Log", command=partial(openFile, "https://miquelcampos.github.io/mgear/releaseLog.html"))
+    pm.menuItem( divider=True )
+    pm.menuItem(label="User Group", command=partial(openFile, "https://groups.google.com/forum/#!forum/mgearusergroup"))
+    pm.menuItem( divider=True )
+    pm.menuItem(label="GitHub", command=partial(openFile, "https://github.com/miquelcampos/mgear"))

@@ -351,6 +351,10 @@ class Rig(object):
 
         self.addToGroup(ctl, "controllers")
 
+        # Set the control shapes isHistoricallyInteresting
+        for oShape in ctl.getShapes():
+            oShape.isHistoricallyInteresting.set(False)
+
         return ctl
 
 
