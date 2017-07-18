@@ -22,11 +22,11 @@ ________________________________________________________________________________
     mGear have been used at Studio AKA for San Pellegrino ‘Dining By Starlight’. Rigged by Adam Avery
 
 Contributors (in alphabetical order):
-	- Akagi-san
-	- Gaetan Guidet
-	- Lior Ben Horin
-	- Miles Cheng
-	- Yamahigashi-san
+	- `Akagi-san <https://github.com/akiwoRM/>`_
+	- `Gaetan Guidet <https://github.com/gatgui/>`_
+	- `Lior Ben Horin <https://github.com/liorbenhorin/>`_
+	- `Matsumoto-san <https://github.com/yamahigashi>`_
+	- `Miles Cheng <https://github.com/milesckt/>`_
 
 .. note::
 

@@ -5,7 +5,7 @@ Release Log
 2.1.1
 -----
 **New Features**
-	* mGear solvers: New vertes position node.  This node gets the vertex position in worldspace.
+	* mGear solvers: New vertex position node.  This node gets the vertex position in worldspace.
 	* Rigbits: New rigging commont library with toos and functions to help the rigging system. This library is meant to be use with custom steps or other rigging tools.
 	* Shifter: Components: New  Components from Miles Cheng "arm_ms_2jnt_01", "shoulder_ms_2jnt_01" and "leg_ms_2jnt_01"
 	* Shifter: Components: New enviroment variable: MGEAR_SHIFTER_COMPONENT_PATH (only project components)
