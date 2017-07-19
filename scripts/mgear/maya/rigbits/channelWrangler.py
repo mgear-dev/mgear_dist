@@ -28,11 +28,17 @@ import mgear.maya.pyqt as gqt
 import mgear.maya.rigbits.channelWranglerUI as channelWranglerUI
 
 import pymel.core as pm
+import collections
+
 
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
+
+######################################################################
+## Dialog
+######################################################################
 
 class cwUI(QtWidgets.QDialog, channelWranglerUI.Ui_Form):
 
@@ -78,6 +84,57 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.setLayout(self.cw_layout)
 
 
+
+######################################################################
+## Functions
+######################################################################
+
+
+# apply the channel configuration from a dictionary
+def _applyChannelConfig():
+    return
+
+# apply the configuration stored in a  json file. This will be to use outside the interface
+def applyChannelConfigFromFile():
+    return
+
+# apply the current configuration in the dialog
+def applyChannelConfig():
+    return
+
+# move the channel and  connect  (is WIP)
+# posible test
+# for at in ["arm_C0_maxstretch", "arm_C0_slide", "arm_C0_blend", "arm_C0_upvref"]:
+
+#     moveChannel(at, "global_C0_ctl", "pCube1")
+def moveChannel(attr, sourceNode, targetNode):
+
+    if isinstance(sourceNode, str):
+        sourceNode = pm.PyNode(sourceNode)
+    if isinstance(targetNode, str):
+        targetNode = pm.PyNode(targetNode)
+
+    at = sourceNode.attr(attr)
+    atType =  at.type()
+    if atType in ["double", "enum"]:
+        outcnx = at.listConnections(p=True)
+        value = at.get()
+        if atType == "double":
+            min = at.getMin()
+            max = at.getMax()
+            pm.addAttr(targetNode, ln=attr, at="double", min=min, max=max, dv=value, k=True)
+        elif atType == "enum":
+            en = at.getEnums()
+            oEn = collections.OrderedDict(sorted(en.items(), key=lambda t: t[1]))
+            enStr = ":".join([n for n in oEn])
+            pm.addAttr(targetNode, ln=attr, at="enum", en=enStr, dv=value, k=True)
+        newAtt = pm.PyNode(".".join([targetNode.name(), attr]))
+        for cnx in outcnx:
+            pm.connectAttr(newAtt, cnx, f=True)
+        pm.deleteAttr(at)
+
+    else:
+        pm.displayWarning("MoveChannel function can't handle an attribure of type: %s"%atType)
 
 
 
