@@ -797,6 +797,7 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         self.create_layout()
         self.create_connections()
 
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
     def create_controls(self):
         """

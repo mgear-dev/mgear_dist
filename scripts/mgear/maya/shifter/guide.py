@@ -918,6 +918,8 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.create_layout()
         self.create_connections()
 
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+
     def setup_SettingWindow(self):
         self.mayaMainWindow = gqt.maya_main_window()
 
