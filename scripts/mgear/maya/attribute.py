@@ -529,3 +529,44 @@ class enumParamDef(ParamDef):
         attr_name = addEnumAttribute(node, self.scriptName, enum=self.enum, value=self.value)
 
         return node, attr_name
+
+
+##########################################################
+# GETTERS
+##########################################################
+# ========================================================
+
+def getSelectedChannels(userDefine=False):
+    """Get the selected channels on the channel box
+
+    Args:
+        userDefine (bool, optional): If True, will return only the user defined channels. Other channels will be skipped.
+
+    Returns:
+        list: The list of selected channels names
+    """
+    channelBox = pm.mel.eval('global string $gChannelBoxName; $temp=$gChannelBoxName;') #fetch maya's main channelbox
+    attrs = pm.channelBox(channelBox, q=True, sma=True)
+    if userDefine:
+        oSel = pm.selected()[0]
+        uda = oSel.listAttr(ud=True)
+        attrs = [x for x in attrs if oSel.attr(x)  in uda]
+
+    return attrs
+
+def getSelectedObjectChannels(oSel=None, userDefine=False):
+    """Get the selected object channels.
+
+    Args:
+        oSel (None, optional): The  pynode with channels to get
+        userDefine (bool, optional): If True, will return only the user defined channels. Other channels will be skipped.
+
+    Returns:
+        list: The list of the selected object channels names
+    """
+    if not oSel:
+        oSel = pm.selected()[0]
+
+    channels = [x.name().rsplit(".", 1)[1] for x in oSel.listAttr(ud=True)]
+
+    return channels
