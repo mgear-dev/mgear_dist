@@ -37,6 +37,56 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
 ######################################################################
+## Functions
+######################################################################
+
+
+# apply the channel configuration from a dictionary
+def _applyChannelConfig():
+    return
+
+# apply the configuration stored in a  json file. This will be to use outside the interface
+def applyChannelConfig(filePath):
+    return
+
+
+# move the channel and  connect  (is WIP)
+# posible test
+# for at in ["arm_C0_maxstretch", "arm_C0_slide", "arm_C0_blend", "arm_C0_upvref"]:
+
+#     moveChannel(at, "global_C0_ctl", "pCube1")
+def moveChannel(attr, sourceNode, targetNode):
+
+    if isinstance(sourceNode, str):
+        sourceNode = pm.PyNode(sourceNode)
+    if isinstance(targetNode, str):
+        targetNode = pm.PyNode(targetNode)
+
+    at = sourceNode.attr(attr)
+    atType =  at.type()
+    if atType in ["double", "enum"]:
+        outcnx = at.listConnections(p=True)
+        value = at.get()
+        if atType == "double":
+            min = at.getMin()
+            max = at.getMax()
+            pm.addAttr(targetNode, ln=attr, at="double", min=min, max=max, dv=value, k=True)
+        elif atType == "enum":
+            en = at.getEnums()
+            oEn = collections.OrderedDict(sorted(en.items(), key=lambda t: t[1]))
+            enStr = ":".join([n for n in oEn])
+            pm.addAttr(targetNode, ln=attr, at="enum", en=enStr, dv=value, k=True)
+        newAtt = pm.PyNode(".".join([targetNode.name(), attr]))
+        for cnx in outcnx:
+            pm.connectAttr(newAtt, cnx, f=True)
+        pm.deleteAttr(at)
+
+    else:
+        pm.displayWarning("MoveChannel function can't handle an attribure of type: %s"%atType)
+
+
+
+######################################################################
 ## Dialog
 ######################################################################
 
@@ -83,60 +133,76 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
         self.setLayout(self.cw_layout)
 
+    # set the row item
+    def _setRowItem(self, row, itemIndex):
+        return
+
+    # the source is set at the same time as the channel
+    def _setRowChannel(self, row, channel, source):
+        return
+
+    def _setRowTarget(self, row, target):
+        return
 
 
-######################################################################
-## Functions
-######################################################################
+    def _addNewRow(self, channel=None, source=None, target=None):
+        row = "need to be implemented"
+        if channel and source:
+            self._setRowChannel(row, channel, source)
+        return
+
+    # clear the list of rows
+    def _clearRows(self):
+        return
 
 
-# apply the channel configuration from a dictionary
-def _applyChannelConfig():
-    return
+    #SLOTS
+    #buttons
+    def populateChannelLineEdit(self):
+        return
 
-# apply the configuration stored in a  json file. This will be to use outside the interface
-def applyChannelConfigFromFile():
-    return
+    def populateTargetLineEdit(self):
+        return
 
-# apply the current configuration in the dialog
-def applyChannelConfig():
-    return
+    # sets a new row with the information on the channel and target lineEdit
+    def setRow(self):
+        return
 
-# move the channel and  connect  (is WIP)
-# posible test
-# for at in ["arm_C0_maxstretch", "arm_C0_slide", "arm_C0_blend", "arm_C0_upvref"]:
+    # sets new rows from the selectec channels. 1 channel for each row.
+    def setMultiChannel(self):
+        return
 
-#     moveChannel(at, "global_C0_ctl", "pCube1")
-def moveChannel(attr, sourceNode, targetNode):
+    # set the target colum for the selected rows
+    # if only one object is selected will populate all the rows with the same object
+    # if there is more that one object selected, will iterate the selection adding one object to each row
+    def setMultyTarget(self):
+        return
 
-    if isinstance(sourceNode, str):
-        sourceNode = pm.PyNode(sourceNode)
-    if isinstance(targetNode, str):
-        targetNode = pm.PyNode(targetNode)
+    # populate new rows with all the user defined parameters from the selected objects
+    def autoPopulate(self):
+        return
 
-    at = sourceNode.attr(attr)
-    atType =  at.type()
-    if atType in ["double", "enum"]:
-        outcnx = at.listConnections(p=True)
-        value = at.get()
-        if atType == "double":
-            min = at.getMin()
-            max = at.getMax()
-            pm.addAttr(targetNode, ln=attr, at="double", min=min, max=max, dv=value, k=True)
-        elif atType == "enum":
-            en = at.getEnums()
-            oEn = collections.OrderedDict(sorted(en.items(), key=lambda t: t[1]))
-            enStr = ":".join([n for n in oEn])
-            pm.addAttr(targetNode, ln=attr, at="enum", en=enStr, dv=value, k=True)
-        newAtt = pm.PyNode(".".join([targetNode.name(), attr]))
-        for cnx in outcnx:
-            pm.connectAttr(newAtt, cnx, f=True)
-        pm.deleteAttr(at)
+    # clear selected rows
+    def clearSelectedRows(self):
+        return
 
-    else:
-        pm.displayWarning("MoveChannel function can't handle an attribure of type: %s"%atType)
+    # clear all the rows
+    def clearAllRows(self):
+        return
 
+    # export channelWrangler configuration
+    def exportConfig(self):
+        return
+
+    # import channel wrangler configuration
+    def importConfig(self):
+        return
+
+    # apply the current configuration in the dialog
+    def applyChannelConfig(self):
+        return
 
 
+####################################
 if __name__ == "__main__":
     gqt.showDialog(channelWrangler)
