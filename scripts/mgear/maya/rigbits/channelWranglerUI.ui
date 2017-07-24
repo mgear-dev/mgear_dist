@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>707</width>
-    <height>524</height>
+    <width>832</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,6 +38,11 @@
          <property name="cornerButtonEnabled">
           <bool>false</bool>
          </property>
+         <column>
+          <property name="text">
+           <string>Idx</string>
+          </property>
+         </column>
          <column>
           <property name="text">
            <string>Channel</string>
@@ -191,26 +196,6 @@
         </widget>
        </item>
        <item>
-        <widget class="Line" name="line_3">
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="lineWidth">
-          <number>2</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="autoPopulate_pushButton">
-         <property name="text">
-          <string>Auto Populate</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="Line" name="line_2">
          <property name="frameShadow">
           <enum>QFrame::Plain</enum>
@@ -235,6 +220,103 @@
          <property name="text">
           <string>Clear All</string>
          </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line_4">
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="setMoveOp_pushButton">
+         <property name="text">
+          <string>Set Move Operation</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="setProxyOp_pushButton">
+         <property name="text">
+          <string>Set Proxy Operation</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line_5">
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>Move Duplicated Channel Policy</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QComboBox" name="movePolicy_comboBox">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the duplicate channel policy when we use proxy channel operation.&lt;/p&gt;&lt;p&gt;-&lt;span style=&quot; font-weight:600;&quot;&gt;Merge&lt;/span&gt;: If the channel is already in the target object the new channel creationg will be skipped and the output channels will be reconnected to the previous existing channel&lt;/p&gt;&lt;p&gt;-&lt;span style=&quot; font-weight:600;&quot;&gt;Index&lt;/span&gt;: If the channel is already in the target object, the new proxy channel will add an index number to avoid the name clashing.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;example:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;&amp;quot;ik_fk_blend&amp;quot; will be renamed &amp;quot;ik_fk_blend0&amp;quot;, &amp;quot;ik_fk_blend1&amp;quot;,&amp;quot;ik_fk_blend2&amp;quot;, etc...&lt;/span&gt;&lt;/p&gt;&lt;p&gt;-&lt;span style=&quot; font-weight:600;&quot;&gt;Full Name&lt;/span&gt;: If the channel is already in the target object, the new channel will be renamed using the source node name as a prefix&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Merge</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Index</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Full Name</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Proxy Duplicated Channel Policy</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QComboBox" name="proxyPolicy_comboBox">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the duplicate channel policy when we use proxy channel operation.&lt;/p&gt;&lt;p&gt;-&lt;span style=&quot; font-weight:600;&quot;&gt;Index&lt;/span&gt;: If the channel is already in the target object, the new proxy channel will add an index number to avoid the name clashing.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;example:&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;&amp;quot;ik_fk_blend&amp;quot; will be renamed &amp;quot;ik_fk_blend0&amp;quot;, &amp;quot;ik_fk_blend1&amp;quot;,&amp;quot;ik_fk_blend2&amp;quot;, etc...&lt;/span&gt;&lt;/p&gt;&lt;p&gt;-&lt;span style=&quot; font-weight:600;&quot;&gt;Full Name&lt;/span&gt;: If the channel is already in the target object, the new channel will be renamed using the source node name as a prefix&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>Index</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Full Name</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>

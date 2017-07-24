@@ -25,10 +25,10 @@
 # Date:       2016 / 10 / 10
 
 import mgear.maya.pyqt as gqt
+import mgear.maya.attribute as att
 import mgear.maya.rigbits.channelWranglerUI as channelWranglerUI
 
 import pymel.core as pm
-import collections
 
 
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
@@ -42,48 +42,28 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
 # apply the channel configuration from a dictionary
-def _applyChannelConfig():
-    return
+def _applyChannelConfig(configDic):
+    tableMap = configDic["map"]
+    movePolicy = configDic["movePolicy"]
+    proxyPolicy = configDic["proxyPolicy"]
+    for rule in tableMap:
+        attr = rule[0]
+        sourceNode = rule[1]
+        targetNode = rule[2]
+        option = rule[3]
+        # proxy
+        if option:
+            node = pm.PyNode(sourceNode)
+            sourceAttrs = node.attr(attr)
+            target = pm.PyNode(targetNode)
+            att.addProxyAttribute(sourceAttrs, target,  proxyPolicy)
+        # move
+        else:
+            att.moveChannel(attr, sourceNode, targetNode, movePolicy)
 
 # apply the configuration stored in a  json file. This will be to use outside the interface
 def applyChannelConfig(filePath):
     return
-
-
-# move the channel and  connect  (is WIP)
-# posible test
-# for at in ["arm_C0_maxstretch", "arm_C0_slide", "arm_C0_blend", "arm_C0_upvref"]:
-
-#     moveChannel(at, "global_C0_ctl", "pCube1")
-def moveChannel(attr, sourceNode, targetNode):
-
-    if isinstance(sourceNode, str):
-        sourceNode = pm.PyNode(sourceNode)
-    if isinstance(targetNode, str):
-        targetNode = pm.PyNode(targetNode)
-
-    at = sourceNode.attr(attr)
-    atType =  at.type()
-    if atType in ["double", "enum"]:
-        outcnx = at.listConnections(p=True)
-        value = at.get()
-        if atType == "double":
-            min = at.getMin()
-            max = at.getMax()
-            pm.addAttr(targetNode, ln=attr, at="double", min=min, max=max, dv=value, k=True)
-        elif atType == "enum":
-            en = at.getEnums()
-            oEn = collections.OrderedDict(sorted(en.items(), key=lambda t: t[1]))
-            enStr = ":".join([n for n in oEn])
-            pm.addAttr(targetNode, ln=attr, at="enum", en=enStr, dv=value, k=True)
-        newAtt = pm.PyNode(".".join([targetNode.name(), attr]))
-        for cnx in outcnx:
-            pm.connectAttr(newAtt, cnx, f=True)
-        pm.deleteAttr(at)
-
-    else:
-        pm.displayWarning("MoveChannel function can't handle an attribure of type: %s"%atType)
-
 
 
 ######################################################################
@@ -104,17 +84,20 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
         super(self.__class__, self).__init__(parent = parent)
         self.cwUIInst = cwUI()
-        self.headerTable = self.cwUIInst.channelMapping_tableWidget.horizontalHeader()
+        self.table = self.cwUIInst.channelMapping_tableWidget
+        self.headerTable = self.table.horizontalHeader()
         # we try setSectionResizeMode for Pyside2 if attributeError setResizeMode for PySide
-        try:
-            self.headerTable.setSectionResizeMode(0,  QtWidgets.QHeaderView.Stretch)
-        except AttributeError:
-            self.headerTable.setResizeMode(0,  QtWidgets.QHeaderView.Stretch)
-
+        for i in [1, 4]:
+            try:
+                self.headerTable.setSectionResizeMode(i,  QtWidgets.QHeaderView.Stretch)
+                self.headerTable.setSectionResizeMode(0,  QtWidgets.QHeaderView.ResizeToContents)
+            except AttributeError:
+                self.headerTable.setResizeMode(i,  QtWidgets.QHeaderView.Stretch)
+                self.headerTable.setResizeMode(0,  QtWidgets.QHeaderView.ResizeToContents)
 
         self.setup_channelWranglerWindow()
         self.create_layout()
-        # self.create_connections()
+        self.create_connections()
 
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
@@ -133,74 +116,147 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
         self.setLayout(self.cw_layout)
 
+    ###########################
+    #create connections SIGNALS
+    ###########################
+    def create_connections(self):
+        self.cwUIInst.channel_pushButton.clicked.connect(self.populateChannelLineEdit)
+        self.cwUIInst.target_pushButton.clicked.connect(self.populateTargetLineEdit)
+        self.cwUIInst.setRow_pushButton.clicked.connect(self.setRow)
+        self.cwUIInst.setMultiChannel_pushButton.clicked.connect(self.setMultiChannel)
+        self.cwUIInst.setMultiTarget_pushButton.clicked.connect(self.setMultiTarget)
+        self.cwUIInst.clearAll_pushButton.clicked.connect(self.clearAllRows)
+        self.cwUIInst.clearSelectedRows_pushButton.clicked.connect(self.clearSelectedRows)
+
+    ##################
+    # helper functions
+    ##################
     # set the row item
-    def _setRowItem(self, row, itemIndex):
-        return
+    def _setRowItem(self, table, rowPosition, itemIndex, itemContent):
+        item = QtWidgets.QTableWidgetItem(itemContent)
+        table.setItem(rowPosition , itemIndex, item)
+        return item
 
     # the source is set at the same time as the channel
-    def _setRowChannel(self, row, channel, source):
+    def _setRowChannel(self, table, rowPosition, channel, source):
+        self._setRowItem(table, rowPosition, 0, str(rowPosition).zfill(3))
+        self._setRowItem(table, rowPosition, 1, channel)
+        self._setRowItem(table, rowPosition, 2, source)
         return
 
-    def _setRowTarget(self, row, target):
+    def _setRowTarget(self, table, rowPosition, target):
+        self._setRowItem(table, rowPosition, 3, target)
         return
 
 
     def _addNewRow(self, channel=None, source=None, target=None):
-        row = "need to be implemented"
+        table = self.table
+        rowPosition = table.rowCount()
+        table.insertRow(rowPosition)
         if channel and source:
-            self._setRowChannel(row, channel, source)
+            self._setRowChannel(table, rowPosition, channel, source)
+        if target:
+            self._setRowTarget(table, rowPosition, target)
+
+        # adding the operation combo box
+        operation_comboBox = QtWidgets.QComboBox()
+        operation_comboBox.setObjectName("operation")
+        operation_comboBox.addItem("Move Channel")
+        operation_comboBox.addItem("Proxy Channel")
+        operation_comboBox.SizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContentsOnFirstShow)
+        table.setCellWidget(rowPosition, 4, operation_comboBox)
+        return rowPosition
+
+    # build the config dictionary from the UI data
+    def _buildConfigDict(self):
         return
 
-    # clear the list of rows
-    def _clearRows(self):
-        return
-
-
+    ###########################
     #SLOTS
+    ###########################
     #buttons
     def populateChannelLineEdit(self):
-        return
+        oSel = pm.selected()[0]
+        chan = att.getSelectedChannels(True)[0]
+        self.cwUIInst.channel_lineEdit.setText("{}.{}".format(oSel.name(), chan))
 
     def populateTargetLineEdit(self):
-        return
+        oSel = pm.selected()[0]
+        self.cwUIInst.target_lineEdit.setText(oSel.name())
 
     # sets a new row with the information on the channel and target lineEdit
     def setRow(self):
-        return
+        fullChanName = self.cwUIInst.channel_lineEdit.text()
+        if fullChanName:
+            sourceName, chanName = fullChanName.split(".")
+        targetName = self.cwUIInst.target_lineEdit.text()
+        #TODO: checker for the new rule, be sure is not duplicated
+        self._addNewRow(chanName, sourceName, targetName)
 
     # sets new rows from the selectec channels. 1 channel for each row.
     def setMultiChannel(self):
-        return
+        oSel = pm.selected()[0]
+        if oSel:
+            channels = att.getSelectedChannels(True)
+            if not channels:
+                channels = att.getSelectedObjectChannels(oSel, True, True)
+            for ch in channels:
+                self._addNewRow(ch, oSel.name(), oSel.name())
 
     # set the target colum for the selected rows
     # if only one object is selected will populate all the rows with the same object
     # if there is more that one object selected, will iterate the selection adding one object to each row
-    def setMultyTarget(self):
-        return
-
-    # populate new rows with all the user defined parameters from the selected objects
-    def autoPopulate(self):
+    def setMultiTarget(self):
+        #first ge if we have rows selected:
+        rows = sorted(set(item.row() for item in self.table.selectedItems()))
+        print len(rows)
+        #
         return
 
     # clear selected rows
     def clearSelectedRows(self):
-        return
+
+        index_list = []
+        for model_index in self.table.selectionModel().selectedRows():
+            index = QtCore.QPersistentModelIndex(model_index)
+            index_list.append(index)
+
+        for index in index_list:
+            # self.model.removeRow(index.row())
+            self.table.removeRow(index.row())
 
     # clear all the rows
     def clearAllRows(self):
-        return
+        for i in reversed(range(self.table.rowCount())):
+            self.table.removeRow(i)
 
     # export channelWrangler configuration
     def exportConfig(self):
+        configDict = self._buildConfigDict()
         return
 
     # import channel wrangler configuration
     def importConfig(self):
+        # TODO: if import dict ask to add to the current configuration or replace.
+        # also ask for proxy and move policy if is not the same when we add to the current list
+        # checker to avoid a double configuration in several rows
         return
 
     # apply the current configuration in the dialog
     def applyChannelConfig(self):
+        configDict = self._buildConfigDict()
         return
+
+    def _setOperator(self, operator):
+        #TODO: set the operator comboBox  to move or proxy
+        # if nothing selected will apply it to all the rows
+        return
+
+    def setMoveOperator(self):
+        self._setOperator(0)
+
+    def setProxyOperator(self):
+        self._setOperator(1)
 
 
 ####################################

@@ -28,36 +28,42 @@
 import unittest
 import pymel.core as pm
 import mgear.maya.rigbits.channelWrangler as cw
+import mgear.maya.attribute as att
 
 
 class cwTestCase(unittest.TestCase):
 
     def setUp(self):
+        self.config = { "movePolicy":"merge",
+                        "proxyPolicy":"index",
+                        "map":[ ["shoulder_ik", "armUI_R0_ctl", "armUI_L0_ctl", 0],
+                                ["shoulder_rotRef", "armUI_R0_ctl", "armUI_L0_ctl", 0],
+                                ["shoulder_rotRef", "armUI_R1_ctl", "armUI_L0_ctl", 0]]}
 
-        self.testName = self.shortDescription()
-        if (self.testName == "move channel"):
-            pm.displayInfo("Running: {}".format(self.testName))
-            self.pcs = pm.polyCube(n="pCube_source")
-            self.pct = pm.polyCube(n="pCube_target")
-            self.chanName = "bla"
-            pm.addAttr( self.pcs[0], ln=self.chanName, type="double", min=0, max=1)
-        else:
-            pm.displayWarning("UNKNOWN TEST ROUTINE: {}".format(self.testName))
+        self.pcs = pm.polyCube(n="armUI_R0_ctl")
+        self.pcs2 = pm.polyCube(n="armUI_R1_ctl")
+        self.pct = pm.polyCube(n="armUI_L0_ctl")
+        att.addAttribute(self.pcs[0], "shoulder_ik", "double", 0, minValue=0, maxValue=1 )
+        ch2 = att.addAttribute(self.pcs[0], "shoulder_rotRef", "double", 0, minValue=0, maxValue=1 )
+        ch3 = att.addAttribute(self.pcs2[0], "shoulder_rotRef", "double", 0, minValue=0, maxValue=1 )
+        pm.connectAttr(ch2, self.pcs[0].ty)
+        pm.connectAttr(ch3, self.pcs2[0].ty)
 
 
     def tearDown(self):
-        if (self.testName == "move channel"):
-            pm.delete(self.pcs)
-            pm.delete(self.pct)
+        return
+        pm.delete(self.pcs)
+        pm.delete(self.pct)
+
+    def test_applyChannelConfig(self):
+        self.assertIsNone(cw._applyChannelConfig(self.config))
+
+    # def test_applyChannelConfigFromFile(self):
+    #     filePath = ""
+    #     self.assertIsNone(cw.applyChannelConfig(filePath))
 
 
-    def test_moveChannel(self):
-        """move channel
-        """
-        self.assertIsNone(cw.moveChannel(self.chanName,  self.pcs[0],  self.pct[0]))
 
-    def test_proxyChannel(self):
-        print "lol"
 
 if __name__=='__main__':
     unittest.main(exit=False)
