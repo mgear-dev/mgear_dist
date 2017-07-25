@@ -71,7 +71,12 @@ def getSkinCluster(obj):
 
             for shape in obj.getShapes():
                 try:
-                    skinCluster = pm.listHistory(shape, type="skinCluster")[0]
+                    for skC in pm.listHistory(shape, type="skinCluster"):
+                        try:
+                            if skC.getGeometry()[0] == shape:
+                                skinCluster = skC
+                        except:
+                            pass
                 except:
                     pass
     except:
