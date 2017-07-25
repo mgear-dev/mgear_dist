@@ -37,7 +37,7 @@ class Ui_Form(object):
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.channelMapping_tableWidget = QtWidgets.QTableWidget(Form)
+        self.channelMapping_tableWidget = TableWidgetDragRowsChannelWrangler(Form)
         self.channelMapping_tableWidget.setDragDropMode(QtWidgets.QAbstractItemView.InternalMove)
         self.channelMapping_tableWidget.setDefaultDropAction(QtCore.Qt.MoveAction)
         self.channelMapping_tableWidget.setAlternatingRowColors(True)
@@ -224,3 +224,4 @@ class Ui_Form(object):
         self.proxyPolicy_comboBox.setItemText(0, gqt.fakeTranslate("Form", "Index", None, -1))
         self.proxyPolicy_comboBox.setItemText(1, gqt.fakeTranslate("Form", "Full Name", None, -1))
 
+from mgear.maya.rigbits.widgets import TableWidgetDragRowsChannelWrangler

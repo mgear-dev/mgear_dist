@@ -36,7 +36,8 @@ class attribute_moveChannel_TestCase(unittest.TestCase):
     """
     def setUp(self):
         self.testName = self.shortDescription()
-        if (self.testName in ["move_channel", "move_channel_index", "move_channel_fullName", "move_channel_merge", "proxy_channel"]):
+        if (self.testName in [  "move_channel", "move_channel_index", "move_channel_fullName",
+                                "move_channel_merge", "proxy_channel"]):
             pm.displayInfo("Running: {}".format(self.testName))
             self.pcs = pm.polyCube(n="pCube_source")
             self.pcs2 = pm.polyCube(n="pCube_source2")

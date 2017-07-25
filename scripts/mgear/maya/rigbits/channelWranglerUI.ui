@@ -19,7 +19,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QTableWidget" name="channelMapping_tableWidget">
+        <widget class="TableWidgetDragRowsChannelWrangler" name="channelMapping_tableWidget">
          <property name="dragDropMode">
           <enum>QAbstractItemView::InternalMove</enum>
          </property>
@@ -338,6 +338,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TableWidgetDragRowsChannelWrangler</class>
+   <extends>QTableWidget</extends>
+   <header>mgear.maya.rigbits.channelWrangler</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

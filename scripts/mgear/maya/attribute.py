@@ -242,6 +242,8 @@ def moveChannel(attr, sourceNode, targetNode, duplicatedPolicy=None):
     Duplicated channel policy, stablish the rule in case the channel already
     exist on the target.
 
+    NOTE: For the moment move channel only supports type double and enum
+
     Duplicate policy options
 
     ================    =================================================================
@@ -299,7 +301,9 @@ def moveChannel(attr, sourceNode, targetNode, duplicatedPolicy=None):
             newAtt = pm.PyNode(".".join([targetNode.name(), attrName]))
         for cnx in outcnx:
             pm.connectAttr(newAtt, cnx, f=True)
-        pm.deleteAttr(at)
+
+        if sourceNode.name() != targetNode.name():
+            pm.deleteAttr(at)
 
     else:
         pm.displayWarning("MoveChannel function can't handle an attribute of type: %s. Only supported 'double' adn 'enum' types."%atType)

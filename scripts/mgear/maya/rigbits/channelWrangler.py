@@ -76,6 +76,7 @@ class cwUI(QtWidgets.QDialog, channelWranglerUI.Ui_Form):
         super(cwUI, self).__init__(parent)
         self.setupUi(self)
 
+
 class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
     valueChanged = QtCore.Signal(int)
 
@@ -127,36 +128,53 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.cwUIInst.setMultiTarget_pushButton.clicked.connect(self.setMultiTarget)
         self.cwUIInst.clearAll_pushButton.clicked.connect(self.clearAllRows)
         self.cwUIInst.clearSelectedRows_pushButton.clicked.connect(self.clearSelectedRows)
+        self.cwUIInst.setMoveOp_pushButton.clicked.connect(self.setMoveOperator)
+        self.cwUIInst.setProxyOp_pushButton.clicked.connect(self.setProxyOperator)
+        self.cwUIInst.apply_pushButton.clicked.connect(self.applyChannelConfig)
 
     ##################
     # helper functions
     ##################
     # set the row item
-    def _setRowItem(self, table, rowPosition, itemIndex, itemContent):
+    def _setRowItem(self, rowPosition, itemIndex, itemContent):
         item = QtWidgets.QTableWidgetItem(itemContent)
-        table.setItem(rowPosition , itemIndex, item)
+        self.table.setItem(rowPosition , itemIndex, item)
         return item
 
     # the source is set at the same time as the channel
-    def _setRowChannel(self, table, rowPosition, channel, source):
-        self._setRowItem(table, rowPosition, 0, str(rowPosition).zfill(3))
-        self._setRowItem(table, rowPosition, 1, channel)
-        self._setRowItem(table, rowPosition, 2, source)
+    def _setRowChannel(self, rowPosition, channel, source):
+        self._setRowItem(rowPosition, 0, str(rowPosition).zfill(3))
+        self._setRowItem(rowPosition, 1, channel)
+        self._setRowItem(rowPosition, 2, source)
         return
 
-    def _setRowTarget(self, table, rowPosition, target):
-        self._setRowItem(table, rowPosition, 3, target)
-        return
+    def _setRowTarget(self, rowPosition, target):
+        """Set the row target item
+
+        Args:
+            rowPosition (int): The row position index
+            target (int): the target item index
+        """
+        self._setRowItem(rowPosition, 3, target)
 
 
     def _addNewRow(self, channel=None, source=None, target=None):
-        table = self.table
-        rowPosition = table.rowCount()
-        table.insertRow(rowPosition)
+        """Add new row to the table
+
+        Args:
+            channel (str, optional): The channel to add to the table.
+            source (str, optional): The source node that has the channel to move.
+            target (str, optional): The destionation node for the channel.
+
+        Returns:
+            int: The row position index
+        """
+        rowPosition = self.table.rowCount()
+        self.table.insertRow(rowPosition)
         if channel and source:
-            self._setRowChannel(table, rowPosition, channel, source)
+            self._setRowChannel(rowPosition, channel, source)
         if target:
-            self._setRowTarget(table, rowPosition, target)
+            self._setRowTarget(rowPosition, target)
 
         # adding the operation combo box
         operation_comboBox = QtWidgets.QComboBox()
@@ -164,12 +182,47 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         operation_comboBox.addItem("Move Channel")
         operation_comboBox.addItem("Proxy Channel")
         operation_comboBox.SizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContentsOnFirstShow)
-        table.setCellWidget(rowPosition, 4, operation_comboBox)
+        self.table.setCellWidget(rowPosition, 4, operation_comboBox)
         return rowPosition
 
-    # build the config dictionary from the UI data
+    def _getSelectedRowsIndex(self):
+        """Return a list with the selected rows index
+
+        Returns:
+            List: Selected rows index list
+        """
+        index_list = []
+        for model_index in self.table.selectionModel().selectedRows():
+            index = QtCore.QPersistentModelIndex(model_index)
+            index_list.append(index)
+
+        return index_list
+
+
     def _buildConfigDict(self):
-        return
+        """build the config dictionary from the UI data
+
+        Returns:
+            dic: The channel wrangler map configuration dictionary
+        """
+        configDict = {}
+        mapList = []
+
+        # this list will contain only the 3 main items list to avoid duplicated rules
+        checkDuplicatedList = []
+
+        for i in reversed(range(self.table.rowCount())):
+            checkItems  = [self.table.item(i , x+1).text() for x in range(3)]
+            if checkItems not in checkDuplicatedList:
+                checkDuplicatedList.append(checkItems)
+                rowItems = checkItems + [self.table.cellWidget(i, 4).currentIndex()]
+                mapList.append(rowItems)
+
+        configDict["map"] = mapList
+        configDict["movePolicy"]= ["merge", "index", "fullName"][self.cwUIInst.movePolicy_comboBox.currentIndex()]
+        configDict["proxyPolicy"]= ["index", "fullName"][self.cwUIInst.proxyPolicy_comboBox.currentIndex()]
+        return configDict
+
 
     ###########################
     #SLOTS
@@ -195,45 +248,57 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
 
     # sets new rows from the selectec channels. 1 channel for each row.
     def setMultiChannel(self):
-        oSel = pm.selected()[0]
+        oSel = pm.selected()
         if oSel:
             channels = att.getSelectedChannels(True)
             if not channels:
-                channels = att.getSelectedObjectChannels(oSel, True, True)
+                channels = att.getSelectedObjectChannels(oSel[0], True, True)
             for ch in channels:
-                self._addNewRow(ch, oSel.name(), oSel.name())
+                self._addNewRow(ch, oSel[0].name(), oSel[0].name())
+        else:
+            pm.displayWarning("To set the source, you need to select at  one source object")
 
     # set the target colum for the selected rows
     # if only one object is selected will populate all the rows with the same object
     # if there is more that one object selected, will iterate the selection adding one object to each row
     def setMultiTarget(self):
-        #first ge if we have rows selected:
-        rows = sorted(set(item.row() for item in self.table.selectedItems()))
-        print len(rows)
-        #
-        return
+        oSel = pm.selected()
+        index_list = self._getSelectedRowsIndex()
+
+        if len(oSel) > 1:
+            if index_list:
+                for index, obj in zip(index_list, oSel):
+                    self._setRowTarget(index.row(), obj.name())
+        elif len(oSel) == 1:
+            if index_list:
+                for index in index_list:
+                    self._setRowTarget(index.row(), oSel[0].name())
+            else:
+                for i in reversed(range(self.table.rowCount())):
+                    self._setRowTarget(i, oSel[0].name())
+        else:
+            pm.displayWarning("To set the target, you need to select at less one target object")
 
     # clear selected rows
     def clearSelectedRows(self):
-
-        index_list = []
-        for model_index in self.table.selectionModel().selectedRows():
-            index = QtCore.QPersistentModelIndex(model_index)
-            index_list.append(index)
-
+        """Clear selected rows from the table
+        """
+        index_list = self._getSelectedRowsIndex()
         for index in index_list:
-            # self.model.removeRow(index.row())
             self.table.removeRow(index.row())
+
 
     # clear all the rows
     def clearAllRows(self):
         for i in reversed(range(self.table.rowCount())):
             self.table.removeRow(i)
 
+
     # export channelWrangler configuration
     def exportConfig(self):
         configDict = self._buildConfigDict()
         return
+
 
     # import channel wrangler configuration
     def importConfig(self):
@@ -242,21 +307,60 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         # checker to avoid a double configuration in several rows
         return
 
+
     # apply the current configuration in the dialog
     def applyChannelConfig(self):
-        configDict = self._buildConfigDict()
-        return
+        with pm.UndoChunk():
+            configDict = self._buildConfigDict()
+            #TODO add checker to avoid error if the datas is not found in the scene
+            for rule in configDict["map"]:
+                # proxy
+                if rule[3]:
+                    source = pm.PyNode("{}.{}".format(rule[1], rule[0]))
+                    target = pm.PyNode(rule[2])
+                    att.addProxyAttribute(source,  target, configDict["proxyPolicy"])
+                #move
+                else:
+                    source = pm.PyNode(rule[1])
+                    target = pm.PyNode(rule[2])
+                    att.moveChannel( rule[0], source,  target, configDict["movePolicy"])
+
 
     def _setOperator(self, operator):
-        #TODO: set the operator comboBox  to move or proxy
-        # if nothing selected will apply it to all the rows
-        return
+        """set the channel wrangle operator
+
+        =====   ======================
+        index   Operation
+        =====   ======================
+        0       Move the channel
+        1       Create a proxy channel
+        =====   ======================
+
+        Args:
+            operator (index): Operator to use
+        """
+        index_list = self._getSelectedRowsIndex()
+        if index_list:
+            for index in index_list:
+                oCombo = self.table.cellWidget(index.row(), 4)
+                oCombo.setCurrentIndex(operator)
+        else:
+            for i in reversed(range(self.table.rowCount())):
+                oCombo = self.table.cellWidget(i, 4)
+                oCombo.setCurrentIndex(operator)
+
 
     def setMoveOperator(self):
+        """set the channel wrangler operator to Move
+        """
         self._setOperator(0)
 
+
     def setProxyOperator(self):
+        """set the channel wrangler operator to Proxy
+        """
         self._setOperator(1)
+
 
 
 ####################################
