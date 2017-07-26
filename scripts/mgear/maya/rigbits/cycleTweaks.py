@@ -138,6 +138,9 @@ def cycleTweak(name, edgePair, mirrorAxis, baseMesh, rotMesh, transMesh, setupPa
         tweakBase.attr("ry").set(tweakBase.attr("ry").get() + 180)
         rotBase.attr("ry").set(rotBase.attr("ry").get() + 180)
         posNPO.attr("ry").set(posNPO.attr("ry").get() + 180)
+        tweakBase.attr("sz").set(-1)
+        rotBase.attr("sz").set(-1)
+        posNPO.attr("sz").set(-1)
 
     #create joints
     rJoint =  rigbits.addJnt(rotJointDriver, jntOrg, True, grp)
