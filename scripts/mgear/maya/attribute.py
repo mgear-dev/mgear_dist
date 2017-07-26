@@ -265,6 +265,9 @@ def moveChannel(attr, sourceNode, targetNode, duplicatedPolicy=None):
 
     try:
         at = sourceNode.attr(attr)
+        if pm.addAttr(at, q=True, usedAsProxy=True):
+            pm.displayWarning("{} is a proxy channel and move operation is not yet supported.".format(attr))
+            return
     except:
         pm.displayWarning("Looks like the {} is not in the source: {}".format(attr, sourceNode.name()))
         return
