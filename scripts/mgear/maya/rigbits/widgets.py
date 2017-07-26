@@ -34,15 +34,15 @@ import mgear.widgets as gWidgets
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
-#################################################
-## CUSTOM WIDGETS
-#################################################
+################################################
+# CUSTOM WIDGETS
+################################################
 
 class TableWidgetDragRowsChannelWrangler(gWidgets.TableWidgetDragRows):
     """TableWidgetDragRows subclass for channelWrangler
     """
     def __init__(self, *args, **kwargs):
-        gWidgets.TableWidgetDragRows.__init__(self, *args, **kwargs)
+        super(TableWidgetDragRowsChannelWrangler, self).__init__(*args, **kwargs)
 
     def dropEvent(self, event):
         if not event.isAccepted() and event.source() == self:
@@ -85,10 +85,3 @@ class TableWidgetDragRowsChannelWrangler(gWidgets.TableWidgetDragRows):
                 self.item(drop_row + row_index, 2).setSelected(True)
                 self.item(drop_row + row_index, 3).setSelected(True)
 
-
-
-
-
-####################################
-if __name__ == "__main__":
-    gqt.showDialog(channelWrangler)

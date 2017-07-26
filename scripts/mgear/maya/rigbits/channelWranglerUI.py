@@ -194,7 +194,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(gqt.fakeTranslate("Form", "Form", None, -1))
-        self.channelMapping_tableWidget.setSortingEnabled(True)
+        self.channelMapping_tableWidget.setSortingEnabled(False)
         self.channelMapping_tableWidget.horizontalHeaderItem(0).setText(gqt.fakeTranslate("Form", "Idx", None, -1))
         self.channelMapping_tableWidget.horizontalHeaderItem(1).setText(gqt.fakeTranslate("Form", "Channel", None, -1))
         self.channelMapping_tableWidget.horizontalHeaderItem(2).setText(gqt.fakeTranslate("Form", "Source", None, -1))

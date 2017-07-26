@@ -52,7 +52,8 @@ class attribute_moveChannel_TestCase(unittest.TestCase):
 
 
     def tearDown(self):
-        if (self.testName in ["move_channel", "move_channel_index", "move_channel_fullName", "move_channel_merge", "proxy_channel"]):
+        if (self.testName in [  "move_channel", "move_channel_index", "move_channel_fullName",
+                                "move_channel_merge", "proxy_channel"]):
             pm.delete(self.pcs)
             pm.delete(self.pcs2)
             pm.delete(self.pct)

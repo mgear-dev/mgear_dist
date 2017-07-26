@@ -50,6 +50,7 @@ import mgear.maya.rigbits.postSpring as postSpring
 import mgear.maya.rigbits.rope as rope
 import mgear.maya.rigbits.proxySlicer as proxySlicer
 import mgear.maya.rigbits.utils as utils
+import mgear.maya.rigbits.channelWrangler as channelWrangler
 
 
 def openFile(file, *args):
@@ -152,6 +153,8 @@ def CreateMenu():
     pm.menuItem( divider=True )
     pm.menuItem(label="Spring", command=partial(postSpring.spring_UI))
     pm.menuItem(label="Rope", command=partial(rope.rope_UI))
+    pm.menuItem( divider=True )
+    pm.menuItem(label="Channel Wrangler", command=partial(channelWrangler.openChannelWrangler))
 
     ## skinning tools
     skinM = pm.menuItem(parent='mGear', subMenu=True, tearOff=True, label='Skinning')

@@ -39,7 +39,7 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
     """qTableWidget with drag and drop functionality
     """
     def __init__(self, *args, **kwargs):
-        QtWidgets.QTableWidget.__init__(self, *args, **kwargs)
+        super(TableWidgetDragRows, self).__init__(*args, **kwargs)
 
         self.setDragEnabled(True)
         self.setAcceptDrops(True)

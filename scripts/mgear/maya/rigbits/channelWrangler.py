@@ -24,6 +24,8 @@
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
 
+import json
+
 import mgear.maya.pyqt as gqt
 import mgear.maya.attribute as att
 import mgear.maya.rigbits.channelWranglerUI as channelWranglerUI
@@ -63,7 +65,14 @@ def _applyChannelConfig(configDic):
 
 # apply the configuration stored in a  json file. This will be to use outside the interface
 def applyChannelConfig(filePath):
-    return
+    """apply the configuration stored in a  json file.
+    This will be to use outside the interface
+
+    Args:
+        filePath (str): Path to the  channel wrangler configuration file
+    """
+    configDict = json.load(open(filePath))
+    _applyChannelConfig(configDict)
 
 
 ######################################################################
@@ -130,6 +139,8 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.cwUIInst.clearSelectedRows_pushButton.clicked.connect(self.clearSelectedRows)
         self.cwUIInst.setMoveOp_pushButton.clicked.connect(self.setMoveOperator)
         self.cwUIInst.setProxyOp_pushButton.clicked.connect(self.setProxyOperator)
+        self.cwUIInst.export_pushButton.clicked.connect(self.exportConfig)
+        self.cwUIInst.import_pushButton.clicked.connect(self.importConfig)
         self.cwUIInst.apply_pushButton.clicked.connect(self.applyChannelConfig)
 
     ##################
@@ -211,7 +222,7 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         # this list will contain only the 3 main items list to avoid duplicated rules
         checkDuplicatedList = []
 
-        for i in reversed(range(self.table.rowCount())):
+        for i in range(self.table.rowCount()):
             checkItems  = [self.table.item(i , x+1).text() for x in range(3)]
             if checkItems not in checkDuplicatedList:
                 checkDuplicatedList.append(checkItems)
@@ -229,13 +240,15 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
     ###########################
     #buttons
     def populateChannelLineEdit(self):
-        oSel = pm.selected()[0]
-        chan = att.getSelectedChannels(True)[0]
-        self.cwUIInst.channel_lineEdit.setText("{}.{}".format(oSel.name(), chan))
+        oSel = pm.selected()
+        if oSel:
+            chan = att.getSelectedChannels(True)[0]
+            self.cwUIInst.channel_lineEdit.setText("{}.{}".format(oSel[0].name(), chan))
 
     def populateTargetLineEdit(self):
-        oSel = pm.selected()[0]
-        self.cwUIInst.target_lineEdit.setText(oSel.name())
+        oSel = pm.selected()
+        if oSel:
+            self.cwUIInst.target_lineEdit.setText(oSel[0].name())
 
     # sets a new row with the information on the channel and target lineEdit
     def setRow(self):
@@ -243,8 +256,11 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         if fullChanName:
             sourceName, chanName = fullChanName.split(".")
         targetName = self.cwUIInst.target_lineEdit.text()
+        if  fullChanName and targetName:
         #TODO: checker for the new rule, be sure is not duplicated
-        self._addNewRow(chanName, sourceName, targetName)
+            self._addNewRow(chanName, sourceName, targetName)
+        else:
+            pm.displayWarning("Channel and target are not set properly")
 
     # sets new rows from the selectec channels. 1 channel for each row.
     def setMultiChannel(self):
@@ -286,10 +302,14 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         index_list = self._getSelectedRowsIndex()
         for index in index_list:
             self.table.removeRow(index.row())
+            # for x in range(4):
+            #     self.table.item(index, x).clear()
+            # self.table.cellWidget(index, 4).deleteLater()
 
 
     # clear all the rows
     def clearAllRows(self):
+        self.table.clear()
         for i in reversed(range(self.table.rowCount())):
             self.table.removeRow(i)
 
@@ -297,15 +317,52 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
     # export channelWrangler configuration
     def exportConfig(self):
         configDict = self._buildConfigDict()
-        return
+        data_string = json.dumps(configDict, indent=4, sort_keys=True)
+        filePath = pm.fileDialog2(dialogStyle=2, fileMode=0,
+                                  fileFilter='Channel Wrangler Configuration .cwc (*%s)' %".cwc")
+        if not filePath:
+            return
+        if not isinstance(filePath, basestring):
+            filePath = filePath[0]
+        f = open(filePath, 'w')
+        f.write(data_string)
+        f.close()
 
 
     # import channel wrangler configuration
     def importConfig(self):
         # TODO: if import dict ask to add to the current configuration or replace.
+        startDir = pm.workspace(q=True, rootDirectory=True)
+        filePath = pm.fileDialog2(  dialogStyle=2, fileMode=1, startingDirectory=startDir,
+                                    fileFilter='Channel Wrangler Configuration .cwc (*%s)' %".cwc")
+        if not filePath:
+            return
+        if not isinstance(filePath, basestring):
+            filePath = filePath[0]
+        configDict = json.load(open(filePath))
         # also ask for proxy and move policy if is not the same when we add to the current list
-        # checker to avoid a double configuration in several rows
-        return
+        if self.table.rowCount():
+            option = pm.confirmDialog(  title='Channel Wrangler Configuration Import Style',
+                                        message='Do you want to repace current configuration or add it?\n\
+                                                if add the move policy and proxy policy will not change',
+                                        button=['Replace','Add', 'Cancel'], defaultButton='Reaplace',
+                                        cancelButton='Cancel', dismissString='Cancel' )
+        else:
+            option = "Replace"
+        if option == "Replace":
+            self.clearAllRows()
+            #set move policy
+            indexList = ["merge", "index", "fullName"]
+            self.cwUIInst.movePolicy_comboBox.setCurrentIndex(indexList.index(configDict["movePolicy"]))
+
+            #set proxy policy
+            indexList = ["index", "fullName"]
+            self.cwUIInst.proxyPolicy_comboBox.setCurrentIndex(indexList.index(configDict["proxyPolicy"]))
+
+        for rule in configDict["map"]:
+            row_pos = self._addNewRow(channel=rule[0], source=rule[1], target=rule[2])
+            oCombo = self.table.cellWidget(row_pos, 4)
+            oCombo.setCurrentIndex(rule[3])
 
 
     # apply the current configuration in the dialog
@@ -361,7 +418,8 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         """
         self._setOperator(1)
 
-
+def openChannelWrangler(*args):
+    gqt.showDialog(channelWrangler)
 
 ####################################
 if __name__ == "__main__":

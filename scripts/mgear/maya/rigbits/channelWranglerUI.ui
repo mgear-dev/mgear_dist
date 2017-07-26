@@ -33,7 +33,7 @@
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
          <property name="sortingEnabled">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="cornerButtonEnabled">
           <bool>false</bool>
@@ -342,7 +342,7 @@
   <customwidget>
    <class>TableWidgetDragRowsChannelWrangler</class>
    <extends>QTableWidget</extends>
-   <header>mgear.maya.rigbits.channelWrangler</header>
+   <header>mgear.maya.rigbits.widgets</header>
   </customwidget>
  </customwidgets>
  <resources/>

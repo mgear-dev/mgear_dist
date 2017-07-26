@@ -263,47 +263,73 @@ def moveChannel(attr, sourceNode, targetNode, duplicatedPolicy=None):
     if isinstance(targetNode, str):
         targetNode = pm.PyNode(targetNode)
 
-    at = sourceNode.attr(attr)
+    try:
+        at = sourceNode.attr(attr)
+    except:
+        pm.displayWarning("Looks like the {} is not in the source: {}".format(attr, sourceNode.name()))
+        return
     atType =  at.type()
     if atType in ["double", "enum"]:
 
-        # define duplicated attribute policy
         newAtt = None
         attrName = attr
-        if pm.attributeQuery( attr, node=targetNode, exists=True ):
-            if duplicatedPolicy == "index":
-                i = 0
-                while targetNode.hasAttr(attr+str(i)):
-                    i+=1
-                attrName = attr+str(i)
-            elif duplicatedPolicy == "fullName":
-                attrName = "{}_{}".format(sourceNode.name(), attr)
+        nName = pm.attributeQuery(at.shortName(),  node=at.node(), niceName=True )
+        # define duplicated attribute policy
+        if sourceNode.name() != targetNode.name(): #this policy doesn't apply for rearrange channels
+            if pm.attributeQuery( attr, node=targetNode, exists=True ):
+                if duplicatedPolicy == "index":
+                    i = 0
+                    while targetNode.hasAttr(attr+str(i)):
+                        i+=1
+                    attrName = attr+str(i)
+                elif duplicatedPolicy == "fullName":
+                    attrName = "{}_{}".format(sourceNode.name(), attr)
 
-            elif duplicatedPolicy == "merge":
-                newAtt = pm.PyNode(".".join([targetNode.name(), attr]))
+                elif duplicatedPolicy == "merge":
+                    newAtt = pm.PyNode(".".join([targetNode.name(), attr]))
 
-            else:
-                pm.displayWarning("Duplicated channel policy, is not defined. Move channel operation will fail if the channel already exist on the target.")
-                return False
+                else:
+                    pm.displayWarning(  "Duplicated channel policy, is not defined. \
+                                        Move channel operation will fail if the channel \
+                                        already exist on the target.")
+                    return False
 
         outcnx = at.listConnections(p=True)
         if not newAtt:
+            #get the attr data
             value = at.get()
             if atType == "double":
+                kwargs = {}
                 min = at.getMin()
+                if min:
+                    kwargs["min"]= min
                 max = at.getMax()
-                pm.addAttr(targetNode, ln=attrName, at="double", min=min, max=max, dv=value, k=True)
+                if max:
+                    kwargs["max"]= max
             elif atType == "enum":
                 en = at.getEnums()
                 oEn = collections.OrderedDict(sorted(en.items(), key=lambda t: t[1]))
                 enStr = ":".join([n for n in oEn])
-                pm.addAttr(targetNode, ln=attr, at="enum", en=enStr, dv=value, k=True)
-            newAtt = pm.PyNode(".".join([targetNode.name(), attrName]))
-        for cnx in outcnx:
-            pm.connectAttr(newAtt, cnx, f=True)
 
-        if sourceNode.name() != targetNode.name():
+            # delete old attr
             pm.deleteAttr(at)
+
+            # rebuild the attr
+            if atType == "double":
+                pm.addAttr(targetNode, ln=attrName, niceName=nName, at="double", dv=value, k=True, **kwargs)
+            elif atType == "enum":
+                pm.addAttr(targetNode, ln=attrName, niceName=nName, at="enum", en=enStr, dv=value, k=True)
+
+            newAtt = pm.PyNode(".".join([targetNode.name(), attrName]))
+        else:
+            pm.deleteAttr(at)
+
+        for cnx in outcnx:
+            try:
+                pm.connectAttr(newAtt, cnx, f=True)
+            except RuntimeError:
+                pm.displayError("There is a problem connecting the channel %s  maybe is already move? Please check your configuration"% newAtt.name())
+
 
     else:
         pm.displayWarning("MoveChannel function can't handle an attribute of type: %s. Only supported 'double' adn 'enum' types."%atType)
