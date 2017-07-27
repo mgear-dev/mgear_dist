@@ -58,7 +58,6 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
             rows = sorted(set(item.row() for item in self.selectedItems()))
             rows_to_move = [[QtWidgets.QTableWidgetItem(self.item(row_index, column_index)) for column_index in range(self.columnCount())]
                             for row_index in rows]
-            # print rows_to_move
             for row_index in reversed(rows):
                 self.removeRow(row_index)
                 if row_index < drop_row:
@@ -68,8 +67,6 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
                 row_index += drop_row
                 self.insertRow(row_index)
                 for column_index, column_data in enumerate(data):
-                    # print column_index
-                    # print type(column_data)
                     self.setItem(row_index, column_index, column_data)
             event.accept()
             for row_index in range(len(rows_to_move)):
@@ -90,7 +87,6 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
             return False
         elif rect.bottom() - pos.y() < margin:
             return True
-        # noinspection PyTypeChecker
         return rect.contains(pos, True) and not (int(self.model().flags(index)) & QtCore.Qt.ItemIsDropEnabled) and pos.y() >= rect.center().y()
 
     def getSelectedRowsFast(self):
@@ -150,7 +146,7 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
 
     def position(self, pos, rect, index):
         r = QtWidgets.QAbstractItemView.OnViewport
-        margin = 2
+        margin = 5
         if pos.y() - rect.top() < margin:
             r = QtWidgets.QAbstractItemView.AboveItem
         elif rect.bottom() - pos.y() < margin:
