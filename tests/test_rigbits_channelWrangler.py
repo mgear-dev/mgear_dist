@@ -51,8 +51,8 @@ class cwTestCase(unittest.TestCase):
 
 
     def tearDown(self):
-        return
         pm.delete(self.pcs)
+        pm.delete(self.pcs2)
         pm.delete(self.pct)
 
     def test_applyChannelConfig(self):
