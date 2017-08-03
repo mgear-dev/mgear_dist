@@ -779,14 +779,14 @@ class mainSettingsTab(QtWidgets.QDialog, msui.Ui_Form):
     # ============================================
     # INIT
     def __init__(self, parent=None):
-        super(mainSettingsTab, self).__init__(parent)
+        super(mainSettingsTab, self).__init__()
         self.setupUi(self)
 
 class componentMainSettings(QtWidgets.QDialog, helperSlots):
     valueChanged = QtCore.Signal(int)
 
     def __init__(self, parent=None):
-        super(componentMainSettings, self).__init__(parent)
+        super(componentMainSettings, self).__init__()
         # the inspectSettings function set the current selection to the component root before open the settings dialog
         self.root = pm.selected()[0]
 
@@ -797,7 +797,7 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         self.create_layout()
         self.create_connections()
 
-        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
 
     def create_controls(self):
         """

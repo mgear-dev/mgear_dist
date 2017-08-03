@@ -905,7 +905,8 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.toolName = TYPE
         # Delete old instances of the componet settings window.
         gqt.deleteInstances(self, MayaQDockWidget)
-        super(self.__class__, self).__init__(parent = parent)
+        # super(self.__class__, self).__init__(parent = parent)
+        super(self.__class__, self).__init__()
         # the inspectSettings function set the current selection to the component root before open the settings dialog
         self.root = pm.selected()[0]
 
@@ -918,7 +919,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.create_layout()
         self.create_connections()
 
-        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
 
     def setup_SettingWindow(self):
         self.mayaMainWindow = gqt.maya_main_window()

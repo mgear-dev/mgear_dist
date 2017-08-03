@@ -78,7 +78,8 @@ def showDialog(dialog, dInst=True, *args):
             pass
 
     # Create minimal dialog object
-    windw = dialog(maya_main_window())
+    # windw = dialog(maya_main_window())
+    windw = dialog()
     windw.move(QtWidgets.QApplication.desktop().screen().rect().center()- windw.rect().center())
 
     # Delete the UI if errors occur to avoid causing winEvent
