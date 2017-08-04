@@ -140,8 +140,10 @@ class Component(MainComponent):
                 fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, tra.getTransform(parentctl), self.color_fk, "cube", w=self.size*.2, h=self.size*.05, d=self.size*.2, tp=self.previousCtlTag)
                 att.setKeyableAttributes(self.fk_ctl)
                 att.setRotOrder(fk_ctl, "ZXY")
-                self.fk_ctl.append(fk_ctl)
+
                 self.previousCtlTag = fk_ctl
+
+            self.fk_ctl.append(fk_ctl)
 
 
             self.scl_npo.append(scl_npo)
@@ -158,7 +160,7 @@ class Component(MainComponent):
             self.twister.append(twister)
             self.ref_twist.append(ref_twist)
 
-        for  x in self.fk_ctl:
+        for  x in self.fk_ctl[:-1]:
             att.setInvertMirror(x, ["tx", "rz", "ry"])
 
         # Head ---------------------------------------------
