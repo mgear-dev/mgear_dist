@@ -165,8 +165,10 @@ class Component(MainComponent):
                 if i in [ self.settings["division"] - 1]:
                     self.fk_ctl.append(fk_ctl)
             else:
-                fk_npo = pri.addTransform(parentctl, self.getName("fk%s_npo"%(i-1)), tra.getTransform(parentctl))
-                fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%(i-1), tra.getTransform(parentctl), self.color_fk, "cube", w=self.size, h=self.size*.05, d=self.size, tp=self.preiviousCtlTag)
+                # fk_npo = pri.addTransform(parentctl, self.getName("fk%s_npo"%(i-1)), tra.getTransform(parentctl))
+                fk_npo = pri.addTransform(parentctl, self.getName("fk%s_npo"%(i)), tra.getTransform(parentctl))
+                fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%(i), tra.getTransform(parentctl), self.color_fk, "cube", w=self.size, h=self.size*.05, d=self.size, tp=self.preiviousCtlTag)
+                # fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%(i-1), tra.getTransform(parentctl), self.color_fk, "cube", w=self.size, h=self.size*.05, d=self.size, tp=self.preiviousCtlTag)
                 att.setKeyableAttributes(self.fk_ctl)
                 att.setRotOrder(fk_ctl, "ZXY")
                 self.fk_ctl.append(fk_ctl)
