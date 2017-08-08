@@ -202,3 +202,5 @@ def CreateMenu():
     pm.menuItem(label="User Group", command=partial(openFile, "https://groups.google.com/forum/#!forum/mgearusergroup"))
     pm.menuItem( divider=True )
     pm.menuItem(label="GitHub", command=partial(openFile, "https://github.com/miquelcampos/mgear"))
+    pm.menuItem( divider=True )
+    pm.menuItem(label="About", command=mgear.maya.aboutMgear)
