@@ -30,7 +30,8 @@ Attribute creation functions.
 
 #############################################
 # GLOBAL
-#############################################
+#############################################\
+import collections
 import mgear
 import pymel.core as pm
 import pymel.core.datatypes as dt
@@ -196,12 +197,23 @@ def addEnumAttribute(node, longName, value, enum, niceName=None, shortName=None,
 
     return node.attr(longName)
 
-def addProxyAttribute(sourceAttrs, targets):
+def addProxyAttribute(sourceAttrs, targets,  duplicatedPolicy=None):
     """Add proxy paramenter to a list of target dagNode
+    Duplicated channel policy, stablish the rule in case the channel already
+    exist on the target.
+
+    Duplicate policy options
+
+    ================    =================================================================
+    index               This policy will add an index to avoid clashing channel names
+    fullName            This policy will add the name of the source object to the channel
+    merge               This policy will merge the channels
+    ================    =================================================================
 
     Args:
         sourceAttrs (attr or list of attr): The parameters to be connected as proxy
         targets (dagNode or list of dagNode): The list of dagNode to add the proxy paramenter
+        duplicatedPolicy (string, optional): Set the duplicated channel policy
     """
     if not isinstance(targets, list):
         targets = [targets]
@@ -209,10 +221,122 @@ def addProxyAttribute(sourceAttrs, targets):
         sourceAttrs = [sourceAttrs]
     for sourceAttr in sourceAttrs:
         for target in targets:
-            if not target.hasAttr(sourceAttr.longName()):
-                target.addAttr(sourceAttr.longName(), pxy=sourceAttr)
+            attrName = sourceAttr.longName()
+            if target.hasAttr(sourceAttr.longName()):
+                if duplicatedPolicy == "index":
+                    i = 0
+                    while target.hasAttr(sourceAttr.longName()+str(i)):
+                        i+=1
+                    attrName = sourceAttr.longName()+str(i)
+                elif duplicatedPolicy == "fullName":
+                    attrName = "{}_{}".format(sourceAttr.nodeName(), sourceAttr.longName())
+
+            if not target.hasAttr(attrName):
+                target.addAttr(attrName, pxy=sourceAttr)
             else:
                 pm.displayWarning("The proxy channel %s already exist on: %s."%(sourceAttr.longName(), target.name()))
+
+
+def moveChannel(attr, sourceNode, targetNode, duplicatedPolicy=None):
+    """Move channels  keeping the output connections.
+    Duplicated channel policy, stablish the rule in case the channel already
+    exist on the target.
+
+    NOTE: For the moment move channel only supports type double and enum
+
+    Duplicate policy options
+
+    ================    =================================================================
+    index               This policy will add an index to avoid clashing channel names
+    fullName            This policy will add the name of the source object to the channel
+    merge               This policy will merge the channels
+    ================    =================================================================
+
+    Args:
+        attr (str): Name of the channel to move
+        sourceNode (PyNoe or str): The source node with the channel
+        targetNode (PyNoe or str): The target node for the channel
+        duplicatedPolicy (None, str): Set the duplicated channel policy
+    """
+    if isinstance(sourceNode, str):
+        sourceNode = pm.PyNode(sourceNode)
+    if isinstance(targetNode, str):
+        targetNode = pm.PyNode(targetNode)
+
+    try:
+        at = sourceNode.attr(attr)
+        if pm.addAttr(at, q=True, usedAsProxy=True):
+            pm.displayWarning("{} is a proxy channel and move operation is not yet supported.".format(attr))
+            return
+    except:
+        pm.displayWarning("Looks like the {} is not in the source: {}".format(attr, sourceNode.name()))
+        return
+    atType =  at.type()
+    if atType in ["double", "enum"]:
+
+        newAtt = None
+        attrName = attr
+        nName = pm.attributeQuery(at.shortName(),  node=at.node(), niceName=True )
+        # define duplicated attribute policy
+        if sourceNode.name() != targetNode.name(): #this policy doesn't apply for rearrange channels
+            if pm.attributeQuery( attr, node=targetNode, exists=True ):
+                if duplicatedPolicy == "index":
+                    i = 0
+                    while targetNode.hasAttr(attr+str(i)):
+                        i+=1
+                    attrName = attr+str(i)
+                elif duplicatedPolicy == "fullName":
+                    attrName = "{}_{}".format(sourceNode.name(), attr)
+
+                elif duplicatedPolicy == "merge":
+                    newAtt = pm.PyNode(".".join([targetNode.name(), attr]))
+
+                else:
+                    pm.displayWarning(  "Duplicated channel policy, is not defined. \
+                                        Move channel operation will fail if the channel \
+                                        already exist on the target.")
+                    return False
+
+        outcnx = at.listConnections(p=True)
+        if not newAtt:
+            #get the attr data
+            value = at.get()
+            if atType == "double":
+                kwargs = {}
+                min = at.getMin()
+                if min:
+                    kwargs["min"]= min
+                max = at.getMax()
+                if max:
+                    kwargs["max"]= max
+            elif atType == "enum":
+                en = at.getEnums()
+                oEn = collections.OrderedDict(sorted(en.items(), key=lambda t: t[1]))
+                enStr = ":".join([n for n in oEn])
+
+            # delete old attr
+            pm.deleteAttr(at)
+
+            # rebuild the attr
+            if atType == "double":
+                pm.addAttr(targetNode, ln=attrName, niceName=nName, at="double", dv=value, k=True, **kwargs)
+            elif atType == "enum":
+                pm.addAttr(targetNode, ln=attrName, niceName=nName, at="enum", en=enStr, dv=value, k=True)
+
+            newAtt = pm.PyNode(".".join([targetNode.name(), attrName]))
+        else:
+            pm.deleteAttr(at)
+
+        for cnx in outcnx:
+            try:
+                pm.connectAttr(newAtt, cnx, f=True)
+            except RuntimeError:
+                pm.displayError("There is a problem connecting the channel %s  maybe is already move? Please check your configuration"% newAtt.name())
+
+
+    else:
+        pm.displayWarning("MoveChannel function can't handle an attribute of type: %s. Only supported 'double' adn 'enum' types."%atType)
+
 
 def lockAttribute(node, attributes=["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz", "v"]):
     """
@@ -529,3 +653,48 @@ class enumParamDef(ParamDef):
         attr_name = addEnumAttribute(node, self.scriptName, enum=self.enum, value=self.value)
 
         return node, attr_name
+
+
+##########################################################
+# GETTERS
+##########################################################
+# ========================================================
+
+def getSelectedChannels(userDefine=False):
+    """Get the selected channels on the channel box
+
+    Args:
+        userDefine (bool, optional): If True, will return only the user defined channels. Other channels will be skipped.
+
+    Returns:
+        list: The list of selected channels names
+    """
+    channelBox = pm.mel.eval('global string $gChannelBoxName; $temp=$gChannelBoxName;') #fetch maya's main channelbox
+    attrs = pm.channelBox(channelBox, q=True, sma=True)
+    if userDefine:
+        oSel = pm.selected()[0]
+        uda = oSel.listAttr(ud=True)
+        if attrs:
+            attrs = [x for x in attrs if oSel.attr(x)  in uda]
+        else:
+            return None
+
+    return attrs
+
+def getSelectedObjectChannels(oSel=None, userDefine=False, animatable=False):
+    """Get the selected object channels.
+
+    Args:
+        oSel (None, optional): The  pynode with channels to get
+        userDefine (bool, optional): If True, will return only the user defined channels. Other channels will be skipped.
+        animatable (bool, optional): If True, only animatable parameters will be return
+
+    Returns:
+        list: The list of the selected object channels names
+    """
+    if not oSel:
+        oSel = pm.selected()[0]
+
+    channels = [x.name().rsplit(".", 1)[1] for x in oSel.listAttr(ud=userDefine, k=animatable)]
+
+    return channels

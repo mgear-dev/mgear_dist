@@ -22,6 +22,7 @@ Modules
 
    mgear.maya.rigbits
    mgear.maya.rigbits.blendShapes
+   mgear.maya.rigbits.channelWrangler
    mgear.maya.rigbits.cycleTweaks
    mgear.maya.rigbits.ghost
    mgear.maya.rigbits.postSpring

@@ -223,6 +223,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
                 self.updateListAttr(sender, "ikrefarray")
             elif sender == self.settingsTab.headRefArray_listWidget:
                 self.updateListAttr(sender, "headrefarray")
+            return True
+        else:
+            return QtWidgets.QDialog.eventFilter(self, sender, event)
 
 
 

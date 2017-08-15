@@ -9,8 +9,14 @@ Originally mGear was design and develope by `Jeremie Passerin <http://www.jeremi
 
 																			**Jeremie Passerin**
 
+Contributors (in alphabetical order):
+	- `Akagi-san <https://github.com/akiwoRM/>`_
+	- `Gaetan Guidet <https://github.com/gatgui/>`_
+	- `Lior Ben Horin <https://github.com/liorbenhorin/>`_
+	- `Matsumoto-san <https://github.com/yamahigashi>`_
+	- `Miles Cheng <https://github.com/milesckt/>`_
+
 `Join the mGear Google user group <https://groups.google.com/forum/#!forum/mgearusergroup/>`_
-_____________________________________________________________________________________________
 
 .. figure:: images/studioAKA_mGear_A.jpg
     :width: 800px
@@ -20,13 +26,6 @@ ________________________________________________________________________________
     :figclass: align-center
 
     mGear have been used at Studio AKA for San Pellegrino ‘Dining By Starlight’. Rigged by Adam Avery
-
-Contributors (in alphabetical order):
-	- `Akagi-san <https://github.com/akiwoRM/>`_
-	- `Gaetan Guidet <https://github.com/gatgui/>`_
-	- `Lior Ben Horin <https://github.com/liorbenhorin/>`_
-	- `Matsumoto-san <https://github.com/yamahigashi>`_
-	- `Miles Cheng <https://github.com/milesckt/>`_
 
 .. note::
 

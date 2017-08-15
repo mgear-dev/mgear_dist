@@ -180,6 +180,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         if event.type() == QtCore.QEvent.ChildRemoved:
             if sender == self.settingsTab.refArray_listWidget:
                 self.updateListAttr(sender, "ikrefarray")
+            return True
+        else:
+            return QtWidgets.QDialog.eventFilter(self, sender, event)
 
     def dockCloseEventTriggered(self):
         gqt.deleteInstances(self, MayaQDockWidget)

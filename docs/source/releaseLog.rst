@@ -1,6 +1,30 @@
 Release Log
 ===========
 
+2.2.0
+-----
+**New Features**
+	* Simple autorig This a new rigging sytem for basic props.
+	* Channel Wrangler: Channel manager with export import options.
+
+**Improvements**
+	* Synoptic: key/select all for custom widgets
+	* Skin IO: IO skin for curves & nurbs
+	* Skin IO: Now can export with Skin Packs. Every object will be in a separated file.
+	* Shifter: custom Sets: Now is possible to add custom sets to shifter components
+	* Shifter: Now all the controls are Tag as a control (> Maya 2016.5)
+	* Shifter: Custom Rig controls navigation
+	* Shifter: Custom steps IO to JSON file.
+	* Shifter: Componente: Chain_01: Non uniform scaling for FK controls
+	* Shifter: Now the controls have unchecked historical interest from ctl shapes for cleaner channel box
+	* Rigbits: Now replace shape support multiple shapes
+	* mGear: Menu updated with about info and useful links
+	* mGear: Added support for RGB color on icons/Controls
+
+**Bug Fix**
+	* Shifter: componente: freetangent arm and leg: Fixed joint offset in the extremes
+	* General: Fixed bad parenting for PySide dialogs.
+
 
 2.1.1
 -----
@@ -10,6 +34,7 @@ Release Log
 	* Shifter: Components: New  Components from Miles Cheng "arm_ms_2jnt_01", "shoulder_ms_2jnt_01" and "leg_ms_2jnt_01"
 	* Shifter: Components: New enviroment variable: MGEAR_SHIFTER_COMPONENT_PATH (only project components)
 	* Shifter: Custom Step: New enviroment variable: MGEAR_SHIFTER_CUSTOMSTEP_PATH to stablish relative paths for the custom steps data.
+	* Shifter: New Channel naming options
 
 **Improvements**
 	* Improved error logging for custom steps and Synoptic.
@@ -24,6 +49,8 @@ Release Log
 	* Shifter: Track information (rig Asset, components used version and mGear version)
 	* Synoptic: General visual and structure improvement. Big Thanks to Yamahigashi-san.
 	* Synoptic: IK/FK animation transfer
+	* Shifter: Updated biped guide
+	* Shifter: Updated Quadruped guide
 
 **Bug Fix**
 	* Bad layout on setting windows with HDPI displays.

@@ -69,13 +69,15 @@ class Component(MainComponent):
         self.spring_npo = []
         self.spring_target = []
         parent = self.root
+        self.previousTag  = self.parentCtlTag
         for i, t in enumerate(tra.getChainTransform(self.guide.apos, self.normal, self.negate)):
             dist = vec.getDistance(self.guide.apos[i], self.guide.apos[i+1])
 
             fk_npo = pri.addTransform(parent, self.getName("fk%s_npo"%i), t)
             spring_aim = pri.addTransform(fk_npo, self.getName("spring%s_aim"%i), t)
             spring_cns = pri.addTransform(fk_npo, self.getName("spring%s_cns"%i), t)
-            fk_ctl = self.addCtl(spring_cns, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.1, d=self.size*.1, po=dt.Vector(dist*.5*self.n_factor,0,0))
+            fk_ctl = self.addCtl(spring_cns, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.1, d=self.size*.1, po=dt.Vector(dist*.5*self.n_factor,0,0), tp=self.previousTag)
+            self.previousTag = fk_ctl
 
 
             t = tra.getTransformFromPos(self.guide.apos[i+1])
@@ -166,10 +168,21 @@ class Component(MainComponent):
     # @param self
     def setRelation(self):
 
+        # self.relatives["root"] = self.loc[0]
+        # self.jointRelatives["root"] = 0
+        # for i in range(0, len(self.loc)-1):
+        #     self.relatives["%s_loc"%i] = self.loc[i+1]
+        #     self.jointRelatives["%s_loc"%i] = i+1
+        # self.relatives["%s_loc"%(len(self.loc)-1)] = self.loc[-1]
+        # self.jointRelatives["%s_loc"%(len(self.loc)-1)] = len(self.loc)-1
+
         self.relatives["root"] = self.loc[0]
+        self.controlRelatives["root"] = self.fk_ctl[0]
         self.jointRelatives["root"] = 0
         for i in range(0, len(self.loc)-1):
             self.relatives["%s_loc"%i] = self.loc[i+1]
+            self.controlRelatives["%s_loc"%i] = self.fk_ctl[i+1]
             self.jointRelatives["%s_loc"%i] = i+1
         self.relatives["%s_loc"%(len(self.loc)-1)] = self.loc[-1]
+        self.controlRelatives["%s_loc"%(len(self.loc)-1)] = self.fk_ctl[-1]
         self.jointRelatives["%s_loc"%(len(self.loc)-1)] = len(self.loc)-1

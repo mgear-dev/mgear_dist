@@ -1,7 +1,10 @@
 Tools
 ===========
 
-tools from mGear maya menu 
+tools from mGear maya menu
+
+WIP section: Please visit:
+`mGear Youtube channel <https://vimeo.com/groups/mgear/>`_
 
 .. toctree::
 

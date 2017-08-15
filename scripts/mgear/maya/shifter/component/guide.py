@@ -178,6 +178,8 @@ class ComponentGuide(MainGuide):
         self.pCompIndex = self.addParam("comp_index",  "long", self.compIndex, 0)
         self.pConnector = self.addParam("connector",  "string", "standard")
         self.pUIHost = self.addParam("ui_host",  "string", "")
+        self.pCtlGroup  = self.addParam("ctlGrp", "string", "")
+
 
         # Items -------------------------------------------
         typeItems = [self.compType, self.compType]
@@ -777,14 +779,14 @@ class mainSettingsTab(QtWidgets.QDialog, msui.Ui_Form):
     # ============================================
     # INIT
     def __init__(self, parent=None):
-        super(mainSettingsTab, self).__init__(parent)
+        super(mainSettingsTab, self).__init__()
         self.setupUi(self)
 
 class componentMainSettings(QtWidgets.QDialog, helperSlots):
     valueChanged = QtCore.Signal(int)
 
     def __init__(self, parent=None):
-        super(componentMainSettings, self).__init__(parent)
+        super(componentMainSettings, self).__init__()
         # the inspectSettings function set the current selection to the component root before open the settings dialog
         self.root = pm.selected()[0]
 
@@ -795,6 +797,7 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         self.create_layout()
         self.create_connections()
 
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
 
     def create_controls(self):
         """
@@ -828,6 +831,7 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
             self.mainSettingsTab.useJointIndex_checkBox.setCheckState(QtCore.Qt.Unchecked)
         self.mainSettingsTab.parentJointIndex_spinBox.setValue(self.root.attr("parentJointIndex").get())
         self.mainSettingsTab.host_lineEdit.setText(self.root.attr("ui_host").get())
+        self.mainSettingsTab.subGroup_lineEdit.setText(self.root.attr("ctlGrp").get())
 
 
     def create_layout(self):
@@ -851,3 +855,4 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         self.mainSettingsTab.useJointIndex_checkBox.stateChanged.connect(partial(self.updateCheck, self.mainSettingsTab.useJointIndex_checkBox, "useIndex"))
         self.mainSettingsTab.parentJointIndex_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.mainSettingsTab.parentJointIndex_spinBox, "parentJointIndex"))
         self.mainSettingsTab.host_pushButton.clicked.connect(partial(self.updateHostUI, self.mainSettingsTab.host_lineEdit, "ui_host"))
+        self.mainSettingsTab.subGroup_lineEdit.editingFinished.connect(partial(self.updateLineEdit,  self.mainSettingsTab.subGroup_lineEdit, "ctlGrp") )

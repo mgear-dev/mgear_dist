@@ -85,10 +85,10 @@ class Component(MainComponent):
         self.fk0_npo = pri.addTransform(self.fk_cns, self.getName("fk0_npo"), t)
 
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
-        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0*.7, h=self.size*.1, d=self.size*.1, po=dt.Vector(.35*self.length0*self.n_factor,0,0))
+        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0*.7, h=self.size*.1, d=self.size*.1, po=dt.Vector(.35*self.length0*self.n_factor,0,0), tp=self.parentCtlTag)
         att.setKeyableAttributes(self.fk0_ctl)
         # *ms* add fk roll control Simage style
-        self.fk0_roll_ctl = self.addCtl(self.fk0_ctl, "fk0_roll_ctl", t, self.color_fk, "cube", w=self.length0*.3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.85*self.length0*self.n_factor,0,0))
+        self.fk0_roll_ctl = self.addCtl(self.fk0_ctl, "fk0_roll_ctl", t, self.color_fk, "cube", w=self.length0*.3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.85*self.length0*self.n_factor,0,0), tp=self.fk0_ctl)
         att.setKeyableAttributes(self.fk0_roll_ctl)
         self.fk0_mtx = pri.addTransform(self.root, self.getName("fk0_mtx"), t)
         t = tra.setMatrixPosition(t, self.guide.apos[1])
@@ -97,10 +97,10 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
 
         self.fk1_npo = pri.addTransform(self.fk1_loc, self.getName("fk1_npo"), t)
-        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1*.7, h=self.size*.1, d=self.size*.1, po=dt.Vector(.35*self.length1*self.n_factor,0,0))
+        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1*.7, h=self.size*.1, d=self.size*.1, po=dt.Vector(.35*self.length1*self.n_factor,0,0), tp=self.fk0_roll_ctl)
         att.setKeyableAttributes(self.fk1_ctl)
         self.fk1_mtx = pri.addTransform(self.fk1_ctl, self.getName("fk1_mtx"), t)
-        self.fk1_roll_ctl = self.addCtl(self.fk1_ctl, "fk1_roll_ctl", t, self.color_fk, "cube", w=self.length1*.3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.85*self.length1*self.n_factor,0,0))
+        self.fk1_roll_ctl = self.addCtl(self.fk1_ctl, "fk1_roll_ctl", t, self.color_fk, "cube", w=self.length1*.3, h=self.size*.1, d=self.size*.1, po=dt.Vector(.85*self.length1*self.n_factor,0,0), tp=self.fk1_ctl)
         att.setKeyableAttributes(self.fk1_roll_ctl)
 
 
@@ -118,7 +118,7 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
 
         self.fk2_npo = pri.addTransform(self.fk2_loc, self.getName("fk2_npo"), t)
-        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
+        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0), tp=self.fk1_roll_ctl)
         att.setKeyableAttributes(self.fk2_ctl)
 
         self.fk_ctl = [self.fk0_roll_ctl, self.fk1_ctl, self.fk2_ctl]
@@ -128,16 +128,30 @@ class Component(MainComponent):
 
         # att.setInvertMirror(self.fk0_ctl, ["tx", "ty", "tz"])
 
+        self.ctrn_loc = pri.addTransformFromPos(self.root, self.getName("ctrn_loc"), self.guide.apos[1])
+        # eff npo --- take the effector output of gear ik solver
+        self.eff_npo  = pri.addTransformFromPos(self.root, self.getName("eff_npo"), self.guide.apos[2])
+        # eff loc --- take the fk ik blend result
+        self.eff_loc  = pri.addTransformFromPos(self.eff_npo, self.getName("eff_loc"), self.guide.apos[2])
+    # tws_ref
+        t = tra.getRotationFromAxis(dt.Vector(0,-1,0), self.normal, "xz", self.negate)
+        t = tra.setMatrixPosition(t, self.guide.pos["ankle"])
+        self.tws_ref = pri.addTransform(self.eff_loc, self.getName("tws_ref"), t)
+
+        # Mid Controler ------------------------------------
+        self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2, tp=self.parentCtlTag)
+        att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
+        # *ms* add knee thickness
 
         # IK Controlers -----------------------------------
 
         self.ik_cns = pri.addTransformFromPos(self.root, self.getName("ik_cns"), self.guide.pos["ankle"])
 
-        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["ankle"]), self.color_ik, "null", w=self.size*.12)
+        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["ankle"]), self.color_ik, "null", w=self.size*.12, tp=self.mid_ctl)
         att.setInvertMirror(self.ikcns_ctl, ["tx"])
 
         m = tra.getTransformFromPos(self.guide.pos["ankle"])
-        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12)
+        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12, tp=self.ikcns_ctl)
         att.setKeyableAttributes(self.ik_ctl)
         # att.setRotOrder(self.ik_ctl, "XZY")
         att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
@@ -154,7 +168,7 @@ class Component(MainComponent):
         self.upv_mtx = pri.addTransformFromPos(self.upv_cns, self.getName("upv_mtx"), self.guide.apos[0])
 
         self.upv_npo = pri.addTransformFromPos(self.upv_mtx, self.getName("upv_npo"), v)
-        self.upv_ctl = self.addCtl(self.upv_npo, "upv_ctl", tra.getTransform(self.upv_npo), self.color_ik, "diamond", w=self.size*.12)
+        self.upv_ctl = self.addCtl(self.upv_npo, "upv_ctl", tra.getTransform(self.upv_npo), self.color_ik, "diamond", w=self.size*.12, tp=self.ik_ctl)
         att.setKeyableAttributes(self.upv_ctl, self.t_params)
         att.setInvertMirror(self.upv_ctl, ["tx"])
 
@@ -184,20 +198,6 @@ class Component(MainComponent):
         self.bone1.setAttr("sx", self.length1)
         self.bone1.setAttr("visibility", False)
 
-        self.ctrn_loc = pri.addTransformFromPos(self.root, self.getName("ctrn_loc"), self.guide.apos[1])
-        # eff npo --- take the effector output of gear ik solver
-        self.eff_npo  = pri.addTransformFromPos(self.root, self.getName("eff_npo"), self.guide.apos[2])
-        # eff loc --- take the fk ik blend result
-        self.eff_loc  = pri.addTransformFromPos(self.eff_npo, self.getName("eff_loc"), self.guide.apos[2])
-    # tws_ref
-        t = tra.getRotationFromAxis(dt.Vector(0,-1,0), self.normal, "xz", self.negate)
-        t = tra.setMatrixPosition(t, self.guide.pos["ankle"])
-        self.tws_ref = pri.addTransform(self.eff_loc, self.getName("tws_ref"), t)
-
-        # Mid Controler ------------------------------------
-        self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
-        att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
-        # *ms* add knee thickness
 
 
 
@@ -236,13 +236,15 @@ class Component(MainComponent):
         self.div_ctls = []
         self.div_org = pri.addTransform(self.root, self.getName("div_org"), tra.getTransform(self.root))
 
+        self.previousCtlTag = self.parentCtlTag
         for i in range(self.divisions0):
 
             div_cns = pri.addTransform(self.div_org, self.getName("div%s_loc" % i))
             if self.negate:
-                div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)))
+                div_ctl = self.addCtl(div_cns, self.getName("div%s_ctl" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
             else:
-                div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)))
+                div_ctl = self.addCtl(div_cns, self.getName("div%s_ctl" % i), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05,w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
+            self.previousCtlTag = div_ctl
             self.div_cns.append(div_cns)
             self.div_cnsUp.append(div_cns)
             self.jnt_pos.append([div_ctl,i])
@@ -251,9 +253,10 @@ class Component(MainComponent):
         d = self.divisions0
         self.div_mid = pri.addTransform(self.div_org, self.getName("div%s_loc" % d), tra.getTransform(self.mid_ctl))
         if self.negate:
-            self.div_mid_ctl = self.addCtl(self.div_mid, self.getName("div%s_ctl" % d), tra.getTransform(self.div_mid), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0), ro=dt.Vector(0,0,dt.radians(90)))
+            self.div_mid_ctl = self.addCtl(self.div_mid, self.getName("div%s_ctl" % d), tra.getTransform(self.div_mid), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0), ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
         else:
-            self.div_mid_ctl = self.addCtl(self.div_mid, self.getName("div%s_ctl" % d), tra.getTransform(self.div_mid), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*0.05,0), ro=dt.Vector(0,0,dt.radians(90)))
+            self.div_mid_ctl = self.addCtl(self.div_mid, self.getName("div%s_ctl" % d), tra.getTransform(self.div_mid), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*0.05,0), ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
+        self.previousCtlTag = div_ctl
         self.div_cns.append(self.div_mid)
         self.jnt_pos.append([self.div_mid_ctl,self.divisions0])
         self.div_ctls.append(self.div_mid_ctl)
@@ -263,9 +266,10 @@ class Component(MainComponent):
             dd = i +self.divisions1+1
             div_cns = pri.addTransform(self.div_org, self.getName("div%s_loc" % dd))
             if self.negate:
-                div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)))
+                div_ctl = self.addCtl(div_cns, self.getName("div%s_ctl" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*-0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
             else:
-                div_ctl = self.addCtl(div_cns, self.getName("div%s_clt" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)))
+                div_ctl = self.addCtl(div_cns, self.getName("div%s_ctl" % dd), tra.getTransform(div_cns), self.color_fk, "square",d=self.size*.05, w=self.size*.1,po=dt.Vector(0,self.size*0.05,0),ro=dt.Vector(0,0,dt.radians(90)), tp=self.previousCtlTag)
+            self.previousCtlTag = div_ctl
             self.div_cns.append(div_cns)
             self.div_cnsDn.append(div_cns)
             self.jnt_pos.append([div_ctl,i+self.divisions0+1])
@@ -373,7 +377,12 @@ class Component(MainComponent):
         node = aop.gear_ikfk2bone_op(out, self.root, self.ik_ref, self.upv_ctl, self.fk0_mtx, self.fk1_mtx, self.fk2_mtx, self.length0, self.length1, self.negate)
 
         pm.connectAttr(self.blend_att, node+".blend")
-        pm.connectAttr(self.roll_att, node+".roll")
+        if self.negate:
+            mulVal = -1
+        else:
+            mulVal = 1
+        nod.createMulNode(self.roll_att, mulVal, node+".roll")
+        # pm.connectAttr(self.roll_att, node+".roll")
         pm.connectAttr(self.scale_att, node+".scaleA")
         pm.connectAttr(self.scale_att, node+".scaleB")
         pm.connectAttr(self.maxstretch_att, node+".maxstretch")
@@ -612,6 +621,11 @@ class Component(MainComponent):
         self.relatives["knee"] = self.div_cns[self.settings["div0"] + 2]
         self.relatives["ankle"] = self.div_cns[-1]
         self.relatives["eff"] = self.eff_loc
+
+        self.controlRelatives["root"] = self.fk0_ctl
+        self.controlRelatives["knee"] = self.fk1_ctl
+        self.controlRelatives["ankle"] = self.ik_ctl
+        self.controlRelatives["eff"] = self.fk2_ctl
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["knee"] = self.settings["div0"] + 2

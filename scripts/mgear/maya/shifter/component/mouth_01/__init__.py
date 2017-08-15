@@ -55,7 +55,7 @@ class Component(MainComponent):
         #jaw control
         t = tra.getTransformFromPos(self.guide.pos["jaw"])
         self.ctl_npo = pri.addTransform(self.root, self.getName("ctl_npo"), t)
-        self.jaw_ctl = self.addCtl(self.ctl_npo, "jaw_ctl", t, self.color_fk, "circle", w=1, ro=dt.Vector([1.5708,0,0]))
+        self.jaw_ctl = self.addCtl(self.ctl_npo, "jaw_ctl", t, self.color_fk, "circle", w=1, ro=dt.Vector([1.5708,0,0]), tp=self.parentCtlTag)
         att.setKeyableAttributes(self.jaw_ctl, ["tx", "ty", "tz", "rz"])
 
         #mouth center
@@ -78,20 +78,20 @@ class Component(MainComponent):
         #lips
         t = tra.getTransformFromPos(self.guide.pos["lipup"])
         self.lipup_npo = pri.addTransform(self.jawUp_rot, self.getName("lipup_npo"), t)
-        self.lipup_ctl = self.addCtl(self.lipup_npo, "lipup_ctl", t, self.color_fk, "square", d=.15, w=1, ro=dt.Vector([1.5708,0,0]))
+        self.lipup_ctl = self.addCtl(self.lipup_npo, "lipup_ctl", t, self.color_fk, "square", d=.15, w=1, ro=dt.Vector([1.5708,0,0]), tp=self.jaw_ctl)
 
         t = tra.getTransformFromPos(self.guide.pos["liplow"])
         self.liplow_npo = pri.addTransform(self.jawLow_rot, self.getName("liplow_npo"), t)
-        self.liplow_ctl = self.addCtl(self.liplow_npo, "liplow_ctl", t, self.color_fk, "square", d=.15, w=1, ro=dt.Vector([1.5708,0,0]))
+        self.liplow_ctl = self.addCtl(self.liplow_npo, "liplow_ctl", t, self.color_fk, "square", d=.15, w=1, ro=dt.Vector([1.5708,0,0]), tp=self.jaw_ctl)
 
         #teeth
         t = tra.getTransformFromPos(self.guide.pos["lipup"])
         self.teethup_npo = pri.addTransform(self.jawUp_rot, self.getName("teethup_npo"), t)
-        self.teethup_ctl = self.addCtl(self.teethup_npo, "teethup_ctl", t, self.color_ik, "square", d=.1, w=.7, ro=dt.Vector([1.5708,0,0]))
+        self.teethup_ctl = self.addCtl(self.teethup_npo, "teethup_ctl", t, self.color_ik, "square", d=.1, w=.7, ro=dt.Vector([1.5708,0,0]), tp=self.lipup_ctl)
 
         t = tra.getTransformFromPos(self.guide.pos["liplow"])
         self.teethlow_npo = pri.addTransform(self.jawLow_rot, self.getName("teethlow_npo"), t)
-        self.teethlow_ctl = self.addCtl(self.teethlow_npo, "teethlow_ctl", t, self.color_ik, "square", d=.1, w=.7, ro=dt.Vector([1.5708,0,0]))
+        self.teethlow_ctl = self.addCtl(self.teethlow_npo, "teethlow_ctl", t, self.color_ik, "square", d=.1, w=.7, ro=dt.Vector([1.5708,0,0]), tp=self.liplow_ctl)
 
 
         self.jnt_pos.append([self.jawLow_rot, "jaw", "parent_relative_jnt", False])
@@ -250,6 +250,12 @@ class Component(MainComponent):
         self.relatives["rotcenter"] = self.jawLow_rot
         self.relatives["lipup"] = self.lipup_ctl
         self.relatives["liplow"] = self.liplow_ctl
+
+        self.controlRelatives["root"] = self.parentCtlTag
+        self.controlRelatives["jaw"] = self.jaw_ctl
+        self.controlRelatives["rotcenter"] = self.jaw_ctl
+        self.controlRelatives["lipup"] = self.lipup_ctl
+        self.controlRelatives["liplow"] = self.liplow_ctl
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["jaw"] = 0

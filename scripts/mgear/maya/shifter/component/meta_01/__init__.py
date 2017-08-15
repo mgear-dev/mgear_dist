@@ -70,7 +70,7 @@ class Component(MainComponent):
             self.npoList.append(npo)
             if i == len(self.guide.apos) -1:
                 ctl_npo = pri.addTransform(self.root, self.getName("ctl_npo"), t)
-                self.meta_ctl = self.addCtl(ctl_npo, "ctl", t, self.color_fk, "cube", w=self.size*.5, h=self.size*.5, d=self.size*.5)
+                self.meta_ctl = self.addCtl(ctl_npo, "ctl", t, self.color_fk, "cube", w=self.size*.5, h=self.size*.5, d=self.size*.5, tp=self.parentCtlTag)
 
 
     # =====================================================
@@ -117,6 +117,8 @@ class Component(MainComponent):
 
         self.relatives["root"] = self.locList[0]
         self.jointRelatives["root"] = 0
+        self.controlRelatives["root"] = self.meta_ctl
         for i in range(len(self.locList)-1):
             self.relatives["%s_loc"%i] = self.locList[i+1]
+            self.controlRelatives["%s_loc"%i] = self.meta_ctl
             self.jointRelatives["%s_loc"%i] = i+1

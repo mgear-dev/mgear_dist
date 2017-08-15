@@ -64,7 +64,7 @@ class Component(MainComponent):
         t = tra.setMatrixPosition(t, self.guide.pos["neck"])
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
 
-        self.ik_ctl = self.addCtl(self.ik_cns, "ik_ctl", t, self.color_ik, "compas", w=self.size*.5)
+        self.ik_ctl = self.addCtl(self.ik_cns, "ik_ctl", t, self.color_ik, "compas", w=self.size*.5, tp=self.parentCtlTag)
         att.setKeyableAttributes(self.ik_ctl, self.tr_params)
         att.setRotOrder(self.ik_ctl, "ZXY")
         att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
@@ -73,14 +73,14 @@ class Component(MainComponent):
         if self.settings["tangentControls"]:
             t = tra.setMatrixPosition(t, self.guide.pos["tan1"])
             self.tan1_loc = pri.addTransform(self.ik_ctl, self.getName("tan1_loc"), t)
-            self.tan1_ctl = self.addCtl(self.tan1_loc, "tan1_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+            self.tan1_ctl = self.addCtl(self.tan1_loc, "tan1_ctl", t, self.color_ik, "sphere", w=self.size*.2, tp=self.ik_ctl)
             att.setKeyableAttributes(self.tan1_ctl, self.t_params)
             att.setInvertMirror(self.tan1_ctl, ["tx"])
 
             t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["tan0"], self.normal, "yx", self.negate)
             t = tra.setMatrixPosition(t, self.guide.pos["tan0"])
             self.tan0_loc = pri.addTransform(self.root, self.getName("tan0_loc"), t)
-            self.tan0_ctl = self.addCtl(self.tan0_loc, "tan0_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+            self.tan0_ctl = self.addCtl(self.tan0_loc, "tan0_ctl", t, self.color_ik, "sphere", w=self.size*.2, tp=self.ik_ctl)
             att.setKeyableAttributes(self.tan0_ctl, self.t_params)
             att.setInvertMirror(self.tan0_ctl, ["tx"])
 
@@ -119,7 +119,7 @@ class Component(MainComponent):
         parent_twistRef = pri.addTransform(self.root, self.getName("reference"), tra.getTransform(self.root))
         t = tra.getTransformLookingAt(self.guide.pos["root"], self.guide.pos["neck"], self.normal, "yx", self.negate)
         self.intMRef = pri.addTransform(self.root, self.getName("intMRef"), t)
-
+        self.previousCtlTag = self.parentCtlTag
         for i in range(self.settings["division"]):
 
             # References
@@ -137,9 +137,12 @@ class Component(MainComponent):
                 fk_npo = fk_ctl
             else:
                 fk_npo = pri.addTransform(scl_npo, self.getName("fk%s_npo"%i), tra.getTransform(parentctl))
-                fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, tra.getTransform(parentctl), self.color_fk, "cube", w=self.size*.2, h=self.size*.05, d=self.size*.2)
+                fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, tra.getTransform(parentctl), self.color_fk, "cube", w=self.size*.2, h=self.size*.05, d=self.size*.2, tp=self.previousCtlTag)
                 att.setKeyableAttributes(self.fk_ctl)
                 att.setRotOrder(fk_ctl, "ZXY")
+
+                self.previousCtlTag = fk_ctl
+
             self.fk_ctl.append(fk_ctl)
 
 
@@ -165,7 +168,7 @@ class Component(MainComponent):
         self.head_cns = pri.addTransform(self.root, self.getName("head_cns"), t)
 
         dist = vec.getDistance(self.guide.pos["head"], self.guide.pos["eff"])
-        self.head_ctl = self.addCtl(self.head_cns, "head_ctl", t, self.color_fk, "cube", w=self.size*.5, h=dist, d=self.size*.5, po=dt.Vector(0,dist*.5,0))
+        self.head_ctl = self.addCtl(self.head_cns, "head_ctl", t, self.color_fk, "cube", w=self.size*.5, h=dist, d=self.size*.5, po=dt.Vector(0,dist*.5,0), tp=self.previousCtlTag)
         att.setRotOrder(self.head_ctl, "ZXY")
         att.setInvertMirror(self.head_ctl, ["tx", "rz", "ry"])
 
@@ -321,6 +324,13 @@ class Component(MainComponent):
         self.relatives["neck"] = self.head_ctl
         self.relatives["head"] = self.head_ctl
         self.relatives["eff"] = self.head_ctl
+
+        self.controlRelatives["root"] = self.fk_ctl[0]
+        self.controlRelatives["tan1"] = self.head_ctl
+        self.controlRelatives["tan2"] = self.head_ctl
+        self.controlRelatives["neck"] = self.head_ctl
+        self.controlRelatives["head"] = self.head_ctl
+        self.controlRelatives["eff"] = self.head_ctl
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["tan1"] = 0

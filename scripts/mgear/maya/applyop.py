@@ -153,7 +153,7 @@ def pathCns(obj, curve, cnsType=False, u=0, tangent=False):
     return node
 
 #TODO: review function to make wupObject optional
-def aimCns(obj, master, axis="xy", wupType=4, wupVector=[0,1,0], wupObject=None, maintainOffset=False):
+def aimCns(obj, master, axis="xy", wupType="objectrotation", wupVector=[0,1,0], wupObject=None, maintainOffset=False):
     """
     Apply a direction constraint
 
@@ -161,7 +161,7 @@ def aimCns(obj, master, axis="xy", wupType=4, wupVector=[0,1,0], wupObject=None,
         obj (dagNode): Constrained object.
         master (dagNode): Constraining Object.
         axis (str): Define pointing axis and upvector axis (combination of xyz and -x-y-z).
-        wupType (int): 0=scene up, 1=Object up, 2=Object rotation up, 3=Vector, 4=None.
+        wupType (str): scene, object, objectrotation, vector, or none.
         wupVector (list of 3 float): world up vector. Exp: [0.0,1.0,0.0].
         wupObject (pyNode): world up object.
         maintainOffset (bool): Maintain offset.

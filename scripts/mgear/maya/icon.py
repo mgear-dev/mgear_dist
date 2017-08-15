@@ -910,9 +910,13 @@ def setcolor(node, color):
     #TODO: configure this funcion to work with RGB or Index color base on Maya version.
     # version = mgear.maya.getMayaver()
 
-    if not isinstance(color, int):
-        return
+    if isinstance(color, int):
 
-    for shp in node.listRelatives(shapes=True):
-        shp.setAttr("overrideEnabled", True)
-        shp.setAttr("overrideColor", color)
+        for shp in node.listRelatives(shapes=True):
+            shp.setAttr("overrideEnabled", True)
+            shp.setAttr("overrideColor", color)
+    else:
+        for shp in node.listRelatives(shapes=True):
+            shp.overrideEnabled.set(1)
+            shp.overrideRGBColors.set(1)
+            shp.overrideColorRGB.set(color[0],color[1],color[2])

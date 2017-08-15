@@ -104,6 +104,7 @@ class MainComponent(object):
         # --------------------------------------------------
         # Builder init
         self.groups = {} ## Dictionary of groups
+        self.subGroups = {} ## Dictionary of subGroups
         self.controlers = [] ## List of all the controllers of the component
 
         # --------------------------------------------------
@@ -113,6 +114,7 @@ class MainComponent(object):
 
         self.relatives = {}
         self.jointRelatives = {} #joint relatives mapping for automatic connection
+        self.controlRelatives = {}
 
         # --------------------------------------------------
         # Joint positions init
@@ -136,6 +138,7 @@ class MainComponent(object):
         """
         self.preScript()
         self.initialHierarchy()
+        self.initControlTag()
         self.addObjects()
         self.setRelation()
         return
@@ -341,7 +344,7 @@ class MainComponent(object):
         return vec.getPlaneBiNormal(pos[0], pos[1], pos[2])
 
 
-    def addCtl(self, parent, name, m, color, icon, **kwargs):
+    def addCtl(self, parent, name, m, color, icon, tp=None, **kwargs):
         """
         Create the control and apply the shape, if this is alrealdy stored
         in the guide controllers grp.
@@ -352,6 +355,7 @@ class MainComponent(object):
             m (matrix): The transfromation matrix for the control.
             color (int or list of float): The color for the control in idex or RGB.
             icon (str): The controls default shape.
+            tp (dagNode): Tag Parent Control object to connect as a parent controller
             kwargs (variant): Other arguments for the icon type variations.
 
         Returns:
@@ -381,20 +385,67 @@ class MainComponent(object):
         att.addAttribute(ctl, "invSy", "bool", 0,  keyable=False, niceName="Invert Mirror SY")
         att.addAttribute(ctl, "invSz", "bool", 0,  keyable=False, niceName="Invert Mirror SZ")
 
-        self.addToGroup(ctl, "controllers")
+        if self.settings["ctlGrp"]:
+            ctlGrp = self.settings["ctlGrp"]
+            self.addToGroup(ctl, ctlGrp,  "controllers")
+        else:
+            ctlGrp = "controllers"
+            self.addToGroup(ctl, ctlGrp)
 
         #lock the control parent attributes if is not a control
-        if parent not in self.groups["controllers"]:
+        if parent not in self.groups[ctlGrp]:
             self.transform2Lock.append(parent)
 
         # Set the control shapes isHistoricallyInteresting
         for oShape in ctl.getShapes():
             oShape.isHistoricallyInteresting.set(False)
 
+        #set controller tag
+        if versions.current() >= 201650:
+            try:
+                oldTag = pm.PyNode( ctl.name()+"_tag" )
+                if not oldTag.controllerObject.connections():
+                    # NOTE:  The next line is comment out. Because this will happend alot since maya does't clean
+                    # controller tags after deleting the control Object of the tag. This have been log to Autodesk.
+                    # If orphane tags are found, it will be clean in silence.
+                    # pm.displayWarning("Orphane Tag: %s  will be delete and created new for: %s"%(oldTag.name(), ctl.name()))
+                    pm.delete(oldTag)
+
+            except:
+                pass
+            pm.controller(ctl)
+
+
+            if tp:
+                ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
+                tpTagNode = pm.PyNode(pm.controller(tp, q=True)[0])
+                tpTagNode.cycleWalkSibling.set(True)
+                pm.connectAttr(tpTagNode.prepopulate, ctt.prepopulate, f=True)
+                # The connectAttr to the children attribute is giving error
+                # i.e:  pm.connectAttr(ctt.attr("parent"), tpTagNode.attr("children"), na=True)
+                # if using the next available option tag
+                # I was expecting to use ctt.setParent(tp) but doest't work as expected.
+                # After reading the documentation this method looks prety useless.
+                # Looks like is boolean and works based on selection :(
+
+                # this is a dirty loop workaround. Naaah!
+                i = 0
+                while True:
+                    try:
+                        pm.connectAttr(ctt.parent, tpTagNode.attr("children[%s]"%str(i)))
+                        break
+                    except:
+                        i+=1
+                        if i >100:
+                            pm.displayWarning("The controller tag for %s has reached the limit index of 100 children"%ctl.name())
+                            break
+
+
+
         return ctl
 
 
-    def addToGroup(self, objects, names=["hidden"]):
+    def addToGroup(self, objects, names=["hidden"], parentGrp=None):
         """
         Add the object in a collection for later group creation.
 
@@ -414,6 +465,14 @@ class MainComponent(object):
                 self.groups[name] = []
 
             self.groups[name].extend(objects)
+
+            if parentGrp:
+                if parentGrp not in self.subGroups.keys():
+                    self.subGroups[parentGrp] = []
+                if name not in self.subGroups[parentGrp]:
+                    self.subGroups[parentGrp].append(name)
+
+
 
     # =====================================================
     # PROPERTY
@@ -593,6 +652,7 @@ class MainComponent(object):
         """
         for name in self.guide.objectNames:
             self.relatives[name] = self.root
+            self.controlRelatives[name] = self.global_ctl
 
 
     def getRelation(self, name):
@@ -611,6 +671,36 @@ class MainComponent(object):
             return False
 
         return self.relatives[name]
+
+    def getControlRelation(self, name):
+        """
+        Return the relational object from guide to rig.
+
+        Args:
+            name (str): Local name of the guide object.
+
+        Returns:
+            dagNode: The relational object.
+
+        """
+        if name not in self.controlRelatives.keys():
+            mgear.log("Control tag relative: Can't find reference for object : " + self.fullName + "." + name, mgear.sev_error)
+            return False
+
+        return self.controlRelatives[name]
+
+    def initControlTag(self):
+        """Initialice the control tag parent.
+        The controllers tag are a new feature from Maya 2016.5 and up.
+        Helps to stablish realtions with a custom walkpick.
+        Also tells maya how to evaluate the control properly on parallel evaluation
+        """
+        self.parentCtlTag = None
+        if versions.current() >= 201650:
+            parent_name = "none"
+            if self.guide.parentComponent is not None:
+                parent_name = self.guide.parentComponent.getName(self.guide.parentLocalName)
+            self.parentCtlTag = self.rig.findControlRelative(parent_name)
 
 
     def initConnector(self):
@@ -845,6 +935,7 @@ class MainComponent(object):
 
         """
         return
+
 
     # =====================================================
     # JOINTS STRUCTURE

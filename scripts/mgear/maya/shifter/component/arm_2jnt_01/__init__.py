@@ -63,23 +63,23 @@ class Component(MainComponent):
         self.length2 = vec.getDistance(self.guide.apos[2], self.guide.apos[3])
 
         # 1 bone chain for upv ref
-        self.armChainUpvRef= pri.add2DChain(self.root, self.getName("armUpvRef%s_jnt"), [self.guide.apos[0],self.guide.apos[2]], self.normal, False, self.WIP)
+        self.armChainUpvRef = pri.add2DChain(self.root, self.getName("armUpvRef%s_jnt"), [self.guide.apos[0],self.guide.apos[2]], self.normal, False, self.WIP)
         self.armChainUpvRef[1].setAttr("jointOrientZ", self.armChainUpvRef[1].getAttr("jointOrientZ")*-1)
 
         # FK Controlers -----------------------------------
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root, self.getName("fk0_npo"), t)
-        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
+        self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0),tp=self.parentCtlTag)
         att.setKeyableAttributes(self.fk0_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
         self.fk1_npo = pri.addTransform(self.fk0_ctl, self.getName("fk1_npo"), t)
-        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0))
+        self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0),tp=self.fk0_ctl )
         att.setKeyableAttributes(self.fk1_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
         self.fk2_npo = pri.addTransform(self.fk1_ctl, self.getName("fk2_npo"), t)
-        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0))
+        self.fk2_ctl = self.addCtl(self.fk2_npo, "fk2_ctl", t, self.color_fk, "cube", w=self.length2, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length2*self.n_factor,0,0), tp=self.fk1_ctl)
         att.setKeyableAttributes(self.fk2_ctl)
 
         self.fk_ctl = [self.fk0_ctl, self.fk1_ctl, self.fk2_ctl]
@@ -92,14 +92,14 @@ class Component(MainComponent):
 
         self.ik_cns = pri.addTransformFromPos(self.root, self.getName("ik_cns"), self.guide.pos["wrist"])
 
-        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["wrist"]), self.color_ik, "null", w=self.size*.12)
+        self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", tra.getTransformFromPos(self.guide.pos["wrist"]), self.color_ik, "null", w=self.size*.12, tp=self.parentCtlTag)
         att.setInvertMirror(self.ikcns_ctl, ["tx", "ty", "tz"])
 
         if self.negate:
             m = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "x-y", True)
         else:
             m = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "xy", False)
-        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12)
+        self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12, tp=self.ikcns_ctl)
         att.setKeyableAttributes(self.ik_ctl)
         att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
 
@@ -112,7 +112,7 @@ class Component(MainComponent):
 
         self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
-        self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
+        self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12, tp=self.parentCtlTag)
         if self.settings["mirrorMid"]:
             if self.negate:
                 self.upv_cns.rz.set(180)
@@ -125,7 +125,7 @@ class Component(MainComponent):
         if self.settings["ikTR"]:
             self.ikRot_npo = pri.addTransform(self.root, self.getName("ikRot_npo"), m)
             self.ikRot_cns = pri.addTransform(self.ikRot_npo, self.getName("ikRot_cns"), m)
-            self.ikRot_ctl = self.addCtl(self.ikRot_cns, "ikRot_ctl", m, self.color_ik, "sphere", w=self.size*.12)
+            self.ikRot_ctl = self.addCtl(self.ikRot_cns, "ikRot_ctl", m, self.color_ik, "sphere", w=self.size*.12, tp=self.ik_ctl)
             att.setKeyableAttributes(self.ikRot_ctl, self.r_params)
 
 
@@ -158,7 +158,7 @@ class Component(MainComponent):
         # Mid Controler ------------------------------------
         t = tra.getTransform(self.ctrn_loc)
         self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
-        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2, tp=self.parentCtlTag)
         if self.settings["mirrorMid"]:
             if self.negate:
                 self.mid_cns.rz.set(180)
@@ -461,6 +461,11 @@ class Component(MainComponent):
         self.jointRelatives["elbow"] = self.settings["div0"] + 2
         self.jointRelatives["wrist"] = len(self.div_cns)-1
         self.jointRelatives["eff"] = -1
+
+        self.controlRelatives["root"] = self.fk0_ctl
+        self.controlRelatives["elbow"] = self.fk1_ctl
+        self.controlRelatives["wrist"] = self.fk2_ctl
+        self.controlRelatives["eff"] = self.fk2_ctl
     ## standard connection definition.
     # @param self
     def connect_standard(self):

@@ -224,6 +224,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
                 self.updateListAttr(sender, "upvrefarray")
             elif sender == self.settingsTab.pinRefArray_listWidget:
                 self.updateListAttr(sender, "pinrefarray")
+            return True
+        else:
+            return QtWidgets.QDialog.eventFilter(self, sender, event)
 
 
 

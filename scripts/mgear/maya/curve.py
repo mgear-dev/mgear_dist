@@ -101,6 +101,50 @@ def addCurve(parent, name, points, close=False, degree=3, m=dt.Matrix()):
 
     return node
 
+def createCurveFromOrderedEdges(edgeLoop, startVertex, name, parent=None, degree=3):
+    """Create a curve for a edgeloop ordering the list from starting vertex
+
+    Args:
+        edgeLoop (list ): List of edges
+        startVertex (vertex): Starting vertex
+        name (str): Name of the new curve.
+        parent (dagNode): Parent of the new curve.
+        degree (int): Degree of the new curve.
+
+    Returns:
+        dagNode: The newly created curve.
+    """
+    orderedEdges = []
+    for e in edgeLoop:
+        if startVertex in e.connectedVertices():
+            orderedEdges.append(e)
+            next = e
+            break
+    count = 0
+    while True:
+        for e in edgeLoop:
+            if e in next.connectedEdges() and e not in orderedEdges:
+                orderedEdges.append(e)
+                next = e
+                pass
+        if len(orderedEdges) == len(edgeLoop):
+            break
+        count +=1
+        if count > 100:
+            break
+
+    # return orderedEdges
+    orderedVertex = [startVertex]
+    orderedVertexPos = [startVertex.getPosition(space='world')]
+    for e in orderedEdges:
+
+        for v in e.connectedVertices():
+            if v not in orderedVertex:
+                orderedVertex.append(v)
+                orderedVertexPos.append(v.getPosition(space='world'))
+
+    crv = addCurve(parent, name, orderedVertexPos, degree=degree)
+    return crv
 
 def createCuveFromEdges(edgeList, name, parent=None, degree=3, sortingAxis="x"):
     """

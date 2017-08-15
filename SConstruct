@@ -46,6 +46,7 @@ targets = [
       "custom": [maya.Require],
       "install": {"scripts": excons.glob("scripts/*.py"),
                   "scripts/mgear": filter(lambda x: not x.endswith(".py.in"), excons.glob("scripts/mgear/*")),
+                  "tests": excons.glob("tests/*.py"),
                   "": mgearmod},
       "deps": mgearinit
    },

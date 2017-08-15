@@ -58,7 +58,7 @@ class Component(MainComponent):
 
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, axis="xy", negate=self.negate)
         self.ctl_npo = pri.addTransform(self.root, self.getName("ctl_npo"), t)
-        self.ctl = self.addCtl(self.ctl_npo, "ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
+        self.ctl = self.addCtl(self.ctl_npo, "ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0), tp=self.parentCtlTag)
         t = tra.getTransformFromPos(self.guide.apos[1])
         self.orbit_ref1 = pri.addTransform(self.ctl, self.getName("orbit_ref1"), t)
         self.orbit_ref2 = pri.addTransform(self.root, self.getName("orbit_ref2"), t)
@@ -66,7 +66,7 @@ class Component(MainComponent):
         self.orbit_cns = pri.addTransform(self.ctl, self.getName("orbit_cns"), t)
 
         self.orbit_npo = pri.addTransform(self.orbit_cns, self.getName("orbit_npo"), t)
-        self.orbit_ctl = self.addCtl(self.orbit_npo, "orbit_ctl", t, self.color_fk, "sphere", w=self.length0/4)
+        self.orbit_ctl = self.addCtl(self.orbit_npo, "orbit_ctl", t, self.color_fk, "sphere", w=self.length0/4, tp=self.ctl)
 
         self.jnt_pos.append([self.ctl, "shoulder"])
     # =====================================================
@@ -100,6 +100,9 @@ class Component(MainComponent):
     def setRelation(self):
         self.relatives["root"] = self.ctl
         self.relatives["tip"] = self.orbit_ctl
+
+        self.controlRelatives["root"] = self.ctl
+        self.controlRelatives["tip"] = self.orbit_ctl
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["tip"] = 0
