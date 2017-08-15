@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.shifter.component &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.shifter.component &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.shifter.component.guide" href="guide.html"/>
         <link rel="prev" title="mgear.maya.shifter.gui" href="../gui.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.shifter.component</li>
+        
+      <li>mgear.maya.shifter.component</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../../../_sources/mgear/maya/shifter/component/component.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../../../_sources/mgear/maya/shifter/component/component.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -184,13 +213,13 @@
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.rig">
 <code class="descname">rig</code><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.rig" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>Rig</em> &#8211; The parent Rig of this component.</p>
+<dd><p><em>Rig</em> – The parent Rig of this component.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.guide">
 <code class="descname">guide</code><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.guide" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>ComponentGuide</em> &#8211; The guide for this component.</p>
+<dd><p><em>ComponentGuide</em> – The guide for this component.</p>
 </dd></dl>
 
 <dl class="method">
@@ -203,15 +232,15 @@ Note that animatable and keyable are True per default.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
-<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
-<li><strong>attType</strong> (<em>str</em>) &#8211; The Attribute Type. Exp: &#8216;string&#8217;, &#8216;bool&#8217;, &#8216;long&#8217;, etc..</li>
-<li><strong>value</strong> (<em>float or int</em>) &#8211; The default value.</li>
-<li><strong>enum</strong> (<em>list of str</em>) &#8211; The list of elements in the enumerate control</li>
-<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>attType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, ‘long’, etc..</li>
+<li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – The default value.</li>
+<li><strong>enum</strong> (<em>list of str</em>) – The list of elements in the enumerate control</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
 </ul>
 </td>
 </tr>
@@ -235,16 +264,16 @@ Note that animatable and keyable are True per default.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
-<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
-<li><strong>attType</strong> (<em>str</em>) &#8211; The Attribute Type. Exp: &#8216;string&#8217;, &#8216;bool&#8217;, &#8216;long&#8217;, etc..</li>
-<li><strong>value</strong> (<em>float or int</em>) &#8211; The default value.</li>
-<li><strong>minValue</strong> (<em>float or int</em>) &#8211; minimum value. (optional)</li>
-<li><strong>maxValue</strong> (<em>float or int</em>) &#8211; maximum value. (optional)</li>
-<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>attType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, ‘long’, etc..</li>
+<li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – The default value.</li>
+<li><strong>minValue</strong> (<em>float</em><em> or </em><em>int</em>) – minimum value. (optional)</li>
+<li><strong>maxValue</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
 </ul>
 </td>
 </tr>
@@ -281,7 +310,7 @@ Only if you need to use an new connection (not the standard).</p>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.component.MainComponent.addCtl">
-<code class="descname">addCtl</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>m</em>, <em>color</em>, <em>icon</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addCtl" title="Permalink to this definition">¶</a></dt>
+<code class="descname">addCtl</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>m</em>, <em>color</em>, <em>icon</em>, <em>tp=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addCtl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the control and apply the shape, if this is alrealdy stored
 in the guide controllers grp.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -289,12 +318,13 @@ in the guide controllers grp.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The control parent</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The control name.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The transfromation matrix for the control.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color for the control in idex or RGB.</li>
-<li><strong>icon</strong> (<em>str</em>) &#8211; The controls default shape.</li>
-<li><strong>kwargs</strong> (<em>variant</em>) &#8211; Other arguments for the icon type variations.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The control parent</li>
+<li><strong>name</strong> (<em>str</em>) – The control name.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The transfromation matrix for the control.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color for the control in idex or RGB.</li>
+<li><strong>icon</strong> (<em>str</em>) – The controls default shape.</li>
+<li><strong>tp</strong> (<em>dagNode</em>) – Tag Parent Control object to connect as a parent controller</li>
+<li><strong>kwargs</strong> (<em>variant</em>) – Other arguments for the icon type variations.</li>
 </ul>
 </td>
 </tr>
@@ -317,17 +347,22 @@ Note that animatable and keyable are True per default.</p>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.component.MainComponent.addJoint">
-<code class="descname">addJoint</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em>, <em>newActiveJnt=None</em>, <em>UniScale=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addJoint" title="Permalink to this definition">¶</a></dt>
+<code class="descname">addJoint</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em>, <em>newActiveJnt=None</em>, <em>UniScale=True</em>, <em>segComp=0</em>, <em>gearMulMatrix=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addJoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add joint as child of the active joint or under driver object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>obj</strong> (<em>dagNode</em>) &#8211; The input driver object for the joint.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The joint name.</li>
-<li><strong>newActiveJnt</strong> (<em>bool or dagNode</em>) &#8211; If a joint is pass, this joint will be the active joint
+<li><strong>obj</strong> (<em>dagNode</em>) – The input driver object for the joint.</li>
+<li><strong>name</strong> (<em>str</em>) – The joint name.</li>
+<li><strong>newActiveJnt</strong> (<em>bool</em><em> or </em><em>dagNode</em>) – If a joint is pass, this joint will be the active joint
 and parent of the newly created joint.</li>
+<li><strong>UniScale</strong> (<em>bool</em>) – Connects the joint scale with the Z axis for a unifor scalin, if set False
+will connect with each axis separated.</li>
+<li><strong>segComp</strong> (<em>bool</em>) – Set True or False the segment compensation in the joint..</li>
+<li><strong>gearMulMatrix</strong> (<em>bool</em>) – Use the custom gear_multiply matrix node, if False will use
+Maya’s default mulMatrix node.</li>
 </ul>
 </td>
 </tr>
@@ -371,16 +406,16 @@ Note that animatable and keyable are False per default.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
-<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
-<li><strong>attType</strong> (<em>str</em>) &#8211; The Attribute Type. Exp: &#8216;string&#8217;, &#8216;bool&#8217;, &#8216;long&#8217;, etc..</li>
-<li><strong>value</strong> (<em>float or int</em>) &#8211; The default value.</li>
-<li><strong>minValue</strong> (<em>float or int</em>) &#8211; minimum value. (optional)</li>
-<li><strong>maxValue</strong> (<em>float or int</em>) &#8211; maximum value. (optional)</li>
-<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>attType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, ‘long’, etc..</li>
+<li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – The default value.</li>
+<li><strong>minValue</strong> (<em>float</em><em> or </em><em>int</em>) – minimum value. (optional)</li>
+<li><strong>maxValue</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
 </ul>
 </td>
 </tr>
@@ -396,15 +431,15 @@ Note that animatable and keyable are False per default.</p>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.component.MainComponent.addToGroup">
-<code class="descname">addToGroup</code><span class="sig-paren">(</span><em>objects, names=['hidden']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addToGroup" title="Permalink to this definition">¶</a></dt>
+<code class="descname">addToGroup</code><span class="sig-paren">(</span><em>objects, names=[‘hidden’], parentGrp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addToGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the object in a collection for later group creation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>objects</strong> (<em>dagNode or list of dagNode</em>) &#8211; Object to put in the group.</li>
-<li><strong>names</strong> (<em>str or list of str</em>) &#8211; Names of the groups to create.</li>
+<li><strong>objects</strong> (<em>dagNode</em><em> or </em><em>list of dagNode</em>) – Object to put in the group.</li>
+<li><strong>names</strong> (<em>str</em><em> or </em><em>list of str</em>) – Names of the groups to create.</li>
 </ul>
 </td>
 </tr>
@@ -427,9 +462,9 @@ Note that animatable and keyable are False per default.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>refArray</strong> (<em>list of dagNode</em>) &#8211; List of driver objects</li>
-<li><strong>cns_obj</strong> (<em>dagNode</em>) &#8211; The driven object.</li>
-<li><strong>upVAttr</strong> (<em>bool</em>) &#8211; Set if the ref Array is for IK or Up vector</li>
+<li><strong>refArray</strong> (<em>list of dagNode</em>) – List of driver objects</li>
+<li><strong>cns_obj</strong> (<em>dagNode</em>) – The driven object.</li>
+<li><strong>upVAttr</strong> (<em>bool</em>) – Set if the ref Array is for IK or Up vector</li>
 </ul>
 </td>
 </tr>
@@ -446,11 +481,11 @@ Note that animatable and keyable are False per default.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>refArray</strong> (<a class="reference internal" href="../../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) &#8211; List of driver objects divided by &#8221;,&#8221;.</li>
-<li><strong>cns_obj</strong> (<em>dagNode</em>) &#8211; The driven object.</li>
-<li><strong>upVAttr</strong> (<em>bool</em>) &#8211; Set if the ref Array is for IK or Up vector</li>
-<li><strong>init_ref</strong> (<em>list of dagNode</em>) &#8211; </li>
-<li><strong>skipTranslate</strong> (<em>bool</em>) &#8211; if True will skip the translation connections</li>
+<li><strong>refArray</strong> (<a class="reference internal" href="../../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) – List of driver objects divided by “,”.</li>
+<li><strong>cns_obj</strong> (<em>dagNode</em>) – The driven object.</li>
+<li><strong>upVAttr</strong> (<em>bool</em>) – Set if the ref Array is for IK or Up vector</li>
+<li><strong>init_ref</strong> (<em>list of dagNode</em>) – Set the initial default ref connections</li>
+<li><strong>skipTranslate</strong> (<em>bool</em>) – if True will skip the translation connections</li>
 </ul>
 </td>
 </tr>
@@ -491,8 +526,8 @@ Note that animatable and keyable are False per default.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>refArray</strong> (<em>list of dagNode</em>) &#8211; List of driver objects</li>
-<li><strong>cns_obj</strong> (<em>dagNode</em>) &#8211; The driven object.</li>
+<li><strong>refArray</strong> (<em>list of dagNode</em>) – List of driver objects</li>
+<li><strong>cns_obj</strong> (<em>dagNode</em>) – The driven object.</li>
 </ul>
 </td>
 </tr>
@@ -526,11 +561,47 @@ Note that animatable and keyable are False per default.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<em>list of vectors</em>) &#8211; List of 3 vectors.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<em>list of vectors</em>) – List of 3 vectors.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The 3 vectors plane binormal.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../../vector.html#module-mgear.maya.vector" title="mgear.maya.vector">vector</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.component.MainComponent.getCompName">
+<code class="descname">getCompName</code><span class="sig-paren">(</span><em>name=”</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getCompName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the component type name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – The name to concatenate to the component name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The name.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.component.MainComponent.getControlRelation">
+<code class="descname">getControlRelation</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getControlRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the relational object from guide to rig.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Local name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relational object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dagNode</td>
 </tr>
 </tbody>
 </table>
@@ -550,15 +621,15 @@ Note that animatable and keyable are False per default.</p>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.component.MainComponent.getName">
-<code class="descname">getName</code><span class="sig-paren">(</span><em>name=''</em>, <em>side=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getName" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getName</code><span class="sig-paren">(</span><em>name=”</em>, <em>side=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the name for component element</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; The name to concatenate to the component name. (Optional)</li>
-<li><strong>side</strong> (<em>str</em>) &#8211; The side (Optional).</li>
+<li><strong>name</strong> (<em>str</em>) – The name to concatenate to the component name. (Optional)</li>
+<li><strong>side</strong> (<em>str</em>) – The side (Optional).</li>
 </ul>
 </td>
 </tr>
@@ -580,7 +651,7 @@ Note that animatable and keyable are False per default.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<em>list of vectors</em>) &#8211; List of 3 vectors.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<em>list of vectors</em>) – List of 3 vectors.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The 3 vectors plane normal.</td>
 </tr>
@@ -598,7 +669,7 @@ Note that animatable and keyable are False per default.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) &#8211; Local name of the guide object.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Local name of the guide object.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relational object.</td>
 </tr>
@@ -621,6 +692,15 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="mgear.maya.shifter.component.MainComponent.initControlTag">
+<code class="descname">initControlTag</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.initControlTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialice the control tag parent.
+The controllers tag are a new feature from Maya 2016.5 and up.
+Helps to stablish realtions with a custom walkpick.
+Also tells maya how to evaluate the control properly on parallel evaluation</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="mgear.maya.shifter.component.MainComponent.initialHierarchy">
 <code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.initialHierarchy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the inital structure for the rig.</p>
@@ -634,7 +714,7 @@ Note that animatable and keyable are False per default.</p>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.local_params">
-<code class="descname">local_params</code><em class="property"> = ('tx', 'ty', 'tz', 'rx', 'ry', 'rz', 'ro', 'sx', 'sy', 'sz')</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.local_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">local_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘ro’, ‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.local_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -661,17 +741,17 @@ Note that animatable and keyable are False per default.</p>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.r_params">
-<code class="descname">r_params</code><em class="property"> = ('rx', 'ry', 'rz', 'ro')</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.r_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">r_params</code><em class="property"> = (‘rx’, ‘ry’, ‘rz’, ‘ro’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.r_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.rs_params">
-<code class="descname">rs_params</code><em class="property"> = ('rx', 'ry', 'rz', 'ro', 'sx', 'sy', 'sz')</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.rs_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">rs_params</code><em class="property"> = (‘rx’, ‘ry’, ‘rz’, ‘ro’, ‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.rs_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.s_params">
-<code class="descname">s_params</code><em class="property"> = ('sx', 'sy', 'sz')</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.s_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">s_params</code><em class="property"> = (‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.s_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -722,23 +802,31 @@ Note that animatable and keyable are False per default.</p>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.steps">
-<code class="descname">steps</code><em class="property"> = ['Objects', 'Properties', 'Operators', 'Connect', 'Joints', 'Finalize']</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.steps" title="Permalink to this definition">¶</a></dt>
+<code class="descname">steps</code><em class="property"> = [‘Objects’, ‘Properties’, ‘Operators’, ‘Connect’, ‘Joints’, ‘Finalize’]</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.steps" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.t_params">
-<code class="descname">t_params</code><em class="property"> = ('tx', 'ty', 'tz')</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.t_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">t_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.t_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.tr_params">
-<code class="descname">tr_params</code><em class="property"> = ('tx', 'ty', 'tz', 'rx', 'ry', 'rz', 'ro')</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.tr_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">tr_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘ro’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.tr_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.MainComponent.type">
 <code class="descname">type</code><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the type of the component</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.component.MainComponent.validateProxyChannels">
+<code class="descname">validateProxyChannels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.validateProxyChannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the Maya version to determinate if we can use proxy channels
+and check user setting on the guide.
+This feature is available from 2016.5</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -762,15 +850,18 @@ Note that animatable and keyable are False per default.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="guide.html" class="btn btn-neutral float-right" title="mgear.maya.shifter.component.guide" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="guide.html" class="btn btn-neutral float-right" title="mgear.maya.shifter.component.guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../gui.html" class="btn btn-neutral" title="mgear.maya.shifter.gui" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../gui.html" class="btn btn-neutral" title="mgear.maya.shifter.gui" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -801,10 +892,11 @@ Note that animatable and keyable are False per default.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../../../_static/jquery.js"></script>

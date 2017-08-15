@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.icon &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.icon &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.log" href="log.html"/>
         <link rel="prev" title="mgear.maya.fcurve" href="fcurve.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.icon</li>
+        
+      <li>mgear.maya.icon</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/icon.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/icon.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -179,20 +208,20 @@
 <p>Predefined nurbsCurve shapes to be use as a rigging control Icons</p>
 <dl class="function">
 <dt id="mgear.maya.icon.arrow">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">arrow</code><span class="sig-paren">(</span><em>parent=None, name='arrow', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.arrow" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">arrow</code><span class="sig-paren">(</span><em>parent=None, name=’arrow’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.arrow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a ARROW shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -208,20 +237,20 @@
 
 <dl class="function">
 <dt id="mgear.maya.icon.axis">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">axis</code><span class="sig-paren">(</span><em>parent=None, name='axis', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.axis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">axis</code><span class="sig-paren">(</span><em>parent=None, name=’axis’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.axis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a AXIS shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -237,20 +266,20 @@
 
 <dl class="function">
 <dt id="mgear.maya.icon.circle">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">circle</code><span class="sig-paren">(</span><em>parent=None, name='circle', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.circle" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">circle</code><span class="sig-paren">(</span><em>parent=None, name=’circle’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.circle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CIRCLE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -266,20 +295,20 @@
 
 <dl class="function">
 <dt id="mgear.maya.icon.compas">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">compas</code><span class="sig-paren">(</span><em>parent=None, name='compas', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.compas" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">compas</code><span class="sig-paren">(</span><em>parent=None, name=’compas’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.compas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a COMPAS shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -295,7 +324,7 @@
 
 <dl class="function">
 <dt id="mgear.maya.icon.create">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">create</code><span class="sig-paren">(</span><em>parent=None, name='icon', m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), color=[0, 0, 0], icon='cube', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.create" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">create</code><span class="sig-paren">(</span><em>parent=None, name=’icon’, m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), color=[0, 0, 0], icon=’cube’, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.create" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Create icon master function.</strong>
 This function centralize all the icons creation</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -303,13 +332,13 @@ This function centralize all the icons creation</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the new icon</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the Icon.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; Transformation matrix of the icon</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>icon</strong> (<em>str</em>) &#8211; Icon type. Options: &#8220;cube&#8221;, &#8220;pyramid&#8221;, &#8220;square&#8221;, &#8220;flower&#8221;, &#8220;circle&#8221;, &#8220;cylinder&#8221;, &#8220;compas&#8221;, &#8220;diamond&#8221;,
-&#8220;cubewithpeak&#8221;, &#8220;sphere&#8221;, &#8220;arrow&#8221;, &#8220;crossarrow&#8221;, &#8220;cross&#8221;, &#8220;null&#8221;</li>
-<li><strong>kwargs</strong> &#8211; The keyword arguments can vary depending of the icon type.
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the new icon</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the Icon.</li>
+<li><strong>m</strong> (<em>matrix</em>) – Transformation matrix of the icon</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>icon</strong> (<em>str</em>) – Icon type. Options: “cube”, “pyramid”, “square”, “flower”, “circle”, “cylinder”, “compas”, “diamond”,
+“cubewithpeak”, “sphere”, “arrow”, “crossarrow”, “cross”, “null”</li>
+<li><strong>kwargs</strong> – The keyword arguments can vary depending of the icon type.
 Please refear to the specific icon method for more info.</li>
 </ul>
 </td>
@@ -326,20 +355,20 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.cross">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">cross</code><span class="sig-paren">(</span><em>parent=None, name='cross', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.cross" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">cross</code><span class="sig-paren">(</span><em>parent=None, name=’cross’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.cross" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CROSS shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -355,20 +384,20 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.crossarrow">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">crossarrow</code><span class="sig-paren">(</span><em>parent=None, name='crossArrow', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.crossarrow" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">crossarrow</code><span class="sig-paren">(</span><em>parent=None, name=’crossArrow’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.crossarrow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CROSS ARROW shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -384,22 +413,22 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.cube">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">cube</code><span class="sig-paren">(</span><em>parent=None, name='cube', width=1, height=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.cube" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">cube</code><span class="sig-paren">(</span><em>parent=None, name=’cube’, width=1, height=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.cube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CUBE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>height</strong> (<em>float</em>) &#8211; Height of the shape.</li>
-<li><strong>depth</strong> (<em>float</em>) &#8211; Depth of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>height</strong> (<em>float</em>) – Height of the shape.</li>
+<li><strong>depth</strong> (<em>float</em>) – Depth of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -415,20 +444,20 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.cubewithpeak">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">cubewithpeak</code><span class="sig-paren">(</span><em>parent=None, name='cubewithpeak', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.cubewithpeak" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">cubewithpeak</code><span class="sig-paren">(</span><em>parent=None, name=’cubewithpeak’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.cubewithpeak" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CUBE WITH PEAK shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -444,21 +473,21 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.cylinder">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">cylinder</code><span class="sig-paren">(</span><em>parent=None, name='cylinder', width=1, heigth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.cylinder" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">cylinder</code><span class="sig-paren">(</span><em>parent=None, name=’cylinder’, width=1, heigth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.cylinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CYLINDER shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>height</strong> (<em>float</em>) &#8211; Height of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>height</strong> (<em>float</em>) – Height of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -474,22 +503,22 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.diamond">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">diamond</code><span class="sig-paren">(</span><em>parent=None, name='diamond', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.diamond" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">diamond</code><span class="sig-paren">(</span><em>parent=None, name=’diamond’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.diamond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a DIAMOND shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>height</strong> (<em>float</em>) &#8211; Height of the shape.</li>
-<li><strong>depth</strong> (<em>float</em>) &#8211; Depth of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>height</strong> (<em>float</em>) – Height of the shape.</li>
+<li><strong>depth</strong> (<em>float</em>) – Depth of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -505,20 +534,20 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.flower">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">flower</code><span class="sig-paren">(</span><em>parent=None, name='flower', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.flower" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">flower</code><span class="sig-paren">(</span><em>parent=None, name=’flower’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.flower" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a FLOWER shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -541,9 +570,9 @@ Please refear to the specific icon method for more info.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>point_pos</strong> (<em>list of vector</em>) &#8211; Point positions.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The rotation offset of the curve from its center. In radians.</li>
+<li><strong>point_pos</strong> (<em>list of vector</em>) – Point positions.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The rotation offset of the curve from its center. In radians.</li>
 </ul>
 </td>
 </tr>
@@ -559,7 +588,7 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.guideBladeIcon">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">guideBladeIcon</code><span class="sig-paren">(</span><em>parent=None, name='blade', lenX=1.0, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.guideBladeIcon" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">guideBladeIcon</code><span class="sig-paren">(</span><em>parent=None, name=’blade’, lenX=1.0, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.guideBladeIcon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a BLADE GUIDE shape.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -570,13 +599,13 @@ Please refear to the specific icon method for more info.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>lenX</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>lenX</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -592,7 +621,7 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.guideLocatorIcon">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">guideLocatorIcon</code><span class="sig-paren">(</span><em>parent=None, name='locator', width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.guideLocatorIcon" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">guideLocatorIcon</code><span class="sig-paren">(</span><em>parent=None, name=’locator’, width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.guideLocatorIcon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a LOCATOR GUIDE shape.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -603,13 +632,13 @@ Please refear to the specific icon method for more info.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -625,7 +654,7 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.guideRootIcon">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">guideRootIcon</code><span class="sig-paren">(</span><em>parent=None, name='root', width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.guideRootIcon" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">guideRootIcon</code><span class="sig-paren">(</span><em>parent=None, name=’root’, width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.guideRootIcon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a ROOT GUIDE shape.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -636,13 +665,13 @@ Please refear to the specific icon method for more info.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -658,20 +687,20 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.null">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">null</code><span class="sig-paren">(</span><em>parent=None, name='null', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.null" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">null</code><span class="sig-paren">(</span><em>parent=None, name=’null’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.null" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a NULL shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -687,22 +716,22 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.pyramid">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">pyramid</code><span class="sig-paren">(</span><em>parent=None, name='pyramid', width=1, height=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.pyramid" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">pyramid</code><span class="sig-paren">(</span><em>parent=None, name=’pyramid’, width=1, height=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.pyramid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a PYRAMIDE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>height</strong> (<em>float</em>) &#8211; Height of the shape.</li>
-<li><strong>depth</strong> (<em>float</em>) &#8211; Depth of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>height</strong> (<em>float</em>) – Height of the shape.</li>
+<li><strong>depth</strong> (<em>float</em>) – Depth of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -725,8 +754,8 @@ Please refear to the specific icon method for more info.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The object</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 </ul>
 </td>
 </tr>
@@ -736,20 +765,20 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.sphere">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">sphere</code><span class="sig-paren">(</span><em>parent=None, name='sphere', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.sphere" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">sphere</code><span class="sig-paren">(</span><em>parent=None, name=’sphere’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.sphere" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a SPHERE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -765,21 +794,21 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.maya.icon.square">
-<code class="descclassname">mgear.maya.icon.</code><code class="descname">square</code><span class="sig-paren">(</span><em>parent=None, name='square', width=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.square" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.icon.</code><code class="descname">square</code><span class="sig-paren">(</span><em>parent=None, name=’square’, width=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.icon.square" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a SQUARE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent object of the newly created curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the curve.</li>
-<li><strong>width</strong> (<em>float</em>) &#8211; Width of the shape.</li>
-<li><strong>depth</strong> (<em>float</em>) &#8211; Depth of the shape.</li>
-<li><strong>color</strong> (<em>int or list of float</em>) &#8211; The color in index base or RGB.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz position offset of the curve from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The xyz rotation offset of the curve from its center. xyz in radians</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>depth</strong> (<em>float</em>) – Depth of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz position offset of the curve from its center.</li>
+<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from its center. xyz in radians</li>
 </ul>
 </td>
 </tr>
@@ -797,15 +826,18 @@ Please refear to the specific icon method for more info.</li>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="log.html" class="btn btn-neutral float-right" title="mgear.maya.log" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="log.html" class="btn btn-neutral float-right" title="mgear.maya.log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="fcurve.html" class="btn btn-neutral" title="mgear.maya.fcurve" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="fcurve.html" class="btn btn-neutral" title="mgear.maya.fcurve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -836,10 +868,11 @@ Please refear to the specific icon method for more info.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Shifter Rig Builder &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>Shifter Rig Builder &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="index.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="index.html"/>
         <link rel="up" title="Framework" href="framework.html"/>
         <link rel="next" title="mgear.maya.shifter" href="generated/mgear.maya.shifter.html"/>
         <link rel="prev" title="mgear.maya.vector" href="generated/mgear.maya.vector.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="baseModules.html">Base Modules</a></li>
@@ -99,6 +108,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modulesList.html">Modules flat List</a></li>
 </ul>
 </li>
@@ -122,8 +132,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -132,25 +144,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
           <li><a href="framework.html">Framework</a> &raquo;</li>
-      
-    <li>Shifter Rig Builder</li>
+        
+      <li>Shifter Rig Builder</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/shifterModules.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/shifterModules.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -166,8 +195,8 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Shifter is the default autorigging modular system included with mGear. This system is provided with the hope to solve the majority of your rigging necesities. From a freelancer or small boutique to a big studio.</p>
-<p>Shifter can be use in a wide variety of projects. Animated feature films, video games, VR, VFX, TV series, etc... and can build rigs for any kind of asset. i.e: cartoon characters, creatures, robots, props, vehicles, etc...</p>
-<p>Shifter have been build on top of mGear framework and can co-exist with other rigging systems inside mGear framework. In other words, if Shifter&#8217;s paradigm doesn&#8217;t fit your rigging needs, you can create another rigging system using the same mGear base modules.</p>
+<p>Shifter can be use in a wide variety of projects. Animated feature films, video games, VR, VFX, TV series, etc… and can build rigs for any kind of asset. i.e: cartoon characters, creatures, robots, props, vehicles, etc…</p>
+<p>Shifter have been build on top of mGear framework and can co-exist with other rigging systems inside mGear framework. In other words, if Shifter’s paradigm doesn’t fit your rigging needs, you can create another rigging system using the same mGear base modules.</p>
 </div>
 <div class="section" id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
@@ -181,7 +210,7 @@
 <td>Shifter base rig class.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="mgear/maya/shifter/guide.html#module-mgear.maya.shifter.guide" title="mgear.maya.shifter.guide"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.shifter.guide</span></code></a></td>
-<td>Shifter&#8217;s MainGuide class and RigGuide class.</td>
+<td>Shifter’s MainGuide class and RigGuide class.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="mgear/maya/shifter/gui.html#module-mgear.maya.shifter.gui" title="mgear.maya.shifter.gui"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.shifter.gui</span></code></a></td>
 <td></td>
@@ -190,7 +219,7 @@
 <td>Shifter component rig class.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="mgear/maya/shifter/component/guide.html#module-mgear.maya.shifter.component.guide" title="mgear.maya.shifter.component.guide"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.shifter.component.guide</span></code></a></td>
-<td>Shifter&#8217;s Component guide class.</td>
+<td>Shifter’s Component guide class.</td>
 </tr>
 </tbody>
 </table>
@@ -199,15 +228,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="generated/mgear.maya.shifter.html" class="btn btn-neutral float-right" title="mgear.maya.shifter" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="generated/mgear.maya.shifter.html" class="btn btn-neutral float-right" title="mgear.maya.shifter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="generated/mgear.maya.vector.html" class="btn btn-neutral" title="mgear.maya.vector" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="generated/mgear.maya.vector.html" class="btn btn-neutral" title="mgear.maya.vector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -238,10 +270,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>

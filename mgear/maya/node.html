@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.node &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.node &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.primitive" href="primitive.html"/>
         <link rel="prev" title="mgear.maya.meshNavigation" href="meshNavigation.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.node</li>
+        
+      <li>mgear.maya.node</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/node.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/node.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -186,8 +215,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputA</strong> (<em>attr or float</em>) &#8211; The attribute input A</li>
-<li><strong>inputB</strong> (<em>attr or float</em>) &#8211; The attribute input B</li>
+<li><strong>inputA</strong> (<em>attr</em><em> or </em><em>float</em>) – The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr</em><em> or </em><em>float</em>) – The attribute input B</li>
 </ul>
 </td>
 </tr>
@@ -212,7 +241,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> (<em>list of attr</em>) &#8211; The list of attributes to add</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> (<em>list of attr</em>) – The list of attributes to add</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The output attributes list.</td>
 </tr>
@@ -234,9 +263,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputA</strong> (<em>attr or list of 3 attr</em>) &#8211; The attribute input A</li>
-<li><strong>inputB</strong> (<em>attr or list of 3 attr</em>) &#8211; The attribute input B</li>
-<li><strong>blender</strong> (<em>float or attr</em>) &#8211; Float in 0 to 1 range or attribute string name.</li>
+<li><strong>inputA</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute input B</li>
+<li><strong>blender</strong> (<em>float</em><em> or </em><em>attr</em>) – Float in 0 to 1 range or attribute string name.</li>
 </ul>
 </td>
 </tr>
@@ -262,9 +291,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>input</strong> (<em>attr, float or list</em>) &#8211; The input value to clamp</li>
-<li><strong>in_min</strong> (<em>float</em>) &#8211; The minimun value to clamp</li>
-<li><strong>in_max</strong> (<em>float</em>) &#8211; The maximun value to clamp</li>
+<li><strong>input</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list</em>) – The input value to clamp</li>
+<li><strong>in_min</strong> (<em>float</em>) – The minimun value to clamp</li>
+<li><strong>in_max</strong> (<em>float</em>) – The maximun value to clamp</li>
 </ul>
 </td>
 </tr>
@@ -290,10 +319,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; The name for the new node.</li>
-<li><strong>inputs</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
-<li><strong>in_min</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
-<li><strong>in_max</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
+<li><strong>name</strong> (<em>str</em>) – The name for the new node.</li>
+<li><strong>inputs</strong> (<em>list of attr</em>) – The list of attributes</li>
+<li><strong>in_min</strong> (<em>list of attr</em>) – The list of attributes</li>
+<li><strong>in_max</strong> (<em>list of attr</em>) – The list of attributes</li>
 </ul>
 </td>
 </tr>
@@ -347,11 +376,11 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>firstTerm</strong> (<em>attr</em>) &#8211; The attribute string name for the first conditions.</li>
-<li><strong>secondTerm</strong> (<em>attr</em>) &#8211; The attribute string for the second conditions.</li>
-<li><strong>operator</strong> (<em>int</em>) &#8211; The operator to make the condition.</li>
-<li><strong>ifTrue</strong> (<em>bool or attr</em>) &#8211; If an attribute is provided will connect ifTrue output.</li>
-<li><strong>ifFalse</strong> (<em>bool or attr</em>) &#8211; If an attribute is provided will connect ifFalse output.</li>
+<li><strong>firstTerm</strong> (<em>attr</em>) – The attribute string name for the first conditions.</li>
+<li><strong>secondTerm</strong> (<em>attr</em>) – The attribute string for the second conditions.</li>
+<li><strong>operator</strong> (<em>int</em>) – The operator to make the condition.</li>
+<li><strong>ifTrue</strong> (<em>bool</em><em> or </em><em>attr</em>) – If an attribute is provided will connect ifTrue output.</li>
+<li><strong>ifFalse</strong> (<em>bool</em><em> or </em><em>attr</em>) – If an attribute is provided will connect ifFalse output.</li>
 </ul>
 </td>
 </tr>
@@ -376,7 +405,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>crv</strong> (<em>dagNode</em>) &#8211; The curve.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>crv</strong> (<em>dagNode</em>) – The curve.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the newly created node.</td>
 </tr>
@@ -397,7 +426,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>m</strong> (<em>str or attr</em>) &#8211; The matrix attribute name.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>m</strong> (<em>str</em><em> or </em><em>attr</em>) – The matrix attribute name.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the newly created node.</td>
 </tr>
@@ -419,9 +448,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>objA</strong> (<em>dagNode</em>) &#8211; The dagNode A.</li>
-<li><strong>objB</strong> (<em>dagNode</em>) &#8211; The dagNode B.</li>
-<li><strong>output</strong> (<em>attr</em>) &#8211; Output attribute.</li>
+<li><strong>objA</strong> (<em>dagNode</em>) – The dagNode A.</li>
+<li><strong>objB</strong> (<em>dagNode</em>) – The dagNode B.</li>
+<li><strong>output</strong> (<em>attr</em>) – Output attribute.</li>
 </ul>
 </td>
 </tr>
@@ -447,9 +476,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputA</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input A</li>
-<li><strong>inputB</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input B</li>
-<li><strong>output</strong> (<em>attr or list of attr</em>) &#8211; The attribute to connect the output.</li>
+<li><strong>inputA</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input B</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the output.</li>
 </ul>
 </td>
 </tr>
@@ -483,9 +512,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; The name for the new node.</li>
-<li><strong>inputs1</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
-<li><strong>inputs2</strong> (<em>list of attr</em>) &#8211; The list of attributes</li>
+<li><strong>name</strong> (<em>str</em>) – The name for the new node.</li>
+<li><strong>inputs1</strong> (<em>list of attr</em>) – The list of attributes</li>
+<li><strong>inputs2</strong> (<em>list of attr</em>) – The list of attributes</li>
 </ul>
 </td>
 </tr>
@@ -508,9 +537,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputA</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input A</li>
-<li><strong>inputB</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input B</li>
-<li><strong>output</strong> (<em>attr or list of attr</em>) &#8211; The attribute to connect the output.</li>
+<li><strong>inputA</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input B</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the output.</li>
 </ul>
 </td>
 </tr>
@@ -533,9 +562,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputA</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input A</li>
-<li><strong>inputB</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input B</li>
-<li><strong>output</strong> (<em>attr or list of attr</em>) &#8211; The attribute to connect the output.</li>
+<li><strong>inputA</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input B</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the output.</li>
 </ul>
 </td>
 </tr>
@@ -558,8 +587,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; The name for the new node.</li>
-<li><strong>inputs</strong> (<em>list of attr</em>) &#8211; The list of attributes to multiply</li>
+<li><strong>name</strong> (<em>str</em>) – The name for the new node.</li>
+<li><strong>inputs</strong> (<em>list of attr</em>) – The list of attributes to multiply</li>
 </ul>
 </td>
 </tr>
@@ -575,7 +604,7 @@
 
 <dl class="function">
 <dt id="mgear.maya.node.createMultMatrixNode">
-<code class="descclassname">mgear.maya.node.</code><code class="descname">createMultMatrixNode</code><span class="sig-paren">(</span><em>mA</em>, <em>mB</em>, <em>target=False</em>, <em>transform='srt'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createMultMatrixNode" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createMultMatrixNode</code><span class="sig-paren">(</span><em>mA</em>, <em>mB</em>, <em>target=False</em>, <em>transform=’srt’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createMultMatrixNode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create Maya multiply Matrix node.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -586,10 +615,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mA</strong> (<em>matrix</em>) &#8211; input matrix A.</li>
-<li><strong>mB</strong> (<em>matrix</em>) &#8211; input matrix B.</li>
-<li><strong>target</strong> (<em>dagNode</em>) &#8211; object target to apply the transformation</li>
-<li><strong>transform</strong> (<em>str</em>) &#8211; if target is True. out transform  to SRT valid value s r t</li>
+<li><strong>mA</strong> (<em>matrix</em>) – input matrix A.</li>
+<li><strong>mB</strong> (<em>matrix</em>) – input matrix B.</li>
+<li><strong>target</strong> (<em>dagNode</em>) – object target to apply the transformation</li>
+<li><strong>transform</strong> (<em>str</em>) – if target is True. out transform  to SRT valid value s r t</li>
 </ul>
 </td>
 </tr>
@@ -612,8 +641,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; The name for the new node.</li>
-<li><strong>inputs</strong> (<em>list of attr</em>) &#8211; The list of attributes to negate</li>
+<li><strong>name</strong> (<em>str</em>) – The name for the new node.</li>
+<li><strong>inputs</strong> (<em>list of attr</em>) – The list of attributes to negate</li>
 </ul>
 </td>
 </tr>
@@ -636,11 +665,11 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputA</strong> (<em>dagNode</em>) &#8211; The transfomr input 1</li>
-<li><strong>inputB</strong> (<em>dagNode</em>) &#8211; The transfomr input 2</li>
-<li><strong>blender</strong> (<em>float or attr</em>) &#8211; Float in 0 to 1 range or attribute string name.</li>
-<li><strong>rotInterpolation</strong> (<em>int</em>) &#8211; Rotation interpolation option. 0=Euler. 1=Quaternion.</li>
-<li><strong>output</strong> (<em>dagNode</em>) &#8211; The output node with the blend transfomr applied.</li>
+<li><strong>inputA</strong> (<em>dagNode</em>) – The transfomr input 1</li>
+<li><strong>inputB</strong> (<em>dagNode</em>) – The transfomr input 2</li>
+<li><strong>blender</strong> (<em>float</em><em> or </em><em>attr</em>) – Float in 0 to 1 range or attribute string name.</li>
+<li><strong>rotInterpolation</strong> (<em>int</em>) – Rotation interpolation option. 0=Euler. 1=Quaternion.</li>
+<li><strong>output</strong> (<em>dagNode</em>) – The output node with the blend transfomr applied.</li>
 </ul>
 </td>
 </tr>
@@ -690,9 +719,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputA</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input A</li>
-<li><strong>inputB</strong> (<em>attr, float or list of float</em>) &#8211; The attribute input B</li>
-<li><strong>output</strong> (<em>attr or list of attr</em>) &#8211; The attribute to connect the output.</li>
+<li><strong>inputA</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input B</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the output.</li>
 </ul>
 </td>
 </tr>
@@ -715,8 +744,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>input</strong> (<em>attr or list of 3 attr</em>) &#8211; The attribute input.</li>
-<li><strong>output</strong> (<em>attr or list of 3 attr</em>) &#8211; The attribute to connect the output.</li>
+<li><strong>input</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute input.</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute to connect the output.</li>
 </ul>
 </td>
 </tr>
@@ -734,6 +763,11 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.node.createSetRangeNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createSetRangeNode</code><span class="sig-paren">(</span><em>input</em>, <em>oldMin</em>, <em>oldMax</em>, <em>newMin=0</em>, <em>newMax=1</em>, <em>output=None</em>, <em>name=’setRange’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createSetRangeNode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.node.createSubNode">
 <code class="descclassname">mgear.maya.node.</code><code class="descname">createSubNode</code><span class="sig-paren">(</span><em>inputA</em>, <em>inputB</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createSubNode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and connect a subtraction node.</p>
@@ -742,8 +776,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputA</strong> (<em>attr or float</em>) &#8211; The attribute input A</li>
-<li><strong>inputB</strong> (<em>attr or float</em>) &#8211; The attribute input B</li>
+<li><strong>inputA</strong> (<em>attr</em><em> or </em><em>float</em>) – The attribute input A</li>
+<li><strong>inputB</strong> (<em>attr</em><em> or </em><em>float</em>) – The attribute input B</li>
 </ul>
 </td>
 </tr>
@@ -760,19 +794,28 @@
 </div>
 </dd></dl>
 
+<dl class="function">
+<dt id="mgear.maya.node.createVertexPositionNode">
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createVertexPositionNode</code><span class="sig-paren">(</span><em>inShape</em>, <em>vId=0</em>, <em>output=None</em>, <em>name=’mgear_vertexPosition’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createVertexPositionNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a mgear_vertexPosition node</p>
+</dd></dl>
+
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="primitive.html" class="btn btn-neutral float-right" title="mgear.maya.primitive" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="primitive.html" class="btn btn-neutral float-right" title="mgear.maya.primitive" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="meshNavigation.html" class="btn btn-neutral" title="mgear.maya.meshNavigation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="meshNavigation.html" class="btn btn-neutral" title="mgear.maya.meshNavigation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -803,10 +846,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

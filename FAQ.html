@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>FAQ &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>FAQ &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="index.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="index.html"/>
         <link rel="next" title="Release Log" href="releaseLog.html"/>
         <link rel="prev" title="Video Tutorials" href="videoTutorials.html"/> 
 
@@ -41,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -60,7 +66,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -81,7 +87,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
@@ -95,7 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#is-mgear-providing-animation-tools">Is mGear providing animation tools?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#will-be-always-free-and-open-source">Will be always free and open source?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#who-can-use-mgear">Who can use mGear?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#why-mgear-s-shifter-use-custom-solvers-instead-of-maya-standard-solvers">Why mGear&#8217;s Shifter use custom solvers instead of Maya standard solvers?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-mgear-s-shifter-use-custom-solvers-instead-of-maya-standard-solvers">Why mGear’s Shifter use custom solvers instead of Maya standard solvers?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#does-mgear-have-the-same-functions-tools-of-gear-softimage">Does mGear have the same functions/tools of Gear Softimage?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-i-get-out-of-the-box">What I get out of the box?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-should-i-add-mgear-to-my-pipeline">Why should I add mGear to my pipeline?</a></li>
@@ -116,8 +125,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -126,23 +137,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>FAQ</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>FAQ</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/FAQ.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/FAQ.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -176,7 +204,7 @@
 <div>mGear is for everybody who needs to create a rigs or develop rigging tools. For example riggers and animators without programming knowledge can use it out of the box to generate infinite variety of rigs combinations. TDs with Python and C++ knowledge can also extend the functionality and adapt it to her/his needs/pipeline.</div></blockquote>
 </div>
 <div class="section" id="why-mgear-s-shifter-use-custom-solvers-instead-of-maya-standard-solvers">
-<h2>Why mGear&#8217;s Shifter use custom solvers instead of Maya standard solvers?<a class="headerlink" href="#why-mgear-s-shifter-use-custom-solvers-instead-of-maya-standard-solvers" title="Permalink to this headline">¶</a></h2>
+<h2>Why mGear’s Shifter use custom solvers instead of Maya standard solvers?<a class="headerlink" href="#why-mgear-s-shifter-use-custom-solvers-instead-of-maya-standard-solvers" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div>The default components provides with <strong>Shifter</strong> are using custom solvers to simplify the rig construction encapsulating complex functionality and improve the playback performance.
 But you can create your own component without using the custom solvers.</div></blockquote>
@@ -190,10 +218,10 @@ But you can create your own component without using the custom solvers.</div></b
 <h2>What I get out of the box?<a class="headerlink" href="#what-i-get-out-of-the-box" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li>Shifter: Modular rigging system. (Exp: bipeds, quadrupeds, birds, creatures, robots, mechanical props, unlimited limbs, etc... )</li>
+<li>Shifter: Modular rigging system. (Exp: bipeds, quadrupeds, birds, creatures, robots, mechanical props, unlimited limbs, etc… )</li>
 <li>C++ Solvers: High performance rigs.</li>
 <li>Synoptic viewer: Animators interface and picker</li>
-<li>General purpose rigging tools.</li>
+<li>Rigbits: General purpose rigging tools.</li>
 </ul>
 </div></blockquote>
 </div>
@@ -218,15 +246,18 @@ But you can create your own component without using the custom solvers.</div></b
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="releaseLog.html" class="btn btn-neutral float-right" title="Release Log" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="releaseLog.html" class="btn btn-neutral float-right" title="Release Log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="videoTutorials.html" class="btn btn-neutral" title="Video Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="videoTutorials.html" class="btn btn-neutral" title="Video Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -257,10 +288,11 @@ But you can create your own component without using the custom solvers.</div></b
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>

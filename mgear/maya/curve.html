@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.curve &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.curve &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.dag" href="dag.html"/>
         <link rel="prev" title="mgear.maya.attribute" href="attribute.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.curve</li>
+        
+      <li>mgear.maya.curve</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/curve.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/curve.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -186,10 +215,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; Parent object.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name</li>
-<li><strong>centers</strong> (<em>list of dagNode</em>) &#8211; Object that will drive the curve.</li>
-<li><strong>degree</strong> (<em>int</em>) &#8211; 1 for linear curve, 3 for Cubic.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent object.</li>
+<li><strong>name</strong> (<em>str</em>) – Name</li>
+<li><strong>centers</strong> (<em>list of dagNode</em>) – Object that will drive the curve.</li>
+<li><strong>degree</strong> (<em>int</em>) – 1 for linear curve, 3 for Cubic.</li>
 </ul>
 </td>
 </tr>
@@ -212,12 +241,12 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; Parent object.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name</li>
-<li><strong>positions</strong> (<em>list of float</em>) &#8211; points of the curve in a one dimension array [point0X, point0Y, point0Z, 1, point1X, point1Y, point1Z, 1, ...].</li>
-<li><strong>close</strong> (<em>bool</em>) &#8211; True to close the curve.</li>
-<li><strong>degree</strong> (<em>bool</em>) &#8211; 1 for linear curve, 3 for Cubic.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; Global transform.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent object.</li>
+<li><strong>name</strong> (<em>str</em>) – Name</li>
+<li><strong>positions</strong> (<em>list of float</em>) – points of the curve in a one dimension array [point0X, point0Y, point0Z, 1, point1X, point1Y, point1Z, 1, …].</li>
+<li><strong>close</strong> (<em>bool</em>) – True to close the curve.</li>
+<li><strong>degree</strong> (<em>bool</em>) – 1 for linear curve, 3 for Cubic.</li>
+<li><strong>m</strong> (<em>matrix</em>) – Global transform.</li>
 </ul>
 </td>
 </tr>
@@ -240,10 +269,37 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>srcCrv</strong> (<a class="reference internal" href="#module-mgear.maya.curve" title="mgear.maya.curve"><em>curve</em></a>) &#8211; The source curve.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The new curve name.</li>
-<li><strong>nbPoints</strong> (<em>int</em>) &#8211; Number of control points for the new curve.</li>
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; Parent of the new curve.</li>
+<li><strong>srcCrv</strong> (<a class="reference internal" href="#module-mgear.maya.curve" title="mgear.maya.curve"><em>curve</em></a>) – The source curve.</li>
+<li><strong>name</strong> (<em>str</em>) – The new curve name.</li>
+<li><strong>nbPoints</strong> (<em>int</em>) – Number of control points for the new curve.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent of the new curve.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created curve.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.curve.createCurveFromOrderedEdges">
+<code class="descclassname">mgear.maya.curve.</code><code class="descname">createCurveFromOrderedEdges</code><span class="sig-paren">(</span><em>edgeLoop</em>, <em>startVertex</em>, <em>name</em>, <em>parent=None</em>, <em>degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.curve.createCurveFromOrderedEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a curve for a edgeloop ordering the list from starting vertex</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>edgeLoop</strong> (<em>list</em>) – List of edges</li>
+<li><strong>startVertex</strong> (<em>vertex</em>) – Starting vertex</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the new curve.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent of the new curve.</li>
+<li><strong>degree</strong> (<em>int</em>) – Degree of the new curve.</li>
 </ul>
 </td>
 </tr>
@@ -259,18 +315,18 @@
 
 <dl class="function">
 <dt id="mgear.maya.curve.createCuveFromEdges">
-<code class="descclassname">mgear.maya.curve.</code><code class="descname">createCuveFromEdges</code><span class="sig-paren">(</span><em>edgeList</em>, <em>name</em>, <em>parent=None</em>, <em>degree=3</em>, <em>sortingAxis='x'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.curve.createCuveFromEdges" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.curve.</code><code class="descname">createCuveFromEdges</code><span class="sig-paren">(</span><em>edgeList</em>, <em>name</em>, <em>parent=None</em>, <em>degree=3</em>, <em>sortingAxis=’x’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.curve.createCuveFromEdges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create curve from a edge list.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>edgeList</strong> (<em>list</em>) &#8211; List of edges.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the new curve.</li>
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; Parent of the new curve.</li>
-<li><strong>degree</strong> (<em>int</em>) &#8211; Degree of the new curve.</li>
-<li><strong>sortingAxis</strong> (<em>str</em>) &#8211; Sorting axis x, y or z</li>
+<li><strong>edgeList</strong> (<em>list</em>) – List of edges.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the new curve.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent of the new curve.</li>
+<li><strong>degree</strong> (<em>int</em>) – Degree of the new curve.</li>
+<li><strong>sortingAxis</strong> (<em>str</em>) – Sorting axis x, y or z</li>
 </ul>
 </td>
 </tr>
@@ -293,8 +349,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>param</strong> (<em>float</em>) &#8211; The parameter to get the legth</li>
-<li><strong>crv</strong> (<a class="reference internal" href="#module-mgear.maya.curve" title="mgear.maya.curve"><em>curve</em></a>) &#8211; The source curve.</li>
+<li><strong>param</strong> (<em>float</em>) – The parameter to get the legth</li>
+<li><strong>crv</strong> (<a class="reference internal" href="#module-mgear.maya.curve" title="mgear.maya.curve"><em>curve</em></a>) – The source curve.</li>
 </ul>
 </td>
 </tr>
@@ -323,8 +379,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>position</strong> (<em>list of float</em>) &#8211; Represents the position in worldSpace exp: [1.4, 3.55, 42.6]</li>
-<li><strong>crv</strong> (<a class="reference internal" href="#module-mgear.maya.curve" title="mgear.maya.curve"><em>curve</em></a>) &#8211; The  source curve to get the parameter.</li>
+<li><strong>position</strong> (<em>list of float</em>) – Represents the position in worldSpace exp: [1.4, 3.55, 42.6]</li>
+<li><strong>crv</strong> (<a class="reference internal" href="#module-mgear.maya.curve" title="mgear.maya.curve"><em>curve</em></a>) – The  source curve to get the parameter.</li>
 </ul>
 </td>
 </tr>
@@ -342,15 +398,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dag.html" class="btn btn-neutral float-right" title="mgear.maya.dag" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dag.html" class="btn btn-neutral float-right" title="mgear.maya.dag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="attribute.html" class="btn btn-neutral" title="mgear.maya.attribute" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="attribute.html" class="btn btn-neutral" title="mgear.maya.attribute" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -381,10 +440,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

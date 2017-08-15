@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.shifter.component.guide &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.shifter.component.guide &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.synoptic" href="../../synoptic/synoptic.html"/>
         <link rel="prev" title="mgear.maya.shifter.component" href="component.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.shifter.component.guide</li>
+        
+      <li>mgear.maya.shifter.component.guide</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../../../_sources/mgear/maya/shifter/component/guide.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../../../_sources/mgear/maya/shifter/component/guide.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -176,7 +205,7 @@
             
   <div class="section" id="module-mgear.maya.shifter.component.guide">
 <span id="mgear-maya-shifter-component-guide"></span><h1>mgear.maya.shifter.component.guide<a class="headerlink" href="#module-mgear.maya.shifter.component.guide" title="Permalink to this headline">¶</a></h1>
-<p>Shifter&#8217;s Component guide class.</p>
+<p>Shifter’s Component guide class.</p>
 <dl class="class">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide">
 <em class="property">class </em><code class="descclassname">mgear.maya.shifter.component.guide.</code><code class="descname">ComponentGuide</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide" title="Permalink to this definition">¶</a></dt>
@@ -187,25 +216,25 @@ Finally it also now how to export itself as xml_node.</p>
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.paramNames">
 <code class="descname">paramNames</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.paramNames" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list</em> &#8211; List of parameter name cause it&#8217;s actually important to keep them sorted.</p>
+<dd><p><em>list</em> – List of parameter name cause it’s actually important to keep them sorted.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.paramDefs">
 <code class="descname">paramDefs</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.paramDefs" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dic</em> &#8211; Dictionary of parameter definition.</p>
+<dd><p><em>dic</em> – Dictionary of parameter definition.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.values">
 <code class="descname">values</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.values" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dic</em> &#8211; Dictionary of options values.</p>
+<dd><p><em>dic</em> – Dictionary of options values.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.valid">
 <code class="descname">valid</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.valid" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>bool</em> &#8211; We will check a few things and make sure the guide we are loading is up to date.
+<dd><p><em>bool</em> – We will check a few things and make sure the guide we are loading is up to date.
 If parameters or object are missing a warning message will be display and
 the guide should be updated.</p>
 </dd></dl>
@@ -213,67 +242,67 @@ the guide should be updated.</p>
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.tra">
 <code class="descname">tra</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.tra" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dic</em> &#8211; dictionary of global transform</p>
+<dd><p><em>dic</em> – dictionary of global transform</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.atra">
 <code class="descname">atra</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.atra" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list</em> &#8211; list of global transform</p>
+<dd><p><em>list</em> – list of global transform</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.pos">
 <code class="descname">pos</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.pos" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dic</em> &#8211; dictionary of global postion</p>
+<dd><p><em>dic</em> – dictionary of global postion</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.apos">
 <code class="descname">apos</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.apos" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list</em> &#8211; list of global position</p>
+<dd><p><em>list</em> – list of global position</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.prim">
 <code class="descname">prim</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.prim" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dic</em> &#8211; dictionary of primitive</p>
+<dd><p><em>dic</em> – dictionary of primitive</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.blades">
 <code class="descname">blades</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.blades" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dic</em> &#8211; dictionary of blades</p>
+<dd><p><em>dic</em> – dictionary of blades</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.size">
 <code class="descname">size</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.size" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> &#8211; Size reference of the component. Default = .1</p>
+<dd><p><em>float</em> – Size reference of the component. Default = .1</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.save_transform">
 <code class="descname">save_transform</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.save_transform" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list</em> &#8211; Transform of object name in this list will be saved</p>
+<dd><p><em>list</em> – Transform of object name in this list will be saved</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.save_primitive">
 <code class="descname">save_primitive</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.save_primitive" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list</em> &#8211; Primitive of object name in this list will be saved</p>
+<dd><p><em>list</em> – Primitive of object name in this list will be saved</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.save_blade">
 <code class="descname">save_blade</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.save_blade" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>list</em> &#8211; Normal and BiNormal of object will be saved</p>
+<dd><p><em>list</em> – Normal and BiNormal of object will be saved</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.minmax">
 <code class="descname">minmax</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.minmax" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dic</em> &#8211; Define the min and max object for multi location objects</p>
+<dd><p><em>dic</em> – Define the min and max object for multi location objects</p>
 </dd></dl>
 
 <dl class="method">
@@ -287,9 +316,9 @@ Blade object is a 3points curve to define a plan in the guide.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; Local name of the element.</li>
-<li><strong>parentPos</strong> (<em>dagNode</em>) &#8211; The parent of the element.</li>
-<li><strong>parentDir</strong> (<em>dagNode</em>) &#8211; The direction constraint of the element.</li>
+<li><strong>name</strong> (<em>str</em>) – Local name of the element.</li>
+<li><strong>parentPos</strong> (<em>dagNode</em>) – The parent of the element.</li>
+<li><strong>parentDir</strong> (<em>dagNode</em>) – The direction constraint of the element.</li>
 </ul>
 </td>
 </tr>
@@ -313,9 +342,9 @@ Display curve object is a simple curve to show the connection between different 
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; Local name of the element.</li>
-<li><strong>centers</strong> (<em>list of dagNode</em>) &#8211; List of object to define the curve.</li>
-<li><strong>degree</strong> (<em>int</em>) &#8211; Curve degree. Default 1 = lineal.</li>
+<li><strong>name</strong> (<em>str</em>) – Local name of the element.</li>
+<li><strong>centers</strong> (<em>list of dagNode</em>) – List of object to define the curve.</li>
+<li><strong>degree</strong> (<em>int</em>) – Curve degree. Default 1 = lineal.</li>
 </ul>
 </td>
 </tr>
@@ -340,9 +369,9 @@ Loc object is a simple null to define a position or a tranformation in the guide
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; Local name of the element.</li>
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent of the element.</li>
-<li><strong>position</strong> (<a class="reference internal" href="../../vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The default position of the element.</li>
+<li><strong>name</strong> (<em>str</em>) – Local name of the element.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent of the element.</li>
+<li><strong>position</strong> (<a class="reference internal" href="../../vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The default position of the element.</li>
 </ul>
 </td>
 </tr>
@@ -367,11 +396,11 @@ Loc object is a simple null to define a position or a tranformation in the guide
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; Local name of the element.</li>
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent of the element.</li>
-<li><strong>minimum</strong> (<em>int</em>) &#8211; The minimum number of loc.</li>
-<li><strong>maximum</strong> (<em>int</em>) &#8211; The maximum number of loc.</li>
-<li><strong>updateParent</strong> (<em>bool</em>) &#8211; if True update the parent reference. False, keep the same for all loc.</li>
+<li><strong>name</strong> (<em>str</em>) – Local name of the element.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent of the element.</li>
+<li><strong>minimum</strong> (<em>int</em>) – The minimum number of loc.</li>
+<li><strong>maximum</strong> (<em>int</em>) – The maximum number of loc.</li>
+<li><strong>updateParent</strong> (<em>bool</em>) – if True update the parent reference. False, keep the same for all loc.</li>
 </ul>
 </td>
 </tr>
@@ -436,17 +465,17 @@ Root object is a simple transform with a specific display and a setting property
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.compName">
-<code class="descname">compName</code><em class="property"> = 'component'</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.compName" title="Permalink to this definition">¶</a></dt>
+<code class="descname">compName</code><em class="property"> = ‘component’</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.compName" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.compSide">
-<code class="descname">compSide</code><em class="property"> = 'C'</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.compSide" title="Permalink to this definition">¶</a></dt>
+<code class="descname">compSide</code><em class="property"> = ‘C’</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.compSide" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.compType">
-<code class="descname">compType</code><em class="property"> = 'component'</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.compType" title="Permalink to this definition">¶</a></dt>
+<code class="descname">compType</code><em class="property"> = ‘component’</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.compType" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -461,12 +490,12 @@ Root object is a simple transform with a specific display and a setting property
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.ctl_grp">
-<code class="descname">ctl_grp</code><em class="property"> = ''</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.ctl_grp" title="Permalink to this definition">¶</a></dt>
+<code class="descname">ctl_grp</code><em class="property"> = ”</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.ctl_grp" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.description">
-<code class="descname">description</code><em class="property"> = ''</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.description" title="Permalink to this definition">¶</a></dt>
+<code class="descname">description</code><em class="property"> = ”</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -477,7 +506,7 @@ Root object is a simple transform with a specific display and a setting property
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> (<em>dagNode</em>) &#8211; the parent of the component.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> (<em>dagNode</em>) – the parent of the component.</td>
 </tr>
 </tbody>
 </table>
@@ -491,7 +520,7 @@ Root object is a simple transform with a specific display and a setting property
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> (<em>dagNode</em>) &#8211; the parent of the component.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> (<em>dagNode</em>) – the parent of the component.</td>
 </tr>
 </tbody>
 </table>
@@ -537,7 +566,7 @@ Root object is a simple transform with a specific display and a setting property
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) &#8211; Localname of the element.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Localname of the element.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Element fullname.</td>
 </tr>
@@ -572,8 +601,8 @@ Root object is a simple transform with a specific display and a setting property
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>model</strong> (<em>dagNode</em>) &#8211; The root of the component.</li>
-<li><strong>includeShapes</strong> (<em>boo</em>) &#8211; If True, will include the shapes.</li>
+<li><strong>model</strong> (<em>dagNode</em>) – The root of the component.</li>
+<li><strong>includeShapes</strong> (<em>boo</em>) – If True, will include the shapes.</li>
 </ul>
 </td>
 </tr>
@@ -638,7 +667,7 @@ Root object is a simple transform with a specific display and a setting property
 <dl class="method">
 <dt id="mgear.maya.shifter.component.guide.ComponentGuide.initialHierarchy">
 <code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.guide.ComponentGuide.initialHierarchy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initial hierachy. It&#8217;s no more than the basic set of parameters and layout
+<dd><p>Initial hierachy. It’s no more than the basic set of parameters and layout
 needed for the setting property.</p>
 </dd></dl>
 
@@ -683,10 +712,10 @@ needed for the setting property.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>root</strong> (<em>dagNode</em>) &#8211; The parent of the component</li>
-<li><strong>newName</strong> (<em>str</em>) &#8211; The new name.</li>
-<li><strong>newSide</strong> (<em>str</em>) &#8211; Side of the component.</li>
-<li><strong>newIndex</strong> (<em>int</em>) &#8211; index of the comonent.</li>
+<li><strong>root</strong> (<em>dagNode</em>) – The parent of the component</li>
+<li><strong>newName</strong> (<em>str</em>) – The new name.</li>
+<li><strong>newSide</strong> (<em>str</em>) – Side of the component.</li>
+<li><strong>newIndex</strong> (<em>int</em>) – index of the comonent.</li>
 </ul>
 </td>
 </tr>
@@ -702,7 +731,7 @@ needed for the setting property.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>root</strong> (<em>dagNode</em>) &#8211; The root of the hierarchy to parse.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>root</strong> (<em>dagNode</em>) – The root of the hierarchy to parse.</td>
 </tr>
 </tbody>
 </table>
@@ -716,7 +745,7 @@ needed for the setting property.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>dagNode</em>) &#8211; The parent model of the guide.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>dagNode</em>) – The parent model of the guide.</td>
 </tr>
 </tbody>
 </table>
@@ -754,13 +783,13 @@ This class is used in addMinMax method.</p>
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.MinMax.minimum">
 <code class="descname">minimum</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.MinMax.minimum" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>int</em> &#8211; minimum.</p>
+<dd><p><em>int</em> – minimum.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.MinMax.maximum">
 <code class="descname">maximum</code><a class="headerlink" href="#mgear.maya.shifter.component.guide.MinMax.maximum" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>int</em> &#8211; maximum.</p>
+<dd><p><em>int</em> – maximum.</p>
 </dd></dl>
 
 </dd></dl>
@@ -794,12 +823,12 @@ This class is used in addMinMax method.</p>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.componentMainSettings.staticMetaObject">
-<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000012E50908&gt;</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.componentMainSettings.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.componentMainSettings.staticMetaObject" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.componentMainSettings.valueChanged">
-<code class="descname">valueChanged</code><em class="property"> = &lt;PySide.QtCore.Signal object at 0x0000000012E553E8&gt;</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.componentMainSettings.valueChanged" title="Permalink to this definition">¶</a></dt>
+<code class="descname">valueChanged</code><em class="property"> = &lt;PySide2.QtCore.Signal object&gt;</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.componentMainSettings.valueChanged" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -809,7 +838,7 @@ This class is used in addMinMax method.</p>
 <em class="property">class </em><code class="descclassname">mgear.maya.shifter.component.guide.</code><code class="descname">mainSettingsTab</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.guide.mainSettingsTab" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="attribute">
 <dt id="mgear.maya.shifter.component.guide.mainSettingsTab.staticMetaObject">
-<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000012E50888&gt;</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.mainSettingsTab.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.shifter.component.guide.mainSettingsTab.staticMetaObject" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -818,15 +847,18 @@ This class is used in addMinMax method.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../synoptic/synoptic.html" class="btn btn-neutral float-right" title="mgear.maya.synoptic" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../../synoptic/synoptic.html" class="btn btn-neutral float-right" title="mgear.maya.synoptic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="component.html" class="btn btn-neutral" title="mgear.maya.shifter.component" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="component.html" class="btn btn-neutral" title="mgear.maya.shifter.component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -857,10 +889,11 @@ This class is used in addMinMax method.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../../../_static/jquery.js"></script>

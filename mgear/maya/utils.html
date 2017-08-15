@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.utils &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.utils &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.vector" href="vector.html"/>
         <link rel="prev" title="mgear.maya.transform" href="transform.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.utils</li>
+        
+      <li>mgear.maya.utils</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/utils.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/utils.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -177,6 +206,60 @@
   <div class="section" id="module-mgear.maya.utils">
 <span id="mgear-maya-utils"></span><h1>mgear.maya.utils<a class="headerlink" href="#module-mgear.maya.utils" title="Permalink to this headline">¶</a></h1>
 <p>Utilitie functions.</p>
+<dl class="function">
+<dt id="mgear.maya.utils.gatherCustomModuleDirectories">
+<code class="descclassname">mgear.maya.utils.</code><code class="descname">gatherCustomModuleDirectories</code><span class="sig-paren">(</span><em>envvarkey</em>, <em>defaultModulePath</em>, <em>component=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.gatherCustomModuleDirectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns component directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>envvarkey</strong> – The environment variable key name, that is searched</li>
+<li><strong>defaultModulePath</strong> – The default module path for search in.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">[]string}</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Dict{string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.utils.getModuleBasePath">
+<code class="descclassname">mgear.maya.utils.</code><code class="descname">getModuleBasePath</code><span class="sig-paren">(</span><em>directories</em>, <em>moduleName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.getModuleBasePath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.utils.importFromStandardOrCustomDirectories">
+<code class="descclassname">mgear.maya.utils.</code><code class="descname">importFromStandardOrCustomDirectories</code><span class="sig-paren">(</span><em>directories</em>, <em>defaultFormatter</em>, <em>customFormatter</em>, <em>moduleName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.importFromStandardOrCustomDirectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>return imported module</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>directories</strong> – the directories for search in. this is got by gatherCustomModuleDirectories</li>
+<li><strong>defaultFormatter</strong> – this represents module structure for default module. for example “mgear.maya.shifter.component.{}”</li>
+<li><strong>customFormatter</strong> – this represents module structure for custom module. for example “{0}.{1}”</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">imported module</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">module</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="function">
 <dt id="mgear.maya.utils.is_odd">
 <code class="descclassname">mgear.maya.utils.</code><code class="descname">is_odd</code><span class="sig-paren">(</span><em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.is_odd" title="Permalink to this definition">¶</a></dt>
@@ -195,19 +278,35 @@ num (int): the number</p>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="mgear.maya.utils.one_undo">
+<code class="descclassname">mgear.maya.utils.</code><code class="descname">one_undo</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.one_undo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator - guarantee close chunk.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.utils.viewport_off">
+<code class="descclassname">mgear.maya.utils.</code><code class="descname">viewport_off</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.viewport_off" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator - turn off Maya display while func is running.
+if func will fail, the error will be raised after.</p>
+</dd></dl>
+
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="vector.html" class="btn btn-neutral float-right" title="mgear.maya.vector" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="vector.html" class="btn btn-neutral float-right" title="mgear.maya.vector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="transform.html" class="btn btn-neutral" title="mgear.maya.transform" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="transform.html" class="btn btn-neutral" title="mgear.maya.transform" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -238,10 +337,11 @@ num (int): the number</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.meshNavigation &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.meshNavigation &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../index.html"/>
         <link rel="up" title="Base Modules" href="../baseModules.html"/>
         <link rel="next" title="mgear.maya.node" href="mgear.maya.node.html"/>
         <link rel="prev" title="mgear.maya.log" href="mgear.maya.log.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
@@ -107,6 +116,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
 </ul>
 </li>
@@ -130,8 +140,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -140,27 +152,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../baseModules.html">Base Modules</a> &raquo;</li>
-      
-    <li>mgear.maya.meshNavigation</li>
+        
+      <li>mgear.maya.meshNavigation</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../_sources/generated/mgear.maya.meshNavigation.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../_sources/generated/mgear.maya.meshNavigation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -182,7 +211,7 @@
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/meshNavigation.html#mgear.maya.meshNavigation.bboxCenter" title="mgear.maya.meshNavigation.bboxCenter"><code class="xref py py-obj docutils literal"><span class="pre">bboxCenter</span></code></a>(obj[,&nbsp;radius])</td>
 <td>Get bounding box center of mesh object</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/meshNavigation.html#mgear.maya.meshNavigation.edgeRangeInLoopFromMid" title="mgear.maya.meshNavigation.edgeRangeInLoopFromMid"><code class="xref py py-obj docutils literal"><span class="pre">edgeRangeInLoopFromMid</span></code></a>(edgeList,&nbsp;midPos,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/meshNavigation.html#mgear.maya.meshNavigation.edgeRangeInLoopFromMid" title="mgear.maya.meshNavigation.edgeRangeInLoopFromMid"><code class="xref py py-obj docutils literal"><span class="pre">edgeRangeInLoopFromMid</span></code></a>(edgeList,&nbsp;midPos,&nbsp;…)</td>
 <td>Return a range of edges in the same loop from a mid position</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/meshNavigation.html#mgear.maya.meshNavigation.getClosestPolygonFromTransform" title="mgear.maya.meshNavigation.getClosestPolygonFromTransform"><code class="xref py py-obj docutils literal"><span class="pre">getClosestPolygonFromTransform</span></code></a>(geo,&nbsp;loc)</td>
@@ -194,7 +223,7 @@
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/meshNavigation.html#mgear.maya.meshNavigation.getConcentricVertexLoop" title="mgear.maya.meshNavigation.getConcentricVertexLoop"><code class="xref py py-obj docutils literal"><span class="pre">getConcentricVertexLoop</span></code></a>(loop,&nbsp;nbLoops)</td>
 <td>Get concentric vertex loops</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/meshNavigation.html#mgear.maya.meshNavigation.getExtremeVertexFromLoop" title="mgear.maya.meshNavigation.getExtremeVertexFromLoop"><code class="xref py py-obj docutils literal"><span class="pre">getExtremeVertexFromLoop</span></code></a>([edgeList])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/meshNavigation.html#mgear.maya.meshNavigation.getExtremeVertexFromLoop" title="mgear.maya.meshNavigation.getExtremeVertexFromLoop"><code class="xref py py-obj docutils literal"><span class="pre">getExtremeVertexFromLoop</span></code></a>([edgeList,&nbsp;sideRange])</td>
 <td>Get extreme vertex X and  Y, min and max positions from edge loop</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/meshNavigation.html#mgear.maya.meshNavigation.getVertexRowsFromLoops" title="mgear.maya.meshNavigation.getVertexRowsFromLoops"><code class="xref py py-obj docutils literal"><span class="pre">getVertexRowsFromLoops</span></code></a>(loopList)</td>
@@ -206,15 +235,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mgear.maya.node.html" class="btn btn-neutral float-right" title="mgear.maya.node" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mgear.maya.node.html" class="btn btn-neutral float-right" title="mgear.maya.node" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mgear.maya.log.html" class="btn btn-neutral" title="mgear.maya.log" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mgear.maya.log.html" class="btn btn-neutral" title="mgear.maya.log" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -245,10 +277,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

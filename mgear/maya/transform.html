@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.transform &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.transform &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.utils" href="utils.html"/>
         <link rel="prev" title="mgear.maya.skin" href="skin.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.transform</li>
+        
+      <li>mgear.maya.transform</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/transform.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/transform.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -185,7 +214,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tm</strong> (<em>matrix</em>) &#8211; The input matrix.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tm</strong> (<em>matrix</em>) – The input matrix.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The transformation matrix in worldSpace</td>
 </tr>
@@ -204,9 +233,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>positions</strong> (<em>list of vector</em>) &#8211; List with the chain positions.</li>
-<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Normal direction.</li>
-<li><strong>negate</strong> (<em>bool</em>) &#8211; If true invert the chain orientation.</li>
+<li><strong>positions</strong> (<em>list of vector</em>) – List with the chain positions.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Normal direction.</li>
+<li><strong>negate</strong> (<em>bool</em>) – If true invert the chain orientation.</li>
 </ul>
 </td>
 </tr>
@@ -236,9 +265,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>positions</strong> (<em>list of vector</em>) &#8211; List with the chain positions.</li>
-<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Normal direction.</li>
-<li><strong>negate</strong> (<em>bool</em>) &#8211; If true invert the chain orientation.</li>
+<li><strong>positions</strong> (<em>list of vector</em>) – List with the chain positions.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Normal direction.</li>
+<li><strong>negate</strong> (<em>bool</em>) – If true invert the chain orientation.</li>
 </ul>
 </td>
 </tr>
@@ -264,10 +293,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>m</strong> (<em>matrix</em>) &#8211; the reference matrix</li>
-<li><strong>translation</strong> (<em>bool</em>) &#8211; If true the return matrix will match the translation.</li>
-<li><strong>rotation</strong> (<em>bool</em>) &#8211; If true the return matrix will match the rotation.</li>
-<li><strong>scaling</strong> (<em>bool</em>) &#8211; If true the return matrix will match the scaling.</li>
+<li><strong>m</strong> (<em>matrix</em>) – the reference matrix</li>
+<li><strong>translation</strong> (<em>bool</em>) – If true the return matrix will match the translation.</li>
+<li><strong>rotation</strong> (<em>bool</em>) – If true the return matrix will match the rotation.</li>
+<li><strong>scaling</strong> (<em>bool</em>) – If true the return matrix will match the scaling.</li>
 </ul>
 </td>
 </tr>
@@ -290,9 +319,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>t1</strong> (<em>matrix</em>) &#8211; Input matrix 1.</li>
-<li><strong>t2</strong> (<em>matrix</em>) &#8211; Input matrix 2.</li>
-<li><strong>blend</strong> (<em>float</em>) &#8211; The blending value. Default 0.5</li>
+<li><strong>t1</strong> (<em>matrix</em>) – Input matrix 1.</li>
+<li><strong>t2</strong> (<em>matrix</em>) – Input matrix 2.</li>
+<li><strong>blend</strong> (<em>float</em>) – The blending value. Default 0.5</li>
 </ul>
 </td>
 </tr>
@@ -318,8 +347,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The dagNode with the original position.</li>
-<li><strong>offset</strong> (<em>list of float</em>) &#8211; Ofsset values for xyz. exp : [1.2, 4.6, 32.78]</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The dagNode with the original position.</li>
+<li><strong>offset</strong> (<em>list of float</em>) – Ofsset values for xyz. exp : [1.2, 4.6, 32.78]</li>
 </ul>
 </td>
 </tr>
@@ -347,7 +376,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>in_m</strong> (<em>matrix</em>) &#8211; The input Matrix.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>in_m</strong> (<em>matrix</em>) – The input Matrix.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The position values for xyz.</td>
 </tr>
@@ -359,17 +388,17 @@
 
 <dl class="function">
 <dt id="mgear.maya.transform.getRotationFromAxis">
-<code class="descclassname">mgear.maya.transform.</code><code class="descname">getRotationFromAxis</code><span class="sig-paren">(</span><em>in_a</em>, <em>in_b</em>, <em>axis='xy'</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getRotationFromAxis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getRotationFromAxis</code><span class="sig-paren">(</span><em>in_a</em>, <em>in_b</em>, <em>axis=’xy’</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getRotationFromAxis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the matrix rotation from a given axis.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>in_a</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Axis A</li>
-<li><strong>in_b</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Axis B</li>
-<li><strong>axis</strong> (<em>str</em>) &#8211; The axis to use for the orientation. Default: &#8220;xy&#8221;</li>
-<li><strong>negate</strong> (<em>bool</em>) &#8211; negates the axis orientation.</li>
+<li><strong>in_a</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Axis A</li>
+<li><strong>in_b</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Axis B</li>
+<li><strong>axis</strong> (<em>str</em>) – The axis to use for the orientation. Default: “xy”</li>
+<li><strong>negate</strong> (<em>bool</em>) – negates the axis orientation.</li>
 </ul>
 </td>
 </tr>
@@ -393,16 +422,16 @@
 
 <dl class="function">
 <dt id="mgear.maya.transform.getSymmetricalTransform">
-<code class="descclassname">mgear.maya.transform.</code><code class="descname">getSymmetricalTransform</code><span class="sig-paren">(</span><em>t</em>, <em>axis='yz'</em>, <em>fNegScale=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getSymmetricalTransform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the symmetrical tranformation matrix from a define 2 axis mirror plane. exp:&#8221;yz&#8221;.</p>
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getSymmetricalTransform</code><span class="sig-paren">(</span><em>t</em>, <em>axis=’yz’</em>, <em>fNegScale=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getSymmetricalTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the symmetrical tranformation matrix from a define 2 axis mirror plane. exp:”yz”.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>t</strong> (<em>matrix</em>) &#8211; The transformation matrix to mirror.</li>
-<li><strong>axis</strong> (<em>str</em>) &#8211; The mirror plane.</li>
-<li><strong>fNegScale</strong> (<em>bool</em>) &#8211; This function is not yet implemented.</li>
+<li><strong>t</strong> (<em>matrix</em>) – The transformation matrix to mirror.</li>
+<li><strong>axis</strong> (<em>str</em>) – The mirror plane.</li>
+<li><strong>fNegScale</strong> (<em>bool</em>) – This function is not yet implemented.</li>
 </ul>
 </td>
 </tr>
@@ -424,7 +453,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The dagNode to get the translation</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The dagNode to get the translation</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The transformation matrix</td>
 </tr>
@@ -442,7 +471,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Position for the transformation matrix</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Position for the transformation matrix</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The newly created transformation matrix</td>
 </tr>
@@ -457,18 +486,18 @@
 
 <dl class="function">
 <dt id="mgear.maya.transform.getTransformLookingAt">
-<code class="descclassname">mgear.maya.transform.</code><code class="descname">getTransformLookingAt</code><span class="sig-paren">(</span><em>pos</em>, <em>lookat</em>, <em>normal</em>, <em>axis='xy'</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getTransformLookingAt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.transform.</code><code class="descname">getTransformLookingAt</code><span class="sig-paren">(</span><em>pos</em>, <em>lookat</em>, <em>normal</em>, <em>axis=’xy’</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.transform.getTransformLookingAt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the transformation matrix of the dagNode oriented looking to an specific point.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The position for the transformation</li>
-<li><strong>lookat</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The aiming position to stablish the orientation.</li>
-<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The normal control the transformation roll.</li>
-<li><strong>axis</strong> (<em>str</em>) &#8211; The 2 axis used for lookat and normal. Default &#8220;xy&#8221;</li>
-<li><strong>negate</strong> (<em>bool</em>) &#8211; If true, invert the aiming direction.</li>
+<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The position for the transformation</li>
+<li><strong>lookat</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The aiming position to stablish the orientation.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The normal control the transformation roll.</li>
+<li><strong>axis</strong> (<em>str</em>) – The 2 axis used for lookat and normal. Default “xy”</li>
+<li><strong>negate</strong> (<em>bool</em>) – If true, invert the aiming direction.</li>
 </ul>
 </td>
 </tr>
@@ -493,7 +522,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The dagNode to get the translation</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The dagNode to get the translation</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The transformation matrix</td>
 </tr>
@@ -512,8 +541,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>source</strong> (<em>dagNode</em>) &#8211; The source dagNode</li>
-<li><strong>target</strong> (<em>dagNode</em>) &#8211; The target dagNode</li>
+<li><strong>source</strong> (<em>dagNode</em>) – The source dagNode</li>
+<li><strong>target</strong> (<em>dagNode</em>) – The target dagNode</li>
 </ul>
 </td>
 </tr>
@@ -533,8 +562,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>q1</strong> (<em>quaternion</em>) &#8211; Input quaternion 1.</li>
-<li><strong>q2</strong> (<em>quaternion</em>) &#8211; Input quaternion 2.</li>
+<li><strong>q1</strong> (<em>quaternion</em>) – Input quaternion 1.</li>
+<li><strong>q2</strong> (<em>quaternion</em>) – Input quaternion 2.</li>
 </ul>
 </td>
 </tr>
@@ -557,9 +586,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>q1</strong> (<em>quaternion</em>) &#8211; Input quaternion 1.</li>
-<li><strong>q2</strong> (<em>quaternion</em>) &#8211; Input quaternion 2.</li>
-<li><strong>blend</strong> (<em>float</em>) &#8211; Blending value.</li>
+<li><strong>q1</strong> (<em>quaternion</em>) – Input quaternion 1.</li>
+<li><strong>q2</strong> (<em>quaternion</em>) – Input quaternion 2.</li>
+<li><strong>blend</strong> (<em>float</em>) – Blending value.</li>
 </ul>
 </td>
 </tr>
@@ -587,10 +616,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to reset the transforms.</li>
-<li><strong>t</strong> (<em>bool</em>) &#8211; If true translation will be reseted.</li>
-<li><strong>r</strong> (<em>bool</em>) &#8211; If true rotation will be reseted.</li>
-<li><strong>s</strong> (<em>bool</em>) &#8211; If true scale will be reseted.</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The object to reset the transforms.</li>
+<li><strong>t</strong> (<em>bool</em>) – If true translation will be reseted.</li>
+<li><strong>r</strong> (<em>bool</em>) – If true rotation will be reseted.</li>
+<li><strong>s</strong> (<em>bool</em>) – If true scale will be reseted.</li>
 </ul>
 </td>
 </tr>
@@ -610,8 +639,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>in_m</strong> (<em>matrix</em>) &#8211; The input Matrix.</li>
-<li><strong>pos</strong> (<em>list of float</em>) &#8211; The position values for xyz</li>
+<li><strong>in_m</strong> (<em>matrix</em>) – The input Matrix.</li>
+<li><strong>pos</strong> (<em>list of float</em>) – The position values for xyz</li>
 </ul>
 </td>
 </tr>
@@ -640,8 +669,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>in_m</strong> (<em>matrix</em>) &#8211; The input Matrix.</li>
-<li><strong>rot</strong> (<em>list of float</em>) &#8211; The rotation values for xyz</li>
+<li><strong>in_m</strong> (<em>matrix</em>) – The input Matrix.</li>
+<li><strong>rot</strong> (<em>list of float</em>) – The rotation values for xyz</li>
 </ul>
 </td>
 </tr>
@@ -664,8 +693,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>in_m</strong> (<em>matrix</em>) &#8211; The input Matrix.</li>
-<li><strong>scl</strong> (<em>list of float</em>) &#8211; The scale values for xyz</li>
+<li><strong>in_m</strong> (<em>matrix</em>) – The input Matrix.</li>
+<li><strong>scl</strong> (<em>list of float</em>) – The scale values for xyz</li>
 </ul>
 </td>
 </tr>
@@ -683,15 +712,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="utils.html" class="btn btn-neutral float-right" title="mgear.maya.utils" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="utils.html" class="btn btn-neutral float-right" title="mgear.maya.utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="skin.html" class="btn btn-neutral" title="mgear.maya.skin" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="skin.html" class="btn btn-neutral" title="mgear.maya.skin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -722,10 +754,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

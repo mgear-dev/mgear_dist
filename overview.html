@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>Overview &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="index.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="index.html"/>
         <link rel="next" title="Framework" href="framework.html"/>
         <link rel="prev" title="Welcome to mGear: Rigging Framework for Autodesk Maya" href="index.html"/> 
 
@@ -41,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -60,7 +66,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -81,7 +87,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
@@ -104,8 +113,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -114,23 +125,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>Overview</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Overview</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/overview.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/overview.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -141,11 +169,23 @@
 <p>mGear is a rigging framework for Autodesk Maya. mGear provides a set of convenient modules, tools and   c++ solvers to streamline the development of rigging and animation tools.</p>
 <p>Originally mGear was design and develope by <a class="reference external" href="http://www.jeremiepasserin.com/blog/">Jeremie Passerin</a> , since 2013 <a class="reference external" href="http://www.miquel-campos.com/">Miquel Campos</a> continued the project and evolved to the current design.</p>
 <blockquote>
-<div><p>&#8220;Miquel did an amazing job making mGear a solid Production tool. I am delighted to see it running smoothly in Maya. Softimage User will be delighted to find their favorite Rig Builder in Maya. Maya user will be amazed how MGear is solid and flexible. Gear has been used in production all around the world since 2010 and changed the life of many riggers and animators, I have no doubt that mGear will have the same success. Do I need to mention it’s free and open source ?&#8221;</p>
+<div><p>“Miquel did an amazing job making mGear a solid Production tool. I am delighted to see it running smoothly in Maya. Softimage User will be delighted to find their favorite Rig Builder in Maya. Maya user will be amazed how MGear is solid and flexible. Gear has been used in production all around the world since 2010 and changed the life of many riggers and animators, I have no doubt that mGear will have the same success. Do I need to mention it’s free and open source ?”</p>
 <blockquote>
 <div><strong>Jeremie Passerin</strong></div></blockquote>
 </div></blockquote>
-<div class="align-center figure" id="id2">
+<dl class="docutils">
+<dt>Contributors (in alphabetical order):</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://github.com/akiwoRM/">Akagi-san</a></li>
+<li><a class="reference external" href="https://github.com/gatgui/">Gaetan Guidet</a></li>
+<li><a class="reference external" href="https://github.com/liorbenhorin/">Lior Ben Horin</a></li>
+<li><a class="reference external" href="https://github.com/yamahigashi">Matsumoto-san</a></li>
+<li><a class="reference external" href="https://github.com/milesckt/">Miles Cheng</a></li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="https://groups.google.com/forum/#!forum/mgearusergroup/">Join the mGear Google user group</a></p>
+<div class="align-center figure" id="id3">
 <a class="reference internal image-reference" href="_images/studioAKA_mGear_A.jpg"><img alt="alternate text" src="_images/studioAKA_mGear_A.jpg" style="width: 800px; height: 475px;" /></a>
 <p class="caption"><span class="caption-text">mGear have been used at Studio AKA for San Pellegrino ‘Dining By Starlight’. Rigged by Adam Avery</span></p>
 </div>
@@ -154,16 +194,15 @@
 <dl class="last docutils">
 <dt>from Miquel:</dt>
 <dd><p class="first">Big thanks to <a class="reference external" href="http://www.jeremiepasserin.com/blog/">Jeremie Passerin</a> , he is the real master behind mGear design. I am just following  his steps and continuing what he started.</p>
-<p>Also special big thanks to <a class="reference external" href="https://github.com/gatgui">Gaetan Guidet</a> for the Linux solver compilation and guidance in my C++ desert of knowledge.</p>
-<p>Thanks to <a class="reference external" href="http://www.chadvernon.com/blog/">Chad Vernon</a> , for his fantastic tutorials and open-source tools. Some of mGear&#8217;s parts wouldn&#8217;t be possible without it.
-Thanks to <a class="reference external" href="http://www.braverabbit.de/">Ingo Clemens</a> for the OSX solver compilation in mGear 1.1</p>
+<p>Also special big thanks to <a class="reference external" href="http://www.braverabbit.de/">Ingo Clemens</a> for the OSX solver compilation and <a class="reference external" href="https://github.com/gatgui">Gaetan Guidet</a> for the Linux solver compilation and guidance in my C++ desert of knowledge.</p>
+<p>Thanks to <a class="reference external" href="http://www.chadvernon.com/blog/">Chad Vernon</a> , for his fantastic tutorials and open-source tools. Some of mGear’s parts wouldn’t be possible without it.</p>
 <p class="last">And thanks!! to all the people who help me and support this project :)</p>
 </dd>
 </dl>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>I can&#8217;t promise any kind of support and this tool is provided “AS IS”. Please read the LICENSE for more information.</p>
+<p>I can’t promise any kind of support and this tool is provided “AS IS”. Please read the LICENSE for more information.</p>
 <p class="last">However, I am committed to continue developing mGear. So please, do not hesitate contact me if you found any bug or possible improvement.</p>
 </div>
 <div class="admonition note">
@@ -175,15 +214,18 @@ Please read the license for more information.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="framework.html" class="btn btn-neutral float-right" title="Framework" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="framework.html" class="btn btn-neutral float-right" title="Framework" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to mGear: Rigging Framework for Autodesk Maya" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Welcome to mGear: Rigging Framework for Autodesk Maya" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -214,10 +256,11 @@ Please read the license for more information.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>

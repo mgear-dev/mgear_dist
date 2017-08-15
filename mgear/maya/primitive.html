@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.primitive &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.primitive &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.skin" href="skin.html"/>
         <link rel="prev" title="mgear.maya.node" href="node.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.primitive</li>
+        
+      <li>mgear.maya.primitive</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/primitive.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/primitive.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -190,11 +219,11 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the chain.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
-<li><strong>positions</strong> (<em>list of vectors</em>) &#8211; the positons to define the chain.</li>
-<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The normal vector to define the direction of the chain.</li>
-<li><strong>negate</strong> (<em>bool</em>) &#8211; If True will negate the direction of the chain</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the chain.</li>
+<li><strong>name</strong> (<em>str</em>) – The node name.</li>
+<li><strong>positions</strong> (<em>list of vectors</em>) – the positons to define the chain.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The normal vector to define the direction of the chain.</li>
+<li><strong>negate</strong> (<em>bool</em>) – If True will negate the direction of the chain</li>
 </ul>
 </td>
 </tr>
@@ -226,11 +255,11 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the chain.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
-<li><strong>positions</strong> (<em>list of vectors</em>) &#8211; the positons to define the chain.</li>
-<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The normal vector to define the direction of the chain.</li>
-<li><strong>negate</strong> (<em>bool</em>) &#8211; If True will negate the direction of the chain</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the chain.</li>
+<li><strong>name</strong> (<em>str</em>) – The node name.</li>
+<li><strong>positions</strong> (<em>list of vectors</em>) – the positons to define the chain.</li>
+<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The normal vector to define the direction of the chain.</li>
+<li><strong>negate</strong> (<em>bool</em>) – If True will negate the direction of the chain</li>
 </ul>
 </td>
 </tr>
@@ -247,18 +276,18 @@
 
 <dl class="function">
 <dt id="mgear.maya.primitive.addIkHandle">
-<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addIkHandle</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>chn</em>, <em>solver='ikRPsolver'</em>, <em>poleV=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addIkHandle" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.primitive.</code><code class="descname">addIkHandle</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>chn</em>, <em>solver=’ikRPsolver’</em>, <em>poleV=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.primitive.addIkHandle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates and connect an IKhandle to a joints chain.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the IKhandle.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
-<li><strong>chn</strong> (<em>list</em>) &#8211; List of joints.</li>
-<li><strong>solver</strong> (<em>str</em>) &#8211; the solver to be use for the ikHandel. Default value is &#8220;ikRPsolver&#8221;</li>
-<li><strong>poleV</strong> (<em>dagNode</em>) &#8211; Pole vector for the IKHandle</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the IKhandle.</li>
+<li><strong>name</strong> (<em>str</em>) – The node name.</li>
+<li><strong>chn</strong> (<em>list</em>) – List of joints.</li>
+<li><strong>solver</strong> (<em>str</em>) – the solver to be use for the ikHandel. Default value is “ikRPsolver”</li>
+<li><strong>poleV</strong> (<em>dagNode</em>) – Pole vector for the IKHandle</li>
 </ul>
 </td>
 </tr>
@@ -281,7 +310,7 @@
 <dd><p>Create a joint dagNode.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">I&#8217;m not using the joint() comand because this is parenting
+<p class="last">I’m not using the joint() comand because this is parenting
 the newly created joint to current selection which might not be desired</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -289,10 +318,10 @@ the newly created joint to current selection which might not be desired</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The matrix for the node transformation (optional).</li>
-<li><strong>vis</strong> (<em>bool</em>) &#8211; Set the visibility of the new joint.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) – The node name.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The matrix for the node transformation (optional).</li>
+<li><strong>vis</strong> (<em>bool</em>) – Set the visibility of the new joint.</li>
 </ul>
 </td>
 </tr>
@@ -312,7 +341,7 @@ the newly created joint to current selection which might not be desired</p>
 <dd><p>Create a joint dagNode.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">I&#8217;m not using the joint() comand because this is parenting
+<p class="last">I’m not using the joint() comand because this is parenting
 the newly created joint to current selection which might not be desired</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -320,10 +349,10 @@ the newly created joint to current selection which might not be desired</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The node name.</li>
-<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The vector for the node position (optional).</li>
-<li><strong>vis</strong> (<em>bool</em>) &#8211; Set the visibility of the new joint.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) – The node name.</li>
+<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The vector for the node position (optional).</li>
+<li><strong>vis</strong> (<em>bool</em>) – Set the visibility of the new joint.</li>
 </ul>
 </td>
 </tr>
@@ -346,10 +375,10 @@ the newly created joint to current selection which might not be desired</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The Node name.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The matrix for the node transformation (optional).</li>
-<li><strong>size</strong> (<em>float</em>) &#8211; The space locator shape size (optional).</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) – The Node name.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The matrix for the node transformation (optional).</li>
+<li><strong>size</strong> (<em>float</em>) – The space locator shape size (optional).</li>
 </ul>
 </td>
 </tr>
@@ -372,10 +401,10 @@ the newly created joint to current selection which might not be desired</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The Node name.</li>
-<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The vector for the node position (optional).</li>
-<li><strong>size</strong> (<em>float</em>) &#8211; The space locator shape size (optional).</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) – The Node name.</li>
+<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The vector for the node position (optional).</li>
+<li><strong>size</strong> (<em>float</em>) – The space locator shape size (optional).</li>
 </ul>
 </td>
 </tr>
@@ -398,9 +427,9 @@ the newly created joint to current selection which might not be desired</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The Node name.</li>
-<li><strong>m</strong> (<em>matrix</em>) &#8211; The matrix for the node transformation (optional).</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) – The Node name.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The matrix for the node transformation (optional).</li>
 </ul>
 </td>
 </tr>
@@ -423,9 +452,9 @@ the newly created joint to current selection which might not be desired</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; The parent for the node.</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The Node name.</li>
-<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The vector for the node position (optional).</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent for the node.</li>
+<li><strong>name</strong> (<em>str</em>) – The Node name.</li>
+<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The vector for the node position (optional).</li>
 </ul>
 </td>
 </tr>
@@ -443,15 +472,18 @@ the newly created joint to current selection which might not be desired</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="skin.html" class="btn btn-neutral float-right" title="mgear.maya.skin" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="skin.html" class="btn btn-neutral float-right" title="mgear.maya.skin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="node.html" class="btn btn-neutral" title="mgear.maya.node" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="node.html" class="btn btn-neutral" title="mgear.maya.node" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -482,10 +514,11 @@ the newly created joint to current selection which might not be desired</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

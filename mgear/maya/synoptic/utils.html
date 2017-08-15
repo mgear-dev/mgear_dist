@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.synoptic.widgets" href="widgets.html"/>
         <link rel="prev" title="mgear.maya.synoptic" href="synoptic.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.synoptic.utils</li>
+        
+      <li>mgear.maya.synoptic.utils</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../../_sources/mgear/maya/synoptic/utils.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../../_sources/mgear/maya/synoptic/utils.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -176,14 +205,248 @@
             
   <div class="section" id="module-mgear.maya.synoptic.utils">
 <span id="mgear-maya-synoptic-utils"></span><h1>mgear.maya.synoptic.utils<a class="headerlink" href="#module-mgear.maya.synoptic.utils" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">AbstractAnimationTransfer</code><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.bakeAnimation">
+<code class="descname">bakeAnimation</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.bakeAnimation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.createUI">
+<code class="descname">createUI</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.createUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.create_connections">
+<code class="descname">create_connections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.create_connections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.create_controls">
+<code class="descname">create_controls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.create_controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.create_layout">
+<code class="descname">create_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.create_layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.doItByUI">
+<code class="descname">doItByUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.doItByUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.getHostName">
+<code class="descname">getHostName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.getHostName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.getWorldMatrices">
+<code class="descname">getWorldMatrices</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>val_src_nodes</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.getWorldMatrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns matrice List[frame][controller number].</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.populateRange">
+<code class="descname">populateRange</code><span class="sig-paren">(</span><em>timeSlider=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.populateRange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.setComboBoxItemsFormComboObj">
+<code class="descname">setComboBoxItemsFormComboObj</code><span class="sig-paren">(</span><em>combo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.setComboBoxItemsFormComboObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.setComboBoxItemsFormList">
+<code class="descname">setComboBoxItemsFormList</code><span class="sig-paren">(</span><em>comboList</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.setComboBoxItemsFormList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.setComboObj">
+<code class="descname">setComboObj</code><span class="sig-paren">(</span><em>combo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.setComboObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.setGroupBoxTitle">
+<code class="descname">setGroupBoxTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.setGroupBoxTitle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.setModel">
+<code class="descname">setModel</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.setModel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.setSwitchedAttrShortName">
+<code class="descname">setSwitchedAttrShortName</code><span class="sig-paren">(</span><em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.setSwitchedAttrShortName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.setUiHost">
+<code class="descname">setUiHost</code><span class="sig-paren">(</span><em>uihost</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.setUiHost" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.transfer">
+<code class="descname">transfer</code><span class="sig-paren">(</span><em>startFrame</em>, <em>endFrame</em>, <em>onlyKeyframes</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.transfer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.valueChanged">
+<code class="descname">valueChanged</code><em class="property"> = &lt;PySide2.QtCore.Signal object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.valueChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">IkFkTransfer</code><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.changeAttrToBoundValue">
+<code class="descname">changeAttrToBoundValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.changeAttrToBoundValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.doItByUI">
+<code class="descname">doItByUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.doItByUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.execute">
+<em class="property">static </em><code class="descname">execute</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uihost</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot=None</em>, <em>startFrame=None</em>, <em>endFrame=None</em>, <em>onlyKeyframes=None</em>, <em>switchTo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>transfer without displaying UI</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.getChangeAttrName">
+<code class="descname">getChangeAttrName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.getChangeAttrName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.getChangeRollAttrName">
+<code class="descname">getChangeRollAttrName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.getChangeRollAttrName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.getValueFromUI">
+<code class="descname">getValueFromUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.getValueFromUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.setCtrls">
+<code class="descname">setCtrls</code><span class="sig-paren">(</span><em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.setCtrls" title="Permalink to this definition">¶</a></dt>
+<dd><p>gather maya PyNode represented each controllers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.setGroupBoxTitle">
+<code class="descname">setGroupBoxTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.setGroupBoxTitle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.showUI">
+<em class="property">static </em><code class="descname">showUI</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uihost</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.showUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.toFK">
+<em class="property">static </em><code class="descname">toFK</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uihost</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.toFK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.toIK">
+<em class="property">static </em><code class="descname">toIK</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uihost</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.toIK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.IkFkTransfer.transfer">
+<code class="descname">transfer</code><span class="sig-paren">(</span><em>startFrame</em>, <em>endFrame</em>, <em>onlyKeyframes</em>, <em>ikRot</em>, <em>switchTo=None</em>, <em>*args</em>, <em>**kargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.IkFkTransfer.transfer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">ParentSpaceTransfer</code><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer.changeAttrToBoundValue">
+<code class="descname">changeAttrToBoundValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer.changeAttrToBoundValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer.getChangeAttrName">
+<code class="descname">getChangeAttrName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer.getChangeAttrName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer.getValue">
+<code class="descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer.getValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer.setCtrls">
+<code class="descname">setCtrls</code><span class="sig-paren">(</span><em>srcName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer.setCtrls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer.setGroupBoxTitle">
+<code class="descname">setGroupBoxTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer.setGroupBoxTitle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer.showUI">
+<em class="property">static </em><code class="descname">showUI</code><span class="sig-paren">(</span><em>combo</em>, <em>model</em>, <em>uihost</em>, <em>switchedAttrShortName</em>, <em>ctrl_name</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer.showUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.ParentSpaceTransfer.transfer">
+<code class="descname">transfer</code><span class="sig-paren">(</span><em>startFrame</em>, <em>endFrame</em>, <em>onlyKeyframes</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ParentSpaceTransfer.transfer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.applyMirror">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">applyMirror</code><span class="sig-paren">(</span><em>nameSpace</em>, <em>mirrorEntry</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.applyMirror" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.bindPose">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">bindPose</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.bindPose" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.synoptic.utils.calculateMirrorData">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">calculateMirrorData</code><span class="sig-paren">(</span><em>srcNode</em>, <em>targetNode</em>, <em>flip=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.calculateMirrorData" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns [{“target”: node, “attr”: at, “val”: flipVal}]</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.synoptic.utils.changeSpace">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">changeSpace</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em>, <em>cnsIndex</em>, <em>ctl_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.changeSpace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.gatherMirrorData">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">gatherMirrorData</code><span class="sig-paren">(</span><em>nameSpace</em>, <em>node</em>, <em>flip</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.gatherMirrorData" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -198,12 +461,27 @@
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getControlers">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getControlers</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getControlers" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getControlers</code><span class="sig-paren">(</span><em>model</em>, <em>gSuffix=’_controllers_grp’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getControlers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getInvertCheckButtonAttrName">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getInvertCheckButtonAttrName</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getInvertCheckButtonAttrName" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getModel">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getModel</code><span class="sig-paren">(</span><em>widget</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getModel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getNamespace">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getNamespace</code><span class="sig-paren">(</span><em>modelName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getNamespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getNode">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getNode</code><span class="sig-paren">(</span><em>nodeName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getNode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -216,8 +494,34 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.synoptic.utils.ikFkMatch">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">ikFkMatch</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uiHost_name</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ikFkMatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.isSideElement">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">isSideElement</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.isSideElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns is name(str) side element?</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> – str</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.synoptic.utils.keyAll">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keyAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keyAll" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.keyGroup">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keyGroup</code><span class="sig-paren">(</span><em>model</em>, <em>groupSuffix</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keyGroup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -229,8 +533,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>model</strong> &#8211; Name of the namespace that will define de the model</li>
-<li><strong>object_names</strong> &#8211; names of the controls, without the name space</li>
+<li><strong>model</strong> – Name of the namespace that will define de the model</li>
+<li><strong>object_names</strong> – names of the controls, without the name space</li>
 </ul>
 </td>
 </tr>
@@ -247,8 +551,13 @@
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.synoptic.utils.listAttrForMirror">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">listAttrForMirror</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.listAttrForMirror" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.synoptic.utils.mirrorPose">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">mirrorPose</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.mirrorPose" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">mirrorPose</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.mirrorPose" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -272,58 +581,34 @@
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.synoptic.utils.selGroup">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selGroup</code><span class="sig-paren">(</span><em>model</em>, <em>groupSuffix</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selGroup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.synoptic.utils.selectObj">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selectObj</code><span class="sig-paren">(</span><em>model</em>, <em>object_names</em>, <em>mouse_button</em>, <em>key_modifier</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selectObj" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="mgear.maya.synoptic.utils.showSpaceTransferUI">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">showSpaceTransferUI</code><span class="sig-paren">(</span><em>combo</em>, <em>model</em>, <em>uihost</em>, <em>combo_attr</em>, <em>ctrl_name</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.showSpaceTransferUI" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.synoptic.utils.stripNamespace">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">stripNamespace</code><span class="sig-paren">(</span><em>nodeName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.stripNamespace" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="class">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI">
-<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">spaceTransferUI</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI.create">
-<code class="descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.create" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI.create_connections">
-<code class="descname">create_connections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.create_connections" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI.create_controls">
-<code class="descname">create_controls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.create_controls" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI.create_layout">
-<code class="descname">create_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.create_layout" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI.doSpaceTransfer">
-<code class="descname">doSpaceTransfer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.doSpaceTransfer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI.populateRange">
-<code class="descname">populateRange</code><span class="sig-paren">(</span><em>timeSlider=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.populateRange" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI.staticMetaObject">
-<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide.QtCore.QMetaObject object at 0x0000000012E18848&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.staticMetaObject" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="mgear.maya.synoptic.utils.spaceTransferUI.valueChanged">
-<code class="descname">valueChanged</code><em class="property"> = &lt;PySide.QtCore.Signal object at 0x0000000012E16E68&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.spaceTransferUI.valueChanged" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.swapSideLabel">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">swapSideLabel</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.swapSideLabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns fliped name that replaced side label left to right or right to left.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -335,15 +620,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="widgets.html" class="btn btn-neutral float-right" title="mgear.maya.synoptic.widgets" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="widgets.html" class="btn btn-neutral float-right" title="mgear.maya.synoptic.widgets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="synoptic.html" class="btn btn-neutral" title="mgear.maya.synoptic" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="synoptic.html" class="btn btn-neutral" title="mgear.maya.synoptic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -374,10 +662,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../../_static/jquery.js"></script>

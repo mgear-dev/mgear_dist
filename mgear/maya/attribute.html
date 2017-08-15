@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.attribute &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.attribute &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.curve" href="curve.html"/>
         <link rel="prev" title="mgear.maya.applyop" href="applyop.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.attribute</li>
+        
+      <li>mgear.maya.attribute</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/attribute.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/attribute.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -186,10 +215,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>scriptName</strong> (<em>str</em>) &#8211; Attribute fullName.</li>
-<li><strong>keys</strong> (<em>list</em>) &#8211; The keyframes to define the function curve.</li>
-<li><strong>interpolation</strong> (<em>int</em>) &#8211; the curve interpolation.</li>
-<li><strong>extrapolation</strong> (<em>int</em>) &#8211; the curve extrapolation.</li>
+<li><strong>scriptName</strong> (<em>str</em>) – Attribute fullName.</li>
+<li><strong>keys</strong> (<em>list</em>) – The keyframes to define the function curve.</li>
+<li><strong>interpolation</strong> (<em>int</em>) – the curve interpolation.</li>
+<li><strong>extrapolation</strong> (<em>int</em>) – the curve extrapolation.</li>
 </ul>
 </td>
 </tr>
@@ -203,7 +232,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The node to add the attribute</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The node to add the attribute</td>
 </tr>
 </tbody>
 </table>
@@ -233,7 +262,7 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The node to add the attribute</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The node to add the attribute</td>
 </tr>
 </tbody>
 </table>
@@ -250,17 +279,17 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>scriptName</strong> (<em>str</em>) &#8211; Parameter scriptname.</li>
-<li><strong>valueType</strong> (<em>str</em>) &#8211; The Attribute Type. Exp: &#8216;string&#8217;, &#8216;bool&#8217;, &#8216;long&#8217;, etc..</li>
-<li><strong>value</strong> (<em>float or int</em>) &#8211; Default parameter value.</li>
-<li><strong>niceName</strong> (<em>str</em>) &#8211; Parameter niceName.</li>
-<li><strong>shortName</strong> (<em>str</em>) &#8211; Parameter shortName.</li>
-<li><strong>minimum</strong> (<em>float or int</em>) &#8211; mininum value.</li>
-<li><strong>maximum</strong> (<em>float or int</em>) &#8211; maximum value.</li>
-<li><strong>keyable</strong> (<em>boo</em>) &#8211; If true is keyable</li>
-<li><strong>readable</strong> (<em>boo</em>) &#8211; If true is readable</li>
-<li><strong>storable</strong> (<em>boo</em>) &#8211; If true is storable</li>
-<li><strong>writable</strong> (<em>boo</em>) &#8211; If true is writable</li>
+<li><strong>scriptName</strong> (<em>str</em>) – Parameter scriptname.</li>
+<li><strong>valueType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, ‘long’, etc..</li>
+<li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – Default parameter value.</li>
+<li><strong>niceName</strong> (<em>str</em>) – Parameter niceName.</li>
+<li><strong>shortName</strong> (<em>str</em>) – Parameter shortName.</li>
+<li><strong>minimum</strong> (<em>float</em><em> or </em><em>int</em>) – mininum value.</li>
+<li><strong>maximum</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value.</li>
+<li><strong>keyable</strong> (<em>boo</em>) – If true is keyable</li>
+<li><strong>readable</strong> (<em>boo</em>) – If true is readable</li>
+<li><strong>storable</strong> (<em>boo</em>) – If true is storable</li>
+<li><strong>writable</strong> (<em>boo</em>) – If true is writable</li>
 </ul>
 </td>
 </tr>
@@ -283,19 +312,19 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to add the new attribute.</li>
-<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
-<li><strong>attributeType</strong> (<em>str</em>) &#8211; The Attribute Type. Exp: &#8216;string&#8217;, &#8216;bool&#8217;, &#8216;long&#8217;, etc..</li>
-<li><strong>value</strong> (<em>float or int</em>) &#8211; The default value.</li>
-<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
-<li><strong>shortName</strong> (<em>str</em>) &#8211; The attribute short name. (optional)</li>
-<li><strong>minValue</strong> (<em>float or int</em>) &#8211; minimum value. (optional)</li>
-<li><strong>maxValue</strong> (<em>float or int</em>) &#8211; maximum value. (optional)</li>
-<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
-<li><strong>channelBox</strong> (<em>bool</em>) &#8211; Set if the attribute is in the channelBox or not, when the attribute is not keyable. (optional)</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>attributeType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, ‘long’, etc..</li>
+<li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – The default value.</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) – The attribute short name. (optional)</li>
+<li><strong>minValue</strong> (<em>float</em><em> or </em><em>int</em>) – minimum value. (optional)</li>
+<li><strong>maxValue</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
+<li><strong>channelBox</strong> (<em>bool</em>) – Set if the attribute is in the channelBox or not, when the attribute is not keyable. (optional)</li>
 </ul>
 </td>
 </tr>
@@ -318,15 +347,15 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to add the new attribute.</li>
-<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
-<li><strong>value</strong> (<em>list of flotat</em>) &#8211; The default value in a list for RGB. exp [1.0, 0.99, 0.13].</li>
-<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
-<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
-<li><strong>shortName</strong> (<em>str</em>) &#8211; The attribute short name. (optional)</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>value</strong> (<em>list of flotat</em>) – The default value in a list for RGB. exp [1.0, 0.99, 0.13].</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) – The attribute short name. (optional)</li>
 </ul>
 </td>
 </tr>
@@ -349,16 +378,16 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to add the new attribute.</li>
-<li><strong>longName</strong> (<em>str</em>) &#8211; The attribute name.</li>
-<li><strong>value</strong> (<em>int</em>) &#8211; The default value.</li>
-<li><strong>enum</strong> (<em>list of str</em>) &#8211; The list of elements in the enumerate control</li>
-<li><strong>niceName</strong> (<em>str</em>) &#8211; The attribute nice name. (optional)</li>
-<li><strong>shortName</strong> (<em>str</em>) &#8211; The attribute short name. (optional)</li>
-<li><strong>keyable</strong> (<em>bool</em>) &#8211; Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) &#8211; Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) &#8211; Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) &#8211; Set if the attribute is writable or not. (optional)</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>value</strong> (<em>int</em>) – The default value.</li>
+<li><strong>enum</strong> (<em>list of str</em>) – The list of elements in the enumerate control</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) – The attribute short name. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
 </ul>
 </td>
 </tr>
@@ -374,7 +403,7 @@ paranDef (dic): The stored param definition</dd>
 
 <dl class="function">
 <dt id="mgear.maya.attribute.addFCurve">
-<code class="descclassname">mgear.maya.attribute.</code><code class="descname">addFCurve</code><span class="sig-paren">(</span><em>node</em>, <em>name='fcurve'</em>, <em>keys=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.addFCurve" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">addFCurve</code><span class="sig-paren">(</span><em>node</em>, <em>name=’fcurve’</em>, <em>keys=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.addFCurve" title="Permalink to this definition">¶</a></dt>
 <dd><p>FCurve attribute (just a animCurveUU node connected to an attribute)</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -385,13 +414,52 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to add the new fcurve attribute</li>
-<li><strong>name</strong> (<em>str</em>) &#8211; The attribute name</li>
-<li><strong>key</strong> (<em>list</em>) &#8211; list of keyframes and values</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The object to add the new fcurve attribute</li>
+<li><strong>name</strong> (<em>str</em>) – The attribute name</li>
+<li><strong>key</strong> (<em>list</em>) – list of keyframes and values</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Fcurve and attribute name</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.addProxyAttribute">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">addProxyAttribute</code><span class="sig-paren">(</span><em>sourceAttrs</em>, <em>targets</em>, <em>duplicatedPolicy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.addProxyAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add proxy paramenter to a list of target dagNode
+Duplicated channel policy, stablish the rule in case the channel already
+exist on the target.</p>
+<p>Duplicate policy options</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>index</td>
+<td>This policy will add an index to avoid clashing channel names</td>
+</tr>
+<tr class="row-even"><td>fullName</td>
+<td>This policy will add the name of the source object to the channel</td>
+</tr>
+<tr class="row-odd"><td>merge</td>
+<td>This policy will merge the channels</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceAttrs</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The parameters to be connected as proxy</li>
+<li><strong>targets</strong> (<em>dagNode</em><em> or </em><em>list of dagNode</em>) – The list of dagNode to add the proxy paramenter</li>
+<li><strong>duplicatedPolicy</strong> (<a class="reference internal" href="../string.html#module-mgear.string" title="mgear.string"><em>string</em></a><em>, </em><em>optional</em>) – Set the duplicated channel policy</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -407,8 +475,8 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>scriptName</strong> (<em>str</em>) &#8211; Attribute fullName</li>
-<li><strong>value</strong> (<em>list of float</em>) &#8211; The default value in a list for RGB. exp [1.0, 0.99, 0.13].</li>
+<li><strong>scriptName</strong> (<em>str</em>) – Attribute fullName</li>
+<li><strong>value</strong> (<em>list of float</em>) – The default value in a list for RGB. exp [1.0, 0.99, 0.13].</li>
 </ul>
 </td>
 </tr>
@@ -422,7 +490,7 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The node to add the attribute</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The node to add the attribute</td>
 </tr>
 </tbody>
 </table>
@@ -439,9 +507,9 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>scriptName</strong> (<em>str</em>) &#8211; Attribute fullName</li>
-<li><strong>enum</strong> (<em>list of str</em>) &#8211; The list of elements in the enumerate control.</li>
-<li><strong>value</strong> (<em>int</em>) &#8211; The default value.</li>
+<li><strong>scriptName</strong> (<em>str</em>) – Attribute fullName</li>
+<li><strong>enum</strong> (<em>list of str</em>) – The list of elements in the enumerate control.</li>
+<li><strong>value</strong> (<em>int</em>) – The default value.</li>
 </ul>
 </td>
 </tr>
@@ -455,7 +523,7 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The node to add the attribute</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The node to add the attribute</td>
 </tr>
 </tbody>
 </table>
@@ -464,18 +532,59 @@ paranDef (dic): The stored param definition</dd>
 </dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.attribute.getSelectedChannels">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">getSelectedChannels</code><span class="sig-paren">(</span><em>userDefine=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.getSelectedChannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the selected channels on the channel box</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>userDefine</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, will return only the user defined channels. Other channels will be skipped.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The list of selected channels names</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.getSelectedObjectChannels">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">getSelectedObjectChannels</code><span class="sig-paren">(</span><em>oSel=None</em>, <em>userDefine=False</em>, <em>animatable=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.getSelectedObjectChannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the selected object channels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>oSel</strong> (<em>None</em><em>, </em><em>optional</em>) – The  pynode with channels to get</li>
+<li><strong>userDefine</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, will return only the user defined channels. Other channels will be skipped.</li>
+<li><strong>animatable</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, only animatable parameters will be return</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The list of the selected object channels names</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.attribute.lockAttribute">
-<code class="descclassname">mgear.maya.attribute.</code><code class="descname">lockAttribute</code><span class="sig-paren">(</span><em>node, attributes=['tx', 'ty', 'tz', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz', 'v'], lock=True, keyable=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.lockAttribute" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">lockAttribute</code><span class="sig-paren">(</span><em>node, attributes=[‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.lockAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lock attributes of a node. By defaul will lock the rotation, scale and translation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The node with the attributes to lock.</li>
-<li><strong>attributes</strong> (<em>list of str</em>) &#8211; The list of the attributes to lock.</li>
-<li><strong>lock</strong> (<em>Bool</em>) &#8211; Set the attribute lock when is True.</li>
-<li><strong>keyable</strong> (<em>Bool</em>) &#8211; Set the attribute keyable when is True.</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The node with the attributes to lock.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) – The list of the attributes to lock.</li>
 </ul>
 </td>
 </tr>
@@ -488,6 +597,47 @@ paranDef (dic): The stored param definition</dd>
 </dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.attribute.moveChannel">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">moveChannel</code><span class="sig-paren">(</span><em>attr</em>, <em>sourceNode</em>, <em>targetNode</em>, <em>duplicatedPolicy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.moveChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move channels  keeping the output connections.
+Duplicated channel policy, stablish the rule in case the channel already
+exist on the target.</p>
+<p>NOTE: For the moment move channel only supports type double and enum</p>
+<p>Duplicate policy options</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>index</td>
+<td>This policy will add an index to avoid clashing channel names</td>
+</tr>
+<tr class="row-even"><td>fullName</td>
+<td>This policy will add the name of the source object to the channel</td>
+</tr>
+<tr class="row-odd"><td>merge</td>
+<td>This policy will merge the channels</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attr</strong> (<em>str</em>) – Name of the channel to move</li>
+<li><strong>sourceNode</strong> (<em>PyNoe</em><em> or </em><em>str</em>) – The source node with the channel</li>
+<li><strong>targetNode</strong> (<em>PyNoe</em><em> or </em><em>str</em>) – The target node for the channel</li>
+<li><strong>duplicatedPolicy</strong> (<em>None</em><em>, </em><em>str</em>) – Set the duplicated channel policy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.attribute.setInvertMirror">
 <code class="descclassname">mgear.maya.attribute.</code><code class="descname">setInvertMirror</code><span class="sig-paren">(</span><em>node</em>, <em>invList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setInvertMirror" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set invert mirror pose values</p>
@@ -495,7 +645,7 @@ paranDef (dic): The stored param definition</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) &#8211; The object to set invert mirror Values</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The object to set invert mirror Values</td>
 </tr>
 </tbody>
 </table>
@@ -503,16 +653,16 @@ paranDef (dic): The stored param definition</dd>
 
 <dl class="function">
 <dt id="mgear.maya.attribute.setKeyableAttributes">
-<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setKeyableAttributes</code><span class="sig-paren">(</span><em>nodes, params=['tx', 'ty', 'tz', 'ro', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setKeyableAttributes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setKeyableAttributes</code><span class="sig-paren">(</span><em>nodes, params=[‘tx’, ‘ty’, ‘tz’, ‘ro’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setKeyableAttributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set keyable attributes of a node. By defaul will set keyable the rotation, scale and translation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The node with the attributes to set keyable.</li>
-<li><strong>attributes</strong> (<em>list of str</em>) &#8211; The list of the attributes to set keyable. Attrs not in the list will be locked
-if None, [&#8220;tx&#8221;, &#8220;ty&#8221;, &#8220;tz&#8221;, &#8220;rorder&#8221;, &#8220;rx&#8221;, &#8220;ry&#8221;, &#8220;rz&#8221;, &#8220;sx&#8221;, &#8220;sy&#8221;, &#8220;sz&#8221;] is used</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The node with the attributes to set keyable.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) – The list of the attributes to set keyable. Attrs not in the list will be locked
+if None, [“tx”, “ty”, “tz”, “rorder”, “rx”, “ry”, “rz”, “sx”, “sy”, “sz”] is used</li>
 </ul>
 </td>
 </tr>
@@ -522,15 +672,15 @@ if None, [&#8220;tx&#8221;, &#8220;ty&#8221;, &#8220;tz&#8221;, &#8220;rorder&#8
 
 <dl class="function">
 <dt id="mgear.maya.attribute.setNotKeyableAttributes">
-<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setNotKeyableAttributes</code><span class="sig-paren">(</span><em>nodes, attributes=['tx', 'ty', 'tz', 'ro', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz', 'v']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setNotKeyableAttributes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setNotKeyableAttributes</code><span class="sig-paren">(</span><em>nodes, attributes=[‘tx’, ‘ty’, ‘tz’, ‘ro’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setNotKeyableAttributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set not keyable attributes of a node. By defaul will set not keyable the rotation, scale and translation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The node with the attributes to set keyable.</li>
-<li><strong>attributes</strong> (<em>list of str</em>) &#8211; The list of the attributes to set not keyable.</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The node with the attributes to set keyable.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) – The list of the attributes to set not keyable.</li>
 </ul>
 </td>
 </tr>
@@ -540,15 +690,15 @@ if None, [&#8220;tx&#8221;, &#8220;ty&#8221;, &#8220;tz&#8221;, &#8220;rorder&#8
 
 <dl class="function">
 <dt id="mgear.maya.attribute.setRotOrder">
-<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setRotOrder</code><span class="sig-paren">(</span><em>node</em>, <em>s='XYZ'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setRotOrder" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">setRotOrder</code><span class="sig-paren">(</span><em>node</em>, <em>s=’XYZ’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.setRotOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the rotorder of the object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>node</strong> (<em>dagNode</em>) &#8211; The object to set the rot order on.</li>
-<li><strong>s</strong> (<em>str</em>) &#8211; Value of the rotorder. Possible values : (&#8220;XYZ&#8221;, &#8220;XZY&#8221;, &#8220;YXZ&#8221;, &#8220;YZX&#8221;, &#8220;ZXY&#8221;, &#8220;ZYX&#8221;)</li>
+<li><strong>node</strong> (<em>dagNode</em>) – The object to set the rot order on.</li>
+<li><strong>s</strong> (<em>str</em>) – Value of the rotorder. Possible values : (“XYZ”, “XZY”, “YXZ”, “YZX”, “ZXY”, “ZYX”)</li>
 </ul>
 </td>
 </tr>
@@ -560,15 +710,18 @@ if None, [&#8220;tx&#8221;, &#8220;ty&#8221;, &#8220;tz&#8221;, &#8220;rorder&#8
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="curve.html" class="btn btn-neutral float-right" title="mgear.maya.curve" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="curve.html" class="btn btn-neutral float-right" title="mgear.maya.curve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="applyop.html" class="btn btn-neutral" title="mgear.maya.applyop" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="applyop.html" class="btn btn-neutral" title="mgear.maya.applyop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -599,10 +752,11 @@ if None, [&#8220;tx&#8221;, &#8220;ty&#8221;, &#8220;tz&#8221;, &#8220;rorder&#8
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

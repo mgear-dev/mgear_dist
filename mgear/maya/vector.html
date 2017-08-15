@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.vector &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.vector &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.shifter" href="shifter/shifter.html"/>
         <link rel="prev" title="mgear.maya.utils" href="utils.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.vector</li>
+        
+      <li>mgear.maya.vector</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/vector.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/vector.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -192,8 +221,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>v0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; vector A.</li>
-<li><strong>v1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; vector B.</li>
+<li><strong>v0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – vector A.</li>
+<li><strong>v1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – vector B.</li>
 </ul>
 </td>
 </tr>
@@ -216,8 +245,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>obj0</strong> (<em>dagNode</em>) &#8211; Object A</li>
-<li><strong>obj1</strong> (<em>dagNode</em>) &#8211; Object B</li>
+<li><strong>obj0</strong> (<em>dagNode</em>) – Object A</li>
+<li><strong>obj1</strong> (<em>dagNode</em>) – Object B</li>
 </ul>
 </td>
 </tr>
@@ -240,9 +269,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>v0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; First position on the plane.</li>
-<li><strong>v1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Second position on the plane.</li>
-<li><strong>v2</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Third position on the plane.</li>
+<li><strong>v0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – First position on the plane.</li>
+<li><strong>v1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Second position on the plane.</li>
+<li><strong>v2</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Third position on the plane.</li>
 </ul>
 </td>
 </tr>
@@ -265,9 +294,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>v0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; First position on the plane.</li>
-<li><strong>v1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Second position on the plane.</li>
-<li><strong>v2</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Third position on the plane.</li>
+<li><strong>v0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – First position on the plane.</li>
+<li><strong>v1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Second position on the plane.</li>
+<li><strong>v2</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Third position on the plane.</li>
 </ul>
 </td>
 </tr>
@@ -290,10 +319,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>v</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Input Vector.</li>
-<li><strong>position0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Position A.</li>
-<li><strong>position1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; Position B.</li>
-<li><strong>inverse</strong> (<em>bool</em>) &#8211; Invert the rotation.</li>
+<li><strong>v</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Input Vector.</li>
+<li><strong>position0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Position A.</li>
+<li><strong>position1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – Position B.</li>
+<li><strong>inverse</strong> (<em>bool</em>) – Invert the rotation.</li>
 </ul>
 </td>
 </tr>
@@ -323,9 +352,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>v0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; vector A.</li>
-<li><strong>v1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; vector B.</li>
-<li><strong>blend</strong> (<em>float</em>) &#8211; Blending value.</li>
+<li><strong>v0</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – vector A.</li>
+<li><strong>v1</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – vector B.</li>
+<li><strong>blend</strong> (<em>float</em>) – Blending value.</li>
 </ul>
 </td>
 </tr>
@@ -348,9 +377,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The vector to rotate.</li>
-<li><strong>axis</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) &#8211; The axis to rotate around.</li>
-<li><strong>a</strong> (<em>float</em>) &#8211; The rotation angle in radians.</li>
+<li><strong>v</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The vector to rotate.</li>
+<li><strong>axis</strong> (<a class="reference internal" href="#module-mgear.maya.vector" title="mgear.maya.vector"><em>vector</em></a>) – The axis to rotate around.</li>
+<li><strong>a</strong> (<em>float</em>) – The rotation angle in radians.</li>
 </ul>
 </td>
 </tr>
@@ -362,15 +391,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="shifter/shifter.html" class="btn btn-neutral float-right" title="mgear.maya.shifter" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="shifter/shifter.html" class="btn btn-neutral float-right" title="mgear.maya.shifter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="utils.html" class="btn btn-neutral" title="mgear.maya.utils" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral" title="mgear.maya.utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -401,10 +433,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.skin &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.skin &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../index.html"/>
         <link rel="up" title="Base Modules" href="../baseModules.html"/>
         <link rel="next" title="mgear.maya.transform" href="mgear.maya.transform.html"/>
         <link rel="prev" title="mgear.maya.primitive" href="mgear.maya.primitive.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
@@ -107,6 +116,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
 </ul>
 </li>
@@ -130,8 +140,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -140,27 +152,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../baseModules.html">Base Modules</a> &raquo;</li>
-      
-    <li>mgear.maya.skin</li>
+        
+      <li>mgear.maya.skin</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../_sources/generated/mgear.maya.skin.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../_sources/generated/mgear.maya.skin.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -169,8 +198,8 @@
   <div class="section" id="module-mgear.maya.skin">
 <span id="mgear-maya-skin"></span><h1>mgear.maya.skin<a class="headerlink" href="#module-mgear.maya.skin" title="Permalink to this headline">¶</a></h1>
 <p>Functions to work with skinCluster data.</p>
-<p>This module is derivated from Chad Vernon&#8217;s Skin IO.</p>
-<p><a class="reference external" href="https://github.com/chadmv/cmt/tree/master/scripts/cmt/deform">Chad Vernon&#8217;s github</a></p>
+<p>This module is derivated from Chad Vernon’s Skin IO.</p>
+<p><a class="reference external" href="https://github.com/chadmv/cmt/tree/master/scripts/cmt/deform">Chad Vernon’s github</a></p>
 <p class="rubric">Functions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -178,29 +207,29 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.collectBlendWeights" title="mgear.maya.skin.collectBlendWeights"><code class="xref py py-obj docutils literal"><span class="pre">collectBlendWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.collectBlendWeights" title="mgear.maya.skin.collectBlendWeights"><code class="xref py py-obj docutils literal"><span class="pre">collectBlendWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;…)</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.collectData" title="mgear.maya.skin.collectData"><code class="xref py py-obj docutils literal"><span class="pre">collectData</span></code></a>(skinCls,&nbsp;dataDic)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.collectInfluenceWeights" title="mgear.maya.skin.collectInfluenceWeights"><code class="xref py py-obj docutils literal"><span class="pre">collectInfluenceWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.collectInfluenceWeights" title="mgear.maya.skin.collectInfluenceWeights"><code class="xref py py-obj docutils literal"><span class="pre">collectInfluenceWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;…)</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.exportSkin" title="mgear.maya.skin.exportSkin"><code class="xref py py-obj docutils literal"><span class="pre">exportSkin</span></code></a>([filePath,&nbsp;objs])</td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.getCurrentWeights" title="mgear.maya.skin.getCurrentWeights"><code class="xref py py-obj docutils literal"><span class="pre">getCurrentWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;components)</td>
-<td></td>
+<td>Get the skincluster weights</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.getGeometryComponents" title="mgear.maya.skin.getGeometryComponents"><code class="xref py py-obj docutils literal"><span class="pre">getGeometryComponents</span></code></a>(skinCls)</td>
-<td></td>
+<td>Get the geometry components from skincluster</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.getObjsFromSkinFile" title="mgear.maya.skin.getObjsFromSkinFile"><code class="xref py py-obj docutils literal"><span class="pre">getObjsFromSkinFile</span></code></a>([filePath])</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.getSkinCluster" title="mgear.maya.skin.getSkinCluster"><code class="xref py py-obj docutils literal"><span class="pre">getSkinCluster</span></code></a>(obj)</td>
-<td></td>
+<td>Get the skincluster of a given object</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.importSkin" title="mgear.maya.skin.importSkin"><code class="xref py py-obj docutils literal"><span class="pre">importSkin</span></code></a>([filePath])</td>
 <td></td>
@@ -208,13 +237,13 @@
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.selectDeformers" title="mgear.maya.skin.selectDeformers"><code class="xref py py-obj docutils literal"><span class="pre">selectDeformers</span></code></a>(*args)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.setBlendWeights" title="mgear.maya.skin.setBlendWeights"><code class="xref py py-obj docutils literal"><span class="pre">setBlendWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.setBlendWeights" title="mgear.maya.skin.setBlendWeights"><code class="xref py py-obj docutils literal"><span class="pre">setBlendWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;…)</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.setData" title="mgear.maya.skin.setData"><code class="xref py py-obj docutils literal"><span class="pre">setData</span></code></a>(skinCls,&nbsp;dataDic)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.setInfluenceWeights" title="mgear.maya.skin.setInfluenceWeights"><code class="xref py py-obj docutils literal"><span class="pre">setInfluenceWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.setInfluenceWeights" title="mgear.maya.skin.setInfluenceWeights"><code class="xref py py-obj docutils literal"><span class="pre">setInfluenceWeights</span></code></a>(skinCls,&nbsp;dagPath,&nbsp;…)</td>
 <td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/skin.html#mgear.maya.skin.skinCopy" title="mgear.maya.skin.skinCopy"><code class="xref py py-obj docutils literal"><span class="pre">skinCopy</span></code></a>([sourceMesh,&nbsp;targetMesh])</td>
@@ -226,15 +255,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mgear.maya.transform.html" class="btn btn-neutral float-right" title="mgear.maya.transform" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mgear.maya.transform.html" class="btn btn-neutral float-right" title="mgear.maya.transform" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mgear.maya.primitive.html" class="btn btn-neutral" title="mgear.maya.primitive" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mgear.maya.primitive.html" class="btn btn-neutral" title="mgear.maya.primitive" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -265,10 +297,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

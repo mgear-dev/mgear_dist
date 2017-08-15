@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.applyop &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.applyop &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.attribute" href="attribute.html"/>
         <link rel="prev" title="mgear.maya" href="maya.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.applyop</li>
+        
+      <li>mgear.maya.applyop</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/applyop.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/applyop.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -183,20 +212,20 @@
 </div>
 <dl class="function">
 <dt id="mgear.maya.applyop.aimCns">
-<code class="descclassname">mgear.maya.applyop.</code><code class="descname">aimCns</code><span class="sig-paren">(</span><em>obj, master, axis='xy', wupType=4, wupVector=[0, 1, 0], wupObject=None, maintainOffset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.aimCns" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">aimCns</code><span class="sig-paren">(</span><em>obj, master, axis=’xy’, wupType=’objectrotation’, wupVector=[0, 1, 0], wupObject=None, maintainOffset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.aimCns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply a direction constraint</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>obj</strong> (<em>dagNode</em>) &#8211; Constrained object.</li>
-<li><strong>master</strong> (<em>dagNode</em>) &#8211; Constraining Object.</li>
-<li><strong>axis</strong> (<em>str</em>) &#8211; Define pointing axis and upvector axis (combination of xyz and -x-y-z).</li>
-<li><strong>wupType</strong> (<em>int</em>) &#8211; 0=scene up, 1=Object up, 2=Object rotation up, 3=Vector, 4=None.</li>
-<li><strong>wupVector</strong> (<em>list of 3 float</em>) &#8211; world up vector. Exp: [0.0,1.0,0.0].</li>
-<li><strong>wupObject</strong> (<em>pyNode</em>) &#8211; world up object.</li>
-<li><strong>maintainOffset</strong> (<em>bool</em>) &#8211; Maintain offset.</li>
+<li><strong>obj</strong> (<em>dagNode</em>) – Constrained object.</li>
+<li><strong>master</strong> (<em>dagNode</em>) – Constraining Object.</li>
+<li><strong>axis</strong> (<em>str</em>) – Define pointing axis and upvector axis (combination of xyz and -x-y-z).</li>
+<li><strong>wupType</strong> (<em>str</em>) – scene, object, objectrotation, vector, or none.</li>
+<li><strong>wupVector</strong> (<em>list of 3 float</em>) – world up vector. Exp: [0.0,1.0,0.0].</li>
+<li><strong>wupObject</strong> (<em>pyNode</em>) – world up object.</li>
+<li><strong>maintainOffset</strong> (<em>bool</em>) – Maintain offset.</li>
 </ul>
 </td>
 </tr>
@@ -219,8 +248,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>crv</strong> (<em>nurbsCurve</em>) &#8211; Nurbs curve.</li>
-<li><strong>inputs</strong> (<em>List of dagNodes</em>) &#8211; Input object to drive the curve. Should be same number as crv points.
+<li><strong>crv</strong> (<em>nurbsCurve</em>) – Nurbs curve.</li>
+<li><strong>inputs</strong> (<em>List of dagNodes</em>) – Input object to drive the curve. Should be same number as crv points.
 Also the order should be the same as the points</li>
 </ul>
 </td>
@@ -244,12 +273,12 @@ Also the order should be the same as the points</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>outcrv</strong> (<em>NurbsCurve</em>) &#8211; Out Curve.</li>
-<li><strong>incrv</strong> (<em>NurbsCurve</em>) &#8211; In Curve.</li>
-<li><strong>position</strong> (<em>float</em>) &#8211; Default position value (from 0 to 1).</li>
-<li><strong>maxstretch</strong> (<em>float</em>) &#8211; Default maxstretch value (from 1 to infinite).</li>
-<li><strong>maxsquash</strong> (<em>float</em>) &#8211; Default maxsquash value (from 0 to 1).</li>
-<li><strong>softness</strong> (<em>float</em>) &#8211; Default softness value (from 0 to 1).</li>
+<li><strong>outcrv</strong> (<em>NurbsCurve</em>) – Out Curve.</li>
+<li><strong>incrv</strong> (<em>NurbsCurve</em>) – In Curve.</li>
+<li><strong>position</strong> (<em>float</em>) – Default position value (from 0 to 1).</li>
+<li><strong>maxstretch</strong> (<em>float</em>) – Default maxstretch value (from 1 to infinite).</li>
+<li><strong>maxsquash</strong> (<em>float</em>) – Default maxsquash value (from 0 to 1).</li>
+<li><strong>softness</strong> (<em>float</em>) – Default softness value (from 0 to 1).</li>
 </ul>
 </td>
 </tr>
@@ -272,18 +301,18 @@ Also the order should be the same as the points</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>out</strong> (<em>list of dagNodes</em>) &#8211; The constrained outputs order must be respected (BoneA, BoneB,  Center, CenterN, Eff),
-set it to None if you don&#8217;t want one of the output.</li>
-<li><strong>root</strong> (<em>dagNode</em>) &#8211; Object that will act as the root of the chain.</li>
-<li><strong>eff</strong> (<em>dagNode</em>) &#8211; Object that will act as the eff controler of the chain.</li>
-<li><strong>upv</strong> (<em>dagNode</em>) &#8211; Object that will act as the up vector of the chain.</li>
-<li><strong>fk0</strong> (<em>dagNode</em>) &#8211; Object that will act as the first fk controler of the chain.</li>
-<li><strong>fk1</strong> (<em>dagNode</em>) &#8211; Object that will act as the second fk controler of the chain.</li>
-<li><strong>fk2</strong> (<em>dagNode</em>) &#8211; Object that will act as the fk effector controler of the chain.</li>
-<li><strong>lengthA</strong> (<em>float</em>) &#8211; Length of first bone.</li>
-<li><strong>lengthB</strong> (<em>float</em>) &#8211; Length of second bone.</li>
-<li><strong>negate</strong> (<em>bool</em>) &#8211; Use with negative Scale.</li>
-<li><strong>blend</strong> (<em>float</em>) &#8211; Default blend value (0 for full ik, 1 for full fk).</li>
+<li><strong>out</strong> (<em>list of dagNodes</em>) – The constrained outputs order must be respected (BoneA, BoneB,  Center, CenterN, Eff),
+set it to None if you don’t want one of the output.</li>
+<li><strong>root</strong> (<em>dagNode</em>) – Object that will act as the root of the chain.</li>
+<li><strong>eff</strong> (<em>dagNode</em>) – Object that will act as the eff controler of the chain.</li>
+<li><strong>upv</strong> (<em>dagNode</em>) – Object that will act as the up vector of the chain.</li>
+<li><strong>fk0</strong> (<em>dagNode</em>) – Object that will act as the first fk controler of the chain.</li>
+<li><strong>fk1</strong> (<em>dagNode</em>) – Object that will act as the second fk controler of the chain.</li>
+<li><strong>fk2</strong> (<em>dagNode</em>) – Object that will act as the fk effector controler of the chain.</li>
+<li><strong>lengthA</strong> (<em>float</em>) – Length of first bone.</li>
+<li><strong>lengthB</strong> (<em>float</em>) – Length of second bone.</li>
+<li><strong>negate</strong> (<em>bool</em>) – Use with negative Scale.</li>
+<li><strong>blend</strong> (<em>float</em>) – Default blend value (0 for full ik, 1 for full fk).</li>
 </ul>
 </td>
 </tr>
@@ -306,9 +335,9 @@ set it to None if you don&#8217;t want one of the output.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mA</strong> (<em>matrix</em>) &#8211; Input matrix A.</li>
-<li><strong>mB</strong> (<em>matrix</em>) &#8211; Input matrix A.</li>
-<li><strong>blend</strong> (<em>float or connection</em>) &#8211; Blending value.</li>
+<li><strong>mA</strong> (<em>matrix</em>) – Input matrix A.</li>
+<li><strong>mB</strong> (<em>matrix</em>) – Input matrix A.</li>
+<li><strong>blend</strong> (<em>float</em><em> or </em><em>connection</em>) – Blending value.</li>
 </ul>
 </td>
 </tr>
@@ -331,8 +360,8 @@ set it to None if you don&#8217;t want one of the output.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>out_obj</strong> (<em>dagNode</em>) &#8211; Output object.</li>
-<li><strong>in_obj</strong> (<em>dagNode</em>) &#8211; Input object.</li>
+<li><strong>out_obj</strong> (<em>dagNode</em>) – Output object.</li>
+<li><strong>in_obj</strong> (<em>dagNode</em>) – Input object.</li>
 </ul>
 </td>
 </tr>
@@ -348,7 +377,7 @@ set it to None if you don&#8217;t want one of the output.</li>
 
 <dl class="function">
 <dt id="mgear.maya.applyop.gear_mulmatrix_op">
-<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_mulmatrix_op</code><span class="sig-paren">(</span><em>mA</em>, <em>mB</em>, <em>target=False</em>, <em>transform='srt'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_mulmatrix_op" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_mulmatrix_op</code><span class="sig-paren">(</span><em>mA</em>, <em>mB</em>, <em>target=False</em>, <em>transform=’srt’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_mulmatrix_op" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create mGear multiply Matrix node.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -359,10 +388,10 @@ set it to None if you don&#8217;t want one of the output.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mA</strong> (<em>matrix</em>) &#8211; input matrix A.</li>
-<li><strong>mB</strong> (<em>matrix</em>) &#8211; input matrix B.</li>
-<li><strong>target</strong> (<em>dagNode</em>) &#8211; object target to apply the transformation</li>
-<li><strong>transform</strong> (<em>str</em>) &#8211; if target is True. out transform  to SRT valid value s r t</li>
+<li><strong>mA</strong> (<em>matrix</em>) – input matrix A.</li>
+<li><strong>mB</strong> (<em>matrix</em>) – input matrix B.</li>
+<li><strong>target</strong> (<em>dagNode</em>) – object target to apply the transformation</li>
+<li><strong>transform</strong> (<em>str</em>) – if target is True. out transform  to SRT valid value s r t</li>
 </ul>
 </td>
 </tr>
@@ -385,11 +414,11 @@ set it to None if you don&#8217;t want one of the output.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>out</strong> (<em>dagNode</em>) &#8211; onstrained Object.</li>
-<li><strong>controlers</strong> (<em>list of dagNodes</em>) &#8211; Objects that will act as controler of the bezier curve.
+<li><strong>out</strong> (<em>dagNode</em>) – onstrained Object.</li>
+<li><strong>controlers</strong> (<em>list of dagNodes</em>) – Objects that will act as controler of the bezier curve.
 Objects must have a parent that will be used as an input for the operator.</li>
-<li><strong>u</strong> (<em>float</em>) &#8211; Position of the object on the bezier curve (from 0 to 1).</li>
-<li><strong>subdiv</strong> (<em>int</em>) &#8211; spline subdivision precision.</li>
+<li><strong>u</strong> (<em>float</em>) – Position of the object on the bezier curve (from 0 to 1).</li>
+<li><strong>subdiv</strong> (<em>int</em>) – spline subdivision precision.</li>
 </ul>
 </td>
 </tr>
@@ -405,18 +434,18 @@ Objects must have a parent that will be used as an input for the operator.</li>
 
 <dl class="function">
 <dt id="mgear.maya.applyop.gear_spinePointAtOp">
-<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_spinePointAtOp</code><span class="sig-paren">(</span><em>cns</em>, <em>startobj</em>, <em>endobj</em>, <em>blend=0.5</em>, <em>axis='-Z'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_spinePointAtOp" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_spinePointAtOp</code><span class="sig-paren">(</span><em>cns</em>, <em>startobj</em>, <em>endobj</em>, <em>blend=0.5</em>, <em>axis=’-Z’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_spinePointAtOp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply a SpinePointAt operator</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cns</strong> (<em>Constraint</em>) &#8211; The constraint to apply the operator on (must be a curve, path or direction constraint).</li>
-<li><strong>startobj</strong> (<em>dagNode</em>) &#8211; Start Reference.</li>
-<li><strong>endobj</strong> (<em>dagNode</em>) &#8211; End Reference.</li>
-<li><strong>blend</strong> (<em>float</em>) &#8211; Blend influence value from 0 to 1.</li>
-<li><strong>axis</strong> (<a class="reference internal" href="../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) &#8211; Axis direction.</li>
+<li><strong>cns</strong> (<em>Constraint</em>) – The constraint to apply the operator on (must be a curve, path or direction constraint).</li>
+<li><strong>startobj</strong> (<em>dagNode</em>) – Start Reference.</li>
+<li><strong>endobj</strong> (<em>dagNode</em>) – End Reference.</li>
+<li><strong>blend</strong> (<em>float</em>) – Blend influence value from 0 to 1.</li>
+<li><strong>axis</strong> (<a class="reference internal" href="../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) – Axis direction.</li>
 </ul>
 </td>
 </tr>
@@ -432,18 +461,18 @@ Objects must have a parent that will be used as an input for the operator.</li>
 
 <dl class="function">
 <dt id="mgear.maya.applyop.gear_spinePointAtOpWM">
-<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_spinePointAtOpWM</code><span class="sig-paren">(</span><em>cns</em>, <em>startobj</em>, <em>endobj</em>, <em>blend=0.5</em>, <em>axis='-Z'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_spinePointAtOpWM" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_spinePointAtOpWM</code><span class="sig-paren">(</span><em>cns</em>, <em>startobj</em>, <em>endobj</em>, <em>blend=0.5</em>, <em>axis=’-Z’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_spinePointAtOpWM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply a SpinePointAt operator using world matrix</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Constraint</strong> (<em>cns</em>) &#8211; The constraint to apply the operator on (must be a curve, path or direction constraint).</li>
-<li><strong>startobj</strong> (<em>dagNode</em>) &#8211; Start Reference.</li>
-<li><strong>endobj</strong> (<em>dagNode</em>) &#8211; End Reference.</li>
-<li><strong>blend</strong> (<em>float</em>) &#8211; Blend influence value from 0 to 1.</li>
-<li><strong>axis</strong> (<em>str</em>) &#8211; Axis direction.</li>
+<li><strong>Constraint</strong> (<em>cns</em>) – The constraint to apply the operator on (must be a curve, path or direction constraint).</li>
+<li><strong>startobj</strong> (<em>dagNode</em>) – Start Reference.</li>
+<li><strong>endobj</strong> (<em>dagNode</em>) – End Reference.</li>
+<li><strong>blend</strong> (<em>float</em>) – Blend influence value from 0 to 1.</li>
+<li><strong>axis</strong> (<em>str</em>) – Axis direction.</li>
 </ul>
 </td>
 </tr>
@@ -466,8 +495,8 @@ Objects must have a parent that will be used as an input for the operator.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>in_obj</strong> (<em>dagNode</em>) &#8211; Constrained object.</li>
-<li><strong>goal</strong> (<em>dagNode</em>) &#8211; By default is False.</li>
+<li><strong>in_obj</strong> (<em>dagNode</em>) – Constrained object.</li>
+<li><strong>goal</strong> (<em>dagNode</em>) – By default is False.</li>
 </ul>
 </td>
 </tr>
@@ -483,17 +512,18 @@ Objects must have a parent that will be used as an input for the operator.</li>
 
 <dl class="function">
 <dt id="mgear.maya.applyop.gear_squashstretch2_op">
-<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_squashstretch2_op</code><span class="sig-paren">(</span><em>out</em>, <em>sclref=None</em>, <em>length=5</em>, <em>axis='x'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_squashstretch2_op" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.applyop.</code><code class="descname">gear_squashstretch2_op</code><span class="sig-paren">(</span><em>out</em>, <em>sclref=None</em>, <em>length=5</em>, <em>axis=’x’</em>, <em>scaleComp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.applyop.gear_squashstretch2_op" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply a sn_squashstretch2_op operator</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>out</strong> (<em>dagNode</em>) &#8211; Constrained object.</li>
-<li><strong>sclref</strong> (<em>dagNode</em>) &#8211; Global scaling reference object.</li>
-<li><strong>length</strong> (<em>float</em>) &#8211; Rest Length of the S&amp;S.</li>
-<li><strong>axis</strong> (<em>str</em>) &#8211; &#8216;x&#8217; for scale all except x axis...</li>
+<li><strong>out</strong> (<em>dagNode</em>) – Constrained object.</li>
+<li><strong>sclref</strong> (<em>dagNode</em>) – Global scaling reference object.</li>
+<li><strong>length</strong> (<em>float</em>) – Rest Length of the S&amp;S.</li>
+<li><strong>axis</strong> (<em>str</em>) – ‘x’ for scale all except x axis…</li>
+<li><strong>scaleComp</strong> (<em>list of float</em>) – extra scale compensation to avoid double scale in some situations.</li>
 </ul>
 </td>
 </tr>
@@ -520,9 +550,9 @@ Objects must have a parent that will be used as an input for the operator.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>driver</strong> (<em>dagNode or dagNode list</em>) &#8211; Driver object.</li>
-<li><strong>driven</strong> (<em>dagNode</em>) &#8211; Driven object.</li>
-<li><strong>maintainOffset</strong> (<em>bool</em>) &#8211; Keep the offset.</li>
+<li><strong>driver</strong> (<em>dagNode</em><em> or </em><em>dagNode list</em>) – Driver object.</li>
+<li><strong>driven</strong> (<em>dagNode</em>) – Driven object.</li>
+<li><strong>maintainOffset</strong> (<em>bool</em>) – Keep the offset.</li>
 </ul>
 </td>
 </tr>
@@ -553,11 +583,11 @@ Objects must have a parent that will be used as an input for the operator.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>obj</strong> (<em>dagNode</em>) &#8211; Constrained object.</li>
-<li><strong>curve</strong> (<em>Nurbscurve</em>) &#8211; Constraining Curve.</li>
-<li><strong>cnsType</strong> (<em>int</em>) &#8211; 0 for Path Constraint, 1 for Curve Constraint (Parametric).</li>
-<li><strong>u</strong> (<em>float</em>) &#8211; Position of the object on the curve (from 0 to 100 for path constraint, from 0 to 1 for Curve cns).</li>
-<li><strong>tangent</strong> (<em>bool</em>) &#8211; Keep tangent orientation option.</li>
+<li><strong>obj</strong> (<em>dagNode</em>) – Constrained object.</li>
+<li><strong>curve</strong> (<em>Nurbscurve</em>) – Constraining Curve.</li>
+<li><strong>cnsType</strong> (<em>int</em>) – 0 for Path Constraint, 1 for Curve Constraint (Parametric).</li>
+<li><strong>u</strong> (<em>float</em>) – Position of the object on the curve (from 0 to 100 for path constraint, from 0 to 1 for Curve cns).</li>
+<li><strong>tangent</strong> (<em>bool</em>) – Keep tangent orientation option.</li>
 </ul>
 </td>
 </tr>
@@ -580,11 +610,11 @@ Objects must have a parent that will be used as an input for the operator.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) &#8211; Name of the operator node.</li>
-<li><strong>chn</strong> (<em>list of joints</em>) &#8211; List of joints. At less 2 joints should be in the list.</li>
-<li><strong>parent</strong> (<em>dagNode</em>) &#8211; Parent for the ikHandle.</li>
-<li><strong>cParent</strong> (<em>dagNode</em>) &#8211; Parent for the curve.</li>
-<li><strong>curve</strong> (<em>dagNode</em>) &#8211; Specifies the curve to be used by the ikSplineHandle. This param is optional.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the operator node.</li>
+<li><strong>chn</strong> (<em>list of joints</em>) – List of joints. At less 2 joints should be in the list.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent for the ikHandle.</li>
+<li><strong>cParent</strong> (<em>dagNode</em>) – Parent for the curve.</li>
+<li><strong>curve</strong> (<em>dagNode</em>) – Specifies the curve to be used by the ikSplineHandle. This param is optional.</li>
 </ul>
 </td>
 </tr>
@@ -606,15 +636,18 @@ Objects must have a parent that will be used as an input for the operator.</li>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="attribute.html" class="btn btn-neutral float-right" title="mgear.maya.attribute" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="attribute.html" class="btn btn-neutral float-right" title="mgear.maya.attribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="maya.html" class="btn btn-neutral" title="mgear.maya" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="maya.html" class="btn btn-neutral" title="mgear.maya" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -645,10 +678,11 @@ Objects must have a parent that will be used as an input for the operator.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

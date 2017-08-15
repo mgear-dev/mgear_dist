@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Log &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>Release Log &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="index.html"/>
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="index.html"/>
         <link rel="next" title="License" href="license.html"/>
         <link rel="prev" title="FAQ" href="FAQ.html"/> 
 
@@ -41,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -60,7 +66,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -81,7 +87,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
@@ -91,7 +100,9 @@
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">2.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.0</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -107,8 +118,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -117,23 +130,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>Release Log</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Release Log</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/releaseLog.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/releaseLog.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -142,55 +172,107 @@
   <div class="section" id="release-log">
 <h1>Release Log<a class="headerlink" href="#release-log" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>2.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>2.2.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
-<dd><ul class="first last">
-<li><p class="first">New licensing under MIT license terms.</p>
-</li>
-<li><p class="first">New Documentation</p>
-</li>
-<li><p class="first">New Component settings view.</p>
-</li>
-<li><p class="first">Quadrupeds template and new leg component for 3 bones legs.</p>
-</li>
-<li><dl class="first docutils">
-<dt>Shifter: Modular rigging sytem rebranded.</dt>
 <dd><ul class="first last simple">
-<li>Single Hierarchy Joint connexion</li>
-<li>Update Guides Command.</li>
+<li>Simple autorig This a new rigging sytem for basic props.</li>
+<li>Channel Wrangler: Channel manager with export import options.</li>
+</ul>
+</dd>
+<dt><strong>Improvements</strong></dt>
+<dd><ul class="first last simple">
+<li>Synoptic: key/select all for custom widgets</li>
+<li>Skin IO: IO skin for curves &amp; nurbs</li>
+<li>Skin IO: Now can export with Skin Packs. Every object will be in a separated file.</li>
+<li>Shifter: custom Sets: Now is possible to add custom sets to shifter components</li>
+<li>Shifter: Now all the controls are Tag as a control (&gt; Maya 2016.5)</li>
+<li>Shifter: Custom Rig controls navigation</li>
+<li>Shifter: Custom steps IO to JSON file.</li>
+<li>Shifter: Componente: Chain_01: Non uniform scaling for FK controls</li>
+<li>Shifter: Now the controls have unchecked historical interest from ctl shapes for cleaner channel box</li>
+<li>Rigbits: Now replace shape support multiple shapes</li>
+<li>mGear: Menu updated with about info and useful links</li>
+<li>mGear: Added support for RGB color on icons/Controls</li>
+</ul>
+</dd>
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter: componente: freetangent arm and leg: Fixed joint offset in the extremes</li>
+<li>General: Fixed bad parenting for PySide dialogs.</li>
 </ul>
 </dd>
 </dl>
-</li>
-<li><p class="first">Mocap HumanIK mapping tool for standard Shifter biped</p>
-</li>
-<li><p class="first">Gimmick joints basic tools</p>
-</li>
-<li><dl class="first docutils">
-<dt>Enviroment variables</dt>
+</div>
+<div class="section" id="id2">
+<h2>2.1.1<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
-<li>Synoptic variable: MGEAR_SYNOPTIC_PATH</li>
+<li>mGear solvers: New vertes position node.  This node gets the vertex position in worldspace.</li>
+<li>Rigbits: New rigging commont library with toos and functions to help the rigging system. This library is meant to be use with custom steps or other rigging tools.</li>
+<li>Shifter: Components: New  Components from Miles Cheng “arm_ms_2jnt_01”, “shoulder_ms_2jnt_01” and “leg_ms_2jnt_01”</li>
+<li>Shifter: Components: New enviroment variable: MGEAR_SHIFTER_COMPONENT_PATH (only project components)</li>
+<li>Shifter: Custom Step: New enviroment variable: MGEAR_SHIFTER_CUSTOMSTEP_PATH to stablish relative paths for the custom steps data.</li>
+<li>Shifter: New Channel naming options</li>
+</ul>
+</dd>
+<dt><strong>Improvements</strong></dt>
+<dd><ul class="first last simple">
+<li>Improved error logging for custom steps and Synoptic.</li>
+<li>Shifter: Clean up jnt_org empty groups after rig build.</li>
+<li>Shifter: Components: Updated neck with optiona tangent controls.</li>
+<li>Shifter: Components: Arm have a new option to separate the IK controls in rotation and translation control</li>
+<li>Shifter: Components: Control extraction name buffer to avoid name clashing for ctl extraction on guides</li>
+<li>Shifter: Components: Pin elbow/knee</li>
+<li>Shifter: Components: Spine updated: Autobend optional control and optional mid tangent control</li>
+<li>Shifter: Components: Arms mid ctl and upv with optinal mirror behaviour.</li>
+<li>Shifter: Custom step using class implementation</li>
+<li>Shifter: Track information (rig Asset, components used version and mGear version)</li>
+<li>Synoptic: General visual and structure improvement. Big Thanks to Yamahigashi-san.</li>
+<li>Synoptic: IK/FK animation transfer</li>
+<li>Shifter: Updated biped guide</li>
+<li>Shifter: Updated Quadruped guide</li>
+</ul>
+</dd>
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Bad layout on setting windows with HDPI displays.</li>
+<li>Shifter: Components: General clean up and bug fixing (Please check github commint for more info).</li>
+<li>Issue #9  leg_3jnt: Flip offset rz double connection</li>
+<li>Issue #13  Chain_01 IK refs not being connected</li>
 </ul>
 </dd>
 </dl>
-</li>
-<li><p class="first">Pre and Post custom Steps.</p>
-</li>
-<li><p class="first">cvWrap deformer included.</p>
-</li>
-<li><p class="first">Updated Synoptic view.</p>
-</li>
+</div>
+<div class="section" id="id3">
+<h2>2.0<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
+<dd><ul class="first last simple">
+<li>Custom enviroment variables for synoptic: MGEAR_SYNOPTIC_PATH</li>
+<li>cvWrap deformer included.</li>
+<li>Gimmick joints basic tools</li>
+<li>Mocap HumanIK mapping tool for standard Shifter biped</li>
+<li>New Component settings view.</li>
+<li>New Documentation</li>
+<li>New licensing under MIT license terms.</li>
+<li>Pre and Post custom Steps.</li>
+<li>Shifter: Modular rigging sytem rebranded.</li>
+<li>Shifter: Quadrupeds template and new leg component for 3 bones legs.</li>
+<li>Shifter: Single Hierarchy Joint connexion</li>
+<li>Shifter: Update Guides Command.</li>
+<li>Synoptic view Updated.</li>
 </ul>
 </dd>
 <dt><strong>Inprovements</strong></dt>
 <dd><ul class="first last simple">
-<li>Groups and dag pose connected to rig base node. This will avoid lost elements if we export selection.</li>
 <li>Component guides will snap to parent position at creation time.</li>
-<li>Newly created guide components automatic update of the side and uiHost from the parent attributes.</li>
-<li>Guide Blades have new attr to control the  roll offset</li>
 <li>Duplicate symmetry can find partial chain names. Is not needed to duplicate from the top root of the branch.</li>
+<li>Groups and dag pose connected to rig base node. This will avoid lost elements if we export selection.</li>
+<li>Guide Blades have new attr to control the  roll offset</li>
 <li>mGear version and other useful information in guide root.</li>
+<li>Newly created guide components automatic update of the side and uiHost from the parent attributes.</li>
 <li>Shifter componets full review and functions unified.</li>
 </ul>
 </dd>
@@ -200,15 +282,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="FAQ.html" class="btn btn-neutral" title="FAQ" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="FAQ.html" class="btn btn-neutral" title="FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -239,10 +324,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>

@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.meshNavigation &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mgear.maya.meshNavigation &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.node" href="node.html"/>
         <link rel="prev" title="mgear.maya.log" href="log.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,12 +88,16 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -138,8 +148,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -148,27 +160,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../../framework.html">Framework</a> &raquo;</li>
-      
+        
           <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
-      
-    <li>mgear.maya.meshNavigation</li>
+        
+      <li>mgear.maya.meshNavigation</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../../_sources/mgear/maya/meshNavigation.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../../_sources/mgear/maya/meshNavigation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -186,9 +215,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>obj</strong> (<em>dagNode</em>) &#8211; Mesh object</li>
-<li><strong>yZero</strong> (<em>bool</em>) &#8211; If True, sets the Y axis value to 0 in world space.</li>
-<li><strong>args</strong> &#8211; </li>
+<li><strong>obj</strong> (<em>dagNode</em>) – Mesh object</li>
+<li><strong>yZero</strong> (<em>bool</em>) – If True, sets the Y axis value to 0 in world space.</li>
+<li><strong>args</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -211,8 +240,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>obj</strong> (<em>dagNode</em>) &#8211; mesh object</li>
-<li><strong>radius</strong> (<em>bool</em>) &#8211; If True return a list the center + the radius</li>
+<li><strong>obj</strong> (<em>dagNode</em>) – mesh object</li>
+<li><strong>radius</strong> (<em>bool</em>) – If True return a list the center + the radius</li>
 </ul>
 </td>
 </tr>
@@ -238,10 +267,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>edgeList</strong> (<em>list</em>) &#8211; selection edge loop</li>
-<li><strong>midPos</strong> (<em>vertex</em>) &#8211; mid vertex</li>
-<li><strong>endA</strong> (<em>vertex</em>) &#8211; endA vertex</li>
-<li><strong>endB</strong> (<em>vertex</em>) &#8211; endB vertex</li>
+<li><strong>edgeList</strong> (<em>list</em>) – selection edge loop</li>
+<li><strong>midPos</strong> (<em>vertex</em>) – mid vertex</li>
+<li><strong>endA</strong> (<em>vertex</em>) – endA vertex</li>
+<li><strong>endB</strong> (<em>vertex</em>) – endB vertex</li>
 </ul>
 </td>
 </tr>
@@ -264,8 +293,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>geo</strong> (<em>dagNode</em>) &#8211; Mesh object</li>
-<li><strong>loc</strong> (<em>matrix</em>) &#8211; location transform</li>
+<li><strong>geo</strong> (<em>dagNode</em>) – Mesh object</li>
+<li><strong>loc</strong> (<em>matrix</em>) – location transform</li>
 </ul>
 </td>
 </tr>
@@ -285,8 +314,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>geo</strong> (<em>dagNode</em>) &#8211; Mesh object</li>
-<li><strong>loc</strong> (<em>matrix</em>) &#8211; location transform</li>
+<li><strong>geo</strong> (<em>dagNode</em>) – Mesh object</li>
+<li><strong>loc</strong> (<em>matrix</em>) – location transform</li>
 </ul>
 </td>
 </tr>
@@ -309,8 +338,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>loop</strong> (<em>list</em>) &#8211; Vertex loop list</li>
-<li><strong>nbLoops</strong> (<em>int</em>) &#8211; Number of loops to search</li>
+<li><strong>loop</strong> (<em>list</em>) – Vertex loop list</li>
+<li><strong>nbLoops</strong> (<em>int</em>) – Number of loops to search</li>
 </ul>
 </td>
 </tr>
@@ -326,17 +355,23 @@
 
 <dl class="function">
 <dt id="mgear.maya.meshNavigation.getExtremeVertexFromLoop">
-<code class="descclassname">mgear.maya.meshNavigation.</code><code class="descname">getExtremeVertexFromLoop</code><span class="sig-paren">(</span><em>edgeList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.meshNavigation.getExtremeVertexFromLoop" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.meshNavigation.</code><code class="descname">getExtremeVertexFromLoop</code><span class="sig-paren">(</span><em>edgeList=None</em>, <em>sideRange=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.meshNavigation.getExtremeVertexFromLoop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get extreme vertex X and  Y, min and max positions from edge loop</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>edgeList</strong> (<em>list</em>) &#8211; Edge list</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>edgeList</strong> (<em>list</em>) – Edge list</li>
+<li><strong>sideRange</strong> (<em>bool</em>) – If True will calculate the extreme position of Z instead of X</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">upPos, lowPos, inPos, outPos, edgeList, vertexList</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">upPos, lowPos, inPos, outPos, edgeList, vertexList</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -351,7 +386,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>loopList</strong> (<em>list</em>) &#8211; Edge loop list</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>loopList</strong> (<em>list</em>) – Edge loop list</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">vertex rows</td>
 </tr>
@@ -365,15 +400,18 @@
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="node.html" class="btn btn-neutral float-right" title="mgear.maya.node" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="node.html" class="btn btn-neutral float-right" title="mgear.maya.node" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="log.html" class="btn btn-neutral" title="mgear.maya.log" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="log.html" class="btn btn-neutral" title="mgear.maya.log" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -404,10 +442,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

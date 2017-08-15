@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mGear Rigging Tools &mdash; mGear: Rigging Framework 2.0 documentation</title>
+  <title>mGear Rigging Tools &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
   
 
+  
+  
   
   
 
@@ -30,7 +32,10 @@
   
 
   
-    <link rel="top" title="mGear: Rigging Framework 2.0 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../index.html"/>
         <link rel="up" title="Tools" href="../tools.html"/>
         <link rel="next" title="mGear utils" href="mgearUtils.html"/>
         <link rel="prev" title="Tools" href="../tools.html"/> 
@@ -42,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -61,7 +67,7 @@
             
             
               <div class="version">
-                2.0
+                2.2
               </div>
             
           
@@ -82,7 +88,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Nodes</a></li>
@@ -109,8 +118,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">mGear: Rigging Framework</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
       </nav>
 
 
@@ -119,25 +130,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../tools.html">Tools</a> &raquo;</li>
-      
-    <li>mGear Rigging Tools</li>
+        
+      <li>mGear Rigging Tools</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../_sources/mgearTools/mgearRiggingTools.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../_sources/mgearTools/mgearRiggingTools.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -145,115 +173,22 @@
             
   <div class="section" id="module-mGear_riggingTools">
 <span id="mgear-rigging-tools"></span><h1>mGear Rigging Tools<a class="headerlink" href="#module-mGear_riggingTools" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="mGear_riggingTools.addBlendedJoint">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">addBlendedJoint</code><span class="sig-paren">(</span><em>oSel=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.addBlendedJoint" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.addJnt">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">addJnt</code><span class="sig-paren">(</span><em>obj=False</em>, <em>parent=False</em>, <em>noReplace=False</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.addJnt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create one joint for each selected object.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.addNPO">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">addNPO</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.addNPO" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a transform node as a parent and in the same pose of each of the selected objects.
-This way neutralize the local transfromation values.
-NPO stands for &#8220;neutral position&#8221; terminology from the all mighty Softimage ;)</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.addSupportJoint">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">addSupportJoint</code><span class="sig-paren">(</span><em>oSel=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.addSupportJoint" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.alignToPointsLoop">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">alignToPointsLoop</code><span class="sig-paren">(</span><em>points=None</em>, <em>loc=None</em>, <em>name=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.alignToPointsLoop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create space locator align to the plain define by at less 3 vertex</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.connectLocalTransfrom">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">connectLocalTransfrom</code><span class="sig-paren">(</span><em>s=True</em>, <em>r=True</em>, <em>t=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.connectLocalTransfrom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Connect scale, rotatio and translation.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.createCTL">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">createCTL</code><span class="sig-paren">(</span><em>type='square'</em>, <em>child=False</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.createCTL" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a control for each selected object. The newly create control can be parent or child of the object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>type</strong> (<em>str</em>) &#8211; The shape of the control.</li>
-<li><strong>child</strong> (<em>bool</em>) &#8211; if True, the control will be created as a child of the object.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.createInterpolateTransform">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">createInterpolateTransform</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.createInterpolateTransform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create space locator and apply gear_intmatrix_op, to interpolate the his pose between 2 selected objects.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.duplicateSym">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">duplicateSym</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.duplicateSym" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicate one dag hierarchy to/from X/-X renaming &#8220;L&#8221; to &#8220;R&#8221;</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.matchPosfromBBox">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">matchPosfromBBox</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.matchPosfromBBox" title="Permalink to this definition">¶</a></dt>
-<dd><p>Match the position of one object, using the boundig box center of another object.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.matchWorldXform">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">matchWorldXform</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.matchWorldXform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Align 2 selected objects in world space.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.replaceShape">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">replaceShape</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.replaceShape" title="Permalink to this definition">¶</a></dt>
-<dd><p>Replace the shape of one object by another.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.selectDeformers">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">selectDeformers</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.selectDeformers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Select the deformers from the object skinCluster.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="mGear_riggingTools.spaceJump">
-<code class="descclassname">mGear_riggingTools.</code><code class="descname">spaceJump</code><span class="sig-paren">(</span><em>ref=None</em>, <em>space=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mGear_riggingTools.spaceJump" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function create a local reference space from another space in the hierarchy</p>
-</dd></dl>
-
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mgearUtils.html" class="btn btn-neutral float-right" title="mGear utils" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mgearUtils.html" class="btn btn-neutral float-right" title="mGear utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../tools.html" class="btn btn-neutral" title="Tools" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../tools.html" class="btn btn-neutral" title="Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -284,10 +219,11 @@ NPO stands for &#8220;neutral position&#8221; terminology from the all mighty So
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.0',
+            VERSION:'2.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
