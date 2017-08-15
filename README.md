@@ -6,10 +6,12 @@ Originally mGear was design and develope by Jeremie Passerin , since 2013 Miquel
 
 MGEAR is under the terms of the MIT License
 
-*Latest release: 2.1.1
+*Latest release: 2.2.0
 
 For the official release, with compiled solvers and example data please download mGear from: https://gumroad.com/l/mgear
 
 Official Documentation: https://miquelcampos.github.io/mgear/
 
 mGear Goggle group: https://groups.google.com/forum/#!forum/mgearusergroup
+
+Youtube channel: https://www.youtube.com/channel/UCJsN2KCAD7qkA6-fOeB2fOw
