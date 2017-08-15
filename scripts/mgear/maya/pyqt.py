@@ -31,6 +31,7 @@ pyQt/pySide widgets and helper functions for mGear
 #############################################
 # GLOBAL
 #############################################
+import os
 import pymel.core as pm
 import maya.cmds as cmds
 
@@ -40,44 +41,7 @@ from functools import partial
 import traceback
 import maya.OpenMayaUI as omui
 
-##  Master qt import function ##
-def qt_import(shi=False):
-    """
-    import pyside/pyQt
-
-    Returns:
-        multi: QtGui, QtCore, QtWidgets, wrapInstance
-
-    """
-    QtGui = None
-    QtCore = None
-    QtWidgets = None
-    wrapInstance = None
-
-    try:
-        from PySide import QtGui, QtCore
-        import PySide.QtGui as QtWidgets
-        import shiboken
-        from shiboken import wrapInstance
-    except ImportError:
-        from PySide2 import QtGui, QtCore, QtWidgets
-        import shiboken2 as shiboken
-        from shiboken2 import wrapInstance
-    except ImportError:
-        from PyQt4 import QtGui
-        from PyQt4 import QtCore
-        import PyQt4.QtGui as QtWidgets
-        from PyQt4.QtCore import QObject, pyqtSignal
-        from sip import wrapinstance as wrapInstance
-
-    if shi:
-        return QtGui, QtCore, QtWidgets, wrapInstance, shiboken
-    else:
-        return QtGui, QtCore, QtWidgets, wrapInstance
-
-
-QtGui, QtCore, QtWidgets, wrapInstance = qt_import()
-
+from mGear_pyqt import QtGui, QtCore, QtWidgets, wrapInstance, qt_import
 
 #############################################
 # helper Maya pyQt functions
@@ -97,7 +61,7 @@ def maya_main_window():
 
 
 
-def showDialog(dialog, *args):
+def showDialog(dialog, dInst=True, *args):
     """
     Show the defined dialog window
 
@@ -105,13 +69,13 @@ def showDialog(dialog, *args):
         dialog (QDialog): The window to show.
 
     """
-
-    try:
-        for c in maya_main_window().children():
-            if isinstance(c, dialog):
-                c.deleteLater()
-    except:
-        pass
+    if dInst:
+        try:
+            for c in maya_main_window().children():
+                if isinstance(c, dialog):
+                    c.deleteLater()
+        except:
+            pass
 
     # Create minimal dialog object
     windw = dialog(maya_main_window())
@@ -137,7 +101,7 @@ def deleteInstances(dialog, checkinstance):
         checkinstance (QDialog): The instance to check the type of dialog.
 
     """
-    
+
     mayaMainWindow = maya_main_window()
     for obj in mayaMainWindow.children():
         if type( obj ) == checkinstance:
@@ -145,21 +109,13 @@ def deleteInstances(dialog, checkinstance):
                 print 'Deleting instance {0}'.format(obj)
                 mayaMainWindow.removeDockWidget(obj)
                 obj.setParent(None)
-                obj.deleteLater()        
-
-
-def createStandardContextMenu(lineEdit):
-        menu = QLineEdit.createStandardContextMenu(self.lineEdit())
-        menu.addSeparator()
-        menu.addAction(_('&Edit authors'), self.edit_authors)
-        return menu
-
+                obj.deleteLater()
 
 def fakeTranslate(*args):
     """
-    fake QApplication.translate. This function helps to bypass the incompativility 
+    fake QApplication.translate. This function helps to bypass the incompativility
     for the Unicode utf8  deprecated in pyside2
-    
+
 
     """
 

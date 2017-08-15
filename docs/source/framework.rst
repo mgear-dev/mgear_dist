@@ -7,6 +7,7 @@ Framework
 	baseModules
 	shifterModules
 	synopticModules
+	rigbitsModules
 
 .. toctree::
 	:maxdepth: 0

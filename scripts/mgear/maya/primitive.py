@@ -217,7 +217,7 @@ def add2DChain2(parent, name, positions, normal, negate=False, vis=True):
 
     """
 
-    if not "%s" in name:
+    if  "%s" not in name:
         name += "%s"
 
     transforms = tra.getChainTransform(positions, normal, negate)
@@ -270,7 +270,7 @@ def add2DChain(parent, name, positions, normal, negate=False, vis=True):
     >>> self.rollRef = pri.add2DChain(self.root, self.getName("rollChain"), self.guide.apos[:2], self.normal, self.negate)
     """
 
-    if not "%s" in name:
+    if  "%s" not in name:
         name += "%s"
 
     transforms = tra.getChainTransform(positions, normal, negate)
@@ -341,10 +341,7 @@ def addIkHandle(parent, name, chn, solver="ikRPsolver", poleV=None):
         parent.addChild(node)
 
     if poleV:
-         pm.poleVectorConstraint(poleV, node)
+        pm.poleVectorConstraint(poleV, node)
 
 
     return node
-
-
-

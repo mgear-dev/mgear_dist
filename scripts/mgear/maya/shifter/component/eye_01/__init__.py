@@ -35,6 +35,7 @@ from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
+import mgear.maya.attribute as att
 import mgear.maya.applyop as aop
 
 ##########################################################
@@ -56,22 +57,17 @@ class Component(MainComponent):
         self.eyeOver_ctl = self.addCtl(self.eyeOver_npo, "Over_ctl", t, self.color_fk, "sphere", w=1)
         self.eye_npo = pri.addTransform(self.root, self.getName("eye_npo"), t)
         self.eyeFK_ctl = self.addCtl(self.eye_npo, "fk_ctl", t, self.color_fk, "arrow", w=1)
-        # sq st controls
-        self.sqUp_ctl = self.addCtl(self.root, "squashUp_ctl", t, self.color_ik, "arrow", w=.1)
-        self.sqLow_ctl = self.addCtl(self.root, "squashDown_ctl", t, self.color_ik, "arrow", w=.1)
 
         # look at
         t = tra.getTransformFromPos(self.guide.pos["look"])
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
         self.eyeIK_npo = pri.addTransform(self.ik_cns, self.getName("ik_npo"), t)
         self.eyeIK_ctl = self.addCtl(self.eyeIK_npo, "ik_ctl", t, self.color_fk, "circle", w=.5)
+        att.setKeyableAttributes(self.eyeIK_ctl, self.t_params)
 
         self.jnt_pos.append([self.eyeFK_ctl, "eye", "parent_relative_jnt"])
-        self.jnt_pos.append([self.eyeOver_ctl, "eyeOver", "parent_relative_jnt"])
+        self.jnt_pos.append([self.eyeOver_ctl, "eyeOver", "parent_relative_jnt", False])
 
-        #Envelopes for lattice
-        self.jnt_pos.append([self.sqUp_ctl, "LatticeSqUp", "parent_relative_jnt"])
-        self.jnt_pos.append([self.sqLow_ctl, "LatticeSqLow", "parent_relative_jnt"])
 
 
     # =====================================================
@@ -104,7 +100,7 @@ class Component(MainComponent):
         else:
             upvVec = [0,0,1]
 
-        cns = aop.aimCns(self.eye_npo, self.eyeIK_ctl, "zy", 2, upvVec, self.root, False)
+        aop.aimCns(self.eye_npo, self.eyeIK_ctl, "zy", 2, upvVec, self.root, False)
 
         pm.scaleConstraint(self.eyeOver_ctl, self.eye_npo, maintainOffset=False)
         pm.pointConstraint(self.eyeOver_ctl, self.eye_npo, maintainOffset=False)

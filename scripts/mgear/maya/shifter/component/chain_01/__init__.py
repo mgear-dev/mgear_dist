@@ -31,16 +31,14 @@
 import pymel.core as pm
 import pymel.core.datatypes as dt
 
-import maya.OpenMaya as om
-
 # mgear
 from mgear.maya.shifter.component import MainComponent
 
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
+import mgear.maya.applyop as aop
 import mgear.maya.attribute as att
 import mgear.maya.node as nod
-import mgear.maya.icon as ico
 import mgear.maya.vector as vec
 
 ##########################################################
@@ -70,19 +68,29 @@ class Component(MainComponent):
         if self.isFk:
             self.fk_npo = []
             self.fk_ctl = []
+            self.fk_ref = []
+            self.fk_off = []
             t = self.guide.tra["root"]
             self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
             parent = self.ik_cns
             tOld = False
+            fk_ctl = None
             for i, t in enumerate(tra.getChainTransform(self.guide.apos, self.normal, self.negate)):
                 dist = vec.getDistance(self.guide.apos[i], self.guide.apos[i+1])
                 if self.settings["neutralpose"] or not tOld:
                     tnpo = t
                 else:
                     tnpo = tra.setMatrixPosition(tOld, tra.getPositionFromMatrix(t))
-                fk_npo = pri.addTransform(parent, self.getName("fk%s_npo"%i), tnpo)
+                if i:
+                    tref = tra.setMatrixPosition(tOld, tra.getPositionFromMatrix(t))
+                    fk_ref = pri.addTransform(fk_ctl, self.getName("fk%s_ref"%i), tref)
+                    self.fk_ref.append(fk_ref)
+                else:
+                    tref = t
+                fk_off = pri.addTransform(parent, self.getName("fk%s_off"%i), tref)
+                fk_npo = pri.addTransform(fk_off, self.getName("fk%s_npo"%i), tnpo)
                 fk_ctl = self.addCtl(fk_npo, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.1, d=self.size*.1, po=dt.Vector(dist*.5*self.n_factor,0,0))
-                parent = fk_ctl
+                self.fk_off.append(fk_off)
                 self.fk_npo.append(fk_npo)
                 self.fk_ctl.append(fk_ctl)
                 tOld = t
@@ -97,6 +105,7 @@ class Component(MainComponent):
             self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
             self.ikcns_ctl = self.addCtl(self.ik_cns, "ikcns_ctl", t, self.color_ik, "null", w=self.size)
             self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", t, self.color_ik, "cube", w=self.size*.3, h=self.size*.3, d=self.size*.3)
+            att.setKeyableAttributes(self.ik_ctl, self.t_params)
 
             v = self.guide.apos[-1] - self.guide.apos[0]
             v = v ^ self.normal
@@ -106,22 +115,20 @@ class Component(MainComponent):
             self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
             self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.1)
+            att.setKeyableAttributes(self.upv_ctl, self.t_params)
 
             # Chain
             self.chain = pri.add2DChain(self.root, self.getName("chain"), self.guide.apos, self.normal, self.negate)
             self.chain[0].attr("visibility").set(self.WIP)
-
-
 
         # Chain of deformers -------------------------------
         self.loc = []
         parent = self.root
         for i, t in enumerate(tra.getChainTransform(self.guide.apos, self.normal, self.negate)):
             loc = pri.addTransform(parent, self.getName("%s_loc"%i), t)
-            
+
             self.loc.append(loc)
-            self.jnt_pos.append([loc, i])
-            parent = loc
+            self.jnt_pos.append([loc, i, None, False])
 
     # =====================================================
     # PROPERTY
@@ -142,13 +149,6 @@ class Component(MainComponent):
                 ref_names = self.settings["ikrefarray"].split(",")
                 if len(ref_names) > 1:
                     self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
-        # Ref
-        # if self.settings["ikrefarray"]:
-        #     ref_names = self.settings["ikrefarray"].split(",")
-        #     if len(ref_names) > 1:
-        #         self.ikref_att = self.addAnimEnumParam("ikref", "Ori Ref", 0, self.settings["ikrefarray"].split(","))
-
-
 
     # =====================================================
     # OPERATORS
@@ -177,6 +177,10 @@ class Component(MainComponent):
             for shp in self.ik_ctl.getShapes():
                 pm.connectAttr(self.blend_att, shp.attr("visibility"))
 
+        # FK Chain -----------------------------------------
+        if self.isFk:
+            for off, ref in zip(self.fk_off[1:], self.fk_ref):
+                aop.gear_mulmatrix_op(ref.worldMatrix, off.parentInverseMatrix, off, "rt")
         # IK Chain -----------------------------------------
         if self.isIk:
             self.ikh = pri.addIkHandle(self.root, self.getName("ikh"), self.chain)
@@ -209,6 +213,7 @@ class Component(MainComponent):
 
                 # orientation
                 cns = pm.parentConstraint(self.fk_ctl[i], self.chain[i], loc, maintainOffset=False)
+                cns.interpType.set(0)
                 weight_att = pm.parentConstraint(cns, query=True, weightAliasList=True)
                 pm.connectAttr(rev_node+".outputX", weight_att[0])
                 pm.connectAttr(self.blend_att, weight_att[1])
@@ -242,14 +247,13 @@ class Component(MainComponent):
         self.connections["orientation"] = self.connect_orientation
         self.connections["parent"] = self.connect_parent
 
-
-
     def connect_orientation(self):
         self.connect_orientCns()
 
     ## standard connection definition.
+    def connect_standard(self):
+        self.connect_standardWithSimpleIkRef()
+
     # @param self
     def connect_parent(self):
         self.connect_standardWithSimpleIkRef()
-
-    

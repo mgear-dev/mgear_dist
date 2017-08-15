@@ -30,7 +30,6 @@
 # Maya
 import pymel.core as pm
 import pymel.core.datatypes as dt
-import maya.OpenMaya as om
 
 # mgear
 from mgear.maya.shifter.component import MainComponent
@@ -73,12 +72,12 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root_ctl, self.getName("fk0_npo"), t)
         self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
-        att.setKeyableAttributes(self.fk0_ctl)
+        att.setKeyableAttributes(self.fk0_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
         self.fk1_npo = pri.addTransform(self.fk0_ctl, self.getName("fk1_npo"), t)
         self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0))
-        att.setKeyableAttributes(self.fk1_ctl)
+        att.setKeyableAttributes(self.fk1_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
         self.fk2_npo = pri.addTransform(self.fk1_ctl, self.getName("fk2_npo"), t)
@@ -115,6 +114,7 @@ class Component(MainComponent):
         self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
         att.setKeyableAttributes(self.upv_ctl, self.t_params)
         att.setInvertMirror(self.upv_ctl, ["tx"])
+        att.setKeyableAttributes(self.upv_ctl, self.t_params)
 
         # References --------------------------------------
         self.ik_ref = pri.addTransform(self.ik_ctl, self.getName("ik_ref"), tra.getTransform(self.ik_ctl))
@@ -146,7 +146,9 @@ class Component(MainComponent):
         self.tws_ref = pri.addTransform(self.eff_loc, self.getName("tws_ref"), t)
 
         # Mid Controler ------------------------------------
-        self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+        t = tra.getTransform(self.ctrn_loc)
+        self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
         att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
 
         # Twist references ---------------------------------
@@ -209,7 +211,7 @@ class Component(MainComponent):
         self.slide_att = self.addAnimParam("slide", "Slide", "double", .5, 0, 1)
         self.softness_att = self.addAnimParam("softness", "Softness", "double", 0, 0, 1)
         self.reverse_att = self.addAnimParam("reverse", "Reverse", "double", 0, 0, 1)
-        self.roundness_att = self.addAnimParam("roundness", "Roundness", "double", 0, 0, 1)
+        self.roundness_att = self.addAnimParam("roundness", "Roundness", "double", 0, 0, self.size)
         self.volume_att = self.addAnimParam("volume", "Volume", "double", 1, 0, 1)
 
         # Ref
@@ -218,10 +220,17 @@ class Component(MainComponent):
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
 
-        ref_names = ["Auto", "ikFoot"] 
+        ref_names = ["Auto", "ikFoot"]
         if self.settings["upvrefarray"]:
             ref_names = ref_names + self.settings["upvrefarray"].split(",")
         self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
+
+        if self.settings["pinrefarray"]:
+            ref_names = self.settings["pinrefarray" ].split(",")
+            ref_names = ["Auto"] + ref_names
+            if len(ref_names) > 1:
+                self.pin_att = self.addAnimEnumParam("kneeref", "Knee Ref", 0, ref_names)
+
 
         # Setup ------------------------------------------
         # Eval Fcurve
@@ -354,7 +363,7 @@ class Component(MainComponent):
 
 
 
-        # NOTE: next line fix the issue on meters. 
+        # NOTE: next line fix the issue on meters.
         # This is special case becasuse the IK solver from mGear use the scale as lenght and we have shear
         # TODO: check for a more clean and elegant solution instead of re-match the world matrix again
         # tra.matchWorldTransform(self.fk_ctl[0], self.match_fk0_off)
@@ -386,7 +395,6 @@ class Component(MainComponent):
     ## standard connection definition.
     # @param self
     def connect_standard(self):
-        # self.connect_standardWithIkRef()
         self.parent.addChild(self.root)
 
         # Set the Ik Reference
@@ -395,3 +403,6 @@ class Component(MainComponent):
             self.connectRef("Auto,ikFoot,"+self.settings["upvrefarray"], self.upv_cns, True)
         else:
             self.connectRef("Auto,ikFoot", self.upv_cns, True)
+
+        if self.settings["pinrefarray"]:
+            self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)

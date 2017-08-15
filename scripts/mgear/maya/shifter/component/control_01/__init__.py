@@ -27,8 +27,6 @@
 #############################################
 # GLOBAL
 #############################################
-
-import pymel.core as pm
 # mgear
 from mgear.maya.shifter.component import MainComponent
 
@@ -43,8 +41,6 @@ import mgear.maya.attribute as att
 class Component(MainComponent):
 
     def addObjects(self):
-
-       
 
         if self.settings["neutralRotation"]:
             t = tra.getTransformFromPos(self.guide.pos["root"])
@@ -72,7 +68,7 @@ class Component(MainComponent):
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
 
-        
+
     def addOperators(self):
         return
 

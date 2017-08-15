@@ -34,30 +34,15 @@ from functools import partial
 
 # pymel
 import pymel.core as pm
-import pymel.core.datatypes as dt
 
 # mgear
 import mgear
-import mgear.maya.attribute as att
-import mgear.maya.dag as dag
-import mgear.maya.vector as vec
-
 import mgear.maya.shifter as shifter
 import mgear.maya.skin as skin
-
 import mgear.maya.pyqt as gqt
-
-import mgear.maya.shifter.component as comp
-
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"
-
-COMPONENT_PATH = os.path.join(os.path.dirname(__file__), "component")
-TEMPLATE_PATH = os.path.join(COMPONENT_PATH, "templates")
-SYNOPTIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, "synoptic","tabs"))
-
-# VERSION = 2.0
 
 
 ##############################
@@ -99,7 +84,7 @@ class Guide_UI(object):
         pm.setParent( '..' )
 
         self.ui_tabs = pm.tabLayout(width=panelWeight, innerMarginWidth=5, innerMarginHeight=5)
-        tabWidth = pm.tabLayout(self.ui_tabs, q=True, width=True)
+        pm.tabLayout(self.ui_tabs, q=True, width=True)
 
         #
         self.ui_compColumn = pm.columnLayout(adj=True, rs=3)
@@ -109,29 +94,42 @@ class Guide_UI(object):
         pm.separator()
 
         # List of components
-        
-        path = os.path.dirname(comp.__file__)
-        for comp_name in sorted(os.listdir(path)):
+        # doGrouping = 1 < len(shifter.COMPONENTS_DIRECTORIES.keys())
+        compDir = shifter.getComponentDirectories()
+        trackLoadComponent = []
+        for path, comps in compDir.iteritems():
 
-            if not os.path.exists(os.path.join(path, comp_name, "__init__.py")):
-                continue
-
-            # module = __import__("mgear.maya.rig.component."+comp_name, globals(), locals(), ["*"], -1)
-            module = __import__("mgear.maya.shifter.component."+comp_name+".guide", globals(), locals(), ["*"], -1)
-            reload(module)
-            image = os.path.join(path, comp_name, "icon.jpg")
-
-            buttonSize = 25
-            textDesc = "Name: "+module.NAME+"\nType:: "+module.TYPE+"\n===========\nAuthor: "+module.AUTHOR+"\nWeb: "+module.URL+\
-                        "\nEmail: "+module.EMAIL+"\n===========\nDescription:\n"+module.DESCRIPTION
-
-            row = pm.rowLayout(numberOfColumns=2, columnWidth=([1, buttonSize]), adjustableColumn=2, columnAttach=([1, "both", 0], [2, "both", 5]))
-            pm.symbolButton(ann=textDesc, width=buttonSize, height=buttonSize, bgc=[0,0,0], ebg=False, i=image, command=partial(self.drawComp, module.TYPE))
-            textColumn = pm.columnLayout(columnAlign="center")
-            pm.text(align="center", width=panelWeight*.6, label=module.TYPE, ann=textDesc, fn="plainLabelFont")
-
-            pm.setParent(self.ui_compList_column)
+            pm.text(align="center", label=os.path.basename(path))
             pm.separator()
+            for comp_name in comps:
+
+                if  comp_name in trackLoadComponent:
+                    pm.displayWarning("Custom component name: %s, already in default components. Names should be unique. This component is not loaded"%comp_name)
+                    continue
+                else:
+                    trackLoadComponent.append(comp_name)
+
+                if not os.path.exists(os.path.join(path, comp_name, "__init__.py")):
+                    continue
+
+                # module = __import__("mgear.maya.rig.component."+comp_name, globals(), locals(), ["*"], -1)
+                module = shifter.importComponentGuide(comp_name)
+                # print module
+                # print dir(module)
+                reload(module)
+                image = os.path.join(path, comp_name, "icon.jpg")
+
+                buttonSize = 25
+                textDesc = "Name: "+module.NAME+"\nType:: "+module.TYPE+"\n===========\nAuthor: "+module.AUTHOR+"\nWeb: "+module.URL+\
+                           "\nEmail: "+module.EMAIL+"\n===========\nDescription:\n"+module.DESCRIPTION
+
+                pm.rowLayout(numberOfColumns=2, columnWidth=([1, buttonSize]), adjustableColumn=2, columnAttach=([1, "both", 0], [2, "both", 5]))
+                pm.symbolButton(ann=textDesc, width=buttonSize, height=buttonSize, bgc=[0,0,0], ebg=False, i=image, command=partial(self.drawComp, module.TYPE))
+                pm.columnLayout(columnAlign="center")
+                pm.text(align="center", width=panelWeight*.6, label=module.TYPE, ann=textDesc, fn="plainLabelFont")
+
+                pm.setParent(self.ui_compList_column)
+                pm.separator()
 
         # Display the window
         pm.tabLayout(self.ui_tabs, edit=True, tabLabelIndex=([1, "Components"]))
@@ -149,7 +147,7 @@ class Guide_UI(object):
 
         guide.drawNewComponent(parent, compType)
 
-        
+
     def buildFromSelection(self, *args):
 
         print mgear.logInfos()
@@ -178,7 +176,7 @@ class Guide_UI(object):
 
         comp_type = False
         guide_root = False
-        while root:            
+        while root:
             if pm.attributeQuery("comp_type", node=root, ex=True):
                 comp_type = root.attr("comp_type").get()
                 break
@@ -188,15 +186,11 @@ class Guide_UI(object):
             root = root.getParent()
             pm.select(root)
 
-            
+
         if comp_type:
-            # try:
-            module_name = "mgear.maya.shifter.component."+comp_type+".guide"
-            guide = __import__(module_name, globals(), locals(), ["*"], -1)
+            guide = shifter.importComponentGuide(comp_type)
             gqt.showDialog(guide.componentSettings)
 
-            # except:
-            #     pm.displayError("Component of type: %s Loading fail"%comp_type)
         elif guide_root:
             module_name = "mgear.maya.shifter.guide"
             guide = __import__(module_name, globals(), locals(), ["*"], -1)
@@ -224,7 +218,7 @@ class Guide_UI(object):
         def skinLoad(root, *args):
             startDir = root.attr("skin").get()
             filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir,
-                                        fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
+                                      fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
             if not filePath:
                 return
             if not isinstance(filePath, basestring):
@@ -286,10 +280,6 @@ class Guide_UI(object):
                     pm.formLayout(fl, e=1, af=(pSide, "left", 90))
                     oriVal = root.attr("comp_side").get()
                     pSide.setValue(oriVal )
-                    # if oriVal in sideSet:
-                    #     pSide.setValue(oriVal )
-                    # else:
-                    #     pSide.setValue(sideSet[0])
                 elif attr == "mode":
                     fl = pm.formLayout()
                     pMode = pm.optionMenu(l="mode")
@@ -377,13 +367,13 @@ class Guide_UI(object):
             mgear.log("Not controller group in the scene or the group is not unique", mgear.sev_error )
         for x in oSel:
             try:
-                old = pm.PyNode(cGrp.name() + "|" + x.name().split("|")[-1])
+                old = pm.PyNode(cGrp.name() + "|" + x.name().split("|")[-1] +"_controlBuffer")
                 pm.delete(old)
             except:
                 pass
             new = pm.duplicate(x)[0]
             pm.parent(new, cGrp, a=True)
-            pm.rename(new, x.name())
+            pm.rename(new, x.name() +"_controlBuffer")
             toDel = new.getChildren(type="transform")
             pm.delete(toDel)
             try:

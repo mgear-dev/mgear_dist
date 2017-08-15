@@ -28,8 +28,6 @@
 # GLOBAL
 ##########################################################
 from functools import partial
-# pyMel
-import pymel.core as pm
 
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
@@ -39,9 +37,8 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos"
@@ -136,7 +133,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """

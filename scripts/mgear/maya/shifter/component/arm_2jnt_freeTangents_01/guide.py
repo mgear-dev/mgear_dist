@@ -28,8 +28,6 @@
 # GLOBAL
 ##########################################################
 from functools import partial
-# pyMel
-import pymel.core as pm
 
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
@@ -41,18 +39,17 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1,0,3]
+VERSION = [1,2,0]
 TYPE = "arm_2jnt_freeTangents_01"
 NAME = "arm"
-DESCRIPTION = "2 bones arm with classic bendy/roll arms"
+DESCRIPTION = "2 bones arm with classic bendy/roll arms. With elbow pin and only one central tangent"
 
 ##########################################################
 # CLASS
@@ -99,7 +96,11 @@ class Guide(ComponentGuide):
         self.pBlend       = self.addParam("blend", "double", 1, 0, 1)
         self.pIkRefArray  = self.addParam("ikrefarray", "string", "")
         self.pUpvRefArray = self.addParam("upvrefarray", "string", "")
+        self.pUpvRefArray = self.addParam("pinrefarray", "string", "")
         self.pMaxStretch  = self.addParam("maxstretch", "double", 1.5 , 1, None)
+        self.pIKTR       = self.addParam("ikTR", "bool", False)
+        self.pMirrorMid = self.addParam("mirrorMid", "bool", False)
+
 
         # Divisions
         self.pDiv0 = self.addParam("div0", "long", 2, 1, None)
@@ -111,6 +112,7 @@ class Guide(ComponentGuide):
 
         self.pUseIndex       = self.addParam("useIndex", "bool", False)
         self.pParentJointIndex = self.addParam("parentJointIndex", "long", -1, None, None)
+
 
 
 ##########################################################
@@ -147,11 +149,11 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.setObjectName(self.toolName)
         self.setWindowFlags(QtCore.Qt.Window)
         self.setWindowTitle(TYPE)
-        self.resize(280, 620)
+        self.resize(280, 780)
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """
@@ -165,6 +167,8 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.ikfk_slider.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.ikfk_spinBox.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
+        self.populateCheck(self.settingsTab.ikTR_checkBox, "ikTR")
+        self.populateCheck(self.settingsTab.mirrorMid_checkBox, "mirrorMid")
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
@@ -173,6 +177,9 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         upvRefArrayItems = self.root.attr("upvrefarray").get().split(",")
         for item in upvRefArrayItems:
             self.settingsTab.upvRefArray_listWidget.addItem(item)
+        pinRefArrayItems = self.root.attr("pinrefarray").get().split(",")
+        for item in pinRefArrayItems:
+            self.settingsTab.pinRefArray_listWidget.addItem(item)
 
 
     def create_componentLayout(self):
@@ -191,8 +198,8 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.div0_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div0_spinBox, "div0"))
         self.settingsTab.div1_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div1_spinBox, "div1"))
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(self.setProfile)
-
-
+        self.settingsTab.ikTR_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.ikTR_checkBox, "ikTR"))
+        self.settingsTab.mirrorMid_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.mirrorMid_checkBox, "mirrorMid"))
 
         self.settingsTab.ikRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
         self.settingsTab.ikRefArrayRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
@@ -204,12 +211,19 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.upvRefArray_copyRef_pushButton.clicked.connect(partial(self.copyFromListWidget, self.settingsTab.ikRefArray_listWidget, self.settingsTab.upvRefArray_listWidget, "upvrefarray"))
         self.settingsTab.upvRefArray_listWidget.installEventFilter(self)
 
+        self.settingsTab.pinRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.pinRefArray_listWidget, "pinrefarray"))
+        self.settingsTab.pinRefArrayRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.settingsTab.pinRefArray_listWidget, "pinrefarray"))
+        self.settingsTab.pinRefArray_copyRef_pushButton.clicked.connect(partial(self.copyFromListWidget, self.settingsTab.ikRefArray_listWidget, self.settingsTab.pinRefArray_listWidget, "pinrefarray"))
+        self.settingsTab.pinRefArray_listWidget.installEventFilter(self)
+
     def eventFilter(self, sender, event):
         if event.type() == QtCore.QEvent.ChildRemoved:
             if sender == self.settingsTab.ikRefArray_listWidget:
                 self.updateListAttr(sender, "ikrefarray")
             elif sender == self.settingsTab.upvRefArray_listWidget:
                 self.updateListAttr(sender, "upvrefarray")
+            elif sender == self.settingsTab.pinRefArray_listWidget:
+                self.updateListAttr(sender, "pinrefarray")
 
 
 

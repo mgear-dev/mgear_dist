@@ -5,11 +5,12 @@ mGear is a rigging framework for Autodesk Maya. mGear provides a set of convenie
 
 Originally mGear was design and develope by `Jeremie Passerin <http://www.jeremiepasserin.com/blog/>`_ , since 2013 `Miquel Campos <http://www.miquel-campos.com/>`_ continued the project and evolved to the current design.
 
-				"Miquel did an amazing job making mGear a solid Production tool. I am delighted to see it running smoothly in Maya. Softimage User will be delighted to find their favorite Rig Builder in Maya. Maya user will be amazed how MGear is solid and flexible. Gear has been used in production all around the world since 2010 and changed the life of many riggers and animators, I have no doubt that mGear will have the same success. Do I need to mention it’s free and open source ?"					
-	
+				"Miquel did an amazing job making mGear a solid Production tool. I am delighted to see it running smoothly in Maya. Softimage User will be delighted to find their favorite Rig Builder in Maya. Maya user will be amazed how MGear is solid and flexible. Gear has been used in production all around the world since 2010 and changed the life of many riggers and animators, I have no doubt that mGear will have the same success. Do I need to mention it’s free and open source ?"
+
 																			**Jeremie Passerin**
 
-
+`Join the mGear Google user group <https://groups.google.com/forum/#!forum/mgearusergroup/>`_
+_____________________________________________________________________________________________
 
 .. figure:: images/studioAKA_mGear_A.jpg
     :width: 800px
@@ -19,6 +20,13 @@ Originally mGear was design and develope by `Jeremie Passerin <http://www.jeremi
     :figclass: align-center
 
     mGear have been used at Studio AKA for San Pellegrino ‘Dining By Starlight’. Rigged by Adam Avery
+
+Contributors (in alphabetical order):
+	- `Akagi-san <https://github.com/akiwoRM/>`_
+	- `Gaetan Guidet <https://github.com/gatgui/>`_
+	- `Lior Ben Horin <https://github.com/liorbenhorin/>`_
+	- `Matsumoto-san <https://github.com/yamahigashi>`_
+	- `Miles Cheng <https://github.com/milesckt/>`_
 
 .. note::
 

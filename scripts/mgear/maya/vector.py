@@ -65,7 +65,7 @@ def getDistance2(obj0, obj1):
         obj0 (dagNode): Object A
         obj1 (dagNode): Object B
 
-    Returns:  
+    Returns:
         float: Distance length
     """
     v0 = obj0.getTranslation(space="world")
@@ -183,8 +183,8 @@ def getTransposedVector(v, position0, position1, inverse=False):
     vector = rotateAlongAxis(v, axis, ra)
 
     # Check if the rotation has been set in the right order
-    ra2 = (math.pi *.5 ) - v1.angle(vector)
-    vector = rotateAlongAxis(v, axis, -ra2)
+    # ra2 = (math.pi *.5 ) - v1.angle(vector)
+    # vector = rotateAlongAxis(v, axis, -ra2)
 
     return vector
 
@@ -239,4 +239,3 @@ class Blade(object):
         self.x = dt.Vector(x.x, x.y, x.z)
         self.y = dt.Vector(y.x, y.y, y.z)
         self.z = dt.Vector(z.x, z.y, z.z)
-

@@ -420,29 +420,29 @@ def getRotationFromAxis(in_a, in_b, axis="xy", negate=False):
     b.normalize()
 
     if axis == "xy":
-      x = a
-      y = b
-      z = c
+        x = a
+        y = b
+        z = c
     elif axis == "xz":
-      x = a
-      z = b
-      y = -c
+        x = a
+        z = b
+        y = -c
     elif axis == "yx":
-      y = a
-      x = b
-      z = -c
+        y = a
+        x = b
+        z = -c
     elif axis == "yz":
-      y = a
-      z = b
-      x = c
+        y = a
+        z = b
+        x = c
     elif axis == "zx":
-      z = a
-      x = b
-      y = c
+        z = a
+        x = b
+        y = c
     elif axis == "zy":
-      z = a
-      y = b
-      x = -c
+        z = a
+        y = b
+        x = -c
 
     m = dt.Matrix()
     setMatrixRotation(m, [x,y,z])
@@ -463,18 +463,18 @@ def getSymmetricalTransform(t, axis="yz", fNegScale=False):
     """
 
     if axis == "yz":
-        mirror =   dt.TransformationMatrix(-1,0,0,0,
+        mirror =   dt.TransformationMatrix( -1,0,0,0,
                                             0,1,0,0,
                                             0,0,1,0,
                                             0,0,0,1)
 
     if axis == "xy":
-        mirror =   dt.TransformationMatrix(1,0,0,0,
+        mirror =   dt.TransformationMatrix( 1,0,0,0,
                                             0,1,0,0,
                                             0,0,-1,0,
                                             0,0,0,1)
     if axis == "zx":
-        mirror =   dt.TransformationMatrix(1,0,0,0,
+        mirror =   dt.TransformationMatrix( 1,0,0,0,
                                             0,-1,0,0,
                                             0,0,1,0,
                                             0,0,0,1)
@@ -626,8 +626,7 @@ def getInterpolateTransformMatrix(t1, t2, blend=.5 ):
         return t1
 
     # translate
-    pos = vec.linearlyInterpolate(t1.getTranslation(space="world"),
-            t2.getTranslation(space="world"), blend)
+    pos = vec.linearlyInterpolate(t1.getTranslation(space="world"), t2.getTranslation(space="world"), blend)
 
     # scale
     scaleA = dt.Vector(*t1.getScale(space="world"))
@@ -637,8 +636,7 @@ def getInterpolateTransformMatrix(t1, t2, blend=.5 ):
     vs = vec.linearlyInterpolate(scaleA, scaleB, blend)
 
     # rotate
-    q = quaternionSlerp(dt.Quaternion(t1.getRotationQuaternion()),
-        dt.Quaternion(t2.getRotationQuaternion()), blend)
+    q = quaternionSlerp(dt.Quaternion(t1.getRotationQuaternion()), dt.Quaternion(t2.getRotationQuaternion()), blend)
 
     # out
     result = dt.TransformationMatrix()

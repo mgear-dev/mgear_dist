@@ -74,12 +74,12 @@ class Component(MainComponent):
         t = tra.getTransformLookingAt(self.guide.apos[0], self.guide.apos[1], self.normal, "xz", self.negate)
         self.fk0_npo = pri.addTransform(self.root_ctl, self.getName("fk0_npo"), t)
         self.fk0_ctl = self.addCtl(self.fk0_npo, "fk0_ctl", t, self.color_fk, "cube", w=self.length0, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length0*self.n_factor,0,0))
-        att.setKeyableAttributes(self.fk0_ctl)
+        att.setKeyableAttributes(self.fk0_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[1], self.guide.apos[2], self.normal, "xz", self.negate)
         self.fk1_npo = pri.addTransform(self.fk0_ctl, self.getName("fk1_npo"), t)
         self.fk1_ctl = self.addCtl(self.fk1_npo, "fk1_ctl", t, self.color_fk, "cube", w=self.length1, h=self.size*.1, d=self.size*.1, po=dt.Vector(.5*self.length1*self.n_factor,0,0))
-        att.setKeyableAttributes(self.fk1_ctl)
+        att.setKeyableAttributes(self.fk1_ctl, ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx"])
 
         t = tra.getTransformLookingAt(self.guide.apos[2], self.guide.apos[3], self.normal, "xz", self.negate)
         self.fk2_npo = pri.addTransform(self.fk1_ctl, self.getName("fk2_npo"), t)
@@ -115,6 +115,7 @@ class Component(MainComponent):
 
         self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12)
         att.setInvertMirror(self.upv_ctl, ["tx"])
+        att.setKeyableAttributes(self.upv_ctl, self.t_params)
 
         # References --------------------------------------
         self.ik_ref = pri.addTransform(self.ik_ctl, self.getName("ik_ref"), tra.getTransform(self.ik_ctl))
@@ -150,8 +151,11 @@ class Component(MainComponent):
         self.tws_ref = pri.addTransform(self.eff_loc, self.getName("tws_ref"), t)
 
         # Mid Controler ------------------------------------
-        self.mid_ctl = self.addCtl(self.ctrn_loc, "mid_ctl", tra.getTransform(self.ctrn_loc), self.color_ik, "sphere", w=self.size*.2)
+        t = tra.getTransform(self.ctrn_loc)
+        self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
+        self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2)
         att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
+        att.setKeyableAttributes(self.mid_ctl, self.t_params)
 
         # Twist references ---------------------------------
         x = dt.Vector(0,-1,0)
@@ -207,8 +211,7 @@ class Component(MainComponent):
             self.auxChainPos.append(vec.linearlyInterpolate(self.guide.pos["ankle"], self.guide.pos["eff"], blend=i))
             i=i+ii
         t = self.root.getMatrix(worldSpace=True)
-        rotAux = 90
-        rotNpo = -90
+
         self.aux_npo = pri.addTransform(self.root, self.getName("aux_npo"), t)
         self.auxTwistChain = pri.add2DChain(self.aux_npo, self.getName("auxTwist%s_jnt"), self.lowlegChainPos[:3], self.normal, False, self.WIP)
         #Non Roll join ref ---------------------------------
@@ -239,29 +242,49 @@ class Component(MainComponent):
         self.jnt_pos.append([self.end_ref, 'end'])
 
         # Tangent controls
-        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .3333)
+        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .5)
         self.uplegTangentA_loc = pri.addTransform(self.root_ctl, self.getName("uplegTangentA_loc"), self.fk_ctl[0].getMatrix(worldSpace=True))
         self.uplegTangentA_npo = pri.addTransform(self.uplegTangentA_loc, self.getName("uplegTangentA_npo"), t)
         self.uplegTangentA_ctl = self.addCtl(self.uplegTangentA_npo, "uplegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.uplegTangentA_npo.rz.set(180)
+            self.uplegTangentA_npo.sz.set(-1)
+        att.setKeyableAttributes(self.uplegTangentA_ctl, self.t_params)
 
-        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .6666)
+        t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .9)
         self.uplegTangentB_npo = pri.addTransform(self.tws1A_loc, self.getName("uplegTangentB_npo"), t)
-        self.uplegTangentB_ctl = self.addCtl(self.uplegTangentB_npo, "uplegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.uplegTangentB_ctl = self.addCtl(self.uplegTangentB_npo, "uplegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.uplegTangentB_npo.rz.set(180)
+            self.uplegTangentB_npo.sz.set(-1)
+        att.setKeyableAttributes(self.uplegTangentB_ctl, self.t_params)
 
         tC = self.tws1B_npo.getMatrix(worldSpace=True)
         tC = tra.setMatrixPosition(tC, self.guide.apos[2])
-        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .3333)
+        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .1)
         self.lowlegTangentA_npo = pri.addTransform(self.tws1B_loc, self.getName("lowlegTangentA_npo"), t)
-        self.lowlegTangentA_ctl = self.addCtl(self.lowlegTangentA_npo, "lowlegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        self.lowlegTangentA_ctl = self.addCtl(self.lowlegTangentA_npo, "lowlegTangentA_ctl", t, self.color_ik, "circle", w=self.size*.1, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.lowlegTangentA_npo.rz.set(180)
+            self.lowlegTangentA_npo.sz.set(-1)
+        att.setKeyableAttributes(self.lowlegTangentA_ctl, self.t_params)
 
-        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .6666)
+        t = tra.getInterpolateTransformMatrix(self.tws1B_npo, tC, .5)
         self.lowlegTangentB_loc = pri.addTransform(self.root, self.getName("lowlegTangentB_loc"), tC)
         self.lowlegTangentB_npo = pri.addTransform(self.lowlegTangentB_loc, self.getName("lowlegTangentB_npo"), t)
         self.lowlegTangentB_ctl = self.addCtl(self.lowlegTangentB_npo, "lowlegTangentB_ctl", t, self.color_ik, "circle", w=self.size*.2, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.lowlegTangentB_npo.rz.set(180)
+            self.lowlegTangentB_npo.sz.set(-1)
+        att.setKeyableAttributes(self.lowlegTangentB_ctl, self.t_params)
 
         t = self.mid_ctl.getMatrix(worldSpace=True)
         self.kneeTangent_npo = pri.addTransform(self.mid_ctl, self.getName("kneeTangent_npo"), t)
         self.kneeTangent_ctl = self.addCtl(self.kneeTangent_npo, "kneeTangent_ctl", t, self.color_fk, "circle", w=self.size*.25, ro=dt.Vector(0,0,1.570796))
+        if self.negate:
+            self.kneeTangent_npo.rz.set(180)
+            self.kneeTangent_npo.sz.set(-1)
+        att.setKeyableAttributes(self.kneeTangent_ctl, self.t_params)
 
         # match IK FK references
         self.match_fk0_off = pri.addTransform(self.root, self.getName("matchFk0_npo"), tra.getTransform(self.fk_ctl[1]))
@@ -300,6 +323,12 @@ class Component(MainComponent):
             ref_names = ["Auto"] + ref_names
             if len(ref_names) > 1:
                 self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
+
+        if self.settings["pinrefarray"]:
+            ref_names = self.settings["pinrefarray" ].split(",")
+            ref_names = ["Auto"] + ref_names
+            if len(ref_names) > 1:
+                self.pin_att = self.addAnimEnumParam("kneeref", "Knee Ref", 0, ref_names)
 
 
         # Setup ------------------------------------------
@@ -494,11 +523,16 @@ class Component(MainComponent):
         aop.gear_curvecns_op(self.lowlegTwistCrv, [ self.kneeTangent_ctl, self.lowlegTangentA_ctl, self.lowlegTangentB_ctl,self.lowlegTangentB_loc ])
 
         #Tangent controls vis
-        pm.connectAttr( self.tangentVis_att, self.uplegTangentA_ctl.attr("visibility"))
-        pm.connectAttr( self.tangentVis_att, self.uplegTangentB_ctl.attr("visibility"))
-        pm.connectAttr( self.tangentVis_att, self.lowlegTangentA_ctl.attr("visibility"))
-        pm.connectAttr( self.tangentVis_att, self.lowlegTangentB_ctl.attr("visibility"))
-        pm.connectAttr( self.tangentVis_att, self.kneeTangent_ctl.attr("visibility"))
+        for shp in self.uplegTangentA_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
+        for shp in self.uplegTangentB_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
+        for shp in self.lowlegTangentA_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
+        for shp in self.lowlegTangentB_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
+        for shp in self.kneeTangent_ctl.getShapes():
+            pm.connectAttr( self.tangentVis_att, shp.attr("visibility"))
 
 
         # Divisions ----------------------------------------
@@ -506,8 +540,10 @@ class Component(MainComponent):
         for i, div_cns in enumerate(self.div_cns):
             if i < (self.settings["div0"]+2):
                 mulmat_node = aop.gear_mulmatrix_op(self.uplegTwistChain[i]+".worldMatrix", div_cns+".parentInverseMatrix")
+                lastUpLegDiv = div_cns
             else:
                 mulmat_node = aop.gear_mulmatrix_op(self.lowlegTwistChain[i-(self.settings["div0"]+2)]+".worldMatrix", div_cns+".parentInverseMatrix")
+                lastLowLegDiv = div_cns
             dm_node = nod.createDecomposeMatrixNode(mulmat_node+".output")
             pm.connectAttr(dm_node+".outputTranslate", div_cns+".t")
             pm.connectAttr(dm_node+".outputRotate", div_cns+".r")
@@ -520,7 +556,12 @@ class Component(MainComponent):
             pm.connectAttr(self.st_att[i], node+".stretch")
             pm.connectAttr(self.sq_att[i], node+".squash")
 
-        # NOTE: next line fix the issue on meters. 
+        #force translation for last loc arm and foreamr
+        aop.gear_mulmatrix_op(self.kneeTangent_ctl.worldMatrix,lastUpLegDiv.parentInverseMatrix, lastUpLegDiv, "t" )
+        aop.gear_mulmatrix_op(self.tws2_loc.worldMatrix,lastLowLegDiv.parentInverseMatrix, lastLowLegDiv, "t" )
+
+
+        # NOTE: next line fix the issue on meters.
         # This is special case becasuse the IK solver from mGear use the scale as lenght and we have shear
         # TODO: check for a more clean and elegant solution instead of re-match the world matrix again
         tra.matchWorldTransform(self.fk_ctl[0], self.match_fk0_off)
@@ -548,16 +589,17 @@ class Component(MainComponent):
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["knee"] = self.settings["div0"] + 2
-        self.jointRelatives["ankle"] = len(self.div_cns)-1
+        self.jointRelatives["ankle"] = len(self.div_cns)
         self.jointRelatives["eff"] = len(self.div_cns)
 
     ## standard connection definition.
     # @param self
     def connect_standard(self):
-        # self.connect_standardWithIkRef()
         self.parent.addChild(self.root)
 
         # Set the Ik Reference
         self.connectRef(self.settings["ikrefarray"], self.ik_cns)
         if self.settings["upvrefarray"]:
             self.connectRef("Auto,"+self.settings["upvrefarray"], self.upv_cns, True)
+        if self.settings["pinrefarray"]:
+            self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)

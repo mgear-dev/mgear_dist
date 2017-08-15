@@ -28,13 +28,10 @@
 # GLOBAL
 #############################################
 from functools import partial
-# pyMel
-import pymel.core as pm
 
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
 import mgear.maya.transform as tra
-import mgear.maya.attribute as att
 import mgear.maya.vector as vec
 
 #Pyside
@@ -42,20 +39,17 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
-
-
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquletd.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1,0,1]
+VERSION = [2,0,0]
 TYPE = "neck_ik_01"
 NAME = "neck"
-DESCRIPTION = ""
+DESCRIPTION = "Neck ik and FK with optional tangent controls"
 
 ##########################################################
 # CLASS
@@ -120,6 +114,8 @@ class Guide(ComponentGuide):
 
         # Options
         self.pDivision = self.addParam("division", "long", 5, 3)
+        self.pTangentControls = self.addParam("tangentControls", "bool", False)
+
 
         # FCurves
         self.pSt_profile = self.addFCurveParam("st_profile", [[0,0],[.5,-1],[1,0]])
@@ -167,7 +163,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """
@@ -183,6 +179,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
         self.settingsTab.maxSquash_spinBox.setValue(self.root.attr("maxsquash").get())
         self.settingsTab.division_spinBox.setValue(self.root.attr("division").get())
+        self.populateCheck(self.settingsTab.tangentControls_checkBox, "tangentControls")
 
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
         for item in ikRefArrayItems:
@@ -207,6 +204,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.maxStretch_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxStretch_spinBox, "maxstretch"))
         self.settingsTab.maxSquash_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxSquash_spinBox, "maxsquash"))
         self.settingsTab.division_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.division_spinBox, "division"))
+        self.settingsTab.tangentControls_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.tangentControls_checkBox, "tangentControls"))
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(self.setProfile)
 
         self.settingsTab.ikRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))

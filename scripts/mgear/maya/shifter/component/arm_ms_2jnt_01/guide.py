@@ -24,20 +24,13 @@
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
 
-## @package mgear.maya.rig.component.arm_ms_2jnt_01.guide
-# @author Jeremie Passerin, Miquel Campos, MilesCheng
-
-
 ##########################################################
 # GLOBAL
 ##########################################################
 from functools import partial
-# pyMel
-import pymel.core as pm
 
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
-
 import mgear.maya.transform as tra
 
 #Pyside
@@ -45,15 +38,14 @@ from mgear.maya.shifter.component.guide import componentMainSettings
 import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
-import maya.OpenMayaUI as omui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 import settingsUI as sui
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos, Miles Cheng"
 URL = "www.jeremiepasserin.com, www.miquletd.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com , miles@simage.com.hk"
-VERSION = [1,2,0]
+VERSION = [1,3,0]
 TYPE = "arm_ms_2jnt_01"
 NAME = "arm"
 DESCRIPTION = "2 bones arm with Maya nodes for roll bones + Simage specification"
@@ -105,10 +97,10 @@ class Guide(ComponentGuide):
         self.pIkRefArray  = self.addParam("ikrefarray", "string", "")
         self.pUpvRefArray = self.addParam("upvrefarray", "string", "")
         self.pMaxStretch  = self.addParam("maxstretch", "double", 2 , 1, None)
-
+        self.pElbowThickness = self.addParam("elbow","double",0,0,None)
         # Divisions
-        self.pDiv0 = self.addParam("div0", "long", 4, 1, None)
-        self.pDiv1 = self.addParam("div1", "long", 4, 1, None)
+        self.pDiv0 = self.addParam("div0", "long", 3, 1, None)
+        self.pDiv1 = self.addParam("div1", "long", 3, 1, None)
 
         # FCurves
         self.pSt_profile = self.addFCurveParam("st_profile", [[0,0],[.5,-.5],[1,0]])
@@ -157,7 +149,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentControls(self):
         return
-        
+
 
     def populate_componentControls(self):
         """
@@ -171,9 +163,10 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.ikfk_slider.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.ikfk_spinBox.setValue(int(self.root.attr("blend").get()*100))
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
+        self.settingsTab.elbow_spinBox.setValue(self.root.attr("elbow").get())
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
-        
+
         fkRefArrayItems = self.root.attr("fkrefarray").get().split(",")
         for item in fkRefArrayItems:
             self.settingsTab.fkRefArray_listWidget.addItem(item)
@@ -198,6 +191,8 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.ikfk_slider.valueChanged.connect(partial(self.updateSlider, self.settingsTab.ikfk_slider, "blend"))
         self.settingsTab.ikfk_spinBox.valueChanged.connect(partial(self.updateSlider, self.settingsTab.ikfk_spinBox, "blend"))
         self.settingsTab.maxStretch_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxStretch_spinBox, "maxstretch"))
+        self.settingsTab.elbow_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.elbow_spinBox, "elbow"))
+
         self.settingsTab.div0_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div0_spinBox, "div0"))
         self.settingsTab.div1_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div1_spinBox, "div1"))
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(self.setProfile)

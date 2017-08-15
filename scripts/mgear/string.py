@@ -93,12 +93,12 @@ def convertRLName(name):
 
     reMatch = re.search(rePattern, name)
     if reMatch:
-      instance = reMatch.group(0)
-      if instance.find("R") != -1:
+        instance = reMatch.group(0)
+        if instance.find("R") != -1:
             rep = instance.replace("R", "L")
-      else:
+        else:
             rep = instance.replace("L", "R")
 
-      name = re.sub(rePattern, rep, name)
+        name = re.sub(rePattern, rep, name)
 
     return name

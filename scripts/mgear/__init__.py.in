@@ -33,9 +33,11 @@ mGear init module.
 ##########################################################
 # built-in
 import os
-import sys, string, exceptions
+import sys
+import string
+import exceptions
 
-## Debug mode for the logger
+# Debug mode for the logger
 logDebug = False
 
 # Severity for logged messages
@@ -47,7 +49,7 @@ sev_verbose = 16
 sev_comment = 32
 
 # gear version
-VERSION = [2,0,4]
+VERSION = @MGEAR_VERSION@
 
 
 ##########################################################
@@ -191,7 +193,7 @@ def getInfos(level):
 
     Args:
         level (int): Level
-    
+
     Returns:
         str: The info
     """
