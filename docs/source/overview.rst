@@ -9,12 +9,12 @@ Originally mGear was design and develope by `Jeremie Passerin <http://www.jeremi
 
 																			**Jeremie Passerin**
 
-Contributors:
-	Akagi-san
-	Gaetan Guidet
-	Lior Ben Horin
-	Miles Cheng
-	Yamahigashi-san
+Contributors (in alphabetical order):
+	- `Akagi-san <https://github.com/akiwoRM/>`_
+	- `Gaetan Guidet <https://github.com/gatgui/>`_
+	- `Lior Ben Horin <https://github.com/liorbenhorin/>`_
+	- `Matsumoto-san <https://github.com/yamahigashi>`_
+	- `Miles Cheng <https://github.com/milesckt/>`_
 
 `Join the mGear Google user group <https://groups.google.com/forum/#!forum/mgearusergroup/>`_
 

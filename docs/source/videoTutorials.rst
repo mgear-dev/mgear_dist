@@ -1,8 +1,8 @@
 Video Tutorials
 ===============
 
-Please visit 
-`mGear Vimeo Group <https://vimeo.com/groups/mgear/>`_
+WIP section: Please visit:
+`mGear Youtube channel <https://vimeo.com/groups/mgear/>`_
 
 
 .. raw:: html
