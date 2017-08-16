@@ -119,7 +119,7 @@ class Component(MainComponent):
         self.relatives["root"] = self.ref_base
         self.relatives["tip"] = self.ref_tip
 
-        self.controlRelatives["root"] = self.base_ctl
+        self.controlRelatives["root"] = self.ctl
         self.controlRelatives["tip"] = self.tip_ctl
 
         for i in range(0, len(self.div_cns)-1):
