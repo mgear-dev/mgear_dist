@@ -1,0 +1,24 @@
+mgear\.maya\.rigbits\.cycleTweaks
+=================================
+
+.. automodule:: mgear.maya.rigbits.cycleTweaks
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      cycleTweak
+      initCycleTweakBase
+      inverseTranslateParent
+   
+   
+
+   
+   
+   
+
+   
+   
+   

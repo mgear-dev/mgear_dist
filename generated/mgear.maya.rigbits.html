@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.rigbits &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../index.html"/>
+        <link rel="up" title="Rigbits" href="../rigbitsModules.html"/>
+        <link rel="next" title="mgear.maya.rigbits.blendShapes" href="mgear.maya.rigbits.blendShapes.html"/>
+        <link rel="prev" title="Rigbits" href="../rigbitsModules.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../rigbitsModules.html#introduction">Introduction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../rigbitsModules.html#modules">Modules</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">mgear.maya.rigbits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.blendShapes.html">mgear.maya.rigbits.blendShapes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.channelWrangler.html">mgear.maya.rigbits.channelWrangler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.cycleTweaks.html">mgear.maya.rigbits.cycleTweaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.ghost.html">mgear.maya.rigbits.ghost</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.postSpring.html">mgear.maya.rigbits.postSpring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.proxySlicer.html">mgear.maya.rigbits.proxySlicer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.rivet.html">mgear.maya.rigbits.rivet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.rope.html">mgear.maya.rigbits.rope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.tweaks.html">mgear.maya.rigbits.tweaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.maya.rigbits.utils.html">mgear.maya.rigbits.utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../rigbitsModules.html">Rigbits</a> &raquo;</li>
+        
+      <li>mgear.maya.rigbits</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated/mgear.maya.rigbits.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.rigbits">
+<span id="mgear-maya-rigbits"></span><h1>mgear.maya.rigbits<a class="headerlink" href="#module-mgear.maya.rigbits" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.addBlendedJoint" title="mgear.maya.rigbits.addBlendedJoint"><code class="xref py py-obj docutils literal"><span class="pre">addBlendedJoint</span></code></a>([oSel,&nbsp;compScale])</td>
+<td>Create a joint that rotate 50% of the selected joint.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.addJnt" title="mgear.maya.rigbits.addJnt"><code class="xref py py-obj docutils literal"><span class="pre">addJnt</span></code></a>([obj,&nbsp;parent,&nbsp;noReplace,&nbsp;grp])</td>
+<td>Create one joint for each selected object.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.addNPO" title="mgear.maya.rigbits.addNPO"><code class="xref py py-obj docutils literal"><span class="pre">addNPO</span></code></a>([objs])</td>
+<td>Add a transform node as a parent and in the same pose of each of the selected objects.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.addSupportJoint" title="mgear.maya.rigbits.addSupportJoint"><code class="xref py py-obj docutils literal"><span class="pre">addSupportJoint</span></code></a>([oSel])</td>
+<td>Add an extra joint to the blended joint.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.alignToPointsLoop" title="mgear.maya.rigbits.alignToPointsLoop"><code class="xref py py-obj docutils literal"><span class="pre">alignToPointsLoop</span></code></a>([points,&nbsp;loc,&nbsp;name])</td>
+<td>Create space locator align to the plain define by at less 3 vertex</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.connectInvertSRT" title="mgear.maya.rigbits.connectInvertSRT"><code class="xref py py-obj docutils literal"><span class="pre">connectInvertSRT</span></code></a>(source,&nbsp;target[,&nbsp;srt,&nbsp;axis])</td>
+<td>Connect the locat transformations with inverted values.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.connectLocalTransform" title="mgear.maya.rigbits.connectLocalTransform"><code class="xref py py-obj docutils literal"><span class="pre">connectLocalTransform</span></code></a>([objects,&nbsp;s,&nbsp;r,&nbsp;t])</td>
+<td>Connect scale, rotatio and translation.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.connectUserDefinedChannels" title="mgear.maya.rigbits.connectUserDefinedChannels"><code class="xref py py-obj docutils literal"><span class="pre">connectUserDefinedChannels</span></code></a>(source,&nbsp;targets)</td>
+<td>Connects the user defined channels between 2 objects with the same channels.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.connectWorldTransform" title="mgear.maya.rigbits.connectWorldTransform"><code class="xref py py-obj docutils literal"><span class="pre">connectWorldTransform</span></code></a>(source,&nbsp;target)</td>
+<td>Connect the source world transform of one object to another object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.createCTL" title="mgear.maya.rigbits.createCTL"><code class="xref py py-obj docutils literal"><span class="pre">createCTL</span></code></a>([type,&nbsp;child])</td>
+<td>Create a control for each selected object.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.createInterpolateTransform" title="mgear.maya.rigbits.createInterpolateTransform"><code class="xref py py-obj docutils literal"><span class="pre">createInterpolateTransform</span></code></a>([objects,&nbsp;blend])</td>
+<td>Create space locator and apply gear_intmatrix_op, to interpolate the his pose between 2 selected objects.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.duplicateSym" title="mgear.maya.rigbits.duplicateSym"><code class="xref py py-obj docutils literal"><span class="pre">duplicateSym</span></code></a>(*args)</td>
+<td>Duplicate one dag hierarchy to/from X/-X renaming “L” to “R”</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.matchPosfromBBox" title="mgear.maya.rigbits.matchPosfromBBox"><code class="xref py py-obj docutils literal"><span class="pre">matchPosfromBBox</span></code></a>(*args)</td>
+<td>Match the position of one object, using the boundig box center of another object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.matchWorldXform" title="mgear.maya.rigbits.matchWorldXform"><code class="xref py py-obj docutils literal"><span class="pre">matchWorldXform</span></code></a>(*args)</td>
+<td>Align 2 selected objects in world space.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.replaceShape" title="mgear.maya.rigbits.replaceShape"><code class="xref py py-obj docutils literal"><span class="pre">replaceShape</span></code></a>([source,&nbsp;targets])</td>
+<td>Replace the shape of one object by another.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.selectDeformers" title="mgear.maya.rigbits.selectDeformers"><code class="xref py py-obj docutils literal"><span class="pre">selectDeformers</span></code></a>(*args)</td>
+<td>Select the deformers from the object skinCluster.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/rigbits/rigbits.html#mgear.maya.rigbits.spaceJump" title="mgear.maya.rigbits.spaceJump"><code class="xref py py-obj docutils literal"><span class="pre">spaceJump</span></code></a>([ref,&nbsp;space])</td>
+<td>This function create a local reference space from another space in the hierarchy</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mgear.maya.rigbits.blendShapes.html" class="btn btn-neutral float-right" title="mgear.maya.rigbits.blendShapes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../rigbitsModules.html" class="btn btn-neutral" title="Rigbits" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

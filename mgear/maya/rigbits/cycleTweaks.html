@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.rigbits.cycleTweaks &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mgear.maya.rigbits.cycleTweaks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/mgear/maya/rigbits/cycleTweaks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.rigbits.cycleTweaks">
+<span id="mgear-maya-rigbits-cycletweaks"></span><h1>mgear.maya.rigbits.cycleTweaks<a class="headerlink" href="#module-mgear.maya.rigbits.cycleTweaks" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="mgear.maya.rigbits.cycleTweaks.cycleTweak">
+<code class="descclassname">mgear.maya.rigbits.cycleTweaks.</code><code class="descname">cycleTweak</code><span class="sig-paren">(</span><em>name</em>, <em>edgePair</em>, <em>mirrorAxis</em>, <em>baseMesh</em>, <em>rotMesh</em>, <em>transMesh</em>, <em>setupParent</em>, <em>ctlParent</em>, <em>jntOrg=None</em>, <em>grp=None</em>, <em>iconType=’square’</em>, <em>size=0.025</em>, <em>color=13</em>, <em>ro=dt.Vector([1.5708</em>, <em>0.0</em>, <em>0.7854])</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.cycleTweaks.cycleTweak" title="Permalink to this definition">¶</a></dt>
+<dd><p>The command to create a cycle tweak.
+A cycle tweak is a tweak that cycles to the parent position but doesn’t create a cycle of dependency. This type of tweaks
+are very useful to create facial tweakers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference internal" href="../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) – Name for the cycle tweak</li>
+<li><strong>edgePair</strong> (<em>list</em>) – List of edge pair to attach the cycle tweak</li>
+<li><strong>mirrorAxis</strong> (<em>bool</em>) – If true, will mirror the x axis behaviour.</li>
+<li><strong>baseMesh</strong> (<em>Mesh</em>) – The base mesh for the cycle tweak.</li>
+<li><strong>rotMesh</strong> (<em>Mesh</em>) – The mesh that will support the rotation transformations for the cycle tweak</li>
+<li><strong>transMesh</strong> (<em>Mesh</em>) – The mesh that will support the translation and scale transformations for the cycle tweak</li>
+<li><strong>setupParent</strong> (<em>dagNode</em>) – The parent for the setup objects</li>
+<li><strong>ctlParent</strong> (<em>dagNode</em>) – The parent for the control objects</li>
+<li><strong>jntOrg</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the joints</li>
+<li><strong>grp</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – The set to add the controls</li>
+<li><strong>iconType</strong> (<em>str</em><em>, </em><em>optional</em>) – The controls shape</li>
+<li><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – The control size</li>
+<li><strong>color</strong> (<em>int</em><em>, </em><em>optional</em>) – The control color</li>
+<li><strong>ro</strong> (<em>TYPE</em><em>, </em><em>optional</em>) – The control shape rotation offset</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the tweak control and the list of related joints.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">multi</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.cycleTweaks.initCycleTweakBase">
+<code class="descclassname">mgear.maya.rigbits.cycleTweaks.</code><code class="descname">initCycleTweakBase</code><span class="sig-paren">(</span><em>outMesh</em>, <em>baseMesh</em>, <em>rotMesh</em>, <em>transMesh</em>, <em>staticJnt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.cycleTweaks.initCycleTweakBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialice the cycle tweak setup structure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>outMesh</strong> (<em>Mesh</em>) – The output mesh after the tweak deformation</li>
+<li><strong>baseMesh</strong> (<em>Mesh</em>) – The base mesh for the cycle tweak.</li>
+<li><strong>rotMesh</strong> (<em>Mesh</em>) – The mesh that will support the rotation transformations for the cycle tweak</li>
+<li><strong>transMesh</strong> (<em>Mesh</em>) – The mesh that will support the translation and scale transformations for the cycle tweak</li>
+<li><strong>staticJnt</strong> (<em>None</em><em> or </em><em>joint</em><em>, </em><em>optional</em>) – The static joint for the static vertex.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.cycleTweaks.inverseTranslateParent">
+<code class="descclassname">mgear.maya.rigbits.cycleTweaks.</code><code class="descname">inverseTranslateParent</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.cycleTweaks.inverseTranslateParent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invert the parent transformation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<em>dagNode</em>) – The source dagNode to inver parent transformation.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

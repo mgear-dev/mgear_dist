@@ -1,0 +1,27 @@
+mgear\.maya\.rigbits\.tweaks
+============================
+
+.. automodule:: mgear.maya.rigbits.tweaks
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      createJntTweak
+      createRivetTweak
+      createRivetTweakFromList
+      createRivetTweakLayer
+      doritosMagic
+      resetJntLocalSRT
+   
+   
+
+   
+   
+   
+
+   
+   
+   

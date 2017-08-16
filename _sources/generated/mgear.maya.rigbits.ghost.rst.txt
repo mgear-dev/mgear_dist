@@ -1,0 +1,24 @@
+mgear\.maya\.rigbits\.ghost
+===========================
+
+.. automodule:: mgear.maya.rigbits.ghost
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      createDoritoGhostCtl
+      createGhostCtl
+      ghostSlider
+   
+   
+
+   
+   
+   
+
+   
+   
+   

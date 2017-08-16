@@ -1,0 +1,23 @@
+mgear\.maya\.rigbits\.blendShapes
+=================================
+
+.. automodule:: mgear.maya.rigbits.blendShapes
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      connectWithBlendshape
+      getBlendShape
+   
+   
+
+   
+   
+   
+
+   
+   
+   

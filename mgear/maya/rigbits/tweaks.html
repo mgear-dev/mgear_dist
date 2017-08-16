@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.rigbits.tweaks &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mgear.maya.rigbits.tweaks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/mgear/maya/rigbits/tweaks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.rigbits.tweaks">
+<span id="mgear-maya-rigbits-tweaks"></span><h1>mgear.maya.rigbits.tweaks<a class="headerlink" href="#module-mgear.maya.rigbits.tweaks" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="mgear.maya.rigbits.tweaks.createJntTweak">
+<code class="descclassname">mgear.maya.rigbits.tweaks.</code><code class="descname">createJntTweak</code><span class="sig-paren">(</span><em>mesh</em>, <em>parentJnt</em>, <em>ctlParent</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.tweaks.createJntTweak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a joint tweak</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mesh</strong> (<em>mesh</em>) – The object to deform with the tweak</li>
+<li><strong>parentJnt</strong> (<em>dagNode</em>) – The parent for the new joint</li>
+<li><strong>ctlParent</strong> (<em>dagNode</em>) – The parent for the control.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.tweaks.createRivetTweak">
+<code class="descclassname">mgear.maya.rigbits.tweaks.</code><code class="descname">createRivetTweak</code><span class="sig-paren">(</span><em>mesh, edgePair, name, parent=None, ctlParent=None, color=[0, 0, 0], size=0.04, defSet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.tweaks.createRivetTweak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a tweak joint attached to the mesh using a rivet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mesh</strong> (<em>mesh</em>) – The object to add the tweak</li>
+<li><strong>edgePair</strong> (<em>pari list</em>) – The edge pairt to create the rivet</li>
+<li><strong>name</strong> (<em>str</em>) – The name for the tweak</li>
+<li><strong>parent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak</li>
+<li><strong>ctlParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak control</li>
+<li><strong>color</strong> (<em>list</em><em>, </em><em>optional</em>) – The color for the control</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.tweaks.createRivetTweakFromList">
+<code class="descclassname">mgear.maya.rigbits.tweaks.</code><code class="descname">createRivetTweakFromList</code><span class="sig-paren">(</span><em>mesh, edgeIndexPairList, name, parent=None, ctlParent=None, color=[0, 0, 0]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.tweaks.createRivetTweakFromList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create multiple rivet tweaks from a list of edge pairs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mesh</strong> (<em>mesh</em>) – The object to add the tweak</li>
+<li><strong>edgeIndexPairList</strong> (<em>list of list</em>) – The edge pair list of list</li>
+<li><strong>name</strong> (<em>str</em>) – The name for the tweak</li>
+<li><strong>parent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak</li>
+<li><strong>ctlParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak control</li>
+<li><strong>color</strong> (<em>list</em><em>, </em><em>optional</em>) – The color for the control</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.tweaks.createRivetTweakLayer">
+<code class="descclassname">mgear.maya.rigbits.tweaks.</code><code class="descname">createRivetTweakLayer</code><span class="sig-paren">(</span><em>layerMesh</em>, <em>bst</em>, <em>edgeList</em>, <em>tweakName</em>, <em>parent=None</em>, <em>ctlParent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.tweaks.createRivetTweakLayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a rivet tweak layer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>layerMesh</strong> (<em>mesh</em>) – The tweak layer mesh</li>
+<li><strong>bst</strong> (<em>mesh</em>) – The mesh blendshape target</li>
+<li><strong>edgeList</strong> (<em>list</em>) – List of edges</li>
+<li><strong>tweakName</strong> (<a class="reference internal" href="../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) – The name for the tweak</li>
+<li><strong>parent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak</li>
+<li><strong>ctlParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – the parent for the tweak control</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.tweaks.doritosMagic">
+<code class="descclassname">mgear.maya.rigbits.tweaks.</code><code class="descname">doritosMagic</code><span class="sig-paren">(</span><em>mesh</em>, <em>joint</em>, <em>jointBase</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.tweaks.doritosMagic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.tweaks.resetJntLocalSRT">
+<code class="descclassname">mgear.maya.rigbits.tweaks.</code><code class="descname">resetJntLocalSRT</code><span class="sig-paren">(</span><em>jnt</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.tweaks.resetJntLocalSRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the local SRT and jointOrient of a joint</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>jnt</strong> (<em>joint</em>) – The joint to reset the local SRT</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+mgear\.maya\.rigbits\.proxySlicer
+=================================
+
+.. automodule:: mgear.maya.rigbits.proxySlicer
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      slice
+   
+   
+
+   
+   
+   
+
+   
+   
+   

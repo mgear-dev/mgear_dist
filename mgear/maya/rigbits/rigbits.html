@@ -1,0 +1,528 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.maya.rigbits &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../solvers.html">Custom Solvers/Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mgear.maya.rigbits</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/mgear/maya/rigbits/rigbits.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.maya.rigbits">
+<span id="mgear-maya-rigbits"></span><h1>mgear.maya.rigbits<a class="headerlink" href="#module-mgear.maya.rigbits" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="mgear.maya.rigbits.addBlendedJoint">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">addBlendedJoint</code><span class="sig-paren">(</span><em>oSel=None</em>, <em>compScale=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.addBlendedJoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a joint that rotate 50% of the selected joint. This operation is done using a
+pairBlend node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>oSel</strong> (<em>None</em><em> or </em><em>joint</em><em>, </em><em>optional</em>) – If None will use the selected joints.</li>
+<li><strong>compScale</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set the compScale option of the blended joint. Default is True.</li>
+<li><strong>*args</strong> – Maya’s dummy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.addJnt">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">addJnt</code><span class="sig-paren">(</span><em>obj=False</em>, <em>parent=False</em>, <em>noReplace=False</em>, <em>grp=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.addJnt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create one joint for each selected object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<em>bool</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The object to drive the new joint. If False will use the current selection.</li>
+<li><strong>parent</strong> (<em>bool</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the joint. If False will try to parent to jnt_org.
+If jnt_org doesn’t exist will parent the joint under the obj</li>
+<li><strong>noReplace</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True will add the extension “_jnt” to the new joint name</li>
+<li><strong>grp</strong> (<em>pyNode</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – The set to add the new joint. If none will use “rig_deformers_grp”</li>
+<li><strong>*args</strong> – Maya’s dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The New created joint.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.addNPO">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">addNPO</code><span class="sig-paren">(</span><em>objs=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.addNPO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a transform node as a parent and in the same pose of each of the selected objects.
+This way neutralize the local transfromation values.
+NPO stands for “neutral position” terminology from the all mighty Softimage ;)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.addSupportJoint">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">addSupportJoint</code><span class="sig-paren">(</span><em>oSel=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.addSupportJoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an extra joint to the blended joint. This is meant to be use with SDK for game style deformation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>oSel</strong> (<em>None</em><em> or </em><em>blended joint</em><em>, </em><em>optional</em>) – If None will use the current selection.</li>
+<li><strong>*args</strong> – Mays’s dummy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.alignToPointsLoop">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">alignToPointsLoop</code><span class="sig-paren">(</span><em>points=None</em>, <em>loc=None</em>, <em>name=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.alignToPointsLoop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create space locator align to the plain define by at less 3 vertex</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>points</strong> (<em>None</em><em> or </em><em>vertex list</em><em>, </em><em>optional</em>) – The reference vertex to align the ref locator</li>
+<li><strong>loc</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – If none will create a new locator</li>
+<li><strong>name</strong> (<em>None</em><em> or </em><a class="reference internal" href="../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a><em>, </em><em>optional</em>) – Name of the new locator</li>
+<li><strong>*args</strong> – Description</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Description</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">TYPE</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.connectInvertSRT">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">connectInvertSRT</code><span class="sig-paren">(</span><em>source</em>, <em>target</em>, <em>srt=’srt’</em>, <em>axis=’xyz’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.connectInvertSRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect the locat transformations with inverted values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>source</strong> (<em>dagNode</em>) – The source driver dagNode</li>
+<li><strong>target</strong> (<em>dagNode</em>) – The target driven dagNode</li>
+<li><strong>srt</strong> (<a class="reference internal" href="../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a><em>, </em><em>optional</em>) – String value for the scale(s), rotate(r), translation(t). Default
+value is “srt”. Posible values “s”, “r”, “t” or any combination</li>
+<li><strong>axis</strong> (<a class="reference internal" href="../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a><em>, </em><em>optional</em>) – String value for the axis. Default
+value is “xyz”. Posible values “x”, “y”, “z” or any combination</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.connectLocalTransform">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">connectLocalTransform</code><span class="sig-paren">(</span><em>objects=None</em>, <em>s=True</em>, <em>r=True</em>, <em>t=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.connectLocalTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect scale, rotatio and translation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>None</em><em> or </em><em>list of dagNode</em><em>, </em><em>optional</em>) – If None will use the current selection.</li>
+<li><strong>s</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True will connect the local scale</li>
+<li><strong>r</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True will connect the local rotation</li>
+<li><strong>t</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True will connect the local translation</li>
+<li><strong>*args</strong> – Maya’s dummy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.connectUserDefinedChannels">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">connectUserDefinedChannels</code><span class="sig-paren">(</span><em>source</em>, <em>targets</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.connectUserDefinedChannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connects the user defined channels between 2 objects with the same channels. Usually a copy of the same object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>source</strong> (<em>dagNode</em>) – The dagNode with the source user defined channels</li>
+<li><strong>targets</strong> (<em>list of dagNode</em>) – The list of dagNodes with the same user defined channels to be connected.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.connectWorldTransform">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">connectWorldTransform</code><span class="sig-paren">(</span><em>source</em>, <em>target</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.connectWorldTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect the source world transform of one object to another object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>source</strong> (<em>dagNode</em>) – Source dagNode.</li>
+<li><strong>target</strong> (<em>dagNode</em>) – target dagNode.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.createCTL">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">createCTL</code><span class="sig-paren">(</span><em>type=’square’</em>, <em>child=False</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.createCTL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a control for each selected object. The newly create control can be parent or child of the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>type</strong> (<em>str</em>) – The shape of the control.</li>
+<li><strong>child</strong> (<em>bool</em>) – if True, the control will be created as a child of the object.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.createInterpolateTransform">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">createInterpolateTransform</code><span class="sig-paren">(</span><em>objects=None</em>, <em>blend=0.5</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.createInterpolateTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create space locator and apply gear_intmatrix_op, to interpolate the his pose between 2 selected objects.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objects</strong> (<em>None</em><em> or </em><em>list of 2 dagNode</em><em>, </em><em>optional</em>) – The 2 dagNode to interpolate the transform.</li>
+<li><strong>blend</strong> (<em>float</em><em>, </em><em>optional</em>) – The interpolation blend factor.</li>
+<li><strong>*args</strong> – Maya’s dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The new transformation witht the interpolate matrix node applied.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.duplicateSym">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">duplicateSym</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.duplicateSym" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicate one dag hierarchy to/from X/-X renaming “L” to “R”</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.matchPosfromBBox">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">matchPosfromBBox</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.matchPosfromBBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match the position of one object, using the boundig box center of another object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.matchWorldXform">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">matchWorldXform</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.matchWorldXform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Align 2 selected objects in world space.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.replaceShape">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">replaceShape</code><span class="sig-paren">(</span><em>source=None</em>, <em>targets=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.replaceShape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace the shape of one object by another.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source</strong> (<em>None</em><em>, </em><em>PyNode</em>) – Source object with the original shape.</li>
+<li><strong>targets</strong> (<em>None</em><em>, </em><em>list of pyNode</em>) – Targets object to apply the source shape.</li>
+<li><strong>*args</strong> – Maya’s dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Return non if nothing is selected or the source and targets are none</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.selectDeformers">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">selectDeformers</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.selectDeformers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the deformers from the object skinCluster.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.rigbits.spaceJump">
+<code class="descclassname">mgear.maya.rigbits.</code><code class="descname">spaceJump</code><span class="sig-paren">(</span><em>ref=None</em>, <em>space=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.spaceJump" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function create a local reference space from another space in the hierarchy</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ref</strong> (<em>None</em><em>, </em><em>optional</em>) – Transform reference</li>
+<li><strong>space</strong> (<em>None</em><em>, </em><em>optional</em>) – Space reference</li>
+<li><strong>*args</strong> – Maya dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Transform</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'2.2.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

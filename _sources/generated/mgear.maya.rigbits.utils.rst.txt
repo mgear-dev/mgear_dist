@@ -1,0 +1,24 @@
+mgear\.maya\.rigbits\.utils
+===========================
+
+.. automodule:: mgear.maya.rigbits.utils
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      createHotkeys
+      createRunTimeCommand
+      ui2py
+   
+   
+
+   
+   
+   
+
+   
+   
+   

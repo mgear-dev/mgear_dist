@@ -1,0 +1,38 @@
+mgear\.maya\.rigbits
+====================
+
+.. automodule:: mgear.maya.rigbits
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      addBlendedJoint
+      addJnt
+      addNPO
+      addSupportJoint
+      alignToPointsLoop
+      connectInvertSRT
+      connectLocalTransform
+      connectUserDefinedChannels
+      connectWorldTransform
+      createCTL
+      createInterpolateTransform
+      duplicateSym
+      matchPosfromBBox
+      matchWorldXform
+      replaceShape
+      selectDeformers
+      spaceJump
+   
+   
+
+   
+   
+   
+
+   
+   
+   

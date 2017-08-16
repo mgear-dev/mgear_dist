@@ -1,0 +1,24 @@
+mgear\.maya\.rigbits\.rope
+==========================
+
+.. automodule:: mgear.maya.rigbits.rope
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      build_rope
+      rope
+      rope_UI
+   
+   
+
+   
+   
+   
+
+   
+   
+   

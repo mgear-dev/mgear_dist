@@ -1,0 +1,25 @@
+mgear\.maya\.rigbits\.postSpring
+================================
+
+.. automodule:: mgear.maya.rigbits.postSpring
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      bake_spring
+      build_spring
+      postSpring
+      spring_UI
+   
+   
+
+   
+   
+   
+
+   
+   
+   
