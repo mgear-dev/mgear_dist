@@ -120,7 +120,7 @@ class Ui_Form(object):
         self.mode_label.setText(gqt.fakeTranslate("Form", "Mode:", None, -1))
         self.mode_comboBox.setItemText(0, gqt.fakeTranslate("Form", "FK", None, -1))
         self.mode_comboBox.setItemText(1, gqt.fakeTranslate("Form", "IK", None, -1))
-        self.mode_comboBox.setItemText(2, gqt.fakeTranslate("Form", "FKI/IK", None, -1))
+        self.mode_comboBox.setItemText(2, gqt.fakeTranslate("Form", "FK/IK", None, -1))
         self.ikfk_label.setText(gqt.fakeTranslate("Form", "IK/FK Blend:", None, -1))
         self.neutralPose_checkBox.setText(gqt.fakeTranslate("Form", "Nuetral pose", None, -1))
         self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))

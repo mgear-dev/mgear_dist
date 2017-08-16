@@ -1,9 +1,16 @@
 Release Log
 ===========
+2.2.1
+-----
+**Bug Fix**
+	* Shifter: Component: Hydraulic: Fix bad reference connector
+	* Docs: Text error fix
+	* Shifter: Text error fix
 
 2.2.0
 -----
 **New Features**
+	* Maya 2018 compatible
 	* Simple autorig This a new rigging sytem for basic props.
 	* Channel Wrangler: Channel manager with export import options.
 
@@ -22,7 +29,7 @@ Release Log
 	* mGear: Added support for RGB color on icons/Controls
 
 **Bug Fix**
-	* Shifter: componente: freetangent arm and leg: Fixed joint offset in the extremes
+	* Shifter: component: freetangent arm and leg: Fixed joint offset in the extremes
 	* General: Fixed bad parenting for PySide dialogs.
 
 

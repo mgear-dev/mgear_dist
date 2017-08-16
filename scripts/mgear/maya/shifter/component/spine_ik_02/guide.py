@@ -48,7 +48,7 @@ EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
 VERSION = [2,0,0]
 TYPE = "spine_ik_02"
 NAME = "spine"
-DESCRIPTION = """This version hace an extra hip joint. An ik spine with an over top layer of fk controllers
+DESCRIPTION = """This version have an extra hip joint. An ik spine with an over top layer of fk controllers
 that follow the ik position. Optional auto bend ik control and central
 tangent control.
 """
