@@ -114,8 +114,15 @@ class Component(MainComponent):
         self.upv_cns = pri.addTransformFromPos(self.root, self.getName("upv_cns"), v)
 
         self.upv_ctl = self.addCtl(self.upv_cns, "upv_ctl", tra.getTransform(self.upv_cns), self.color_ik, "diamond", w=self.size*.12, tp=self.root_ctl)
-        att.setInvertMirror(self.upv_ctl, ["tx"])
+        if self.settings["mirrorMid"]:
+            if self.negate:
+                self.upv_cns.rz.set(180)
+                self.upv_cns.sy.set(-1)
+        else:
+            att.setInvertMirror(self.upv_ctl, ["tx"])
         att.setKeyableAttributes(self.upv_ctl, self.t_params)
+
+        
 
         # References --------------------------------------
         self.ik_ref = pri.addTransform(self.ik_ctl, self.getName("ik_ref"), tra.getTransform(self.ik_ctl))
@@ -154,7 +161,12 @@ class Component(MainComponent):
         t = tra.getTransform(self.ctrn_loc)
         self.mid_cns = pri.addTransform(self.ctrn_loc, self.getName("mid_cns"), t)
         self.mid_ctl = self.addCtl(self.mid_cns, "mid_ctl", t, self.color_ik, "sphere", w=self.size*.2, tp=self.root_ctl)
-        att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
+        if self.settings["mirrorMid"]:
+            if self.negate:
+                self.mid_cns.rz.set(180)
+                self.mid_cns.sz.set(-1)
+        else:
+            att.setInvertMirror(self.mid_ctl, ["tx", "ty", "tz"])
         att.setKeyableAttributes(self.mid_ctl, self.t_params)
 
         # Twist references ---------------------------------
