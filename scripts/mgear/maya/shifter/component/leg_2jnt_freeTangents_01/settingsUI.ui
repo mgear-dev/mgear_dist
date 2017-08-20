@@ -104,7 +104,7 @@
           <item>
            <widget class="QSpinBox" name="div0_spinBox">
             <property name="minimum">
-             <number>1</number>
+             <number>2</number>
             </property>
             <property name="value">
              <number>2</number>
@@ -114,7 +114,7 @@
           <item>
            <widget class="QSpinBox" name="div1_spinBox">
             <property name="minimum">
-             <number>1</number>
+             <number>2</number>
             </property>
             <property name="value">
              <number>2</number>
@@ -122,6 +122,22 @@
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="mirrorMid_checkBox">
+          <property name="toolTip">
+           <string extracomment="This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ">This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour </string>
+          </property>
+          <property name="statusTip">
+           <string extracomment="This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ">This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour </string>
+          </property>
+          <property name="whatsThis">
+           <string>This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour </string>
+          </property>
+          <property name="text">
+           <string>Mirror Mid Ctl and UPV  axis</string>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
