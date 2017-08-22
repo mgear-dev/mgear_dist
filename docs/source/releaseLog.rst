@@ -1,5 +1,11 @@
 Release Log
 ===========
+2.2.2
+-----
+**Bug Fix**
+	* Issue #49: Shifter: Close settings Exception on Maya 2018
+	* Issue #44: mGear quadruped rig not being created in 2018
+
 2.2.1
 -----
 **Bug Fix**
