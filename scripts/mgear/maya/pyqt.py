@@ -34,6 +34,7 @@ pyQt/pySide widgets and helper functions for mGear
 import os
 import pymel.core as pm
 import maya.cmds as cmds
+from pymel import versions
 
 from maya.app.general.mayaMixin import MayaQDockWidget
 
@@ -57,7 +58,8 @@ def maya_main_window():
     """
 
     main_window_ptr = omui.MQtUtil.mainWindow()
-    return wrapInstance(long(main_window_ptr), QtWidgets.QMainWindow)
+    # return wrapInstance(long(main_window_ptr), QtWidgets.QMainWindow)
+    return wrapInstance(long(main_window_ptr), QtWidgets.QWidget)
 
 
 
@@ -78,8 +80,11 @@ def showDialog(dialog, dInst=True, *args):
             pass
 
     # Create minimal dialog object
-    # windw = dialog(maya_main_window())
-    windw = dialog()
+
+    if versions.current() >= 20180000:
+        windw = dialog(maya_main_window())
+    else:
+        windw = dialog()
     windw.move(QtWidgets.QApplication.desktop().screen().rect().center()- windw.rect().center())
 
     # Delete the UI if errors occur to avoid causing winEvent
