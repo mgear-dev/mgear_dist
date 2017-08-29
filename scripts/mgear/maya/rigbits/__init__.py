@@ -466,29 +466,40 @@ def createInterpolateTransform(objects=None, blend=.5, *args):
     return intTrans
 
 
-def addBlendedJoint(oSel=None, compScale=True, *args):
+def addBlendedJoint(oSel=None, compScale=True, blend=.5, name=None, select=True, *args):
     """Create a joint that rotate 50% of the selected joint. This operation is done using a
     pairBlend node.
 
     Args:
         oSel (None or joint, optional): If None will use the selected joints.
         compScale (bool, optional): Set the compScale option of the blended joint. Default is True.
+        blend (float, optional): blend rotation value
+        name (None, optional): Name for the blended node
         *args: Maya's dummy
+
+    Returns:
+        list: blended joints list
     """
     if not oSel:
         oSel = pm.selected()
     elif not isinstance(oSel, list):
         oSel = [oSel]
-
+    jnt_list = []
     for x in oSel:
         if isinstance(x, pm.nodetypes.Joint):
             parent = x.getParent()
-            jnt = pm.createNode('joint', n='blend_'+x.name(), p=x)
+            if name:
+                name = 'blend_'+name
+            else:
+                name = 'blend_'+x.name()
+
+            jnt = pm.createNode('joint', n=name, p=x)
+            jnt_list.append(jnt)
             jnt.attr('radius').set(1.5)
             pm.parent(jnt, parent)
             node = pm.createNode("pairBlend")
             node.attr("rotInterpolation").set(1)
-            pm.setAttr(node+".weight", .5)
+            pm.setAttr(node+".weight", blend)
             pm.connectAttr(x+".translate", node+".inTranslate1")
             pm.connectAttr(x+".translate", node+".inTranslate2")
             pm.connectAttr(x+".rotate", node+".inRotate1")
@@ -519,24 +530,34 @@ def addBlendedJoint(oSel=None, compScale=True, *args):
         else:
             pm.displayWarning("Blended Joint can't be added to: %s. Because is not ot type Joint"%x.name())
 
-def addSupportJoint(oSel=None, *args):
+    if jnt_list and select:
+        pm.select(jnt_list)
+
+    return jnt_list
+
+def addSupportJoint(oSel=None, select=True, *args):
     """Add an extra joint to the blended joint. This is meant to be use with SDK for game style deformation.
 
     Args:
         oSel (None or blended joint, optional): If None will use the current selection.
         *args: Mays's dummy
+
+    Returns:
+        list: blended joints list
     """
     if not oSel:
         oSel = pm.selected()
     elif not isinstance(oSel, list):
         oSel = [oSel]
 
+    jnt_list = []
     for x in oSel:
         if x.name().split("_")[0] == "blend":
             children = [item for item in pm.selected()[0].listRelatives(ad=True, type="joint")]
             i = len(children)
             name = x.name().replace("blend", "blendSupport_%s"%str(i))
             jnt = pm.createNode('joint', n=name, p=x)
+            jnt_list.append(jnt)
             jnt.attr('radius').set(1.5)
             jnt.attr("overrideEnabled").set(1)
             jnt.attr("overrideColor").set(17)
@@ -551,3 +572,8 @@ def addSupportJoint(oSel=None, *args):
 
         else:
             pm.displayWarning("Support Joint can't be added to: %s. Because is not blend joint"%x.name())
+
+    if jnt_list and select:
+        pm.select(jnt_list)
+
+    return jnt_list
