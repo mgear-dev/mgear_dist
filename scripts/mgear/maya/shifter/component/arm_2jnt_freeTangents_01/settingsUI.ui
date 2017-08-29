@@ -142,7 +142,7 @@
            <string>This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour </string>
           </property>
           <property name="text">
-           <string>Mirror Mid Ctl and UPV  axis</string>
+           <string>Mirror IK Ctl,  Mid Ctl and UPV  axis</string>
           </property>
          </widget>
         </item>

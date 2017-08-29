@@ -225,7 +225,7 @@ class Ui_Form(object):
         self.mirrorMid_checkBox.setToolTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
         self.mirrorMid_checkBox.setStatusTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
         self.mirrorMid_checkBox.setWhatsThis(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
-        self.mirrorMid_checkBox.setText(gqt.fakeTranslate("Form", "Mirror Mid Ctl and UPV  axis", None, -1))
+        self.mirrorMid_checkBox.setText(gqt.fakeTranslate("Form", "Mirror IK Ctl,  Mid Ctl and UPV  axis", None, -1))
         self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
         self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
         self.ikRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from UpV Ref", None, -1))
