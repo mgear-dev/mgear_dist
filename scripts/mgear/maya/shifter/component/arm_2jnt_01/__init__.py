@@ -466,6 +466,11 @@ class Component(MainComponent):
         self.controlRelatives["elbow"] = self.fk1_ctl
         self.controlRelatives["wrist"] = self.fk2_ctl
         self.controlRelatives["eff"] = self.fk2_ctl
+
+    ## Add more connection definition to the set.
+    # @param self
+    def addConnection(self):
+        self.connections["shoulder_01"] = self.connect_shoulder_01
     ## standard connection definition.
     # @param self
     def connect_standard(self):
@@ -485,3 +490,7 @@ class Component(MainComponent):
 
         if self.settings["pinrefarray"]:
             self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
+
+    def connect_shoulder_01(self):
+        self.connect_standard()
+        pm.parent(self.rollRef[0],self.parent_comp.ctl)

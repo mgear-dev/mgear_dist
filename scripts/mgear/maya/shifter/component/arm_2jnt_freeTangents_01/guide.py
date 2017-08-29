@@ -28,6 +28,7 @@
 # GLOBAL
 ##########################################################
 from functools import partial
+import pymel.core as pm
 
 # mgear
 from mgear.maya.shifter.component.guide import ComponentGuide
@@ -64,6 +65,8 @@ class Guide(ComponentGuide):
     url = URL
     email = EMAIL
     version = VERSION
+
+    connectors = ["shoulder_01"]
 
     # =====================================================
     ##
@@ -180,6 +183,18 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         pinRefArrayItems = self.root.attr("pinrefarray").get().split(",")
         for item in pinRefArrayItems:
             self.settingsTab.pinRefArray_listWidget.addItem(item)
+
+        #populate connections in main settings
+        for cnx in Guide.connectors:
+            self.mainSettingsTab.connector_comboBox.addItem(cnx)
+        self.connector_items = [ self.mainSettingsTab.connector_comboBox.itemText(i) for i in range( self.mainSettingsTab.connector_comboBox.count())]
+        currentConnector = self.root.attr("connector").get()
+        if currentConnector not in self.connector_items:
+            self.mainSettingsTab.connector_comboBox.addItem(currentConnector)
+            self.connector_items.append(currentConnector)
+            pm.displayWarning("The current connector: %s, is not a valid connector for this component. Build will Fail!!")
+        comboIndex = self.connector_items.index(currentConnector)
+        self.mainSettingsTab.connector_comboBox.setCurrentIndex(comboIndex)
 
 
     def create_componentLayout(self):
