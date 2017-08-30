@@ -100,7 +100,7 @@ class Component(MainComponent):
         else:
             m = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "xy", False)
         self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12, tp=self.ikcns_ctl)
-        if self.settings["mirrorMid"]:
+        if self.settings["mirrorIK"]:
             if self.negate:
                 self.ik_cns.sx.set(-1)
                 self.ik_ctl.rz.set(self.ik_ctl.rz.get()*-1)

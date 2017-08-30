@@ -47,7 +47,7 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1,2,0]
+VERSION = [1,3,0]
 TYPE = "arm_2jnt_freeTangents_01"
 NAME = "arm"
 DESCRIPTION = "2 bones arm with classic bendy/roll arms. With elbow pin and only one central tangent"
@@ -103,6 +103,7 @@ class Guide(ComponentGuide):
         self.pMaxStretch  = self.addParam("maxstretch", "double", 1.5 , 1, None)
         self.pIKTR       = self.addParam("ikTR", "bool", False)
         self.pMirrorMid = self.addParam("mirrorMid", "bool", False)
+        self.pMirrorIK = self.addParam("mirrorIK", "bool", False)
 
 
         # Divisions
@@ -172,6 +173,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
         self.populateCheck(self.settingsTab.ikTR_checkBox, "ikTR")
         self.populateCheck(self.settingsTab.mirrorMid_checkBox, "mirrorMid")
+        self.populateCheck(self.settingsTab.mirrorIK_checkBox, "mirrorIK")
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
@@ -215,6 +217,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(self.setProfile)
         self.settingsTab.ikTR_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.ikTR_checkBox, "ikTR"))
         self.settingsTab.mirrorMid_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.mirrorMid_checkBox, "mirrorMid"))
+        self.settingsTab.mirrorIK_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.mirrorIK_checkBox, "mirrorIK"))
 
         self.settingsTab.ikRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
         self.settingsTab.ikRefArrayRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
