@@ -2,9 +2,15 @@ Release Log
 ===========
 2.2.2
 -----
+**Enhancements**
+	* Issue #47: Shifter: Components: Legs: Mirror axis behavior on upv and mid ctl
+	* Issue #48: Shifter: Componets: Arms: IK ctl mirror behaviour
+	* Issue #53: Shifter: arm roll new reference connector
+
 **Bug Fix**
-	* Issue #49: Shifter: Close settings Exception on Maya 2018
+	* Issue #42: Shifter: component UI min division hang. Check all components
 	* Issue #44: mGear quadruped rig not being created in 2018
+	* Issue #49: Shifter: Close settings Exception on Maya 2018: Note: This is a workaround. The issue comes from Maya 2018
 
 2.2.1
 -----
