@@ -1,5 +1,10 @@
 Release Log
 ===========
+2.2.3
+-----
+**Bug Fix**
+	* Issue #54: Synoptic: Match IK/FK with split ctl for trans and rot
+
 2.2.2
 -----
 **Enhancements**
