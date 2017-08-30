@@ -307,6 +307,11 @@ def add2DChain(parent, name, positions, normal, negate=False, vis=True):
 
                 jp = jnt.getParent()
 
+                # Aviod intermediate e.g. `transform3` groups that can appear
+                # between joints due to basic moving around.
+                while jp.type() == "transform":
+                    jp = jp.getParent()
+
                 jp.setAttr("jointOrient", 0, 0, jp.attr("jointOrient").get()[2]*-1)
 
         jnt.setAttr("radius", 1.5)

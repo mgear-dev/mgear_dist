@@ -138,10 +138,10 @@
           <item row="3" column="1">
            <widget class="QSpinBox" name="division_spinBox">
             <property name="minimum">
-             <number>1</number>
+             <number>3</number>
             </property>
             <property name="value">
-             <number>2</number>
+             <number>3</number>
             </property>
            </widget>
           </item>

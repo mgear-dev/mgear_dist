@@ -26,7 +26,6 @@
 
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
-
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -97,6 +96,9 @@ class Ui_Form(object):
         self.ikTR_checkBox = QtWidgets.QCheckBox(self.groupBox)
         self.ikTR_checkBox.setObjectName("ikTR_checkBox")
         self.verticalLayout.addWidget(self.ikTR_checkBox)
+        self.mirrorIK_checkBox = QtWidgets.QCheckBox(self.groupBox)
+        self.mirrorIK_checkBox.setObjectName("mirrorIK_checkBox")
+        self.verticalLayout.addWidget(self.mirrorIK_checkBox)
         self.mirrorMid_checkBox = QtWidgets.QCheckBox(self.groupBox)
         self.mirrorMid_checkBox.setObjectName("mirrorMid_checkBox")
         self.verticalLayout.addWidget(self.mirrorMid_checkBox)
@@ -222,10 +224,14 @@ class Ui_Form(object):
         self.maxStretch_label.setText(gqt.fakeTranslate("Form", "Max Stretch", None, -1))
         self.divisions_label.setText(gqt.fakeTranslate("Form", "Divisions", None, -1))
         self.ikTR_checkBox.setText(gqt.fakeTranslate("Form", "IK separated Trans and Rot ctl", None, -1))
+        self.mirrorIK_checkBox.setToolTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
+        self.mirrorIK_checkBox.setStatusTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
+        self.mirrorIK_checkBox.setWhatsThis(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
+        self.mirrorIK_checkBox.setText(gqt.fakeTranslate("Form", "Mirror IK Ctl  axis behaviour", None, -1))
         self.mirrorMid_checkBox.setToolTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
         self.mirrorMid_checkBox.setStatusTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
         self.mirrorMid_checkBox.setWhatsThis(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
-        self.mirrorMid_checkBox.setText(gqt.fakeTranslate("Form", "Mirror Mid Ctl and UPV  axis", None, -1))
+        self.mirrorMid_checkBox.setText(gqt.fakeTranslate("Form", "MirrorMid Ctl and UPV  axis behaviour", None, -1))
         self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
         self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
         self.ikRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from UpV Ref", None, -1))
