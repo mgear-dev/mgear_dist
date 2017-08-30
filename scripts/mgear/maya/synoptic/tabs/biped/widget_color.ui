@@ -6769,6 +6769,9 @@
    <property name="upv" stdset="0">
     <string>arm_R0_upv_ctl</string>
    </property>
+   <property name="ikRot" stdset="0">
+    <string>arm_R0_ikRot_ctl</string>
+   </property>
   </widget>
   <widget class="ikfkMatchButton" name="b_keySel_3">
    <property name="geometry">
@@ -7768,6 +7771,9 @@
    </property>
    <property name="upv" stdset="0">
     <string>arm_L0_upv_ctl</string>
+   </property>
+   <property name="ikRot" stdset="0">
+    <string>arm_L0_ikRot_ctl</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget_3">
