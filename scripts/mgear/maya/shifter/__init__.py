@@ -157,18 +157,27 @@ class Rig(object):
 
         self.customStepDic["mgearRun"] = self
 
+        # stop build triggered if a custom step fail
+        self.stopBuild = False
+
         self.preCustomStep()
-        self.initialHierarchy()
-        self.processComponents()
-        self.finalize()
-        self.postCustomStep()
-        return self.model
+        if not self.stopBuild:
+            self.initialHierarchy()
+            self.processComponents()
+            self.finalize()
+            self.postCustomStep()
+
+            return self.model
 
     def customStep(self, checker, attr):
         if self.options[checker]:
             customSteps = self.options[attr].split(",")
             for step in customSteps:
-                helperSlots.runStep(step.split("|")[-1][1:], self.customStepDic)
+                if not self.stopBuild:
+                    self.stopBuild = helperSlots.runStep(step.split("|")[-1][1:], self.customStepDic)
+                else:
+                    pm.displayWarning("Build Stopped")
+                    break
 
     def preCustomStep(self):
         self.customStep("doPreCustomStep", "preCustomStep")
