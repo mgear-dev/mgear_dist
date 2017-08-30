@@ -100,8 +100,14 @@ class Component(MainComponent):
         else:
             m = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "xy", False)
         self.ik_ctl = self.addCtl(self.ikcns_ctl, "ik_ctl", m, self.color_ik, "cube", w=self.size*.12, h=self.size*.12, d=self.size*.12, tp=self.ikcns_ctl)
+        if self.settings["mirrorIK"]:
+            if self.negate:
+                self.ik_cns.sx.set(-1)
+                self.ik_ctl.rz.set(self.ik_ctl.rz.get()*-1)
+        else:
+            att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
         att.setKeyableAttributes(self.ik_ctl)
-        att.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
+        self.ik_ctl_ref = pri.addTransform(self.ik_ctl, self.getName("ikCtl_ref"), m)
 
         # upv
         v = self.guide.apos[2] - self.guide.apos[0]
@@ -132,7 +138,7 @@ class Component(MainComponent):
         # References --------------------------------------
         # Calculate  again the transfor for the IK ref. This way align with FK
         trnIK_ref = tra.getTransformLookingAt(self.guide.pos["wrist"], self.guide.pos["eff"], self.normal, "xz", self.negate)
-        self.ik_ref = pri.addTransform(self.ik_ctl, self.getName("ik_ref"), trnIK_ref)
+        self.ik_ref = pri.addTransform(self.ik_ctl_ref, self.getName("ik_ref"), trnIK_ref)
         self.fk_ref = pri.addTransform(self.fk_ctl[2], self.getName("fk_ref"), trnIK_ref)
 
         # Chain --------------------------------------------
@@ -426,7 +432,7 @@ class Component(MainComponent):
             tra.matchWorldTransform(self.fk2_ctl, self.ikRot_cns)
 
         #scale: this fix the scalin popping issue
-        intM_node = aop.gear_intmatrix_op(self.fk2_ctl.attr("worldMatrix"), self.ik_ctl.attr("worldMatrix"),  node.attr("blend"))
+        intM_node = aop.gear_intmatrix_op(self.fk2_ctl.attr("worldMatrix"), self.ik_ctl_ref.attr("worldMatrix"),  node.attr("blend"))
         mulM_node = aop.gear_mulmatrix_op(intM_node.attr("output"), self.eff_loc.attr("parentInverseMatrix"))
         dm_node = nod.createDecomposeMatrixNode(mulM_node.attr("output"))
         dm_node.attr("outputScale") >> self.eff_loc.attr("scale")
@@ -656,12 +662,14 @@ class Component(MainComponent):
         self.controlRelatives["wrist"] = self.fk2_ctl
         self.controlRelatives["eff"] = self.fk2_ctl
 
+    ## Add more connection definition to the set.
+    # @param self
+    def addConnection(self):
+        self.connections["shoulder_01"] = self.connect_shoulder_01
+
     ## standard connection definition.
     # @param self
     def connect_standard(self):
-        # self.connect_standardWithIkRef()
-        # if self.settings["pinrefarray"]:
-        #     self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
         if self.settings["ikTR"]:
             self.parent.addChild(self.root)
             self.connectRef(self.settings["ikrefarray"], self.ik_cns)
@@ -677,3 +685,8 @@ class Component(MainComponent):
 
         if self.settings["pinrefarray"]:
             self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
+
+
+    def connect_shoulder_01(self):
+        self.connect_standard()
+        pm.parent(self.rollRef[0],self.parent_comp.ctl)

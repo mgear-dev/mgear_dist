@@ -103,7 +103,7 @@ class Ui_Form(object):
         self.divisions_label.setObjectName("divisions_label")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.divisions_label)
         self.division_spinBox = QtWidgets.QSpinBox(self.groupBox)
-        self.division_spinBox.setMinimum(1)
+        self.division_spinBox.setMinimum(3)
         self.division_spinBox.setProperty("value", 2)
         self.division_spinBox.setObjectName("division_spinBox")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.division_spinBox)

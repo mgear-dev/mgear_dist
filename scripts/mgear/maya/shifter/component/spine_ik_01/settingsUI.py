@@ -138,7 +138,7 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.division_spinBox.sizePolicy().hasHeightForWidth())
         self.division_spinBox.setSizePolicy(sizePolicy)
-        self.division_spinBox.setMinimum(1)
+        self.division_spinBox.setMinimum(3)
         self.division_spinBox.setProperty("value", 2)
         self.division_spinBox.setObjectName("division_spinBox")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.division_spinBox)
