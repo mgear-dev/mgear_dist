@@ -1,5 +1,9 @@
 Release Log
 ===========
+2.3.0
+-----
+**Enhancements**
+
 2.2.3
 -----
 **Bug Fix**
