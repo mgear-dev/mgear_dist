@@ -852,31 +852,43 @@ class helperSlots(object):
 
     @classmethod
     def runStep(self, stepPath, customStepDic):
-        with pm.UndoChunk():
             try:
-                pm.displayInfo("EXEC: Executing custom step: %s"%stepPath)
-                fileName = os.path.split(stepPath)[1].split(".")[0]
-                if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
-                    runPath = os.path.join( os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "") , stepPath)
-                else:
-                    runPath = stepPath
-                customStep = imp.load_source(fileName, runPath)
-                if hasattr(customStep, "CustomShifterStep"):
-                    cs = customStep.CustomShifterStep()
-                    cs.run(customStepDic)
-                    customStepDic[cs.name] = cs
-                    pm.displayInfo("SUCCEED: Custom Shifter Step Class: %s. Succeed!!"%stepPath)
-                else:
-                    pm.displayInfo("SUCCEED: Custom Step simple script: %s. Succeed!!"%stepPath)
+                with pm.UndoChunk():
+                    pm.displayInfo("EXEC: Executing custom step: %s"%stepPath)
+                    fileName = os.path.split(stepPath)[1].split(".")[0]
+                    if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                        runPath = os.path.join( os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "") , stepPath)
+                    else:
+                        runPath = stepPath
+                    customStep = imp.load_source(fileName, runPath)
+                    if hasattr(customStep, "CustomShifterStep"):
+                        cs = customStep.CustomShifterStep()
+                        cs.run(customStepDic)
+                        customStepDic[cs.name] = cs
+                        pm.displayInfo("SUCCEED: Custom Shifter Step Class: %s. Succeed!!"%stepPath)
+                    else:
+                        pm.displayInfo("SUCCEED: Custom Step simple script: %s. Succeed!!"%stepPath)
 
             except Exception as ex:
                 template = "An exception of type {0} occured. Arguments:\n{1!r}"
                 message = template.format(type(ex).__name__, ex.args)
                 pm.displayError( message)
                 pm.displayError(traceback.format_exc())
-                cont = pm.confirmBox("FAIL: Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Undo this Step")
-                if not cont:
-                    pm.undo()
+                cont = pm.confirmBox("FAIL: Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Stop Build", "Try Again!")
+                if cont == "Stop Build":
+                    # stop Build
+                    return True
+                elif cont == "Try Again!":
+                    try: #just in case there is nothing to undo
+                        pm.undo()
+                    except:
+                        pass
+                    pm.displayInfo("Trying again! : {}".format(stepPath))
+                    inception = self.runStep(stepPath, customStepDic)
+                    if inception: # stops build from the recursion loop.
+                        return True
+                else:
+                    return False
 
 
     def runManualStep(self, widgetList):
