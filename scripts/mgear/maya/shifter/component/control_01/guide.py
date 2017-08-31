@@ -29,7 +29,9 @@
 #############################################
 from functools import partial
 
+import pymel.core as pm
 # mgear
+import mgear.maya.transform as tra
 from mgear.maya.shifter.component.guide import ComponentGuide
 
 #Pyside
@@ -45,7 +47,7 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1,0,1]
+VERSION = [1,1,0]
 TYPE = "control_01"
 NAME = "control"
 DESCRIPTION = "Simple controler with space switch and Rot order selection. \nThis component can use the root rotation to place  the control orientation"
@@ -67,7 +69,7 @@ class Guide(ComponentGuide):
     ##
     # @param self
     def postInit(self):
-        self.save_transform = ["root"]
+        self.save_transform = ["root", "sizeRef"]
 
     # =====================================================
     ## Add more object to the object definition list.
@@ -75,6 +77,11 @@ class Guide(ComponentGuide):
     def addObjects(self):
 
         self.root = self.addRoot()
+        vTemp = tra.getOffsetPosition( self.root, [0,0,1])
+        self.sizeRef = self.addLoc("sizeRef", self.root, vTemp)
+        # self.sizeRef.visibility.set(False)
+        pm.delete(self.sizeRef.getShapes())
+
 
 
     # =====================================================

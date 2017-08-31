@@ -29,6 +29,7 @@
 ##########################################################
 # Maya
 import pymel.core as pm
+import pymel.core.datatypes as dt
 
 # mgear
 from mgear.maya.shifter.component import MainComponent
@@ -54,15 +55,15 @@ class Component(MainComponent):
 
         t = tra.getTransformFromPos(self.guide.pos["root"])
         self.eyeOver_npo = pri.addTransform(self.root, self.getName("eyeOver_npo"), t)
-        self.eyeOver_ctl = self.addCtl(self.eyeOver_npo, "Over_ctl", t, self.color_fk, "sphere", w=1, tp=self.parentCtlTag)
+        self.eyeOver_ctl = self.addCtl(self.eyeOver_npo, "Over_ctl", t, self.color_fk, "sphere", w=1*self.size, tp=self.parentCtlTag)
         self.eye_npo = pri.addTransform(self.root, self.getName("eye_npo"), t)
-        self.eyeFK_ctl = self.addCtl(self.eye_npo, "fk_ctl", t, self.color_fk, "arrow", w=1, tp=self.eyeOver_ctl)
+        self.eyeFK_ctl = self.addCtl(self.eye_npo, "fk_ctl", t, self.color_fk, "arrow", w=1*self.size, tp=self.eyeOver_ctl)
 
         # look at
         t = tra.getTransformFromPos(self.guide.pos["look"])
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
         self.eyeIK_npo = pri.addTransform(self.ik_cns, self.getName("ik_npo"), t)
-        self.eyeIK_ctl = self.addCtl(self.eyeIK_npo, "ik_ctl", t, self.color_fk, "circle", w=.5, tp=self.eyeFK_ctl)
+        self.eyeIK_ctl = self.addCtl(self.eyeIK_npo, "ik_ctl", t, self.color_fk, "circle", w=.5*self.size, tp=self.eyeFK_ctl, ro=dt.Vector([1.5708,0,0]))
         att.setKeyableAttributes(self.eyeIK_ctl, self.t_params)
 
         self.jnt_pos.append([self.eyeFK_ctl, "eye", "parent_relative_jnt"])

@@ -67,7 +67,7 @@ class Component(MainComponent):
         t = tra.setMatrixPosition(t, self.guide.apos[1])
         if self.settings["autoBend"]:
             self.autoBend_npo = pri.addTransform(self.root, self.getName("spinePosition_npo"), t)
-            self.autoBend_ctl = self.addCtl(self.autoBend_npo, "spinePosition_ctl", t, self.color_ik, "square", w=self.size, tp=self.parentCtlTag)
+            self.autoBend_ctl = self.addCtl(self.autoBend_npo, "spinePosition_ctl", t, self.color_ik, "square", w=self.size, d=.3*self.size, tp=self.parentCtlTag)
             att.setKeyableAttributes(self.autoBend_ctl, ["tx", "ty", "tz", "ry"])
             att.setInvertMirror(self.autoBend_ctl, ["tx", "ry"])
 
