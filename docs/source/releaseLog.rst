@@ -1,11 +1,11 @@
 Release Log
 ===========
-2.3.0
------
-**Enhancements**
 
 2.2.3
 -----
+**Enhancements**
+	* Issue #43: Shifter: Custom Steps: Added Stop Build and Try again option if step fail.
+
 **Bug Fix**
 	* Issue #54: Synoptic: Match IK/FK with split ctl for trans and rot
 
