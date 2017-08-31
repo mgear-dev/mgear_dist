@@ -1,6 +1,11 @@
 Release Log
 ===========
 
+2.2.4
+-----
+**Enhancements**
+	* Issue #50: Global scale and size of controllers.
+
 2.2.3
 -----
 **Enhancements**
