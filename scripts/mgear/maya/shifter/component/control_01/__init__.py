@@ -33,6 +33,7 @@ from mgear.maya.shifter.component import MainComponent
 import mgear.maya.primitive as pri
 import mgear.maya.transform as tra
 import mgear.maya.attribute as att
+import mgear.maya.vector as vec
 
 
 #############################################
@@ -41,6 +42,7 @@ import mgear.maya.attribute as att
 class Component(MainComponent):
 
     def addObjects(self):
+        # self.length0 = vec.getDistance(self.guide.apos[0], self.guide.apos[1])
 
         if self.settings["neutralRotation"]:
             t = tra.getTransformFromPos(self.guide.pos["root"])
@@ -49,7 +51,15 @@ class Component(MainComponent):
             t = tra.setMatrixScale(t)
         self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
 
-        self.ctl = self.addCtl(self.ik_cns, "ctl", t, self.color_ik, self.settings["icon"], w=self.settings["ctlSize"], h=self.settings["ctlSize"], d=self.settings["ctlSize"], tp=self.parentCtlTag)
+        self.ctl = self.addCtl( self.ik_cns,
+                                "ctl",
+                                t,
+                                self.color_ik,
+                                self.settings["icon"],
+                                w=self.settings["ctlSize"]*self.size,
+                                h=self.settings["ctlSize"]*self.size,
+                                d=self.settings["ctlSize"]*self.size,
+                                tp=self.parentCtlTag)
 
         params = [ s for s in ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"] if self.settings["k_"+s] ]
         att.setKeyableAttributes(self.ctl, params)
