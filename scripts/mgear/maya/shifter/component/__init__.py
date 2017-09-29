@@ -999,7 +999,13 @@ class MainComponent(object):
                 uniScale = jpo[3]
             else:
                 uniScale = True
-            self.jointList.append(self.addJoint(jpo[0], jpo[1], newActiveJnt, uniScale))
+            # handle the matrix node connection
+            if len(jpo)==5 and self.options["joint_rig"]:
+                gearMulMatrix = jpo[4]
+            else:
+                gearMulMatrix = True
+
+            self.jointList.append(self.addJoint(jpo[0], jpo[1], newActiveJnt, uniScale, gearMulMatrix=gearMulMatrix))
 
 
     # =====================================================
