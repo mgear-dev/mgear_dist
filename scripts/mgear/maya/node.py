@@ -210,7 +210,7 @@ def createBlendNode(inputA, inputB, blender=.5):
     return node
 
 
-def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, output=None):
+def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, output=None, trans=True, rot=True):
     """
     Create and connect a PairBlend node.
 
@@ -220,6 +220,8 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
         blender (float or attr): Float in 0 to 1 range or attribute string name.
         rotInterpolation (int): Rotation interpolation option. 0=Euler. 1=Quaternion.
         output (dagNode): The output node with the blend transfomr applied.
+        trans (bool): If true connects translation.
+        rot (bool): If true connects rotation.
 
     Returns:
         pyNode: the newly created node.
@@ -236,12 +238,16 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
     node.attr("rotInterpolation").set(rotInterpolation)
 
     if inputA:
-        pm.connectAttr(inputA+".translate", node+".inTranslate1")
-        pm.connectAttr(inputA+".rotate", node+".inRotate1")
+        if trans:
+            pm.connectAttr(inputA+".translate", node+".inTranslate1")
+        if rot:
+            pm.connectAttr(inputA+".rotate", node+".inRotate1")
 
     if inputB:
-        pm.connectAttr(inputB+".translate", node+".inTranslate2")
-        pm.connectAttr(inputB+".rotate", node+".inRotate2")
+        if trans:
+            pm.connectAttr(inputB+".translate", node+".inTranslate2")
+        if rot:
+            pm.connectAttr(inputB+".rotate", node+".inRotate2")
 
     if isinstance(blender, str) or isinstance(blender, unicode) or isinstance(blender, pm.Attribute):
         pm.connectAttr(blender, node+".weight")
@@ -249,8 +255,10 @@ def createPairBlend(inputA=None, inputB=None, blender=.5, rotInterpolation=0, ou
         pm.setAttr(node+".weight", blender)
 
     if output:
-        pm.connectAttr(node+".outRotate", output+".rotate")
-        pm.connectAttr(node+".outTranslate", output+".translate")
+        if rot:
+            pm.connectAttr(node+".outRotate", output+".rotate")
+        if trans:
+            pm.connectAttr(node+".outTranslate", output+".translate")
 
     return node
 
