@@ -46,6 +46,18 @@ import pymel.core.datatypes as dt
 # BUILT IN NODES
 #############################################
 
+
+def curvecns_op(crv, inputs=[]):
+
+
+
+    for i, item in enumerate(inputs):
+        node = pm.createNode("decomposeMatrix")
+        pm.connectAttr(item+".worldMatrix[0]", node+".inputMatrix")
+        pm.connectAttr(node+".outputTranslate", crv+".controlPoints[%s]"%i)
+
+    return node
+
 def splineIK(name, chn, parent=None, cParent=None, curve=None):
     """
     Apply a splineIK solver to a chain.
