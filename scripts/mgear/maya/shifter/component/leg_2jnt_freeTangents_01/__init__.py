@@ -173,7 +173,7 @@ class Component(component.Main):
         v += self.guide.apos[1]
 
         self.upv_cns = primitive.addTransformFromPos(
-            self.root, self.getName("upv_cns"), v)
+            self.ik_ctl, self.getName("upv_cns"), v)
 
         self.upv_ctl = self.addCtl(
             self.upv_cns,
@@ -601,9 +601,11 @@ class Component(component.Main):
 
         ref_names = ["Auto", "ikFoot"]
         if self.settings["upvrefarray"]:
-            ref_names = ref_names + self.settings["upvrefarray"].split(",")
-        self.upvref_att = self.addAnimEnumParam(
-            "upvref", "UpV Ref", 0, ref_names)
+            ref_names += self.settings["upvrefarray"].split(",")
+        if len(ref_names) > 1:
+            self.upvref_att = self.addAnimEnumParam(
+                "upvref", "UpV Ref", 0, ref_names)
+
         if self.settings["pinrefarray"]:
             ref_names = self.settings["pinrefarray"].split(",")
             ref_names = ["Auto"] + ref_names
@@ -658,7 +660,7 @@ class Component(component.Main):
             self.legChainUpvRef,
             "ikSCsolver")
         pm.pointConstraint(self.ik_ctl, self.ikHandleUpvRef)
-        pm.parentConstraint(self.legChainUpvRef[0], self.upv_cns, mo=True)
+        pm.parentConstraint(self.legChainUpvRef[0], self.ik_ctl, self.upv_cns, mo=True)
 
         # Visibilities -------------------------------------
         # shape.dispGeometry
