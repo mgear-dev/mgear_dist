@@ -122,7 +122,7 @@ class Component(MainComponent):
             att.setInvertMirror(self.upv_ctl, ["tx"])
         att.setKeyableAttributes(self.upv_ctl, self.t_params)
 
-        
+
 
         # References --------------------------------------
         self.ik_ref = pri.addTransform(self.ik_ctl, self.getName("ik_ref"), tra.getTransform(self.ik_ctl))
@@ -330,12 +330,10 @@ class Component(MainComponent):
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
 
+        ref_names = ["Auto", "ikFoot"]
         if self.settings["upvrefarray"]:
-            ref_names = self.settings["upvrefarray"].split(",")
-            ref_names = ["Auto"] + ref_names
-            if len(ref_names) > 1:
-                self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
-
+            ref_names = ref_names + self.settings["upvrefarray"].split(",")
+        self.upvref_att = self.addAnimEnumParam("upvref", "UpV Ref", 0, ref_names)
         if self.settings["pinrefarray"]:
             ref_names = self.settings["pinrefarray" ].split(",")
             ref_names = ["Auto"] + ref_names
@@ -622,6 +620,9 @@ class Component(MainComponent):
         # Set the Ik Reference
         self.connectRef(self.settings["ikrefarray"], self.ik_cns)
         if self.settings["upvrefarray"]:
-            self.connectRef("Auto,"+self.settings["upvrefarray"], self.upv_cns, True)
+            self.connectRef("Auto,ikFoot,"+self.settings["upvrefarray"], self.upv_cns, True)
+        else:
+            self.connectRef("Auto,ikFoot", self.upv_cns, True)
+
         if self.settings["pinrefarray"]:
             self.connectRef2("Auto,"+ self.settings["pinrefarray"], self.mid_cns, self.pin_att, [self.ctrn_loc], False)
