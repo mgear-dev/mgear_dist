@@ -110,11 +110,11 @@ def createCTL(type = "square", child=False, *args):
             iconList.append(icon)
 
     try:
-        defSet = pm.PyNode("rig_controlers_grp")
+        defSet = pm.PyNode("rig_controllers_grp")
         for ico in iconList:
             pm.sets(defSet, add=ico)
     except:
-        print "not rig_controlers_grp found"
+        print "not rig_controllers_grp found"
         pass
 
 
