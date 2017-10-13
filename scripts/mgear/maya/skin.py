@@ -212,12 +212,11 @@ def exportSkin(filePath=None, objs=None, *args):
             pm.displayInfo( 'Exported skinCluster %s (%d influences, %d vertices) %s' % ( skinCls.name(),
                             len(dataDic['weights'].keys()), len(dataDic['blendWeights']), obj.name()))
 
+    if packDic["objs"]:
+        fh = open(filePath, 'wb')
+        pickle.dump(packDic, fh, pickle.HIGHEST_PROTOCOL)
+        fh.close()
 
-    fh = open(filePath, 'wb')
-    pickle.dump(packDic, fh, pickle.HIGHEST_PROTOCOL)
-    fh.close()
-
-    return True
 
 def exportSkinPack(packPath=None, objs=None, *args):
 
