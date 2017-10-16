@@ -161,7 +161,7 @@ def controllerWalkDown(node, add=False, multi=False):
     if oChild:
         pm.select(_getControllerWalkNodes(oChild), add=add)
     else:
-        pm.displayWarning("No parent to walk Up.")
+        pm.displayWarning("No parent to walk Down.")
 
 
 def _getControllerWalkSiblings(node, direction="right", multi=False):
