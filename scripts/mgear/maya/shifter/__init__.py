@@ -203,7 +203,8 @@ class Rig(object):
 
         # --------------------------------------------------
         # Global Ctl
-        self.global_ctl = self.addCtl(self.model, "global_C0_ctl", dt.Matrix(), self.options["C_color_fk"], "crossarrow", w=10)
+        # self.global_ctl = self.addCtl(self.model, "global_C0_ctl", dt.Matrix(), self.options["C_color_fk"], "crossarrow", w=10)
+        self.global_ctl = self.addCtl(self.model, "world_ctl", dt.Matrix(), self.options["C_color_fk"], "circle", w=10)
         att.setRotOrder(self.global_ctl, "ZXY")
 
         # --------------------------------------------------
