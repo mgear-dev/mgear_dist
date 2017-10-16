@@ -33,7 +33,9 @@ Shifter's Component guide class.
 # GLOBAL
 ##########################################################
 from functools import partial
+import datetime
 
+import maya.cmds as cmds
 # pyMel
 import pymel.core as pm
 import pymel.core.datatypes as dt
@@ -478,7 +480,9 @@ class ComponentGuide(MainGuide):
         self.parent.attr("comp_index").set( self.values["comp_index"])
 
 
-        objList =  dag.findComponentChildren(self.parent, oldName, oldSideIndex)
+        # objList =  dag.findComponentChildren(self.parent, oldName, oldSideIndex)
+        # NOTE: Experimenta  using findComponentChildren2
+        objList =  dag.findComponentChildren2(self.parent, oldName, oldSideIndex)
         newSideIndex = newSide +  str(self.values["comp_index"])
         objList.append(self.parent)
         for obj in objList:
@@ -663,7 +667,49 @@ class ComponentGuide(MainGuide):
 
         return objects
 
+    def getObjects2(self, model, includeShapes=True):
+            """
+            Get the objects of the component.
 
+            Args:
+                model(dagNode): The root of the component.
+                includeShapes (boo): If True, will include the shapes.
+
+            Returns:
+                list of dagNode: The list of the objects.
+
+            """
+            objects = {}
+            if includeShapes:
+                children = [pm.PyNode(x) for x in cmds.listRelatives(model.longName(), ad=True, fullPath=True)]
+            else:
+                children = [pm.PyNode(x) for x in cmds.listRelatives(model.longName(), ad=True, typ='transform', fullPath=True)]
+            for child in children:
+                cName = child.longName()
+                if cName.startswith(self.fullName):
+                    objects[cName.split("_")[-1]] = child
+
+            return objects
+
+    def getObjects3(self, model):
+        """
+        NOTE: Experimental function
+        Get the objects of the component.
+        This version only get the transforms by Name using Maya Cmds
+
+        Args:
+            model(dagNode): The root of the component.
+
+        Returns:
+            list of dagNode: The list of the objects.
+
+        """
+        objects = {}
+
+        for child in cmds.ls(self.fullName+"_*", type="transform"):
+            objects[child[child.index(self.fullName+"_")+len(self.fullName+"_"):]] = child
+
+        return objects
 
     def addMinMax(self, name, minimum=1, maximum=-1):
         """

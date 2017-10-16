@@ -401,12 +401,17 @@ class RigGuide(MainGuide):
         # Components
         mgear.log("Get components")
         self.findComponentRecursive(root, branch)
+        endTime = datetime.datetime.now()
+        finalTime = endTime - startTime
+        mgear.log("Find recursive in  [ " + str(finalTime) + " ]" )
         # Parenting
         if self.valid:
             for name in self.componentsIndex:
                 mgear.log("Get parenting for: " + name)
                 compParent = self.components[name]
-                for localName, element in compParent.getObjects(self.model, False).items():
+                # for localName, element in compParent.getObjects(self.model, False).items():
+                # NOTE: getObjects3 is an experimental function
+                for localName, element in compParent.getObjects3(self.model).items():
                     for name  in self.componentsIndex:
                         compChild = self.components[name]
                         compChild_parent = compChild.root.getParent()
