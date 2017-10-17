@@ -689,4 +689,4 @@ class Component(MainComponent):
 
     def connect_shoulder_01(self):
         self.connect_standard()
-        pm.parent(self.rollRef[0],self.parent_comp.ctl)
+        pm.parent(self.armRollRef[0],self.parent_comp.ctl)
