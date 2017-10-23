@@ -76,7 +76,7 @@ class Component(MainComponent):
             fk_npo = pri.addTransform(parent, self.getName("fk%s_npo"%i), t)
             spring_aim = pri.addTransform(fk_npo, self.getName("spring%s_aim"%i), t)
             spring_cns = pri.addTransform(fk_npo, self.getName("spring%s_cns"%i), t)
-            fk_ctl = self.addCtl(spring_cns, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.1, d=self.size*.1, po=dt.Vector(dist*.5*self.n_factor,0,0), tp=self.previousTag)
+            fk_ctl = self.addCtl(spring_cns, "fk%s_ctl"%i, t, self.color_fk, "cube", w=dist, h=self.size*.1, d=self.size*.1, po=dt.Vector(dist*.5*self.n_factor,0,0), tp=self.previousTag, lp=False)
             self.previousTag = fk_ctl
 
 

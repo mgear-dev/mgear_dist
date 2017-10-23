@@ -344,7 +344,7 @@ class MainComponent(object):
         return vec.getPlaneBiNormal(pos[0], pos[1], pos[2])
 
 
-    def addCtl(self, parent, name, m, color, icon, tp=None, **kwargs):
+    def addCtl(self, parent, name, m, color, icon, tp=None, lp=True, **kwargs):
         """
         Create the control and apply the shape, if this is alrealdy stored
         in the guide controllers grp.
@@ -356,6 +356,7 @@ class MainComponent(object):
             color (int or list of float): The color for the control in idex or RGB.
             icon (str): The controls default shape.
             tp (dagNode): Tag Parent Control object to connect as a parent controller
+            lp (bool): Lock the parent controller channels
             kwargs (variant): Other arguments for the icon type variations.
 
         Returns:
@@ -393,7 +394,7 @@ class MainComponent(object):
             self.addToGroup(ctl, ctlGrp)
 
         #lock the control parent attributes if is not a control
-        if parent not in self.groups[ctlGrp]:
+        if parent not in self.groups[ctlGrp] and lp:
             self.transform2Lock.append(parent)
 
         # Set the control shapes isHistoricallyInteresting
