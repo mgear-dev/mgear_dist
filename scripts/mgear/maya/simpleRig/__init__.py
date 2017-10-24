@@ -57,7 +57,7 @@ PIVOT_EXTENSION = "lvl"
 PGROUP_EXTENSION = "pgrp"
 ROOT_EXTENSION = "root"
 WIP = False
-
+iconList = ["cube", "circle", "square"]
 
 
 #############################################
@@ -156,6 +156,8 @@ def simpleRig(rigName="rig", wCntCtl=False, *args):
     # Create base structure
     rig = pm.createNode('transform', n=rigName)
     geo = pm.createNode('transform', n="geo", p=rig)
+    geo.attr("overrideEnabled").set(1)
+    geo.attr("overrideDisplayType").set(2)
 
     att.addAttribute(rig, "is_rig", "bool", True)
     att.addAttribute(rig, "rig_name", "string", "rig")
@@ -210,7 +212,7 @@ def simpleRig(rigName="rig", wCntCtl=False, *args):
         # Loop selection
         uPivotCtl = []
         if userPivots:
-            for uPivot in reversed(userPivots):
+            for uPivot in userPivots:
                 try:
                     pgrp = pm.PyNode(uPivot.name().split('_')[0]+"_"+PGROUP_EXTENSION)
                 except:
@@ -223,7 +225,16 @@ def simpleRig(rigName="rig", wCntCtl=False, *args):
                     lvlParent = pm.listRelatives(uPivot, p=True)[0].name().split("_")[0]+"_ctl"
                     lvl = pm.createNode('transform', n=uPivot.split("_")[0] + "_npo")
                     lvl.setTransformation(t)
-                    ctl = ico.create(lvl, uPivot.split("_")[0] + "_ctl", t, 15, icon="cube", w=bbRadio*2, h=bbRadio*2, d=bbRadio*2)
+                    icon = iconList[uPivot.attr("ctlIcon").get()]
+                    ctlKeyable = []
+                    if uPivot.attr("animTranslation").get():
+                        ctlKeyable = ctlKeyable +  ["tx", "ty", "tz"]
+                    if uPivot.attr("animRotation").get():
+                        ctlKeyable = ctlKeyable +  ["ro", "rx", "ry", "rz"]
+                    if uPivot.attr("animScale").get():
+                        ctlKeyable = ctlKeyable +  ["sx", "sy", "sz"]
+                    ctl = ico.create(lvl, uPivot.split("_")[0] + "_ctl", t, 15, icon=icon, w=bbRadio*2, h=bbRadio*2, d=bbRadio*2)
+                    att.setKeyableAttributes(ctl, ctlKeyable)
                     pm.parent(lvl, lvlParent)
                     att.setKeyableAttributes(lvl, [])
                     uPivotCtl.append(ctl)
@@ -269,6 +280,21 @@ def simpleRig(rigName="rig", wCntCtl=False, *args):
     pm.connectAttr(deformersSet.attr("message"), "rig.rigGroups[3]")
     pm.connectAttr(compGroup.attr("message"), "rig.rigGroups[4]")
 
+    if oSel.hasAttr("animSets") and oSel.attr("animSets").get():
+        # create anim Sets
+        pm.sets(n="animNodes", em=True)
+        animNodes_set = pm.PyNode("animNodes")
+
+        pm.sets(n="animSets", em=True)
+        animSets_set = pm.PyNode("animSets")
+
+        #adding set
+        pm.sets(animSets_set, add=animNodes_set)
+        pm.sets(animNodes_set, add=ctlSet.members())
+
+        pm.connectAttr(animSets_set.attr("message"), "rig.rigGroups[5]")
+        pm.connectAttr(animNodes_set.attr("message"), "rig.rigGroups[6]")
+
     #create dagPose
     pm.select(ctlSet)
     node = pm.dagPose(save=True, selection=True)
@@ -301,7 +327,11 @@ def setUserRigPivot(*args):
 
         bbCenter, bbRadio, bb = bBoxData(listSelection, yZero=False)
         t = tra.getTransformFromPos(bbCenter)
-        axis = ico.axis(parent=parent, name=oName +"_"+PIVOT_EXTENSION, width=1, color=[0,0,0], m=t)
+        axis = ico.axis(parent=parent, name=oName +"_"+PIVOT_EXTENSION, width=bbRadio*2, color=[0,0,0], m=t)
+        att.addAttribute(axis, "animTranslation", "bool", True)
+        att.addAttribute(axis, "animRotation", "bool", True)
+        att.addAttribute(axis, "animScale", "bool", True)
+        att.addEnumAttribute(axis, "ctlIcon", 0, iconList)
         pgrp = pm.group(listSelection, p=parent, n=oName  + "_"+ PGROUP_EXTENSION)
         return axis, pgrp
     else:
@@ -361,8 +391,8 @@ def createRoot(*args):
     dialog.exec_()
     oName  = dialog.rootName
     if oName:
-
         group = pm.group(n=oName + "_" + ROOT_EXTENSION)
+        att.addAttribute(group, "animSets", "bool", False)
     return group
 
 
