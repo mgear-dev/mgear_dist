@@ -40,6 +40,7 @@ import mgear
 import mgear.maya.shifter as shifter
 import mgear.maya.skin as skin
 import mgear.maya.pyqt as gqt
+import mgear.maya.utils as mutils
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"
@@ -147,7 +148,7 @@ class Guide_UI(object):
 
         guide.drawNewComponent(parent, compType)
 
-
+    @mutils.one_undo
     def buildFromSelection(self, *args):
 
         print mgear.logInfos()

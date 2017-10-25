@@ -32,6 +32,7 @@ import mgear
 import mgear.maya.shifter.gui as  gui
 import mgear.maya.shifter as rg
 import mgear.maya.shifter.component as comp
+import mgear.maya.utils as mutils
 
 
 
@@ -41,6 +42,7 @@ def guideUI(*args):
     """
     gui.Guide_UI()
 
+@mutils.one_undo
 def buildFromSelection(*args):
     """
     Build the rig from the guide root selection or a component root.
