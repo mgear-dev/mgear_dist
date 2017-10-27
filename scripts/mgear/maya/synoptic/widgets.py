@@ -78,12 +78,19 @@ class toggleCombo(QtWidgets.QComboBox):
             else:
                 syn_uti.changeSpace(self.model, self.uihost_name, self.combo_attr, self.currentIndex(), self.ctl_name)
 
-class bakeMocap(QtWidgets.QPushButton):
+class bakeSprings(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
         model = syn_uti.getModel(self)
-        syn_uti.bakeMocap(model)
+        syn_uti.bakeSprings(model)
+
+class clearSprings(QtWidgets.QPushButton):
+
+    def mousePressEvent(self, event):
+
+        model = syn_uti.getModel(self)
+        syn_uti.clearSprings(model)
 
 
 class ikfkMatchButton(QtWidgets.QPushButton):

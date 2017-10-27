@@ -53,6 +53,7 @@ QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 SYNOPTIC_WIDGET_NAME = "synoptic_view"
 CTRL_GRP_SUFFIX = "_controllers_grp"
+PLOT_GRP_SUFFIX = "_PLOT_grp"
 
 
 EXPR_LEFT_SIDE = re.compile("L(\d+)")
@@ -145,10 +146,13 @@ def getModel(widget):
 
 def getControlers(model, gSuffix=CTRL_GRP_SUFFIX):
 
-    ctl_set = pm.PyNode(model.name()+gSuffix)
-    members = ctl_set.members()
+    try:
+        ctl_set = pm.PyNode(model.name()+gSuffix)
+        members = ctl_set.members()
 
-    return members
+        return members
+    except:
+        return None
 
 def getNamespace(modelName):
     if not modelName:
@@ -1167,3 +1171,20 @@ class IkFkTransfer(AbstractAnimationTransfer):
 
         kwargs.update({"switchTo": "fk"})
         IkFkTransfer.execute(model, ikfk_attr, uihost, fks, ik, upv, ikRot, **kwargs)
+
+
+#Baker Springs
+
+def clearSprings(model):
+    springNodes = getControlers(model, gSuffix=PLOT_GRP_SUFFIX)
+    pm.cutKey(springNodes, cl=True)
+
+@mutils.one_undo
+@mutils.viewport_off
+def bakeSprings(model):
+    springNodes = getControlers(model, gSuffix=PLOT_GRP_SUFFIX)
+    if springNodes:
+        pm.cutKey(springNodes, cl=True)
+        start = pm.playbackOptions(q=True, min=True)
+        end = pm.playbackOptions(q=True, max=True)
+        pm.bakeResults( springNodes, t=(start,end), simulation=True )
