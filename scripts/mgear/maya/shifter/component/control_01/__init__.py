@@ -61,15 +61,17 @@ class Component(MainComponent):
                                 d=self.settings["ctlSize"]*self.size,
                                 tp=self.parentCtlTag)
 
+        #we need to set the rotation order before lock any rotation axis
+        if self.settings["k_ro"]:
+            rotOderList = ["XYZ", "YZX", "ZXY", "XZY", "YXZ", "ZYX"]
+            att.setRotOrder(self.ctl, rotOderList[self.settings["default_rotorder"]])
+
         params = [ s for s in ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"] if self.settings["k_"+s] ]
         att.setKeyableAttributes(self.ctl, params)
 
         if self.settings["joint"]:
             self.jnt_pos.append([self.ctl, 0, None, self.settings["uniScale"]])
 
-        if self.settings["k_ro"]:
-            rotOderList = ["XYZ", "YZX", "ZXY", "XZY", "YXZ", "ZYX"]
-            att.setRotOrder(self.ctl, rotOderList[self.settings["default_rotorder"]])
 
     def addAttributes(self):
         # Ref
