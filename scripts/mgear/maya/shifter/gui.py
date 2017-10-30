@@ -148,12 +148,21 @@ class Guide_UI(object):
 
         guide.drawNewComponent(parent, compType)
 
+    @classmethod
     @mutils.one_undo
     def buildFromSelection(self, *args):
 
+        logWin = pm.window( title="mGear Build Log", iconName='mGear Log')
+        pm.columnLayout( adjustableColumn=True )
+        pm.cmdScrollFieldReporter(width=800, height=500, clr=True)
+        pm.button( label='Close', command=('pm.deleteUI(\"' + logWin + '\", window=True)') )
+        pm.setParent( '..' )
+        pm.showWindow( logWin )
         print mgear.logInfos()
         rg = shifter.Rig()
         rg.buildFromSelection()
+
+
     @classmethod
     def duplicate(self, sym, *args):
         oSel = pm.selected()

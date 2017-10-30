@@ -47,9 +47,8 @@ def buildFromSelection(*args):
     """
     Build the rig from the guide root selection or a component root.
     """
-    print mgear.logInfos()
-    rig = rg.Rig()
-    rig.buildFromSelection()
+    gui.Guide_UI.buildFromSelection()
+
 
 def updateGuide(*args):
     """
