@@ -349,11 +349,35 @@ def lockAttribute(node, attributes=["tx", "ty", "tz", "rx", "ry", "rz", "sx", "s
     Example:
         >>> att.lockAttribute(self.root_ctl, ["sx", "sy", "sz", "v"])
     """
+    _lockUnlockAttribute(node, attributes, lock=True, keyable=False)
+
+def unlockAttribute(node, attributes=["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz", "v"]):
+    """
+    Unlock attributes of a node. By defaul will unlock the rotation, scale and translation.
+
+    Args:
+        node(dagNode): The node with the attributes to unlock.
+        attributes (list of str): The list of the attributes to unlock.
+
+    Example:
+        >>> att.unlockAttribute(self.root_ctl, ["sx", "sy", "sz", "v"])
+    """
+    _lockUnlockAttribute(node, attributes, lock=False, keyable=True)
+
+def _lockUnlockAttribute(node, attributes, lock, keyable):
+    """
+    Lock or unlock attributes of a node.
+
+    Args:
+        node(dagNode): The node with the attributes to lock/unlock.
+        attributes (list of str): The list of the attributes to lock/unlock.
+
+    """
     if not isinstance(attributes, list):
         attributes = [attributes]
 
     for attr_name in attributes:
-        node.setAttr(attr_name, lock=True, keyable=False)
+        node.setAttr(attr_name, lock=lock, keyable=keyable)
 
 
 def setKeyableAttributes(nodes, params=["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"]):
