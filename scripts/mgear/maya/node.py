@@ -509,7 +509,7 @@ def createMulDivNode(inputA, inputB, operation=1, output=None):
         if isinstance(item, str) or isinstance(item, unicode) or isinstance(item, pm.Attribute):
             try:
                 pm.connectAttr(item, node+".input1"+s, f=True)
-            except RuntimeError:
+            except( UnicodeEncodeError, RuntimeError): # Maya in Japanese have an issue with unicodeEndoce UnicodeEncodeError is a workaround
                 pm.connectAttr(item, node+".input1", f=True)
                 break
 
@@ -520,7 +520,7 @@ def createMulDivNode(inputA, inputB, operation=1, output=None):
         if isinstance(item, str) or isinstance(item, unicode) or isinstance(item, pm.Attribute):
             try:
                 pm.connectAttr(item, node+".input2"+s, f=True)
-            except RuntimeError:
+            except( UnicodeEncodeError, RuntimeError):  # Maya in Japanese have an issue with unicodeEndoce UnicodeEncodeError is a workaround
                 pm.connectAttr(item, node+".input2", f=True)
                 break
         else:
