@@ -1,5 +1,10 @@
 language: python
 
+# cvwrap is incorrectly configured to pull
+# its submodules via ssh as opposed to https
+git:
+  submodules: false
+
 python:
   - 2.7
 
