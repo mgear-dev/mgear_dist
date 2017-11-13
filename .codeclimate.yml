@@ -7,4 +7,5 @@ ratings:
    - "**.py"
    
 exclude_paths:
-- "*/**/widget.py"
+  - "*/**/widget.py"
+  - "scripts/mgear/maya/shifter/component/**"
