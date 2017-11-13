@@ -41,7 +41,7 @@ import pymel.core.datatypes as dt
 # NODE
 #############################################
 
-def addAttribute(node, longName, attributeType, value, niceName=None, shortName=None, minValue=None,
+def addAttribute(node, longName, attributeType, value=None, niceName=None, shortName=None, minValue=None,
                  maxValue=None, keyable=True, readable=True, storable=True, writable=True, channelBox=False):
     """
     Add attribute to a node
@@ -88,9 +88,15 @@ def addAttribute(node, longName, attributeType, value, niceName=None, shortName=
     data["readable"] = readable
     data["storable"] = storable
     data["writable"] = writable
+
+    if value is not None and attributeType not in ["string"]:
+        data["defaultValue"] = value
+
     node.addAttr(longName, **data)
+
     if value is not None:
         node.setAttr(longName, value)
+
     if channelBox:
         node.attr(longName).set(channelBox=True)
     return node.attr(longName)

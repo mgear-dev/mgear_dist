@@ -27,11 +27,8 @@
 
 ## Rigbits  widgets
 
-import mgear.maya.pyqt as gqt
 import mgear.widgets as gWidgets
-
-
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+from mgear.vendor.Qt import  QtWidgets
 
 
 ################################################

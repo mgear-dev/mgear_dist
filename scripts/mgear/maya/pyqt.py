@@ -31,18 +31,11 @@ pyQt/pySide widgets and helper functions for mGear
 #############################################
 # GLOBAL
 #############################################
-import os
-import pymel.core as pm
-import maya.cmds as cmds
-from pymel import versions
-
-from maya.app.general.mayaMixin import MayaQDockWidget
-
-from functools import partial
 import traceback
 import maya.OpenMayaUI as omui
 
-from mGear_pyqt import QtGui, QtCore, QtWidgets, wrapInstance, qt_import
+from mGear_pyqt import qt_import
+from mgear.vendor.Qt import QtWidgets, QtCompat
 
 #############################################
 # helper Maya pyQt functions
@@ -58,10 +51,7 @@ def maya_main_window():
     """
 
     main_window_ptr = omui.MQtUtil.mainWindow()
-    # return wrapInstance(long(main_window_ptr), QtWidgets.QMainWindow)
-    return wrapInstance(long(main_window_ptr), QtWidgets.QWidget)
-
-
+    return QtCompat.wrapInstance(long(main_window_ptr), QtWidgets.QWidget)
 
 def showDialog(dialog, dInst=True, *args):
     """
@@ -81,10 +71,10 @@ def showDialog(dialog, dInst=True, *args):
 
     # Create minimal dialog object
 
-    if versions.current() >= 20180000:
-        windw = dialog(maya_main_window())
-    else:
-        windw = dialog()
+    # if versions.current() >= 20180000:
+    #     windw = dialog(maya_main_window())
+    # else:
+    windw = dialog()
     windw.move(QtWidgets.QApplication.desktop().screen().rect().center()- windw.rect().center())
 
     # Delete the UI if errors occur to avoid causing winEvent

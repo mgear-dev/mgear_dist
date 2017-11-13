@@ -28,8 +28,8 @@
 mGear Qt custom widgets
 """
 
-import mgear.maya.pyqt as gqt
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+from mgear.vendor.Qt import QtCore, QtWidgets
+
 
 #################################################
 ## CUSTOM WIDGETS
