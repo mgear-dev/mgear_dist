@@ -27,7 +27,6 @@ outdir = excons.OutputBaseDirectory()
 gen = excons.config.AddGenerator(env, "mgear", {"MGEAR_VERSION": "[%d, %d, %d]" % version,
                                                 "MGEAR_MAJMIN_VERSION": "%d.%d" % (version[0], version[1])})
 
-mgearinit = gen(outdir + "/scripts/mgear/__init__.py", "scripts/mgear/__init__.py.in")
 mgearmod = gen("mGear.mod", "mGear.mod.in")
 
 defines = []
@@ -56,7 +55,6 @@ targets = [
                   "scripts/mgear": filter(lambda x: not x.endswith(".py.in"), excons.glob("scripts/mgear/*")),
                   "tests": excons.glob("tests/*.py"),
                   "": mgearmod},
-      "deps": mgearinit
    },
    {
       "name": "cvwrap",
@@ -78,7 +76,7 @@ excons.AddHelpTargets(mgear="mgear maya framework")
 
 td = excons.DeclareTargets(env, targets)
 
-env.Alias("mgear", mgearinit + [td["mgear_solvers"], td["cvwrap"]])
+env.Alias("mgear", [td["mgear_solvers"], td["cvwrap"]])
 
 td["python"] = filter(lambda x: os.path.splitext(str(x))[1] != ".mel", Glob(outdir + "/scripts/*"))
 td["scripts"] = Glob(outdir + "/scripts/*.mel")
