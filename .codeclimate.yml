@@ -5,3 +5,6 @@ engines:
 ratings:
    paths:
    - "**.py"
+   
+exclude_paths:
+- "*/**/widget.py"
