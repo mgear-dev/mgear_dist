@@ -4,12 +4,20 @@ import excons
 import excons.config
 import excons.tools.maya as maya
 
+# Assuming SConstruct is called from the current working directory
+scriptsdir = os.path.join(os.getcwd(), "scripts")
+assert os.path.isdir(scriptsdir), (
+  "SConstruct wasn't called from the mgear/ root directory"
+)
+sys.path.insert(0, scriptsdir)
+
+import mgear
 
 maya.SetupMscver()
 env = excons.MakeBaseEnv()
 
 
-version = (2, 2, 5)
+version = mgear.VERSION
 versionstr = "%d.%d.%d" % version
 platname = {"win32": "windows", "darwin": "osx"}.get(sys.platform, "linux")
 outprefix = "platforms/%s/%s/%s/plug-ins" % (maya.Version(nice=True), platname, excons.arch_dir)

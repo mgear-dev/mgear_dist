@@ -1,0 +1,19 @@
+language: python
+
+# cvwrap is incorrectly configured to pull
+# its submodules via ssh as opposed to https
+git:
+  submodules: false
+
+python:
+  - 2.7
+
+services:
+  - docker
+
+install:
+  - docker build -t mgear .
+
+script:
+  - docker run -ti --rm -v $(pwd):/workspace mgear
+

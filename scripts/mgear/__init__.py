@@ -34,7 +34,6 @@ mGear init module.
 # built-in
 import os
 import sys
-import string
 import exceptions
 
 # Debug mode for the logger
@@ -49,7 +48,7 @@ sev_verbose = 16
 sev_comment = 32
 
 # gear version
-VERSION = @MGEAR_VERSION@
+VERSION = (2, 2, 5)
 
 
 ##########################################################
@@ -60,7 +59,7 @@ def logInfos():
     """
     Log version of Gear
     """
-    print "GEAR version : "+getVersion()
+    print "GEAR version : " + getVersion()
 
 
 def getVersion():
