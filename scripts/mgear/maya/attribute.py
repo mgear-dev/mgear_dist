@@ -93,6 +93,10 @@ def addAttribute(node, longName, attributeType, value=None, niceName=None, short
         data["defaultValue"] = value
 
     node.addAttr(longName, **data)
+
+    if value is not None:
+        node.setAttr(longName, value)
+
     if channelBox:
         node.attr(longName).set(channelBox=True)
     return node.attr(longName)
