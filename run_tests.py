@@ -38,7 +38,9 @@ if __name__ == "__main__":
     dirname = os.path.dirname(__file__)
     sys.path.insert(0, os.path.join(dirname, "scripts"))
 
+    print("\n" + "-" * 70)
     print("Initialising Maya..")
+
     with mute():
         standalone.initialize()
         import pymel.core
