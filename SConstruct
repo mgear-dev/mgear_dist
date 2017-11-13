@@ -10,7 +10,7 @@ assert os.path.isdir(scriptsdir), (
   "SConstruct wasn't called from the mgear/ root directory"
 )
 sys.path.insert(0, scriptsdir)
-
+sys.dont_write_bytecode = True
 import mgear
 
 maya.SetupMscver()
