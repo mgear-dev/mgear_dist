@@ -38,7 +38,7 @@ import mgear.maya.shifter.gameToolsUI as gtUI
 
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 import mgear.maya.pyqt as gqt
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+from mgear.vendor.Qt import  QtCore, QtWidgets
 
 
 @mutils.one_undo
