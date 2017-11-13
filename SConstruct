@@ -4,20 +4,12 @@ import excons
 import excons.config
 import excons.tools.maya as maya
 
-# Assuming SConstruct is called from the current working directory
-scriptsdir = os.path.join(os.getcwd(), "scripts")
-assert os.path.isdir(scriptsdir), (
-  "SConstruct wasn't called from the mgear/ root directory"
-)
-sys.path.insert(0, scriptsdir)
-sys.dont_write_bytecode = True
-import mgear
 
 maya.SetupMscver()
 env = excons.MakeBaseEnv()
 
 
-version = mgear.VERSION
+version = (2, 2, 5)
 versionstr = "%d.%d.%d" % version
 platname = {"win32": "windows", "darwin": "osx"}.get(sys.platform, "linux")
 outprefix = "platforms/%s/%s/%s/plug-ins" % (maya.Version(nice=True), platname, excons.arch_dir)
@@ -27,7 +19,9 @@ outdir = excons.OutputBaseDirectory()
 gen = excons.config.AddGenerator(env, "mgear", {"MGEAR_VERSION": "[%d, %d, %d]" % version,
                                                 "MGEAR_MAJMIN_VERSION": "%d.%d" % (version[0], version[1])})
 
+mgearinit = gen("scripts/mgear/__init__.py", "scripts/mgear/__init__.py.in")
 mgearmod = gen("mGear.mod", "mGear.mod.in")
+NoClean(mgearinit + mgearmod)
 
 defines = []
 if sys.platform == "win32":
@@ -52,7 +46,7 @@ targets = [
       "srcs": excons.glob("src/*.cpp"),
       "custom": [maya.Require],
       "install": {"scripts": excons.glob("scripts/*.py"),
-                  "scripts/mgear": filter(lambda x: not x.endswith(".py.in"), excons.glob("scripts/mgear/*")),
+                  "scripts/mgear": filter(lambda x: not os.path.basename(x).startswith("__init__.py"), excons.glob("scripts/mgear/*")) + mgearinit,
                   "tests": excons.glob("tests/*.py"),
                   "": mgearmod},
    },
