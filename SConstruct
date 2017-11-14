@@ -22,6 +22,7 @@ gen = excons.config.AddGenerator(env, "mgear", {"MGEAR_VERSION": "[%d, %d, %d]" 
 mgearinit = gen("scripts/mgear/__init__.py", "scripts/mgear/__init__.py.in")
 mgearmod = gen("mGear.mod", "mGear.mod.in")
 mgearpy = filter(lambda x: not os.path.basename(x).startswith("__init__.py"), excons.glob("scripts/mgear/*"))
+qtpy = ["Qtdotpy/Qt.py"]
 NoClean(mgearinit + mgearmod)
 
 defines = []
@@ -41,6 +42,7 @@ targets = [
       "desc": "mgear core python modules",
       "install": {"scripts": excons.glob("scripts/*.py"),
                   "scripts/mgear": mgearpy + mgearinit,
+                  "scripts/mgear/vendor": qtpy,
                   "tests": excons.glob("tests/*.py"),
                   "": mgearmod}
    },

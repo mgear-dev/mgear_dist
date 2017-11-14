@@ -4,3 +4,6 @@
 [submodule "cvwrap"]
 	path = cvwrap
 	url = https://github.com/miquelcampos/cvwrap.git
+[submodule "Qtdotpy"]
+	path = Qtdotpy
+	url = https://github.com/mottosso/Qt.py
