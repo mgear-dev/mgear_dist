@@ -21,6 +21,7 @@ gen = excons.config.AddGenerator(env, "mgear", {"MGEAR_VERSION": "[%d, %d, %d]" 
 
 mgearinit = gen("scripts/mgear/__init__.py", "scripts/mgear/__init__.py.in")
 mgearmod = gen("mGear.mod", "mGear.mod.in")
+mgearpy = filter(lambda x: not os.path.basename(x).startswith("__init__.py"), excons.glob("scripts/mgear/*"))
 NoClean(mgearinit + mgearmod)
 
 defines = []
@@ -35,6 +36,15 @@ def CVWrapSetup(env):
 
 targets = [
    {
+      "name": "mgear_core",
+      "type": "install",
+      "desc": "mgear core python modules",
+      "install": {"scripts": excons.glob("scripts/*.py"),
+                  "scripts/mgear": mgearpy + mgearinit,
+                  "tests": excons.glob("tests/*.py"),
+                  "": mgearmod}
+   },
+   {
       "name": "mgear_solvers",
       "type": "dynamicmodule",
       "desc": "mgear solvers plugin",
@@ -44,11 +54,7 @@ targets = [
       "defs": defines,
       "incdirs": ["src"],
       "srcs": excons.glob("src/*.cpp"),
-      "custom": [maya.Require],
-      "install": {"scripts": excons.glob("scripts/*.py"),
-                  "scripts/mgear": filter(lambda x: not os.path.basename(x).startswith("__init__.py"), excons.glob("scripts/mgear/*")) + mgearinit,
-                  "tests": excons.glob("tests/*.py"),
-                  "": mgearmod},
+      "custom": [maya.Require]
    },
    {
       "name": "cvwrap",
@@ -66,11 +72,11 @@ targets = [
    }
 ]
 
-excons.AddHelpTargets(mgear="mgear maya framework")
+excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cvwrap)")
 
 td = excons.DeclareTargets(env, targets)
 
-env.Alias("mgear", [td["mgear_solvers"], td["cvwrap"]])
+env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"]])
 
 td["python"] = filter(lambda x: os.path.splitext(str(x))[1] != ".mel", Glob(outdir + "/scripts/*"))
 td["scripts"] = Glob(outdir + "/scripts/*.mel")
