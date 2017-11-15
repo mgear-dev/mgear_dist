@@ -64,5 +64,8 @@ scripts: ../../../../scripts
 + MAYAVERSION:2018 PLATFORM:win64 mGear 2.2 ./platforms/2018/windows/x64
 scripts: ../../../../scripts
 
++ MAYAVERSION:2018 PLATFORM:linux mGear 2.2 ./platforms/2018/linux/x64
+scripts: ../../../../scripts
+
 + MAYAVERSION:2018 PLATFORM:mac   mGear 2.2 ./platforms/2018/osx/x64
 scripts: ../../../../scripts
