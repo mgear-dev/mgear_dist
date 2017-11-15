@@ -1,0 +1,11 @@
+engines:
+  pep8:
+    enabled: true
+
+ratings:
+   paths:
+   - "**.py"
+   
+exclude_paths:
+  - "*/**/widget.py"
+  - "scripts/mgear/maya/shifter/component/**"
