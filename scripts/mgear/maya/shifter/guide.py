@@ -1,28 +1,3 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
 
 """
 Shifter's Main class and Rig class.
@@ -46,17 +21,13 @@ import imp
 
 # pymel
 import pymel.core as pm
-import pymel.core.datatypes as dt
+from pymel.core import datatypes
 
 # mgear
 import mgear
-import mgear.maya.attribute as att
-import mgear.maya.dag as dag
-import mgear.maya.vector as vec
+from mgear.maya import attribute, dag, vector, pyqt, skin
 import mgear.string
-import mgear.maya.pyqt as gqt
 import mgear.string as string
-import mgear.maya.skin as skin
 
 import guideUI as guui
 import customStepUI as csui
@@ -64,7 +35,7 @@ import customStepUI as csui
 # pyside
 from maya.app.general.mayaMixin import MayaQDockWidget
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+QtGui, QtCore, QtWidgets, wrapInstance = pyqt.qt_import()
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"
@@ -77,18 +48,21 @@ MGEAR_SHIFTER_CUSTOMSTEP_KEY = "MGEAR_SHIFTER_CUSTOMSTEP_PATH"
 # GUIDE
 ##########################################################
 
+
 class Main(object):
-    """
-    The main guide class.
-    Provide the methods to add parameters, set parameter values, create property...
+    """The main guide class.
+    Provide the methods to add parameters, set parameter values,
+    create property...
 
     Attributes:
-        paramNames (list): List of parameter name cause it's actually important to keep them sorted.
+        paramNames (list): List of parameter name cause it's actually important
+        to keep them sorted.
         paramDefs (dic): Dictionary of parameter definition.
         values (dic): Dictionary of options values.
-        valid (bool): We will check a few things and make sure the guide we are loading is up to date.
-            If parameters or object are missing a warning message will be display and
-            the guide should be updated.
+        valid (bool): We will check a few things and make sure the guide we are
+        loading is up to date.
+            If parameters or object are missing a warning message will be
+            display and the guide should be updated.
 
     """
     def __init__(self):
@@ -98,10 +72,9 @@ class Main(object):
         self.values = {}
         self.valid = True
 
-
     def addPropertyParamenters(self, parent):
-        """
-        Add attributes ( Attribute = Parameters terminology from Softimage) from the parameter definition list.
+        """Add attributes ( Attribute = Parameters terminology from Softimage)
+        from the parameter definition list.
 
         Args:
             parent (dagNode): The object to add the attributes.
@@ -116,10 +89,8 @@ class Main(object):
 
         return parent
 
-
     def setParamDefValue(self, scriptName, value):
-        """
-        Set the value of parameter with matching scriptname.
+        """Set the value of parameter with matching scriptname.
 
         Args:
             scriptName (str): Scriptname of the parameter to edit.
@@ -130,7 +101,8 @@ class Main(object):
 
         """
         if scriptName not in self.paramDefs.keys():
-            mgear.log("Can't find parameter definition for : " + scriptName, mgear.sev_warning)
+            mgear.log("Can't find parameter definition for : " + scriptName,
+                      mgear.sev_warning)
             return False
 
         self.paramDefs[scriptName].value = value
@@ -138,10 +110,8 @@ class Main(object):
 
         return True
 
-
     def setParamDefValuesFromProperty(self, node):
-        """
-        Set the parameter definition values from the attributes of an object.
+        """Set the parameter definition values from the attributes of an object
 
         Args:
             node (dagNode): The object with the attributes.
@@ -149,20 +119,23 @@ class Main(object):
 
         for scriptName, paramDef in self.paramDefs.items():
             if not pm.attributeQuery(scriptName, node=node, exists=True):
-                mgear.log("Can't find parameter '%s' in %s"%(scriptName, node), mgear.sev_warning)
+                mgear.log("Can't find parameter '%s' in %s" %
+                          (scriptName, node), mgear.sev_warning)
                 self.valid = False
             else:
-                cnx = pm.listConnections(node+"."+scriptName, destination=False, source=True)
+                cnx = pm.listConnections(
+                    node + "." + scriptName,
+                    destination=False, source=True)
                 if cnx:
                     paramDef.value = None
                     self.values[scriptName] = cnx[0]
                 else:
-                    paramDef.value = pm.getAttr(node+"."+scriptName)
-                    self.values[scriptName] = pm.getAttr(node+"."+scriptName)
+                    paramDef.value = pm.getAttr(node + "." + scriptName)
+                    self.values[scriptName] = pm.getAttr(
+                        node + "." + scriptName)
 
     def addColorParam(self, scriptName, value=False):
-        """
-        Add color paramenter to the paramenter definition Dictionary.
+        """Add color paramenter to the paramenter definition Dictionary.
 
         Args:
             scriptName (str): The name of the color parameter.
@@ -172,19 +145,22 @@ class Main(object):
             paramDef: The newly create paramenter definition.
         """
 
-        paramDef = att.colorParamDef(scriptName, value)
+        paramDef = attribute.colorParamDef(scriptName, value)
         self.paramDefs[scriptName] = paramDef
         self.paramNames.append(scriptName)
 
         return paramDef
 
-    def addParam(self, scriptName,  valueType, value, minimum=None, maximum=None, keyable=False, readable=True, storable=True, writable=True, niceName=None, shortName=None):
-        """
-        Add paramenter to the paramenter definition Dictionary.
+    def addParam(self, scriptName, valueType, value,
+                 minimum=None, maximum=None, keyable=False,
+                 readable=True, storable=True, writable=True,
+                 niceName=None, shortName=None):
+        """Add paramenter to the paramenter definition Dictionary.
 
         Args:
             scriptName (str): Parameter scriptname.
-            valueType (str): The Attribute Type. Exp: 'string', 'bool', 'long', etc..
+            valueType (str): The Attribute Type. Exp: 'string', 'bool',
+                'long', etc..
             value (float or int): Default parameter value.
             niceName (str): Parameter niceName.
             shortName (str): Parameter shortName.
@@ -199,7 +175,9 @@ class Main(object):
             paramDef: The newly create paramenter definition.
 
         """
-        paramDef = att.ParamDef2(scriptName, valueType, value, niceName, shortName, minimum, maximum, keyable, readable, storable, writable)
+        paramDef = attribute.ParamDef2(scriptName, valueType, value, niceName,
+                                       shortName, minimum, maximum, keyable,
+                                       readable, storable, writable)
         self.paramDefs[scriptName] = paramDef
         self.values[scriptName] = value
         self.paramNames.append(scriptName)
@@ -207,8 +185,7 @@ class Main(object):
         return paramDef
 
     def addFCurveParam(self, scriptName, keys, interpolation=0):
-        """
-        Add FCurve paramenter to the paramenter definition Dictionary.
+        """Add FCurve paramenter to the paramenter definition Dictionary.
 
         Args:
             scriptName (str): Attribute fullName.
@@ -219,17 +196,15 @@ class Main(object):
             paramDef: The newly create paramenter definition.
 
         """
-        paramDef = att.FCurveParamDef(scriptName, keys, interpolation)
+        paramDef = attribute.FCurveParamDef(scriptName, keys, interpolation)
         self.paramDefs[scriptName] = paramDef
         self.values[scriptName] = None
         self.paramNames.append(scriptName)
 
         return paramDef
 
-
     def addEnumParam(self, scriptName, enum, value=False):
-        """
-        Add FCurve paramenter to the paramenter definition Dictionary.
+        """Add FCurve paramenter to the paramenter definition Dictionary.
 
         Args:
             scriptName (str): Attribute fullName
@@ -240,7 +215,7 @@ class Main(object):
             paramDef: The newly create paramenter definition.
 
         """
-        paramDef = att.enumParamDef(scriptName, enum, value)
+        paramDef = attribute.enumParamDef(scriptName, enum, value)
         self.paramDefs[scriptName] = paramDef
         self.values[scriptName] = value
         self.paramNames.append(scriptName)
@@ -251,24 +226,31 @@ class Main(object):
 # RIG GUIDE
 ##########################################################
 
+
 class Rig(Main):
-    """
-    Rig guide class.
+    """Rig guide class.
 
     This is the class for complete rig guide definition.
 
-        * It contains the component guide in correct hierarchy order and the options to generate the rig.
+        * It contains the component guide in correct hierarchy order and the
+            options to generate the rig.
         * Provide the methods to add more component, import/export guide.
 
     Attributes:
-        paramNames (list): List of parameter name cause it's actually important to keep them sorted.
+        paramNames (list): List of parameter name cause it's actually important
+            to keep them sorted.
         paramDefs (dic): Dictionary of parameter definition.
         values (dic): Dictionary of options values.
-        valid (bool): We will check a few things and make sure the guide we are loading is up to date. If parameters or object are missing a warning message will be display and the guide should be updated.
+        valid (bool): We will check a few things and make sure the guide we are
+            loading is up to date. If parameters or object are missing a
+            warning message will be display and the guide should be updated.
         controllers (dic): Dictionary of controllers.
-        components (dic): Dictionary of component. Keys are the component fullname (ie. 'arm_L0')
-        componentsIndex (list): List of component name sorted by order creation (hierarchy order)
-        parents (list): List of the parent of each component, in same order as self.components
+        components (dic): Dictionary of component. Keys are the component
+            fullname (ie. 'arm_L0')
+        componentsIndex (list): List of component name sorted by order
+            creation (hierarchy order)
+        parents (list): List of the parent of each component, in same order
+            as self.components
     """
 
     def __init__(self):
@@ -286,10 +268,8 @@ class Rig(Main):
 
         self.addParameters()
 
-
     def addParameters(self):
-        """
-        Parameters for rig options.
+        """Parameters for rig options.
 
         Add more parameter to the parameter definition list.
 
@@ -298,9 +278,16 @@ class Rig(Main):
         # Main Tab
         self.pRigName = self.addParam("rig_name", "string", "rig")
         self.pMode = self.addEnumParam("mode", ["Final", "WIP"], 0)
-        self.pStep = self.addEnumParam("step", ["All Steps", "Objects", "Properties", "Operators", "Connect", "Joints", "Finalize"], 6)
+        self.pStep = self.addEnumParam(
+            "step",
+            ["All Steps", "Objects", "Properties",
+                "Operators", "Connect", "Joints", "Finalize"],
+            6)
         self.pIsModel = self.addParam("ismodel", "bool", True)
-        self.pClassicChannelNames = self.addParam("classicChannelNames", "bool", True)
+        self.pClassicChannelNames = self.addParam(
+            "classicChannelNames",
+            "bool",
+            True)
         self.pProxyChannels = self.addParam("proxyChannels", "bool", False)
 
         # --------------------------------------------------
@@ -311,15 +298,15 @@ class Rig(Main):
         # --------------------------------------------------
         # Colors
 
-        #Index color
-        self.pLColorIndexfk =  self.addParam("L_color_fk", "long", 6, 0, 31)
-        self.pLColorIndexik =  self.addParam("L_color_ik", "long", 18, 0, 31)
-        self.pRColorIndexfk =  self.addParam("R_color_fk", "long", 23, 0, 31)
-        self.pRColorIndexik =  self.addParam("R_color_ik", "long", 14, 0, 31)
-        self.pCColorIndexfk =  self.addParam("C_color_fk", "long", 13, 0, 31)
-        self.pCColorIndexik =  self.addParam("C_color_ik", "long", 17, 0, 31)
+        # Index color
+        self.pLColorIndexfk = self.addParam("L_color_fk", "long", 6, 0, 31)
+        self.pLColorIndexik = self.addParam("L_color_ik", "long", 18, 0, 31)
+        self.pRColorIndexfk = self.addParam("R_color_fk", "long", 23, 0, 31)
+        self.pRColorIndexik = self.addParam("R_color_ik", "long", 14, 0, 31)
+        self.pCColorIndexfk = self.addParam("C_color_fk", "long", 13, 0, 31)
+        self.pCColorIndexik = self.addParam("C_color_ik", "long", 17, 0, 31)
 
-        #RGB colors for Maya 2015 and up
+        # RGB colors for Maya 2015 and up
         # self.pLColorfk = self.addColorParam("L_RGB_fk", [0, 1, 0])
         # self.pLColorik = self.addColorParam("L_RGB_ik", [0, .5, 0])
         # self.pRColorfk = self.addColorParam("R_RGB_fk", [0, 0, 1])
@@ -333,27 +320,30 @@ class Rig(Main):
         self.pSynoptic = self.addParam("synoptic", "string", "")
 
         self.pDoPreCustomStep = self.addParam("doPreCustomStep", "bool", False)
-        self.pDoPostCustomStep = self.addParam("doPostCustomStep", "bool", False)
+        self.pDoPostCustomStep = self.addParam("doPostCustomStep",
+                                               "bool", False)
         self.pPreCustomStep = self.addParam("preCustomStep", "string", "")
         self.pPostCustomStep = self.addParam("postCustomStep", "string", "")
 
         # --------------------------------------------------
         # Comments
         self.pComments = self.addParam("comments", "string", "")
-        self.pUser       = self.addParam("user", "string", getpass.getuser())
-        self.pDate        = self.addParam("date", "string", str(datetime.datetime.now()))
-        self.pMayaVersion = self.addParam("maya_version", "string", str(pm.mel.eval("getApplicationVersionAsFloat")))
-        self.pGearVersion = self.addParam("gear_version", "string", mgear.getVersion())
-
+        self.pUser = self.addParam("user", "string", getpass.getuser())
+        self.pDate = self.addParam(
+            "date", "string", str(datetime.datetime.now()))
+        self.pMayaVersion = self.addParam(
+            "maya_version", "string",
+            str(pm.mel.eval("getApplicationVersionAsFloat")))
+        self.pGearVersion = self.addParam(
+            "gear_version", "string", mgear.getVersion())
 
     def setFromSelection(self):
-        """
-        Set the guide hierarchy from selection.
-
-        """
+        """Set the guide hierarchy from selection."""
         selection = pm.ls(selection=True)
         if not selection:
-            mgear.log("Select one or more guide root or a guide model", mgear.sev_error)
+            mgear.log(
+                "Select one or more guide root or a guide model",
+                mgear.sev_error)
             self.valid = False
             return False
 
@@ -362,10 +352,8 @@ class Rig(Main):
 
         return True
 
-
     def setFromHierarchy(self, root, branch=True):
-        """
-        Set the guide from given hierarchy.
+        """Set the guide from given hierarchy.
 
         Args:
             root (dagNode): The root of the hierarchy to parse.
@@ -382,7 +370,7 @@ class Rig(Main):
             if root.hasAttr("comp_type") or self.model == root:
                 break
             root = root.getParent()
-            mgear.log( root)
+            mgear.log(root)
 
         # ---------------------------------------------------
         # First check and set the options
@@ -403,57 +391,57 @@ class Rig(Main):
         self.findComponentRecursive(root, branch)
         endTime = datetime.datetime.now()
         finalTime = endTime - startTime
-        mgear.log("Find recursive in  [ " + str(finalTime) + " ]" )
+        mgear.log("Find recursive in  [ " + str(finalTime) + " ]")
         # Parenting
         if self.valid:
             for name in self.componentsIndex:
                 mgear.log("Get parenting for: " + name)
                 compParent = self.components[name]
-                # for localName, element in compParent.getObjects(self.model, False).items():
+                # for localName, element in \
+                #     compParent.getObjects(self.model, False).items():
                 # NOTE: getObjects3 is an experimental function
-                for localName, element in compParent.getObjects3(self.model).items():
-                    for name  in self.componentsIndex:
+                for localName, element in compParent.getObjects3(
+                        self.model).items():
+                    for name in self.componentsIndex:
                         compChild = self.components[name]
                         compChild_parent = compChild.root.getParent()
                         if element is not None and element == compChild_parent:
                             compChild.parentComponent = compParent
                             compChild.parentLocalName = localName
 
-
             # More option values
             self.addOptionsValues()
 
         # End
         if not self.valid:
-            mgear.log("The guide doesn't seem to be up to date. Check logged messages and update the guide.", mgear.sev_warning)
+            mgear.log("The guide doesn't seem to be up to date."
+                      "Check logged messages and update the guide.",
+                      mgear.sev_warning)
 
         endTime = datetime.datetime.now()
         finalTime = endTime - startTime
-        mgear.log("Guide loaded from hierarchy in  [ " + str(finalTime) + " ]" )
-
+        mgear.log("Guide loaded from hierarchy in  [ " + str(finalTime) + " ]")
 
     def addOptionsValues(self):
-        """
-        Gather or change some options values according to some others.
+        """Gather or change some options values according to some others.
 
         Note:
-            For the moment only gets the rig size to adapt size of object to the scale of the character
+            For the moment only gets the rig size to adapt size of object to
+            the scale of the character
 
         """
         # Get rig size to adapt size of object to the scale of the character
         maximum = 1
-        v = dt.Vector()
+        v = datatypes.Vector()
         for comp in self.components.values():
             for pos in comp.apos:
-                d = vec.getDistance(v, pos)
+                d = vector.getDistance(v, pos)
                 maximum = max(d, maximum)
 
         self.values["size"] = max(maximum * .05, .1)
 
-
     def findComponentRecursive(self, node, branch=True):
-        """
-        Finds components by recursive search.
+        """Finds components by recursive search.
 
         Args:
             node (dagNode): Object frome where start the search.
@@ -466,7 +454,7 @@ class Rig(Main):
 
             if comp_guide:
                 comp_guide.setFromHierarchy(node)
-                mgear.log(comp_guide.fullName+" ("+comp_type+")")
+                mgear.log(comp_guide.fullName + " (" + comp_type + ")")
                 if not comp_guide.valid:
                     self.valid = False
 
@@ -478,8 +466,9 @@ class Rig(Main):
                 self.findComponentRecursive(child)
 
     def getComponentGuide(self, comp_type):
-        """
-        Get the componet guide python object. ie. Finds the guide.py of the component.
+        """Get the componet guide python object.
+
+        ie. Finds the guide.py of the component.
 
         Args:
             comp_type (str): The component type.
@@ -492,7 +481,8 @@ class Rig(Main):
         '''
         path = os.path.join(basepath, comp_type, "guide.py")
         if not os.path.exists(path):
-            mgear.log("Can't find guide definition for : " + comp_type + ".\n"+ path, mgear.sev_error)
+            mgear.log("Can't find guide definition for : " + comp_type + ".\n"+
+                path, mgear.sev_error)
             return False
         '''
 
@@ -517,14 +507,15 @@ class Rig(Main):
         # Options
         self.options = self.addPropertyParamenters(self.model)
 
-        #the basic org nulls (Maya groups)
-        self.controllers_org = pm.group(n="controllers_org", em=True, p=self.model)
+        # the basic org nulls (Maya groups)
+        self.controllers_org = pm.group(
+            n="controllers_org",
+            em=True,
+            p=self.model)
         self.controllers_org.attr('visibility').set(0)
 
-
     def drawNewComponent(self, parent, comp_type):
-        """
-        Add a new component to the guide.
+        """Add a new component to the guide.
 
         Args:
             parent (dagNode): Parent of this new component guide.
@@ -534,7 +525,8 @@ class Rig(Main):
         comp_guide = self.getComponentGuide(comp_type)
 
         if not comp_guide:
-            mgear.log("Not component guide of type: " + comp_type + " have been found.", mgear.sev_error)
+            mgear.log("Not component guide of type: " + comp_type +
+                      " have been found.", mgear.sev_error)
             return
         if parent is None:
             self.initialHierarchy()
@@ -556,7 +548,6 @@ class Rig(Main):
                     comp_guide.setParamDefValue("comp_side", parent_side)
                     comp_guide.setParamDefValue("ui_host", parent_uihost)
 
-
                     break
 
                 parent_root = parent_root.getParent()
@@ -573,10 +564,10 @@ class Rig(Main):
 
         # controls shape
         try:
-            pm.delete(pm.PyNode(newParentName+"|controllers_org"))
-            oldRootName = oldRoot.name().split("|")[0]+"|controllers_org"
-            pm.parent(oldRootName, newParentName)
-        except:
+            pm.delete(pm.PyNode(newParentName + "|controllers_org"))
+            oldRootName = oldRoot.name().split("|")[0] + "|controllers_org"
+            (oldRootName, newParentName)
+        except TypeError:
             pm.displayError("The guide don't have controllers_org")
 
         # Components
@@ -585,20 +576,16 @@ class Rig(Main):
             oldParentName = comp_guide.root.getParent().name()
 
             try:
-                parent = pm.PyNode(oldParentName.replace(oldParentName.split("|")[0], newParentName))
-            except:
+                parent = pm.PyNode(oldParentName.replace(
+                    oldParentName.split("|")[0], newParentName))
+            except TypeError:
                 pm.displayWarning("No parent for the guide")
                 parent = self.model
 
             comp_guide.draw(parent)
 
-
-
-
     def update(self, sel):
-        """
-        Update the guide if a parameter is missing
-        """
+        """Update the guide if a parameter is missing"""
 
         if pm.attributeQuery("ismodel", node=sel, ex=True):
             self.model = sel
@@ -612,11 +599,11 @@ class Rig(Main):
             pm.displayInfo("The Guide is updated")
             return
 
-        pm.rename(self.model,  name+"_old")
+        pm.rename(self.model, name + "_old")
         deleteLater = self.model
         self.drawUpdate(deleteLater)
-        pm.rename(self.model,  name)
-        pm.displayInfo("The guide %s have been updated"%name)
+        pm.rename(self.model, name)
+        pm.displayInfo("The guide %s have been updated" % name)
         pm.delete(deleteLater)
 
     def duplicate(self, root, symmetrize=False):
@@ -624,16 +611,19 @@ class Rig(Main):
         Duplicate the guide hierarchy.
 
         Note:
-            Indeed this method is not duplicating. What it is doing is parse the compoment guide,
+            Indeed this method is not duplicating.
+            What it is doing is parse the compoment guide,
             and creating an new one base on the current selection.
 
         Warning:
-            Don't use the default Maya's duplicate tool to duplicate a Shifter's guide.
+            Don't use the default Maya's duplicate tool to duplicate a
+            Shifter's guide.
 
 
         Args:
             root (dagNode): The guide root to duplicate.
-            symmetrize (bool): If True, duplicate symmetrical in X axis. The guide have to be "Left" or "Right".
+            symmetrize (bool): If True, duplicate symmetrical in X axis.
+            The guide have to be "Left" or "Right".
 
         """
         if not pm.attributeQuery("comp_type", node=root, ex=True):
@@ -659,7 +649,10 @@ class Rig(Main):
                 if comp_guide.parentComponent is None:
                     parent = comp_guide.root.getParent()
                     if symmetrize:
-                        parent = dag.findChild(self.model, mgear.string.convertRLName(comp_guide.root.getParent().name()))
+                        parent = dag.findChild(
+                            self.model,
+                            mgear.string.convertRLName(
+                                comp_guide.root.getParent().name()))
                         if not parent:
                             parent = comp_guide.root.getParent()
 
@@ -667,22 +660,29 @@ class Rig(Main):
                         parent = comp_guide.root.getParent()
 
                 else:
-                    parent = dag.findChild(self.model, comp_guide.parentComponent.getName(comp_guide.parentLocalName))
+                    parent = dag.findChild(
+                        self.model,
+                        comp_guide.parentComponent.getName(
+                            comp_guide.parentLocalName))
                     if not parent:
-                        mgear.log("Unable to find parent (%s.%s) for guide %s"%(comp_guide.parentComponent.getFullName, comp_guide.parentLocalName, comp_guide.getFullName ))
+                        mgear.log(
+                            "Unable to find parent (%s.%s) for guide %s" %
+                            (comp_guide.parentComponent.getFullName,
+                                comp_guide.parentLocalName,
+                                comp_guide.getFullName))
                         parent = self.model
 
-                comp_guide.root = None # Reset the root so we force the draw to duplicate
+                # Reset the root so we force the draw to duplicate
+                comp_guide.root = None
+
                 comp_guide.setIndex(self.model)
 
                 comp_guide.draw(parent)
 
         pm.select(self.components[self.componentsIndex[0]].root)
 
-
     def updateProperties(self, root, newName, newSide, newIndex):
-        """
-        Update the Properties of the component.
+        """Update the Properties of the component.
 
         Args:
             root (dagNode): Root of the component.
@@ -700,9 +700,9 @@ class Rig(Main):
         comp_guide.rename(root, newName, newSide, newIndex)
 
 
-##################################################################################
+###############################################################################
 # HELPER SLOTS
-##################################################################################
+###############################################################################
 
 class helperSlots(object):
 
@@ -715,7 +715,8 @@ class helperSlots(object):
                 lEdit.setText(oSel[0].name())
                 self.root.attr(targetAttr).set(lEdit.text())
             else:
-                pm.displayWarning("The selected element is not a valid object or not from a guide")
+                pm.displayWarning("The selected element is not a "
+                                  "valid object or not from a guide")
         else:
             pm.displayWarning("Please select first the object.")
 
@@ -723,15 +724,14 @@ class helperSlots(object):
         name = string.removeInvalidCharacter(lEdit.text())
         self.root.attr(targetAttr).set(name)
 
-
     def addItem2listWidget(self, listWidget, targetAttr=None):
 
         items = pm.selected()
-        itemsList = [i.text() for i in listWidget.findItems("", QtCore.Qt.MatchContains)]
+        itemsList = [i.text() for i in listWidget.findItems(
+            "", QtCore.Qt.MatchContains)]
         # Quick clean the first empty item
         if itemsList and not itemsList[0]:
             listWidget.takeItem(0)
-
 
         for item in items:
             if item.name() not in itemsList:
@@ -739,9 +739,13 @@ class helperSlots(object):
                     listWidget.addItem(item.name())
 
                 else:
-                    pm.displayWarning("The object: %s, is not a valid reference, Please select only guide componet roots and guide locators."%item.name())
+                    pm.displayWarning(
+                        "The object: %s, is not a valid"
+                        " reference, Please select only guide componet"
+                        " roots and guide locators." % item.name())
             else:
-                pm.displayWarning("The object: %s, is already in the list."%item.name())
+                pm.displayWarning("The object: %s, is already in the list." %
+                                  item.name())
 
         if targetAttr:
             self.updateListAttr(listWidget, targetAttr)
@@ -752,9 +756,11 @@ class helperSlots(object):
         if targetAttr:
             self.updateListAttr(listWidget, targetAttr)
 
-    def moveFromListWidget2ListWidget(self, sourceListWidget, targetListWidget, targetAttrListWidget, targetAttr=None):
+    def moveFromListWidget2ListWidget(self, sourceListWidget, targetListWidget,
+                                      targetAttrListWidget, targetAttr=None):
         # Quick clean the first empty item
-        itemsList = [i.text() for i in targetAttrListWidget.findItems("", QtCore.Qt.MatchContains)]
+        itemsList = [i.text() for i in targetAttrListWidget.findItems(
+            "", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             targetAttrListWidget.takeItem(0)
 
@@ -765,25 +771,21 @@ class helperSlots(object):
         if targetAttr:
             self.updateListAttr(targetAttrListWidget, targetAttr)
 
-
-
-    def copyFromListWidget(self, sourceListWidget, targetListWidget, targetAttr=None):
+    def copyFromListWidget(self, sourceListWidget, targetListWidget,
+                           targetAttr=None):
         targetListWidget.clear()
-        itemsList = [i.text() for i in sourceListWidget.findItems("", QtCore.Qt.MatchContains)]
+        itemsList = [i.text() for i in sourceListWidget.findItems(
+            "", QtCore.Qt.MatchContains)]
         for item in itemsList:
             targetListWidget.addItem(item)
         if targetAttr:
             self.updateListAttr(sourceListWidget, targetAttr)
 
-
     def updateListAttr(self, sourceListWidget, targetAttr):
-        """
-        Update the string attribute with values separated by commas.
-
-        """
-        newValue = ",".join([i.text() for i in sourceListWidget.findItems("", QtCore.Qt.MatchContains)])
+        """Update the string attribute with values separated by commas"""
+        newValue = ",".join([i.text() for i in sourceListWidget.findItems(
+            "", QtCore.Qt.MatchContains)])
         self.root.attr(targetAttr).set(newValue)
-
 
     def updateComponentName(self):
 
@@ -798,8 +800,9 @@ class helperSlots(object):
         guide = Rig()
         guide.updateProperties(self.root, newName, newSide, newIndex)
         pm.select(self.root, r=True)
-        #sync index
-        self.mainSettingsTab.componentIndex_spinBox.setValue(self.root.attr("comp_index").get())
+        # sync index
+        self.mainSettingsTab.componentIndex_spinBox.setValue(
+            self.root.attr("comp_index").get())
 
     def updateConnector(self, sourceWidget, itemsList, *args):
         self.root.attr("connector").set(itemsList[sourceWidget.currentIndex()])
@@ -818,7 +821,7 @@ class helperSlots(object):
         return True
 
     def updateSlider(self, sourceWidget, targetAttr, *args):
-        self.root.attr(targetAttr).set(float(sourceWidget.value())/100)
+        self.root.attr(targetAttr).set(float(sourceWidget.value()) / 100)
 
     def updateComboBox(self, sourceWidget, targetAttr, *args):
         self.root.attr(targetAttr).set(sourceWidget.currentIndex())
@@ -828,19 +831,20 @@ class helperSlots(object):
         self.root.attr(targetAttr).set(ctlList[curIndx])
 
     def setProfile(self):
-        pm.select(self.root,  r=True)
+        pm.select(self.root, r=True)
         pm.runtime.GraphEditor()
-
 
     def close_settings(self):
         self.close()
-        gqt.deleteInstances(self, MayaQDockWidget)
+        pyqt.deleteInstances(self, MayaQDockWidget)
 
     def editFile(self, widgetList):
         try:
             filepath = widgetList.selectedItems()[0].text().split("|")[-1][1:]
-            if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
-                editPath = os.path.join( os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "") , filepath)
+            if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                editPath = os.path.join(
+                    os.environ.get(
+                        MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""), filepath)
             else:
                 editPath = filepath
             if filepath:
@@ -852,17 +856,20 @@ class helperSlots(object):
                     subprocess.call(('xdg-open', editPath))
             else:
                 pm.displayWarning("Please select one item from the list")
-        except:
+        except Exception:
             pm.displayError("The step can't be find or does't exists")
 
     @classmethod
     def runStep(self, stepPath, customStepDic):
             try:
                 with pm.UndoChunk():
-                    pm.displayInfo("EXEC: Executing custom step: %s"%stepPath)
+                    pm.displayInfo(
+                        "EXEC: Executing custom step: %s" % stepPath)
                     fileName = os.path.split(stepPath)[1].split(".")[0]
-                    if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
-                        runPath = os.path.join( os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "") , stepPath)
+                    if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                        runPath = os.path.join(
+                            os.environ.get(
+                                MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""), stepPath)
                     else:
                         runPath = stepPath
                     customStep = imp.load_source(fileName, runPath)
@@ -870,36 +877,45 @@ class helperSlots(object):
                         cs = customStep.CustomShifterStep()
                         cs.run(customStepDic)
                         customStepDic[cs.name] = cs
-                        pm.displayInfo("SUCCEED: Custom Shifter Step Class: %s. Succeed!!"%stepPath)
+                        pm.displayInfo(
+                            "SUCCEED: Custom Shifter Step Class: %s. "
+                            "Succeed!!" % stepPath)
                     else:
-                        pm.displayInfo("SUCCEED: Custom Step simple script: %s. Succeed!!"%stepPath)
+                        pm.displayInfo(
+                            "SUCCEED: Custom Step simple script: %s. "
+                            "Succeed!!" % stepPath)
 
             except Exception as ex:
-                template = "An exception of type {0} occured. Arguments:\n{1!r}"
+                template = "An exception of type {0} occured. "
+                "Arguments:\n{1!r}"
                 message = template.format(type(ex).__name__, ex.args)
-                pm.displayError( message)
+                pm.displayError(message)
                 pm.displayError(traceback.format_exc())
-                cont = pm.confirmBox("FAIL: Custom Step Fail", "The step:%s has failed. Continue with next step?"%stepPath + "\n\n" + message + "\n\n" + traceback.format_exc(), "Continue", "Stop Build", "Try Again!")
+                cont = pm.confirmBox(
+                    "FAIL: Custom Step Fail",
+                    "The step:%s has failed. Continue with next step?" %
+                    stepPath + "\n\n" + message + "\n\n" +
+                    traceback.format_exc(),
+                    "Continue", "Stop Build", "Try Again!")
                 if cont == "Stop Build":
                     # stop Build
                     return True
                 elif cont == "Try Again!":
-                    try: #just in case there is nothing to undo
+                    try:  # just in case there is nothing to undo
                         pm.undo()
-                    except:
+                    except Exception:
                         pass
                     pm.displayInfo("Trying again! : {}".format(stepPath))
                     inception = self.runStep(stepPath, customStepDic)
-                    if inception: # stops build from the recursion loop.
+                    if inception:  # stops build from the recursion loop.
                         return True
                 else:
                     return False
 
-
     def runManualStep(self, widgetList):
         selItems = widgetList.selectedItems()
         for item in selItems:
-            self.runStep( item.text().split("|")[-1][1:], customStepDic={})
+            self.runStep(item.text().split("|")[-1][1:], customStepDic={})
 
 
 ##################
@@ -910,10 +926,12 @@ class guideSettingsTab(QtWidgets.QDialog, guui.Ui_Form):
         super(guideSettingsTab, self).__init__(parent)
         self.setupUi(self)
 
+
 class customStepTab(QtWidgets.QDialog, csui.Ui_Form):
     def __init__(self, parent=None):
         super(customStepTab, self).__init__(parent)
         self.setupUi(self)
+
 
 class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
     # valueChanged = QtCore.Signal(int)
@@ -921,10 +939,11 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
     def __init__(self, parent=None):
         self.toolName = TYPE
         # Delete old instances of the componet settings window.
-        gqt.deleteInstances(self, MayaQDockWidget)
+        pyqt.deleteInstances(self, MayaQDockWidget)
         # super(self.__class__, self).__init__(parent=parent)
         super(guideSettings, self).__init__()
-        # the inspectSettings function set the current selection to the component root before open the settings dialog
+        # the inspectSettings function set the current selection to the
+        # component root before open the settings dialog
         self.root = pm.selected()[0]
 
         self.guideSettingsTab = guideSettingsTab()
@@ -939,7 +958,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
 
     def setup_SettingWindow(self):
-        self.mayaMainWindow = gqt.maya_main_window()
+        self.mayaMainWindow = pyqt.maya_main_window()
 
         self.setObjectName(self.toolName)
         self.setWindowFlags(QtCore.Qt.Window)
@@ -947,54 +966,67 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         self.resize(500, 615)
 
     def create_controls(self):
-        """
-        Create the controls for the component base
-
-        """
+        """Create the controls for the component base"""
         self.tabs = QtWidgets.QTabWidget()
         self.tabs.setObjectName("settings_tab")
 
         # Close Button
         self.close_button = QtWidgets.QPushButton("Close")
 
-
-
     def populate_controls(self):
-        """
-        Populate the controls values from the custom attributes of the component.
+        """Populate the controls values
+            from the custom attributes of the component.
 
         """
-        #populate tab
+        # populate tab
         self.tabs.insertTab(0, self.guideSettingsTab, "Guide Settings")
         self.tabs.insertTab(1, self.customStepTab, "Custom Steps")
 
-        #populate main settings
-        self.guideSettingsTab.rigName_lineEdit.setText(self.root.attr("rig_name").get())
-        self.guideSettingsTab.mode_comboBox.setCurrentIndex(self.root.attr("mode").get())
-        self.guideSettingsTab.step_comboBox.setCurrentIndex(self.root.attr("step").get())
-        self.populateCheck(self.guideSettingsTab.proxyChannels_checkBox, "proxyChannels")
-        self.populateCheck(self.guideSettingsTab.classicChannelNames_checkBox, "classicChannelNames")
-        self.populateCheck(self.guideSettingsTab.importSkin_checkBox, "importSkin")
-        self.guideSettingsTab.skin_lineEdit.setText(self.root.attr("skin").get())
-        self.populateCheck(self.guideSettingsTab.jointRig_checkBox, "joint_rig")
+        # populate main settings
+        self.guideSettingsTab.rigName_lineEdit.setText(
+            self.root.attr("rig_name").get())
+        self.guideSettingsTab.mode_comboBox.setCurrentIndex(
+            self.root.attr("mode").get())
+        self.guideSettingsTab.step_comboBox.setCurrentIndex(
+            self.root.attr("step").get())
+        self.populateCheck(
+            self.guideSettingsTab.proxyChannels_checkBox, "proxyChannels")
+        self.populateCheck(
+            self.guideSettingsTab.classicChannelNames_checkBox,
+            "classicChannelNames")
+        self.populateCheck(
+            self.guideSettingsTab.importSkin_checkBox, "importSkin")
+        self.guideSettingsTab.skin_lineEdit.setText(
+            self.root.attr("skin").get())
+        self.populateCheck(
+            self.guideSettingsTab.jointRig_checkBox, "joint_rig")
         self.populateAvailableSynopticTabs()
+
         for item in self.root.attr("synoptic").get().split(","):
             self.guideSettingsTab.rigTabs_listWidget.addItem(item)
-        self.guideSettingsTab.L_color_fk_spinBox.setValue(self.root.attr("L_color_fk").get())
-        self.guideSettingsTab.L_color_ik_spinBox.setValue(self.root.attr("L_color_ik").get())
-        self.guideSettingsTab.C_color_fk_spinBox.setValue(self.root.attr("C_color_fk").get())
-        self.guideSettingsTab.C_color_ik_spinBox.setValue(self.root.attr("C_color_ik").get())
-        self.guideSettingsTab.R_color_fk_spinBox.setValue(self.root.attr("R_color_fk").get())
-        self.guideSettingsTab.R_color_ik_spinBox.setValue(self.root.attr("R_color_ik").get())
+
+        self.guideSettingsTab.L_color_fk_spinBox.setValue(
+            self.root.attr("L_color_fk").get())
+        self.guideSettingsTab.L_color_ik_spinBox.setValue(
+            self.root.attr("L_color_ik").get())
+        self.guideSettingsTab.C_color_fk_spinBox.setValue(
+            self.root.attr("C_color_fk").get())
+        self.guideSettingsTab.C_color_ik_spinBox.setValue(
+            self.root.attr("C_color_ik").get())
+        self.guideSettingsTab.R_color_fk_spinBox.setValue(
+            self.root.attr("R_color_fk").get())
+        self.guideSettingsTab.R_color_ik_spinBox.setValue(
+            self.root.attr("R_color_ik").get())
 
         # pupulate custom steps sttings
-        self.populateCheck(self.customStepTab.preCustomStep_checkBox, "doPreCustomStep")
+        self.populateCheck(
+            self.customStepTab.preCustomStep_checkBox, "doPreCustomStep")
         for item in self.root.attr("preCustomStep").get().split(","):
             self.customStepTab.preCustomStep_listWidget.addItem(item)
-            self.populateCheck(self.customStepTab.postCustomStep_checkBox, "doPostCustomStep")
+            self.populateCheck(
+                self.customStepTab.postCustomStep_checkBox, "doPostCustomStep")
         for item in self.root.attr("postCustomStep").get().split(","):
             self.customStepTab.postCustomStep_listWidget.addItem(item)
-
 
     def create_layout(self):
         """
@@ -1007,61 +1039,134 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
 
         self.setLayout(self.settings_layout)
 
-
     def create_connections(self):
-        """
-        Create the slots connections to the controls functions
-
-        """
+        """Create the slots connections to the controls functions"""
         self.close_button.clicked.connect(self.close_settings)
 
         # Setting Tab
-        self.guideSettingsTab.rigName_lineEdit.editingFinished.connect(partial(self.updateLineEdit, self.guideSettingsTab.rigName_lineEdit, "rig_name" ) )
-        self.guideSettingsTab.mode_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.guideSettingsTab.mode_comboBox, "mode"))
-        self.guideSettingsTab.step_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.guideSettingsTab.step_comboBox, "step"))
+        tap = self.guideSettingsTab
+        tap.rigName_lineEdit.editingFinished.connect(
+            partial(self.updateLineEdit,
+                    tap.rigName_lineEdit,
+                    "rig_name"))
+        tap.mode_comboBox.currentIndexChanged.connect(
+            partial(self.updateComboBox,
+                    tap.mode_comboBox,
+                    "mode"))
+        tap.step_comboBox.currentIndexChanged.connect(
+            partial(self.updateComboBox,
+                    tap.step_comboBox,
+                    "step"))
+        tap.proxyChannels_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    tap.proxyChannels_checkBox,
+                    "proxyChannels"))
+        tap.classicChannelNames_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    tap.classicChannelNames_checkBox,
+                    "classicChannelNames"))
+        tap.importSkin_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    tap.importSkin_checkBox,
+                    "importSkin"))
+        tap.jointRig_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    tap.jointRig_checkBox,
+                    "joint_rig"))
+        tap.addTab_pushButton.clicked.connect(
+            partial(self.moveFromListWidget2ListWidget,
+                    tap.available_listWidget,
+                    tap.rigTabs_listWidget,
+                    tap.rigTabs_listWidget,
+                    "synoptic"))
+        tap.removeTab_pushButton.clicked.connect(
+            partial(self.moveFromListWidget2ListWidget,
+                    tap.rigTabs_listWidget,
+                    tap.available_listWidget,
+                    tap.rigTabs_listWidget,
+                    "synoptic"))
+        tap.loadSkinPath_pushButton.clicked.connect(
+            self.skinLoad)
+        tap.rigTabs_listWidget.installEventFilter(self)
 
-        self.guideSettingsTab.proxyChannels_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.proxyChannels_checkBox, "proxyChannels"))
-        self.guideSettingsTab.classicChannelNames_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.classicChannelNames_checkBox, "classicChannelNames"))
-
-        self.guideSettingsTab.importSkin_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.importSkin_checkBox, "importSkin"))
-        self.guideSettingsTab.jointRig_checkBox.stateChanged.connect(partial(self.updateCheck, self.guideSettingsTab.jointRig_checkBox, "joint_rig"))
-        self.guideSettingsTab.addTab_pushButton.clicked.connect(partial(self.moveFromListWidget2ListWidget,  self.guideSettingsTab.available_listWidget, self.guideSettingsTab.rigTabs_listWidget,  self.guideSettingsTab.rigTabs_listWidget, "synoptic"))
-        self.guideSettingsTab.removeTab_pushButton.clicked.connect(partial(self.moveFromListWidget2ListWidget, self.guideSettingsTab.rigTabs_listWidget, self.guideSettingsTab.available_listWidget,  self.guideSettingsTab.rigTabs_listWidget, "synoptic"))
-        self.guideSettingsTab.loadSkinPath_pushButton.clicked.connect(self.skinLoad)
-        self.guideSettingsTab.rigTabs_listWidget.installEventFilter(self)
-
-        self.guideSettingsTab.L_color_fk_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.guideSettingsTab.L_color_fk_spinBox, "L_color_fk"))
-        self.guideSettingsTab.L_color_ik_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.guideSettingsTab.L_color_ik_spinBox, "L_color_ik"))
-        self.guideSettingsTab.C_color_fk_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.guideSettingsTab.C_color_fk_spinBox, "C_color_fk"))
-        self.guideSettingsTab.C_color_ik_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.guideSettingsTab.C_color_ik_spinBox, "C_color_ik"))
-        self.guideSettingsTab.R_color_fk_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.guideSettingsTab.R_color_fk_spinBox, "R_color_fk"))
-        self.guideSettingsTab.R_color_ik_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.guideSettingsTab.R_color_ik_spinBox, "R_color_ik"))
+        tap.L_color_fk_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    tap.L_color_fk_spinBox,
+                    "L_color_fk"))
+        tap.L_color_ik_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    tap.L_color_ik_spinBox,
+                    "L_color_ik"))
+        tap.C_color_fk_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    tap.C_color_fk_spinBox,
+                    "C_color_fk"))
+        tap.C_color_ik_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    tap.C_color_ik_spinBox,
+                    "C_color_ik"))
+        tap.R_color_fk_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    tap.R_color_fk_spinBox,
+                    "R_color_fk"))
+        tap.R_color_ik_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    tap.R_color_ik_spinBox,
+                    "R_color_ik"))
 
         # custom Step Tab
-        self.customStepTab.preCustomStep_checkBox.stateChanged.connect(partial(self.updateCheck, self.customStepTab.preCustomStep_checkBox, "doPreCustomStep"))
-        self.customStepTab.preCustomStepAdd_pushButton.clicked.connect(self.addCustomStep)
-        self.customStepTab.preCustomStepNew_pushButton.clicked.connect(self.newCustomStep)
-        self.customStepTab.preCustomStepDuplicate_pushButton.clicked.connect(self.duplicateCustomStep)
-        self.customStepTab.preCustomStepExport_pushButton.clicked.connect(self.exportCustomStep)
-        self.customStepTab.preCustomStepImport_pushButton.clicked.connect(self.importCustomStep)
-        self.customStepTab.preCustomStepRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.customStepTab.preCustomStep_listWidget, "preCustomStep"))
-        self.customStepTab.preCustomStep_listWidget.installEventFilter(self)
-        self.customStepTab.preCustomStepRun_pushButton.clicked.connect(partial(self.runManualStep, self.customStepTab.preCustomStep_listWidget))
-        self.customStepTab.preCustomStepEdit_pushButton.clicked.connect(partial(self.editFile, self.customStepTab.preCustomStep_listWidget))
+        csTap = self.customStepTab
+        csTap.preCustomStep_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    csTap.preCustomStep_checkBox,
+                    "doPreCustomStep"))
+        csTap.preCustomStepAdd_pushButton.clicked.connect(
+            self.addCustomStep)
+        csTap.preCustomStepNew_pushButton.clicked.connect(
+            self.newCustomStep)
+        csTap.preCustomStepDuplicate_pushButton.clicked.connect(
+            self.duplicateCustomStep)
+        csTap.preCustomStepExport_pushButton.clicked.connect(
+            self.exportCustomStep)
+        csTap.preCustomStepImport_pushButton.clicked.connect(
+            self.importCustomStep)
+        csTap.preCustomStepRemove_pushButton.clicked.connect(
+            partial(self.removeSelectedFromListWidget,
+                    csTap.preCustomStep_listWidget,
+                    "preCustomStep"))
+        csTap.preCustomStep_listWidget.installEventFilter(self)
+        csTap.preCustomStepRun_pushButton.clicked.connect(
+            partial(self.runManualStep,
+                    csTap.preCustomStep_listWidget))
+        csTap.preCustomStepEdit_pushButton.clicked.connect(
+            partial(self.editFile,
+                    csTap.preCustomStep_listWidget))
 
-        self.customStepTab.postCustomStep_checkBox.stateChanged.connect(partial(self.updateCheck, self.customStepTab.postCustomStep_checkBox, "doPostCustomStep"))
-        self.customStepTab.postCustomStepAdd_pushButton.clicked.connect(partial(self.addCustomStep, False))
-        self.customStepTab.postCustomStepNew_pushButton.clicked.connect(partial(self.newCustomStep, False))
-        self.customStepTab.postCustomStepDuplicate_pushButton.clicked.connect(partial(self.duplicateCustomStep, False))
-        self.customStepTab.postCustomStepExport_pushButton.clicked.connect(partial(self.exportCustomStep, False))
-        self.customStepTab.postCustomStepImport_pushButton.clicked.connect(partial(self.importCustomStep, False))
-        self.customStepTab.postCustomStepRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.customStepTab.postCustomStep_listWidget, "postCustomStep"))
-        self.customStepTab.postCustomStep_listWidget.installEventFilter(self)
-        self.customStepTab.postCustomStepRun_pushButton.clicked.connect(partial(self.runManualStep, self.customStepTab.postCustomStep_listWidget))
-        self.customStepTab.postCustomStepEdit_pushButton.clicked.connect(partial(self.editFile, self.customStepTab.postCustomStep_listWidget))
-
-
-
+        csTap.postCustomStep_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    csTap.postCustomStep_checkBox,
+                    "doPostCustomStep"))
+        csTap.postCustomStepAdd_pushButton.clicked.connect(
+            partial(self.addCustomStep, False))
+        csTap.postCustomStepNew_pushButton.clicked.connect(
+            partial(self.newCustomStep, False))
+        csTap.postCustomStepDuplicate_pushButton.clicked.connect(
+            partial(self.duplicateCustomStep, False))
+        csTap.postCustomStepExport_pushButton.clicked.connect(
+            partial(self.exportCustomStep, False))
+        csTap.postCustomStepImport_pushButton.clicked.connect(
+            partial(self.importCustomStep, False))
+        csTap.postCustomStepRemove_pushButton.clicked.connect(
+            partial(self.removeSelectedFromListWidget,
+                    csTap.postCustomStep_listWidget,
+                    "postCustomStep"))
+        csTap.postCustomStep_listWidget.installEventFilter(self)
+        csTap.postCustomStepRun_pushButton.clicked.connect(
+            partial(self.runManualStep,
+                    csTap.postCustomStep_listWidget))
+        csTap.postCustomStepEdit_pushButton.clicked.connect(
+            partial(self.editFile,
+                    csTap.postCustomStep_listWidget))
 
     def eventFilter(self, sender, event):
         if event.type() == QtCore.QEvent.ChildRemoved:
@@ -1084,7 +1189,8 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
         if not defPath or not os.path.isdir(defPath):
             defPath = shifter.SYNOPTIC_PATH
 
-        tabsDirectories = [ name for name in os.listdir(defPath) if os.path.isdir(os.path.join(defPath, name)) ]
+        tabsDirectories = [name for name in os.listdir(defPath) if
+                           os.path.isdir(os.path.join(defPath, name))]
         # Quick clean the first empty item
         if tabsDirectories and not tabsDirectories[0]:
             self.guideSettingsTab.available_listWidget.takeItem(0)
@@ -1096,8 +1202,12 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
 
     def skinLoad(self, *args):
             startDir = self.root.attr("skin").get()
-            filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Apply",
-                                      fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
+            filePath = pm.fileDialog2(
+                dialogStyle=2,
+                fileMode=1,
+                startingDirectory=startDir,
+                okc="Apply",
+                fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
             if not filePath:
                 return
             if not isinstance(filePath, basestring):
@@ -1124,32 +1234,37 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             stepAttr = "postCustomStep"
             stepWidget = self.customStepTab.postCustomStep_listWidget
 
-        # Check if we have a custom enviroment for the custom steps initial folder
-        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        # Check if we have a custom env for the custom steps initial folder
+        if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
         else:
             startDir = self.root.attr(stepAttr).get()
 
-        filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir, okc="Add",
-                                  fileFilter='Custom Step .py (*.py)')
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=1,
+            startingDirectory=startDir,
+            okc="Add",
+            fileFilter='Custom Step .py (*.py)')
         if not filePath:
             return
         if not isinstance(filePath, basestring):
             filePath = filePath[0]
 
         # Quick clean the first empty item
-        itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        itemsList = [i.text() for i in stepWidget.findItems(
+            "", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             stepWidget.takeItem(0)
 
-        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             filePath = os.path.abspath(filePath)
-            baseReplace = os.path.abspath(os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
+            baseReplace = os.path.abspath(os.environ.get(
+                MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
             filePath = filePath.replace(baseReplace, "")[1:]
 
-
         fileName = os.path.split(filePath)[1].split(".")[0]
-        stepWidget.addItem(fileName +" | "+filePath)
+        stepWidget.addItem(fileName + " | " + filePath)
         self.updateListAttr(stepWidget, stepAttr)
 
     def newCustomStep(self, pre=True, *args):
@@ -1170,14 +1285,18 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
             stepAttr = "postCustomStep"
             stepWidget = self.customStepTab.postCustomStep_listWidget
 
-        # Check if we have a custom enviroment for the custom steps initial folder
-        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        # Check if we have a custom env for the custom steps initial folder
+        if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
         else:
             startDir = self.root.attr(stepAttr).get()
 
-        filePath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir, okc="New",
-                                  fileFilter='Custom Step .py (*.py)')
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=0,
+            startingDirectory=startDir,
+            okc="New",
+            fileFilter='Custom Step .py (*.py)')
         if not filePath:
             return
         if not isinstance(filePath, basestring):
@@ -1198,32 +1317,36 @@ class CustomShifterStep(cstp.customShifterMainStep):
     def run(self, stepDict):
         """Run method.
 
-            i.e:  stepDict["mgearRun"].global_ctl  gets the global_ctl from shifter rig on post step
-            i.e:  stepDict["otherCustomStepName"].ctlMesh  gets the ctlMesh from a previous custom
-                    step called "otherCustomStepName"
+            i.e:  stepDict["mgearRun"].global_ctl  gets the global_ctl from
+                    shifter rig on post step
+            i.e:  stepDict["otherCustomStepName"].ctlMesh  gets the ctlMesh
+                    from a previous custom step called "otherCustomStepName"
         Args:
-            stepDict (dic): Dictionary containing the objects from the previous steps
+            stepDict (dic): Dictionary containing the objects from
+                the previous steps
 
         Returns:
             None: None
         """
-        return'''%stepName
+        return''' % stepName
         f = open(filePath, 'w')
         f.write(rawString + "\n")
         f.close()
 
         # Quick clean the first empty item
-        itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        itemsList = [i.text() for i in stepWidget.findItems(
+            "", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             stepWidget.takeItem(0)
 
-        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             filePath = os.path.abspath(filePath)
-            baseReplace = os.path.abspath(os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
+            baseReplace = os.path.abspath(os.environ.get(
+                MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
             filePath = filePath.replace(baseReplace, "")[1:]
 
         fileName = os.path.split(filePath)[1].split(".")[0]
-        stepWidget.addItem(fileName +" | "+filePath)
+        stepWidget.addItem(fileName + " | " + filePath)
         self.updateListAttr(stepWidget, stepAttr)
 
     def duplicateCustomStep(self, pre=True, *args):
@@ -1244,69 +1367,79 @@ class CustomShifterStep(cstp.customShifterMainStep):
             stepAttr = "postCustomStep"
             stepWidget = self.customStepTab.postCustomStep_listWidget
 
-        # Check if we have a custom enviroment for the custom steps initial folder
-        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        # Check if we have a custom env for the custom steps initial folder
+        if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
         else:
             startDir = self.root.attr(stepAttr).get()
 
         if stepWidget.selectedItems():
-            sourcePath = stepWidget.selectedItems()[0].text().split("|")[-1][1:]
+            sourcePath = stepWidget.selectedItems()[0].text().split(
+                "|")[-1][1:]
 
-        filePath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir, okc="New",
-                                  fileFilter='Custom Step .py (*.py)')
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=0,
+            startingDirectory=startDir,
+            okc="New",
+            fileFilter='Custom Step .py (*.py)')
         if not filePath:
             return
         if not isinstance(filePath, basestring):
             filePath = filePath[0]
 
-        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             sourcePath = os.path.join(startDir, sourcePath)
         shutil.copy(sourcePath, filePath)
 
         # Quick clean the first empty item
-        itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        itemsList = [i.text() for i in stepWidget.findItems(
+            "", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             stepWidget.takeItem(0)
 
-        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             filePath = os.path.abspath(filePath)
-            baseReplace = os.path.abspath(os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
+            baseReplace = os.path.abspath(os.environ.get(
+                MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
             filePath = filePath.replace(baseReplace, "")[1:]
 
-
         fileName = os.path.split(filePath)[1].split(".")[0]
-        stepWidget.addItem(fileName +" | "+filePath)
+        stepWidget.addItem(fileName + " | " + filePath)
         self.updateListAttr(stepWidget, stepAttr)
 
     def exportCustomStep(self, pre=True, *args):
         """Export custom steps to a json file
 
         Args:
-            pre (bool, optional): If true takes the steps from the pre step list
+            pre (bool, optional): If true takes the steps from the
+                pre step list
             *args: Maya's Dummy
 
         Returns:
             None: None
         """
         if pre:
-            stepAttr = "preCustomStep"
             stepWidget = self.customStepTab.preCustomStep_listWidget
         else:
-            stepAttr = "postCustomStep"
             stepWidget = self.customStepTab.postCustomStep_listWidget
 
         # Quick clean the first empty item
-        itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+        itemsList = [i.text() for i in stepWidget.findItems(
+            "", QtCore.Qt.MatchContains)]
         if itemsList and not itemsList[0]:
             stepWidget.takeItem(0)
 
-        # Check if we have a custom enviroment for the custom steps initial folder
-        if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        # Check if we have a custom env for the custom steps initial folder
+        if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
             startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
-            itemsList = [os.path.join(startDir, i.text().split("|")[-1][1:]) for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+            itemsList = [os.path.join(startDir, i.text().split("|")[-1][1:])
+                         for i in stepWidget.findItems(
+                         "", QtCore.Qt.MatchContains)]
         else:
-            itemsList = [i.text().split("|")[-1][1:] for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+            itemsList = [i.text().split("|")[-1][1:]
+                         for i in stepWidget.findItems(
+                         "", QtCore.Qt.MatchContains)]
             if itemsList:
                 startDir = os.path.split(itemsList[-1])[0]
             else:
@@ -1314,7 +1447,7 @@ class CustomShifterStep(cstp.customShifterMainStep):
                 return
 
         stepsDict = {}
-        stepsDict["itemsList"] =  itemsList
+        stepsDict["itemsList"] = itemsList
         for item in itemsList:
             step = open(item, "r")
             data = step.read()
@@ -1322,8 +1455,11 @@ class CustomShifterStep(cstp.customShifterMainStep):
             step.close()
 
         data_string = json.dumps(stepsDict, indent=4, sort_keys=True)
-        filePath = pm.fileDialog2(dialogStyle=2, fileMode=0, startingDirectory=startDir,
-                                  fileFilter='Shifter Custom Steps .scs (*%s)' %".scs")
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=0,
+            startingDirectory=startDir,
+            fileFilter='Shifter Custom Steps .scs (*%s)' % ".scs")
         if not filePath:
             return
         if not isinstance(filePath, basestring):
@@ -1350,19 +1486,26 @@ class CustomShifterStep(cstp.customShifterMainStep):
             stepWidget = self.customStepTab.postCustomStep_listWidget
 
         # option import only paths or unpack steps
-        option = pm.confirmDialog(  title='Shifter Custom Step Import Style',
-                                    message='Do you want to import only the path or unpack and import?',
-                                    button=['Only Path','Unpack', 'Cancel'], defaultButton='Only Path',
-                                    cancelButton='Cancel', dismissString='Cancel' )
+        option = pm.confirmDialog(
+            title='Shifter Custom Step Import Style',
+            message='Do you want to import only the path or'
+                    ' unpack and import?',
+            button=['Only Path', 'Unpack', 'Cancel'],
+            defaultButton='Only Path',
+            cancelButton='Cancel',
+            dismissString='Cancel')
 
-        if option in ['Only Path',  'Unpack' ]:
-            if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+        if option in ['Only Path', 'Unpack']:
+            if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
                 startDir = os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, "")
             else:
                 startDir = pm.workspace(q=True, rootDirectory=True)
 
-            filePath = pm.fileDialog2(  dialogStyle=2, fileMode=1, startingDirectory=startDir,
-                                        fileFilter='Shifter Custom Steps .scs (*%s)' %".scs")
+            filePath = pm.fileDialog2(
+                dialogStyle=2,
+                fileMode=1,
+                startingDirectory=startDir,
+                fileFilter='Shifter Custom Steps .scs (*%s)' % ".scs")
             if not filePath:
                 return
             if not isinstance(filePath, basestring):
@@ -1370,12 +1513,15 @@ class CustomShifterStep(cstp.customShifterMainStep):
             stepDict = json.load(open(filePath))
             stepsList = []
 
-        if option =='Only Path':
+        if option == 'Only Path':
             for item in stepDict["itemsList"]:
                 stepsList.append(item)
 
         elif option == 'Unpack':
-            unPackDir = pm.fileDialog2(dialogStyle=2, fileMode=2, startingDirectory=startDir)
+            unPackDir = pm.fileDialog2(
+                dialogStyle=2,
+                fileMode=2,
+                startingDirectory=startDir)
             if not filePath:
                 return
             if not isinstance(unPackDir, basestring):
@@ -1389,22 +1535,23 @@ class CustomShifterStep(cstp.customShifterMainStep):
                 f.write(stepDict[item])
                 f.close()
 
-        if option in ['Only Path',  'Unpack' ]:
+        if option in ['Only Path', 'Unpack']:
 
             for item in stepsList:
                 # Quick clean the first empty item
-                itemsList = [i.text() for i in stepWidget.findItems("", QtCore.Qt.MatchContains)]
+                itemsList = [i.text() for i in stepWidget.findItems(
+                    "", QtCore.Qt.MatchContains)]
                 if itemsList and not itemsList[0]:
                     stepWidget.takeItem(0)
 
-                if  os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
                     item = os.path.abspath(item)
-                    baseReplace = os.path.abspath(os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
+                    baseReplace = os.path.abspath(os.environ.get(
+                        MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""))
                     item = item.replace(baseReplace, "")[1:]
 
-
                 fileName = os.path.split(item)[1].split(".")[0]
-                stepWidget.addItem(fileName +" | "+item)
+                stepWidget.addItem(fileName + " | " + item)
                 self.updateListAttr(stepWidget, stepAttr)
 
 

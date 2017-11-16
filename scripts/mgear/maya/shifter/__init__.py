@@ -1,3 +1,4 @@
+"""Shifter's  Rig Main class."""
 import os.path
 import datetime
 import getpass
@@ -33,12 +34,14 @@ SHIFTER_COMPONENT_ENV_KEY = "MGEAR_SHIFTER_COMPONENT_PATH"
 
 
 def getComponentDirectories():
+    """Get the components directory"""
     return mgear.maya.utils.gatherCustomModuleDirectories(
         SHIFTER_COMPONENT_ENV_KEY,
         os.path.join(os.path.dirname(__file__), "component"))
 
 
 def importComponentGuide(comp_type):
+    """Import the Component guide"""
     dirs = getComponentDirectories()
     defFmt = "mgear.maya.shifter.component.{}.guide"
     customFmt = "{}.guide"
@@ -49,6 +52,7 @@ def importComponentGuide(comp_type):
 
 
 def importComponent(comp_type):
+    """Import the Component """
     dirs = getComponentDirectories()
     defFmt = "mgear.maya.shifter.component.{}"
     customFmt = "{}"
@@ -87,9 +91,8 @@ class Rig(object):
         self.customStepDic = {}
 
     def buildFromSelection(self):
-        """Build the rig from selected guides.
+        """Build the rig from selected guides."""
 
-        """
         startTime = datetime.datetime.now()
         mgear.log(
             "= GEAR RIG SYSTEM ==============================================")
@@ -109,8 +112,7 @@ class Rig(object):
             " ] ======")
 
     def build(self):
-        """Build the rig.
-        """
+        """Build the rig."""
 
         self.options = self.guide.values
         self.guides = self.guide.components
@@ -384,7 +386,7 @@ class Rig(object):
 
         Args:
             subGroups (dagNode or list of dagNode): Groups (maya set) to add
-                 as a Subgroup.
+                as a Subgroup.
             namparentGroupses (str or list of str): Names of the parent groups
                 to create.
 
