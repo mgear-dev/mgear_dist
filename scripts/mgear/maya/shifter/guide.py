@@ -25,7 +25,7 @@
 # Date:       2016 / 10 / 10
 
 """
-Shifter's MainGuide class and RigGuide class.
+Shifter's Main class and Rig class.
 """
 
 ##########################################################
@@ -77,7 +77,7 @@ MGEAR_SHIFTER_CUSTOMSTEP_KEY = "MGEAR_SHIFTER_CUSTOMSTEP_PATH"
 # GUIDE
 ##########################################################
 
-class MainGuide(object):
+class Main(object):
     """
     The main guide class.
     Provide the methods to add parameters, set parameter values, create property...
@@ -251,7 +251,7 @@ class MainGuide(object):
 # RIG GUIDE
 ##########################################################
 
-class RigGuide(MainGuide):
+class Rig(Main):
     """
     Rig guide class.
 
@@ -795,7 +795,7 @@ class helperSlots(object):
         sideIndex = self.mainSettingsTab.side_comboBox.currentIndex()
         newSide = sideSet[sideIndex]
         newIndex = self.mainSettingsTab.componentIndex_spinBox.value()
-        guide = RigGuide()
+        guide = Rig()
         guide.updateProperties(self.root, newName, newSide, newIndex)
         pm.select(self.root, r=True)
         #sync index
@@ -1406,3 +1406,8 @@ class CustomShifterStep(cstp.customShifterMainStep):
                 fileName = os.path.split(item)[1].split(".")[0]
                 stepWidget.addItem(fileName +" | "+item)
                 self.updateListAttr(stepWidget, stepAttr)
+
+
+# Backwards compatibility aliases
+MainGuide = Main
+RigGuide = Rig

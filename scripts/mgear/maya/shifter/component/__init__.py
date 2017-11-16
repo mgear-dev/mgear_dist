@@ -49,7 +49,7 @@ import mgear.maya.icon as ico
 #############################################
 # COMPONENT
 #############################################
-class MainComponent(object):
+class Main(object):
     """
     Main component class
 
@@ -1089,3 +1089,7 @@ class MainComponent(object):
 
     fullName = property(getFullName)
     type = property(getType)
+
+
+# Backwards compatibility alias
+MainComponent = Main

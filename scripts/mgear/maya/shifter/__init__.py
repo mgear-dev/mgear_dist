@@ -10,8 +10,7 @@ from pymel import versions
 # mgear
 import mgear
 import mgear.maya.utils
-from mgear.maya.shifter.guide import RigGuide, helperSlots
-from mgear.maya.shifter.component import MainComponent
+from . import guide, component
 
 from mgear.maya import primitive, attribute, skin, dag
 
@@ -67,7 +66,7 @@ class Rig(object):
     """The main rig class.
 
     Attributes:
-        guide: RigGuide() initialization.
+        guide: guide.Rig() initialization.
         groups (dic): Rig groups (Maya sets)
         components (dic): Dictionary for the rig components.
             Keys are the component fullname (ie. 'arm_L0')
@@ -77,7 +76,7 @@ class Rig(object):
 
     def __init__(self):
 
-        self.guide = RigGuide()
+        self.guide = guide.Rig()
 
         self.groups = {}
         self.subGroups = {}
@@ -135,7 +134,7 @@ class Rig(object):
             customSteps = self.options[attr].split(",")
             for step in customSteps:
                 if not self.stopBuild:
-                    self.stopBuild = helperSlots.runStep(
+                    self.stopBuild = guide.helperSlots.runStep(
                         step.split("|")[-1][1:], self.customStepDic)
                 else:
                     pm.displayWarning("Build Stopped")
@@ -233,29 +232,29 @@ class Rig(object):
         self.components_infos = {}
 
         for comp in self.guide.componentsIndex:
-            guide = self.guides[comp]
-            mgear.log("Init : " + guide.fullName + " (" + guide.type + ")")
+            guide_ = self.guides[comp]
+            mgear.log("Init : " + guide_.fullName + " (" + guide_.type + ")")
 
-            module = importComponent(guide.type)
+            module = importComponent(guide_.type)
             Component = getattr(module, "Component")
 
-            component = Component(self, guide)
-            if component.fullName not in self.componentsIndex:
-                self.components[component.fullName] = component
-                self.componentsIndex.append(component.fullName)
+            comp = Component(self, guide_)
+            if comp.fullName not in self.componentsIndex:
+                self.components[comp.fullName] = comp
+                self.componentsIndex.append(comp.fullName)
 
-                self.components_infos[component.fullName] = [
-                    guide.compType, guide.getVersion(), guide.author]
+                self.components_infos[comp.fullName] = [
+                    guide_.compType, guide_.getVersion(), guide_.author]
 
         # Creation steps
-        self.steps = MainComponent.steps
+        self.steps = component.Main.steps
         for i, name in enumerate(self.steps):
             # for count, compName in enumerate(self.componentsIndex):
             for compName in self.componentsIndex:
-                component = self.components[compName]
-                mgear.log(name + " : " + component.fullName +
-                          " (" + component.type + ")")
-                component.stepMethods[i]()
+                comp = self.components[compName]
+                mgear.log(name + " : " + comp.fullName +
+                          " (" + comp.type + ")")
+                comp.stepMethods[i]()
 
             if self.options["step"] >= 1 and i >= self.options["step"] - 1:
                 break
@@ -277,10 +276,10 @@ class Rig(object):
         mgear.log("Creating groups")
         # Retrieve group content from components
         for name in self.componentsIndex:
-            component = self.components[name]
-            for name, objects in component.groups.items():
+            component_ = self.components[name]
+            for name, objects in component_.groups.items():
                 self.addToGroup(objects, name)
-            for name, objects in component.subGroups.items():
+            for name, objects in component_.subGroups.items():
                 self.addToSubGroup(objects, name)
 
         # Create master set to group all the groups
