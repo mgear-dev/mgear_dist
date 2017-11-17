@@ -5,7 +5,8 @@ engines:
 ratings:
    paths:
    - "**.py"
-   
+
 exclude_paths:
   - "*/**/widget.py"
   - "scripts/mgear/maya/shifter/component/**"
+  - "*UI.py"
