@@ -289,7 +289,7 @@ class Main(object):
 
             if gearMulMatrix:
                 applyop.gear_mulmatrix_op(mulmat_node.attr('output'),
-                                            im, jnt, 'r')
+                                          im, jnt, 'r')
             else:
                 nod.createMultMatrixNode(
                     mulmat_node.attr('matrixSum'), im, jnt, 'r')
