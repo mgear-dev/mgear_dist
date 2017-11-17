@@ -13,7 +13,7 @@ from pymel import versions
 
 # mgear
 import mgear
-from mgear.maya import primitive, vector, transform, attribute
+from mgear.maya import primitive, vector, transform, attribute, applyop
 # node and icon imported with alias to avoid confusion with variables of the
 # same name
 import mgear.maya.node as nod
@@ -249,7 +249,7 @@ class Main(object):
             self.active_jnt = jnt
 
             if gearMulMatrix:
-                mulmat_node = attribute.gear_mulmatrix_op(
+                mulmat_node = applyop.gear_mulmatrix_op(
                     obj + ".worldMatrix", jnt + ".parentInverseMatrix")
                 dm_node = nod.createDecomposeMatrixNode(
                     mulmat_node + ".output")
@@ -288,7 +288,7 @@ class Main(object):
             im = m.inverse()
 
             if gearMulMatrix:
-                attribute.gear_mulmatrix_op(mulmat_node.attr('output'),
+                applyop.gear_mulmatrix_op(mulmat_node.attr('output'),
                                             im, jnt, 'r')
             else:
                 nod.createMultMatrixNode(

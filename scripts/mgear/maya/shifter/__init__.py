@@ -14,15 +14,17 @@ import mgear.maya.utils
 from . import guide, component
 
 from mgear.maya import primitive, attribute, skin, dag
+# icon imported with alias to avoid confusion with variables of the same name
+import mgear.maya.icon as ico
 
 
 # check if we have loaded the necessary plugins
-if not pm.pluginInfo("mgear_solvers", q=True, load=True):
+if not pm.pluginInfo("mgear_solvers", q=True, loaded=True):
     try:
         pm.loadPlugin("mgear_solvers")
     except RuntimeError:
         pm.displayError("You need the mgear_solvers plugin!")
-if not pm.pluginInfo("matrixNodes", q=True, load=True):
+if not pm.pluginInfo("matrixNodes", q=True, loaded=True):
     pm.loadPlugin("matrixNodes")
 
 COMPONENT_PATH = os.path.join(os.path.dirname(__file__), "component")
@@ -347,7 +349,7 @@ class Rig(object):
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
         else:
-            ctl = icon.create(parent, name, m, color, icon, **kwargs)
+            ctl = ico.create(parent, name, m, color, icon, **kwargs)
 
         self.addToGroup(ctl, "controllers")
 
