@@ -17,7 +17,6 @@ from mgear import string
 from mgear.maya import dag, vector, transform, applyop, attribute, curve, icon
 
 from mgear.maya.shifter import guide, gui
-# import mgear.maya.shifter.gui as gui
 
 import mainSettingsUI as msui
 

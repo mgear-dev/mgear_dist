@@ -13,9 +13,7 @@ import mgear
 import mgear.maya.utils
 from . import guide, component
 
-from mgear.maya import primitive, attribute, skin, dag
-# icon imported with alias to avoid confusion with variables of the same name
-import mgear.maya.icon as ico
+from mgear.maya import primitive, attribute, skin, dag, icon
 
 
 # check if we have loaded the necessary plugins
@@ -325,7 +323,7 @@ class Rig(object):
                     "Skin doesn't exist or is not correct. " +
                     self.options["skin"] + " Skipped!")
 
-    def addCtl(self, parent, name, m, color, icon, **kwargs):
+    def addCtl(self, parent, name, m, color, iconShape, **kwargs):
         """Create the control and apply the shape, if this is alrealdy stored
         in the guide controllers grp.
 
@@ -335,8 +333,8 @@ class Rig(object):
             m (matrix): The transfromation matrix for the control.
             color (int or list of float): The color for the control in index
                 or RGB.
-            icon (str): The controls default shape.
-            kwargs (variant): Other arguments for the icon type variations.
+            iconShape (str): The controls default shape.
+            kwargs (variant): Other arguments for the iconShape type variations
 
         Returns:
             dagNode: The Control.
@@ -349,7 +347,7 @@ class Rig(object):
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
         else:
-            ctl = ico.create(parent, name, m, color, icon, **kwargs)
+            ctl = icon.create(parent, name, m, color, iconShape, **kwargs)
 
         self.addToGroup(ctl, "controllers")
 
