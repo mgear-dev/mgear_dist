@@ -35,7 +35,7 @@ import customStepUI as csui
 # pyside
 from maya.app.general.mayaMixin import MayaQDockWidget
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
-QtGui, QtCore, QtWidgets, wrapInstance = pyqt.qt_import()
+from mgear.vendor.Qt import QtCore, QtWidgets
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"

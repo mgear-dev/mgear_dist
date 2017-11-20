@@ -140,7 +140,7 @@ class Guide_UI(object):
 
     def drawComp(self, compType, *args):
 
-        guide = shifter.RigGuide()
+        guide = shifter.guide.Rig()
 
         if pm.selected():
             parent = pm.selected()[0]
@@ -161,7 +161,7 @@ class Guide_UI(object):
             '\", window=True)'))
         pm.setParent('..')
         pm.showWindow(logWin)
-        print mgear.logInfos()
+        mgear.logInfos()
         rg = shifter.Rig()
         rg.buildFromSelection()
 

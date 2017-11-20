@@ -7,31 +7,28 @@ from functools import partial
 import maya.cmds as cmds
 # pyMel
 import pymel.core as pm
-import pymel.core.datatypes as dt
+from pymel.core import datatypes
 
 # mgear
 import mgear
 
 from mgear import string
 
-from mgear.maya import dag, vector, transform, applyop, attribute, curve, pyqt
+from mgear.maya import dag, vector, transform, applyop, attribute, curve, icon
 
-import mgear.maya.icon as ico
-
-from mgear.maya.shifter.guide import MainGuide
-from mgear.maya.shifter.guide import helperSlots
-import mgear.maya.shifter.gui as gui
+from mgear.maya.shifter import guide, gui
+# import mgear.maya.shifter.gui as gui
 
 import mainSettingsUI as msui
 
-QtGui, QtCore, QtWidgets, wrapInstance = pyqt.qt_import()
-
+from mgear.vendor.Qt import QtWidgets, QtCore
 
 ##########################################################
 # COMPONENT GUIDE
 ##########################################################
 
-class ComponentGuide(MainGuide):
+
+class ComponentGuide(guide.Main):
     """Main class for component guide creation.
 
     This class handles all the parameters and objectDefs creation.
@@ -354,19 +351,19 @@ class ComponentGuide(MainGuide):
 
                 if self.jNumberVal:
                     if self.dirAxisVal == "X":
-                        offVec = dt.Vector(self.jSpacVal, 0, 0)
+                        offVec = datatypes.Vector(self.jSpacVal, 0, 0)
                     elif self.dirAxisVal == "-X":
-                        offVec = dt.Vector(self.jSpacVal * -1, 0, 0)
+                        offVec = datatypes.Vector(self.jSpacVal * -1, 0, 0)
                     elif self.dirAxisVal == "Y":
-                        offVec = dt.Vector(0, self.jSpacVal, 0)
+                        offVec = datatypes.Vector(0, self.jSpacVal, 0)
                     elif self.dirAxisVal == "-Y":
-                        offVec = dt.Vector(0, self.jSpacVal * -1, 0)
+                        offVec = datatypes.Vector(0, self.jSpacVal * -1, 0)
                     elif self.dirAxisVal == "Z":
-                        offVec = dt.Vector(0, 0, self.jSpacVal)
+                        offVec = datatypes.Vector(0, 0, self.jSpacVal)
                     elif self.dirAxisVal == "-Z":
-                        offVec = dt.Vector(0, 0, self.jSpacVal * -1)
+                        offVec = datatypes.Vector(0, 0, self.jSpacVal * -1)
 
-                    newPosition = dt.Vector(0, 0, 0)
+                    newPosition = datatypes.Vector(0, 0, 0)
                     for i in range(self.jNumberVal):
                         newPosition = offVec + newPosition
                         localName = string.replaceSharpWithPadding(name, i)
@@ -473,9 +470,9 @@ class ComponentGuide(MainGuide):
         """
         if "root" not in self.tra.keys():
             self.tra["root"] = transform.getTransformFromPos(
-                dt.Vector(0, 0, 0))
+                datatypes.Vector(0, 0, 0))
 
-        self.root = ico.guideRootIcon(self.parent, self.getName(
+        self.root = icon.guideRootIcon(self.parent, self.getName(
             "root"), color=13, m=self.tra["root"])
 
         # Add Parameters from parameter definition list.
@@ -509,7 +506,7 @@ class ComponentGuide(MainGuide):
             loc = self.prim[name].create(
                 parent, self.getName(name), self.tra[name], color=17)
         else:
-            loc = ico.guideLocatorIcon(parent, self.getName(
+            loc = icon.guideLocatorIcon(parent, self.getName(
                 name), color=17, m=self.tra[name])
 
         return loc
@@ -546,7 +543,7 @@ class ComponentGuide(MainGuide):
             if localName not in self.tra.keys():
                 break
 
-            loc = ico.guideLocatorIcon(parent, self.getName(
+            loc = icon.guideLocatorIcon(parent, self.getName(
                 localName), color=17, m=self.tra[localName])
             locs.append(loc)
             if updateParent:
@@ -572,13 +569,13 @@ class ComponentGuide(MainGuide):
         """
         if name not in self.blades.keys():
             self.blades[name] = vector.Blade(
-                transform.getTransformFromPos(dt.Vector(0, 0, 0)))
+                transform.getTransformFromPos(datatypes.Vector(0, 0, 0)))
             offset = False
         else:
             offset = True
 
         dist = .6 * self.root.attr("scaleX").get()
-        blade = ico.guideBladeIcon(parent=parentPos, name=self.getName(
+        blade = icon.guideBladeIcon(parent=parentPos, name=self.getName(
             name), lenX=dist, color=13, m=self.blades[name].transform)
         aim_cns = applyop.aimCns(blade, parentDir, axis="xy", wupType=2,
                                  wupVector=[0, 1, 0], wupObject=self.root,
@@ -802,7 +799,7 @@ class mainSettingsTab(QtWidgets.QDialog, msui.Ui_Form):
         self.setupUi(self)
 
 
-class componentMainSettings(QtWidgets.QDialog, helperSlots):
+class componentMainSettings(QtWidgets.QDialog, guide.helperSlots):
     valueChanged = QtCore.Signal(int)
 
     def __init__(self, parent=None):

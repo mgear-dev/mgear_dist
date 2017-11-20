@@ -1,5 +1,5 @@
 
-from PySide2 import QtCore, QtWidgets
+from mgear.vendor.Qt import QtCore, QtWidgets
 
 
 class Ui_gameTools(object):

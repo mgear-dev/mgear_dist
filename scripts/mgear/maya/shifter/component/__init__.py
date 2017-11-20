@@ -13,11 +13,11 @@ from pymel import versions
 
 # mgear
 import mgear
-from mgear.maya import primitive, vector, transform, attribute, applyop
-# node and icon imported with alias to avoid confusion with variables of the
+from mgear.maya import primitive, vector, transform
+from mgear.maya import attribute, applyop, node, icon
+# node and iconShape imported with alias to avoid confusion with variables of the
 # same name
-import mgear.maya.node as nod
-import mgear.maya.icon as ico
+# import mgear.maya.iconShape as icon
 
 #############################################
 # COMPONENT
@@ -251,13 +251,13 @@ class Main(object):
             if gearMulMatrix:
                 mulmat_node = applyop.gear_mulmatrix_op(
                     obj + ".worldMatrix", jnt + ".parentInverseMatrix")
-                dm_node = nod.createDecomposeMatrixNode(
+                dm_node = node.createDecomposeMatrixNode(
                     mulmat_node + ".output")
                 m = mulmat_node.attr('output').get()
             else:
-                mulmat_node = nod.createMultMatrixNode(
+                mulmat_node = node.createMultMatrixNode(
                     obj + ".worldMatrix", jnt + ".parentInverseMatrix")
-                dm_node = nod.createDecomposeMatrixNode(
+                dm_node = node.createDecomposeMatrixNode(
                     mulmat_node + ".matrixSum")
                 m = mulmat_node.attr('matrixSum').get()
             pm.connectAttr(dm_node + ".outputTranslate", jnt + ".t")
@@ -291,7 +291,7 @@ class Main(object):
                 applyop.gear_mulmatrix_op(mulmat_node.attr('output'),
                                           im, jnt, 'r')
             else:
-                nod.createMultMatrixNode(
+                node.createMultMatrixNode(
                     mulmat_node.attr('matrixSum'), im, jnt, 'r')
 
         else:
@@ -337,7 +337,7 @@ class Main(object):
 
         return vector.getPlaneBiNormal(pos[0], pos[1], pos[2])
 
-    def addCtl(self, parent, name, m, color, icon, tp=None, lp=True, **kwargs):
+    def addCtl(self, parent, name, m, color, iconShape, tp=None, lp=True, **kwargs):
         """
         Create the control and apply the shape, if this is alrealdy stored
         in the guide controllers grp.
@@ -348,11 +348,11 @@ class Main(object):
             m (matrix): The transfromation matrix for the control.
             color (int or list of float): The color for the control in index or
                 RGB.
-            icon (str): The controls default shape.
+            iconShape (str): The controls default shape.
             tp (dagNode): Tag Parent Control object to connect as a parent
                 controller
             lp (bool): Lock the parent controller channels
-            kwargs (variant): Other arguments for the icon type variations.
+            kwargs (variant): Other arguments for the iconShape type variations.
 
         Returns:
             dagNode: The Control.
@@ -366,9 +366,9 @@ class Main(object):
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
                 pm.rename(shape, fullName + "Shape")
-            ico.setcolor(ctl, color)
+            icon.setcolor(ctl, color)
         else:
-            ctl = ico.create(parent, fullName, m, color, icon, **kwargs)
+            ctl = icon.create(parent, fullName, m, color, iconShape, **kwargs)
 
         # create the attributes to handlde mirror and symetrical pose
         attribute.addAttribute(ctl, "invTx", "bool", 0, keyable=False,

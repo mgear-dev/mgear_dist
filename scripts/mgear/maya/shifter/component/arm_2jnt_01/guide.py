@@ -11,7 +11,8 @@ import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
 import settingsUI as sui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+# QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+from mgear.vendor.Qt import QtWidgets, QtCore
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos"
