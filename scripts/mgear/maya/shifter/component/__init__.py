@@ -15,9 +15,6 @@ from pymel import versions
 import mgear
 from mgear.maya import primitive, vector, transform
 from mgear.maya import attribute, applyop, node, icon
-# node and iconShape imported with alias to avoid confusion with variables of the
-# same name
-# import mgear.maya.iconShape as icon
 
 #############################################
 # COMPONENT

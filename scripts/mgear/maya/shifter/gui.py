@@ -170,7 +170,7 @@ class Guide_UI(object):
         oSel = pm.selected()
         if oSel:
             root = oSel[0]
-            guide = shifter.RigGuide()
+            guide = shifter.guide.Rig()
             guide.duplicate(root, sym)
         else:
             mgear.log("Select one component root to edit properties",
