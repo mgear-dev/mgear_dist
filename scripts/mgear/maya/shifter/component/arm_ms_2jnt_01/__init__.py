@@ -564,7 +564,7 @@ class Component(component.Main):
                                                      0,
                                                      5)
         self.jntctl_vis_att = self.addAnimParam(
-            "jntct_vis", "Joint Ctl Vis", "bool", 0, 1, 1)
+            "jntct_vis", "Joint Ctl Vis", "bool", 0)
         # Ref
         if self.settings["fkrefarray"]:
             ref_names = self.settings["fkrefarray"].split(",")

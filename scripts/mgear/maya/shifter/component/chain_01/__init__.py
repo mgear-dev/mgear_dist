@@ -37,7 +37,7 @@ class Component(component.Main):
             self.fk_ctl = []
             self.fk_ref = []
             self.fk_off = []
-            t = self.guide.transform["root"]
+            t = self.guide.tra["root"]
             self.ik_cns = primitive.addTransform(
                 self.root, self.getName("ik_cns"), t)
             parent = self.ik_cns
