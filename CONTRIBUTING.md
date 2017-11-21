@@ -5,10 +5,10 @@
 
 ### Code Style
 
-We are moving all the code to [PEP8](https://www.python.org/dev/peps/pep-0008/)
+We are refactoring all the code to [PEP8](https://www.python.org/dev/peps/pep-0008/)
 If you want to contribute please follow the PEP8 standard
 
-#### Line indentation for arguments
+#### Line break for long arguments
 
 ```python
 
