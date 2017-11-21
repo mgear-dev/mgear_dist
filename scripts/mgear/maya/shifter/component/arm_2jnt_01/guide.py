@@ -58,7 +58,8 @@ class Guide(guide.ComponentGuide):
         self.eff = self.addLoc("eff", self.wrist, vTemp)
 
         self.dispcrv = self.addDispCurve(
-            "crv", [self.root, self.elbow, self.wrist, self.eff])
+            "crv",
+            [self.root, self.elbow, self.wrist, self.eff])
 
     def addParameters(self):
         """Add the configurations settings"""

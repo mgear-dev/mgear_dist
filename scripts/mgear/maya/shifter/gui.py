@@ -252,7 +252,7 @@ class Guide_UI(object):
                 root.attr("default_rotorder").set(
                     rotOrderSet.index(pRotOrder.getValue()))
 
-            guide = shifter.RigGuide()
+            guide = shifter.guide.Rig()
             guide.updateProperties(root, newName, newSide, newIndex)
             pm.select(root, r=True)
 
