@@ -638,8 +638,7 @@ class Component(component.Main):
         self.jointRelatives["ankle"] = len(self.div_cns)
         self.jointRelatives["eff"] = len(self.div_cns)
 
-    def addConnection(self):
-        """Add more connection definition to the set"""
+    def connect_standard(self):
         self.parent.addChild(self.root)
 
         # Set the Ik Reference

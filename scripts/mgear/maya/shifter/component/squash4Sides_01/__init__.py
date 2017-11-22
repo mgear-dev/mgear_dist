@@ -143,6 +143,5 @@ class Component(component.Main):
             self.jointRelatives["int"] = 0
             self.jointRelatives["ext"] = 0
 
-    def addConnection(self):
-        """Add more connection definition to the set"""
+    def connect_standard(self):
         self.connect_standardWithSimpleIkRef()
