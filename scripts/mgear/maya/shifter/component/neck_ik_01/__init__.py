@@ -503,8 +503,6 @@ class Component(component.Main):
         """Add more connection definition to the set"""
         self.connect_standardWithIkRef()
 
-    # standard connection definition with ik and upv references.
-    # @param self
     def connect_standardWithIkRef(self):
 
         self.parent.addChild(self.root)

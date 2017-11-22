@@ -122,6 +122,5 @@ class Component(component.Main):
         self.jointRelatives["root"] = 0
         self.jointRelatives["tip"] = 1
 
-    def addConnection(self):
-        """Add more connection definition to the set"""
+    def connect_standard(self):
         self.parent.addChild(self.root)

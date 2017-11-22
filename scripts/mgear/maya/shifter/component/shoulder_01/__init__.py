@@ -108,8 +108,7 @@ class Component(component.Main):
         self.jointRelatives["root"] = 0
         self.jointRelatives["tip"] = 0
 
-    def addConnection(self):
-        """Add more connection definition to the set"""
+    def connect_standard(self):
         self.parent.addChild(self.root)
         self.connect_standardWithRotRef(self.settings["refArray"],
                                         self.orbit_cns)
