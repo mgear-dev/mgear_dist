@@ -334,7 +334,15 @@ class Main(object):
 
         return vector.getPlaneBiNormal(pos[0], pos[1], pos[2])
 
-    def addCtl(self, parent, name, m, color, iconShape, tp=None, lp=True, **kwargs):
+    def addCtl(self,
+               parent,
+               name,
+               m,
+               color,
+               iconShape,
+               tp=None,
+               lp=True,
+               **kwargs):
         """
         Create the control and apply the shape, if this is alrealdy stored
         in the guide controllers grp.
@@ -349,7 +357,7 @@ class Main(object):
             tp (dagNode): Tag Parent Control object to connect as a parent
                 controller
             lp (bool): Lock the parent controller channels
-            kwargs (variant): Other arguments for the iconShape type variations.
+            kwargs (variant): Other arguments for the iconShape type variations
 
         Returns:
             dagNode: The Control.
