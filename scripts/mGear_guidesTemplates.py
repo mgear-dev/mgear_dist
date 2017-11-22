@@ -10,7 +10,7 @@ def guideUI(*args):
     gui.Guide_UI()
 
 
-@utils.one_undo
+# @utils.one_undo
 def buildFromSelection(*args):
     """Build the rig from the guide root selection or a component root"""
     gui.Guide_UI.buildFromSelection()

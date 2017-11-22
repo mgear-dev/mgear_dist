@@ -8,6 +8,10 @@
 We are refactoring all the code to [PEP8](https://www.python.org/dev/peps/pep-0008/)
 If you want to contribute please follow the PEP8 standard
 
+#### Ignore PEP8 Errors
+
+"W503": [Break bfore aor after binary operator](https://www.python.org/dev/peps/pep-0008/#should-a-line-break-before-or-after-a-binary-operator)
+
 #### Line break for long arguments
 
 ```python

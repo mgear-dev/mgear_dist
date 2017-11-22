@@ -149,8 +149,8 @@ class Guide_UI(object):
 
         guide.drawNewComponent(parent, compType)
 
+    # @utils.one_undo
     @classmethod
-    @utils.one_undo
     def buildFromSelection(self, *args):
 
         logWin = pm.window(title="mGear Build Log", iconName='mGear Log')

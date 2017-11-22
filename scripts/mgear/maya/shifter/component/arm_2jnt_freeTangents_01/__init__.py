@@ -1037,7 +1037,7 @@ class Component(component.Main):
         self.volDriver_att = div_node2 + ".outputX"
 
         # connecting tangent scaele compensation after
-        # volume to aboid duplicate some nodes
+        # volume to avoid duplicate some nodes
         distA_node = node.createDistNode(self.tws0_loc, self.mid_ctl)
         distB_node = node.createDistNode(self.mid_ctl, self.tws2_loc)
 
