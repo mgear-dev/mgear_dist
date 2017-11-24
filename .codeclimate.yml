@@ -10,3 +10,11 @@ exclude_paths:
   - "*/**/widget.py"
   - "scripts/mgear/maya/shifter/component/**"
   - "**UI.py"
+
+checks:
+  file-lines:
+    config:
+      threshold: 1000
+  method-lines:
+    config:
+      threshold: 100
