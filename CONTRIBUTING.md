@@ -1,7 +1,48 @@
 ## Contributing to mGear
 
 
+### Docstrings
 
+All docstrings are written in Google Napoleon format.
+
+```python
+def function(a, b=True):
+    """Summary here, no line breaks
+
+    Arguments:
+        a (str): A first argument, mandatory
+        b (bool, optional): A second argument
+
+    Example:
+        >>> print("A doctest")
+        'A doctest'
+
+    """
+```
+
+<br>
+
+### Quotation Marks
+
+Default to double-ticks, fallback to single-tick.
+
+```python
+# Right
+side = "Right"
+
+# Wrong
+side = 'Left'
+
+# Right
+def function():
+    """It's a single tick"""
+
+# Wrong
+def function():
+    '''It's a single tick"""
+```
+
+<br>
 
 ### Code Style
 
