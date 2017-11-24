@@ -1,5 +1,41 @@
 ## Contributing to mGear
 
+### Relative imports
+
+Where possible, relatively reference the root mgear package.
+
+**Wrong**
+
+```python
+from mgear.maya import rigbits
+```
+
+**Right**
+
+```python
+from .maya import rigbits
+```
+
+This enables mgear to be bundled together with another library, e.g. `from .vendor.mgear import maya` and also avoids mgear being picked up from another location on a user's machine and PYTHONPATH. It also shortens the import line, which is always nice.
+
+<br>
+
+### Avoid `import as`
+
+Where possible, avoid the use of `import ... as ...`.
+
+```python
+from mgear.maya import rigbits as rb
+```
+
+This makes it more difficult to understand where a particular call is coming from, when read by someone who didn't initially make that import.
+
+```python
+swg.run_important_function()
+# What does this do? :O
+```
+
+<br>
 
 ### Tuple versus List
 
@@ -22,6 +58,8 @@ immutable.append(4)
 ```
 
 Whereas a list would not, and cause a difficult-to-debug error. The fabled "Works on my machine (tm)".
+
+<br>
 
 ### Mutable arguments
 
@@ -56,6 +94,8 @@ function()
 function()
 # [1]
 ```
+
+<br>
 
 ### Docstrings
 
