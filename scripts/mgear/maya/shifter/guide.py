@@ -1,23 +1,14 @@
-
-"""
-Shifter's Main class and Rig class.
-"""
-
-##########################################################
-# GLOBAL
-##########################################################
 # Built-in
 import os
-import shutil
 import sys
+import imp
 import json
+import shutil
+import getpass
+import datetime
+import traceback
 import subprocess
 from functools import partial
-import datetime
-import getpass
-import traceback
-import imp
-
 
 # pymel
 import pymel.core as pm
@@ -25,17 +16,16 @@ from pymel.core import datatypes
 
 # mgear
 import mgear
-from mgear.maya import attribute, dag, vector, pyqt, skin
-import mgear.string
-import mgear.string as string
+from .. import attribute, dag, vector, pyqt, skin
+from ... import string
+from ...vendor.Qt import QtCore, QtWidgets
 
-import guideUI as guui
-import customStepUI as csui
+from . import guideUI as guui
+from . import customStepUI as csui
 
 # pyside
 from maya.app.general.mayaMixin import MayaQDockWidget
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
-from mgear.vendor.Qt import QtCore, QtWidgets
 
 GUIDE_UI_WINDOW_NAME = "guide_UI_window"
 GUIDE_DOCK_NAME = "Guide_Components"
@@ -44,27 +34,24 @@ TYPE = "mgear_guide_root"
 
 MGEAR_SHIFTER_CUSTOMSTEP_KEY = "MGEAR_SHIFTER_CUSTOMSTEP_PATH"
 
-##########################################################
-# GUIDE
-##########################################################
-
 
 class Main(object):
-    """The main guide class.
+    """The main guide class
+
     Provide the methods to add parameters, set parameter values,
     create property...
 
     Attributes:
         paramNames (list): List of parameter name cause it's actually important
         to keep them sorted.
-        paramDefs (dic): Dictionary of parameter definition.
-        values (dic): Dictionary of options values.
+        paramDefs (dict): Dictionary of parameter definition.
+        values (dict): Dictionary of options values.
         valid (bool): We will check a few things and make sure the guide we are
-        loading is up to date.
-            If parameters or object are missing a warning message will be
-            display and the guide should be updated.
+            loading is up to date. If parameters or object are missing a
+            warning message will be display and the guide should be updated.
 
     """
+
     def __init__(self):
 
         self.paramNames = []
@@ -73,16 +60,16 @@ class Main(object):
         self.valid = True
 
     def addPropertyParamenters(self, parent):
-        """Add attributes ( Attribute = Parameters terminology from Softimage)
-        from the parameter definition list.
+        """Add attributes from the parameter definition list
 
-        Args:
+        Arguments:
             parent (dagNode): The object to add the attributes.
 
         Returns:
             dagNode: parent with the attributes.
 
         """
+
         for scriptName in self.paramNames:
             paramDef = self.paramDefs[scriptName]
             paramDef.create(parent)
@@ -92,7 +79,7 @@ class Main(object):
     def setParamDefValue(self, scriptName, value):
         """Set the value of parameter with matching scriptname.
 
-        Args:
+        Arguments:
             scriptName (str): Scriptname of the parameter to edit.
             value (variant): New value.
 
@@ -100,6 +87,7 @@ class Main(object):
             bool: False if the parameter wasn't found.
 
         """
+
         if scriptName not in self.paramDefs.keys():
             mgear.log("Can't find parameter definition for : " + scriptName,
                       mgear.sev_warning)
@@ -113,7 +101,7 @@ class Main(object):
     def setParamDefValuesFromProperty(self, node):
         """Set the parameter definition values from the attributes of an object
 
-        Args:
+        Arguments:
             node (dagNode): The object with the attributes.
         """
 
@@ -137,7 +125,7 @@ class Main(object):
     def addColorParam(self, scriptName, value=False):
         """Add color paramenter to the paramenter definition Dictionary.
 
-        Args:
+        Arguments:
             scriptName (str): The name of the color parameter.
             value (Variant): The default color value.
 
@@ -157,7 +145,7 @@ class Main(object):
                  niceName=None, shortName=None):
         """Add paramenter to the paramenter definition Dictionary.
 
-        Args:
+        Arguments:
             scriptName (str): Parameter scriptname.
             valueType (str): The Attribute Type. Exp: 'string', 'bool',
                 'long', etc..
@@ -187,7 +175,7 @@ class Main(object):
     def addFCurveParam(self, scriptName, keys, interpolation=0):
         """Add FCurve paramenter to the paramenter definition Dictionary.
 
-        Args:
+        Arguments:
             scriptName (str): Attribute fullName.
             keys (list): The keyframes to define the function curve.
             interpolation (int): the curve interpolation.
@@ -206,7 +194,7 @@ class Main(object):
     def addEnumParam(self, scriptName, enum, value=False):
         """Add FCurve paramenter to the paramenter definition Dictionary.
 
-        Args:
+        Arguments:
             scriptName (str): Attribute fullName
             enum (list of str): The list of elements in the enumerate control.
             value (int): The default value.
@@ -239,13 +227,13 @@ class Rig(Main):
     Attributes:
         paramNames (list): List of parameter name cause it's actually important
             to keep them sorted.
-        paramDefs (dic): Dictionary of parameter definition.
-        values (dic): Dictionary of options values.
+        paramDefs (dict): Dictionary of parameter definition.
+        values (dict): Dictionary of options values.
         valid (bool): We will check a few things and make sure the guide we are
             loading is up to date. If parameters or object are missing a
             warning message will be display and the guide should be updated.
-        controllers (dic): Dictionary of controllers.
-        components (dic): Dictionary of component. Keys are the component
+        controllers (dict): Dictionary of controllers.
+        components (dict): Dictionary of component. Keys are the component
             fullname (ie. 'arm_L0')
         componentsIndex (list): List of component name sorted by order
             creation (hierarchy order)
@@ -355,7 +343,7 @@ class Rig(Main):
     def setFromHierarchy(self, root, branch=True):
         """Set the guide from given hierarchy.
 
-        Args:
+        Arguments:
             root (dagNode): The root of the hierarchy to parse.
             branch (bool): True to parse children components.
 
@@ -443,7 +431,7 @@ class Rig(Main):
     def findComponentRecursive(self, node, branch=True):
         """Finds components by recursive search.
 
-        Args:
+        Arguments:
             node (dagNode): Object frome where start the search.
             branch (bool): If True search recursive all the children.
         """
@@ -466,11 +454,11 @@ class Rig(Main):
                 self.findComponentRecursive(child)
 
     def getComponentGuide(self, comp_type):
-        """Get the componet guide python object.
+        """Get the componet guide python object
 
         ie. Finds the guide.py of the component.
 
-        Args:
+        Arguments:
             comp_type (str): The component type.
 
         Returns:
@@ -498,10 +486,7 @@ class Rig(Main):
     # DRAW
 
     def initialHierarchy(self):
-        """
-        Create the initial rig guide hierarchy (model, options...)
-
-        """
+        """Create the initial rig guide hierarchy (model, options...)"""
         self.model = pm.group(n="guide", em=True, w=True)
 
         # Options
@@ -517,7 +502,7 @@ class Rig(Main):
     def drawNewComponent(self, parent, comp_type):
         """Add a new component to the guide.
 
-        Args:
+        Arguments:
             parent (dagNode): Parent of this new component guide.
             compType (str): Type of component to add.
 
@@ -607,8 +592,7 @@ class Rig(Main):
         pm.delete(deleteLater)
 
     def duplicate(self, root, symmetrize=False):
-        """
-        Duplicate the guide hierarchy.
+        """Duplicate the guide hierarchy
 
         Note:
             Indeed this method is not duplicating.
@@ -620,7 +604,7 @@ class Rig(Main):
             Shifter's guide.
 
 
-        Args:
+        Arguments:
             root (dagNode): The guide root to duplicate.
             symmetrize (bool): If True, duplicate symmetrical in X axis.
             The guide have to be "Left" or "Right".
@@ -651,7 +635,7 @@ class Rig(Main):
                     if symmetrize:
                         parent = dag.findChild(
                             self.model,
-                            mgear.string.convertRLName(
+                            string.convertRLName(
                                 comp_guide.root.getParent().name()))
                         if not parent:
                             parent = comp_guide.root.getParent()
@@ -684,7 +668,7 @@ class Rig(Main):
     def updateProperties(self, root, newName, newSide, newIndex):
         """Update the Properties of the component.
 
-        Args:
+        Arguments:
             root (dagNode): Root of the component.
             newName (str): New name of the component
             newSide (str): New side of the component
@@ -700,11 +684,7 @@ class Rig(Main):
         comp_guide.rename(root, newName, newSide, newIndex)
 
 
-###############################################################################
-# HELPER SLOTS
-###############################################################################
-
-class helperSlots(object):
+class HelperSlots(object):
 
     def updateHostUI(self, lEdit, targetAttr):
         oType = pm.nodetypes.Transform
@@ -918,22 +898,19 @@ class helperSlots(object):
             self.runStep(item.text().split("|")[-1][1:], customStepDic={})
 
 
-##################
-# Guide Settings
-##################
-class guideSettingsTab(QtWidgets.QDialog, guui.Ui_Form):
+class GuideSettingsTab(QtWidgets.QDialog, guui.Ui_Form):
     def __init__(self, parent=None):
         super(guideSettingsTab, self).__init__(parent)
         self.setupUi(self)
 
 
-class customStepTab(QtWidgets.QDialog, csui.Ui_Form):
+class CustomStepTab(QtWidgets.QDialog, csui.Ui_Form):
     def __init__(self, parent=None):
         super(customStepTab, self).__init__(parent)
         self.setupUi(self)
 
 
-class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
+class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
     # valueChanged = QtCore.Signal(int)
 
     def __init__(self, parent=None):
@@ -1219,7 +1196,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
     def addCustomStep(self, pre=True, *args):
         """Add a new custom step
 
-        Args:
+        Arguments:
             pre (bool, optional): If true adds the steps to the pre step list
             *args: Maya's Dummy
 
@@ -1270,7 +1247,7 @@ class guideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, helperSlots):
     def newCustomStep(self, pre=True, *args):
         """Creates a new custom step
 
-        Args:
+        Arguments:
             pre (bool, optional): If true adds the steps to the pre step list
             *args: Maya's Dummy
 
@@ -1321,8 +1298,8 @@ class CustomShifterStep(cstp.customShifterMainStep):
                     shifter rig on post step
             i.e:  stepDict["otherCustomStepName"].ctlMesh  gets the ctlMesh
                     from a previous custom step called "otherCustomStepName"
-        Args:
-            stepDict (dic): Dictionary containing the objects from
+        Arguments:
+            stepDict (dict): Dictionary containing the objects from
                 the previous steps
 
         Returns:
@@ -1352,7 +1329,7 @@ class CustomShifterStep(cstp.customShifterMainStep):
     def duplicateCustomStep(self, pre=True, *args):
         """Duplicate the selected step
 
-        Args:
+        Arguments:
             pre (bool, optional): If true adds the steps to the pre step list
             *args: Maya's Dummy
 
@@ -1411,14 +1388,16 @@ class CustomShifterStep(cstp.customShifterMainStep):
     def exportCustomStep(self, pre=True, *args):
         """Export custom steps to a json file
 
-        Args:
+        Arguments:
             pre (bool, optional): If true takes the steps from the
                 pre step list
             *args: Maya's Dummy
 
         Returns:
             None: None
+
         """
+
         if pre:
             stepWidget = self.customStepTab.preCustomStep_listWidget
         else:
@@ -1471,13 +1450,15 @@ class CustomShifterStep(cstp.customShifterMainStep):
     def importCustomStep(self, pre=True, *args):
         """Import custom steps from a json file
 
-        Args:
+        Arguments:
             pre (bool, optional): If true import to pre steps list
             *args: Maya's Dummy
 
         Returns:
             None: None
+
         """
+
         if pre:
             stepAttr = "preCustomStep"
             stepWidget = self.customStepTab.preCustomStep_listWidget
@@ -1558,3 +1539,7 @@ class CustomShifterStep(cstp.customShifterMainStep):
 # Backwards compatibility aliases
 MainGuide = Main
 RigGuide = Rig
+helperSlots = HelperSlots
+guideSettingsTab = GuideSettingsTab
+customStepTab = CustomStepTab
+guideSettings = GuideSettings
