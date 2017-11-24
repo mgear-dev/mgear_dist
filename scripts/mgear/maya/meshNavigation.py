@@ -1,39 +1,11 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-"""
-Functions to help navigate the mesh topology.
-"""
+"""Functions to help navigate the mesh topology"""
 
 #############################################
 # GLOBAL
 #############################################
 import pymel.core as pm
-import pymel.core.datatypes as dt
-import maya.OpenMaya as OpenMaya
+import pymel.core.datatypes as datatypes
+from maya import OpenMaya
 
 
 #############################################
@@ -41,14 +13,17 @@ import maya.OpenMaya as OpenMaya
 #############################################
 
 def getExtremeVertexFromLoop(edgeList=None, sideRange=False):
-    """
-    Get extreme vertex X and  Y, min and max positions from edge loop
+    """Get extreme vertex X and  Y
 
-    Args:
+    min and max positions from edge loop
+
+    Arguments:
         edgeList (list): Edge list
-        sideRange (bool): If True will calculate the extreme position of Z instead of X
+        sideRange (bool): If True will calculate the extreme position
+            of Z instead of X
     Returns:
         list: upPos, lowPos, inPos, outPos, edgeList, vertexList
+
     """
     if not edgeList:
         edgeList = [x for x in pm.selected(fl=1)]
@@ -58,10 +33,10 @@ def getExtremeVertexFromLoop(edgeList=None, sideRange=False):
         for v in cv:
             if v not in vertexList:
                 vertexList.append(v)
-    maxX= None
+    maxX = None
     maxY = None
 
-    minX= None
+    minX = None
     minY = None
 
     upPos = None
@@ -88,21 +63,21 @@ def getExtremeVertexFromLoop(edgeList=None, sideRange=False):
             minY = pos[1]
             lowPos = x
     if sideRange:
-        return upPos,lowPos,outPos,inPos, edgeList, vertexList
+        return upPos, lowPos, outPos, inPos, edgeList, vertexList
     else:
-        return upPos,lowPos,inPos,outPos, edgeList, vertexList
+        return upPos, lowPos, inPos, outPos, edgeList, vertexList
 
 
-def getConcentricVertexLoop(loop, nbLoops ):
-    """
-    Get concentric vertex loops
+def getConcentricVertexLoop(loop, nbLoops):
+    """Get concentric vertex loops
 
-    Args:
+    Arguments:
         loop (list): Vertex loop list
         nbLoops (int): Number of loops to search
 
     Returns:
         list: the loop list
+
     """
     loopList = []
     allLoops = []
@@ -127,21 +102,22 @@ def getConcentricVertexLoop(loop, nbLoops ):
 
     return loopList
 
-def getVertexRowsFromLoops(loopList):
-    """
-        Get vertex rows from edge loops
 
-    Args:
+def getVertexRowsFromLoops(loopList):
+    """Get vertex rows from edge loops
+
+    Arguments:
         loopList (list): Edge loop list
 
     Returns:
         list: vertex rows
+
     """
     rows = []
     for x in loopList[0]:
         rows.append([x])
 
-    loopListLength = len(loopList)-1
+    loopListLength = len(loopList) - 1
 
     for i in range(loopListLength):
         for e, r in enumerate(rows):
@@ -153,25 +129,24 @@ def getVertexRowsFromLoops(loopList):
 
             if cvs2:
                 for cv in cvs2:
-                    if cv in loopList[i+1]:
+                    if cv in loopList[i + 1]:
                         rows[e].append(cv)
                         continue
             for cv in cvs:
-                if cv in loopList[i+1]:
+                if cv in loopList[i + 1]:
                     rows[e].append(cv)
                     continue
     return rows
 
 
 #################################################
-## EDGE LOOPS and ROWS
+# EDGE LOOPS and ROWS
 #################################################
 
 def edgeRangeInLoopFromMid(edgeList, midPos, endA, endB):
-    """
-    Return a range of edges in the same loop from a mid position
+    """Return a range of edges in the same loop from a mid position
 
-    Args:
+    Arguments:
         edgeList (list): selection edge loop
         midPos (vertex): mid vertex
         endA (vertex): endA vertex
@@ -179,6 +154,7 @@ def edgeRangeInLoopFromMid(edgeList, midPos, endA, endB):
 
     Returns:
         list: loop range
+
     """
     extremeEdges = []
 
@@ -201,8 +177,10 @@ def edgeRangeInLoopFromMid(edgeList, midPos, endA, endB):
                         midEdges.append(e)
                     cv = e.connectedVertices()
                     for v in cv:
-                        if v.index() in [endA.index(), endB.index()] and e not in extremeEdges:
-                            #extra check to ensure that the 2 edges selected are not attach to the same vertex
+                        if (v.index() in [endA.index(), endB.index()]
+                                and e not in extremeEdges):
+                            # extra check to ensure that the 2 edges
+                            # selected are not attach to the same vertex
                             if v.index() not in indexcheck:
                                 extremeEdges.append(e)
                                 indexcheck.append(v.index())
@@ -217,28 +195,26 @@ def edgeRangeInLoopFromMid(edgeList, midPos, endA, endB):
                     cv = e.connectedVertices()
                     for v in cv:
                         if v not in scanPoint and v not in scannedPoints:
-                            if v.index() not in [endA.index(), endB.index() ]:
+                            if v.index() not in [endA.index(), endB.index()]:
                                 scanPoint.append(v)
 
         if stop:
             break
-        count +=1
+        count += 1
         if count > 50:
             break
     loopRange = set(midEdges + extremeEdges)
     return loopRange
 
 
-
 #################################################
-## Bounding box info
+# Bounding box info
 #################################################
 
 def bboxCenter(obj, radius=False):
-    """
-    Get bounding box center of mesh object
+    """Get bounding box center of mesh object
 
-    Args:
+    Arguments:
         obj (dagNode): mesh object
         radius (bool): If True return a list the center + the radius
 
@@ -246,26 +222,27 @@ def bboxCenter(obj, radius=False):
         list of float: the bounding box center in world space
 
     >>> center = mnav.bboxCenter(source, radius=False)
+
     """
     bbx = obj.getBoundingBox(invisible=True, space='world')
     center = [(bbx[0][x] + bbx[1][x]) / 2.0 for x in range(3)]
     if radius:
-        r = abs((bbx[0][0] - bbx[1][0])/2)
+        r = abs((bbx[0][0] - bbx[1][0]) / 2)
         return center, r
     return center
 
 
 def bBoxData(obj=None, yZero=False, *args):
-    """
-    Get bounding box data of a mesh object
+    """Get bounding box data of a mesh object
 
-    Args:
+    Arguments:
         obj (dagNode): Mesh object
-        yZero (bool): If True, sets the Y axis value to 0 in world space.
+        yZero (bool): If True, sets the Y axis value to 0 in world space
         args:
 
     Returns:
         list: center, radio, bounding box full data
+
     """
     volCenter = False
 
@@ -274,33 +251,33 @@ def bBoxData(obj=None, yZero=False, *args):
     shapes = pm.listRelatives(obj, ad=True, s=True)
     if shapes:
         bb = pm.polyEvaluate(shapes, b=True)
-        volCenter = [ (axis[0] + axis[1]) /2 for axis in bb ]
+        volCenter = [(axis[0] + axis[1]) / 2 for axis in bb]
         if yZero:
             volCenter[1] = bb[1][0]
-        radio = max([bb[0][1] - bb[0][0],bb[2][1] - bb[2][0]])/1.7
+        radio = max([bb[0][1] - bb[0][0], bb[2][1] - bb[2][0]]) / 1.7
 
     return volCenter, radio, bb
 
 
 #################################################
-## CLOSEST LOCATIONS
+# CLOSEST LOCATIONS
 #################################################
 
 def getClosestPolygonFromTransform(geo, loc):
-    """
-    Get closest polygon from transform
+    """Get closest polygon from transform
 
-    Args:
+    Arguments:
         geo (dagNode): Mesh object
         loc (matrix): location transform
 
     Returns:
         Closest Polygon
+
     """
     if isinstance(loc, pm.nodetypes.Transform):
         pos = loc.getTranslation(space='world')
     else:
-        pos = dt.Vector(loc[0], loc[1], loc[2])
+        pos = datatypes.Vector(loc[0], loc[1], loc[2])
 
     nodeDagPath = OpenMaya.MObject()
     try:
@@ -308,8 +285,9 @@ def getClosestPolygonFromTransform(geo, loc):
         selectionList.add(geo.name())
         nodeDagPath = OpenMaya.MDagPath()
         selectionList.getDagPath(0, nodeDagPath)
-    except:
-        raise RuntimeError('OpenMaya.MDagPath() failed on %s' % geo.name())
+    except Exception as e:
+        raise RuntimeError("OpenMaya.MDagPath() failed "
+                           "on {}. \n {}".format(geo.name(), e))
 
     mfnMesh = OpenMaya.MFnMesh(nodeDagPath)
 
@@ -328,10 +306,9 @@ def getClosestPolygonFromTransform(geo, loc):
 
 
 def getClosestVertexFromTransform(geo, loc):
-    """
-    Get closest vertex from transform
+    """Get closest vertex from transform
 
-    Args:
+    Arguments:
         geo (dagNode): Mesh object
         loc (matrix): location transform
 
@@ -339,8 +316,8 @@ def getClosestVertexFromTransform(geo, loc):
         Closest Vertex
 
     >>> v = mn.getClosestVertexFromTransform(geometry, joint)
-    """
 
+    """
     polygon, pos = getClosestPolygonFromTransform(geo, loc)
 
     faceVerts = [geo.vtx[i] for i in polygon.getVertices()]
