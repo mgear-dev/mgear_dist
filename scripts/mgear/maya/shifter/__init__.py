@@ -1,4 +1,4 @@
-"""Shifter's  Rig Main class."""
+"""Shifters Rig Main class."""
 import os.path
 import datetime
 import getpass
@@ -62,10 +62,6 @@ def importComponent(comp_type):
     return module
 
 
-##########################################################
-# RIG
-##########################################################
-
 class Rig(object):
     """The main rig class.
 
@@ -94,8 +90,7 @@ class Rig(object):
         """Build the rig from selected guides."""
 
         startTime = datetime.datetime.now()
-        mgear.log(
-            "= GEAR RIG SYSTEM ==============================================")
+        mgear.log("= GEAR RIG SYSTEM " + "=" * 46)
 
         # Check guide is valid
         self.guide.setFromSelection()
@@ -107,9 +102,11 @@ class Rig(object):
 
         endTime = datetime.datetime.now()
         finalTime = endTime - startTime
-        mgear.log(
-            "= GEAR BUILD RIG DONE ================ [ " + str(finalTime) +
-            " ] ======")
+        mgear.log("= GEAR BUILD RIG DONE {} [ {} ] {}".format(
+            "=" * 16,
+            finalTime,
+            "=" * 7
+        ))
 
     def build(self):
         """Build the rig."""
