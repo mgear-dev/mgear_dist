@@ -197,7 +197,7 @@ class Component(component.Main):
         blend_node_1 = pm.createNode("blendColors")
         blend_node_2 = pm.createNode("blendColors")
 
-        #Node Conexions ########
+        # Node Conexions ########
 
         # md_node_1
         pm.connectAttr(self.jaw_ctl + ".translateY", md_node_1 + ".input1X")
