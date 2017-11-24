@@ -49,7 +49,7 @@ def is_odd(num):
     """
     Check if the number is odd.
 
-    Args:
+    Arguments:
     num (int): the number
 
     Returns:

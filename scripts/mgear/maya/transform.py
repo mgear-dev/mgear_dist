@@ -47,7 +47,7 @@ def getTranslation(node):
     """
     Return the position of the dagNode in worldSpace.
 
-    Args:
+    Arguments:
         node (dagNode): The dagNode to get the translation
 
     Returns:
@@ -59,7 +59,7 @@ def getTransform(node):
     """
     Return the transformation matrix of the dagNode in worldSpace.
 
-    Args:
+    Arguments:
         node (dagNode): The dagNode to get the translation
 
     Returns:
@@ -71,7 +71,7 @@ def getTransformLookingAt(pos, lookat, normal, axis="xy", negate=False):
     """
     Return the transformation matrix of the dagNode oriented looking to an specific point.
 
-    Args:
+    Arguments:
         pos (vector): The position for the transformation
         lookat (vector): The aiming position to stablish the orientation.
         normal (vector): The normal control the transformation roll.
@@ -151,7 +151,7 @@ def getChainTransform(positions, normal, negate=False):
     """
     Get a tranformation list from a positions list and normal.
 
-    Args:
+    Arguments:
         positions(list of vector): List with the chain positions.
         normal (vector): Normal direction.
         negate (bool): If true invert the chain orientation.
@@ -187,7 +187,7 @@ def getChainTransform2(positions, normal, negate=False):
     Note:
         getChainTransform2 is using the latest position on the chain
 
-    Args:
+    Arguments:
         positions(list of vector): List with the chain positions.
         normal (vector): Normal direction.
         negate (bool): If true invert the chain orientation.
@@ -228,7 +228,7 @@ def getTransformFromPos(pos):
     """
     Create a transformation Matrix from a given position.
 
-    Args:
+    Arguments:
         pos (vector): Position for the transformation matrix
 
     Returns:
@@ -249,7 +249,7 @@ def getOffsetPosition(node, offset=[0,0,0]):
     """
     Get an offset position from dagNode
 
-    Args:
+    Arguments:
         node (dagNode): The dagNode with the original position.
         offset (list of float): Ofsset values for xyz. exp : [1.2, 4.6, 32.78]
 
@@ -271,7 +271,7 @@ def getPositionFromMatrix(in_m):
     """
     Get the position values from matrix
 
-    Args:
+    Arguments:
         in_m (matrix): The input Matrix.
 
     Returns:
@@ -285,7 +285,7 @@ def setMatrixPosition(in_m, pos):
     """
     Set the position for a given matrix
 
-    Args:
+    Arguments:
         in_m (matrix): The input Matrix.
         pos (list of float): The position values for xyz
 
@@ -308,7 +308,7 @@ def setMatrixRotation(m, rot):
     """
     Set the rotation for a given matrix
 
-    Args:
+    Arguments:
         in_m (matrix): The input Matrix.
         rot (list of float): The rotation values for xyz
 
@@ -329,7 +329,7 @@ def setMatrixScale(m, scl=[1,1,1]):
     """
     Set the scale for a given matrix
 
-    Args:
+    Arguments:
         in_m (matrix): The input Matrix.
         scl (list of float): The scale values for xyz
 
@@ -349,7 +349,7 @@ def getFilteredTransform(m, translation=True, rotation=True, scaling=True):
     """
     Retrieve a transformation filtered.
 
-    Args:
+    Arguments:
         m (matrix): the reference matrix
         translation (bool): If true the return matrix will match the translation.
         rotation (bool): If true the return matrix will match the rotation.
@@ -387,7 +387,7 @@ def getRotationFromAxis(in_a, in_b, axis="xy", negate=False):
     """
     Get the matrix rotation from a given axis.
 
-    Args:
+    Arguments:
         in_a (vector): Axis A
         in_b (vector): Axis B
         axis (str): The axis to use for the orientation. Default: "xy"
@@ -453,7 +453,7 @@ def getSymmetricalTransform(t, axis="yz", fNegScale=False):
     """
     Get the symmetrical tranformation matrix from a define 2 axis mirror plane. exp:"yz".
 
-    Args:
+    Arguments:
         t (matrix): The transformation matrix to mirror.
         axis (str): The mirror plane.
         fNegScale(bool):  This function is not yet implemented.
@@ -488,7 +488,7 @@ def resetTransform(node, t=True, r=True, s=True):
     """
     Reset the scale, rotation and translation for a given dagNode.
 
-    Args:
+    Arguments:
         node(dagNode): The object to reset the transforms.
         t (bool): If true translation will be reseted.
         r (bool): If true rotation will be reseted.
@@ -520,7 +520,7 @@ def matchWorldTransform(source, target):
     """
     Match 2 dagNode transformations in world space.
 
-    Args:
+    Arguments:
         source (dagNode): The source dagNode
         target (dagNode): The target dagNode
 
@@ -535,7 +535,7 @@ def quaternionDotProd(q1, q2):
     """
     Get the dot product of 2 quaternion.
 
-    Args:
+    Arguments:
         q1 (quaternion): Input quaternion 1.
         q2 (quaternion): Input quaternion 2.
 
@@ -550,7 +550,7 @@ def quaternionSlerp(q1, q2, blend):
     """
     Get an interpolate quaternion based in slerp function.
 
-    Args:
+    Arguments:
         q1 (quaternion): Input quaternion 1.
         q2 (quaternion): Input quaternion 2.
         blend (float): Blending value.
@@ -587,7 +587,7 @@ def convert2TransformMatrix(tm):
     """
     Convert a transformation Matrix or a matrix to a transformation matrix in world space.
 
-    Args:
+    Arguments:
         tm (matrix): The input matrix.
 
     Returns:
@@ -605,7 +605,7 @@ def getInterpolateTransformMatrix(t1, t2, blend=.5 ):
     """
     Interpolate 2 matrix.
 
-    Args:
+    Arguments:
         t1 (matrix): Input matrix 1.
         t2 (matrix): Input matrix 2.
         blend (float): The blending value. Default 0.5

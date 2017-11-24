@@ -45,7 +45,7 @@ def getDistance(v0, v1):
     """
     Get the distance between 2 vectors
 
-    Args:
+    Arguments:
         v0 (vector): vector A.
         v1 (vector): vector B.
 
@@ -61,7 +61,7 @@ def getDistance2(obj0, obj1):
     """
     Get the distance between 2 objects.
 
-    Args:
+    Arguments:
         obj0 (dagNode): Object A
         obj1 (dagNode): Object B
 
@@ -80,7 +80,7 @@ def linearlyInterpolate(v0, v1, blend=.5):
     """
     Get the vector interpolated between 2 vectors.
 
-    Args:
+    Arguments:
         v0 (vector): vector A.
         v1 (vector): vector B.
         blend (float): Blending value.
@@ -101,7 +101,7 @@ def getPlaneNormal(v0, v1, v2):
     """
     Get the normal vector of a plane (Defined by 3 positions).
 
-    Args:
+    Arguments:
         v0 (vector): First position on the plane.
         v1 (vector): Second position on the plane.
         v2 (vector): Third position on the plane.
@@ -126,7 +126,7 @@ def getPlaneBiNormal(v0, v1, v2):
     """
     Get the binormal vector of a plane (Defined by 3 positions).
 
-    Args:
+    Arguments:
         v0 (vector): First position on the plane.
         v1 (vector): Second position on the plane.
         v2 (vector): Third position on the plane.
@@ -150,7 +150,7 @@ def getTransposedVector(v, position0, position1, inverse=False):
     """
     Get the transposed vector.
 
-    Args:
+    Arguments:
         v (vector): Input Vector.
         position0 (vector): Position A.
         position1 (vector): Position B.
@@ -193,7 +193,7 @@ def rotateAlongAxis(v, axis, a):
     """
     Rotate a vector around a given axis defined by other vector.
 
-    Args:
+    Arguments:
         v (vector): The vector to rotate.
         axis (vector): The axis to rotate around.
         a (float): The rotation angle in radians.
