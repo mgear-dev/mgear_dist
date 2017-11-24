@@ -1,50 +1,19 @@
-# MGEAR is under the terms of the MIT License
+"""Functions to create primitives (Non geometry)"""
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-"""
-Functions to create primitives (Non geometry)
-"""
-
-#############################################
-# GLOBAL
-#############################################
 import pymel.core as pm
-import pymel.core.datatypes as dt
+import pymel.core.datatypes as datatypes
 
-import mgear.maya.transform as tra
+import mgear.maya.transform as transform
 
 #############################################
 # PRIMITIVE
 #############################################
 
-def addTransform(parent, name, m=dt.Matrix()):
-    """
-    Create a transform dagNode.
 
-    Args:
+def addTransform(parent, name, m=datatypes.Matrix()):
+    """Create a transform dagNode.
+
+    Arguments:
         parent (dagNode): The parent for the node.
         name (str): The Node name.
         m (matrix): The matrix for the node transformation (optional).
@@ -53,7 +22,6 @@ def addTransform(parent, name, m=dt.Matrix()):
         dagNode: The newly created node.
 
     """
-
     node = pm.PyNode(pm.createNode("transform", n=name))
     node.setTransformation(m)
 
@@ -62,11 +30,11 @@ def addTransform(parent, name, m=dt.Matrix()):
 
     return node
 
-def addTransformFromPos(parent, name, pos=dt.Vector(0,0,0)):
-    """
-    Create a transform dagNode.
 
-    Args:
+def addTransformFromPos(parent, name, pos=datatypes.Vector(0, 0, 0)):
+    """Create a transform dagNode.
+
+    Arguments:
         parent (dagNode): The parent for the node.
         name (str): The Node name.
         pos (vector): The vector for the node position (optional).
@@ -75,7 +43,6 @@ def addTransformFromPos(parent, name, pos=dt.Vector(0,0,0)):
         dagNode: The newly created node.
 
     """
-
     node = pm.PyNode(pm.createNode("transform", n=name))
     node.setTranslation(pos, space="world")
 
@@ -86,11 +53,12 @@ def addTransformFromPos(parent, name, pos=dt.Vector(0,0,0)):
 
 # ===========================================
 # LOCATOR
-def addLocator(parent, name, m=dt.Matrix(), size=1):
-    """
-    Create a space locator dagNode.
 
-    Args:
+
+def addLocator(parent, name, m=datatypes.Matrix(), size=1):
+    """Create a space locator dagNode.
+
+    Arguments:
         parent (dagNode): The parent for the node.
         name (str): The Node name.
         m (matrix): The matrix for the node transformation (optional).
@@ -100,7 +68,6 @@ def addLocator(parent, name, m=dt.Matrix(), size=1):
         dagNode: The newly created node.
 
     """
-
     node = pm.PyNode(pm.createNode("locator")).getParent()
     node.rename(name)
     node.setTransformation(m)
@@ -111,11 +78,11 @@ def addLocator(parent, name, m=dt.Matrix(), size=1):
 
     return node
 
-def addLocatorFromPos(parent, name, pos=dt.Vector(0,0,0), size=1):
-    """
-    Create a space locator dagNode.
 
-    Args:
+def addLocatorFromPos(parent, name, pos=datatypes.Vector(0, 0, 0), size=1):
+    """Create a space locator dagNode.
+
+    Arguments:
         parent (dagNode): The parent for the node.
         name (str): The Node name.
         pos (vector): The vector for the node position (optional).
@@ -123,9 +90,8 @@ def addLocatorFromPos(parent, name, pos=dt.Vector(0,0,0), size=1):
 
     Returns:
         dagNode: The newly created node.
+
     """
-
-
     node = pm.PyNode(pm.createNode("locator")).getParent()
     node.rename(name)
     node.setTranslation(pos, space="world")
@@ -138,15 +104,16 @@ def addLocatorFromPos(parent, name, pos=dt.Vector(0,0,0), size=1):
 
 # ===========================================
 # JOINT
-def addJoint(parent, name, m=dt.Matrix(), vis=True):
-    """
-    Create a joint dagNode.
+
+
+def addJoint(parent, name, m=datatypes.Matrix(), vis=True):
+    """Create a joint dagNode.
 
     Note:
         I'm not using the joint() comand because this is parenting
         the newly created joint to current selection which might not be desired
 
-    Args:
+    Arguments:
         parent (dagNode): The parent for the node.
         name (str): The node name.
         m (matrix): The matrix for the node transformation (optional).
@@ -165,15 +132,15 @@ def addJoint(parent, name, m=dt.Matrix(), vis=True):
 
     return node
 
-def addJointFromPos(parent, name, pos=dt.Vector(0,0,0)):
-    """
-    Create a joint dagNode.
+
+def addJointFromPos(parent, name, pos=datatypes.Vector(0, 0, 0)):
+    """Create a joint dagNode.
 
     Note:
         I'm not using the joint() comand because this is parenting
         the newly created joint to current selection which might not be desired
 
-    Args:
+    Arguments:
         parent (dagNode): The parent for the node.
         name (str): The node name.
         pos (vector): The vector for the node position (optional).
@@ -191,21 +158,25 @@ def addJointFromPos(parent, name, pos=dt.Vector(0,0,0)):
 
     return node
 
+
 def add2DChain2(parent, name, positions, normal, negate=False, vis=True):
-    """
-    Experimental 2D Chain creation function. Create a 2D joint chain. Like Softimage 2D chain.
+    """Experimental 2D Chain creation function.
+
+    Create a 2D joint chain. Like Softimage 2D chain.
 
     Warning:
         This function is WIP and not ready for production.
 
     Warning:
-        This function will create un expected results if all the positions are not in the same 2D plane.
+        This function will create un expected results if all the
+        positions are not in the same 2D plane.
 
-    Args:
+    Arguments:
         parent (dagNode): The parent for the chain.
         name (str): The node name.
         positions(list of vectors): the positons to define the chain.
-        normal (vector): The normal vector to define the direction of the chain.
+        normal (vector): The normal vector to define the direction of
+            the chain.
         negate (bool): If True will negate the direction of the chain
 
     Returns;
@@ -213,20 +184,24 @@ def add2DChain2(parent, name, positions, normal, negate=False, vis=True):
 
 
 
-    >>> self.chain3bones = pri.add2DChain2(self.setup, self.getName("chain3bones%s_jnt"), self.guide.apos[0:4], self.normal, False)
+    >>> self.chain3bones = pri.add2DChain2(
+        self.setup,
+        self.getName("chain3bones%s_jnt"),
+        self.guide.apos[0:4],
+        self.normal,
+        False)
 
     """
-
-    if  "%s" not in name:
+    if "%s" not in name:
         name += "%s"
 
-    transforms = tra.getChainTransform(positions, normal, negate)
-    t = tra.setMatrixPosition(transforms[-1], positions[-1])
+    transforms = transform.getChainTransform(positions, normal, negate)
+    t = transform.setMatrixPosition(transforms[-1], positions[-1])
     transforms.append(t)
 
     chain = []
     for i, t in enumerate(transforms):
-        node = addJoint(parent, name%i, t, vis)
+        node = addJoint(parent, name % i, t, vis)
         chain.append(node)
         parent = node
 
@@ -235,13 +210,14 @@ def add2DChain2(parent, name, positions, normal, negate=False, vis=True):
 
         if i == 0:
             jnt.setAttr("jointOrient", jnt.getAttr("rotate"))
-        elif i == len(chain)-1:
+        elif i == len(chain) - 1:
             jnt.setAttr("jointOrient", 0, 0, 0)
         else:
-            # This will fail if chain is not always oriented the same way (like Z chain)
-            v0 = positions[i] - positions[i-1]
-            v1 = positions[i+1] - positions[i]
-            angle = dt.degrees(v0.angle(v1))
+            # This will fail if chain is not always oriented the same
+            # way (like Z chain)
+            v0 = positions[i] - positions[i - 1]
+            v1 = positions[i + 1] - positions[i]
+            angle = datatypes.degrees(v0.angle(v1))
 
             jnt.setAttr("jointOrient", 0, 0, angle)
 
@@ -250,36 +226,43 @@ def add2DChain2(parent, name, positions, normal, negate=False, vis=True):
 
     return chain
 
+
 def add2DChain(parent, name, positions, normal, negate=False, vis=True):
-    """
-    Create a 2D joint chain. Like Softimage 2D chain.
+    """Create a 2D joint chain. Like Softimage 2D chain.
 
     Warning:
-        This function will create un expected results if all the positions are not in the same 2D plane.
+        This function will create un expected results if all the
+        positions are not in the same 2D plane.
 
-    Args:
+    Arguments:
         parent (dagNode): The parent for the chain.
         name (str): The node name.
         positions(list of vectors): the positons to define the chain.
-        normal (vector): The normal vector to define the direction of the chain.
+        normal (vector): The normal vector to define the direction of
+            the chain.
         negate (bool): If True will negate the direction of the chain
 
     Returns;
         list of dagNodes: The list containg all the joints of the chain
 
-    >>> self.rollRef = pri.add2DChain(self.root, self.getName("rollChain"), self.guide.apos[:2], self.normal, self.negate)
-    """
+    >>> self.rollRef = pri.add2DChain(
+        self.root,
+        self.getName("rollChain"),
+        self.guide.apos[:2],
+        self.normal,
+        self.negate)
 
-    if  "%s" not in name:
+    """
+    if "%s" not in name:
         name += "%s"
 
-    transforms = tra.getChainTransform(positions, normal, negate)
-    t = tra.setMatrixPosition(transforms[-1], positions[-1])
+    transforms = transform.getChainTransform(positions, normal, negate)
+    t = transform.setMatrixPosition(transforms[-1], positions[-1])
     transforms.append(t)
 
     chain = []
     for i, t in enumerate(transforms):
-        node = addJoint(parent, name%i, t, vis)
+        node = addJoint(parent, name % i, t, vis)
         chain.append(node)
         parent = node
 
@@ -288,22 +271,26 @@ def add2DChain(parent, name, positions, normal, negate=False, vis=True):
         if i == 0:
             jnt.setAttr("jointOrient", jnt.getAttr("rotate"))
             jnt.setAttr("rotate", 0, 0, 0)
-        elif i == len(chain)-1:
+        elif i == len(chain) - 1:
             jnt.setAttr("jointOrient", 0, 0, 0)
             jnt.setAttr("rotate", 0, 0, 0)
         else:
-            # This will fail if chain is not always oriented the same way (like X chain)
-            v0 = positions[i] - positions[i-1]
-            v1 = positions[i+1] - positions[i]
-            angle = dt.degrees(v0.angle(v1))
+            # This will fail if chain is not always oriented the same
+            # way (like X chain)
+            v0 = positions[i] - positions[i - 1]
+            v1 = positions[i + 1] - positions[i]
+            angle = datatypes.degrees(v0.angle(v1))
             jnt.setAttr("rotate", 0, 0, 0)
             jnt.setAttr("jointOrient", 0, 0, angle)
 
-        # check if we have to negate Z angle by comparing the guide position and the resulting position.
+        # check if we have to negate Z angle by comparing the guide
+        # position and the resulting position.
         if i >= 1:
             # round the position values to 6 decimals precission
-            # TODO: test with less precision and new check after apply Ik solver
-            if [round(elem, 4) for elem in tra.getTranslation(jnt)] != [round(elem, 4) for elem in positions[i]]:
+            # TODO: test with less precision and new check after apply
+            # Ik solver
+            if ([round(elem, 4) for elem in transform.getTranslation(jnt)]
+                    != [round(elem, 4) for elem in positions[i]]):
 
                 jp = jnt.getParent()
 
@@ -312,7 +299,8 @@ def add2DChain(parent, name, positions, normal, negate=False, vis=True):
                 while jp.type() == "transform":
                     jp = jp.getParent()
 
-                jp.setAttr("jointOrient", 0, 0, jp.attr("jointOrient").get()[2]*-1)
+                jp.setAttr(
+                    "jointOrient", 0, 0, jp.attr("jointOrient").get()[2] * -1)
 
         jnt.setAttr("radius", 1.5)
 
@@ -320,24 +308,31 @@ def add2DChain(parent, name, positions, normal, negate=False, vis=True):
 
 
 def addIkHandle(parent, name, chn, solver="ikRPsolver", poleV=None):
-    """
-    Creates and connect an IKhandle to a joints chain.
+    """Creates and connect an IKhandle to a joints chain.
 
-    Args:
+    Arguments:
         parent (dagNode): The parent for the IKhandle.
         name (str): The node name.
         chn (list): List of joints.
-        solver (str): the solver to be use for the ikHandel. Default value is "ikRPsolver"
+        solver (str): the solver to be use for the ikHandel. Default
+            value is "ikRPsolver"
         poleV (dagNode): Pole vector for the IKHandle
 
     Returns:
         dagNode: The IKHandle
 
-    >>> self.ikHandleUpvRef = pri.addIkHandle(self.root, self.getName("ikHandleLegChainUpvRef"), self.legChainUpvRef, "ikSCsolver")
-    """
+    >>> self.ikHandleUpvRef = pri.addIkHandle(
+        self.root,
+        self.getName("ikHandleLegChainUpvRef"),
+        self.legChainUpvRef,
+        "ikSCsolver")
 
+    """
     # creating a crazy name to avoid name clashing before convert to pyNode.
-    node = pm.ikHandle(n=name+"kjfjfklsdf049r58420582y829h3jnf", sj=chn[0], ee=chn[-1], solver=solver)[0]
+    node = pm.ikHandle(n=name + "kjfjfklsdf049r58420582y829h3jnf",
+                       sj=chn[0],
+                       ee=chn[-1],
+                       solver=solver)[0]
     node = pm.PyNode(node)
     pm.rename(node, name)
     node.attr("visibility").set(False)
@@ -347,6 +342,5 @@ def addIkHandle(parent, name, chn, solver="ikRPsolver", poleV=None):
 
     if poleV:
         pm.poleVectorConstraint(poleV, node)
-
 
     return node
