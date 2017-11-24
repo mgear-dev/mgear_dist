@@ -1,5 +1,72 @@
 ## Contributing to mGear
 
+### Argument shorthands
+
+In Maya, some arguments have a short equivalent. Don't use it.
+
+**Wrong**
+
+```python
+pm.workspace(q=True, rd=True)
+```
+
+**Right**
+
+```python
+pm.workspace(query=True, rootDirectory=True)
+```
+
+The reason is readability. The second reason is that these shorthands are provided not to make *your* code shorter, but to reduce the filesize of Maya's own internal scene format, the `.ma` files. It's not Pythonic, it's an optimisation.
+
+<br>
+
+### Members & `__init__`
+
+Always declare all members of a class in the `__init__` method.
+
+**Wrong**
+
+```python
+class MyClass(object):
+    def __init__(self):
+        super(MyClass, self).__init__()
+
+        self.height = 5
+
+    def resize(self, width, height):
+        self.height = height
+        self.width = width
+```
+
+**Right**
+
+```python
+class MyClass(object):
+    def __init__(self):
+        super(MyClass, self).__init__()
+
+        self.height = 5
+        self.width = 5
+
+    def resize(self, width, height):
+        self.height = height
+        self.width = width
+```
+
+The reason is discoverability. When members are attached to `self` in any subsequent method, it becomes difficult to tell whether it is being created, or modified. More importantly, it becomes impossible to tell which member is used externally.
+
+```python
+from mymodule import MyClass
+
+myclass = MyClass()
+myclass.width = 5
+print(myclass.other_member)
+```
+
+And at that point, impossible to maintain backwards compatibility should any of the methods creating new members be removed or refactored.
+
+<br>
+
 ### Relative imports
 
 Where possible, relatively reference the root mgear package.
@@ -147,9 +214,11 @@ def function():
 We are refactoring all the code to [PEP8](https://www.python.org/dev/peps/pep-0008/)
 If you want to contribute please follow the PEP8 standard
 
+<br>
+
 #### Ignore PEP8 Errors
 
-"W503": [Break bfore aor after binary operator](https://www.python.org/dev/peps/pep-0008/#should-a-line-break-before-or-after-a-binary-operator)
+"W503": [Break bfore or after binary operator](https://www.python.org/dev/peps/pep-0008/#should-a-line-break-before-or-after-a-binary-operator)
 
 #### Line break for long arguments
 
