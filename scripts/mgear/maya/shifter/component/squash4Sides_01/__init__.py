@@ -24,7 +24,7 @@ class Component(component.Main):
         ctlSize = vector.getDistance(
             self.guide.apos[0], self.guide.apos[1]) / 3.0
 
-        t_root = self.guide.transform["root"]
+        t_root = self.guide.tra["root"]
         t_root = transform.setMatrixScale(t_root)
 
         self.ik_cns = primitive.addTransform(
