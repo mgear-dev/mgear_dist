@@ -1,7 +1,7 @@
 import os
 import pymel.core as pm
 
-from mgear.maya import shifter, utils
+from mgear.maya import shifter
 from mgear.maya.shifter import gui, component
 
 
