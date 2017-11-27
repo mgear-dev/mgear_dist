@@ -8,6 +8,10 @@ import maya.OpenMayaUI as omui
 
 from mgear.vendor.Qt import QtWidgets, QtCompat
 
+# TODO: Delete after finish refactor
+# not used in this module, but imported in others
+from mGear_pyqt import qt_import
+
 #############################################
 # helper Maya pyQt functions
 #############################################

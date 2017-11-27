@@ -1,51 +1,19 @@
-# MGEAR is under the terms of the MIT License
+"""Functions to work with matrix and transformations"""
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-"""
-Functions to work with matrix and transformations.
-"""
-
-
-#############################################
-# GLOBAL
-#############################################
 import math
 
-from pymel import util as pmu
-import pymel.core.datatypes as dt
-import pymel.core.nodetypes as nt
+from pymel import util
+from pymel.core import datatypes, nodetypes
 
-import mgear.maya.vector as vec
+from . import vector
 
 #############################################
 # TRANSFORM
 #############################################
+
+
 def getTranslation(node):
-    """
-    Return the position of the dagNode in worldSpace.
+    """Return the position of the dagNode in worldSpace.
 
     Arguments:
         node (dagNode): The dagNode to get the translation
@@ -55,9 +23,9 @@ def getTranslation(node):
     """
     return node.getTranslation(space="world")
 
+
 def getTransform(node):
-    """
-    Return the transformation matrix of the dagNode in worldSpace.
+    """Return the transformation matrix of the dagNode in worldSpace.
 
     Arguments:
         node (dagNode): The dagNode to get the translation
@@ -67,13 +35,16 @@ def getTransform(node):
     """
     return node.getMatrix(worldSpace=True)
 
+
 def getTransformLookingAt(pos, lookat, normal, axis="xy", negate=False):
-    """
-    Return the transformation matrix of the dagNode oriented looking to an specific point.
+    """Return a transformation mstrix using vector positions.
+
+    Return the transformation matrix of the dagNode oriented looking to
+    an specific point.
 
     Arguments:
         pos (vector): The position for the transformation
-        lookat (vector): The aiming position to stablish the orientation.
+        lookat (vector): The aiming position to stablish the orientation
         normal (vector): The normal control the transformation roll.
         axis (str): The 2 axis used for lookat and normal. Default "xy"
         negate (bool): If true, invert the aiming direction.
@@ -81,9 +52,13 @@ def getTransformLookingAt(pos, lookat, normal, axis="xy", negate=False):
     Returns:
         matrix: The transformation matrix
 
-    >>>  t = tra.getTransformLookingAt(self.guide.pos["heel"], self.guide.apos[-4], self.normal, "xz", self.negate)
-    """
+    >>>  t = tra.getTransformLookingAt(self.guide.pos["heel"],
+                                       self.guide.apos[-4],
+                                       self.normal,
+                                       "xz",
+                                       self.negate)
 
+    """
     normal.normalize()
 
     if negate:
@@ -92,9 +67,9 @@ def getTransformLookingAt(pos, lookat, normal, axis="xy", negate=False):
         a = lookat - pos
 
     a.normalize()
-    c = pmu.cross(a, normal)
+    c = util.cross(a, normal)
     c.normalize()
-    b = pmu.cross(c, a)
+    b = util.cross(c, a)
     b.normalize()
 
     if axis == "xy":
@@ -139,7 +114,7 @@ def getTransformLookingAt(pos, lookat, normal, axis="xy", negate=False):
         Y = b
         Z = c
 
-    m = dt.Matrix()
+    m = datatypes.Matrix()
     m[0] = [X[0], X[1], X[2], 0.0]
     m[1] = [Y[0], Y[1], Y[2], 0.0]
     m[2] = [Z[0], Z[1], Z[2], 0.0]
@@ -147,9 +122,9 @@ def getTransformLookingAt(pos, lookat, normal, axis="xy", negate=False):
 
     return m
 
+
 def getChainTransform(positions, normal, negate=False):
-    """
-    Get a tranformation list from a positions list and normal.
+    """Get a tranformation list from a positions list and normal.
 
     Arguments:
         positions(list of vector): List with the chain positions.
@@ -157,21 +132,23 @@ def getChainTransform(positions, normal, negate=False):
         negate (bool): If true invert the chain orientation.
 
     returns:
-        list of matrix: The list containing the transformation matrix for the chain.
+        list of matrix: The list containing the transformation matrix
+            for the chain.
 
     >>> tra.getChainTransform(self.guide.apos, self.normal, self.negate)
-    """
 
+    """
     # Draw
     transforms = []
-    for i in range(len(positions)-1):
-        v0 = positions[i-1]
+    for i in range(len(positions) - 1):
+        v0 = positions[i - 1]
         v1 = positions[i]
-        v2 = positions[i+1]
+        v2 = positions[i + 1]
 
         # Normal Offset
         if i > 0:
-            normal = vec.getTransposedVector(normal, [v0, v1], [v1, v2])
+            normal = vector.getTransposedVector(
+                normal, [v0, v1], [v1, v2])
 
         t = getTransformLookingAt(v1, v2, normal, "xz", negate)
         transforms.append(t)
@@ -179,10 +156,8 @@ def getChainTransform(positions, normal, negate=False):
     return transforms
 
 
-
 def getChainTransform2(positions, normal, negate=False):
-    """
-    Get a tranformation list from a positions list and normal.
+    """Get a tranformation list from a positions list and normal.
 
     Note:
         getChainTransform2 is using the latest position on the chain
@@ -193,29 +168,33 @@ def getChainTransform2(positions, normal, negate=False):
         negate (bool): If true invert the chain orientation.
 
     returns:
-        list of matrix: The list containing the transformation matrix for the chain.
+        list of matrix: The list containing the transformation matrix
+            for the chain.
 
-    >>> tra.getChainTransform2(self.guide.apos, self.normal, self.negate)
+    >>> tra.getChainTransform2(self.guide.apos,
+                               self.normal,
+                               self.negate)
+
     """
-
     # Draw
     transforms = []
     for i in range(len(positions)):
-        if i == len(positions)-1:
-            v0 = positions[i-1]
+        if i == len(positions) - 1:
+            v0 = positions[i - 1]
             v1 = positions[i]
-            v2 = positions[i-2]
+            v2 = positions[i - 2]
 
         else:
-            v0 = positions[i-1]
+            v0 = positions[i - 1]
             v1 = positions[i]
-            v2 = positions[i+1]
+            v2 = positions[i + 1]
 
         # Normal Offset
-        if i > 0 and i != len(positions)-1:
-            normal = vec.getTransposedVector(normal, [v0, v1], [v1, v2])
+        if i > 0 and i != len(positions) - 1:
+            normal = vector.getTransposedVector(
+                normal, [v0, v1], [v1, v2])
 
-        if i == len(positions)-1:
+        if i == len(positions) - 1:
             t = getTransformLookingAt(v1, v0, normal, "-xz", negate)
         else:
             t = getTransformLookingAt(v1, v2, normal, "xz", negate)
@@ -225,8 +204,7 @@ def getChainTransform2(positions, normal, negate=False):
 
 
 def getTransformFromPos(pos):
-    """
-    Create a transformation Matrix from a given position.
+    """Create a transformation Matrix from a given position.
 
     Arguments:
         pos (vector): Position for the transformation matrix
@@ -235,9 +213,9 @@ def getTransformFromPos(pos):
         matrix: The newly created transformation matrix
 
     >>>  t = tra.getTransformFromPos(self.guide.pos["root"])
-    """
 
-    m = dt.Matrix()
+    """
+    m = datatypes.Matrix()
     m[0] = [1.0, 0, 0, 0.0]
     m[1] = [0, 1.0, 0, 0.0]
     m[2] = [0, 0, 1.0, 0.0]
@@ -245,13 +223,14 @@ def getTransformFromPos(pos):
 
     return m
 
-def getOffsetPosition(node, offset=[0,0,0]):
-    """
-    Get an offset position from dagNode
+
+def getOffsetPosition(node, offset=[0, 0, 0]):
+    """Get an offset position from dagNode
 
     Arguments:
         node (dagNode): The dagNode with the original position.
-        offset (list of float): Ofsset values for xyz. exp : [1.2, 4.6, 32.78]
+        offset (list of float): Ofsset values for xyz.
+            exp : [1.2, 4.6, 32.78]
 
     Returns:
         list of float: the new offset position.
@@ -264,26 +243,27 @@ def getOffsetPosition(node, offset=[0,0,0]):
             self.knee = self.addLoc("knee", self.root, vTemp)
 
     """
-    offsetVec = dt.Vector(offset[0],offset[1],offset[2])
+    offsetVec = datatypes.Vector(offset[0], offset[1], offset[2])
     return offsetVec + node.getTranslation(space="world")
 
+
 def getPositionFromMatrix(in_m):
-    """
-    Get the position values from matrix
+    """Get the position values from matrix
 
     Arguments:
         in_m (matrix): The input Matrix.
 
     Returns:
         list of float: The position values for xyz.
+
     """
     pos = in_m[3][:3]
 
     return pos
 
+
 def setMatrixPosition(in_m, pos):
-    """
-    Set the position for a given matrix
+    """Set the position for a given matrix
 
     Arguments:
         in_m (matrix): The input Matrix.
@@ -295,8 +275,9 @@ def setMatrixPosition(in_m, pos):
     >>> tnpo = tra.setMatrixPosition(tOld, tra.getPositionFromMatrix(t))
 
     >>> t = tra.setMatrixPosition(t, self.guide.apos[-1])
+
     """
-    m = dt.Matrix()
+    m = datatypes.Matrix()
     m[0] = in_m[0]
     m[1] = in_m[1]
     m[2] = in_m[2]
@@ -304,9 +285,9 @@ def setMatrixPosition(in_m, pos):
 
     return m
 
+
 def setMatrixRotation(m, rot):
-    """
-    Set the rotation for a given matrix
+    """Set the rotation for a given matrix
 
     Arguments:
         in_m (matrix): The input Matrix.
@@ -314,6 +295,7 @@ def setMatrixRotation(m, rot):
 
     Returns:
         matrix: The matrix with the new rotation
+
     """
     X = rot[0]
     Y = rot[1]
@@ -325,9 +307,9 @@ def setMatrixRotation(m, rot):
 
     return m
 
-def setMatrixScale(m, scl=[1,1,1]):
-    """
-    Set the scale for a given matrix
+
+def setMatrixScale(m, scl=[1, 1, 1]):
+    """Set the scale for a given matrix
 
     Arguments:
         in_m (matrix): The input Matrix.
@@ -335,47 +317,56 @@ def setMatrixScale(m, scl=[1,1,1]):
 
     Returns:
         matrix: The matrix with the new scale
-    """
 
-    tm = dt.TransformationMatrix(m)
+    """
+    tm = datatypes.TransformationMatrix(m)
     tm.setScale(scl, space="world")
 
-    m = dt.Matrix(tm)
+    m = datatypes.Matrix(tm)
 
     return m
 
 
-def getFilteredTransform(m, translation=True, rotation=True, scaling=True):
-    """
-    Retrieve a transformation filtered.
+def getFilteredTransform(m,
+                         translation=True,
+                         rotation=True,
+                         scaling=True):
+    """Retrieve a transformation filtered.
 
     Arguments:
         m (matrix): the reference matrix
-        translation (bool): If true the return matrix will match the translation.
-        rotation (bool): If true the return matrix will match the rotation.
-        scaling (bool): If true the return matrix will match the scaling.
+        translation (bool): If true the return matrix will match the
+            translation.
+        rotation (bool): If true the return matrix will match the
+            rotation.
+        scaling (bool): If true the return matrix will match the
+            scaling.
 
     Returns:
         matrix : The filtered matrix
 
     """
 
-    t = dt.Vector(m[3][0],m[3][1],m[3][2])
-    x = dt.Vector(m[0][0],m[0][1],m[0][2])
-    y = dt.Vector(m[1][0],m[1][1],m[1][2])
-    z = dt.Vector(m[2][0],m[2][1],m[2][2])
+    t = datatypes.Vector(m[3][0], m[3][1], m[3][2])
+    x = datatypes.Vector(m[0][0], m[0][1], m[0][2])
+    y = datatypes.Vector(m[1][0], m[1][1], m[1][2])
+    z = datatypes.Vector(m[2][0], m[2][1], m[2][2])
 
-    out = dt.Matrix()
+    out = datatypes.Matrix()
 
     if translation:
         out = setMatrixPosition(out, t)
 
     if rotation and scaling:
-        out = setMatrixRotation(out, [x,y,z])
+        out = setMatrixRotation(out, [x, y, z])
     elif rotation and not scaling:
         out = setMatrixRotation(out, [x.normal(), y.normal(), z.normal()])
     elif not rotation and scaling:
-        out = setMatrixRotation(out, [dt.Vector(1,0,0) * x.length(), dt.Vector(0,1,0) * y.length(), dt.Vector(0,0,1) * z.length()])
+        out = setMatrixRotation(out,
+                                [datatypes.Vector(1, 0, 0)
+                                 * x.length(), datatypes.Vector(0, 1, 0)
+                                 * y.length(), datatypes.Vector(0, 0, 1)
+                                 * z.length()])
 
     return out
 
@@ -383,9 +374,9 @@ def getFilteredTransform(m, translation=True, rotation=True, scaling=True):
 # ROTATION
 ##########################################################
 
+
 def getRotationFromAxis(in_a, in_b, axis="xy", negate=False):
-    """
-    Get the matrix rotation from a given axis.
+    """Get the matrix rotation from a given axis.
 
     Arguments:
         in_a (vector): Axis A
@@ -399,16 +390,18 @@ def getRotationFromAxis(in_a, in_b, axis="xy", negate=False):
     Example:
         .. code-block:: python
 
-            x = dt.Vector(0,-1,0)
+            x = datatypes.Vector(0,-1,0)
             x = x * tra.getTransform(self.eff_loc)
-            z = dt.Vector(self.normal.x,self.normal.y,self.normal.z)
+            z = datatypes.Vector(self.normal.x,
+                                 self.normal.y,
+                                 self.normal.z)
             z = z * tra.getTransform(self.eff_loc)
             m = tra.getRotationFromAxis(x, z, "xz", self.negate)
-    """
 
-    a = dt.Vector(in_a.x, in_a.y, in_a.z)
-    b = dt.Vector(in_b.x, in_b.y, in_b.z)
-    c = dt.Vector()
+    """
+    a = datatypes.Vector(in_a.x, in_a.y, in_a.z)
+    b = datatypes.Vector(in_b.x, in_b.y, in_b.z)
+    c = datatypes.Vector()
 
     if negate:
         a *= -1
@@ -444,14 +437,17 @@ def getRotationFromAxis(in_a, in_b, axis="xy", negate=False):
         y = b
         x = -c
 
-    m = dt.Matrix()
-    setMatrixRotation(m, [x,y,z])
+    m = datatypes.Matrix()
+    setMatrixRotation(m, [x, y, z])
 
     return m
 
+
 def getSymmetricalTransform(t, axis="yz", fNegScale=False):
-    """
-    Get the symmetrical tranformation matrix from a define 2 axis mirror plane. exp:"yz".
+    """Get the symmetrical tranformation
+
+    Get the symmetrical tranformation matrix from a define 2 axis mirror
+    plane. exp:"yz".
 
     Arguments:
         t (matrix): The transformation matrix to mirror.
@@ -463,30 +459,30 @@ def getSymmetricalTransform(t, axis="yz", fNegScale=False):
     """
 
     if axis == "yz":
-        mirror =   dt.TransformationMatrix( -1,0,0,0,
-                                            0,1,0,0,
-                                            0,0,1,0,
-                                            0,0,0,1)
+        mirror = datatypes.TransformationMatrix(-1, 0, 0, 0,
+                                                0, 1, 0, 0,
+                                                0, 0, 1, 0,
+                                                0, 0, 0, 1)
 
     if axis == "xy":
-        mirror =   dt.TransformationMatrix( 1,0,0,0,
-                                            0,1,0,0,
-                                            0,0,-1,0,
-                                            0,0,0,1)
+        mirror = datatypes.TransformationMatrix(1, 0, 0, 0,
+                                                0, 1, 0, 0,
+                                                0, 0, -1, 0,
+                                                0, 0, 0, 1)
     if axis == "zx":
-        mirror =   dt.TransformationMatrix( 1,0,0,0,
-                                            0,-1,0,0,
-                                            0,0,1,0,
-                                            0,0,0,1)
+        mirror = datatypes.TransformationMatrix(1, 0, 0, 0,
+                                                0, -1, 0, 0,
+                                                0, 0, 1, 0,
+                                                0, 0, 0, 1)
     t *= mirror
 
-    #TODO: getSymmetricalTransform: add freeze negative scaling procedure.
+    # TODO: add freeze negative scaling procedure.
 
     return t
 
+
 def resetTransform(node, t=True, r=True, s=True):
-    """
-    Reset the scale, rotation and translation for a given dagNode.
+    """Reset the scale, rotation and translation for a given dagNode.
 
     Arguments:
         node(dagNode): The object to reset the transforms.
@@ -498,27 +494,37 @@ def resetTransform(node, t=True, r=True, s=True):
         None
 
     """
+    trsDic = {"tx": 0,
+              "ty": 0,
+              "tz": 0,
+              "rx": 0,
+              "ry": 0,
+              "rz": 0,
+              "sx": 1,
+              "sy": 1,
+              "sz": 1}
 
-    trsDic = {"tx":0, "ty":0, "tz":0, "rx":0, "ry":0, "rz":0, "sx":1, "sy":1, "sz":1}
     tAxis = ["tx", "ty", "tz"]
     rAxis = ["rx", "ry", "rz"]
     sAxis = ["sx", "sy", "sz"]
     axis = []
 
-    if t: axis =  axis + tAxis
-    if r: axis =  axis + rAxis
-    if s: axis =  axis + sAxis
+    if t:
+        axis = axis + tAxis
+    if r:
+        axis = axis + rAxis
+    if s:
+        axis = axis + sAxis
 
     for a in axis:
-        try: node.attr(a).set(trsDic[a])
-        except: pass
-
-
+        try:
+            node.attr(a).set(trsDic[a])
+        except Exception:
+            pass
 
 
 def matchWorldTransform(source, target):
-    """
-    Match 2 dagNode transformations in world space.
+    """Match 2 dagNode transformations in world space.
 
     Arguments:
         source (dagNode): The source dagNode
@@ -526,14 +532,14 @@ def matchWorldTransform(source, target):
 
     Returns:
         None
-    """
 
+    """
     sWM = source.getMatrix(worldSpace=True)
     target.setMatrix(sWM, worldSpace=True)
 
+
 def quaternionDotProd(q1, q2):
-    """
-    Get the dot product of 2 quaternion.
+    """Get the dot product of 2 quaternion.
 
     Arguments:
         q1 (quaternion): Input quaternion 1.
@@ -541,14 +547,14 @@ def quaternionDotProd(q1, q2):
 
     Returns:
         quaternion: The dot proct quaternion.
-    """
 
+    """
     dot = q1.x * q2.x + q1.y * q2.y + q1.z * q2.z + q1.w * q2.w
     return dot
 
+
 def quaternionSlerp(q1, q2, blend):
-    """
-    Get an interpolate quaternion based in slerp function.
+    """Get an interpolate quaternion based in slerp function.
 
     Arguments:
         q1 (quaternion): Input quaternion 1.
@@ -561,8 +567,11 @@ def quaternionSlerp(q1, q2, blend):
     Example:
         .. code-block:: python
 
-            q = quaternionSlerp(dt.Quaternion(t1.getRotationQuaternion()),
-                    dt.Quaternion(t2.getRotationQuaternion()), blend)
+            q = quaternionSlerp(datatypes.Quaternion(
+                                t1.getRotationQuaternion()),
+                                datatypes.Quaternion(
+                                    t2.getRotationQuaternion()), blend)
+
     """
     dot = quaternionDotProd(q1, q2)
     if dot < 0.0:
@@ -578,32 +587,35 @@ def quaternionSlerp(q1, q2, blend):
         w1 = 1.0 - blend
         w2 = blend
 
-    result = dt.Quaternion(q1).scaleIt(w1) + dt.Quaternion(q2).scaleIt(w2)
+    result = (datatypes.Quaternion(q1).scaleIt(w1)
+              + datatypes.Quaternion(q2).scaleIt(w2))
 
     return result
 
 
 def convert2TransformMatrix(tm):
-    """
-    Convert a transformation Matrix or a matrix to a transformation matrix in world space.
+    """Convert a transformation Matrix
+
+    Convert a transformation Matrix or a matrix to a transformation
+    matrix in world space.
 
     Arguments:
         tm (matrix): The input matrix.
 
     Returns:
         matrix: The transformation matrix in worldSpace
+
     """
-    if isinstance(tm, nt.Transform):
-        tm = dt.TransformationMatrix(tm.getMatrix(worldSpace=True))
-    if isinstance(tm, dt.Matrix):
-        tm = dt.TransformationMatrix(tm)
+    if isinstance(tm, nodetypes.Transform):
+        tm = datatypes.TransformationMatrix(tm.getMatrix(worldSpace=True))
+    if isinstance(tm, datatypes.Matrix):
+        tm = datatypes.TransformationMatrix(tm)
 
     return tm
 
 
-def getInterpolateTransformMatrix(t1, t2, blend=.5 ):
-    """
-    Interpolate 2 matrix.
+def getInterpolateTransformMatrix(t1, t2, blend=.5):
+    """Interpolate 2 matrix.
 
     Arguments:
         t1 (matrix): Input matrix 1.
@@ -613,10 +625,12 @@ def getInterpolateTransformMatrix(t1, t2, blend=.5 ):
     Returns:
         matrix: The newly interpolated transformation matrix.
 
-    >>> t = tra.getInterpolateTransformMatrix(self.fk_ctl[0], self.tws1A_npo, .3333)
-    """
+    >>> t = tra.getInterpolateTransformMatrix(self.fk_ctl[0],
+                                              self.tws1A_npo,
+                                              .3333)
 
-    #check if the input transforms are transformMatrix
+    """
+    # check if the input transforms are transformMatrix
     t1 = convert2TransformMatrix(t1)
     t2 = convert2TransformMatrix(t2)
 
@@ -626,20 +640,23 @@ def getInterpolateTransformMatrix(t1, t2, blend=.5 ):
         return t1
 
     # translate
-    pos = vec.linearlyInterpolate(t1.getTranslation(space="world"), t2.getTranslation(space="world"), blend)
+    pos = vector.linearlyInterpolate(t1.getTranslation(space="world"),
+                                     t2.getTranslation(space="world"),
+                                     blend)
 
     # scale
-    scaleA = dt.Vector(*t1.getScale(space="world"))
-    scaleB = dt.Vector(*t2.getScale(space="world"))
+    scaleA = datatypes.Vector(*t1.getScale(space="world"))
+    scaleB = datatypes.Vector(*t2.getScale(space="world"))
 
-
-    vs = vec.linearlyInterpolate(scaleA, scaleB, blend)
+    vs = vector.linearlyInterpolate(scaleA, scaleB, blend)
 
     # rotate
-    q = quaternionSlerp(dt.Quaternion(t1.getRotationQuaternion()), dt.Quaternion(t2.getRotationQuaternion()), blend)
+    q = quaternionSlerp(datatypes.Quaternion(t1.getRotationQuaternion()),
+                        datatypes.Quaternion(t2.getRotationQuaternion()),
+                        blend)
 
     # out
-    result = dt.TransformationMatrix()
+    result = datatypes.TransformationMatrix()
 
     result.setTranslation(pos, space="world")
     result.setRotationQuaternion(q.x, q.y, q.z, q.w)
