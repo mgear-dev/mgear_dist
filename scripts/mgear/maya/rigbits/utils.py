@@ -1,32 +1,4 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-"""
-mGear utilitie tools.
-"""
+"""Rigbits utilitie tools"""
 
 from mGear_pyqt import compileUi
 
@@ -34,15 +6,17 @@ import pymel.core as pm
 
 UI_EXT = "ui"
 
+
 def ui2py(filePath=None, *args):
-    """
-    Convert qtDesigner .ui files to .py.
-    """
+    """Convert qtDesigner .ui files to .py"""
 
     if not filePath:
         startDir = pm.workspace(q=True, rootDirectory=True)
-        filePath = pm.fileDialog2(dialogStyle=2, fileMode=1, startingDirectory=startDir,
-                                  fileFilter='PyQt Designer (*%s)' % UI_EXT, okc="Compile to .py")
+        filePath = pm.fileDialog2(dialogStyle=2,
+                                  fileMode=1,
+                                  startingDirectory=startDir,
+                                  fileFilter='PyQt Designer (*%s)' % UI_EXT,
+                                  okc="Compile to .py")
         if not filePath:
             return False
         filePath = filePath[0]
@@ -55,24 +29,27 @@ def ui2py(filePath=None, *args):
     pyfile = open(compiledFilePath, 'w')
     compileUi(filePath, pyfile, False, 4, False)
     pyfile.close()
-    pm.displayInfo("PyQt Designer file compiled to .py in: " + compiledFilePath)
+
+    info = "PyQt Designer file compiled to .py in: "
+    pm.displayInfo(info + compiledFilePath)
 
 
 def createRunTimeCommand(name, rCmd, ann=""):
-    """
-    Create run time commands from raw string.
+    """Create run time commands from raw string.
+
     This function is used to create the mGear hotkeys.
     """
     if pm.runTimeCommand(name, ex=True):
         pm.runTimeCommand(name, e=True, delete=True)
-        pm.displayWarning("Old hotkey: " +name+ " Deleted" )
-
+        pm.displayWarning("Old hotkey: " + name + " Deleted")
 
     pm.runTimeCommand(name, ann=ann, c=rCmd, cat="mGear")
-    pm.displayInfo("Hotkey: " +name+ " created" )
+    pm.displayInfo("Hotkey: " + name + " created")
+
 
 def createHotkeys(*args):
     """Create  mGear custom hotkey functions ready to be use.
+
     This command doesn't set the hotkey binding. Only create the functions.
 
     Args:
@@ -87,7 +64,7 @@ if isinstance(pm.selected()[0], pm.MeshFace):
     pm.polyExtrudeFacet(constructionHistory=True,keepFacesTogether=True )
 else:
     root = pm.selected()[0]
-    if not pm.attributeQuery("comp_type", node=root, ex=True):
+    if not pm.attributeQuery("comp_type", o_node=root, ex=True):
         rigbits.duplicateSym()
     else:
         gui.Guide_UI.duplicate(True)
@@ -104,7 +81,7 @@ if isinstance(pm.selected()[0], pm.MeshFace):
     pm.polyExtrudeFacet(constructionHistory=True,keepFacesTogether=True )
 else:
     root = pm.selected()[0]
-    if not pm.attributeQuery("comp_type", node=root, ex=True):
+    if not pm.attributeQuery("comp_type", o_node=root, ex=True):
         pm.duplicate()
     else:
         gui.Guide_UI.duplicate(False)
@@ -130,7 +107,6 @@ frameSelectedCenter()
 
 '''
     createRunTimeCommand("mGear_frameCenter", rCmd, ann="")
-
 
     # reset SRT
     rCmd = '''
@@ -227,8 +203,6 @@ else:
 '''
     createRunTimeCommand("mGear_align2Transforms", rCmd, ann="")
 
-
-
     #  inspect property
     rCmd = '''
 import mgear.maya.shifter.gui as gui
@@ -298,7 +272,6 @@ pw.walkMirror(pm.selected())
 '''
     createRunTimeCommand("mGear_walkMirror", rCmd, ann="")
 
-
     # reset camera persp
     rCmd = '''
 import pymel.core as pm
@@ -309,7 +282,6 @@ pm.viewSet(p=True, fit=True)
     createRunTimeCommand("mGear_resetCameraPersp", rCmd, ann="")
 
     pm.displayInfo("mGear Hotkeys creation finish.")
-
 
     # walk transform child add
     rCmd = '''
@@ -363,4 +335,3 @@ pw.walkMirror(pm.selected(), True)
 
 '''
     createRunTimeCommand("mGear_walkMirrorAdd", rCmd, ann="")
-

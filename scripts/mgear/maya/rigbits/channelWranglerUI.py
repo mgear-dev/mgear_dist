@@ -1,33 +1,9 @@
-# MGEAR is under the terms of the MIT License
+from mgear.maya import pyqt
+from mgear.vendor.Qt import QtCore, QtWidgets
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-import mgear.maya.pyqt as gqt
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 class Ui_Form(object):
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(832, 537)
@@ -193,35 +169,35 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(gqt.fakeTranslate("Form", "Form", None, -1))
+        Form.setWindowTitle(pyqt.fakeTranslate("Form", "Form", None, -1))
         self.channelMapping_tableWidget.setSortingEnabled(False)
-        self.channelMapping_tableWidget.horizontalHeaderItem(0).setText(gqt.fakeTranslate("Form", "Idx", None, -1))
-        self.channelMapping_tableWidget.horizontalHeaderItem(1).setText(gqt.fakeTranslate("Form", "Channel", None, -1))
-        self.channelMapping_tableWidget.horizontalHeaderItem(2).setText(gqt.fakeTranslate("Form", "Source", None, -1))
-        self.channelMapping_tableWidget.horizontalHeaderItem(3).setText(gqt.fakeTranslate("Form", "Target", None, -1))
-        self.channelMapping_tableWidget.horizontalHeaderItem(4).setText(gqt.fakeTranslate("Form", "operation", None, -1))
-        self.export_pushButton.setText(gqt.fakeTranslate("Form", "Export", None, -1))
-        self.import_pushButton.setText(gqt.fakeTranslate("Form", "Import", None, -1))
-        self.apply_pushButton.setText(gqt.fakeTranslate("Form", "Apply", None, -1))
-        self.groupBox.setTitle(gqt.fakeTranslate("Form", "Channel", None, -1))
-        self.channel_pushButton.setText(gqt.fakeTranslate("Form", "<<<", None, -1))
-        self.groupBox_2.setTitle(gqt.fakeTranslate("Form", "Target", None, -1))
-        self.target_pushButton.setText(gqt.fakeTranslate("Form", "<<<", None, -1))
-        self.setRow_pushButton.setText(gqt.fakeTranslate("Form", "Set Row", None, -1))
-        self.setMultiChannel_pushButton.setText(gqt.fakeTranslate("Form", "Set Multi Channel", None, -1))
-        self.setMultiTarget_pushButton.setText(gqt.fakeTranslate("Form", "Set Multi Target", None, -1))
-        self.clearSelectedRows_pushButton.setText(gqt.fakeTranslate("Form", "Clear Selected Rows", None, -1))
-        self.clearAll_pushButton.setText(gqt.fakeTranslate("Form", "Clear All", None, -1))
-        self.setMoveOp_pushButton.setText(gqt.fakeTranslate("Form", "Set Move Operation", None, -1))
-        self.setProxyOp_pushButton.setText(gqt.fakeTranslate("Form", "Set Proxy Operation", None, -1))
-        self.groupBox_3.setTitle(gqt.fakeTranslate("Form", "Move Duplicated Channel Policy", None, -1))
-        self.movePolicy_comboBox.setToolTip(gqt.fakeTranslate("Form", "<html><head/><body><p>Set the duplicate channel policy when we use proxy channel operation.</p><p>-<span style=\" font-weight:600;\">Merge</span>: If the channel is already in the target object the new channel creationg will be skipped and the output channels will be reconnected to the previous existing channel</p><p>-<span style=\" font-weight:600;\">Index</span>: If the channel is already in the target object, the new proxy channel will add an index number to avoid the name clashing.</p><p><span style=\" text-decoration: underline;\">example:</span></p><p align=\"center\"><span style=\" font-style:italic;\">&quot;ik_fk_blend&quot; will be renamed &quot;ik_fk_blend0&quot;, &quot;ik_fk_blend1&quot;,&quot;ik_fk_blend2&quot;, etc...</span></p><p>-<span style=\" font-weight:600;\">Full Name</span>: If the channel is already in the target object, the new channel will be renamed using the source node name as a prefix</p></body></html>", None, -1))
-        self.movePolicy_comboBox.setItemText(0, gqt.fakeTranslate("Form", "Merge", None, -1))
-        self.movePolicy_comboBox.setItemText(1, gqt.fakeTranslate("Form", "Index", None, -1))
-        self.movePolicy_comboBox.setItemText(2, gqt.fakeTranslate("Form", "Full Name", None, -1))
-        self.groupBox_4.setTitle(gqt.fakeTranslate("Form", "Proxy Duplicated Channel Policy", None, -1))
-        self.proxyPolicy_comboBox.setToolTip(gqt.fakeTranslate("Form", "<html><head/><body><p>Set the duplicate channel policy when we use proxy channel operation.</p><p>-<span style=\" font-weight:600;\">Index</span>: If the channel is already in the target object, the new proxy channel will add an index number to avoid the name clashing.</p><p><span style=\" text-decoration: underline;\">example:</span></p><p align=\"center\"><span style=\" font-style:italic;\">&quot;ik_fk_blend&quot; will be renamed &quot;ik_fk_blend0&quot;, &quot;ik_fk_blend1&quot;,&quot;ik_fk_blend2&quot;, etc...</span></p><p>-<span style=\" font-weight:600;\">Full Name</span>: If the channel is already in the target object, the new channel will be renamed using the source node name as a prefix</p></body></html>", None, -1))
-        self.proxyPolicy_comboBox.setItemText(0, gqt.fakeTranslate("Form", "Index", None, -1))
-        self.proxyPolicy_comboBox.setItemText(1, gqt.fakeTranslate("Form", "Full Name", None, -1))
+        self.channelMapping_tableWidget.horizontalHeaderItem(0).setText(pyqt.fakeTranslate("Form", "Idx", None, -1))
+        self.channelMapping_tableWidget.horizontalHeaderItem(1).setText(pyqt.fakeTranslate("Form", "Channel", None, -1))
+        self.channelMapping_tableWidget.horizontalHeaderItem(2).setText(pyqt.fakeTranslate("Form", "Source", None, -1))
+        self.channelMapping_tableWidget.horizontalHeaderItem(3).setText(pyqt.fakeTranslate("Form", "Target", None, -1))
+        self.channelMapping_tableWidget.horizontalHeaderItem(4).setText(pyqt.fakeTranslate("Form", "operation", None, -1))
+        self.export_pushButton.setText(pyqt.fakeTranslate("Form", "Export", None, -1))
+        self.import_pushButton.setText(pyqt.fakeTranslate("Form", "Import", None, -1))
+        self.apply_pushButton.setText(pyqt.fakeTranslate("Form", "Apply", None, -1))
+        self.groupBox.setTitle(pyqt.fakeTranslate("Form", "Channel", None, -1))
+        self.channel_pushButton.setText(pyqt.fakeTranslate("Form", "<<<", None, -1))
+        self.groupBox_2.setTitle(pyqt.fakeTranslate("Form", "Target", None, -1))
+        self.target_pushButton.setText(pyqt.fakeTranslate("Form", "<<<", None, -1))
+        self.setRow_pushButton.setText(pyqt.fakeTranslate("Form", "Set Row", None, -1))
+        self.setMultiChannel_pushButton.setText(pyqt.fakeTranslate("Form", "Set Multi Channel", None, -1))
+        self.setMultiTarget_pushButton.setText(pyqt.fakeTranslate("Form", "Set Multi Target", None, -1))
+        self.clearSelectedRows_pushButton.setText(pyqt.fakeTranslate("Form", "Clear Selected Rows", None, -1))
+        self.clearAll_pushButton.setText(pyqt.fakeTranslate("Form", "Clear All", None, -1))
+        self.setMoveOp_pushButton.setText(pyqt.fakeTranslate("Form", "Set Move Operation", None, -1))
+        self.setProxyOp_pushButton.setText(pyqt.fakeTranslate("Form", "Set Proxy Operation", None, -1))
+        self.groupBox_3.setTitle(pyqt.fakeTranslate("Form", "Move Duplicated Channel Policy", None, -1))
+        self.movePolicy_comboBox.setToolTip(pyqt.fakeTranslate("Form", "<html><head/><body><p>Set the duplicate channel policy when we use proxy channel operation.</p><p>-<span style=\" font-weight:600;\">Merge</span>: If the channel is already in the target object the new channel creationg will be skipped and the output channels will be reconnected to the previous existing channel</p><p>-<span style=\" font-weight:600;\">Index</span>: If the channel is already in the target object, the new proxy channel will add an index number to avoid the name clashing.</p><p><span style=\" text-decoration: underline;\">example:</span></p><p align=\"center\"><span style=\" font-style:italic;\">&quot;ik_fk_blend&quot; will be renamed &quot;ik_fk_blend0&quot;, &quot;ik_fk_blend1&quot;,&quot;ik_fk_blend2&quot;, etc...</span></p><p>-<span style=\" font-weight:600;\">Full Name</span>: If the channel is already in the target object, the new channel will be renamed using the source node name as a prefix</p></body></html>", None, -1))
+        self.movePolicy_comboBox.setItemText(0, pyqt.fakeTranslate("Form", "Merge", None, -1))
+        self.movePolicy_comboBox.setItemText(1, pyqt.fakeTranslate("Form", "Index", None, -1))
+        self.movePolicy_comboBox.setItemText(2, pyqt.fakeTranslate("Form", "Full Name", None, -1))
+        self.groupBox_4.setTitle(pyqt.fakeTranslate("Form", "Proxy Duplicated Channel Policy", None, -1))
+        self.proxyPolicy_comboBox.setToolTip(pyqt.fakeTranslate("Form", "<html><head/><body><p>Set the duplicate channel policy when we use proxy channel operation.</p><p>-<span style=\" font-weight:600;\">Index</span>: If the channel is already in the target object, the new proxy channel will add an index number to avoid the name clashing.</p><p><span style=\" text-decoration: underline;\">example:</span></p><p align=\"center\"><span style=\" font-style:italic;\">&quot;ik_fk_blend&quot; will be renamed &quot;ik_fk_blend0&quot;, &quot;ik_fk_blend1&quot;,&quot;ik_fk_blend2&quot;, etc...</span></p><p>-<span style=\" font-weight:600;\">Full Name</span>: If the channel is already in the target object, the new channel will be renamed using the source node name as a prefix</p></body></html>", None, -1))
+        self.proxyPolicy_comboBox.setItemText(0, pyqt.fakeTranslate("Form", "Index", None, -1))
+        self.proxyPolicy_comboBox.setItemText(1, pyqt.fakeTranslate("Form", "Full Name", None, -1))
 
 from mgear.maya.rigbits.widgets import TableWidgetDragRowsChannelWrangler
