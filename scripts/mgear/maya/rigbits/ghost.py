@@ -7,7 +7,7 @@ import pymel.core as pm
 
 from mgear.maya import node, primitive
 
-from . import rigbits
+from .. import rigbits
 
 
 def createGhostCtl(ctl, parent=None, connect=True):

@@ -7,7 +7,8 @@ import pymel.core.datatypes as datatypes
 
 from mgear.maya import icon, skin, node
 
-from . import rigbits, rivet, blendShapes
+from .. import rigbits
+from . import rivet, blendShapes
 
 
 def inverseTranslateParent(obj):
