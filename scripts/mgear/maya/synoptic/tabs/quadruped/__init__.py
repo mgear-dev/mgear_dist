@@ -27,12 +27,12 @@
 ##################################################
 # GLOBAL
 ##################################################
-import mgear.maya.pyqt as gqt
+import mgear.maya.pyqt as pyqt
 
 from mgear.maya.synoptic.tabs import MainSynopticTab
 import widget as wui
 
-QtGui, QtCore, QtWidgets, wrapInstance, shiboken = gqt.qt_import(True)
+QtGui, QtCore, QtWidgets, wrapInstance, shiboken = pyqt.qt_import(True)
 
 
 ##################################################

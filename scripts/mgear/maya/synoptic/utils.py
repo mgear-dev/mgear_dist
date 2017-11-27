@@ -1,54 +1,14 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-##################################################
-# GLOBAL
-##################################################
-
-
-
-import pymel.core as pm
-from pymel import versions
-# import maya.mel as mel
-# import maya.OpenMayaUI as omui
 from functools import partial
 import re
-
-import mgear
-import mgear.maya.dag as dag
-import mgear.maya.transform as tra
-import mgear.maya.utils as mutils
 import traceback
 
+from pymel import versions
+import pymel.core as pm
 
-import mgear.maya.pyqt as gqt
-# from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
-# from maya.app.general.mayaMixin import MayaQDockWidget
+import mgear
 
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+from mgear.maya import pyqt, dag, transform, utils
+from mgear.vendor.Qt import QtCore, QtWidgets
 
 
 SYNOPTIC_WIDGET_NAME = "synoptic_view"
@@ -63,9 +23,9 @@ EXPR_RIGHT_SIDE = re.compile("R(\d+)")
 ##################################################
 # util
 def isSideElement(name):
+    """Returns is name(str) side element?
+
     # type: (str) -> bool
-    """
-    Returns is name(str) side element?
 
     Arguments:
         node: str
@@ -84,10 +44,11 @@ def isSideElement(name):
 
 
 def swapSideLabel(name):
-    # type: (str) -> str
-    """
-    Returns fliped name that replaced side label left to right or right to left.
+    """Returns fliped name
 
+    Returns fliped name that replaced side label left to right or right to left
+
+    # type: (str) -> str
     Arguments:
         name(str):
 
@@ -110,9 +71,8 @@ def swapSideLabel(name):
 ##################################################
 
 def getSynopticWidget(widget, max_iter=20):
+    """Return the widget where the synoptic panel is attach
 
-    """
-    Return the widget where the synoptic panel is attach
     :param widget:
     :param max_iter:
     :return:
@@ -124,6 +84,7 @@ def getSynopticWidget(widget, max_iter=20):
         parent = parent.parentWidget()
 
     return False
+
 
 def getModel(widget):
 
@@ -138,21 +99,24 @@ def getModel(widget):
 
     except pm.general.MayaNodeError:
         mes = traceback.format_exc()
-        mes = "Can't find model {0} for widget: {1}\n{2}".format(model_name, widget, mes)
+        mes = "Can't find model {0} for widget: {1}\n{2}".format(
+            model_name, widget, mes)
         mgear.log(mes, mgear.sev_error)
         return None
 
     return model
 
+
 def getControlers(model, gSuffix=CTRL_GRP_SUFFIX):
 
     try:
-        ctl_set = pm.PyNode(model.name()+gSuffix)
+        ctl_set = pm.PyNode(model.name() + gSuffix)
         members = ctl_set.members()
 
         return members
-    except:
+    except TypeError:
         return None
+
 
 def getNamespace(modelName):
     if not modelName:
@@ -165,8 +129,10 @@ def getNamespace(modelName):
 
     return nameSpace
 
+
 def stripNamespace(nodeName):
     return nodeName.split(":")[-1]
+
 
 def getNode(nodeName):
     try:
@@ -179,7 +145,8 @@ def getNode(nodeName):
 def listAttrForMirror(node):
     # type: (pm.nodetypes.Transform) -> list[str]
 
-    res = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]  # FIXME: should "ro" be here?
+    # TODO: should "ro" be here?
+    res = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
     res.extend(pm.listAttr(node, userDefined=True, shortNames=True))
     res = list(filter(lambda x: not x.startswith("inv"), res))
 
@@ -205,7 +172,7 @@ def selectObj(model, object_names, mouse_button, key_modifier):
     with pm.UndoChunk():
         nodes = []
         for name in object_names:
-            if  nameSpace:
+            if nameSpace:
                 node = getNode(nameSpace + ":" + name)
             else:
                 node = getNode(name)
@@ -214,9 +181,10 @@ def selectObj(model, object_names, mouse_button, key_modifier):
                 continue
 
             if not node and nameSpace:
-                mgear.log("Can't find object : %s:%s"%( nameSpace, name), mgear.sev_error)
+                mgear.log("Can't find object : %s:%s" % (nameSpace, name),
+                          mgear.sev_error)
             elif not node:
-                mgear.log("Can't find object : %s"%( name), mgear.sev_error)
+                mgear.log("Can't find object : %s" % (name), mgear.sev_error)
             nodes.append(node)
 
         if not nodes:
@@ -230,31 +198,40 @@ def selectObj(model, object_names, mouse_button, key_modifier):
         # Key pressed
         if key_modifier is None:
             pm.select(nodes)
-        elif key_modifier == QtCore.Qt.NoModifier:# No Key
+        elif key_modifier == QtCore.Qt.NoModifier:  # No Key
             pm.select(nodes)
-        elif key_modifier == QtCore.Qt.ControlModifier: # ctrl
+        elif key_modifier == QtCore.Qt.ControlModifier:  # ctrl
             pm.select(nodes, deselect=True)
-        elif key_modifier == QtCore.Qt.ShiftModifier: # shift
+        elif key_modifier == QtCore.Qt.ShiftModifier:  # shift
             pm.select(nodes, toggle=True)
-        elif int(key_modifier) == (QtCore.Qt.ControlModifier | QtCore.Qt.ShiftModifier): # ctrl + shift
+        elif int(key_modifier) == (QtCore.Qt.ControlModifier
+                                   | QtCore.Qt.ShiftModifier):  # ctrl + shift
             pm.select(nodes, add=True)
-        elif key_modifier == QtCore.Qt.AltModifier: # alt
+        elif key_modifier == QtCore.Qt.AltModifier:  # alt
             pm.select(nodes)
-        elif int(key_modifier) == (QtCore.Qt.ControlModifier | QtCore.Qt.AltModifier): # ctrl + alt
+        elif int(key_modifier) == (QtCore.Qt.ControlModifier
+                                   | QtCore.Qt.AltModifier):  # ctrl + alt
             pm.select(nodes, deselect=True)
-        elif int(key_modifier) == (QtCore.Qt.ShiftModifier | QtCore.Qt.AltModifier): # shift + alt
+        elif int(key_modifier) == (QtCore.Qt.ShiftModifier
+                                   | QtCore.Qt.AltModifier):  # shift + alt
             pm.select(nodes, toggle=True)
-        elif int(key_modifier) == (QtCore.Qt.ControlModifier | QtCore.Qt.AltModifier | QtCore.Qt.ShiftModifier): # Ctrl + alt + shift
+
+            # Ctrl + alt + shift
+        elif int(key_modifier) == (QtCore.Qt.ControlModifier
+                                   | QtCore.Qt.AltModifier
+                                   | QtCore.Qt.ShiftModifier):
             pm.select(nodes, add=True)
         else:
             pm.select(nodes)
 
 # ================================================
+
+
 def quickSel(model, channel, mouse_button):
 
-    qs_attr = model.attr("quicksel%s"%channel)
+    qs_attr = model.attr("quicksel%s" % channel)
 
-    if mouse_button == QtCore.Qt.LeftButton: # Call Selection
+    if mouse_button == QtCore.Qt.LeftButton:  # Call Selection
         names = qs_attr.get().split(",")
         if not names:
             return
@@ -263,11 +240,14 @@ def quickSel(model, channel, mouse_button):
             ctl = dag.findChild(model, name)
             if ctl:
                 ctl.select(add=True)
-    elif mouse_button == QtCore.Qt.MidButton: # Save Selection
-        names = [ sel.name().split("|")[-1] for sel in pm.ls(selection=True) if sel.name().endswith("_ctl") ]
+    elif mouse_button == QtCore.Qt.MidButton:  # Save Selection
+        names = [sel.name().split("|")[-1]
+                 for sel in pm.ls(selection=True)
+                 if sel.name().endswith("_ctl")]
+
         qs_attr.set(",".join(names))
 
-    elif mouse_button == QtCore.Qt.RightButton: # Key Selection
+    elif mouse_button == QtCore.Qt.RightButton:  # Key Selection
         names = qs_attr.get().split(",")
         if not names:
             return
@@ -275,12 +255,16 @@ def quickSel(model, channel, mouse_button):
             keyObj(model, names)
 
 # ================================================
+
+
 def selAll(model):
 
     controlers = getControlers(model)
     pm.select(controlers)
 
 # ================================================
+
+
 def selGroup(model, groupSuffix):
 
     controlers = getControlers(model, groupSuffix)
@@ -295,20 +279,23 @@ def keySel():
     pm.setKeyframe()
 
 # ================================================
+
+
 def keyObj(model, object_names):
+    """Set the keyframe in the controls pass by a list in obj_names variable
 
-    """
-    Set the keyframe in the controls pass by a list in obj_names variable
+    Args:
+        model (Str): Name of the namespace that will define de the model
+        object_names (Str): names of the controls, without the name space
 
-    :param model: Name of the namespace that will define de the model
-    :param object_names: names of the controls, without the name space
-    :return: None
+    Returns:
+        None
     """
     with pm.UndoChunk():
         nodes = []
         nameSpace = getNamespace(model)
         for name in object_names:
-            if  nameSpace:
+            if nameSpace:
                 node = getNode(nameSpace + ":" + name)
             else:
                 node = getNode(name)
@@ -317,9 +304,10 @@ def keyObj(model, object_names):
                 continue
 
             if not node and nameSpace:
-                mgear.log("Can't find object : %s:%s"%( nameSpace, name), mgear.sev_error)
+                mgear.log("Can't find object : %s:%s" % (nameSpace, name),
+                          mgear.sev_error)
             elif not node:
-                mgear.log("Can't find object : %s"%( name), mgear.sev_error)
+                mgear.log("Can't find object : %s" % (name), mgear.sev_error)
             nodes.append(node)
 
         if not nodes:
@@ -328,12 +316,16 @@ def keyObj(model, object_names):
         pm.setKeyframe(*nodes)
 
 # ================================================
+
+
 def keyAll(model):
 
     controlers = getControlers(model)
     pm.setKeyframe(controlers)
 
 # ================================================
+
+
 def keyGroup(model, groupSuffix):
 
     controlers = getControlers(model, groupSuffix)
@@ -345,19 +337,18 @@ def keyGroup(model, groupSuffix):
 def toggleAttr(model, object_name, attr_name):
 
     nameSpace = getNamespace(model)
-    if  nameSpace:
+    if nameSpace:
         node = dag.findChild(nameSpace + ":" + object_name)
     else:
         node = dag.findChild(model, object_name)
 
-    oAttr =  node.attr(attr_name)
+    oAttr = node.attr(attr_name)
     if oAttr.type() in ["float", "bool"]:
         oVal = oAttr.get()
         if oVal == 1:
             oAttr.set(0)
         else:
             oAttr.set(1)
-
 
 
 ##################################################
@@ -367,12 +358,10 @@ def toggleAttr(model, object_name, attr_name):
 def getComboKeys(model, object_name, combo_attr):
 
     nameSpace = getNamespace(model)
-    if  nameSpace:
+    if nameSpace:
         node = getNode(nameSpace + ":" + object_name)
-        # node = dag.findRelative(model, model.split(":")[0] + ":" + object_name)
     else:
         node = getNode(object_name)
-        # node = dag.findRelative(model, object_name)
 
     oAttr = node.attr(combo_attr)
     keys = oAttr.getEnums().keys()
@@ -383,12 +372,12 @@ def getComboKeys(model, object_name, combo_attr):
 def getComboIndex(model, object_name, combo_attr):
 
     nameSpace = getNamespace(model)
-    if  nameSpace:
+    if nameSpace:
         node = getNode(nameSpace + ":" + object_name)
     else:
         node = getNode(object_name)
 
-    oVal =  node.attr(combo_attr).get()
+    oVal = node.attr(combo_attr).get()
     return oVal
 
 
@@ -455,18 +444,18 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
     if val == 1.0:
 
         for target, ctl in zip(fkTargets, fkCtrls):
-            tra.matchWorldTransform(target, ctl)
+            transform.matchWorldTransform(target, ctl)
 
         oAttr.set(0.0)
 
     # if is FK
     elif val == 0.0:
 
-        tra.matchWorldTransform(ikTarget, ikCtrl)
+        transform.matchWorldTransform(ikTarget, ikCtrl)
         if ikRot:
-            tra.matchWorldTransform(ikRotTarget, ikRotNode)
+            transform.matchWorldTransform(ikRotTarget, ikRotNode)
 
-        tra.matchWorldTransform(upvTarget, upvCtrl)
+        transform.matchWorldTransform(upvTarget, upvCtrl)
         oAttr.set(1.0)
 
         roll_att = uiNode.attr(ikfk_attr.replace("blend", "roll"))
@@ -475,7 +464,8 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
 ##################################################
 # POSE
 ##################################################
-# ================================================
+
+
 def mirrorPose(flip=False, nodes=None):
     # type(bool, List[pm.nodetypes.Transform]) -> None
 
@@ -518,7 +508,10 @@ def applyMirror(nameSpace, mirrorEntry):
             node.attr(attr).set(val)
 
     except RuntimeError as e:
-        mgear.log("applyMirror failed: {0} {1}: {2}".format(node.name(), attr, e), mgear.sev_error)
+        mgear.log("applyMirror failed: {0} {1}: {2}".format(node.name(),
+                                                            attr,
+                                                            e),
+                  mgear.sev_error)
 
 
 def gatherMirrorData(nameSpace, node, flip):
@@ -549,7 +542,10 @@ def calculateMirrorData(srcNode, targetNode, flip=False):
 
         # whether does attribute "invTx" exists when attrName is "tx"
         invCheckName = getInvertCheckButtonAttrName(attrName)
-        if not pm.attributeQuery(invCheckName, node=srcNode, shortName=True, exists=True):
+        if not pm.attributeQuery(invCheckName,
+                                 node=srcNode,
+                                 shortName=True,
+                                 exists=True):
 
             # if not exists, straight
             inv = 1
@@ -571,9 +567,13 @@ def calculateMirrorData(srcNode, targetNode, flip=False):
         # if flip enabled record self also
         if flip:
             flipVal = targetNode.attr(attrName).get()
-            results.append({"target": srcNode, "attr": invAttrName, "val": flipVal * inv})
+            results.append({"target": srcNode,
+                            "attr": invAttrName,
+                            "val": flipVal * inv})
 
-        results.append({"target": targetNode, "attr": invAttrName, "val": srcNode.attr(attrName).get() * inv})
+        results.append({"target": targetNode,
+                        "attr": invAttrName,
+                        "val": srcNode.attr(attrName).get() * inv})
 
     return results
 
@@ -581,15 +581,24 @@ def calculateMirrorData(srcNode, targetNode, flip=False):
 def mirrorPoseOld(flip=False, nodes=False):
 
     axis = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
-    aDic = {"tx":"invTx", "ty":"invTy", "tz":"invTz", "rx":"invRx", "ry":"invRy", "rz":"invRz", "sx":"invSx", "sy":"invSy", "sz":"invSz"}
-    mapDic = {"L":"R", "R":"L"}
+    aDic = {"tx": "invTx",
+            "ty": "invTy",
+            "tz": "invTz",
+            "rx": "invRx",
+            "ry": "invRy",
+            "rz": "invRz",
+            "sx": "invSx",
+            "sy": "invSy",
+            "sz": "invSz"}
+
+    mapDic = {"L": "R", "R": "L"}
     if not nodes:
         nodes = pm.selected()
     pm.undoInfo(ock=1)
     try:
         nameSpace = False
         if nodes:
-            if  len(nodes[0].split(":")) == 2:
+            if len(nodes[0].split(":")) == 2:
                 nameSpace = nodes[0].split(":")[0]
         for oSel in nodes:
             if nameSpace:
@@ -599,15 +608,15 @@ def mirrorPoseOld(flip=False, nodes=False):
 
             if nameParts[1][0] == "C":
                 if not oSel.attr("tx").isLocked():
-                    oSel.attr("tx").set(oSel.attr("tx").get()*-1)
+                    oSel.attr("tx").set(oSel.attr("tx").get() * -1)
                 if not oSel.attr("ry").isLocked():
-                    oSel.attr("ry").set(oSel.attr("ry").get()*-1)
+                    oSel.attr("ry").set(oSel.attr("ry").get() * -1)
                 if not oSel.attr("rz").isLocked():
-                    oSel.attr("rz").set(oSel.attr("rz").get()*-1)
+                    oSel.attr("rz").set(oSel.attr("rz").get() * -1)
             else:
                 nameParts[1] = mapDic[nameParts[1][0]] + nameParts[1][1:]
                 if nameSpace:
-                    nameTarget = nameSpace+":"+"_".join(nameParts)
+                    nameTarget = nameSpace + ":" + "_".join(nameParts)
                 else:
                     nameTarget = "_".join(nameParts)
                 oTarget = getNode(nameTarget)
@@ -620,11 +629,11 @@ def mirrorPoseOld(flip=False, nodes=False):
                         if flip:
                             flipVal = oTarget.attr(a).get()
 
-                        oTarget.attr(a).set(oSel.attr(a).get()*inv)
+                        oTarget.attr(a).set(oSel.attr(a).get() * inv)
 
                         if flip:
-                            oSel.attr(a).set(flipVal*inv)
-    except:
+                            oSel.attr(a).set(flipVal * inv)
+    except Exception:
         pm.displayWarning("Flip/Mirror pose fail")
         pass
     finally:
@@ -634,28 +643,27 @@ def mirrorPoseOld(flip=False, nodes=False):
 def bindPose(model):
     nameSpace = getNamespace(model.name())
     if nameSpace:
-        dagPoseName = nameSpace+':dagPose1'
+        dagPoseName = nameSpace + ':dagPose1'
     else:
         dagPoseName = 'dagPose1'
-    pm.dagPose( dagPoseName, restore=True )
+    pm.dagPose(dagPoseName, restore=True)
 
 
 def resetSelTrans():
     with pm.UndoChunk():
         for obj in pm.selected():
-            tra.resetTransform(obj)
+            transform.resetTransform(obj)
 
 
 ##################################################
 # Transfer space
 ##################################################
-# ================================================
 class AbstractAnimationTransfer(QtWidgets.QDialog):
 
     try:
         valueChanged = QtCore.Signal(int)
     except Exception:
-        valueChanged = gqt.pyqtSignal()
+        valueChanged = pyqt.pyqtSignal()
 
     def __init__(self):
         # type: () -> None
@@ -683,7 +691,10 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         # type: () -> None
 
         self.groupBox = QtWidgets.QGroupBox()
-        self.setGroupBoxTitle()  # must be implemented in each specialized classes
+
+        # must be implemented in each specialized classes
+        self.setGroupBoxTitle()
+
         self.onlyKeyframes_check = QtWidgets.QCheckBox('Only Keyframe Frames')
         self.onlyKeyframes_check.setChecked(True)
         self.startFrame_label = QtWidgets.QLabel("Start")
@@ -697,7 +708,8 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         self.endFrame_value.setMaximum(999999)
         self.populateRange(True)
         self.allFrames_button = QtWidgets.QPushButton("All Frames")
-        self.timeSliderFrames_button = QtWidgets.QPushButton("Time Slider Frames")
+        self.timeSliderFrames_button = QtWidgets.QPushButton(
+            "Time Slider Frames")
 
         self.comboBoxSpaces = QtWidgets.QComboBox()
         self.comboBoxSpaces.addItems(self.comboItems)
@@ -738,8 +750,10 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         # type: () -> None
 
         self.spaceTransfer_button.clicked.connect(self.doItByUI)
-        self.allFrames_button.clicked.connect(partial(self.populateRange, False))
-        self.timeSliderFrames_button.clicked.connect(partial(self.populateRange, True))
+        self.allFrames_button.clicked.connect(
+            partial(self.populateRange, False))
+        self.timeSliderFrames_button.clicked.connect(
+            partial(self.populateRange, True))
 
     # SLOTS ##########################################################
 
@@ -812,7 +826,8 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
 
     def transfer(self, startFrame, endFrame, onlyKeyframes, *args, **kwargs):
         # type: (int, int, bool, *str, **str) -> None
-        raise NotImplementedError("must be implemented in each specialized class")
+        raise NotImplementedError("must be implemented in each "
+                                  "specialized class")
 
     def doItByUI(self):
         # type: () -> None
@@ -829,25 +844,36 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         if self.comboObj is not None:
             self.comboObj.setCurrentIndex(self.comboBoxSpaces.currentIndex())
 
-        for c in gqt.maya_main_window().children():
+        for c in pyqt.maya_main_window().children():
             if isinstance(c, AbstractAnimationTransfer):
                 c.deleteLater()
 
-    @mutils.one_undo
-    @mutils.viewport_off
-    def bakeAnimation(self, switch_attr_name, val_src_nodes, key_src_nodes, key_dst_nodes,
-                      startFrame, endFrame, onlyKeyframes=True):
+    @utils.one_undo
+    @utils.viewport_off
+    def bakeAnimation(self,
+                      switch_attr_name,
+                      val_src_nodes,
+                      key_src_nodes,
+                      key_dst_nodes,
+                      startFrame,
+                      endFrame,
+                      onlyKeyframes=True):
         # type: (str, List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], int, int, bool) -> None
 
         # Temporaly turn off cycle check to avoid misleading cycle message on Maya 2016.  With Maya 2016.5 and 2017 the cycle warning doesn't show up
         if versions.current() < 201650:
             pm.cycleCheck(e=False)
-            pm.displayWarning("Maya version older than: 2016.5: CycleCheck temporal turn OFF")
+            pm.displayWarning("Maya version older than: 2016.5: "
+                              "CycleCheck temporal turn OFF")
 
         channels = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
-        worldMatrixList = self.getWorldMatrices(startFrame, endFrame, val_src_nodes)
-        keyframeList = list(set(pm.keyframe(key_src_nodes, at=["t", "r", "s"], q=True)))
-        keyframeList.sort()
+        worldMatrixList = self.getWorldMatrices(startFrame,
+                                                endFrame,
+                                                val_src_nodes)
+
+        keyframeList = sorted(set(pm.keyframe(key_src_nodes,
+                                              at=["t", "r", "s"],
+                                              q=True)))
 
         # delete animation in the space switch channel and destination ctrls
         pm.cutKey(key_dst_nodes, at=channels, time=(startFrame, endFrame))
@@ -875,6 +901,8 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
 
 # ================================================
 # Transfer space
+
+
 class ParentSpaceTransfer(AbstractAnimationTransfer):
 
     def __init__(self):
@@ -902,7 +930,8 @@ class ParentSpaceTransfer(AbstractAnimationTransfer):
     def setGroupBoxTitle(self):
         if hasattr(self, "groupBox"):
             # TODO: extract logic with naming convention
-            part = "_".join(self.ctrlNode.name().split(":")[-1].split("_")[:-1])
+            part = "_".join(
+                self.ctrlNode.name().split(":")[-1].split("_")[:-1])
             self.groupBox.setTitle(part)
 
     def transfer(self, startFrame, endFrame, onlyKeyframes, *args, **kwargs):
@@ -912,15 +941,20 @@ class ParentSpaceTransfer(AbstractAnimationTransfer):
         key_src_nodes = val_src_nodes
         key_dst_nodes = val_src_nodes
 
-        self.bakeAnimation(self.getChangeAttrName(), val_src_nodes, key_src_nodes, key_dst_nodes,
-                           startFrame, endFrame, onlyKeyframes)
+        self.bakeAnimation(self.getChangeAttrName(),
+                           val_src_nodes,
+                           key_src_nodes,
+                           key_dst_nodes,
+                           startFrame,
+                           endFrame,
+                           onlyKeyframes)
 
     @staticmethod
     def showUI(combo, model, uihost, switchedAttrShortName, ctrl_name, *args):
         # type: (widgets.toggleCombo, pm.nodetypes.Transform, str, str, str, *str) -> None
 
         try:
-            for c in gqt.maya_main_window().children():
+            for c in pyqt.maya_main_window().children():
                 if isinstance(c, ParentSpaceTransfer):
                     c.deleteLater()
 
@@ -939,7 +973,7 @@ class ParentSpaceTransfer(AbstractAnimationTransfer):
         # Delete the UI if errors occur to avoid causing winEvent
         # and event errors (in Maya 2014)
         try:
-            ui.createUI(gqt.maya_main_window())
+            ui.createUI(pyqt.maya_main_window())
             ui.show()
 
         except Exception as e:
@@ -963,7 +997,9 @@ class IkFkTransfer(AbstractAnimationTransfer):
 
     def getChangeRollAttrName(self):
         # type: () -> str
-        return "{}.{}".format(self.getHostName(), self.switchedAttrShortName.replace("blend", "roll"))
+        return "{}.{}".format(
+            self.getHostName(),
+            self.switchedAttrShortName.replace("blend", "roll"))
 
     def changeAttrToBoundValue(self):
         # type: () -> None
@@ -1022,7 +1058,14 @@ class IkFkTransfer(AbstractAnimationTransfer):
 
     # ----------------------------------------------------------------
 
-    def transfer(self, startFrame, endFrame, onlyKeyframes, ikRot, switchTo=None, *args, **kargs):
+    def transfer(self,
+                 startFrame,
+                 endFrame,
+                 onlyKeyframes,
+                 ikRot,
+                 switchTo=None,
+                 *args,
+                 **kargs):
         # type: (int, int, bool, str, *str, **str) -> None
 
         if switchTo is not None:
@@ -1071,8 +1114,13 @@ class IkFkTransfer(AbstractAnimationTransfer):
                 pm.cutKey(roll_att, time=(startFrame, endFrame))
                 pm.setAttr(roll_att, 0)
 
-        self.bakeAnimation(self.getChangeAttrName(), val_src_nodes, key_src_nodes, key_dst_nodes,
-                           startFrame, endFrame, onlyKeyframes)
+        self.bakeAnimation(self.getChangeAttrName(),
+                           val_src_nodes,
+                           key_src_nodes,
+                           key_dst_nodes,
+                           startFrame,
+                           endFrame,
+                           onlyKeyframes)
 
     # ----------------------------------------------------------------
     # re implement doItbyUI to have access to self.hasIKrot option
@@ -1091,7 +1139,7 @@ class IkFkTransfer(AbstractAnimationTransfer):
         if self.comboObj is not None:
             self.comboObj.setCurrentIndex(self.comboBoxSpaces.currentIndex())
 
-        for c in gqt.maya_main_window().children():
+        for c in pyqt.maya_main_window().children():
             if isinstance(c, AbstractAnimationTransfer):
                 c.deleteLater()
     # ----------------------------------------------------------------
@@ -1101,7 +1149,7 @@ class IkFkTransfer(AbstractAnimationTransfer):
         # type: (pm.nodetypes.Transform, str, str, List[str], str, str, *str) -> None
 
         try:
-            for c in gqt.maya_main_window().children():
+            for c in pyqt.maya_main_window().children():
                 if isinstance(c, IkFkTransfer):
                     c.deleteLater()
 
@@ -1120,7 +1168,7 @@ class IkFkTransfer(AbstractAnimationTransfer):
         # Delete the UI if errors occur to avoid causing winEvent
         # and event errors (in Maya 2014)
         try:
-            ui.createUI(gqt.maya_main_window())
+            ui.createUI(pyqt.maya_main_window())
             ui.show()
 
         except Exception as e:
@@ -1129,8 +1177,17 @@ class IkFkTransfer(AbstractAnimationTransfer):
             mgear.log(e, mgear.sev_error)
 
     @staticmethod
-    def execute(model, ikfk_attr, uihost, fks, ik, upv, ikRot=None,
-                startFrame=None, endFrame=None, onlyKeyframes=None, switchTo=None):
+    def execute(model,
+                ikfk_attr,
+                uihost,
+                fks,
+                ik,
+                upv,
+                ikRot=None,
+                startFrame=None,
+                endFrame=None,
+                onlyKeyframes=None,
+                switchTo=None):
         # type: (pm.nodetypes.Transform, str, str, List[str], str, str, int, int, bool, str) -> None
         """transfer without displaying UI"""
 
@@ -1163,28 +1220,43 @@ class IkFkTransfer(AbstractAnimationTransfer):
         # type: (pm.nodetypes.Transform, str, str, List[str], str, str, **str) -> None
 
         kwargs.update({"switchTo": "ik"})
-        IkFkTransfer.execute(model, ikfk_attr, uihost, fks, ik, upv, ikRot, **kwargs)
+        IkFkTransfer.execute(model,
+                             ikfk_attr,
+                             uihost,
+                             fks,
+                             ik,
+                             upv,
+                             ikRot,
+                             **kwargs)
 
     @staticmethod
     def toFK(model, ikfk_attr, uihost, fks, ik, upv, ikRot, **kwargs):
         # type: (pm.nodetypes.Transform, str, str, List[str], str, str, **str) -> None
 
         kwargs.update({"switchTo": "fk"})
-        IkFkTransfer.execute(model, ikfk_attr, uihost, fks, ik, upv, ikRot, **kwargs)
+        IkFkTransfer.execute(model,
+                             ikfk_attr,
+                             uihost,
+                             fks,
+                             ik,
+                             upv,
+                             ikRot,
+                             **kwargs)
 
 
-#Baker Springs
+# Baker Springs
 
 def clearSprings(model):
     springNodes = getControlers(model, gSuffix=PLOT_GRP_SUFFIX)
     pm.cutKey(springNodes, cl=True)
 
-@mutils.one_undo
-@mutils.viewport_off
+
+@utils.one_undo
+@utils.viewport_off
 def bakeSprings(model):
     springNodes = getControlers(model, gSuffix=PLOT_GRP_SUFFIX)
     if springNodes:
         pm.cutKey(springNodes, cl=True)
         start = pm.playbackOptions(q=True, min=True)
         end = pm.playbackOptions(q=True, max=True)
-        pm.bakeResults( springNodes, t=(start,end), simulation=True )
+        pm.bakeResults(springNodes, t=(start, end), simulation=True)

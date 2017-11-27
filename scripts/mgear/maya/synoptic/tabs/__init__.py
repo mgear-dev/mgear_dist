@@ -32,7 +32,7 @@ import traceback
 
 import pymel.core as pm
 import maya.OpenMayaUI as OpenMayaUI
-import mgear.maya.pyqt as gqt
+import mgear.maya.pyqt as pyqt
 
 import mgear
 import mgear.maya.synoptic.utils as syn_uti
@@ -40,7 +40,7 @@ import mgear.maya.synoptic.widgets as mwi
 
 # import functools
 
-QtGui, QtCore, QtWidgets, wrapInstance, shiboken = gqt.qt_import(True)
+QtGui, QtCore, QtWidgets, wrapInstance, shiboken = pyqt.qt_import(True)
 
 
 ##################################################

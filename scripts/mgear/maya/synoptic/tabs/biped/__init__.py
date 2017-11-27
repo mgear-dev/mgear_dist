@@ -28,13 +28,13 @@
 # GLOBAL
 ##################################################
 import os
-import mgear.maya.pyqt as gqt
+import mgear.maya.pyqt as pyqt
 import mgear.maya.synoptic.utils as syn_uti
 
 from mgear.maya.synoptic.tabs import MainSynopticTab
 import widget as wui
 
-QtGui, QtCore, QtWidgets, wrapInstance, shiboken = gqt.qt_import(True)
+QtGui, QtCore, QtWidgets, wrapInstance, shiboken = pyqt.qt_import(True)
 
 
 ##################################################
@@ -100,7 +100,7 @@ class SynopticTab(MainSynopticTab, wui.Ui_biped_body):
 
 '''
 MEMO: widget.py snippet
-self.thumbRoll_L0_ctl.setToolTip(gqt.fakeTranslate("biped_body", "thumbRoll_L0_ctl", None, -1))
-self.thumbRoll_L0_ctl.setStatusTip(gqt.fakeTranslate("biped_body", "thumbRoll_L0_ctl", None, -1))
-self.thumbRoll_L0_ctl.setWhatsThis(gqt.fakeTranslate("biped_body", "thumbRoll_L0_ctl", None, -1))
+self.thumbRoll_L0_ctl.setToolTip(pyqt.fakeTranslate("biped_body", "thumbRoll_L0_ctl", None, -1))
+self.thumbRoll_L0_ctl.setStatusTip(pyqt.fakeTranslate("biped_body", "thumbRoll_L0_ctl", None, -1))
+self.thumbRoll_L0_ctl.setWhatsThis(pyqt.fakeTranslate("biped_body", "thumbRoll_L0_ctl", None, -1))
 '''

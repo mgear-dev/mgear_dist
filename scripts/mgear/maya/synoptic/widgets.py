@@ -27,12 +27,12 @@
 ##################################################
 # GLOBAL
 ##################################################
-import mgear.maya.pyqt as gqt
+import mgear.maya.pyqt as pyqt
 # from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 # from maya.app.general.mayaMixin import MayaQDockWidget
 import mgear.maya.synoptic.utils as syn_uti
 
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+QtGui, QtCore, QtWidgets, wrapInstance = pyqt.qt_import()
 
 
 
