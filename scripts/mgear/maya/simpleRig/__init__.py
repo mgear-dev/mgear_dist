@@ -12,7 +12,8 @@ import maya.OpenMayaUI as OpenMayaUI
 
 import mgear
 import mgear.maya.icon as ico
-from mgear.maya import dag, transform, node, string, attribute
+from mgear.maya import dag, transform, node, attribute
+from mgear import string
 
 
 #############################################
