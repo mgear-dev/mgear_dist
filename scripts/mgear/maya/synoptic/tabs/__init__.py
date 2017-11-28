@@ -4,8 +4,7 @@ import pymel.core as pm
 import maya.OpenMayaUI as OpenMayaUI
 
 import mgear
-from .. import widgets
-import mgear.maya.synoptic.utils as syn_utils
+from .. import widgets, utils
 from mgear.vendor.Qt import QtCore, QtWidgets, QtGui, QtCompat
 
 ##################################################
@@ -113,19 +112,19 @@ class MainSynopticTab(QtWidgets.QDialog):
         sels = []
         [sels.append(x.name()) for x in pm.ls(sl=True)]
 
-        oModel = syn_utils.getModel(self)
+        oModel = utils.getModel(self)
         if not oModel:
             mes = "model not found for synoptic {}".format(self.name)
             mgear.log(mes, mgear.sev_info)
 
             # self.close()
 
-            syn_widget = syn_utils.getSynopticWidget(self)
+            syn_widget = utils.getSynopticWidget(self)
             syn_widget.updateModelList()
 
             return
 
-        nameSpace = syn_utils.getNamespace(oModel.name())
+        nameSpace = utils.getNamespace(oModel.name())
 
         selButtons = self.findChildren(widgets.SelectButton)
         for selB in selButtons:
@@ -199,8 +198,8 @@ class MainSynopticTab(QtWidgets.QDialog):
     # BUTTONS
     def selAll_clicked(self):
         # type: () -> None
-        model = syn_utils.getModel(self)
-        syn_utils.selAll(model)
+        model = utils.getModel(self)
+        utils.selAll(model)
 
     def resetAll_clicked(self):
         # type: () -> None
@@ -212,9 +211,9 @@ class MainSynopticTab(QtWidgets.QDialog):
 
     def keyAll_clicked(self):
         # type: () -> None
-        model = syn_utils.getModel(self)
-        syn_utils.keyAll(model)
+        model = utils.getModel(self)
+        utils.keyAll(model)
 
     def keySel_clicked(self):
         # type: () -> None
-        syn_utils.keySel()
+        utils.keySel()

@@ -3,7 +3,7 @@ import os
 from mgear.maya.synoptic.tabs import MainSynopticTab
 from . import widget
 
-import mgear.maya.synoptic.utils as syn_utils
+from ... import utils
 from mgear.vendor.Qt import QtWidgets
 
 ##################################################
@@ -32,39 +32,39 @@ class SynopticTab(MainSynopticTab, widget.Ui_biped_body):
     # ============================================
     # BUTTONS
     def selRight_clicked(self):
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         # i : num of fingers, j : finger length
         object_names = ["finger_R%s_fk%s_ctl" % (i, j)
                         for i in range(4) for j in range(3)]
         thumb_names = ["thumb_R0_fk%s_ctl" % j for j in range(3)]
         object_names.extend(thumb_names)
         modifiers = QtWidgets.QApplication.keyboardModifiers()
-        syn_utils.selectObj(model, object_names, None, modifiers)
+        utils.selectObj(model, object_names, None, modifiers)
 
     def selLeft_clicked(self):
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         # i : num of fingers, j : finger length
         object_names = ["finger_L%s_fk%s_ctl" % (i, j)
                         for i in range(4) for j in range(3)]
         thumb_names = ["thumb_L0_fk%s_ctl" % j for j in range(3)]
         object_names.extend(thumb_names)
         modifiers = QtWidgets.QApplication.keyboardModifiers()
-        syn_utils.selectObj(model, object_names, None, modifiers)
+        utils.selectObj(model, object_names, None, modifiers)
 
     def keyRight_clicked(self):
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         # i : num of fingers, j : finger length
         object_names = ["finger_R%s_fk%s_ctl" % (i, j)
                         for i in range(4) for j in range(3)]
         thumb_names = ["thumb_R0_fk%s_ctl" % j for j in range(3)]
         object_names.extend(thumb_names)
-        syn_utils.keyObj(model, object_names)
+        utils.keyObj(model, object_names)
 
     def keyLeft_clicked(self):
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         # i : num of fingers, j : finger length
         object_names = ["finger_L%s_fk%s_ctl" % (i, j)
                         for i in range(4) for j in range(3)]
         thumb_names = ["thumb_L0_fk%s_ctl" % j for j in range(3)]
         object_names.extend(thumb_names)
-        syn_utils.keyObj(model, object_names)
+        utils.keyObj(model, object_names)

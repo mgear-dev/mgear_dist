@@ -1,4 +1,4 @@
-from mgear.maya.synoptic import utils as syn_utils
+from . import utils
 
 from mgear.vendor.Qt import QtCore, QtWidgets, QtGui
 
@@ -21,16 +21,16 @@ class toggleCombo(QtWidgets.QComboBox):
 
     # def focusInEvent(self, event):
     def enterEvent(self, event):
-        self.model = syn_utils.getModel(self)
+        self.model = utils.getModel(self)
         self.uihost_name = str(self.property("Object"))
         self.combo_attr = str(self.property("Attr"))
         self.ctl_name = str(self.property("ik_ctl"))
         if not self.currentText():
-            list1 = syn_utils.getComboKeys(
+            list1 = utils.getComboKeys(
                 self.model, self.uihost_name, self.combo_attr)
             self.addItems(list1)
 
-        self.setCurrentIndex(syn_utils.getComboIndex(
+        self.setCurrentIndex(utils.getComboIndex(
             self.model, self.uihost_name, self.combo_attr))
         self.firstUpdate = True
 
@@ -38,36 +38,36 @@ class toggleCombo(QtWidgets.QComboBox):
         if self.firstUpdate:
             if self.currentIndex() == self.count() - 1:
                 print "Space Transfer"
-                self.setCurrentIndex(syn_utils.getComboIndex(
+                self.setCurrentIndex(utils.getComboIndex(
                     self.model, self.uihost_name, self.combo_attr))
-                syn_utils.ParentSpaceTransfer.showUI(self,
-                                                     self.model,
-                                                     self.uihost_name,
-                                                     self.combo_attr,
-                                                     self.ctl_name)
+                utils.ParentSpaceTransfer.showUI(self,
+                                                 self.model,
+                                                 self.uihost_name,
+                                                 self.combo_attr,
+                                                 self.ctl_name)
 
             else:
-                syn_utils.changeSpace(self.model,
-                                      self.uihost_name,
-                                      self.combo_attr,
-                                      self.currentIndex(),
-                                      self.ctl_name)
+                utils.changeSpace(self.model,
+                                  self.uihost_name,
+                                  self.combo_attr,
+                                  self.currentIndex(),
+                                  self.ctl_name)
 
 
 class bakeSprings(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        model = syn_utils.getModel(self)
-        syn_utils.bakeSprings(model)
+        model = utils.getModel(self)
+        utils.bakeSprings(model)
 
 
 class clearSprings(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        model = syn_utils.getModel(self)
-        syn_utils.clearSprings(model)
+        model = utils.getModel(self)
+        utils.clearSprings(model)
 
 
 class ikfkMatchButton(QtWidgets.QPushButton):
@@ -93,7 +93,7 @@ class ikfkMatchButton(QtWidgets.QPushButton):
 
         mouse_button = event.button()
 
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         ikfk_attr = str(self.property("ikfk_attr"))
         uiHost_name = str(self.property("uiHost_name"))
 
@@ -113,13 +113,12 @@ class ikfkMatchButton(QtWidgets.QPushButton):
             ikRot = None
 
         if mouse_button == QtCore.Qt.RightButton:
-            syn_utils.IkFkTransfer.showUI(
+            utils.IkFkTransfer.showUI(
                 model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot)
             return
 
         else:
-            syn_utils.ikFkMatch(
-                model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot)
+            utils.ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot)
             return
 
 
@@ -127,71 +126,71 @@ class selGroup(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         group_suffix = str(self.property("groupSuffix"))
 
-        syn_utils.selGroup(model, group_suffix)
+        utils.selGroup(model, group_suffix)
 
 
 class keyGroup(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         group_suffix = str(self.property("groupSuffix"))
 
-        syn_utils.keyGroup(model, group_suffix)
+        utils.keyGroup(model, group_suffix)
 
 
 class toggleAttrButton(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         object_name = str(self.property("Object"))
         attr_name = str(self.property("Attr"))
 
-        syn_utils.toggleAttr(model, object_name, attr_name)
+        utils.toggleAttr(model, object_name, attr_name)
 
 
 class resetTransform(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
-        syn_utils.resetSelTrans()
+        utils.resetSelTrans()
 
 
 class resetBindPose(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
 
-        syn_utils.bindPose(model)
+        utils.bindPose(model)
 
 
 class MirrorPoseButton(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        syn_utils.mirrorPose()
+        utils.mirrorPose()
 
 
 class FlipPoseButton(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        syn_utils.mirrorPose(True)
+        utils.mirrorPose(True)
 
 
 class QuickSelButton(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
 
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         channel = str(self.property("channel"))
         mouse_button = event.button()
 
-        syn_utils.quickSel(model, channel, mouse_button)
+        utils.quickSel(model, channel, mouse_button)
 
 
 class SelectButton(QtWidgets.QWidget):
@@ -226,20 +225,20 @@ class SelectButton(QtWidgets.QWidget):
             else:
                 key_modifier = (QtCore.Qt.ControlModifier
                                 | QtCore.Qt.ShiftModifier)
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         object = str(self.property("object")).split(",")
 
         mouse_button = event.button()
-        syn_utils.selectObj(model, object, mouse_button, key_modifier)
+        utils.selectObj(model, object, mouse_button, key_modifier)
 
     def mousePressEvent(self, event):
 
-        model = syn_utils.getModel(self)
+        model = utils.getModel(self)
         object = str(self.property("object")).split(",")
         mouse_button = event.button()
         key_modifier = event.modifiers()
 
-        syn_utils.selectObj(model, object, mouse_button, key_modifier)
+        utils.selectObj(model, object, mouse_button, key_modifier)
 
     def paintEvent(self, event):
         painter = QtGui.QPainter()
