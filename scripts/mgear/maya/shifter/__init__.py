@@ -1,119 +1,82 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-"""
-Shifter base rig class.
-"""
-
-
-#############################################
-# GLOBAL
-#############################################
-# Built in
+"""Shifters Rig Main class."""
 import os.path
 import datetime
 import getpass
 
 # Maya
 import pymel.core as pm
-import pymel.core.datatypes as dt
+from pymel.core import datatypes
 from pymel import versions
 
 # mgear
 import mgear
 import mgear.maya.utils
-from mgear.maya.shifter.guide import RigGuide
-from mgear.maya.shifter.guide import helperSlots
-from mgear.maya.shifter.component import MainComponent
+from . import guide, component
 
-import mgear.maya.primitive as pri
-import mgear.maya.icon as ico
-import mgear.maya.attribute as att
-import mgear.maya.skin as skin
-import mgear.maya.dag as dag
+from mgear.maya import primitive, attribute, skin, dag, icon
+
 
 # check if we have loaded the necessary plugins
-if not pm.pluginInfo("mgear_solvers", q=True, l=True):
+if not pm.pluginInfo("mgear_solvers", q=True, loaded=True):
     try:
         pm.loadPlugin("mgear_solvers")
-    except:
+    except RuntimeError:
         pm.displayError("You need the mgear_solvers plugin!")
-if not pm.pluginInfo("matrixNodes", q=True, l=True):
+if not pm.pluginInfo("matrixNodes", q=True, loaded=True):
     pm.loadPlugin("matrixNodes")
-
 
 COMPONENT_PATH = os.path.join(os.path.dirname(__file__), "component")
 TEMPLATE_PATH = os.path.join(COMPONENT_PATH, "templates")
-SYNOPTIC_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, "synoptic","tabs"))
+SYNOPTIC_PATH = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), os.pardir, "synoptic", "tabs"))
 
 SHIFTER_COMPONENT_ENV_KEY = "MGEAR_SHIFTER_COMPONENT_PATH"
 
+
 def getComponentDirectories():
+    """Get the components directory"""
     return mgear.maya.utils.gatherCustomModuleDirectories(
         SHIFTER_COMPONENT_ENV_KEY,
         os.path.join(os.path.dirname(__file__), "component"))
 
 
 def importComponentGuide(comp_type):
+    """Import the Component guide"""
     dirs = getComponentDirectories()
     defFmt = "mgear.maya.shifter.component.{}.guide"
     customFmt = "{}.guide"
 
-    module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, comp_type)
+    module = mgear.maya.utils.importFromStandardOrCustomDirectories(
+        dirs, defFmt, customFmt, comp_type)
     return module
 
 
 def importComponent(comp_type):
+    """Import the Component """
     dirs = getComponentDirectories()
     defFmt = "mgear.maya.shifter.component.{}"
     customFmt = "{}"
 
-    module = mgear.maya.utils.importFromStandardOrCustomDirectories(dirs, defFmt, customFmt, comp_type)
+    module = mgear.maya.utils.importFromStandardOrCustomDirectories(
+        dirs, defFmt, customFmt, comp_type)
     return module
 
 
-##########################################################
-# RIG
-##########################################################
-
 class Rig(object):
-    """
-    The main rig class.
+    """The main rig class.
 
     Attributes:
-        guide: RigGuide() initialization.
+        guide: guide.Rig() initialization.
         groups (dic): Rig groups (Maya sets)
         components (dic): Dictionary for the rig components.
             Keys are the component fullname (ie. 'arm_L0')
         componentsIndex (list): Components index list.
 
     """
+
     def __init__(self):
 
-        self.guide = RigGuide()
+        self.guide = guide.Rig()
 
         self.groups = {}
         self.subGroups = {}
@@ -124,15 +87,10 @@ class Rig(object):
         self.customStepDic = {}
 
     def buildFromSelection(self):
-        """
-        Build the rig from selected guides.
+        """Build the rig from selected guides."""
 
-        """
         startTime = datetime.datetime.now()
-        mgear.log("= GEAR RIG SYSTEM ==============================================")
-
-        # Get the option first otherwise the change wight might do won't be taken
-        sel = pm.ls(selection=True)
+        mgear.log("= GEAR RIG SYSTEM " + "=" * 46)
 
         # Check guide is valid
         self.guide.setFromSelection()
@@ -144,13 +102,14 @@ class Rig(object):
 
         endTime = datetime.datetime.now()
         finalTime = endTime - startTime
-        mgear.log("= GEAR BUILD RIG DONE ================ [ " + str(finalTime) + " ] ======")
-
+        mgear.log("= GEAR BUILD RIG DONE {} [ {} ] {}".format(
+            "=" * 16,
+            finalTime,
+            "=" * 7
+        ))
 
     def build(self):
-        """
-        Build the rig.
-        """
+        """Build the rig."""
 
         self.options = self.guide.values
         self.guides = self.guide.components
@@ -174,7 +133,8 @@ class Rig(object):
             customSteps = self.options[attr].split(",")
             for step in customSteps:
                 if not self.stopBuild:
-                    self.stopBuild = helperSlots.runStep(step.split("|")[-1][1:], self.customStepDic)
+                    self.stopBuild = guide.helperSlots.runStep(
+                        step.split("|")[-1][1:], self.customStepDic)
                 else:
                     pm.displayWarning("Build Stopped")
                     break
@@ -182,15 +142,13 @@ class Rig(object):
     def preCustomStep(self):
         self.customStep("doPreCustomStep", "preCustomStep")
 
-
     def postCustomStep(self):
         self.customStep("doPostCustomStep", "postCustomStep")
 
-
     def initialHierarchy(self):
-        """
-        Build the initial hierarchy of the rig.
-        Create the rig model, the main properties, and a couple of base organisation nulls.
+        """Build the initial hierarchy of the rig.
+        Create the rig model, the main properties,
+        and a couple of base organisation nulls.
         Get the global size of the rig.
 
         """
@@ -198,51 +156,71 @@ class Rig(object):
 
         # --------------------------------------------------
         # Model
-        self.model = pri.addTransformFromPos(None, self.options["rig_name"])
-        att.lockAttribute(self.model)
+        self.model = primitive.addTransformFromPos(
+            None, self.options["rig_name"])
+        attribute.lockAttribute(self.model)
 
         # --------------------------------------------------
         # Global Ctl
-        # self.global_ctl = self.addCtl(self.model, "global_C0_ctl", dt.Matrix(), self.options["C_color_fk"], "crossarrow", w=10)
-        self.global_ctl = self.addCtl(self.model, "world_ctl", dt.Matrix(), self.options["C_color_fk"], "circle", w=10)
-        att.setRotOrder(self.global_ctl, "ZXY")
+        # self.global_ctl = self.addCtl(self.model, "global_C0_ctl",
+        # datatypes.Matrix(), self.options["C_color_fk"], "crossarrow", w=10)
+        self.global_ctl = self.addCtl(
+            self.model, "world_ctl", datatypes.Matrix(),
+            self.options["C_color_fk"], "circle", w=10)
+        attribute.setRotOrder(self.global_ctl, "ZXY")
 
         # --------------------------------------------------
         # Setup in world Space
-        self.setupWS = pri.addTransformFromPos(self.model, "setup")
-        att.lockAttribute(self.setupWS)
+        self.setupWS = primitive.addTransformFromPos(self.model, "setup")
+        attribute.lockAttribute(self.setupWS)
 
         # --------------------------------------------------
         # INFOS
-        self.isRig_att       = att.addAttribute(self.model, "is_rig", "bool", True)
-        self.rigName_att     = att.addAttribute(self.model, "rig_name", "string", self.options["rig_name"])
-        self.user_att        = att.addAttribute(self.model, "user", "string", getpass.getuser())
-        self.isWip_att       = att.addAttribute(self.model, "wip", "bool", self.options["mode"] != 0)
-        self.date_att        = att.addAttribute(self.model, "date", "string", str(datetime.datetime.now()))
-        self.mayaVersion_att = att.addAttribute(self.model, "maya_version", "string", str(pm.mel.eval("getApplicationVersionAsFloat")))
-        self.gearVersion_att = att.addAttribute(self.model, "gear_version", "string", mgear.getVersion())
-        self.synoptic_att    = att.addAttribute(self.model, "synoptic", "string", str(self.options["synoptic"]))
-        self.comments_att    = att.addAttribute(self.model, "comments", "string", str(self.options["comments"]))
-        self.ctlVis_att      = att.addAttribute(self.model, "ctl_vis", "bool", True)
-        self.jntVis_att      = att.addAttribute(self.model, "jnt_vis", "bool", True)
+        self.isRig_att = attribute.addAttribute(
+            self.model, "is_rig", "bool", True)
+        self.rigName_att = attribute.addAttribute(
+            self.model, "rig_name", "string", self.options["rig_name"])
+        self.user_att = attribute.addAttribute(
+            self.model, "user", "string", getpass.getuser())
+        self.isWip_att = attribute.addAttribute(
+            self.model, "wip", "bool", self.options["mode"] != 0)
+        self.date_att = attribute.addAttribute(
+            self.model, "date", "string", str(datetime.datetime.now()))
+        self.mayaVersion_att = attribute.addAttribute(
+            self.model, "maya_version", "string",
+            str(pm.mel.eval("getApplicationVersionAsFloat")))
+        self.gearVersion_att = attribute.addAttribute(
+            self.model, "gear_version", "string", mgear.getVersion())
+        self.synoptic_att = attribute.addAttribute(
+            self.model, "synoptic", "string", str(self.options["synoptic"]))
+        self.comments_att = attribute.addAttribute(
+            self.model, "comments", "string", str(self.options["comments"]))
+        self.ctlVis_att = attribute.addAttribute(
+            self.model, "ctl_vis", "bool", True)
+        self.jntVis_att = attribute.addAttribute(
+            self.model, "jnt_vis", "bool", True)
 
-        self.qsA_att         = att.addAttribute(self.model, "quickselA", "string", "")
-        self.qsB_att         = att.addAttribute(self.model, "quickselB", "string", "")
-        self.qsC_att         = att.addAttribute(self.model, "quickselC", "string", "")
-        self.qsD_att         = att.addAttribute(self.model, "quickselD", "string", "")
-        self.qsE_att         = att.addAttribute(self.model, "quickselE", "string", "")
-        self.qsF_att         = att.addAttribute(self.model, "quickselF", "string", "")
+        self.qsA_att = attribute.addAttribute(
+            self.model, "quickselA", "string", "")
+        self.qsB_att = attribute.addAttribute(
+            self.model, "quickselB", "string", "")
+        self.qsC_att = attribute.addAttribute(
+            self.model, "quickselC", "string", "")
+        self.qsD_att = attribute.addAttribute(
+            self.model, "quickselD", "string", "")
+        self.qsE_att = attribute.addAttribute(
+            self.model, "quickselE", "string", "")
+        self.qsF_att = attribute.addAttribute(
+            self.model, "quickselF", "string", "")
 
-
-        self.rigGroups  = self.model.addAttr( "rigGroups",  at='message', m=1 )
-        self.rigPoses = self.model.addAttr( "rigPoses", at='message', m=1 )
+        self.rigGroups = self.model.addAttr("rigGroups", at='message', m=1)
+        self.rigPoses = self.model.addAttr("rigPoses", at='message', m=1)
 
         # --------------------------------------------------
         # Basic set of null
         if self.options["joint_rig"]:
-            self.jnt_org = pri.addTransformFromPos(self.model, "jnt_org")
+            self.jnt_org = primitive.addTransformFromPos(self.model, "jnt_org")
             pm.connectAttr(self.jntVis_att, self.jnt_org.attr("visibility"))
-
 
     def processComponents(self):
         """
@@ -253,36 +231,35 @@ class Rig(object):
         self.components_infos = {}
 
         for comp in self.guide.componentsIndex:
-            guide = self.guides[comp]
-            mgear.log("Init : "+ guide.fullName + " ("+guide.type+")")
+            guide_ = self.guides[comp]
+            mgear.log("Init : " + guide_.fullName + " (" + guide_.type + ")")
 
-            module = importComponent(guide.type)
-            Component = getattr(module , "Component")
+            module = importComponent(guide_.type)
+            Component = getattr(module, "Component")
 
-            component = Component(self, guide)
-            if component.fullName not in self.componentsIndex:
-                self.components[component.fullName] = component
-                self.componentsIndex.append(component.fullName)
+            comp = Component(self, guide_)
+            if comp.fullName not in self.componentsIndex:
+                self.components[comp.fullName] = comp
+                self.componentsIndex.append(comp.fullName)
 
-                self.components_infos[component.fullName] = [guide.compType, guide.getVersion(), guide.author]
+                self.components_infos[comp.fullName] = [
+                    guide_.compType, guide_.getVersion(), guide_.author]
 
         # Creation steps
-        self.steps = MainComponent.steps
+        self.steps = component.Main.steps
         for i, name in enumerate(self.steps):
             # for count, compName in enumerate(self.componentsIndex):
             for compName in self.componentsIndex:
-                component = self.components[compName]
-                mgear.log(name+" : "+ component.fullName + " ("+component.type+")")
-                component.stepMethods[i]()
+                comp = self.components[compName]
+                mgear.log(name + " : " + comp.fullName +
+                          " (" + comp.type + ")")
+                comp.stepMethods[i]()
 
-            if self.options["step"] >= 1 and i >= self.options["step"]-1:
+            if self.options["step"] >= 1 and i >= self.options["step"] - 1:
                 break
 
-
     def finalize(self):
-        """
-        Finalize the rig.
-        """
+        """Finalize the rig."""
         groupIdx = 0
 
         # Properties --------------------------------------
@@ -298,35 +275,32 @@ class Rig(object):
         mgear.log("Creating groups")
         # Retrieve group content from components
         for name in self.componentsIndex:
-            component = self.components[name]
-            for name, objects in component.groups.items():
+            component_ = self.components[name]
+            for name, objects in component_.groups.items():
                 self.addToGroup(objects, name)
-            for name, objects in component.subGroups.items():
+            for name, objects in component_.subGroups.items():
                 self.addToSubGroup(objects, name)
 
-
-        #Create master set to group all the groups
-        masterSet = pm.sets(n=self.model.name()+"_sets_grp", em=True)
+        # Create master set to group all the groups
+        masterSet = pm.sets(n=self.model.name() + "_sets_grp", em=True)
         pm.connectAttr(masterSet.message, self.model.rigGroups[groupIdx])
         groupIdx += 1
 
         # Creating all groups
         pm.select(cl=True)
         for name, objects in self.groups.items():
-            s = pm.sets(n=self.model.name()+"_"+name+"_grp")
-            s.union( objects)
+            s = pm.sets(n=self.model.name() + "_" + name + "_grp")
+            s.union(objects)
             pm.connectAttr(s.message, self.model.rigGroups[groupIdx])
             groupIdx += 1
             masterSet.add(s)
         for parentGroup, subgroups in self.subGroups.items():
-            pg = pm.PyNode(self.model.name()+"_"+parentGroup+"_grp")
+            pg = pm.PyNode(self.model.name() + "_" + parentGroup + "_grp")
             for sg in subgroups:
-                sub = pm.PyNode(self.model.name()+"_"+sg+"_grp")
+                sub = pm.PyNode(self.model.name() + "_" + sg + "_grp")
                 if sub in masterSet.members():
                     masterSet.remove(sub)
                 pg.add(sub)
-
-
 
         # Bind pose ---------------------------------------
         print self.groups["controllers"]
@@ -341,35 +315,36 @@ class Rig(object):
                 pm.displayInfo("Importing Skin")
                 skin.importSkin(self.options["skin"])
 
-            except:
-                pm.displayWarning("Skin doesn't exist or is not correct. "+self.options["skin"]+" Skipped!")
+            except RuntimeError:
+                pm.displayWarning(
+                    "Skin doesn't exist or is not correct. " +
+                    self.options["skin"] + " Skipped!")
 
-
-    def addCtl(self, parent, name, m, color, icon, **kwargs):
-        """
-        Create the control and apply the shape, if this is alrealdy stored
+    def addCtl(self, parent, name, m, color, iconShape, **kwargs):
+        """Create the control and apply the shape, if this is alrealdy stored
         in the guide controllers grp.
 
         Args:
             parent (dagNode): The control parent
             name (str): The control name.
             m (matrix): The transfromation matrix for the control.
-            color (int or list of float): The color for the control in idex or RGB.
-            icon (str): The controls default shape.
-            kwargs (variant): Other arguments for the icon type variations.
+            color (int or list of float): The color for the control in index
+                or RGB.
+            iconShape (str): The controls default shape.
+            kwargs (variant): Other arguments for the iconShape type variations
 
         Returns:
             dagNode: The Control.
 
         """
-        bufferName =  name+"_controlBuffer"
+        bufferName = name + "_controlBuffer"
         if bufferName in self.guide.controllers.keys():
             ctl_ref = self.guide.controllers[bufferName]
-            ctl = pri.addTransform(parent, name, m)
+            ctl = primitive.addTransform(parent, name, m)
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
         else:
-            ctl = ico.create(parent, name, m, color, icon, **kwargs)
+            ctl = icon.create(parent, name, m, color, iconShape, **kwargs)
 
         self.addToGroup(ctl, "controllers")
 
@@ -377,17 +352,14 @@ class Rig(object):
         for oShape in ctl.getShapes():
             oShape.isHistoricallyInteresting.set(False)
 
-        #set controller tag
+        # set controller tag
         if versions.current() >= 201650:
             pm.controller(ctl)
 
-
         return ctl
 
-
     def addToGroup(self, objects, names=["hidden"]):
-        """
-        Add the object in a collection for later group creation.
+        """Add the object in a collection for later group creation.
 
         Args:
             objects (dagNode or list of dagNode): Object to put in the group.
@@ -407,12 +379,13 @@ class Rig(object):
             self.groups[name].extend(objects)
 
     def addToSubGroup(self, subGroups, parentGroups=["hidden"]):
-        """
-        Add the object in a collection for later SubGroup creation.
+        """Add the object in a collection for later SubGroup creation.
 
         Args:
-            subGroups (dagNode or list of dagNode): Groups (maya set) to add as a Subgroup.
-            namparentGroupses (str or list of str): Names of the parent groups to create.
+            subGroups (dagNode or list of dagNode): Groups (maya set) to add
+                as a Subgroup.
+            namparentGroupses (str or list of str): Names of the parent groups
+                to create.
 
         """
 
@@ -427,10 +400,8 @@ class Rig(object):
                 self.subGroups[pg] = []
             self.subGroups[pg].extend(subGroups)
 
-
     def getLocalName(self, guideName):
-        """
-        This function return the local name, cutting the Maya fullname
+        """This function return the local name, cutting the Maya fullname
         and taking the latest part.
 
             ie. "parentA|parentB|arm_C0_root" will return "arm_C0_root"
@@ -446,7 +417,6 @@ class Rig(object):
             return None
         localName = guideName.split("|")[-1]
         return localName
-
 
     def getComponentName(self, guideName, local=True):
         """
@@ -470,8 +440,7 @@ class Rig(object):
         return comp_name
 
     def getRelativeName(self, guideName):
-        """
-        This function return the name of the relative in the guide
+        """This function return the name of the relative in the guide
 
             ie. "arm_C0_root" return "root"
 
@@ -489,10 +458,8 @@ class Rig(object):
         relative_name = "_".join(localName.split("_")[2:])
         return relative_name
 
-
     def findRelative(self, guideName):
-        """
-        Return the objects in the rig matching the guide object.
+        """Return the objects in the rig matching the guide object.
 
         Args:
             guideName (str): Name of the guide object.
@@ -513,10 +480,8 @@ class Rig(object):
             return self.global_ctl
         return self.components[comp_name].getRelation(relative_name)
 
-
     def findControlRelative(self, guideName):
-        """
-        Return the control objects in the rig matching the guide object.
+        """Return the control objects in the rig matching the guide object.
 
         Args:
             guideName (str): Name of the guide object.
@@ -540,8 +505,7 @@ class Rig(object):
     # TODO: update findComponent and other find methods with new funtions like
     # comp_name and others.  Better composability
     def findComponent(self, guideName):
-        """
-        Return the component from a guide Name.
+        """Return the component from a guide Name.
 
         Args:
             guideName (str): Name of the guide object.
@@ -562,8 +526,7 @@ class Rig(object):
         return self.components[comp_name]
 
     def findUIHost(self, guideName):
-        """
-        Return the UI host of the compoent
+        """Return the UI host of the compoent
 
         Args:
             guideName (str): Name of the guide object.
@@ -583,6 +546,7 @@ class Rig(object):
             return self.ui
 
         if self.components[comp_name].ui is None:
-            self.components[comp_name].ui = pm.UIHost(self.components[comp_name].root)
+            self.components[comp_name].ui = pm.UIHost(
+                self.components[comp_name].root)
 
         return self.components[comp_name].ui

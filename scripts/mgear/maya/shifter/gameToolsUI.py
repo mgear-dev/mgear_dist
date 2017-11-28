@@ -1,15 +1,9 @@
-# -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:/repo/mgear/scripts/mgear/maya/shifter/gameToolsUI.ui'
-#
-# Created: Wed Nov  1 16:06:54 2017
-#      by: pyside2-uic  running on PySide2 2.0.0~alpha0
-#
-# WARNING! All changes made in this file will be lost!
+from mgear.vendor.Qt import QtCore, QtWidgets
 
-from PySide2 import QtCore, QtGui, QtWidgets
 
 class Ui_gameTools(object):
+
     def setupUi(self, gameTools):
         gameTools.setObjectName("gameTools")
         gameTools.resize(284, 332)
@@ -37,13 +31,15 @@ class Ui_gameTools(object):
         self.rigNode_lineEdit = QtWidgets.QLineEdit(self.gameTools_groupBox)
         self.rigNode_lineEdit.setObjectName("rigNode_lineEdit")
         self.gridLayout_2.addWidget(self.rigNode_lineEdit, 1, 0, 1, 1)
-        self.rigNode_pushButton = QtWidgets.QPushButton(self.gameTools_groupBox)
+        self.rigNode_pushButton = QtWidgets.QPushButton(
+            self.gameTools_groupBox)
         self.rigNode_pushButton.setObjectName("rigNode_pushButton")
         self.gridLayout_2.addWidget(self.rigNode_pushButton, 1, 1, 1, 1)
         self.meshNode_lineEdit = QtWidgets.QLineEdit(self.gameTools_groupBox)
         self.meshNode_lineEdit.setObjectName("meshNode_lineEdit")
         self.gridLayout_2.addWidget(self.meshNode_lineEdit, 2, 0, 1, 1)
-        self.meshNode_pushButton = QtWidgets.QPushButton(self.gameTools_groupBox)
+        self.meshNode_pushButton = QtWidgets.QPushButton(
+            self.gameTools_groupBox)
         self.meshNode_pushButton.setObjectName("meshNode_pushButton")
         self.gridLayout_2.addWidget(self.meshNode_pushButton, 2, 1, 1, 1)
         self.path_lineEdit = QtWidgets.QLineEdit(self.gameTools_groupBox)
@@ -58,20 +54,27 @@ class Ui_gameTools(object):
         self.script_pushButton = QtWidgets.QPushButton(self.gameTools_groupBox)
         self.script_pushButton.setObjectName("script_pushButton")
         self.gridLayout_2.addWidget(self.script_pushButton, 4, 1, 1, 1)
-        self.disconnectExport_pushButton = QtWidgets.QPushButton(self.gameTools_groupBox)
-        self.disconnectExport_pushButton.setObjectName("disconnectExport_pushButton")
-        self.gridLayout_2.addWidget(self.disconnectExport_pushButton, 5, 0, 1, 2)
+        self.disconnectExport_pushButton = QtWidgets.QPushButton(
+            self.gameTools_groupBox)
+        self.disconnectExport_pushButton.setObjectName(
+            "disconnectExport_pushButton")
+        self.gridLayout_2.addWidget(
+            self.disconnectExport_pushButton, 5, 0, 1, 2)
         self.verticalLayout.addWidget(self.gameTools_groupBox)
         self.assembly_groupBox = QtWidgets.QGroupBox(gameTools)
         self.assembly_groupBox.setObjectName("assembly_groupBox")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.assembly_groupBox)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.importConnect_pushButton = QtWidgets.QPushButton(self.assembly_groupBox)
+        self.importConnect_pushButton = QtWidgets.QPushButton(
+            self.assembly_groupBox)
         self.importConnect_pushButton.setObjectName("importConnect_pushButton")
         self.gridLayout_3.addWidget(self.importConnect_pushButton, 0, 0, 1, 1)
-        self.referenceConnect_pushButton = QtWidgets.QPushButton(self.assembly_groupBox)
-        self.referenceConnect_pushButton.setObjectName("referenceConnect_pushButton")
-        self.gridLayout_3.addWidget(self.referenceConnect_pushButton, 1, 0, 1, 1)
+        self.referenceConnect_pushButton = QtWidgets.QPushButton(
+            self.assembly_groupBox)
+        self.referenceConnect_pushButton.setObjectName(
+            "referenceConnect_pushButton")
+        self.gridLayout_3.addWidget(
+            self.referenceConnect_pushButton, 1, 0, 1, 1)
         self.verticalLayout.addWidget(self.assembly_groupBox)
         self.gridLayout_4.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
@@ -79,15 +82,29 @@ class Ui_gameTools(object):
         QtCore.QMetaObject.connectSlotsByName(gameTools)
 
     def retranslateUi(self, gameTools):
-        gameTools.setWindowTitle(QtWidgets.QApplication.translate("gameTools", "SHIFTER Game Tools", None, -1))
-        self.gameTools_groupBox.setTitle(QtWidgets.QApplication.translate("gameTools", "EXPORT", None, -1))
-        self.assetName_label.setText(QtWidgets.QApplication.translate("gameTools", "Asset Name", None, -1))
-        self.rigNode_pushButton.setText(QtWidgets.QApplication.translate("gameTools", "<<< Rig Top Node", None, -1))
-        self.meshNode_pushButton.setText(QtWidgets.QApplication.translate("gameTools", "<<< Mesh Top Node", None, -1))
-        self.path_pushButton.setText(QtWidgets.QApplication.translate("gameTools", "set Output Folder", None, -1))
-        self.script_pushButton.setText(QtWidgets.QApplication.translate("gameTools", "set Custom Script", None, -1))
-        self.disconnectExport_pushButton.setText(QtWidgets.QApplication.translate("gameTools", "Disconnect and Export", None, -1))
-        self.assembly_groupBox.setTitle(QtWidgets.QApplication.translate("gameTools", "ASSEMBLY", None, -1))
-        self.importConnect_pushButton.setText(QtWidgets.QApplication.translate("gameTools", "Import and Connect", None, -1))
-        self.referenceConnect_pushButton.setText(QtWidgets.QApplication.translate("gameTools", "Reference and Connect", None, -1))
-
+        gameTools.setWindowTitle(QtWidgets.QApplication.translate(
+            "gameTools", "SHIFTER Game Tools", None, -1))
+        self.gameTools_groupBox.setTitle(
+            QtWidgets.QApplication.translate("gameTools", "EXPORT", None, -1))
+        self.assetName_label.setText(QtWidgets.QApplication.translate(
+            "gameTools", "Asset Name", None, -1))
+        self.rigNode_pushButton.setText(QtWidgets.QApplication.translate(
+            "gameTools", "<<< Rig Top Node", None, -1))
+        self.meshNode_pushButton.setText(QtWidgets.QApplication.translate(
+            "gameTools", "<<< Mesh Top Node", None, -1))
+        self.path_pushButton.setText(QtWidgets.QApplication.translate(
+            "gameTools", "set Output Folder", None, -1))
+        self.script_pushButton.setText(QtWidgets.QApplication.translate(
+            "gameTools", "set Custom Script", None, -1))
+        self.disconnectExport_pushButton.setText(
+            QtWidgets.QApplication.translate(
+                "gameTools", "Disconnect and Export", None, -1))
+        self.assembly_groupBox.setTitle(
+            QtWidgets.QApplication.translate(
+                "gameTools", "ASSEMBLY", None, -1))
+        self.importConnect_pushButton.setText(
+            QtWidgets.QApplication.translate(
+                "gameTools", "Import and Connect", None, -1))
+        self.referenceConnect_pushButton.setText(
+            QtWidgets.QApplication.translate(
+                "gameTools", "Reference and Connect", None, -1))

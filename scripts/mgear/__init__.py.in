@@ -1,37 +1,5 @@
-# MGEAR is under the terms of the MIT License
+"""mGear init module"""
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-"""
-mGear init module.
-"""
-
-##########################################################
-# GLOBAL
-##########################################################
-# built-in
 import os
 import sys
 import exceptions
@@ -50,31 +18,28 @@ sev_comment = 32
 # gear version
 VERSION = @MGEAR_VERSION@
 
-
 ##########################################################
 # METHODS
 ##########################################################
 
+
 def logInfos():
-    """
-    Log version of Gear
-    """
+    """Log version of Gear"""
     print "GEAR version : " + getVersion()
 
 
 def getVersion():
-    """
-    Get mGear version
+    """Get mGear version
 
     Returns:
         mgear version
+
     """
     return ".".join([str(i) for i in VERSION])
 
 
 def reloadModule(name="mgear", *args):
-    """
-    Reload a module and its sub-modules from a given module name.
+    """Reload a module and its sub-modules from a given module name.
 
     Args:
         name (str): Module Name. Default value is "mgear".
@@ -91,12 +56,12 @@ def reloadModule(name="mgear", *args):
 
 
 def __reloadRecursive(path, parentName):
-    """
-    search subfolders recursive
+    """search subfolders recursive
 
     Args:
         path (str): Path to search subfolder recursive
         parentName (str): parent name
+
     """
     for root, dirs, files in os.walk(path, True, None):
 
@@ -106,37 +71,38 @@ def __reloadRecursive(path, parentName):
                 if sfile == "__init__.py":
                     name = parentName
                 else:
-                    name = parentName+"."+sfile[:-3]
+                    name = parentName + "." + sfile[:-3]
 
-                log("reload : %s"%name)
+                log("reload : %s" % name)
                 try:
                     module = __import__(name, globals(), locals(), ["*"], -1)
                     reload(module)
-                except ImportError, e:
+                except ImportError as e:
                     for arg in e.args:
                         log(arg, sev_error)
-                except Exception, e:
+                except Exception as e:
                     for arg in e.args:
                         log(arg, sev_error)
 
         # Now reload sub modules
         for dirName in dirs:
-            __reloadRecursive(path+"/"+dirName, parentName+"."+dirName)
+            __reloadRecursive(path + "/" + dirName, parentName + "." + dirName)
         break
 
 ##########################################################
 # LOGGER
 ##########################################################
 
+
 def setDebug(b):
-    """
-    Set the debug mode to given value.
+    """Set the debug mode to given value.
 
     Args:
         b (bool): boolean
 
     Returns:
         bool: The previous value of the debug mode
+
     """
     global logDebug
     original_value = logDebug
@@ -145,11 +111,11 @@ def setDebug(b):
 
 
 def toggleDebug():
-    """
-    Toggle the debug mode value.
+    """Toggle the debug mode value.
 
     Returns;
         bool: The new debug mode value.
+
     """
     global logDebug
     logDebug = not logDebug
@@ -157,8 +123,7 @@ def toggleDebug():
 
 
 def log(message, severity=sev_comment, infos=False):
-    """
-    Log a message using severity and additional info from the file itself.
+    """Log a message using severity and additional info from the file itself.
 
     Severity has been taken from Softimage one:
         * 1. Fatal
@@ -171,23 +136,27 @@ def log(message, severity=sev_comment, infos=False):
     Args:
         messages(str): The message
         severity (int): Severity level.
-        infos (bool):  Add extra infos from the module, class, method and line number.
+        infos (bool):  Add extra infos from the module, class, method and
+            line number.
+
     """
     message = str(message)
 
     if infos or logDebug:
-        message = getInfos(1) +"\n"+ message
+        message = getInfos(1) + "\n" + message
 
     sys.stdout.write(message + "\n")
 
 # ========================================================
-## Exception
+# Exception
+
+
 class FakeException(exceptions.Exception):
     pass
 
+
 def getInfos(level):
-    """
-    Get information from where the method has been fired.
+    """Get information from where the method has been fired.
     Such as module name, method, line number...
 
     Args:
@@ -195,17 +164,18 @@ def getInfos(level):
 
     Returns:
         str: The info
+
     """
     try:
         raise FakeException("this is fake")
-    except Exception, e:
-        #get the current execution frame
+    except Exception:
+        # get the current execution frame
         f = sys.exc_info()[2].tb_frame
 
-    #go back as many call-frames as was specified
+    # go back as many call-frames as was specified
     while level >= 0:
         f = f.f_back
-        level = level-1
+        level = level - 1
 
     infos = ""
 
@@ -215,22 +185,22 @@ def getInfos(level):
         infos += moduleName + " | "
 
     # Class Name
-    #if there is a self variable in the caller's local namespace then
-    #we'll make the assumption that the caller is a class method
+    # if there is a self variable in the caller's local namespace then
+    # we'll make the assumption that the caller is a class method
     obj = f.f_locals.get("self", None)
     if obj:
-        infos += obj.__class__.__name__+"::"
+        infos += obj.__class__.__name__ + "::"
 
     # Function Name
     functionName = f.f_code.co_name
     if functionName != "<module>":
-        infos += functionName+"()"
+        infos += functionName + "()"
 
     # Line Number
     lineNumber = str(f.f_lineno)
-    infos += " line "+lineNumber+""
+    infos += " line " + lineNumber + ""
 
     if infos:
-        infos = "["+infos+"]"
+        infos = "[" + infos + "]"
 
     return infos

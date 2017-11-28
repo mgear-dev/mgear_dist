@@ -1,33 +1,9 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
 import mgear.maya.pyqt as gqt
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+from mgear.vendor.Qt import QtCore, QtWidgets
+
 
 class Ui_Form(object):
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(459, 809)
@@ -57,10 +33,12 @@ class Ui_Form(object):
         self.L_color_fk_label.setObjectName("L_color_fk_label")
         self.horizontalLayout_3.addWidget(self.L_color_fk_label)
         self.L_color_fk_spinBox = QtWidgets.QSpinBox(self.groupBox_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.L_color_fk_spinBox.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.L_color_fk_spinBox.sizePolicy().hasHeightForWidth())
         self.L_color_fk_spinBox.setSizePolicy(sizePolicy)
         self.L_color_fk_spinBox.setMaximum(31)
         self.L_color_fk_spinBox.setObjectName("L_color_fk_spinBox")
@@ -72,10 +50,12 @@ class Ui_Form(object):
         self.L_color_fk_label_5.setObjectName("L_color_fk_label_5")
         self.horizontalLayout_7.addWidget(self.L_color_fk_label_5)
         self.C_color_fk_spinBox = QtWidgets.QSpinBox(self.groupBox_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.C_color_fk_spinBox.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.C_color_fk_spinBox.sizePolicy().hasHeightForWidth())
         self.C_color_fk_spinBox.setSizePolicy(sizePolicy)
         self.C_color_fk_spinBox.setMaximum(31)
         self.C_color_fk_spinBox.setObjectName("C_color_fk_spinBox")
@@ -87,10 +67,12 @@ class Ui_Form(object):
         self.L_color_fk_label_3.setObjectName("L_color_fk_label_3")
         self.horizontalLayout_5.addWidget(self.L_color_fk_label_3)
         self.R_color_fk_spinBox = QtWidgets.QSpinBox(self.groupBox_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.R_color_fk_spinBox.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.R_color_fk_spinBox.sizePolicy().hasHeightForWidth())
         self.R_color_fk_spinBox.setSizePolicy(sizePolicy)
         self.R_color_fk_spinBox.setMaximum(31)
         self.R_color_fk_spinBox.setObjectName("R_color_fk_spinBox")
@@ -102,10 +84,12 @@ class Ui_Form(object):
         self.L_color_fk_label_2.setObjectName("L_color_fk_label_2")
         self.horizontalLayout_4.addWidget(self.L_color_fk_label_2)
         self.L_color_ik_spinBox = QtWidgets.QSpinBox(self.groupBox_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.L_color_ik_spinBox.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.L_color_ik_spinBox.sizePolicy().hasHeightForWidth())
         self.L_color_ik_spinBox.setSizePolicy(sizePolicy)
         self.L_color_ik_spinBox.setMaximum(31)
         self.L_color_ik_spinBox.setObjectName("L_color_ik_spinBox")
@@ -117,10 +101,12 @@ class Ui_Form(object):
         self.L_color_fk_label_6.setObjectName("L_color_fk_label_6")
         self.horizontalLayout_8.addWidget(self.L_color_fk_label_6)
         self.C_color_ik_spinBox = QtWidgets.QSpinBox(self.groupBox_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.C_color_ik_spinBox.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.C_color_ik_spinBox.sizePolicy().hasHeightForWidth())
         self.C_color_ik_spinBox.setSizePolicy(sizePolicy)
         self.C_color_ik_spinBox.setMaximum(31)
         self.C_color_ik_spinBox.setObjectName("C_color_ik_spinBox")
@@ -132,10 +118,12 @@ class Ui_Form(object):
         self.L_color_fk_label_4.setObjectName("L_color_fk_label_4")
         self.horizontalLayout_6.addWidget(self.L_color_fk_label_4)
         self.R_color_ik_spinBox = QtWidgets.QSpinBox(self.groupBox_5)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.R_color_ik_spinBox.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.R_color_ik_spinBox.sizePolicy().hasHeightForWidth())
         self.R_color_ik_spinBox.setSizePolicy(sizePolicy)
         self.R_color_ik_spinBox.setMaximum(31)
         self.R_color_ik_spinBox.setObjectName("R_color_ik_spinBox")
@@ -156,31 +144,40 @@ class Ui_Form(object):
         self.verticalLayout_3.addWidget(self.rigTabs_label)
         self.rigTabs_listWidget = QtWidgets.QListWidget(self.groupBox_4)
         self.rigTabs_listWidget.setDragDropOverwriteMode(True)
-        self.rigTabs_listWidget.setDragDropMode(QtWidgets.QAbstractItemView.InternalMove)
+        self.rigTabs_listWidget.setDragDropMode(
+            QtWidgets.QAbstractItemView.InternalMove)
         self.rigTabs_listWidget.setDefaultDropAction(QtCore.Qt.MoveAction)
         self.rigTabs_listWidget.setAlternatingRowColors(True)
-        self.rigTabs_listWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.rigTabs_listWidget.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection)
         self.rigTabs_listWidget.setSelectionRectVisible(False)
         self.rigTabs_listWidget.setObjectName("rigTabs_listWidget")
         self.verticalLayout_3.addWidget(self.rigTabs_listWidget)
         self.horizontalLayout_2.addLayout(self.verticalLayout_3)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_4.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.verticalLayout_4.setSizeConstraint(
+            QtWidgets.QLayout.SetDefaultConstraint)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum,
+            QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem)
         self.addTab_pushButton = QtWidgets.QPushButton(self.groupBox_4)
         self.addTab_pushButton.setObjectName("addTab_pushButton")
         self.verticalLayout_4.addWidget(self.addTab_pushButton)
         self.removeTab_pushButton = QtWidgets.QPushButton(self.groupBox_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.removeTab_pushButton.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.removeTab_pushButton.sizePolicy().hasHeightForWidth())
         self.removeTab_pushButton.setSizePolicy(sizePolicy)
         self.removeTab_pushButton.setObjectName("removeTab_pushButton")
         self.verticalLayout_4.addWidget(self.removeTab_pushButton)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum,
+            QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem1)
         self.horizontalLayout_2.addLayout(self.verticalLayout_4)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
@@ -190,10 +187,12 @@ class Ui_Form(object):
         self.verticalLayout_2.addWidget(self.available_label)
         self.available_listWidget = QtWidgets.QListWidget(self.groupBox_4)
         self.available_listWidget.setDragDropOverwriteMode(True)
-        self.available_listWidget.setDragDropMode(QtWidgets.QAbstractItemView.NoDragDrop)
+        self.available_listWidget.setDragDropMode(
+            QtWidgets.QAbstractItemView.NoDragDrop)
         self.available_listWidget.setDefaultDropAction(QtCore.Qt.IgnoreAction)
         self.available_listWidget.setAlternatingRowColors(True)
-        self.available_listWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.available_listWidget.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection)
         self.available_listWidget.setSelectionRectVisible(False)
         self.available_listWidget.setObjectName("available_listWidget")
         self.verticalLayout_2.addWidget(self.available_listWidget)
@@ -208,21 +207,26 @@ class Ui_Form(object):
         self.formLayout.setObjectName("formLayout")
         self.rigName_label = QtWidgets.QLabel(self.groupBox)
         self.rigName_label.setObjectName("rigName_label")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.rigName_label)
+        self.formLayout.setWidget(
+            0, QtWidgets.QFormLayout.LabelRole, self.rigName_label)
         self.rigName_lineEdit = QtWidgets.QLineEdit(self.groupBox)
         self.rigName_lineEdit.setObjectName("rigName_lineEdit")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.rigName_lineEdit)
+        self.formLayout.setWidget(
+            0, QtWidgets.QFormLayout.FieldRole, self.rigName_lineEdit)
         self.mode_label = QtWidgets.QLabel(self.groupBox)
         self.mode_label.setObjectName("mode_label")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.mode_label)
+        self.formLayout.setWidget(
+            1, QtWidgets.QFormLayout.LabelRole, self.mode_label)
         self.mode_comboBox = QtWidgets.QComboBox(self.groupBox)
         self.mode_comboBox.setObjectName("mode_comboBox")
         self.mode_comboBox.addItem("")
         self.mode_comboBox.addItem("")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.mode_comboBox)
+        self.formLayout.setWidget(
+            1, QtWidgets.QFormLayout.FieldRole, self.mode_comboBox)
         self.step_label = QtWidgets.QLabel(self.groupBox)
         self.step_label.setObjectName("step_label")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.step_label)
+        self.formLayout.setWidget(
+            2, QtWidgets.QFormLayout.LabelRole, self.step_label)
         self.step_comboBox = QtWidgets.QComboBox(self.groupBox)
         self.step_comboBox.setObjectName("step_comboBox")
         self.step_comboBox.addItem("")
@@ -232,7 +236,8 @@ class Ui_Form(object):
         self.step_comboBox.addItem("")
         self.step_comboBox.addItem("")
         self.step_comboBox.addItem("")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.step_comboBox)
+        self.formLayout.setWidget(
+            2, QtWidgets.QFormLayout.FieldRole, self.step_comboBox)
         self.gridLayout_3.addLayout(self.formLayout, 0, 0, 1, 1)
         self.gridLayout_2.addWidget(self.groupBox, 0, 0, 1, 1)
         self.groupBox_2 = QtWidgets.QGroupBox(Form)
@@ -259,10 +264,12 @@ class Ui_Form(object):
         self.gridLayout_4.addLayout(self.verticalLayout, 0, 0, 1, 1)
         self.gridLayout_2.addWidget(self.groupBox_2, 2, 0, 1, 1)
         self.groupBox_3 = QtWidgets.QGroupBox(Form)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.groupBox_3.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.groupBox_3.sizePolicy().hasHeightForWidth())
         self.groupBox_3.setSizePolicy(sizePolicy)
         self.groupBox_3.setObjectName("groupBox_3")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.groupBox_3)
@@ -278,9 +285,12 @@ class Ui_Form(object):
         self.proxyChannels_checkBox = QtWidgets.QCheckBox(self.groupBox_6)
         self.proxyChannels_checkBox.setObjectName("proxyChannels_checkBox")
         self.gridLayout_8.addWidget(self.proxyChannels_checkBox, 0, 0, 1, 1)
-        self.classicChannelNames_checkBox = QtWidgets.QCheckBox(self.groupBox_6)
-        self.classicChannelNames_checkBox.setObjectName("classicChannelNames_checkBox")
-        self.gridLayout_8.addWidget(self.classicChannelNames_checkBox, 1, 0, 1, 1)
+        self.classicChannelNames_checkBox = QtWidgets.QCheckBox(
+            self.groupBox_6)
+        self.classicChannelNames_checkBox.setObjectName(
+            "classicChannelNames_checkBox")
+        self.gridLayout_8.addWidget(
+            self.classicChannelNames_checkBox, 1, 0, 1, 1)
         self.gridLayout_2.addWidget(self.groupBox_6, 1, 0, 1, 1)
 
         self.retranslateUi(Form)
@@ -288,42 +298,94 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(gqt.fakeTranslate("Form", "Form", None, -1))
-        self.groupBox_5.setTitle(gqt.fakeTranslate("Form", "Color Settings", None, -1))
+        self.groupBox_5.setTitle(gqt.fakeTranslate(
+            "Form", "Color Settings", None, -1))
         self.label.setText(gqt.fakeTranslate("Form", "Left", None, -1))
         self.label_2.setText(gqt.fakeTranslate("Form", "Center", None, -1))
         self.label_3.setText(gqt.fakeTranslate("Form", "Right", None, -1))
-        self.L_color_fk_label.setText(gqt.fakeTranslate("Form", "FK", None, -1))
-        self.L_color_fk_label_5.setText(gqt.fakeTranslate("Form", "FK", None, -1))
-        self.L_color_fk_label_3.setText(gqt.fakeTranslate("Form", "FK", None, -1))
-        self.L_color_fk_label_2.setText(gqt.fakeTranslate("Form", "IK", None, -1))
-        self.L_color_fk_label_6.setText(gqt.fakeTranslate("Form", "IK", None, -1))
-        self.L_color_fk_label_4.setText(gqt.fakeTranslate("Form", " IK", None, -1))
-        self.groupBox_4.setTitle(gqt.fakeTranslate("Form", "Synoptic Settings", None, -1))
-        self.rigTabs_label.setText(gqt.fakeTranslate("Form", "Rig Tabs", None, -1))
-        self.addTab_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
-        self.removeTab_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
-        self.available_label.setText(gqt.fakeTranslate("Form", "Available Tabs", None, -1))
-        self.groupBox.setTitle(gqt.fakeTranslate("Form", "Rig Settings", None, -1))
-        self.rigName_label.setText(gqt.fakeTranslate("Form", "Rig Name", None, -1))
-        self.mode_label.setText(gqt.fakeTranslate("Form", "Debug Mode", None, -1))
-        self.mode_comboBox.setItemText(0, gqt.fakeTranslate("Form", "Final", None, -1))
-        self.mode_comboBox.setItemText(1, gqt.fakeTranslate("Form", "WIP", None, -1))
-        self.step_label.setText(gqt.fakeTranslate("Form", "Guide Build Steps:", None, -1))
-        self.step_comboBox.setItemText(0, gqt.fakeTranslate("Form", "All Steps", None, -1))
-        self.step_comboBox.setItemText(1, gqt.fakeTranslate("Form", "Objects", None, -1))
-        self.step_comboBox.setItemText(2, gqt.fakeTranslate("Form", "Attributes", None, -1))
-        self.step_comboBox.setItemText(3, gqt.fakeTranslate("Form", "Operators", None, -1))
-        self.step_comboBox.setItemText(4, gqt.fakeTranslate("Form", "Connect", None, -1))
-        self.step_comboBox.setItemText(5, gqt.fakeTranslate("Form", "Joints", None, -1))
-        self.step_comboBox.setItemText(6, gqt.fakeTranslate("Form", "Finalize", None, -1))
-        self.groupBox_2.setTitle(gqt.fakeTranslate("Form", "Skinning Settings", None, -1))
-        self.importSkin_checkBox.setText(gqt.fakeTranslate("Form", "Import Skin", None, -1))
-        self.skin_label.setText(gqt.fakeTranslate("Form", "Skin Path", None, -1))
-        self.loadSkinPath_pushButton.setText(gqt.fakeTranslate("Form", "Load Path", None, -1))
-        self.groupBox_3.setTitle(gqt.fakeTranslate("Form", "Joint Settings", None, -1))
-        self.jointRig_checkBox.setText(gqt.fakeTranslate("Form", "Separated Joint Structure", None, -1))
-        self.groupBox_6.setTitle(gqt.fakeTranslate("Form", "Animation Channels Settings", None, -1))
-        self.proxyChannels_checkBox.setText(gqt.fakeTranslate("Form", "Add Internal Proxy Channels", None, -1))
-        self.classicChannelNames_checkBox.setToolTip(gqt.fakeTranslate("Form", "<html><head/><body><p>If this option is checked. The channel name will have unique full name. </p><p align=\"center\"><span style=\" font-weight:600;\">i.e: &quot;arm_L0_blend&quot;</span><br/></p><p>If the option is unchecked. The channel will use the simple name. </p><p align=\"center\"><span style=\" font-weight:600;\">i.e: &quot;arm_blend&quot;</span><br/></p><p><span style=\" font-weight:600;\">NOTE</span>: With the option unchecked. If the channel host (uiHost) have 2 or more componets of the same type. The connection will be shared amoung all the componets with the same name channel. </p><p><span style=\" font-weight:600;\">i.e:</span> If we have 2 arms, the channels will be shared for both arms. To avoid this behaviour with the unchecked option, please use a unique channel host for each component.</p></body></html>", None, -1))
-        self.classicChannelNames_checkBox.setText(gqt.fakeTranslate("Form", "Use Classic Channel Names (All channels will have unique names.)", None, -1))
-
+        self.L_color_fk_label.setText(
+            gqt.fakeTranslate("Form", "FK", None, -1))
+        self.L_color_fk_label_5.setText(
+            gqt.fakeTranslate("Form", "FK", None, -1))
+        self.L_color_fk_label_3.setText(
+            gqt.fakeTranslate("Form", "FK", None, -1))
+        self.L_color_fk_label_2.setText(
+            gqt.fakeTranslate("Form", "IK", None, -1))
+        self.L_color_fk_label_6.setText(
+            gqt.fakeTranslate("Form", "IK", None, -1))
+        self.L_color_fk_label_4.setText(
+            gqt.fakeTranslate("Form", " IK", None, -1))
+        self.groupBox_4.setTitle(gqt.fakeTranslate(
+            "Form", "Synoptic Settings", None, -1))
+        self.rigTabs_label.setText(
+            gqt.fakeTranslate("Form", "Rig Tabs", None, -1))
+        self.addTab_pushButton.setText(
+            gqt.fakeTranslate("Form", "<<", None, -1))
+        self.removeTab_pushButton.setText(
+            gqt.fakeTranslate("Form", ">>", None, -1))
+        self.available_label.setText(gqt.fakeTranslate(
+            "Form", "Available Tabs", None, -1))
+        self.groupBox.setTitle(gqt.fakeTranslate(
+            "Form", "Rig Settings", None, -1))
+        self.rigName_label.setText(
+            gqt.fakeTranslate("Form", "Rig Name", None, -1))
+        self.mode_label.setText(gqt.fakeTranslate(
+            "Form", "Debug Mode", None, -1))
+        self.mode_comboBox.setItemText(
+            0, gqt.fakeTranslate("Form", "Final", None, -1))
+        self.mode_comboBox.setItemText(
+            1, gqt.fakeTranslate("Form", "WIP", None, -1))
+        self.step_label.setText(gqt.fakeTranslate(
+            "Form", "Guide Build Steps:", None, -1))
+        self.step_comboBox.setItemText(
+            0, gqt.fakeTranslate("Form", "All Steps", None, -1))
+        self.step_comboBox.setItemText(
+            1, gqt.fakeTranslate("Form", "Objects", None, -1))
+        self.step_comboBox.setItemText(
+            2, gqt.fakeTranslate("Form", "Attributes", None, -1))
+        self.step_comboBox.setItemText(
+            3, gqt.fakeTranslate("Form", "Operators", None, -1))
+        self.step_comboBox.setItemText(
+            4, gqt.fakeTranslate("Form", "Connect", None, -1))
+        self.step_comboBox.setItemText(
+            5, gqt.fakeTranslate("Form", "Joints", None, -1))
+        self.step_comboBox.setItemText(
+            6, gqt.fakeTranslate("Form", "Finalize", None, -1))
+        self.groupBox_2.setTitle(gqt.fakeTranslate(
+            "Form", "Skinning Settings", None, -1))
+        self.importSkin_checkBox.setText(
+            gqt.fakeTranslate("Form", "Import Skin", None, -1))
+        self.skin_label.setText(gqt.fakeTranslate(
+            "Form", "Skin Path", None, -1))
+        self.loadSkinPath_pushButton.setText(
+            gqt.fakeTranslate("Form", "Load Path", None, -1))
+        self.groupBox_3.setTitle(gqt.fakeTranslate(
+            "Form", "Joint Settings", None, -1))
+        self.jointRig_checkBox.setText(gqt.fakeTranslate(
+            "Form", "Separated Joint Structure", None, -1))
+        self.groupBox_6.setTitle(gqt.fakeTranslate(
+            "Form", "Animation Channels Settings", None, -1))
+        self.proxyChannels_checkBox.setText(gqt.fakeTranslate(
+            "Form", "Add Internal Proxy Channels", None, -1))
+        self.classicChannelNames_checkBox.setToolTip(
+            gqt.fakeTranslate(
+                "Form", "<html><head/><body><p>If this option"
+                " is checked. The channel name will have unique full name."
+                " </p><p align=\"center\"><span style=\" font-weight:600;\">"
+                "i.e: &quot;arm_L0_blend&quot;</span><br/></p><p>If the option"
+                " is unchecked. The channel will use the simple name. "
+                "</p><p align=\"center\"><span style=\" font-weight:600;\">i."
+                "e: &quot;arm_blend&quot;</span><br/></p><p><span style=\" "
+                "font-weight:600;\">NOTE</span>: With the option unchecked. "
+                "If the channel host (uiHost) have 2 or more componets of the "
+                "same type. The connection will be shared amoung all the "
+                "componets with the same name channel. </p><p><span style=\""
+                " font-weight:600;\">i.e:</span> If we have 2 arms, the "
+                "channels will be shared for both arms. To avoid this "
+                "behaviour with the unchecked option, please use a unique"
+                " channel host for each component.</p></body></html>",
+                None, -1))
+        self.classicChannelNames_checkBox.setText(gqt.fakeTranslate(
+            "Form",
+            "Use Classic Channel Names (All channels will have unique names.)",
+            None, -1))
