@@ -279,6 +279,11 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
 
         self.settingsTab.pinRefArray_listWidget.installEventFilter(self)
 
+        self.mainSettingsTab.connector_comboBox.currentIndexChanged.connect(
+            partial(self.updateConnector,
+                    self.mainSettingsTab.connector_comboBox,
+                    self.connector_items))
+
     def eventFilter(self, sender, event):
         if event.type() == QtCore.QEvent.ChildRemoved:
             if sender == self.settingsTab.ikRefArray_listWidget:
