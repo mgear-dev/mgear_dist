@@ -6,14 +6,15 @@ from maya.app.general.mayaMixin import MayaQDockWidget
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 
 import mgear
-from mgear.maya import pyqt, utils
+from mgear.maya import pyqt
 from mgear.vendor.Qt import QtGui, QtCore, QtWidgets
+import mgear.maya.utils
 
 
 SYNOPTIC_WIDGET_NAME = "synoptic_view"
 SYNOPTIC_ENV_KEY = "MGEAR_SYNOPTIC_PATH"
 
-SYNOPTIC_DIRECTORIES = utils.gatherCustomModuleDirectories(
+SYNOPTIC_DIRECTORIES = mgear.maya.utils.gatherCustomModuleDirectories(
     SYNOPTIC_ENV_KEY,
     os.path.join(os.path.dirname(__file__), "tabs"))
 
@@ -40,7 +41,7 @@ def importTab(tabName):
     defFmt = "mgear.maya.synoptic.tabs.{}"
     customFmt = "{0}"
 
-    module = utils.importFromStandardOrCustomDirectories(
+    module = mgear.maya.utils.importFromStandardOrCustomDirectories(
         dirs, defFmt, customFmt, tabName)
     return module
 

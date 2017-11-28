@@ -25,13 +25,14 @@ EXPR_RIGHT_SIDE = re.compile("R(\d+)")
 def isSideElement(name):
     """Returns is name(str) side element?
 
-    # type: (str) -> bool
-
     Arguments:
-        node: str
+        name (str): Description
 
     Returns:
         bool
+
+    Deleted Parameters:
+        node: str
     """
 
     nameParts = stripNamespace(name).split("|")[-1]
@@ -46,11 +47,11 @@ def isSideElement(name):
 def swapSideLabel(name):
     """Returns fliped name
 
-    Returns fliped name that replaced side label left to right or right to left
+    Returns fliped name that replaced side label left to right or
+    right to left
 
-    # type: (str) -> str
     Arguments:
-        name(str):
+        name(str): Name to swap the side
 
     Returns:
         str
@@ -73,9 +74,12 @@ def swapSideLabel(name):
 def getSynopticWidget(widget, max_iter=20):
     """Return the widget where the synoptic panel is attach
 
-    :param widget:
-    :param max_iter:
-    :return:
+    Arguments:
+        widget (QWidget): The widget to get the parent
+        max_iter (int, optional): Iteration limit to find the paretn widget
+
+    Returns:
+        widget: The Parent widget
     """
     parent = widget.parentWidget()
     for i in range(max_iter):
@@ -87,7 +91,14 @@ def getSynopticWidget(widget, max_iter=20):
 
 
 def getModel(widget):
+    """Get the model Name
 
+    Args:
+        widget (QWidget): Synoptic widget
+
+    Returns:
+        PyNode: The rig model name
+    """
     syn_widget = getSynopticWidget(widget, max_iter=20)
     model_name = syn_widget.model_list.currentText()
 
@@ -108,7 +119,15 @@ def getModel(widget):
 
 
 def getControlers(model, gSuffix=CTRL_GRP_SUFFIX):
+    """Get thr controlers from the set
 
+    Args:
+        model (PyNode): Rig root
+        gSuffix (str, optional): set suffix
+
+    Returns:
+        list: The members of the group
+    """
     try:
         ctl_set = pm.PyNode(model.name() + gSuffix)
         members = ctl_set.members()
@@ -119,6 +138,14 @@ def getControlers(model, gSuffix=CTRL_GRP_SUFFIX):
 
 
 def getNamespace(modelName):
+    """Get the name space from rig root
+
+    Args:
+        modelName (str): Rig top node name
+
+    Returns:
+        str: Namespace
+    """
     if not modelName:
         return ""
 
@@ -131,10 +158,27 @@ def getNamespace(modelName):
 
 
 def stripNamespace(nodeName):
+    """Strip all the namespaces from a given name
+
+    Args:
+        nodeName (str): Node name to strip the namespaces
+
+    Returns:
+        str: Node name without namespace
+    """
     return nodeName.split(":")[-1]
 
 
 def getNode(nodeName):
+    """Get a PyNode from the string name
+
+
+    Args:
+        nodeName (str): Node name
+
+    Returns:
+        PyNode or None: The node. or None if the object can't be found
+    """
     try:
         return pm.PyNode(nodeName)
 
@@ -143,8 +187,14 @@ def getNode(nodeName):
 
 
 def listAttrForMirror(node):
-    # type: (pm.nodetypes.Transform) -> list[str]
+    """List attributes to invert the value for mirror posing
 
+    Args:
+        node (PyNode): The Node with the attributes to invert
+
+    Returns:
+        list: Attributes to invert
+    """
     # TODO: should "ro" be here?
     res = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
     res.extend(pm.listAttr(node, userDefined=True, shortNames=True))
@@ -154,6 +204,14 @@ def listAttrForMirror(node):
 
 
 def getInvertCheckButtonAttrName(str):
+    """Get the invert check butto attribute name
+
+    Args:
+        str (str): The attribute name
+
+    Returns:
+        str: The checked attribute name
+    """
     # type: (str) -> str
     return "inv{0}".format(str.lower().capitalize())
 
@@ -163,7 +221,17 @@ def getInvertCheckButtonAttrName(str):
 ##################################################
 # ================================================
 def selectObj(model, object_names, mouse_button, key_modifier):
+    """Select an object
 
+    Args:
+        model (PyNode): The rig top node
+        object_names (list): The names of the objects to select
+        mouse_button (QtSignal): Clicked mouse button signal
+        key_modifier (QtSignal): Modifier button signal
+
+    Returns:
+        None
+    """
     if not model:
         return
 
@@ -228,7 +296,16 @@ def selectObj(model, object_names, mouse_button, key_modifier):
 
 
 def quickSel(model, channel, mouse_button):
+    """Select the object stored on the quick selection attributes
 
+    Args:
+        model (PyNode): The rig top node
+        channel (str): The quick selection channel name
+        mouse_button (QtSignal): Clicked mouse button
+
+    Returns:
+        None
+    """
     qs_attr = model.attr("quicksel%s" % channel)
 
     if mouse_button == QtCore.Qt.LeftButton:  # Call Selection
@@ -258,7 +335,11 @@ def quickSel(model, channel, mouse_button):
 
 
 def selAll(model):
+    """Select all controlers
 
+    Args:
+        model (PyNode): Rig top node
+    """
     controlers = getControlers(model)
     pm.select(controlers)
 
@@ -266,7 +347,12 @@ def selAll(model):
 
 
 def selGroup(model, groupSuffix):
+    """Select the members of a given set
 
+    Args:
+        model (PyNode): Rig top node
+        groupSuffix (str): Set suffix name
+    """
     controlers = getControlers(model, groupSuffix)
     pm.select(controlers)
 
@@ -276,6 +362,8 @@ def selGroup(model, groupSuffix):
 ##################################################
 # ================================================
 def keySel():
+    """Key selected controls"""
+
     pm.setKeyframe()
 
 # ================================================
@@ -319,7 +407,13 @@ def keyObj(model, object_names):
 
 
 def keyAll(model):
+    """Keyframe all the controls inside the controls group
 
+    Note: We use the workd "group" to refer to a set in Maya
+
+    Args:
+        model (PyNode): Rig top node
+    """
     controlers = getControlers(model)
     pm.setKeyframe(controlers)
 
@@ -327,7 +421,12 @@ def keyAll(model):
 
 
 def keyGroup(model, groupSuffix):
+    """Keyframe all the members of a given group
 
+    Args:
+        model (PyNode): Rig top node
+        groupSuffix (str): The group preffix
+    """
     controlers = getControlers(model, groupSuffix)
     pm.setKeyframe(controlers)
 
@@ -335,7 +434,14 @@ def keyGroup(model, groupSuffix):
 
 
 def toggleAttr(model, object_name, attr_name):
+    """Toggle a boolean attribute
 
+    Args:
+        model (PyNode): Rig top node
+        object_name (str): The name of the control containing the attribute to
+            toggle
+        attr_name (str): The attribute to toggle
+    """
     nameSpace = getNamespace(model)
     if nameSpace:
         node = dag.findChild(nameSpace + ":" + object_name)
@@ -356,7 +462,16 @@ def toggleAttr(model, object_name, attr_name):
 ##################################################
 # ================================================
 def getComboKeys(model, object_name, combo_attr):
+    """Get the keys from a combo attribute
 
+    Args:
+        model (PyNode): Rig top node
+        object_name (str): Control name
+        combo_attr (str): Combo attribute name
+
+    Returns:
+        list: Keys names from the combo attribute.
+    """
     nameSpace = getNamespace(model)
     if nameSpace:
         node = getNode(nameSpace + ":" + object_name)
@@ -370,7 +485,16 @@ def getComboKeys(model, object_name, combo_attr):
 
 
 def getComboIndex(model, object_name, combo_attr):
+    """Get the index from a  combo attribute
 
+    Args:
+        model (PyNode): Rig top node
+        object_name (str): Control name
+        combo_attr (str): Combo attribute name
+
+    Returns:
+        int: Current index in the combo attribute
+    """
     nameSpace = getNamespace(model)
     if nameSpace:
         node = getNode(nameSpace + ":" + object_name)
@@ -382,7 +506,17 @@ def getComboIndex(model, object_name, combo_attr):
 
 
 def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
+    """Change the space of a control
 
+    i.e: A control with ik reference array
+
+    Args:
+        model (PyNode): Rig top node
+        object_name (str): Object Name
+        combo_attr (str): Combo attribute name
+        cnsIndex (int): Combo index to change
+        ctl_name (str): Control name
+    """
     nameSpace = getNamespace(model)
     if nameSpace:
         node = getNode(nameSpace + ":" + object_name)
@@ -404,8 +538,20 @@ def changeSpace(model, object_name, combo_attr, cnsIndex, ctl_name):
 ##################################################
 # ================================================
 def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
-    # type: (pm.nodetypes.Transform, str, str, List[str], str, str, str) -> None
+    """Switch IK/FK with matching functionality
 
+    This function is meant to work with 2 joint limbs.
+    i.e: human legs or arms
+
+    Args:
+        model (PyNode): Rig top transform node
+        ikfk_attr (str): Blend ik fk attribute name
+        uiHost_name (str): Ui host name
+        fks ([str]): List of fk controls names
+        ik (str): Ik control name
+        upv (str): Up vector control name
+        ikRot (None, str): optional. Name of the Ik Rotation control
+    """
     nameSpace = getNamespace(model)
 
     def _getNode(name):
@@ -467,8 +613,12 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
 
 
 def mirrorPose(flip=False, nodes=None):
-    # type(bool, List[pm.nodetypes.Transform]) -> None
+    """Summary
 
+    Args:
+        flip (bool, optiona): Set the function behaviout to flip
+        nodes (None,  [PyNode]): Controls to mirro/flip the pose
+    """
     if nodes is None:
         nodes = pm.selected()
 
@@ -496,6 +646,12 @@ def mirrorPose(flip=False, nodes=None):
 
 
 def applyMirror(nameSpace, mirrorEntry):
+    """Apply mirro pose
+
+    Args:
+        nameSpace (str): Namespace
+        mirrorEntry (list): List witht the mirror entry template
+    """
     node = mirrorEntry["target"]
     attr = mirrorEntry["attr"]
     val = mirrorEntry["val"]
@@ -515,8 +671,16 @@ def applyMirror(nameSpace, mirrorEntry):
 
 
 def gatherMirrorData(nameSpace, node, flip):
-    # type: (str, pm.datatypes.Transform, bool) -> List[dict[str]]
+    """Get the data to mirror
 
+    Args:
+        nameSpace (str): Namespace
+        node (PyNode): No
+        flip (TYPE): flip option
+
+    Returns:
+        [dict[str]: The mirror data
+    """
     if isSideElement(node.name()):
 
         nameParts = stripNamespace(node.name()).split("|")[-1]
@@ -532,8 +696,16 @@ def gatherMirrorData(nameSpace, node, flip):
 
 
 def calculateMirrorData(srcNode, targetNode, flip=False):
-    # type: (str, pm.datatypes.Transform, bool) -> List[dict[str]]
-    """returns [{"target": node, "attr": at, "val": flipVal}]"""
+    """Calculate the mirror data
+
+    Args:
+        srcNode (str): The source Node
+        targetNode ([dict[str]]): Target node
+        flip (bool, optional): flip option
+
+    Returns:
+        [{"target": node, "attr": at, "val": flipVal}]
+    """
 
     results = []
 
@@ -579,7 +751,12 @@ def calculateMirrorData(srcNode, targetNode, flip=False):
 
 
 def mirrorPoseOld(flip=False, nodes=False):
+    """Deprecated: Mirror pose
 
+    Args:
+        flip (bool, optional): if True will flip the pose
+        nodes (bool, optional): Nodes to mirror or flip transformation
+    """
     axis = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
     aDic = {"tx": "invTx",
             "ty": "invTy",
@@ -641,6 +818,11 @@ def mirrorPoseOld(flip=False, nodes=False):
 
 
 def bindPose(model):
+    """Restore the reset position of the rig
+
+    Args:
+        model (TYPE): Description
+    """
     nameSpace = getNamespace(model.name())
     if nameSpace:
         dagPoseName = nameSpace + ':dagPose1'
@@ -650,6 +832,7 @@ def bindPose(model):
 
 
 def resetSelTrans():
+    """Reset the transfom values (SRT) for the selected objects"""
     with pm.UndoChunk():
         for obj in pm.selected():
             transform.resetTransform(obj)
@@ -659,6 +842,7 @@ def resetSelTrans():
 # Transfer space
 ##################################################
 class AbstractAnimationTransfer(QtWidgets.QDialog):
+    """Abstract animation transfer class"""
 
     try:
         valueChanged = QtCore.Signal(int)
@@ -786,7 +970,8 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
 
     def setGroupBoxTitle(self):
         # type: (str) -> None
-        # raise NotImplementedError("must implement transfer in each specialized class")
+        # raise NotImplementedError("must implement transfer
+        # in each specialized class")
         pass
 
     def setComboObj(self, combo):
@@ -811,7 +996,8 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         return ":".join([self.nameSpace, self.uihost])
 
     def getWorldMatrices(self, start, end, val_src_nodes):
-        # type: (int, int, List[pm.nodetypes.Transform]) -> List[List[pm.datatypes.Matrix]]
+        # type: (int, int, List[pm.nodetypes.Transform]) ->
+        # List[List[pm.datatypes.Matrix]]
         """ returns matrice List[frame][controller number]."""
 
         res = []
@@ -858,9 +1044,13 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
                       startFrame,
                       endFrame,
                       onlyKeyframes=True):
-        # type: (str, List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], List[pm.nodetypes.Transform], int, int, bool) -> None
+        # type: (str, List[pm.nodetypes.Transform],
+        # List[pm.nodetypes.Transform],
+        # List[pm.nodetypes.Transform], int, int, bool) -> None
 
-        # Temporaly turn off cycle check to avoid misleading cycle message on Maya 2016.  With Maya 2016.5 and 2017 the cycle warning doesn't show up
+        # Temporaly turn off cycle check to avoid misleading cycle message
+        # on Maya 2016.  With Maya 2016.5 and 2017 the cycle warning doesn't
+        # show up
         if versions.current() < 201650:
             pm.cycleCheck(e=False)
             pm.displayWarning("Maya version older than: 2016.5: "
@@ -951,7 +1141,8 @@ class ParentSpaceTransfer(AbstractAnimationTransfer):
 
     @staticmethod
     def showUI(combo, model, uihost, switchedAttrShortName, ctrl_name, *args):
-        # type: (widgets.toggleCombo, pm.nodetypes.Transform, str, str, str, *str) -> None
+        # type: (widgets.toggleCombo,
+        # pm.nodetypes.Transform, str, str, str, *str) -> None
 
         try:
             for c in pyqt.maya_main_window().children():
@@ -1146,7 +1337,8 @@ class IkFkTransfer(AbstractAnimationTransfer):
 
     @staticmethod
     def showUI(model, ikfk_attr, uihost, fks, ik, upv, ikRot, *args):
-        # type: (pm.nodetypes.Transform, str, str, List[str], str, str, *str) -> None
+        # type: (pm.nodetypes.Transform, str, str,
+        # List[str], str, str, *str) -> None
 
         try:
             for c in pyqt.maya_main_window().children():
@@ -1188,7 +1380,8 @@ class IkFkTransfer(AbstractAnimationTransfer):
                 endFrame=None,
                 onlyKeyframes=None,
                 switchTo=None):
-        # type: (pm.nodetypes.Transform, str, str, List[str], str, str, int, int, bool, str) -> None
+        # type: (pm.nodetypes.Transform, str, str,
+        # List[str], str, str, int, int, bool, str) -> None
         """transfer without displaying UI"""
 
         if startFrame is None:
@@ -1217,7 +1410,8 @@ class IkFkTransfer(AbstractAnimationTransfer):
 
     @staticmethod
     def toIK(model, ikfk_attr, uihost, fks, ik, upv, ikRot, **kwargs):
-        # type: (pm.nodetypes.Transform, str, str, List[str], str, str, **str) -> None
+        # type: (pm.nodetypes.Transform, str, str,
+        # List[str], str, str, **str) -> None
 
         kwargs.update({"switchTo": "ik"})
         IkFkTransfer.execute(model,
@@ -1231,7 +1425,8 @@ class IkFkTransfer(AbstractAnimationTransfer):
 
     @staticmethod
     def toFK(model, ikfk_attr, uihost, fks, ik, upv, ikRot, **kwargs):
-        # type: (pm.nodetypes.Transform, str, str, List[str], str, str, **str) -> None
+        # type: (pm.nodetypes.Transform, str, str,
+        # List[str], str, str, **str) -> None
 
         kwargs.update({"switchTo": "fk"})
         IkFkTransfer.execute(model,
