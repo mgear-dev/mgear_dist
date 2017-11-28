@@ -19,7 +19,7 @@ def buildFromSelection(*args):
 def updateGuide(*args):
     """Update the guide rig"""
     if pm.selected():
-        rgGuide = shifter.RigGuide()
+        rgGuide = shifter.guide.Rig()
         rgGuide.update(pm.selected()[0])
     else:
         pm.displayWarning("Please select the guide top node")

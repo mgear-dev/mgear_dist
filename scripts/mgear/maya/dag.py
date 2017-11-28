@@ -52,7 +52,7 @@ def findChild(node, name):
                                     comp_guide.root.name()))
 
     """
-    return __findChildren2(node, name, True)
+    return __findChildren(node, name, True)
 
 
 def findChildren(node, name):
@@ -66,7 +66,7 @@ def findChildren(node, name):
         dagNode list: The children dagNodes
 
     """
-    return __findChildren2(node, name, False)
+    return __findChildren(node, name, False)
 
 
 def findChildrenPartial(node, name):
@@ -81,7 +81,7 @@ def findChildrenPartial(node, name):
         dagNode list: The children dagNodes
 
     """
-    return __findChildren2(node, name, False, True)
+    return __findChildren(node, name, False, True)
 
 
 def __findChildren(node, name, firstOnly=False, partialName=False):

@@ -385,11 +385,11 @@ class Rig(Main):
             for name in self.componentsIndex:
                 mgear.log("Get parenting for: " + name)
                 compParent = self.components[name]
-                # for localName, element in \
-                #     compParent.getObjects(self.model, False).items():
                 # NOTE: getObjects3 is an experimental function
-                for localName, element in compParent.getObjects3(
-                        self.model).items():
+                # for localName, element in compParent.getObjects3(
+                #         self.model).items():
+                for localName, element in compParent.getObjects(
+                        self.model, False).items():
                     for name in self.componentsIndex:
                         compChild = self.components[name]
                         compChild_parent = compChild.root.getParent()
@@ -551,7 +551,7 @@ class Rig(Main):
         try:
             pm.delete(pm.PyNode(newParentName + "|controllers_org"))
             oldRootName = oldRoot.name().split("|")[0] + "|controllers_org"
-            (oldRootName, newParentName)
+            pm.parent(oldRootName, newParentName)
         except TypeError:
             pm.displayError("The guide don't have controllers_org")
 

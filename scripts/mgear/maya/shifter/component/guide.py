@@ -437,11 +437,10 @@ class ComponentGuide(guide.Main):
 
         self.parent.attr("comp_index").set(self.values["comp_index"])
 
-        # objList =  dag.findComponentChildren(
-        #    self.parent, oldName, oldSideIndex)
+        objList = dag.findComponentChildren(self.parent, oldName, oldSideIndex)
         # NOTE: Experimenta  using findComponentChildren2
-        objList = dag.findComponentChildren2(
-            self.parent, oldName, oldSideIndex)
+        # objList = dag.findComponentChildren2(
+        #     self.parent, oldName, oldSideIndex)
         newSideIndex = newSide + str(self.values["comp_index"])
         objList.append(self.parent)
         for obj in objList:
