@@ -153,7 +153,7 @@ class Guide_UI(object):
     @classmethod
     def buildFromSelection(self, *args):
 
-        logWin = pm.window(title="mGear Build Log", iconName='mGear Log')
+        logWin = pm.window(title="Shifter Build Log", iconName='Shifter Log')
         pm.columnLayout(adjustableColumn=True)
         pm.cmdScrollFieldReporter(width=800, height=500, clr=True)
         pm.button(label='Close', command=(

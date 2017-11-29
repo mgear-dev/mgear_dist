@@ -54,10 +54,6 @@ class Ui_Form(object):
             "preCustomStepNew_pushButton")
         self.preCustomStep_verticalLayout_2.addWidget(
             self.preCustomStepNew_pushButton)
-        spacerItem = QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum,
-            QtWidgets.QSizePolicy.Expanding)
-        self.preCustomStep_verticalLayout_2.addItem(spacerItem)
         self.preCustomStepDuplicate_pushButton = QtWidgets.QPushButton(
             self.groupBox)
         self.preCustomStepDuplicate_pushButton.setObjectName(

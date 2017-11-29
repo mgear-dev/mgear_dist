@@ -2,7 +2,6 @@
 import os.path
 import datetime
 import getpass
-from pprint import pprint
 
 # Maya
 import pymel.core as pm
@@ -169,6 +168,7 @@ class Rig(object):
 
     def initialHierarchy(self):
         """Build the initial hierarchy of the rig.
+
         Create the rig model, the main properties,
         and a couple of base organisation nulls.
         Get the global size of the rig.
@@ -182,13 +182,21 @@ class Rig(object):
             None, self.options["rig_name"])
         attribute.lockAttribute(self.model)
 
-        # --------------------------------------------------
+        # ------------------------- -------------------------
         # Global Ctl
-        # self.global_ctl = self.addCtl(self.model, "global_C0_ctl",
-        # datatypes.Matrix(), self.options["C_color_fk"], "crossarrow", w=10)
-        self.global_ctl = self.addCtl(
-            self.model, "world_ctl", datatypes.Matrix(),
-            self.options["C_color_fk"], "circle", w=10)
+        if self.options["worldCtl"]:
+            self.global_ctl = self.addCtl(self.model,
+                                          "world_ctl",
+                                          datatypes.Matrix(),
+                                          self.options["C_color_fk"],
+                                          "circle", w=10)
+        else:
+            self.global_ctl = self.addCtl(self.model,
+                                          "global_C0_ctl",
+                                          datatypes.Matrix(),
+                                          self.options["C_color_fk"],
+                                          "crossarrow",
+                                          w=10)
         attribute.setRotOrder(self.global_ctl, "ZXY")
 
         # --------------------------------------------------

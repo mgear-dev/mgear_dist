@@ -22,6 +22,7 @@ createNode transform -n "guide";
 	addAttr -ci true -sn "classicChannelNames" -ln "classicChannelNames" -min 0 -max 
 		1 -at "bool";
 	addAttr -ci true -sn "proxyChannels" -ln "proxyChannels" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "worldCtl" -ln "worldCtl" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "importSkin" -ln "importSkin" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "skin" -ln "skin" -dt "string";
 	addAttr -ci true -sn "L_color_fk" -ln "L_color_fk" -min 0 -max 31 -at "long";
@@ -45,6 +46,7 @@ createNode transform -n "guide";
 	setAttr -k on ".step" 6;
 	setAttr ".ismodel" yes;
 	setAttr ".proxyChannels" yes;
+	setAttr ".worldCtl" yes;
 	setAttr ".skin" -type "string" "";
 	setAttr ".L_color_fk" 6;
 	setAttr ".L_color_ik" 18;

@@ -277,6 +277,7 @@ class Rig(Main):
             "bool",
             True)
         self.pProxyChannels = self.addParam("proxyChannels", "bool", False)
+        self.pWorldCtl = self.addParam("worldCtl", "bool", False)
 
         # --------------------------------------------------
         # skin
@@ -968,6 +969,9 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
             self.root.attr("step").get())
         self.populateCheck(
             self.guideSettingsTab.proxyChannels_checkBox, "proxyChannels")
+
+        self.populateCheck(self.guideSettingsTab.worldCtl_checkBox, "worldCtl")
+
         self.populateCheck(
             self.guideSettingsTab.classicChannelNames_checkBox,
             "classicChannelNames")
@@ -1038,6 +1042,10 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
             partial(self.updateCheck,
                     tap.proxyChannels_checkBox,
                     "proxyChannels"))
+        tap.worldCtl_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    tap.worldCtl_checkBox,
+                    "worldCtl"))
         tap.classicChannelNames_checkBox.stateChanged.connect(
             partial(self.updateCheck,
                     tap.classicChannelNames_checkBox,

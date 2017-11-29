@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>344</width>
-    <height>593</height>
+    <width>312</width>
+    <height>587</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -77,19 +77,6 @@
                  <string>New</string>
                 </property>
                </widget>
-              </item>
-              <item>
-               <spacer name="preCustomStep_verticalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
               <item>
                <widget class="QPushButton" name="preCustomStepDuplicate_pushButton">
