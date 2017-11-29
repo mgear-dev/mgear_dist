@@ -2,6 +2,7 @@
 import os.path
 import datetime
 import getpass
+from pprint import pprint
 
 # Maya
 import pymel.core as pm
@@ -90,19 +91,32 @@ class Rig(object):
         """Build the rig from selected guides."""
 
         startTime = datetime.datetime.now()
-        mgear.log("= GEAR RIG SYSTEM " + "=" * 46)
+        mgear.log("\n" + "= SHIFTER RIG SYSTEM " + "=" * 46)
 
+        self.stopBuild = False
+        selection = pm.ls(selection=True)
+        if not selection:
+            mgear.log(
+                "Select one or more guide root or a guide model",
+                mgear.sev_error)
+            return
+
+        self.preCustomStep(selection)
+
+        mgear.log("\n" + "= GUIDE VALIDATION " + "=" * 46)
         # Check guide is valid
         self.guide.setFromSelection()
         if not self.guide.valid:
             return
 
         # Build
+        mgear.log("\n" + "= BUILDING RIG " + "=" * 46)
         self.build()
+        self.postCustomStep()
 
         endTime = datetime.datetime.now()
         finalTime = endTime - startTime
-        mgear.log("= GEAR BUILD RIG DONE {} [ {} ] {}".format(
+        mgear.log("\n" + "= SHIFTER BUILD RIG DONE {} [ {} ] {}".format(
             "=" * 16,
             finalTime,
             "=" * 7
@@ -116,21 +130,21 @@ class Rig(object):
 
         self.customStepDic["mgearRun"] = self
 
-        # stop build triggered if a custom step fail
-        self.stopBuild = False
-
-        self.preCustomStep()
         if not self.stopBuild:
             self.initialHierarchy()
             self.processComponents()
             self.finalize()
-            self.postCustomStep()
 
             return self.model
 
-    def customStep(self, checker, attr):
-        if self.options[checker]:
-            customSteps = self.options[attr].split(",")
+    def stepsList(self, checker, attr):
+        if self.options[checker] and self.options[attr]:
+            return self.options[attr].split(",")
+        else:
+            return None
+
+    def customStep(self, customSteps=None):
+        if customSteps:
             for step in customSteps:
                 if not self.stopBuild:
                     self.stopBuild = guide.helperSlots.runStep(
@@ -139,11 +153,19 @@ class Rig(object):
                     pm.displayWarning("Build Stopped")
                     break
 
-    def preCustomStep(self):
-        self.customStep("doPreCustomStep", "preCustomStep")
+    def preCustomStep(self, selection):
+        if (selection[0].hasAttr("ismodel") and
+                selection[0].attr("doPreCustomStep").get()):
+            customSteps = selection[0].attr("preCustomStep").get()
+            if customSteps:
+                mgear.log("\n" + "= PRE CUSTOM STEPS " + "=" * 46)
+                self.customStep(customSteps.split(","))
 
     def postCustomStep(self):
-        self.customStep("doPostCustomStep", "postCustomStep")
+        customSteps = self.stepsList("doPostCustomStep", "postCustomStep")
+        if customSteps:
+            mgear.log("\n" + "= POST CUSTOM STEPS " + "=" * 46)
+            self.customStep(customSteps)
 
     def initialHierarchy(self):
         """Build the initial hierarchy of the rig.
@@ -303,7 +325,8 @@ class Rig(object):
                 pg.add(sub)
 
         # Bind pose ---------------------------------------
-        print self.groups["controllers"]
+        # controls_grp = self.groups["controllers"]
+        # pprint(controls_grp, stream=None, indent=1, width=100)
         pm.select(self.groups["controllers"])
         node = pm.dagPose(save=True, selection=True)
         pm.connectAttr(node.message, self.model.rigPoses[0])
