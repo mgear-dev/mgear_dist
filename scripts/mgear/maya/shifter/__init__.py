@@ -102,24 +102,25 @@ class Rig(object):
 
         self.preCustomStep(selection)
 
-        mgear.log("\n" + "= GUIDE VALIDATION " + "=" * 46)
-        # Check guide is valid
-        self.guide.setFromSelection()
-        if not self.guide.valid:
-            return
+        if not self.stopBuild:
+            mgear.log("\n" + "= GUIDE VALIDATION " + "=" * 46)
+            # Check guide is valid
+            self.guide.setFromSelection()
+            if not self.guide.valid:
+                return
 
-        # Build
-        mgear.log("\n" + "= BUILDING RIG " + "=" * 46)
-        self.build()
-        self.postCustomStep()
+            # Build
+            mgear.log("\n" + "= BUILDING RIG " + "=" * 46)
+            self.build()
+            self.postCustomStep()
 
-        endTime = datetime.datetime.now()
-        finalTime = endTime - startTime
-        mgear.log("\n" + "= SHIFTER BUILD RIG DONE {} [ {} ] {}".format(
-            "=" * 16,
-            finalTime,
-            "=" * 7
-        ))
+            endTime = datetime.datetime.now()
+            finalTime = endTime - startTime
+            mgear.log("\n" + "= SHIFTER BUILD RIG DONE {} [ {} ] {}".format(
+                "=" * 16,
+                finalTime,
+                "=" * 7
+            ))
 
     def build(self):
         """Build the rig."""
@@ -129,12 +130,11 @@ class Rig(object):
 
         self.customStepDic["mgearRun"] = self
 
-        if not self.stopBuild:
-            self.initialHierarchy()
-            self.processComponents()
-            self.finalize()
+        self.initialHierarchy()
+        self.processComponents()
+        self.finalize()
 
-            return self.model
+        return self.model
 
     def stepsList(self, checker, attr):
         if self.options[checker] and self.options[attr]:
