@@ -52,7 +52,8 @@ def findChild(node, name):
                                     comp_guide.root.name()))
 
     """
-    return __findChildren(node, name, True)
+    # return __findChildren(node, name, True)
+    return __findChild(node, name)
 
 
 def findChildren(node, name):
@@ -102,6 +103,33 @@ def __findChildren(node, name, firstOnly=False, partialName=False):
         return children[0]
 
     return children
+
+
+def __findChild(node, name):
+    """This find children function will stop search after firs child found.child
+
+    This is a faster version of __findchildren
+
+    Arguments:
+        node (dagNode): The input node to search
+        name (str): The name to search
+
+    Returns:
+        dagNode: Children node
+    """
+    try:
+        for item in cmds.listRelatives(node.name(),
+                                       allDescendents=True,
+                                       type="transform"):
+            if item.split("|")[-1] == name:
+                return pm.PyNode(item)
+    except pm.MayaNodeError:
+        for item in node.listRelatives(allDescendents=True,
+                                       type="transform"):
+            if item.split("|")[-1] == name:
+                return item
+
+    return False
 
 
 def __findChildren2(node, name, firstOnly=False, partialName=False):

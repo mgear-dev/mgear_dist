@@ -437,10 +437,11 @@ class ComponentGuide(guide.Main):
 
         self.parent.attr("comp_index").set(self.values["comp_index"])
 
-        objList = dag.findComponentChildren(self.parent, oldName, oldSideIndex)
+        # objList = dag.findComponentChildren(self.parent,
+        #                                     oldName, oldSideIndex)
         # NOTE: Experimenta  using findComponentChildren2
-        # objList = dag.findComponentChildren2(
-        #     self.parent, oldName, oldSideIndex)
+        objList = dag.findComponentChildren2(
+            self.parent, oldName, oldSideIndex)
         newSideIndex = newSide + str(self.values["comp_index"])
         objList.append(self.parent)
         for obj in objList:
@@ -675,8 +676,9 @@ class ComponentGuide(guide.Main):
         objects = {}
 
         for child in cmds.ls(self.fullName + "_*", type="transform"):
-            objects[child[child.index(
-                self.fullName + "_") + len(self.fullName + "_"):]] = child
+            if pm.PyNode(child).getParent(-1) == model:
+                objects[child[child.index(
+                    self.fullName + "_") + len(self.fullName + "_"):]] = child
 
         return objects
 

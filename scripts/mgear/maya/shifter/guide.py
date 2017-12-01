@@ -385,18 +385,35 @@ class Rig(Main):
         if self.valid:
             for name in self.componentsIndex:
                 mgear.log("Get parenting for: " + name)
-                compParent = self.components[name]
-                # NOTE: getObjects3 is an experimental function
-                # for localName, element in compParent.getObjects3(
-                #         self.model).items():
-                for localName, element in compParent.getObjects(
-                        self.model, False).items():
-                    for name in self.componentsIndex:
-                        compChild = self.components[name]
-                        compChild_parent = compChild.root.getParent()
-                        if element is not None and element == compChild_parent:
-                            compChild.parentComponent = compParent
-                            compChild.parentLocalName = localName
+                # TODO: In the future should use connections to retrive this
+                # data
+                # We try the fastes aproach, will fail if is not the top node
+                try:
+                    # search for his parent
+                    compParent = self.components[name].root.getParent()
+                    if compParent and compParent.hasAttr("isGearGuide"):
+                        pName = "_".join(compParent.name().split("_")[:2])
+                        pLocal = "_".join(compParent.name().split("_")[2:])
+
+                        pComp = self.components[pName]
+                        self.components[name].parentComponent = pComp
+                        self.components[name].parentLocalName = pLocal
+                # This will scan the hierachy in reverse. It is much slower
+                except KeyError:
+                    # search children and set him as parent
+                    compParent = self.components[name]
+                    # for localName, element in compParent.getObjects(
+                    #         self.model, False).items():
+                    # NOTE: getObjects3 is an experimental function
+                    for localName, element in compParent.getObjects3(
+                            self.model).items():
+                        for name in self.componentsIndex:
+                            compChild = self.components[name]
+                            compChild_parent = compChild.root.getParent()
+                            if (element is not None
+                                    and element == compChild_parent):
+                                compChild.parentComponent = compParent
+                                compChild.parentLocalName = localName
 
             # More option values
             self.addOptionsValues()
@@ -451,7 +468,7 @@ class Rig(Main):
                 self.components[comp_guide.fullName] = comp_guide
 
         if branch:
-            for child in node.getChildren():
+            for child in node.getChildren(type="transform"):
                 self.findComponentRecursive(child)
 
     def getComponentGuide(self, comp_type):
@@ -842,56 +859,56 @@ class HelperSlots(object):
 
     @classmethod
     def runStep(self, stepPath, customStepDic):
-            try:
-                with pm.UndoChunk():
-                    pm.displayInfo(
-                        "EXEC: Executing custom step: %s" % stepPath)
-                    fileName = os.path.split(stepPath)[1].split(".")[0]
-                    if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
-                        runPath = os.path.join(
-                            os.environ.get(
-                                MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""), stepPath)
-                    else:
-                        runPath = stepPath
-                    customStep = imp.load_source(fileName, runPath)
-                    if hasattr(customStep, "CustomShifterStep"):
-                        cs = customStep.CustomShifterStep()
-                        cs.run(customStepDic)
-                        customStepDic[cs.name] = cs
-                        pm.displayInfo(
-                            "SUCCEED: Custom Shifter Step Class: %s. "
-                            "Succeed!!" % stepPath)
-                    else:
-                        pm.displayInfo(
-                            "SUCCEED: Custom Step simple script: %s. "
-                            "Succeed!!" % stepPath)
-
-            except Exception as ex:
-                template = "An exception of type {0} occured. "
-                "Arguments:\n{1!r}"
-                message = template.format(type(ex).__name__, ex.args)
-                pm.displayError(message)
-                pm.displayError(traceback.format_exc())
-                cont = pm.confirmBox(
-                    "FAIL: Custom Step Fail",
-                    "The step:%s has failed. Continue with next step?" %
-                    stepPath + "\n\n" + message + "\n\n" +
-                    traceback.format_exc(),
-                    "Continue", "Stop Build", "Try Again!")
-                if cont == "Stop Build":
-                    # stop Build
-                    return True
-                elif cont == "Try Again!":
-                    try:  # just in case there is nothing to undo
-                        pm.undo()
-                    except Exception:
-                        pass
-                    pm.displayInfo("Trying again! : {}".format(stepPath))
-                    inception = self.runStep(stepPath, customStepDic)
-                    if inception:  # stops build from the recursion loop.
-                        return True
+        try:
+            with pm.UndoChunk():
+                pm.displayInfo(
+                    "EXEC: Executing custom step: %s" % stepPath)
+                fileName = os.path.split(stepPath)[1].split(".")[0]
+                if os.environ.get(MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""):
+                    runPath = os.path.join(
+                        os.environ.get(
+                            MGEAR_SHIFTER_CUSTOMSTEP_KEY, ""), stepPath)
                 else:
-                    return False
+                    runPath = stepPath
+                customStep = imp.load_source(fileName, runPath)
+                if hasattr(customStep, "CustomShifterStep"):
+                    cs = customStep.CustomShifterStep()
+                    cs.run(customStepDic)
+                    customStepDic[cs.name] = cs
+                    pm.displayInfo(
+                        "SUCCEED: Custom Shifter Step Class: %s. "
+                        "Succeed!!" % stepPath)
+                else:
+                    pm.displayInfo(
+                        "SUCCEED: Custom Step simple script: %s. "
+                        "Succeed!!" % stepPath)
+
+        except Exception as ex:
+            template = "An exception of type {0} occured. "
+            "Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            pm.displayError(message)
+            pm.displayError(traceback.format_exc())
+            cont = pm.confirmBox(
+                "FAIL: Custom Step Fail",
+                "The step:%s has failed. Continue with next step?" %
+                stepPath + "\n\n" + message + "\n\n" +
+                traceback.format_exc(),
+                "Continue", "Stop Build", "Try Again!")
+            if cont == "Stop Build":
+                # stop Build
+                return True
+            elif cont == "Try Again!":
+                try:  # just in case there is nothing to undo
+                    pm.undo()
+                except Exception:
+                    pass
+                pm.displayInfo("Trying again! : {}".format(stepPath))
+                inception = self.runStep(stepPath, customStepDic)
+                if inception:  # stops build from the recursion loop.
+                    return True
+            else:
+                return False
 
     def runManualStep(self, widgetList):
         selItems = widgetList.selectedItems()
@@ -900,12 +917,14 @@ class HelperSlots(object):
 
 
 class GuideSettingsTab(QtWidgets.QDialog, guui.Ui_Form):
+
     def __init__(self, parent=None):
         super(guideSettingsTab, self).__init__(parent)
         self.setupUi(self)
 
 
 class CustomStepTab(QtWidgets.QDialog, csui.Ui_Form):
+
     def __init__(self, parent=None):
         super(customStepTab, self).__init__(parent)
         self.setupUi(self)
@@ -1186,20 +1205,20 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
                 self.guideSettingsTab.available_listWidget.addItem(tab)
 
     def skinLoad(self, *args):
-            startDir = self.root.attr("skin").get()
-            filePath = pm.fileDialog2(
-                dialogStyle=2,
-                fileMode=1,
-                startingDirectory=startDir,
-                okc="Apply",
-                fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
-            if not filePath:
-                return
-            if not isinstance(filePath, basestring):
-                filePath = filePath[0]
+        startDir = self.root.attr("skin").get()
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=1,
+            startingDirectory=startDir,
+            okc="Apply",
+            fileFilter='mGear skin (*%s)' % skin.FILE_EXT)
+        if not filePath:
+            return
+        if not isinstance(filePath, basestring):
+            filePath = filePath[0]
 
-            self.root.attr("skin").set(filePath)
-            self.guideSettingsTab.skin_lineEdit.setText(filePath)
+        self.root.attr("skin").set(filePath)
+        self.guideSettingsTab.skin_lineEdit.setText(filePath)
 
     def addCustomStep(self, pre=True, *args):
         """Add a new custom step
