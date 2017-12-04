@@ -169,7 +169,7 @@ def exportSkin(filePath=None, objs=None, *args):
         skinCls = getSkinCluster(obj)
         if not skinCls:
             pm.displayWarning(
-                obj.name() + ": Skiped because don't have Skin Cluster")
+                obj.name() + ": Skipped because don't have Skin Cluster")
             pass
         else:
 
@@ -189,15 +189,17 @@ def exportSkin(filePath=None, objs=None, *args):
             packDic["objDDic"].append(dataDic)
             pm.displayInfo(
                 "Exported skinCluster %s (%d influences, %d "
-                "vertices) %s" % (skinCls.name(),
-                                  len(dataDic['weights'].keys()),
-                                  len(dataDic['blendWeights']),
-                                  obj.name()))
+                "points) %s" % (skinCls.name(),
+                                len(dataDic['weights'].keys()),
+                                len(dataDic['blendWeights']),
+                                obj.name()))
 
     if packDic["objs"]:
         fh = open(filePath, 'wb')
         pickle.dump(packDic, fh, pickle.HIGHEST_PROTOCOL)
         fh.close()
+
+        return True
 
 
 def exportSkinPack(packPath=None, objs=None, *args):
@@ -235,7 +237,7 @@ def exportSkinPack(packPath=None, objs=None, *args):
             pm.displayInfo(filePath)
         else:
             pm.displayWarning(
-                obj.name() + ": Skiped because don't have Skin Cluster")
+                obj.name() + ": Skipped because don't have Skin Cluster")
 
     if packDic["packFiles"]:
         data_string = json.dumps(packDic, indent=4, sort_keys=True)
