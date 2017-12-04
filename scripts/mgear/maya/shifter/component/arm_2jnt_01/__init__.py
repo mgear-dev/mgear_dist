@@ -806,4 +806,6 @@ class Component(component.Main):
     def connect_shoulder_01(self):
         """ Custom connection to be use with shoulder 01 component"""
         self.connect_standard()
-        pm.parent(self.rollRef[0],  self.ikHandleUpvRef,  self.parent_comp.ctl)
+        pm.parent(self.rollRef[0],
+                  self.ikHandleUpvRef,
+                  self.parent_comp.ctl)
