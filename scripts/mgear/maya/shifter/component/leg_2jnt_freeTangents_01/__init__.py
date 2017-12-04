@@ -660,7 +660,8 @@ class Component(component.Main):
             self.legChainUpvRef,
             "ikSCsolver")
         pm.pointConstraint(self.ik_ctl, self.ikHandleUpvRef)
-        pm.parentConstraint(self.legChainUpvRef[0], self.ik_ctl, self.upv_cns, mo=True)
+        pm.parentConstraint(
+            self.legChainUpvRef[0], self.ik_ctl, self.upv_cns, mo=True)
 
         # Visibilities -------------------------------------
         # shape.dispGeometry
