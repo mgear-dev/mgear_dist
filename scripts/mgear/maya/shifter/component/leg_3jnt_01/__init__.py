@@ -586,6 +586,14 @@ class Component(component.Main):
         we shouldn't create any new object in this method.
 
         """
+        # Soft condition
+        soft_cond_node = node.createConditionNode(
+            self.soft_attr,
+            0.0001,
+            4,
+            0.0001,
+            self.soft_attr)
+        self.soft_attr_cond = soft_cond_node.outColorR
 
         if self.settings["ikSolver"]:
             self.ikSolver = "ikRPsolver"
@@ -659,7 +667,7 @@ class Component(component.Main):
              multJnt3_node.attr("outputX")])
 
         subtract1_node = node.createPlusMinusAverage1D(
-            [plusTotalLength_node.attr("output1D"), self.soft_attr], 2)
+            [plusTotalLength_node.attr("output1D"), self.soft_attr_cond], 2)
 
         distance1_node = node.createDistNode(self.ik_ref, self.aim_tra)
         div1_node = node.createDivNode(1.0, self.rig.global_ctl + ".sx")
@@ -668,11 +676,11 @@ class Component(component.Main):
         subtract2_node = node.createPlusMinusAverage1D(
             [mult1_node.attr("outputX"), subtract1_node.attr("output1D")], 2)
         div2_node = node.createDivNode(subtract2_node + ".output1D",
-                                       self.soft_attr)
+                                       self.soft_attr_cond)
         mult2_node = node.createMulNode(-1, div2_node + ".outputX")
         power_node = node.createPowNode(self.softSpeed_attr,
                                         mult2_node + ".outputX")
-        mult3_node = node.createMulNode(self.soft_attr,
+        mult3_node = node.createMulNode(self.soft_attr_cond,
                                         power_node + ".outputX")
         subtract3_node = node.createPlusMinusAverage1D(
             [plusTotalLength_node.attr("output1D"),
@@ -680,7 +688,7 @@ class Component(component.Main):
             2)
 
         cond1_node = node.createConditionNode(
-            self.soft_attr,
+            self.soft_attr_cond,
             0,
             2,
             subtract3_node + ".output1D",
@@ -763,7 +771,7 @@ class Component(component.Main):
             [multJnt1_node.attr("outputX"), multJnt2_node.attr("outputX")])
 
         subtract1_node = node.createPlusMinusAverage1D(
-            [plusTotalLength_node.attr("output1D"), self.soft_attr], 2)
+            [plusTotalLength_node.attr("output1D"), self.soft_attr_cond], 2)
 
         distance1_node = node.createDistNode(self.ik2b_ik_ref, self.aim_tra2)
         div1_node = node.createDivNode(1, self.rig.global_ctl + ".sx")
@@ -775,14 +783,14 @@ class Component(component.Main):
             [mult1_node.attr("outputX"), subtract1_node.attr("output1D")], 2)
 
         div2_node = node.createDivNode(subtract2_node + ".output1D",
-                                       self.soft_attr)
+                                       self.soft_attr_cond)
 
         mult2_node = node.createMulNode(-1, div2_node + ".outputX")
 
         power_node = node.createPowNode(self.softSpeed_attr,
                                         mult2_node + ".outputX")
 
-        mult3_node = node.createMulNode(self.soft_attr,
+        mult3_node = node.createMulNode(self.soft_attr_cond,
                                         power_node + ".outputX")
 
         subtract3_node = node.createPlusMinusAverage1D(
@@ -791,7 +799,7 @@ class Component(component.Main):
             2)
 
         cond1_node = node.createConditionNode(
-            self.soft_attr,
+            self.soft_attr_cond,
             0,
             2,
             subtract3_node + ".output1D",
