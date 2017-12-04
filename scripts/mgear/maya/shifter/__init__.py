@@ -246,6 +246,10 @@ class Rig(object):
         self.rigGroups = self.model.addAttr("rigGroups", at='message', m=1)
         self.rigPoses = self.model.addAttr("rigPoses", at='message', m=1)
 
+        # Connect global visibility
+        pm.connectAttr(self.ctlVis_att, self.global_ctl.attr("visibility"))
+        attribute.lockAttribute(self.global_ctl, ['v'])
+
         # --------------------------------------------------
         # Basic set of null
         if self.options["joint_rig"]:
