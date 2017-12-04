@@ -200,7 +200,8 @@ class channelWrangler(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         operation_comboBox.setObjectName("operation")
         operation_comboBox.addItem("Move Channel")
         operation_comboBox.addItem("Proxy Channel")
-        operation_comboBox.SizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContentsOnFirstShow)
+        operation_comboBox.SizeAdjustPolicy(
+            QtWidgets.QComboBox.AdjustToContentsOnFirstShow)
         self.table.setCellWidget(rowPosition, 4, operation_comboBox)
         return rowPosition
 
