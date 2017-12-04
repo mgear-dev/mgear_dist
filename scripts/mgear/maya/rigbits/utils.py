@@ -64,7 +64,7 @@ if isinstance(pm.selected()[0], pm.MeshFace):
     pm.polyExtrudeFacet(constructionHistory=True,keepFacesTogether=True )
 else:
     root = pm.selected()[0]
-    if not pm.attributeQuery("comp_type", o_node=root, ex=True):
+    if not pm.attributeQuery("comp_type", node=root, ex=True):
         rigbits.duplicateSym()
     else:
         gui.Guide_UI.duplicate(True)
@@ -81,7 +81,7 @@ if isinstance(pm.selected()[0], pm.MeshFace):
     pm.polyExtrudeFacet(constructionHistory=True,keepFacesTogether=True )
 else:
     root = pm.selected()[0]
-    if not pm.attributeQuery("comp_type", o_node=root, ex=True):
+    if not pm.attributeQuery("comp_type", node=root, ex=True):
         pm.duplicate()
     else:
         gui.Guide_UI.duplicate(False)
@@ -110,28 +110,22 @@ frameSelectedCenter()
 
     # reset SRT
     rCmd = '''
-import pymel.core as pm
-def resetSRT(oColl):
-    trList = ['.tx','.ty','.tz','.rx','.ry','.rz']
-    sList = ['.sx','.sy','.sz']
-
-    for attr in [(o, x) for o in oColl for x in trList]:
-        try: pm.Attribute(attr[0] + attr[1]).set(0)
-        except: pass
-    for attr in [(o, x) for o in oColl for x in sList]:
-        try: pm.Attribute(attr[0] + attr[1]).set(1)
-        except: pass
-#this ensure it is one undo step
-doReset = pm.Callback(resetSRT, pm.selected() )
-doReset()
+from mgear.maya import attribute
+attribute.smart_reset()
 
 '''
     createRunTimeCommand("mGear_resetSRT", rCmd, ann="")
 
     # maximize Maya window
     rCmd = '''
-from mgear.maya import attribute
-attribute.smart_reset()
+import maya.cmds as cmds
+import maya.mel as mel
+gMainWindow = mel.eval('$temp1=$gMainWindow')
+acti = cmds.window( gMainWindow, q=True, titleBar=True)
+if acti:
+    cmds.window( gMainWindow, e=True, titleBar=False)
+else:
+    cmds.window( gMainWindow, e=True, titleBar=True)
 
 '''
     createRunTimeCommand("mGear_maximizeMaya", rCmd, ann="")

@@ -922,7 +922,7 @@ def getSelectedObjectChannels(oSel=None, userDefine=False, animatable=False):
 def connectSet(source, target, testInstance):
     """Connect or set attributes
 
-    Connects or set attributes depending if is isntance of a instance check
+    Connects or set attributes depending if is instance of a instance check
 
     Args:
         source (str or Attr): Striname of the attribute or PyNode attribute
