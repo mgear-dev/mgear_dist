@@ -3,11 +3,12 @@
 
 import pymel.core as pm
 import pymel.core.datatypes as datatypes
-
+from . import attribute
 
 #############################################
 # CREATE SIMPLE NODES
 #############################################
+
 
 def createMultMatrixNode(mA, mB, target=False, transform='srt'):
     """Create Maya multiply Matrix node.
@@ -140,16 +141,20 @@ def createConditionNode(firstTerm=False,
                                              plusTotalLength_node+".output1D")
 
     """
+    check_list = (pm.Attribute, unicode, str)
     node = pm.createNode("condition")
     pm.setAttr(node + ".operation", operator)
     if firstTerm:
-        pm.connectAttr(firstTerm, node + ".firstTerm")
+        attribute.connectSet(firstTerm, node + ".firstTerm", check_list)
+
     if secondTerm:
-        pm.connectAttr(secondTerm, node + ".secondTerm")
+        attribute.connectSet(secondTerm, node + ".secondTerm", check_list)
+
     if ifTrue:
-        pm.connectAttr(ifTrue, node + ".colorIfTrueR")
+        attribute.connectSet(ifTrue, node + ".colorIfTrueR", check_list)
+
     if ifFalse:
-        pm.connectAttr(ifFalse, node + ".colorIfFalseR")
+        attribute.connectSet(ifFalse, node + ".colorIfFalseR", check_list)
 
     return node
 

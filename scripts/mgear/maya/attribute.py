@@ -913,3 +913,26 @@ def getSelectedObjectChannels(oSel=None, userDefine=False, animatable=False):
                 for x in oSel.listAttr(ud=userDefine, k=animatable)]
 
     return channels
+
+
+##########################################################
+# UTIL
+##########################################################
+
+def connectSet(source, target, testInstance):
+    """Connect or set attributes
+
+    Connects or set attributes depending if is isntance of a instance check
+
+    Args:
+        source (str or Attr): Striname of the attribute or PyNode attribute
+        target (str or Attr): Striname of the attribute or PyNode attribute
+        testInstance (tuple): Tuple of types to check
+    """
+    if not isinstance(testInstance, tuple):
+        testInstance = tuple(testInstance)
+
+    if isinstance(source, testInstance):
+        pm.connectAttr(source, target)
+    else:
+        pm.setAttr(target, source)
