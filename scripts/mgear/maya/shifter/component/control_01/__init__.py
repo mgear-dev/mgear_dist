@@ -23,7 +23,12 @@ class Component(component.Main):
             t = transform.getTransformFromPos(self.guide.pos["root"])
         else:
             t = self.guide.tra["root"]
-            t = transform.setMatrixScale(t)
+            if self.settings["mirrorBehaviour"] and self.negate:
+                scl = [1, 1, -1]
+            else:
+                scl = [1, 1, 1]
+            t = transform.setMatrixScale(t, scl)
+
         self.ik_cns = primitive.addTransform(
             self.root, self.getName("ik_cns"), t)
 

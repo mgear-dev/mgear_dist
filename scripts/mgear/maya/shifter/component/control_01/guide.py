@@ -17,12 +17,14 @@ import settingsUI as sui
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1, 1, 0]
+VERSION = [1, 2, 0]
 TYPE = "control_01"
 NAME = "control"
 DESCRIPTION = "Simple controler with space switch and Rot order selection. \n"\
               "This component can use the root rotation to place  the "\
-              "control orientation"
+              "control orientation \n" \
+              "NOTE: MAYA 2018 and 2018.1 have a bug that break the behaviour"\
+              " with negative scale. This affect 'Mirror behaviour option' "
 
 ##########################################################
 # CLASS
@@ -76,6 +78,7 @@ class Guide(guide.ComponentGuide):
         self.pDefault_RotOrder = self.addParam(
             "default_rotorder", "long", 0, 0, 5)
         self.pNeutralRotation = self.addParam("neutralRotation", "bool", True)
+        self.pMirrorBehaviour = self.addParam("mirrorBehaviour", "bool", False)
         self.pCtlSize = self.addParam("ctlSize", "double", 1, None, None)
         self.pUseIndex = self.addParam("useIndex", "bool", False)
         self.pParentJointIndex = self.addParam(
@@ -154,6 +157,8 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         self.populateCheck(self.settingsTab.uniScale_checkBox, "uniScale")
         self.populateCheck(self.settingsTab.neutralRotation_checkBox,
                            "neutralRotation")
+        self.populateCheck(self.settingsTab.mirrorBehaviour_checkBox,
+                           "mirrorBehaviour")
         self.settingsTab.ctlSize_doubleSpinBox.setValue(
             self.root.attr("ctlSize").get())
         sideIndex = self.iconsList.index(self.root.attr("icon").get())
@@ -199,6 +204,10 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             partial(self.updateCheck,
                     self.settingsTab.neutralRotation_checkBox,
                     "neutralRotation"))
+        self.settingsTab.mirrorBehaviour_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.mirrorBehaviour_checkBox,
+                    "mirrorBehaviour"))
         self.settingsTab.ctlSize_doubleSpinBox.valueChanged.connect(
             partial(self.updateSpinBox,
                     self.settingsTab.ctlSize_doubleSpinBox,
