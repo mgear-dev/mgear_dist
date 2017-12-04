@@ -7,7 +7,7 @@ import pymel.core as pm
 
 import mgear
 
-from mgear.maya import synoptic, skin, simpleRig, rigbits
+from mgear.maya import synoptic, skin, simpleRig, rigbits, attribute
 from mgear.maya.rigbits import (
     postSpring,
     rope,
@@ -199,6 +199,9 @@ def createMenu():
     pm.menuItem(label="Characterize Biped",
                 command=characterizeBiped)
     pm.menuItem(label="Bake Mocap Biped", command=bakeMocap)
+    pm.menuItem(divider=True)
+    pm.menuItem(label="Smart Reset Attribute/SRT",
+                command=attribute.smart_reset)
 
     # util Tools
     pm.setParent(mGearM, menu=True)

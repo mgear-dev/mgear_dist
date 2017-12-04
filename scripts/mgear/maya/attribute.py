@@ -6,6 +6,7 @@
 import collections
 import mgear
 import pymel.core as pm
+import maya.cmds as cmds
 import pymel.core.datatypes as datatypes
 
 
@@ -508,8 +509,8 @@ def setRotOrder(node, s="XYZ"):
     # So let's do it manually using the EulerRotation class
 
     er = datatypes.EulerRotation([pm.getAttr(node + ".rx"),
-                                 pm.getAttr(node + ".ry"),
-                                 pm.getAttr(node + ".rz")],
+                                  pm.getAttr(node + ".ry"),
+                                  pm.getAttr(node + ".rz")],
                                  unit="degrees")
     er.reorderIt(s)
 
@@ -650,6 +651,7 @@ class ParamDef2(ParamDef):
         ParamDef: The stored parameter definition.
 
     """
+
     def __init__(self,
                  scriptName,
                  valueType,
@@ -686,6 +688,7 @@ class FCurveParamDef(ParamDef):
         extrapolation (int): the curve extrapolation.
 
     """
+
     def __init__(self,
                  scriptName,
                  keys=None,
@@ -730,6 +733,7 @@ class colorParamDef(ParamDef):
             exp [1.0, 0.99, 0.13].
 
     """
+
     def __init__(self, scriptName, value=False):
 
         self.scriptName = scriptName
@@ -756,6 +760,7 @@ class enumParamDef(ParamDef):
         value (int): The default value.
 
     """
+
     def __init__(self, scriptName, enum, value=False):
 
         self.scriptName = scriptName
@@ -777,9 +782,90 @@ class enumParamDef(ParamDef):
 
 
 ##########################################################
+# Default Values functions
+##########################################################
+
+def get_default_value(node, attribute):
+    """Get the default attribute value
+
+    Args:
+        node (str, PyNode): The object with the attribute
+        attribute (str): The attribute to get the value
+
+    Returns:
+        variant: The attribute value
+    """
+    return pm.attributeQuery(attribute,
+                             node=node,
+                             listDefault=True)[0]
+
+
+def set_default_value(node, attribute):
+    """Set the default value to the attribute
+
+    Args:
+        node (str, PyNode): The object with the attribute to reset
+        attribute (str): The attribute to reset
+    """
+    if not isinstance(node, pm.PyNode):
+        node = pm.PyNode(node)
+
+    defVal = get_default_value(node, attribute)
+    try:
+        node.attr(attribute).set(defVal)
+    except RuntimeError:
+        pass
+
+
+def reset_selected_channels_value(objects=None, attributes=None):
+    """Reset the the selected channels if not attribute is provided
+
+    Args:
+        objects (None, optional): The objects to reset the channels
+        attribute (list, optional): The attribute to reset
+    """
+    if not objects:
+        objects = cmds.ls(selection=True)
+    if not attributes:
+        attributes = getSelectedChannels()
+
+    for obj in objects:
+        for attr in attributes:
+            set_default_value(obj, attr)
+
+
+def reset_SRT(objects=None,
+              attributes=["tx", "ty", "tz",
+                          "rx", "ry", "rz",
+                          "sx", "sy", "sz",
+                          "v"]):
+    """Reset Scale Rotation and translation attributes to default value
+
+    Args:
+        objects (None, optional): The objects to reset the channels
+        attribute (list): The attribute to reset
+    """
+    reset_selected_channels_value(objects, attributes)
+
+
+def smart_reset(*args):
+    """Reset the SRT or the selected channels
+
+    Checks first if we have channels selected. If not, will try to reset SRT
+
+    Args:
+        *args: Dummy
+    """
+    attributes = getSelectedChannels()
+    if attributes:
+        reset_selected_channels_value(objects=None, attributes=attributes)
+    else:
+        reset_SRT()
+
+##########################################################
 # GETTERS
 ##########################################################
-# ========================================================
+
 
 def getSelectedChannels(userDefine=False):
     """Get the selected channels on the channel box

@@ -130,14 +130,8 @@ doReset()
 
     # maximize Maya window
     rCmd = '''
-import maya.cmds as cmds
-import maya.mel as mel
-gMainWindow = mel.eval('$temp1=$gMainWindow')
-acti = cmds.window( gMainWindow, q=True, titleBar=True  )
-if acti:
-    cmds.window( gMainWindow, e=True, titleBar=False  )
-else:
-    cmds.window( gMainWindow, e=True, titleBar=True  )
+from mgear.maya import attribute
+attribute.smart_reset()
 
 '''
     createRunTimeCommand("mGear_maximizeMaya", rCmd, ann="")
