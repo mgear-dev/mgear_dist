@@ -1196,4 +1196,4 @@ class Component(component.Main):
         """ Custom connection to be use with shoulder 01 component"""
 
         self.connect_standard()
-        pm.parent(self.armRollRef[0], self.parent_comp.ctl)
+        pm.parent(self.armRollRef[0],  self.ikHandleUpvRef, self.parent_comp.ctl)
