@@ -1,12 +1,10 @@
 import mgear.maya.pyqt as gqt
-from mgear.vendor.Qt import QtCore, QtWidgets
-
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 class Ui_Form(object):
-
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(283, 472)
+        Form.resize(733, 550)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.groupBox = QtWidgets.QGroupBox(Form)
@@ -183,9 +181,9 @@ class Ui_Form(object):
         self.gridLayout.addWidget(self.ikRefArray_groupBox, 2, 0, 1, 1)
 
         self.retranslateUi(Form)
-        QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.tz_checkBox.toggle)
-        QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.ty_checkBox.toggle)
         QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.tx_checkBox.toggle)
+        QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.ty_checkBox.toggle)
+        QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.tz_checkBox.toggle)
         QtCore.QObject.connect(self.rotate_pushButton, QtCore.SIGNAL("clicked()"), self.rx_checkBox.toggle)
         QtCore.QObject.connect(self.rotate_pushButton, QtCore.SIGNAL("clicked()"), self.ry_checkBox.toggle)
         QtCore.QObject.connect(self.rotate_pushButton, QtCore.SIGNAL("clicked()"), self.rz_checkBox.toggle)
@@ -241,3 +239,4 @@ class Ui_Form(object):
         self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
         self.ikRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
         self.ikRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
+
