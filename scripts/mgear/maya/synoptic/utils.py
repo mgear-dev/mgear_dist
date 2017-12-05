@@ -1441,17 +1441,53 @@ class IkFkTransfer(AbstractAnimationTransfer):
 
 # Baker Springs
 
+@utils.one_undo
 def clearSprings(model):
+    """Delete baked animation from spring
+
+    Args:
+        model (dagNode): The rig top node
+    """
     springNodes = getControlers(model, gSuffix=PLOT_GRP_SUFFIX)
-    pm.cutKey(springNodes, cl=True)
+    pairblends = [sn.listConnections(type="pairBlend")[0]
+                  for sn in springNodes]
+
+    for pb in pairblends:
+        animCrvs = pb.listConnections(type="animCurveTA")
+        for fcrv in animCrvs:
+            for conn in fcrv.listConnections(connections=True,
+                                             destination=True,
+                                             plugs=True):
+
+                pm.disconnectAttr(conn[0], conn[1])
+        # reset the value to 0
+        attrs = ["inRotateX1", "inRotateY1", "inRotateZ1"]
+        for attr in attrs:
+            pb.attr(attr).set(0)
+
+        # delete fcurves
+        pm.delete(animCrvs)
 
 
 @utils.one_undo
 @utils.viewport_off
 def bakeSprings(model):
+    """Bake the automatic spring animation to animation curves
+
+    Args:
+        model (dagNode): The rig top node
+    """
+    # first clear animation
+    clearSprings(model)
+
+    # bake again
     springNodes = getControlers(model, gSuffix=PLOT_GRP_SUFFIX)
     if springNodes:
-        pm.cutKey(springNodes, cl=True)
+
         start = pm.playbackOptions(q=True, min=True)
         end = pm.playbackOptions(q=True, max=True)
-        pm.bakeResults(springNodes, t=(start, end), simulation=True)
+        ct = start
+        for i in range(int(end - start) + 1):
+            pm.currentTime(int(ct))
+            pm.setKeyframe(springNodes, insertBlend=True, attribute='rotate')
+            ct += 1

@@ -5,7 +5,7 @@ from pymel.core import datatypes
 
 from mgear.maya.shifter import component
 
-from mgear.maya import applyop, vector
+from mgear.maya import applyop, vector, node
 from mgear.maya import attribute, transform, primitive
 
 #############################################
@@ -158,9 +158,21 @@ class Component(component.Main):
                            [0, 1, 0],
                            self.fk_npo[i],
                            False)
-            applyop.oriCns(tranCns, self.spring_cns[i])
+            ori_cns = applyop.oriCns(tranCns, self.spring_cns[i])
 
             springOP = applyop.gear_spring_op(self.spring_target[i])
+
+            blend_node = pm.createNode("pairBlend")
+
+            pm.connectAttr(ori_cns.constraintRotate, blend_node.inRotate2)
+            pm.connectAttr(self.aSpring_intensity, blend_node.weight)
+
+            pm.disconnectAttr(ori_cns.constraintRotate,
+                              self.spring_cns[i].rotate)
+
+            pm.connectAttr(blend_node.outRotateX, self.spring_cns[i].rotateX)
+            pm.connectAttr(blend_node.outRotateY, self.spring_cns[i].rotateY)
+            pm.connectAttr(blend_node.outRotateZ, self.spring_cns[i].rotateZ)
 
             pm.connectAttr(self.aSpring_intensity, springOP + ".intensity")
             pm.connectAttr(self.aDamping[i], springOP + ".damping")
