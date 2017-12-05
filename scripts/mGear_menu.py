@@ -7,7 +7,7 @@ import pymel.core as pm
 
 import mgear
 
-from mgear.maya import synoptic, skin, simpleRig, rigbits, attribute
+from mgear.maya import synoptic, skin, simpleRig, rigbits, attribute, shifter
 from mgear.maya.rigbits import (
     postSpring,
     rope,
@@ -64,8 +64,9 @@ def createMenu():
     pm.menuItem(label="Import Quadruped Guide",
                 command=quadrupedGuide)
     pm.menuItem(divider=True)
-    pm.menuItem(label="Update Guide",
-                command=updateGuide)
+    pm.menuItem(label="Update Guide", command=updateGuide)
+    pm.menuItem(divider=True)
+    pm.menuItem(label="Reload Components", command=shifter.reloadComponents)
 
     pm.setParent(mGearM, menu=True)
     pm.menuItem(divider=True)

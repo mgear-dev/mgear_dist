@@ -62,6 +62,24 @@ def importComponent(comp_type):
     return module
 
 
+def reloadComponents(*args):
+    """Reload all componets
+
+    Args:
+        *args: Dummy
+    """
+    compDir = getComponentDirectories()
+
+    for x in compDir:
+        for com in compDir[x]:
+            try:
+                reload(importComponent(com))
+                reload(importComponentGuide(com))
+                print "reload : {}.{}".format(os.path.basename(x), com)
+            except ImportError:
+                pass
+
+
 class Rig(object):
     """The main rig class.
 
