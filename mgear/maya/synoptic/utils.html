@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.synoptic.widgets" href="widgets.html"/>
         <link rel="prev" title="mgear.maya.synoptic" href="synoptic.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -208,7 +208,8 @@
 <dl class="class">
 <dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer">
 <em class="property">class </em><code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">AbstractAnimationTransfer</code><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<dd><p>Abstract animation transfer class</p>
+<dl class="method">
 <dt id="mgear.maya.synoptic.utils.AbstractAnimationTransfer.bakeAnimation">
 <code class="descname">bakeAnimation</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.AbstractAnimationTransfer.bakeAnimation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -426,77 +427,311 @@
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.applyMirror">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">applyMirror</code><span class="sig-paren">(</span><em>nameSpace</em>, <em>mirrorEntry</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.applyMirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply mirro pose</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nameSpace</strong> (<em>str</em>) – Namespace</li>
+<li><strong>mirrorEntry</strong> (<em>list</em>) – List witht the mirror entry template</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.bakeSprings">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">bakeSprings</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.bakeSprings" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.bindPose">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">bindPose</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.bindPose" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Restore the reset position of the rig</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>TYPE</em>) – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.calculateMirrorData">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">calculateMirrorData</code><span class="sig-paren">(</span><em>srcNode</em>, <em>targetNode</em>, <em>flip=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.calculateMirrorData" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns [{“target”: node, “attr”: at, “val”: flipVal}]</p>
+<dd><p>Calculate the mirror data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>srcNode</strong> (<em>str</em>) – The source Node</li>
+<li><strong>targetNode</strong> (<em>[</em><em>dict</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Target node</li>
+<li><strong>flip</strong> (<em>bool</em><em>, </em><em>optional</em>) – flip option</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">node, “attr”: at, “val”: flipVal}]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[{“target”</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.changeSpace">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">changeSpace</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em>, <em>cnsIndex</em>, <em>ctl_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.changeSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the space of a control</p>
+<p>i.e: A control with ik reference array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>object_name</strong> (<em>str</em>) – Object Name</li>
+<li><strong>combo_attr</strong> (<em>str</em>) – Combo attribute name</li>
+<li><strong>cnsIndex</strong> (<em>int</em>) – Combo index to change</li>
+<li><strong>ctl_name</strong> (<em>str</em>) – Control name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.clearSprings">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">clearSprings</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.clearSprings" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.gatherMirrorData">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">gatherMirrorData</code><span class="sig-paren">(</span><em>nameSpace</em>, <em>node</em>, <em>flip</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.gatherMirrorData" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the data to mirror</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nameSpace</strong> (<em>str</em>) – Namespace</li>
+<li><strong>node</strong> (<em>PyNode</em>) – No</li>
+<li><strong>flip</strong> (<em>TYPE</em>) – flip option</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The mirror data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[dict[str]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getComboIndex">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getComboIndex</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getComboIndex" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the index from a  combo attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>object_name</strong> (<em>str</em>) – Control name</li>
+<li><strong>combo_attr</strong> (<em>str</em>) – Combo attribute name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current index in the combo attribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getComboKeys">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getComboKeys</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getComboKeys" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the keys from a combo attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>object_name</strong> (<em>str</em>) – Control name</li>
+<li><strong>combo_attr</strong> (<em>str</em>) – Combo attribute name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Keys names from the combo attribute.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getControlers">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getControlers</code><span class="sig-paren">(</span><em>model</em>, <em>gSuffix=’_controllers_grp’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getControlers" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get thr controlers from the set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig root</li>
+<li><strong>gSuffix</strong> (<em>str</em><em>, </em><em>optional</em>) – set suffix</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The members of the group</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getInvertCheckButtonAttrName">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getInvertCheckButtonAttrName</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getInvertCheckButtonAttrName" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the invert check butto attribute name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>str</strong> (<em>str</em>) – The attribute name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The checked attribute name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getModel">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getModel</code><span class="sig-paren">(</span><em>widget</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getModel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the model Name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>widget</strong> (<em>QWidget</em>) – Synoptic widget</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The rig model name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PyNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getNamespace">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getNamespace</code><span class="sig-paren">(</span><em>modelName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getNamespace" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the name space from rig root</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>modelName</strong> (<em>str</em>) – Rig top node name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Namespace</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getNode">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getNode</code><span class="sig-paren">(</span><em>nodeName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getNode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get a PyNode from the string name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nodeName</strong> (<em>str</em>) – Node name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The node. or None if the object can’t be found</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PyNode or None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.getSynopticWidget">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getSynopticWidget</code><span class="sig-paren">(</span><em>widget</em>, <em>max_iter=20</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getSynopticWidget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the widget where the synoptic panel is attach
-:param widget:
-:param max_iter:
-:return:</p>
+<dd><p>Return the widget where the synoptic panel is attach</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>widget</strong> (<em>QWidget</em>) – The widget to get the parent</li>
+<li><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – Iteration limit to find the paretn widget</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The Parent widget</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">widget</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.ikFkMatch">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">ikFkMatch</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uiHost_name</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.ikFkMatch" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Switch IK/FK with matching functionality</p>
+<p>This function is meant to work with 2 joint limbs.
+i.e: human legs or arms</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top transform node</li>
+<li><strong>ikfk_attr</strong> (<em>str</em>) – Blend ik fk attribute name</li>
+<li><strong>uiHost_name</strong> (<em>str</em>) – Ui host name</li>
+<li><strong>fks</strong> (<em>[</em><em>str</em><em>]</em>) – List of fk controls names</li>
+<li><strong>ik</strong> (<em>str</em>) – Ik control name</li>
+<li><strong>upv</strong> (<em>str</em>) – Up vector control name</li>
+<li><strong>ikRot</strong> (<em>None</em><em>, </em><em>str</em>) – optional. Name of the Ik Rotation control</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.isSideElement">
@@ -506,23 +741,50 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> – str</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Description</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Deleted Parameters:</dt>
+<dd>node: str</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.keyAll">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keyAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keyAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyframe all the controls inside the controls group</p>
+<p>Note: We use the workd “group” to refer to a set in Maya</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>PyNode</em>) – Rig top node</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="function">
-<dt id="mgear.maya.synoptic.utils.keyAll">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keyAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keyAll" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
 <dt id="mgear.maya.synoptic.utils.keyGroup">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keyGroup</code><span class="sig-paren">(</span><em>model</em>, <em>groupSuffix</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keyGroup" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Keyframe all the members of a given group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>groupSuffix</strong> (<em>str</em>) – The group preffix</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.keyObj">
@@ -533,8 +795,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>model</strong> – Name of the namespace that will define de the model</li>
-<li><strong>object_names</strong> – names of the controls, without the name space</li>
+<li><strong>model</strong> (<em>Str</em>) – Name of the namespace that will define de the model</li>
+<li><strong>object_names</strong> (<em>Str</em>) – names of the controls, without the name space</li>
 </ul>
 </td>
 </tr>
@@ -548,62 +810,175 @@
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.keySel">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">keySel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.keySel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Key selected controls</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.listAttrForMirror">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">listAttrForMirror</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.listAttrForMirror" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.mirrorPose">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">mirrorPose</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.mirrorPose" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.mirrorPoseOld">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">mirrorPoseOld</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.mirrorPoseOld" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.quickSel">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">quickSel</code><span class="sig-paren">(</span><em>model</em>, <em>channel</em>, <em>mouse_button</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.quickSel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.resetSelTrans">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">resetSelTrans</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.resetSelTrans" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.selAll">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selAll" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.selGroup">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selGroup</code><span class="sig-paren">(</span><em>model</em>, <em>groupSuffix</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selGroup" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.selectObj">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selectObj</code><span class="sig-paren">(</span><em>model</em>, <em>object_names</em>, <em>mouse_button</em>, <em>key_modifier</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selectObj" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.stripNamespace">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">stripNamespace</code><span class="sig-paren">(</span><em>nodeName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.stripNamespace" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="mgear.maya.synoptic.utils.swapSideLabel">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">swapSideLabel</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.swapSideLabel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns fliped name that replaced side label left to right or right to left.</p>
+<dd><p>List attributes to invert the value for mirror posing</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>PyNode</em>) – The Node with the attributes to invert</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Attributes to invert</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.mirrorPose">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">mirrorPose</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.mirrorPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Summary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>flip</strong> (<em>bool</em><em>, </em><em>optiona</em>) – Set the function behaviout to flip</li>
+<li><strong>nodes</strong> (<em>None</em><em>,  </em><em>[</em><em>PyNode</em><em>]</em>) – Controls to mirro/flip the pose</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.mirrorPoseOld">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">mirrorPoseOld</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.mirrorPoseOld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated: Mirror pose</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>flip</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True will flip the pose</li>
+<li><strong>nodes</strong> (<em>bool</em><em>, </em><em>optional</em>) – Nodes to mirror or flip transformation</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.quickSel">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">quickSel</code><span class="sig-paren">(</span><em>model</em>, <em>channel</em>, <em>mouse_button</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.quickSel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the object stored on the quick selection attributes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – The rig top node</li>
+<li><strong>channel</strong> (<em>str</em>) – The quick selection channel name</li>
+<li><strong>mouse_button</strong> (<em>QtSignal</em>) – Clicked mouse button</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.resetSelTrans">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">resetSelTrans</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.resetSelTrans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the transfom values (SRT) for the selected objects</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.selAll">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select all controlers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>PyNode</em>) – Rig top node</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.selGroup">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selGroup</code><span class="sig-paren">(</span><em>model</em>, <em>groupSuffix</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the members of a given set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>groupSuffix</strong> (<em>str</em>) – Set suffix name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.selectObj">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">selectObj</code><span class="sig-paren">(</span><em>model</em>, <em>object_names</em>, <em>mouse_button</em>, <em>key_modifier</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.selectObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – The rig top node</li>
+<li><strong>object_names</strong> (<em>list</em>) – The names of the objects to select</li>
+<li><strong>mouse_button</strong> (<em>QtSignal</em>) – Clicked mouse button signal</li>
+<li><strong>key_modifier</strong> (<em>QtSignal</em>) – Modifier button signal</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.stripNamespace">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">stripNamespace</code><span class="sig-paren">(</span><em>nodeName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.stripNamespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strip all the namespaces from a given name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nodeName</strong> (<em>str</em>) – Node name to strip the namespaces</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Node name without namespace</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.swapSideLabel">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">swapSideLabel</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.swapSideLabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns fliped name</p>
+<p>Returns fliped name that replaced side label left to right or
+right to left</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name to swap the side</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">str</td>
 </tr>
@@ -614,7 +989,22 @@
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.toggleAttr">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">toggleAttr</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>attr_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.toggleAttr" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Toggle a boolean attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>object_name</strong> (<em>str</em>) – The name of the control containing the attribute to
+toggle</li>
+<li><strong>attr_name</strong> (<em>str</em>) – The attribute to toggle</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 
@@ -662,7 +1052,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Log &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>Release Log &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="index.html"/>
         <link rel="next" title="License" href="license.html"/>
         <link rel="prev" title="FAQ" href="FAQ.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -100,13 +100,14 @@
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">2.2.4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">2.2.3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">2.2.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">2.2.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">2.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">2.1.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">2.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">2.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">2.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">2.0</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -176,51 +177,95 @@
   <div class="section" id="release-log">
 <h1>Release Log<a class="headerlink" href="#release-log" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>2.2.4<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>2.3.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
-<li>Issue #50: Global scale and size of controllers.</li>
+<li>mGear: Attribute: addAttribute not setting default attribute value. [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/84">#84</a>]</li>
+<li>mGear: Attribute: update with lock and unlock attribute functions [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/83">#83</a>]</li>
+<li>mGear: PEP8 Style Refactor [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/100">#100</a>]</li>
+<li>mGear: Refactor all exception handling [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/88">#88</a>]</li>
+<li>mGear: Vendoring QT [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/89">#89</a>]</li>
+<li>Shifter: Build command review and log popup window [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/73">#73</a>]</li>
+<li>Shifter: Change Global_C0_ctl to World_ctl [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/66">#66</a>]</li>
+<li>Shifter: Control_01: Add option to have mirror behaviour [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/68">#68</a>]</li>
+<li>Shifter: Improve rig build speed [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/65">#65</a>]</li>
+<li>Shifter: Leg_2jnts_freeTangents_01:no ikFoot in upvref attribute [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/62">#62</a>]</li>
+<li>Shifter: Reload components in custom path [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/78">#78</a>]</li>
+<li>Shifter: Update guide structure in pre custom step [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/101">#101</a>]</li>
+<li>Simple Rig: Update functionality revision  [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/71">#71</a>]</li>
+<li>Synoptic: spring bake util [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/61">#61</a>]</li>
+</ul>
+</dd>
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Rigbits: createCTL function issue [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/59">#59</a>]</li>
+<li>Rigbits: export skin pack error with crvs [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/56">#56</a>]</li>
+<li>Rigbits: skin: There is a case in exportSkin function breaks the existing file [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/58">#58</a>]</li>
+<li>Shifter: 3 joint leg: soft Ik range min in graph editor [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/82">#82</a>]</li>
+<li>Shifter: arm_2jnt_freeTangents_01 no attribute ‘rollRef’ [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/63">#63</a>]</li>
+<li>Shifter: Arms auto upvector and shoulder space jump [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/85">#85</a>]</li>
+<li>Shifter: Chain_spring_01: pop if manipulate FK ctl after Bake [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/75">#75</a>]</li>
+<li>Shifter: Connect Ctl_vis [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/103">#103</a>]</li>
+<li>Shifter: Control_01: rotation axis is missing Y lock [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/74">#74</a>]</li>
+<li>Shifter: Japanese Ascii [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/79">#79</a>]</li>
+<li>Shifter: Spring chain: lock control parent and bake spring bug [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/67">#67</a>]</li>
+<li>Shifter: Synoptic: IK/FK Match with arm_ms_2jnt_01 [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/80">#80</a>]</li>
+</ul>
+</dd>
+<dt><strong>Known Issues</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter: Undo Build from selection crash maya [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/74">#74</a>]</li>
 </ul>
 </dd>
 </dl>
 </div>
 <div class="section" id="id2">
-<h2>2.2.3<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>2.2.4<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
-<li>Issue #43: Shifter: Custom Steps: Added Stop Build and Try again option if step fail.</li>
-</ul>
-</dd>
-<dt><strong>Bug Fix</strong></dt>
-<dd><ul class="first last simple">
-<li>Issue #54: Synoptic: Match IK/FK with split ctl for trans and rot</li>
+<li>Shifter: Global scale and size of controllers. [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/50">#50</a>]</li>
 </ul>
 </dd>
 </dl>
 </div>
 <div class="section" id="id3">
-<h2>2.2.2<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2>2.2.3<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
-<li>Issue #47: Shifter: Components: Legs: Mirror axis behavior on upv and mid ctl</li>
-<li>Issue #48: Shifter: Componets: Arms: IK ctl mirror behaviour</li>
-<li>Issue #53: Shifter: arm roll new reference connector</li>
+<li>Shifter: Custom Steps: Added Stop Build and Try again option if step fail.[<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/43">#43</a>]</li>
 </ul>
 </dd>
 <dt><strong>Bug Fix</strong></dt>
 <dd><ul class="first last simple">
-<li>Issue #42: Shifter: component UI min division hang. Check all components</li>
-<li>Issue #44: mGear quadruped rig not being created in 2018</li>
-<li>Issue #49: Shifter: Close settings Exception on Maya 2018: Note: This is a workaround. The issue comes from Maya 2018</li>
+<li>Synoptic: Match IK/FK with split ctl for trans and rot [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/54">#54</a>]</li>
 </ul>
 </dd>
 </dl>
 </div>
 <div class="section" id="id4">
-<h2>2.2.1<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2>2.2.2<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Enhancements</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter: Components: Legs: Mirror axis behavior on upv and mid ctl [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/47">#47</a>]</li>
+<li>Shifter: Componets: Arms: IK ctl mirror behaviour [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/48">#48</a>]</li>
+<li>Shifter: arm roll new reference connector [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/53">#53</a>]</li>
+</ul>
+</dd>
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter: component UI min division hang. Check all components [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/42">#42</a>]</li>
+<li>Shifter: quadruped rig not being created in 2018 [ #44]</li>
+<li>Shifter: Close settings Exception on Maya 2018: Note: This is a workaround. The issue comes from Maya 2018 [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/49">#49</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id5">
+<h2>2.2.1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Bug Fix</strong></dt>
 <dd><ul class="first last simple">
@@ -231,8 +276,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id5">
-<h2>2.2.0<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>2.2.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -241,7 +286,7 @@
 <li>Channel Wrangler: Channel manager with export import options.</li>
 </ul>
 </dd>
-<dt><strong>Improvements</strong></dt>
+<dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
 <li>Synoptic: key/select all for custom widgets</li>
 <li>Skin IO: IO skin for curves &amp; nurbs</li>
@@ -265,8 +310,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id6">
-<h2>2.1.1<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>2.1.1<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -306,8 +351,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id7">
-<h2>2.0<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>2.0<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -385,7 +430,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

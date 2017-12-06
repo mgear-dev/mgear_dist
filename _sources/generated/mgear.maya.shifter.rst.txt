@@ -1,9 +1,17 @@
-mgear.maya.shifter
-==================
+mgear\.maya\.shifter
+====================
 
 .. automodule:: mgear.maya.shifter
 
    
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      getComponentDirectories
+      importComponent
+      importComponentGuide
    
    
 
@@ -13,9 +21,7 @@ mgear.maya.shifter
 
    .. autosummary::
    
-      MainComponent
       Rig
-      RigGuide
    
    
 

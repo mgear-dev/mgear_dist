@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.node &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.node &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../index.html"/>
         <link rel="up" title="Base Modules" href="../baseModules.html"/>
         <link rel="next" title="mgear.maya.primitive" href="mgear.maya.primitive.html"/>
         <link rel="prev" title="mgear.maya.meshNavigation" href="mgear.maya.meshNavigation.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -247,17 +247,32 @@
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createMulNodeMulti" title="mgear.maya.node.createMulNodeMulti"><code class="xref py py-obj docutils literal"><span class="pre">createMulNodeMulti</span></code></a>(name[,&nbsp;inputs])</td>
 <td>Create and connect multiple multiply nodes</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createNegateNodeMulti" title="mgear.maya.node.createNegateNodeMulti"><code class="xref py py-obj docutils literal"><span class="pre">createNegateNodeMulti</span></code></a>(name[,&nbsp;inputs])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createMultMatrixNode" title="mgear.maya.node.createMultMatrixNode"><code class="xref py py-obj docutils literal"><span class="pre">createMultMatrixNode</span></code></a>(mA,&nbsp;mB[,&nbsp;target,&nbsp;transform])</td>
+<td>Create Maya multiply Matrix node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createNegateNodeMulti" title="mgear.maya.node.createNegateNodeMulti"><code class="xref py py-obj docutils literal"><span class="pre">createNegateNodeMulti</span></code></a>(name[,&nbsp;inputs])</td>
 <td>Create and connect multiple negate nodes</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createPairBlend" title="mgear.maya.node.createPairBlend"><code class="xref py py-obj docutils literal"><span class="pre">createPairBlend</span></code></a>([inputA,&nbsp;inputB,&nbsp;blender,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createPairBlend" title="mgear.maya.node.createPairBlend"><code class="xref py py-obj docutils literal"><span class="pre">createPairBlend</span></code></a>([inputA,&nbsp;inputB,&nbsp;blender,&nbsp;…])</td>
 <td>Create and connect a PairBlend node.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createReverseNode" title="mgear.maya.node.createReverseNode"><code class="xref py py-obj docutils literal"><span class="pre">createReverseNode</span></code></a>(input[,&nbsp;output])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createPlusMinusAverage1D" title="mgear.maya.node.createPlusMinusAverage1D"><code class="xref py py-obj docutils literal"><span class="pre">createPlusMinusAverage1D</span></code></a>(input[,&nbsp;operation,&nbsp;…])</td>
+<td>Create a multiple average node 1D.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createPowNode" title="mgear.maya.node.createPowNode"><code class="xref py py-obj docutils literal"><span class="pre">createPowNode</span></code></a>(inputA,&nbsp;inputB[,&nbsp;output])</td>
+<td>Create and connect a power node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createReverseNode" title="mgear.maya.node.createReverseNode"><code class="xref py py-obj docutils literal"><span class="pre">createReverseNode</span></code></a>(input[,&nbsp;output])</td>
 <td>Create and connect a reverse node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createSetRangeNode" title="mgear.maya.node.createSetRangeNode"><code class="xref py py-obj docutils literal"><span class="pre">createSetRangeNode</span></code></a>(input,&nbsp;oldMin,&nbsp;oldMax[,&nbsp;…])</td>
+<td>Create Set Range Node</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createSubNode" title="mgear.maya.node.createSubNode"><code class="xref py py-obj docutils literal"><span class="pre">createSubNode</span></code></a>(inputA,&nbsp;inputB)</td>
 <td>Create and connect a subtraction node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/node.html#mgear.maya.node.createVertexPositionNode" title="mgear.maya.node.createVertexPositionNode"><code class="xref py py-obj docutils literal"><span class="pre">createVertexPositionNode</span></code></a>(inShape[,&nbsp;vId,&nbsp;…])</td>
+<td>Creates a mgear_vertexPosition node</td>
 </tr>
 </tbody>
 </table>
@@ -307,7 +322,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

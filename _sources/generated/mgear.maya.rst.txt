@@ -1,5 +1,5 @@
-mgear.maya
-==========
+mgear\.maya
+===========
 
 .. automodule:: mgear.maya
 
@@ -9,6 +9,7 @@ mgear.maya
 
    .. autosummary::
    
+      aboutMgear
       getMayaVer
    
    

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.curve &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.curve &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../index.html"/>
         <link rel="up" title="Base Modules" href="../baseModules.html"/>
         <link rel="next" title="mgear.maya.dag" href="mgear.maya.dag.html"/>
         <link rel="prev" title="mgear.maya.attribute" href="mgear.maya.attribute.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -214,13 +214,16 @@
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/curve.html#mgear.maya.curve.createCurveFromCurve" title="mgear.maya.curve.createCurveFromCurve"><code class="xref py py-obj docutils literal"><span class="pre">createCurveFromCurve</span></code></a>(srcCrv,&nbsp;name,&nbsp;nbPoints)</td>
 <td>Create a curve from a curve</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/curve.html#mgear.maya.curve.createCuveFromEdges" title="mgear.maya.curve.createCuveFromEdges"><code class="xref py py-obj docutils literal"><span class="pre">createCuveFromEdges</span></code></a>(edgeList,&nbsp;name[,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/curve.html#mgear.maya.curve.createCurveFromOrderedEdges" title="mgear.maya.curve.createCurveFromOrderedEdges"><code class="xref py py-obj docutils literal"><span class="pre">createCurveFromOrderedEdges</span></code></a>(edgeLoop,&nbsp;…[,&nbsp;…])</td>
+<td>Create a curve for a edgeloop ordering the list from starting vertex</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/curve.html#mgear.maya.curve.createCuveFromEdges" title="mgear.maya.curve.createCuveFromEdges"><code class="xref py py-obj docutils literal"><span class="pre">createCuveFromEdges</span></code></a>(edgeList,&nbsp;name[,&nbsp;…])</td>
 <td>Create curve from a edge list.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/curve.html#mgear.maya.curve.findLenghtFromParam" title="mgear.maya.curve.findLenghtFromParam"><code class="xref py py-obj docutils literal"><span class="pre">findLenghtFromParam</span></code></a>(crv,&nbsp;param)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/curve.html#mgear.maya.curve.findLenghtFromParam" title="mgear.maya.curve.findLenghtFromParam"><code class="xref py py-obj docutils literal"><span class="pre">findLenghtFromParam</span></code></a>(crv,&nbsp;param)</td>
 <td>Find lengtht from a curve parameter</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/curve.html#mgear.maya.curve.getCurveParamAtPosition" title="mgear.maya.curve.getCurveParamAtPosition"><code class="xref py py-obj docutils literal"><span class="pre">getCurveParamAtPosition</span></code></a>(crv,&nbsp;position)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/curve.html#mgear.maya.curve.getCurveParamAtPosition" title="mgear.maya.curve.getCurveParamAtPosition"><code class="xref py py-obj docutils literal"><span class="pre">getCurveParamAtPosition</span></code></a>(crv,&nbsp;position)</td>
 <td>Get curve parameter from a position</td>
 </tr>
 </tbody>
@@ -271,7 +274,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

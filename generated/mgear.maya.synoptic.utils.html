@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../index.html"/>
         <link rel="up" title="Synoptic" href="../synopticModules.html"/>
         <link rel="next" title="mgear.maya.synoptic.widgets" href="mgear.maya.synoptic.widgets.html"/>
         <link rel="prev" title="mgear.maya.synoptic" href="mgear.maya.synoptic.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -194,55 +194,118 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.applyMirror" title="mgear.maya.synoptic.utils.applyMirror"><code class="xref py py-obj docutils literal"><span class="pre">applyMirror</span></code></a>(nameSpace,&nbsp;mirrorEntry)</td>
+<td>Apply mirro pose</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.bakeSprings" title="mgear.maya.synoptic.utils.bakeSprings"><code class="xref py py-obj docutils literal"><span class="pre">bakeSprings</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.bindPose" title="mgear.maya.synoptic.utils.bindPose"><code class="xref py py-obj docutils literal"><span class="pre">bindPose</span></code></a>(model)</td>
+<td>Restore the reset position of the rig</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.calculateMirrorData" title="mgear.maya.synoptic.utils.calculateMirrorData"><code class="xref py py-obj docutils literal"><span class="pre">calculateMirrorData</span></code></a>(srcNode,&nbsp;targetNode[,&nbsp;flip])</td>
+<td>Calculate the mirror data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.changeSpace" title="mgear.maya.synoptic.utils.changeSpace"><code class="xref py py-obj docutils literal"><span class="pre">changeSpace</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr,&nbsp;…)</td>
+<td>Change the space of a control</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.clearSprings" title="mgear.maya.synoptic.utils.clearSprings"><code class="xref py py-obj docutils literal"><span class="pre">clearSprings</span></code></a>(model)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.changeSpace" title="mgear.maya.synoptic.utils.changeSpace"><code class="xref py py-obj docutils literal"><span class="pre">changeSpace</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr,&nbsp;…)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.gatherMirrorData" title="mgear.maya.synoptic.utils.gatherMirrorData"><code class="xref py py-obj docutils literal"><span class="pre">gatherMirrorData</span></code></a>(nameSpace,&nbsp;node,&nbsp;flip)</td>
+<td>Get the data to mirror</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getComboIndex" title="mgear.maya.synoptic.utils.getComboIndex"><code class="xref py py-obj docutils literal"><span class="pre">getComboIndex</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr)</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getComboIndex" title="mgear.maya.synoptic.utils.getComboIndex"><code class="xref py py-obj docutils literal"><span class="pre">getComboIndex</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr)</td>
+<td>Get the index from a  combo attribute</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getComboKeys" title="mgear.maya.synoptic.utils.getComboKeys"><code class="xref py py-obj docutils literal"><span class="pre">getComboKeys</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getComboKeys" title="mgear.maya.synoptic.utils.getComboKeys"><code class="xref py py-obj docutils literal"><span class="pre">getComboKeys</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr)</td>
+<td>Get the keys from a combo attribute</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getControlers" title="mgear.maya.synoptic.utils.getControlers"><code class="xref py py-obj docutils literal"><span class="pre">getControlers</span></code></a>(model[,&nbsp;gSuffix])</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getControlers" title="mgear.maya.synoptic.utils.getControlers"><code class="xref py py-obj docutils literal"><span class="pre">getControlers</span></code></a>(model[,&nbsp;gSuffix])</td>
+<td>Get thr controlers from the set</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getInvertCheckButtonAttrName" title="mgear.maya.synoptic.utils.getInvertCheckButtonAttrName"><code class="xref py py-obj docutils literal"><span class="pre">getInvertCheckButtonAttrName</span></code></a>(str)</td>
+<td>Get the invert check butto attribute name</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getModel" title="mgear.maya.synoptic.utils.getModel"><code class="xref py py-obj docutils literal"><span class="pre">getModel</span></code></a>(widget)</td>
-<td></td>
+<td>Get the model Name</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getNamespace" title="mgear.maya.synoptic.utils.getNamespace"><code class="xref py py-obj docutils literal"><span class="pre">getNamespace</span></code></a>(modelName)</td>
+<td>Get the name space from rig root</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getNode" title="mgear.maya.synoptic.utils.getNode"><code class="xref py py-obj docutils literal"><span class="pre">getNode</span></code></a>(nodeName)</td>
+<td>Get a PyNode from the string name</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.getSynopticWidget" title="mgear.maya.synoptic.utils.getSynopticWidget"><code class="xref py py-obj docutils literal"><span class="pre">getSynopticWidget</span></code></a>(widget[,&nbsp;max_iter])</td>
 <td>Return the widget where the synoptic panel is attach</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.ikFkMatch" title="mgear.maya.synoptic.utils.ikFkMatch"><code class="xref py py-obj docutils literal"><span class="pre">ikFkMatch</span></code></a>(model,&nbsp;ikfk_attr,&nbsp;uiHost_name,&nbsp;…)</td>
-<td></td>
+<td>Switch IK/FK with matching functionality</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.keyAll" title="mgear.maya.synoptic.utils.keyAll"><code class="xref py py-obj docutils literal"><span class="pre">keyAll</span></code></a>(model)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.isSideElement" title="mgear.maya.synoptic.utils.isSideElement"><code class="xref py py-obj docutils literal"><span class="pre">isSideElement</span></code></a>(name)</td>
+<td>Returns is name(str) side element?</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.keyAll" title="mgear.maya.synoptic.utils.keyAll"><code class="xref py py-obj docutils literal"><span class="pre">keyAll</span></code></a>(model)</td>
+<td>Keyframe all the controls inside the controls group</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.keyGroup" title="mgear.maya.synoptic.utils.keyGroup"><code class="xref py py-obj docutils literal"><span class="pre">keyGroup</span></code></a>(model,&nbsp;groupSuffix)</td>
+<td>Keyframe all the members of a given group</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.keyObj" title="mgear.maya.synoptic.utils.keyObj"><code class="xref py py-obj docutils literal"><span class="pre">keyObj</span></code></a>(model,&nbsp;object_names)</td>
 <td>Set the keyframe in the controls pass by a list in obj_names variable</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.keySel" title="mgear.maya.synoptic.utils.keySel"><code class="xref py py-obj docutils literal"><span class="pre">keySel</span></code></a>()</td>
-<td></td>
+<td>Key selected controls</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.mirrorPose" title="mgear.maya.synoptic.utils.mirrorPose"><code class="xref py py-obj docutils literal"><span class="pre">mirrorPose</span></code></a>([flip,&nbsp;nodes])</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.listAttrForMirror" title="mgear.maya.synoptic.utils.listAttrForMirror"><code class="xref py py-obj docutils literal"><span class="pre">listAttrForMirror</span></code></a>(node)</td>
+<td>List attributes to invert the value for mirror posing</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.mirrorPose" title="mgear.maya.synoptic.utils.mirrorPose"><code class="xref py py-obj docutils literal"><span class="pre">mirrorPose</span></code></a>([flip,&nbsp;nodes])</td>
+<td>Summary</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.mirrorPoseOld" title="mgear.maya.synoptic.utils.mirrorPoseOld"><code class="xref py py-obj docutils literal"><span class="pre">mirrorPoseOld</span></code></a>([flip,&nbsp;nodes])</td>
+<td>Deprecated: Mirror pose</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.quickSel" title="mgear.maya.synoptic.utils.quickSel"><code class="xref py py-obj docutils literal"><span class="pre">quickSel</span></code></a>(model,&nbsp;channel,&nbsp;mouse_button)</td>
-<td></td>
+<td>Select the object stored on the quick selection attributes</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.resetSelTrans" title="mgear.maya.synoptic.utils.resetSelTrans"><code class="xref py py-obj docutils literal"><span class="pre">resetSelTrans</span></code></a>()</td>
-<td></td>
+<td>Reset the transfom values (SRT) for the selected objects</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.selAll" title="mgear.maya.synoptic.utils.selAll"><code class="xref py py-obj docutils literal"><span class="pre">selAll</span></code></a>(model)</td>
+<td>Select all controlers</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.selGroup" title="mgear.maya.synoptic.utils.selGroup"><code class="xref py py-obj docutils literal"><span class="pre">selGroup</span></code></a>(model,&nbsp;groupSuffix)</td>
+<td>Select the members of a given set</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.selectObj" title="mgear.maya.synoptic.utils.selectObj"><code class="xref py py-obj docutils literal"><span class="pre">selectObj</span></code></a>(model,&nbsp;object_names,&nbsp;mouse_button,&nbsp;…)</td>
+<td>Select an object</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.stripNamespace" title="mgear.maya.synoptic.utils.stripNamespace"><code class="xref py py-obj docutils literal"><span class="pre">stripNamespace</span></code></a>(nodeName)</td>
+<td>Strip all the namespaces from a given name</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.swapSideLabel" title="mgear.maya.synoptic.utils.swapSideLabel"><code class="xref py py-obj docutils literal"><span class="pre">swapSideLabel</span></code></a>(name)</td>
+<td>Returns fliped name</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.toggleAttr" title="mgear.maya.synoptic.utils.toggleAttr"><code class="xref py py-obj docutils literal"><span class="pre">toggleAttr</span></code></a>(model,&nbsp;object_name,&nbsp;attr_name)</td>
+<td>Toggle a boolean attribute</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.AbstractAnimationTransfer" title="mgear.maya.synoptic.utils.AbstractAnimationTransfer"><code class="xref py py-obj docutils literal"><span class="pre">AbstractAnimationTransfer</span></code></a>()</td>
+<td>Abstract animation transfer class</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.IkFkTransfer" title="mgear.maya.synoptic.utils.IkFkTransfer"><code class="xref py py-obj docutils literal"><span class="pre">IkFkTransfer</span></code></a>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.selectObj" title="mgear.maya.synoptic.utils.selectObj"><code class="xref py py-obj docutils literal"><span class="pre">selectObj</span></code></a>(model,&nbsp;object_names,&nbsp;mouse_button,&nbsp;…)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.toggleAttr" title="mgear.maya.synoptic.utils.toggleAttr"><code class="xref py py-obj docutils literal"><span class="pre">toggleAttr</span></code></a>(model,&nbsp;object_name,&nbsp;attr_name)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/synoptic/utils.html#mgear.maya.synoptic.utils.ParentSpaceTransfer" title="mgear.maya.synoptic.utils.ParentSpaceTransfer"><code class="xref py py-obj docutils literal"><span class="pre">ParentSpaceTransfer</span></code></a>()</td>
 <td></td>
 </tr>
 </tbody>
@@ -293,7 +356,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

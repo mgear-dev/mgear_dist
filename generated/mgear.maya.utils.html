@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.utils &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.utils &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../index.html"/>
         <link rel="up" title="Base Modules" href="../baseModules.html"/>
         <link rel="next" title="mgear.maya.vector" href="mgear.maya.vector.html"/>
         <link rel="prev" title="mgear.maya.transform" href="mgear.maya.transform.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -197,7 +197,7 @@
             
   <div class="section" id="module-mgear.maya.utils">
 <span id="mgear-maya-utils"></span><h1>mgear.maya.utils<a class="headerlink" href="#module-mgear.maya.utils" title="Permalink to this headline">¶</a></h1>
-<p>Utilitie functions.</p>
+<p>Utilitie functions</p>
 <p class="rubric">Functions</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -205,8 +205,23 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/utils.html#mgear.maya.utils.is_odd" title="mgear.maya.utils.is_odd"><code class="xref py py-obj docutils literal"><span class="pre">is_odd</span></code></a>(num)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/utils.html#mgear.maya.utils.gatherCustomModuleDirectories" title="mgear.maya.utils.gatherCustomModuleDirectories"><code class="xref py py-obj docutils literal"><span class="pre">gatherCustomModuleDirectories</span></code></a>(envvarkey,&nbsp;…)</td>
+<td>returns component directory</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/utils.html#mgear.maya.utils.getModuleBasePath" title="mgear.maya.utils.getModuleBasePath"><code class="xref py py-obj docutils literal"><span class="pre">getModuleBasePath</span></code></a>(directories,&nbsp;moduleName)</td>
+<td>search component path</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/utils.html#mgear.maya.utils.importFromStandardOrCustomDirectories" title="mgear.maya.utils.importFromStandardOrCustomDirectories"><code class="xref py py-obj docutils literal"><span class="pre">importFromStandardOrCustomDirectories</span></code></a>(…)</td>
+<td>Return imported module</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/utils.html#mgear.maya.utils.is_odd" title="mgear.maya.utils.is_odd"><code class="xref py py-obj docutils literal"><span class="pre">is_odd</span></code></a>(num)</td>
 <td>Check if the number is odd.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/utils.html#mgear.maya.utils.one_undo" title="mgear.maya.utils.one_undo"><code class="xref py py-obj docutils literal"><span class="pre">one_undo</span></code></a>(func)</td>
+<td>Decorator - guarantee close chunk.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/utils.html#mgear.maya.utils.viewport_off" title="mgear.maya.utils.viewport_off"><code class="xref py py-obj docutils literal"><span class="pre">viewport_off</span></code></a>(func)</td>
+<td>Decorator - Turn off Maya display while func is running.</td>
 </tr>
 </tbody>
 </table>
@@ -256,7 +271,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

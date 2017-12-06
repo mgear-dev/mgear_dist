@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.rigbits.postSpring &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.rigbits.postSpring &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../index.html"/> 
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../../index.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -164,11 +164,12 @@
             
   <div class="section" id="module-mgear.maya.rigbits.postSpring">
 <span id="mgear-maya-rigbits-postspring"></span><h1>mgear.maya.rigbits.postSpring<a class="headerlink" href="#module-mgear.maya.rigbits.postSpring" title="Permalink to this headline">¶</a></h1>
-<p>Post Spring tool, creates a spring dynamic rig on top of a pre-existing FK chain rig.</p>
+<p>Post Spring tool</p>
+<p>creates a spring dynamic rig on top of a pre-existing FK chain rig.</p>
 <dl class="function">
 <dt id="mgear.maya.rigbits.postSpring.bake_spring">
 <code class="descclassname">mgear.maya.rigbits.postSpring.</code><code class="descname">bake_spring</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.postSpring.bake_spring" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut fro the Maya’s Bake Simulation Options.</p>
+<dd><p>Shortcut fro the Maya’s Bake Simulation Options</p>
 </dd></dl>
 
 <dl class="function">
@@ -179,7 +180,9 @@
 <dl class="function">
 <dt id="mgear.maya.rigbits.postSpring.postSpring">
 <code class="descclassname">mgear.maya.rigbits.postSpring.</code><code class="descname">postSpring</code><span class="sig-paren">(</span><em>dist=5</em>, <em>hostUI=False</em>, <em>hostUI2=False</em>, <em>invertX=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.postSpring.postSpring" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create the dynamic spring rig. This spring system use the mgear_spring node. And transfer the position spring
+<dd><p>Create the dynamic spring rig.</p>
+<p>This spring system use the mgear_spring node
+And transfer the position spring
 to rotation spring using an aim constraint.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -192,7 +195,8 @@ to rotation spring using an aim constraint.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>dist</strong> (<em>float</em>) – The distance of the position spring.</li>
 <li><strong>hostUI</strong> (<em>dagNode</em>) – The spring active and intensity channel host.</li>
-<li><strong>hostUI2</strong> (<em>dagNode</em>) – The daping and stiffness channel host for each object in the chain.</li>
+<li><strong>hostUI2</strong> (<em>dagNode</em>) – The daping and stiffness channel host for each
+object in the chain.</li>
 <li><strong>invertX</strong> (<em>bool</em>) – reverse the direction of the x axis.</li>
 </ul>
 </td>
@@ -204,7 +208,7 @@ to rotation spring using an aim constraint.</p>
 <dl class="function">
 <dt id="mgear.maya.rigbits.postSpring.spring_UI">
 <code class="descclassname">mgear.maya.rigbits.postSpring.</code><code class="descname">spring_UI</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.rigbits.postSpring.spring_UI" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates the post tool UI.</p>
+<dd><p>Creates the post tool UI</p>
 </dd></dl>
 
 </div>
@@ -244,7 +248,7 @@ to rotation spring using an aim constraint.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

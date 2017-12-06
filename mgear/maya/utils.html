@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.utils &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.utils &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.vector" href="vector.html"/>
         <link rel="prev" title="mgear.maya.transform" href="transform.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -205,7 +205,7 @@
             
   <div class="section" id="module-mgear.maya.utils">
 <span id="mgear-maya-utils"></span><h1>mgear.maya.utils<a class="headerlink" href="#module-mgear.maya.utils" title="Permalink to this headline">¶</a></h1>
-<p>Utilitie functions.</p>
+<p>Utilitie functions</p>
 <dl class="function">
 <dt id="mgear.maya.utils.gatherCustomModuleDirectories">
 <code class="descclassname">mgear.maya.utils.</code><code class="descname">gatherCustomModuleDirectories</code><span class="sig-paren">(</span><em>envvarkey</em>, <em>defaultModulePath</em>, <em>component=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.gatherCustomModuleDirectories" title="Permalink to this definition">¶</a></dt>
@@ -233,20 +233,24 @@
 <dl class="function">
 <dt id="mgear.maya.utils.getModuleBasePath">
 <code class="descclassname">mgear.maya.utils.</code><code class="descname">getModuleBasePath</code><span class="sig-paren">(</span><em>directories</em>, <em>moduleName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.getModuleBasePath" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>search component path</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.utils.importFromStandardOrCustomDirectories">
 <code class="descclassname">mgear.maya.utils.</code><code class="descname">importFromStandardOrCustomDirectories</code><span class="sig-paren">(</span><em>directories</em>, <em>defaultFormatter</em>, <em>customFormatter</em>, <em>moduleName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.importFromStandardOrCustomDirectories" title="Permalink to this definition">¶</a></dt>
-<dd><p>return imported module</p>
+<dd><p>Return imported module</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>directories</strong> – the directories for search in. this is got by gatherCustomModuleDirectories</li>
-<li><strong>defaultFormatter</strong> – this represents module structure for default module. for example “mgear.maya.shifter.component.{}”</li>
-<li><strong>customFormatter</strong> – this represents module structure for custom module. for example “{0}.{1}”</li>
+<li><strong>directories</strong> – the directories for search in. this is got by
+gatherCustomModuleDirectories</li>
+<li><strong>defaultFormatter</strong> – this represents module structure for default
+module. for example “mgear.maya.shifter.component.{}”</li>
+<li><strong>customFormatter</strong> – this represents module structure for custom
+module. for example “{0}.{1}”</li>
 </ul>
 </td>
 </tr>
@@ -264,7 +268,7 @@
 <dt id="mgear.maya.utils.is_odd">
 <code class="descclassname">mgear.maya.utils.</code><code class="descname">is_odd</code><span class="sig-paren">(</span><em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.is_odd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the number is odd.</p>
-<p>Args:
+<p>Arguments:
 num (int): the number</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -282,13 +286,15 @@ num (int): the number</p>
 <dt id="mgear.maya.utils.one_undo">
 <code class="descclassname">mgear.maya.utils.</code><code class="descname">one_undo</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.one_undo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator - guarantee close chunk.</p>
+<p>type: (function) -&gt; function</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.utils.viewport_off">
 <code class="descclassname">mgear.maya.utils.</code><code class="descname">viewport_off</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.utils.viewport_off" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator - turn off Maya display while func is running.
-if func will fail, the error will be raised after.</p>
+<dd><p>Decorator - Turn off Maya display while func is running.</p>
+<p>if func will fail, the error will be raised after.</p>
+<p>type: (function) -&gt; function</p>
 </dd></dl>
 
 </div>
@@ -337,7 +343,7 @@ if func will fail, the error will be raised after.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

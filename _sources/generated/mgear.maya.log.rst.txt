@@ -1,5 +1,5 @@
-mgear.maya.log
-==============
+mgear\.maya\.log
+================
 
 .. automodule:: mgear.maya.log
 

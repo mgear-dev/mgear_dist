@@ -1,5 +1,5 @@
-mgear.maya.node
-===============
+mgear\.maya\.node
+=================
 
 .. automodule:: mgear.maya.node
 
@@ -23,10 +23,15 @@ mgear.maya.node
       createMulDivNode
       createMulNode
       createMulNodeMulti
+      createMultMatrixNode
       createNegateNodeMulti
       createPairBlend
+      createPlusMinusAverage1D
+      createPowNode
       createReverseNode
+      createSetRangeNode
       createSubNode
+      createVertexPositionNode
    
    
 

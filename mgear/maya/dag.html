@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.dag &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.dag &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.fcurve" href="fcurve.html"/>
         <link rel="prev" title="mgear.maya.curve" href="curve.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -205,7 +205,7 @@
             
   <div class="section" id="module-mgear.maya.dag">
 <span id="mgear-maya-dag"></span><h1>mgear.maya.dag<a class="headerlink" href="#module-mgear.maya.dag" title="Permalink to this headline">¶</a></h1>
-<p>Navigate the DAG hierarchy.</p>
+<p>Nvigate the DAG hierarchy</p>
 <dl class="function">
 <dt id="mgear.maya.dag.findChild">
 <code class="descclassname">mgear.maya.dag.</code><code class="descname">findChild</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.dag.findChild" title="Permalink to this definition">¶</a></dt>
@@ -228,7 +228,9 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">parent</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">mgear</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">convertRLName</span><span class="p">(</span><span class="n">comp_guide</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">parent</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+<span class="go">                            mgear.string.convertRLName(</span>
+<span class="go">                                comp_guide.root.name()))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -308,7 +310,44 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">objList</span> <span class="o">=</span>  <span class="n">dag</span><span class="o">.</span><span class="n">findComponentChildren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">oldName</span><span class="p">,</span> <span class="n">oldSideIndex</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">objList</span> <span class="o">=</span>  <span class="n">dag</span><span class="o">.</span><span class="n">findComponentChildren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span>
+<span class="go">                                         oldName,</span>
+<span class="go">                                         oldSideIndex)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.dag.findComponentChildren2">
+<code class="descclassname">mgear.maya.dag.</code><code class="descname">findComponentChildren2</code><span class="sig-paren">(</span><em>node</em>, <em>name</em>, <em>sideIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.dag.findComponentChildren2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the component children of input component root.</p>
+<p>This function is using Maya cmds instead of PyMel</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is specific to work with shifter guides naming conventions</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The input node to search</li>
+<li><strong>name</strong> (<em>str</em>) – The name to search</li>
+<li><strong>sideIndex</strong> (<em>str</em>) – the side</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The children dagNodes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">objList</span> <span class="o">=</span>  <span class="n">dag</span><span class="o">.</span><span class="n">findComponentChildren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span>
+<span class="go">                                         oldName,</span>
+<span class="go">                                         oldSideIndex)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -334,7 +373,8 @@
 <dl class="function">
 <dt id="mgear.maya.dag.getTopParent">
 <code class="descclassname">mgear.maya.dag.</code><code class="descname">getTopParent</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.dag.getTopParent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the first parent of the hierarchy. (usually the ‘Model’ in Softimage)</p>
+<dd><p>Returns the first parent of the hierarchy.</p>
+<p>usually the ‘Model’ in Softimage terminology</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -395,7 +435,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

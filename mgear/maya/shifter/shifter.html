@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.shifter &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.shifter &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.shifter.guide" href="guide.html"/>
         <link rel="prev" title="mgear.maya.vector" href="../vector.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -205,7 +205,7 @@
             
   <div class="section" id="module-mgear.maya.shifter">
 <span id="mgear-maya-shifter"></span><h1>mgear.maya.shifter<a class="headerlink" href="#module-mgear.maya.shifter" title="Permalink to this headline">¶</a></h1>
-<p>Shifter base rig class.</p>
+<p>Shifters Rig Main class.</p>
 <dl class="class">
 <dt id="mgear.maya.shifter.Rig">
 <em class="property">class </em><code class="descclassname">mgear.maya.shifter.</code><code class="descname">Rig</code><a class="headerlink" href="#mgear.maya.shifter.Rig" title="Permalink to this definition">¶</a></dt>
@@ -213,7 +213,7 @@
 <dl class="attribute">
 <dt id="mgear.maya.shifter.Rig.guide">
 <code class="descname">guide</code><a class="headerlink" href="#mgear.maya.shifter.Rig.guide" title="Permalink to this definition">¶</a></dt>
-<dd><p>RigGuide() initialization.</p>
+<dd><p>guide.Rig() initialization.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -237,7 +237,7 @@ Keys are the component fullname (ie. ‘arm_L0’)</p>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.Rig.addCtl">
-<code class="descname">addCtl</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>m</em>, <em>color</em>, <em>icon</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.addCtl" title="Permalink to this definition">¶</a></dt>
+<code class="descname">addCtl</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>m</em>, <em>color</em>, <em>iconShape</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.addCtl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the control and apply the shape, if this is alrealdy stored
 in the guide controllers grp.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -248,9 +248,10 @@ in the guide controllers grp.</p>
 <li><strong>parent</strong> (<em>dagNode</em>) – The control parent</li>
 <li><strong>name</strong> (<em>str</em>) – The control name.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The transfromation matrix for the control.</li>
-<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color for the control in idex or RGB.</li>
-<li><strong>icon</strong> (<em>str</em>) – The controls default shape.</li>
-<li><strong>kwargs</strong> (<em>variant</em>) – Other arguments for the icon type variations.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color for the control in index
+or RGB.</li>
+<li><strong>iconShape</strong> (<em>str</em>) – The controls default shape.</li>
+<li><strong>kwargs</strong> (<em>variant</em>) – Other arguments for the iconShape type variations</li>
 </ul>
 </td>
 </tr>
@@ -291,8 +292,10 @@ in the guide controllers grp.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>subGroups</strong> (<em>dagNode</em><em> or </em><em>list of dagNode</em>) – Groups (maya set) to add as a Subgroup.</li>
-<li><strong>namparentGroupses</strong> (<em>str</em><em> or </em><em>list of str</em>) – Names of the parent groups to create.</li>
+<li><strong>subGroups</strong> (<em>dagNode</em><em> or </em><em>list of dagNode</em>) – Groups (maya set) to add
+as a Subgroup.</li>
+<li><strong>namparentGroupses</strong> (<em>str</em><em> or </em><em>list of str</em>) – Names of the parent groups
+to create.</li>
 </ul>
 </td>
 </tr>
@@ -460,7 +463,8 @@ and taking the latest part.</p>
 <dt id="mgear.maya.shifter.Rig.initialHierarchy">
 <code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.initialHierarchy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the initial hierarchy of the rig.
-Create the rig model, the main properties, and a couple of base organisation nulls.
+Create the rig model, the main properties,
+and a couple of base organisation nulls.
 Get the global size of the rig.</p>
 </dd></dl>
 
@@ -485,17 +489,20 @@ Get the global size of the rig.</p>
 <dl class="function">
 <dt id="mgear.maya.shifter.getComponentDirectories">
 <code class="descclassname">mgear.maya.shifter.</code><code class="descname">getComponentDirectories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.getComponentDirectories" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get the components directory</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.shifter.importComponent">
 <code class="descclassname">mgear.maya.shifter.</code><code class="descname">importComponent</code><span class="sig-paren">(</span><em>comp_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.importComponent" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Import the Component</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.shifter.importComponentGuide">
 <code class="descclassname">mgear.maya.shifter.</code><code class="descname">importComponentGuide</code><span class="sig-paren">(</span><em>comp_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.importComponentGuide" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Import the Component guide</p>
+</dd></dl>
 
 </div>
 
@@ -543,7 +550,7 @@ Get the global size of the rig.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

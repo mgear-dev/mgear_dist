@@ -1,5 +1,5 @@
-mgear.string
-============
+mgear\.string
+=============
 
 .. automodule:: mgear.string
 

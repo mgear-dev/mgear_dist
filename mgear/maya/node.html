@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.node &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.node &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.primitive" href="primitive.html"/>
         <link rel="prev" title="mgear.maya.meshNavigation" href="meshNavigation.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -265,7 +265,8 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>inputA</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute input A</li>
 <li><strong>inputB</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute input B</li>
-<li><strong>blender</strong> (<em>float</em><em> or </em><em>attr</em>) – Float in 0 to 1 range or attribute string name.</li>
+<li><strong>blender</strong> (<em>float</em><em> or </em><em>attr</em>) – Float in 0 to 1 range or attribute
+string name.</li>
 </ul>
 </td>
 </tr>
@@ -277,7 +278,10 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">blend_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createBlendNode</span><span class="p">([</span><span class="n">dm_node</span><span class="o">+</span><span class="s2">&quot;.outputRotate</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">cns</span><span class="o">+</span><span class="s2">&quot;.rotate</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="s2">&quot;XYZ&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">lock_ori_att</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">blend_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createBlendNode</span><span class="p">(</span>
+<span class="go">        [dm_node+&quot;.outputRotate%s&quot;%s for s in &quot;XYZ&quot;],</span>
+<span class="go">        [cns+&quot;.rotate%s&quot;%s for s in &quot;XYZ&quot;],</span>
+<span class="go">        self.lock_ori_att)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -305,7 +309,10 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clamp_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createClampNode</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">roll_att</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_att</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_att</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">180</span><span class="p">])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clamp_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createClampNode</span><span class="p">(</span>
+<span class="go">    [self.roll_att, self.bank_att, self.bank_att],</span>
+<span class="go">    [0, -180, 0],</span>
+<span class="go">    [180,0,180])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -376,11 +383,15 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>firstTerm</strong> (<em>attr</em>) – The attribute string name for the first conditions.</li>
-<li><strong>secondTerm</strong> (<em>attr</em>) – The attribute string for the second conditions.</li>
+<li><strong>firstTerm</strong> (<em>attr</em>) – The attribute string name for the first
+conditions.</li>
+<li><strong>secondTerm</strong> (<em>attr</em>) – The attribute string for the second
+conditions.</li>
 <li><strong>operator</strong> (<em>int</em>) – The operator to make the condition.</li>
-<li><strong>ifTrue</strong> (<em>bool</em><em> or </em><em>attr</em>) – If an attribute is provided will connect ifTrue output.</li>
-<li><strong>ifFalse</strong> (<em>bool</em><em> or </em><em>attr</em>) – If an attribute is provided will connect ifFalse output.</li>
+<li><strong>ifTrue</strong> (<em>bool</em><em> or </em><em>attr</em>) – If an attribute is provided will connect
+ifTrue output.</li>
+<li><strong>ifFalse</strong> (<em>bool</em><em> or </em><em>attr</em>) – If an attribute is provided will connect
+ifFalse output.</li>
 </ul>
 </td>
 </tr>
@@ -392,7 +403,11 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cond1_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createConditionNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soft_attr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="n">subtract3_node</span><span class="o">+</span><span class="s2">&quot;.output1D&quot;</span><span class="p">,</span> <span class="n">plusTotalLength_node</span><span class="o">+</span><span class="s2">&quot;.output1D&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cond1_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createConditionNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soft_attr</span><span class="p">,</span>
+<span class="go">                                         0,</span>
+<span class="go">                                         2,</span>
+<span class="go">                                         subtract3_node+&quot;.output1D&quot;,</span>
+<span class="go">                                         plusTotalLength_node+&quot;.output1D&quot;)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -478,7 +493,8 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>inputA</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input A</li>
 <li><strong>inputB</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input B</li>
-<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the output.</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the
+output.</li>
 </ul>
 </td>
 </tr>
@@ -495,10 +511,12 @@
 <span class="n">div1_node</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s2">&quot;multiplyDivide&quot;</span><span class="p">)</span>
 <span class="n">div1_node</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span><span class="s2">&quot;operation&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">div1_node</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span><span class="s2">&quot;input1X&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">pm</span><span class="o">.</span><span class="n">connectAttr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rig</span><span class="o">.</span><span class="n">global_ctl</span><span class="o">+</span><span class="s2">&quot;.sx&quot;</span><span class="p">,</span> <span class="n">div1_node</span><span class="o">+</span><span class="s2">&quot;.input2X&quot;</span><span class="p">)</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">connectAttr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rig</span><span class="o">.</span><span class="n">global_ctl</span><span class="o">+</span><span class="s2">&quot;.sx&quot;</span><span class="p">,</span>
+               <span class="n">div1_node</span><span class="o">+</span><span class="s2">&quot;.input2X&quot;</span><span class="p">)</span>
 
 <span class="c1"># mGear style = 1 line</span>
-<span class="n">div1_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createDivNode</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rig</span><span class="o">.</span><span class="n">global_ctl</span><span class="o">+</span><span class="s2">&quot;.sx&quot;</span><span class="p">)</span>
+<span class="n">div1_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createDivNode</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">rig</span><span class="o">.</span><span class="n">global_ctl</span><span class="o">+</span><span class="s2">&quot;.sx&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -539,7 +557,8 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>inputA</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input A</li>
 <li><strong>inputB</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input B</li>
-<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the output.</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the
+output.</li>
 </ul>
 </td>
 </tr>
@@ -564,7 +583,8 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>inputA</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input A</li>
 <li><strong>inputB</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input B</li>
-<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the output.</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the
+output.</li>
 </ul>
 </td>
 </tr>
@@ -608,7 +628,8 @@
 <dd><p>Create Maya multiply Matrix node.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This node have same functionality as the default Maya matrix multiplication.</p>
+<p class="last">This node have same functionality as the default Maya matrix
+multiplication.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -618,7 +639,8 @@
 <li><strong>mA</strong> (<em>matrix</em>) – input matrix A.</li>
 <li><strong>mB</strong> (<em>matrix</em>) – input matrix B.</li>
 <li><strong>target</strong> (<em>dagNode</em>) – object target to apply the transformation</li>
-<li><strong>transform</strong> (<em>str</em>) – if target is True. out transform  to SRT valid value s r t</li>
+<li><strong>transform</strong> (<em>str</em>) – if target is True. out transform  to SRT valid
+value s r t</li>
 </ul>
 </td>
 </tr>
@@ -658,7 +680,7 @@
 
 <dl class="function">
 <dt id="mgear.maya.node.createPairBlend">
-<code class="descclassname">mgear.maya.node.</code><code class="descname">createPairBlend</code><span class="sig-paren">(</span><em>inputA=None</em>, <em>inputB=None</em>, <em>blender=0.5</em>, <em>rotInterpolation=0</em>, <em>output=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createPairBlend" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.node.</code><code class="descname">createPairBlend</code><span class="sig-paren">(</span><em>inputA=None</em>, <em>inputB=None</em>, <em>blender=0.5</em>, <em>rotInterpolation=0</em>, <em>output=None</em>, <em>trans=True</em>, <em>rot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createPairBlend" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and connect a PairBlend node.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -667,9 +689,14 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>inputA</strong> (<em>dagNode</em>) – The transfomr input 1</li>
 <li><strong>inputB</strong> (<em>dagNode</em>) – The transfomr input 2</li>
-<li><strong>blender</strong> (<em>float</em><em> or </em><em>attr</em>) – Float in 0 to 1 range or attribute string name.</li>
-<li><strong>rotInterpolation</strong> (<em>int</em>) – Rotation interpolation option. 0=Euler. 1=Quaternion.</li>
-<li><strong>output</strong> (<em>dagNode</em>) – The output node with the blend transfomr applied.</li>
+<li><strong>blender</strong> (<em>float</em><em> or </em><em>attr</em>) – Float in 0 to 1 range or attribute
+string name.</li>
+<li><strong>rotInterpolation</strong> (<em>int</em>) – Rotation interpolation option. 0=Euler.
+1=Quaternion.</li>
+<li><strong>output</strong> (<em>dagNode</em>) – The output node with the blend transfomr
+applied.</li>
+<li><strong>trans</strong> (<em>bool</em>) – If true connects translation.</li>
+<li><strong>rot</strong> (<em>bool</em>) – If true connects rotation.</li>
 </ul>
 </td>
 </tr>
@@ -682,7 +709,10 @@
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">blend_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createPairBlend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">legBonesFK</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">legBonesIK</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">blend_att</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">blend_node</span> <span class="o">=</span> <span class="n">nod</span><span class="o">.</span><span class="n">createPairBlend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">legBonesFK</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">legBonesIK</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">blend_att</span><span class="p">,</span>
+                                 <span class="mi">1</span><span class="p">)</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">connectAttr</span><span class="p">(</span><span class="n">blend_node</span> <span class="o">+</span> <span class="s2">&quot;.outRotate&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="s2">&quot;.rotate&quot;</span><span class="p">)</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">connectAttr</span><span class="p">(</span><span class="n">blend_node</span> <span class="o">+</span> <span class="s2">&quot;.outTranslate&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="s2">&quot;.translate&quot;</span><span class="p">)</span>
 </pre></div>
@@ -695,16 +725,18 @@
 <dd><p>Create a multiple average node 1D.
 :param input: The input values.
 :type input: attr, float or list
-:param operation: Node operation. 0=None, 1=sum, 2=subtract, 3=average
-:type operation: int
-:param output: The attribute to connect the result.</p>
+:param operation: Node operation. 0=None, 1=sum, 2=subtract,</p>
+<blockquote>
+<div>3=average</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the newly created node.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>output</strong> (<em>attr</em>) – The attribute to connect the result.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyNode</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the newly created node.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pyNode</td>
 </tr>
 </tbody>
 </table>
@@ -721,7 +753,8 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>inputA</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input A</li>
 <li><strong>inputB</strong> (<em>attr</em><em>, </em><em>float</em><em> or </em><em>list of float</em>) – The attribute input B</li>
-<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the output.</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The attribute to connect the
+output.</li>
 </ul>
 </td>
 </tr>
@@ -745,7 +778,8 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>input</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute input.</li>
-<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute to connect the output.</li>
+<li><strong>output</strong> (<em>attr</em><em> or </em><em>list of 3 attr</em>) – The attribute to connect the
+output.</li>
 </ul>
 </td>
 </tr>
@@ -765,7 +799,8 @@
 <dl class="function">
 <dt id="mgear.maya.node.createSetRangeNode">
 <code class="descclassname">mgear.maya.node.</code><code class="descname">createSetRangeNode</code><span class="sig-paren">(</span><em>input</em>, <em>oldMin</em>, <em>oldMax</em>, <em>newMin=0</em>, <em>newMax=1</em>, <em>output=None</em>, <em>name=’setRange’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.node.createSetRangeNode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Create Set Range Node</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.node.createSubNode">
@@ -846,7 +881,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

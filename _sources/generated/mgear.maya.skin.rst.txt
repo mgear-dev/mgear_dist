@@ -1,5 +1,5 @@
-mgear.maya.skin
-===============
+mgear\.maya\.skin
+=================
 
 .. automodule:: mgear.maya.skin
 
@@ -13,11 +13,13 @@ mgear.maya.skin
       collectData
       collectInfluenceWeights
       exportSkin
+      exportSkinPack
       getCurrentWeights
       getGeometryComponents
       getObjsFromSkinFile
       getSkinCluster
       importSkin
+      importSkinPack
       selectDeformers
       setBlendWeights
       setData

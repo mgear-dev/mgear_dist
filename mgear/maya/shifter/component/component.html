@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.shifter.component &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.shifter.component &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.shifter.component.guide" href="guide.html"/>
         <link rel="prev" title="mgear.maya.shifter.gui" href="../gui.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -207,26 +207,26 @@
 <span id="mgear-maya-shifter-component"></span><h1>mgear.maya.shifter.component<a class="headerlink" href="#module-mgear.maya.shifter.component" title="Permalink to this headline">¶</a></h1>
 <p>Shifter component rig class.</p>
 <dl class="class">
-<dt id="mgear.maya.shifter.component.MainComponent">
-<em class="property">class </em><code class="descclassname">mgear.maya.shifter.component.</code><code class="descname">MainComponent</code><span class="sig-paren">(</span><em>rig</em>, <em>guide</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main">
+<em class="property">class </em><code class="descclassname">mgear.maya.shifter.component.</code><code class="descname">Main</code><span class="sig-paren">(</span><em>rig</em>, <em>guide</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main component class</p>
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.rig">
-<code class="descname">rig</code><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.rig" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.rig">
+<code class="descname">rig</code><a class="headerlink" href="#mgear.maya.shifter.component.Main.rig" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>Rig</em> – The parent Rig of this component.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.guide">
-<code class="descname">guide</code><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.guide" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.guide">
+<code class="descname">guide</code><a class="headerlink" href="#mgear.maya.shifter.component.Main.guide" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>ComponentGuide</em> – The guide for this component.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addAnimEnumParam">
-<code class="descname">addAnimEnumParam</code><span class="sig-paren">(</span><em>longName</em>, <em>niceName</em>, <em>value</em>, <em>enum=[]</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addAnimEnumParam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a parameter to the animation property.
-Note that animatable and keyable are True per default.</p>
+<dt id="mgear.maya.shifter.component.Main.addAnimEnumParam">
+<code class="descname">addAnimEnumParam</code><span class="sig-paren">(</span><em>longName</em>, <em>niceName</em>, <em>value</em>, <em>enum=[]</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addAnimEnumParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to the animation property.</p>
+<p>Note that animatable and keyable are True per default.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -234,13 +234,13 @@ Note that animatable and keyable are True per default.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
 <li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
-<li><strong>attType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, ‘long’, etc..</li>
+<li><strong>attType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, etc..</li>
 <li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – The default value.</li>
 <li><strong>enum</strong> (<em>list of str</em>) – The list of elements in the enumerate control</li>
 <li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not.(optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not.(optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not.(optional)</li>
 </ul>
 </td>
 </tr>
@@ -255,10 +255,10 @@ Note that animatable and keyable are True per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addAnimParam">
-<code class="descname">addAnimParam</code><span class="sig-paren">(</span><em>longName</em>, <em>niceName</em>, <em>attType</em>, <em>value</em>, <em>minValue=None</em>, <em>maxValue=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addAnimParam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a parameter to the animation property.
-Note that animatable and keyable are True per default.</p>
+<dt id="mgear.maya.shifter.component.Main.addAnimParam">
+<code class="descname">addAnimParam</code><span class="sig-paren">(</span><em>longName</em>, <em>niceName</em>, <em>attType</em>, <em>value</em>, <em>minValue=None</em>, <em>maxValue=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addAnimParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to the animation property.</p>
+<p>Note that animatable and keyable are True per default.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -266,14 +266,14 @@ Note that animatable and keyable are True per default.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
 <li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
-<li><strong>attType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, ‘long’, etc..</li>
+<li><strong>attType</strong> (<em>str</em>) – The Attribute Type.Exp:’string’, ‘bool’, ‘long’, etc</li>
 <li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – The default value.</li>
 <li><strong>minValue</strong> (<em>float</em><em> or </em><em>int</em>) – minimum value. (optional)</li>
 <li><strong>maxValue</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value. (optional)</li>
 <li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not.(optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not.(optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not.(optional)</li>
 </ul>
 </td>
 </tr>
@@ -288,8 +288,8 @@ Note that animatable and keyable are True per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addAttributes">
-<code class="descname">addAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addAttributes" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.addAttributes">
+<code class="descname">addAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addAttributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method add the attributes of the component.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -298,8 +298,8 @@ Note that animatable and keyable are True per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addConnection">
-<code class="descname">addConnection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addConnection" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.addConnection">
+<code class="descname">addConnection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addConnection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add more connection definition to the set.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -309,8 +309,8 @@ Only if you need to use an new connection (not the standard).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addCtl">
-<code class="descname">addCtl</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>m</em>, <em>color</em>, <em>icon</em>, <em>tp=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addCtl" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.addCtl">
+<code class="descname">addCtl</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>m</em>, <em>color</em>, <em>iconShape</em>, <em>tp=None</em>, <em>lp=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addCtl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the control and apply the shape, if this is alrealdy stored
 in the guide controllers grp.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -321,10 +321,13 @@ in the guide controllers grp.</p>
 <li><strong>parent</strong> (<em>dagNode</em>) – The control parent</li>
 <li><strong>name</strong> (<em>str</em>) – The control name.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The transfromation matrix for the control.</li>
-<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color for the control in idex or RGB.</li>
-<li><strong>icon</strong> (<em>str</em>) – The controls default shape.</li>
-<li><strong>tp</strong> (<em>dagNode</em>) – Tag Parent Control object to connect as a parent controller</li>
-<li><strong>kwargs</strong> (<em>variant</em>) – Other arguments for the icon type variations.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color for the control in index or
+RGB.</li>
+<li><strong>iconShape</strong> (<em>str</em>) – The controls default shape.</li>
+<li><strong>tp</strong> (<em>dagNode</em>) – Tag Parent Control object to connect as a parent
+controller</li>
+<li><strong>lp</strong> (<em>bool</em>) – Lock the parent controller channels</li>
+<li><strong>kwargs</strong> (<em>variant</em>) – Other arguments for the iconShape type variations</li>
 </ul>
 </td>
 </tr>
@@ -339,15 +342,15 @@ in the guide controllers grp.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addFullNameParam">
-<code class="descname">addFullNameParam</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addFullNameParam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a parameter to the animation property.
-Note that animatable and keyable are True per default.</p>
+<dt id="mgear.maya.shifter.component.Main.addFullNameParam">
+<code class="descname">addFullNameParam</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addFullNameParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to the animation property.</p>
+<p>Note that animatable and keyable are True per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addJoint">
-<code class="descname">addJoint</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em>, <em>newActiveJnt=None</em>, <em>UniScale=True</em>, <em>segComp=0</em>, <em>gearMulMatrix=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addJoint" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.addJoint">
+<code class="descname">addJoint</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em>, <em>newActiveJnt=None</em>, <em>UniScale=True</em>, <em>segComp=0</em>, <em>gearMulMatrix=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addJoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add joint as child of the active joint or under driver object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -356,13 +359,15 @@ Note that animatable and keyable are True per default.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>obj</strong> (<em>dagNode</em>) – The input driver object for the joint.</li>
 <li><strong>name</strong> (<em>str</em>) – The joint name.</li>
-<li><strong>newActiveJnt</strong> (<em>bool</em><em> or </em><em>dagNode</em>) – If a joint is pass, this joint will be the active joint
-and parent of the newly created joint.</li>
-<li><strong>UniScale</strong> (<em>bool</em>) – Connects the joint scale with the Z axis for a unifor scalin, if set False
-will connect with each axis separated.</li>
-<li><strong>segComp</strong> (<em>bool</em>) – Set True or False the segment compensation in the joint..</li>
-<li><strong>gearMulMatrix</strong> (<em>bool</em>) – Use the custom gear_multiply matrix node, if False will use
-Maya’s default mulMatrix node.</li>
+<li><strong>newActiveJnt</strong> (<em>bool</em><em> or </em><em>dagNode</em>) – If a joint is pass, this joint will
+be the active joint and parent of the newly created joint.</li>
+<li><strong>UniScale</strong> (<em>bool</em>) – Connects the joint scale with the Z axis for a
+unifor scalin, if set Falsewill connect with each axis
+separated.</li>
+<li><strong>segComp</strong> (<em>bool</em>) – Set True or False the segment compensation in the
+joint..</li>
+<li><strong>gearMulMatrix</strong> (<em>bool</em>) – Use the custom gear_multiply matrix node, if
+False will use Maya’s default mulMatrix node.</li>
 </ul>
 </td>
 </tr>
@@ -377,8 +382,8 @@ Maya’s default mulMatrix node.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addObjects">
-<code class="descname">addObjects</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addObjects" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.addObjects">
+<code class="descname">addObjects</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addObjects" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method creates the objects of the component.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -387,8 +392,8 @@ Maya’s default mulMatrix node.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addOperators">
-<code class="descname">addOperators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addOperators" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.addOperators">
+<code class="descname">addOperators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addOperators" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method add the operators of the component.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -397,8 +402,8 @@ Maya’s default mulMatrix node.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addSetupParam">
-<code class="descname">addSetupParam</code><span class="sig-paren">(</span><em>longName</em>, <em>niceName</em>, <em>attType</em>, <em>value</em>, <em>minValue=None</em>, <em>maxValue=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addSetupParam" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.addSetupParam">
+<code class="descname">addSetupParam</code><span class="sig-paren">(</span><em>longName</em>, <em>niceName</em>, <em>attType</em>, <em>value</em>, <em>minValue=None</em>, <em>maxValue=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addSetupParam" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a parameter to the setup property.
 Note that animatable and keyable are False per default.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -408,14 +413,14 @@ Note that animatable and keyable are False per default.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
 <li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
-<li><strong>attType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, ‘long’, etc..</li>
+<li><strong>attType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’, etc..</li>
 <li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – The default value.</li>
 <li><strong>minValue</strong> (<em>float</em><em> or </em><em>int</em>) – minimum value. (optional)</li>
 <li><strong>maxValue</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value. (optional)</li>
-<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
-<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
-<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
-<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not.(optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not.(optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not.(optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not.(optional)</li>
 </ul>
 </td>
 </tr>
@@ -430,8 +435,8 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.addToGroup">
-<code class="descname">addToGroup</code><span class="sig-paren">(</span><em>objects, names=[‘hidden’], parentGrp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.addToGroup" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.addToGroup">
+<code class="descname">addToGroup</code><span class="sig-paren">(</span><em>objects, names=[‘hidden’], parentGrp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addToGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the object in a collection for later group creation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -448,14 +453,16 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connect">
-<code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Connect the component to the rest of the rig using the defined connection.</p>
+<dt id="mgear.maya.shifter.component.Main.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect the component</p>
+<p>Connect the component to the rest of the rig using the defined
+connection.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connectRef">
-<code class="descname">connectRef</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em>, <em>upVAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connectRef" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.connectRef">
+<code class="descname">connectRef</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em>, <em>upVAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connectRef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect the cns_obj to a multiple object using parentConstraint.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -473,8 +480,8 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connectRef2">
-<code class="descname">connectRef2</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em>, <em>in_attr</em>, <em>init_ref=False</em>, <em>skipTranslate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connectRef2" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.connectRef2">
+<code class="descname">connectRef2</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em>, <em>in_attr</em>, <em>init_ref=False</em>, <em>skipTranslate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connectRef2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect the cns_obj to a multiple object using parentConstraint.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -494,33 +501,38 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connect_averageParentCns">
-<code class="descname">connect_averageParentCns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connect_averageParentCns" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.connect_averageParentCns">
+<code class="descname">connect_averageParentCns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connect_averageParentCns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connection definition using average parent constraint.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connect_orientCns">
-<code class="descname">connect_orientCns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connect_orientCns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Connection definition using orientation constraint.</p>
+<dt id="mgear.maya.shifter.component.Main.connect_orientCns">
+<code class="descname">connect_orientCns</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connect_orientCns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connection with ori cns</p>
+<p>Connection definition using orientation constraint.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connect_standard">
-<code class="descname">connect_standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connect_standard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Standard connection definition. This is a simple parenting of the root.</p>
+<dt id="mgear.maya.shifter.component.Main.connect_standard">
+<code class="descname">connect_standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connect_standard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard Connection</p>
+<p>Standard connection definition. This is a simple parenting of the root.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connect_standardWithIkRef">
-<code class="descname">connect_standardWithIkRef</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connect_standardWithIkRef" title="Permalink to this definition">¶</a></dt>
-<dd><p>Standard connection definition with ik and upv references.</p>
+<dt id="mgear.maya.shifter.component.Main.connect_standardWithIkRef">
+<code class="descname">connect_standardWithIkRef</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connect_standardWithIkRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard IK Connection</p>
+<p>Standard connection definition with ik and upv references.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connect_standardWithRotRef">
-<code class="descname">connect_standardWithRotRef</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connect_standardWithRotRef" title="Permalink to this definition">¶</a></dt>
-<dd><p>Connect the cns_obj to a multiple object using parentConstraint, but skipping translation connection.</p>
+<dt id="mgear.maya.shifter.component.Main.connect_standardWithRotRef">
+<code class="descname">connect_standardWithRotRef</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connect_standardWithRotRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect the cns_obj to a multiple object</p>
+<p>Connect the cns_obj to a multiple object using parentConstraint, but
+skipping translation connection.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -536,26 +548,26 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.connect_standardWithSimpleIkRef">
-<code class="descname">connect_standardWithSimpleIkRef</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.connect_standardWithSimpleIkRef" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.connect_standardWithSimpleIkRef">
+<code class="descname">connect_standardWithSimpleIkRef</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connect_standardWithSimpleIkRef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Standard connection definition with simple IK reference.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.finalize">
-<code class="descname">finalize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.finalize" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.finalize">
+<code class="descname">finalize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.finalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finalize and clean the rig builing.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.fullName">
-<code class="descname">fullName</code><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.fullName" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.fullName">
+<code class="descname">fullName</code><a class="headerlink" href="#mgear.maya.shifter.component.Main.fullName" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the fullname of the component</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getBiNormalFromPos">
-<code class="descname">getBiNormalFromPos</code><span class="sig-paren">(</span><em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getBiNormalFromPos" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.getBiNormalFromPos">
+<code class="descname">getBiNormalFromPos</code><span class="sig-paren">(</span><em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getBiNormalFromPos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the binormal vector from 3 positions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -572,8 +584,8 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getCompName">
-<code class="descname">getCompName</code><span class="sig-paren">(</span><em>name=”</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getCompName" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.getCompName">
+<code class="descname">getCompName</code><span class="sig-paren">(</span><em>name=”</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getCompName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the component type name</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -590,8 +602,8 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getControlRelation">
-<code class="descname">getControlRelation</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getControlRelation" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.getControlRelation">
+<code class="descname">getControlRelation</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getControlRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the relational object from guide to rig.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -608,27 +620,27 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getFullName">
-<code class="descname">getFullName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getFullName" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.getFullName">
+<code class="descname">getFullName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getFullName" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the fullname of the component</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getHost">
-<code class="descname">getHost</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getHost" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the host for the properties.</p>
+<dt id="mgear.maya.shifter.component.Main.getHost">
+<code class="descname">getHost</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the host for the properties</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getName">
-<code class="descname">getName</code><span class="sig-paren">(</span><em>name=”</em>, <em>side=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getName" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.getName">
+<code class="descname">getName</code><span class="sig-paren">(</span><em>name=”</em>, <em>side=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the name for component element</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>str</em>) – The name to concatenate to the component name. (Optional)</li>
+<li><strong>name</strong> (<em>str</em>) – The name to concatenate to component name. (Optional)</li>
 <li><strong>side</strong> (<em>str</em>) – The side (Optional).</li>
 </ul>
 </td>
@@ -644,8 +656,8 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getNormalFromPos">
-<code class="descname">getNormalFromPos</code><span class="sig-paren">(</span><em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getNormalFromPos" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.getNormalFromPos">
+<code class="descname">getNormalFromPos</code><span class="sig-paren">(</span><em>pos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getNormalFromPos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the normal vector from 3 positions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -662,8 +674,8 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getRelation">
-<code class="descname">getRelation</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getRelation" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.getRelation">
+<code class="descname">getRelation</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the relational object from guide to rig.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -680,46 +692,51 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.getType">
-<code class="descname">getType</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.getType" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.getType">
+<code class="descname">getType</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getType" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the type of the component</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.initConnector">
-<code class="descname">initConnector</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.initConnector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize the connections beetween the component and his parent component.</p>
+<dt id="mgear.maya.shifter.component.Main.initConnector">
+<code class="descname">initConnector</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.initConnector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the connections</p>
+<p>Initialize the connections beetween the component and his parent
+component.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.initControlTag">
-<code class="descname">initControlTag</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.initControlTag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialice the control tag parent.
-The controllers tag are a new feature from Maya 2016.5 and up.
+<dt id="mgear.maya.shifter.component.Main.initControlTag">
+<code class="descname">initControlTag</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.initControlTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialice the control tag parent.</p>
+<p>The controllers tag are a new feature from Maya 2016.5 and up.
 Helps to stablish realtions with a custom walkpick.
-Also tells maya how to evaluate the control properly on parallel evaluation</p>
+Also tells maya how to evaluate the control properly on parallel
+evaluation</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.initialHierarchy">
-<code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.initialHierarchy" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.initialHierarchy">
+<code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.initialHierarchy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the inital structure for the rig.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.jointStructure">
-<code class="descname">jointStructure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.jointStructure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handle the building of the joint structure, when we select jnt_org option.</p>
+<dt id="mgear.maya.shifter.component.Main.jointStructure">
+<code class="descname">jointStructure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.jointStructure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the Joint structure</p>
+<p>Handle the building of the joint structure, when we select jnt_org
+option.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.local_params">
-<code class="descname">local_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘ro’, ‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.local_params" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.local_params">
+<code class="descname">local_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘ro’, ‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.local_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.postConnect">
-<code class="descname">postConnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.postConnect" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.postConnect">
+<code class="descname">postConnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.postConnect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post connection actions.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -728,35 +745,35 @@ Also tells maya how to evaluate the control properly on parallel evaluation</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.postScript">
-<code class="descname">postScript</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.postScript" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.postScript">
+<code class="descname">postScript</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.postScript" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute an external .py file, after the rig building.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.preScript">
-<code class="descname">preScript</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.preScript" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.preScript">
+<code class="descname">preScript</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.preScript" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute an external .py file, before the rig building.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.r_params">
-<code class="descname">r_params</code><em class="property"> = (‘rx’, ‘ry’, ‘rz’, ‘ro’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.r_params" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.r_params">
+<code class="descname">r_params</code><em class="property"> = (‘rx’, ‘ry’, ‘rz’, ‘ro’)</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.r_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.rs_params">
-<code class="descname">rs_params</code><em class="property"> = (‘rx’, ‘ry’, ‘rz’, ‘ro’, ‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.rs_params" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.rs_params">
+<code class="descname">rs_params</code><em class="property"> = (‘rx’, ‘ry’, ‘rz’, ‘ro’, ‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.rs_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.s_params">
-<code class="descname">s_params</code><em class="property"> = (‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.s_params" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.s_params">
+<code class="descname">s_params</code><em class="property"> = (‘sx’, ‘sy’, ‘sz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.s_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.setRelation">
-<code class="descname">setRelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.setRelation" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.setRelation">
+<code class="descname">setRelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.setRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the relation beetween object from guide to rig.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -765,85 +782,94 @@ Also tells maya how to evaluate the control properly on parallel evaluation</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.step_00">
-<code class="descname">step_00</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.step_00" title="Permalink to this definition">¶</a></dt>
-<dd><p>Step 00. PreScript, initial Hierarchy, create objects and set the connection relation.</p>
+<dt id="mgear.maya.shifter.component.Main.step_00">
+<code class="descname">step_00</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.step_00" title="Permalink to this definition">¶</a></dt>
+<dd><p>Step 00.</p>
+<p>PreScript, initial Hierarchy, create objects and set the connection
+relation.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.step_01">
-<code class="descname">step_01</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.step_01" title="Permalink to this definition">¶</a></dt>
-<dd><p>Step 01. Get the properties host, create parameters and set layout and logic.</p>
+<dt id="mgear.maya.shifter.component.Main.step_01">
+<code class="descname">step_01</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.step_01" title="Permalink to this definition">¶</a></dt>
+<dd><p>Step 01.</p>
+<p>Get the properties host, create parameters and set layout and logic.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.step_02">
-<code class="descname">step_02</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.step_02" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.step_02">
+<code class="descname">step_02</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.step_02" title="Permalink to this definition">¶</a></dt>
 <dd><p>Step 02. Apply all the operators.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.step_03">
-<code class="descname">step_03</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.step_03" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.step_03">
+<code class="descname">step_03</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.step_03" title="Permalink to this definition">¶</a></dt>
 <dd><p>Step 03. Connect the component to the rest of the rig.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.step_04">
-<code class="descname">step_04</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.step_04" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.step_04">
+<code class="descname">step_04</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.step_04" title="Permalink to this definition">¶</a></dt>
 <dd><p>Step 04. Joint structure creation.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.step_05">
-<code class="descname">step_05</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.step_05" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.step_05">
+<code class="descname">step_05</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.step_05" title="Permalink to this definition">¶</a></dt>
 <dd><p>Step 05. Finalize the component and post Script.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.steps">
-<code class="descname">steps</code><em class="property"> = [‘Objects’, ‘Properties’, ‘Operators’, ‘Connect’, ‘Joints’, ‘Finalize’]</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.steps" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.steps">
+<code class="descname">steps</code><em class="property"> = [‘Objects’, ‘Properties’, ‘Operators’, ‘Connect’, ‘Joints’, ‘Finalize’]</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.steps" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.t_params">
-<code class="descname">t_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.t_params" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.t_params">
+<code class="descname">t_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’)</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.t_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.tr_params">
-<code class="descname">tr_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘ro’)</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.tr_params" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.tr_params">
+<code class="descname">tr_params</code><em class="property"> = (‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘ro’)</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.tr_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.type">
-<code class="descname">type</code><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.type" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.type">
+<code class="descname">type</code><a class="headerlink" href="#mgear.maya.shifter.component.Main.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the type of the component</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="mgear.maya.shifter.component.MainComponent.validateProxyChannels">
-<code class="descname">validateProxyChannels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.validateProxyChannels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check the Maya version to determinate if we can use proxy channels
-and check user setting on the guide.
+<dt id="mgear.maya.shifter.component.Main.validateProxyChannels">
+<code class="descname">validateProxyChannels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.validateProxyChannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the Maya version to determinate if we can use proxy channels</p>
+<p>Also check user setting on the guide.
 This feature is available from 2016.5</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.x_axis">
-<code class="descname">x_axis</code><em class="property"> = dt.Vector([1.0, 0.0, 0.0])</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.x_axis" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.x_axis">
+<code class="descname">x_axis</code><em class="property"> = dt.Vector([1.0, 0.0, 0.0])</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.x_axis" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.y_axis">
-<code class="descname">y_axis</code><em class="property"> = dt.Vector([0.0, 1.0, 0.0])</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.y_axis" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.y_axis">
+<code class="descname">y_axis</code><em class="property"> = dt.Vector([0.0, 1.0, 0.0])</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.y_axis" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="mgear.maya.shifter.component.MainComponent.z_axis">
-<code class="descname">z_axis</code><em class="property"> = dt.Vector([0.0, 0.0, 1.0])</em><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent.z_axis" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.maya.shifter.component.Main.z_axis">
+<code class="descname">z_axis</code><em class="property"> = dt.Vector([0.0, 0.0, 1.0])</em><a class="headerlink" href="#mgear.maya.shifter.component.Main.z_axis" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.shifter.component.MainComponent">
+<code class="descclassname">mgear.maya.shifter.component.</code><code class="descname">MainComponent</code><a class="headerlink" href="#mgear.maya.shifter.component.MainComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mgear.maya.shifter.component.Main" title="mgear.maya.shifter.component.Main"><code class="xref py py-class docutils literal"><span class="pre">Main</span></code></a></p>
 </dd></dl>
 
 </div>
@@ -892,7 +918,7 @@ This feature is available from 2016.5</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

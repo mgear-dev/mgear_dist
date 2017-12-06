@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.fcurve &mdash; mGear: Rigging Framework 2.2.0 documentation</title>
+  <title>mgear.maya.fcurve &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.2.0 documentation" href="../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.icon" href="icon.html"/>
         <link rel="prev" title="mgear.maya.dag" href="dag.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.2
+                2.3
               </div>
             
           
@@ -205,7 +205,6 @@
             
   <div class="section" id="module-mgear.maya.fcurve">
 <span id="mgear-maya-fcurve"></span><h1>mgear.maya.fcurve<a class="headerlink" href="#module-mgear.maya.fcurve" title="Permalink to this headline">¶</a></h1>
-<p>Functions to work with animation curves</p>
 <dl class="function">
 <dt id="mgear.maya.fcurve.getFCurveValues">
 <code class="descclassname">mgear.maya.fcurve.</code><code class="descname">getFCurveValues</code><span class="sig-paren">(</span><em>fcv_node</em>, <em>division</em>, <em>factor=1</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.fcurve.getFCurveValues" title="Permalink to this definition">¶</a></dt>
@@ -216,7 +215,8 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>fcv_node</strong> (<em>pyNode</em><em> or </em><em>str</em>) – The FCurve to evaluate.</li>
-<li><strong>division</strong> (<em>int</em>) – The number of division you want to evaluate on the FCurve.</li>
+<li><strong>division</strong> (<em>int</em>) – The number of division you want to evaluate on
+the FCurve.</li>
 <li><strong>factor</strong> (<em>float</em>) – Multiplication factor. Default = 1. (optional)</li>
 </ul>
 </td>
@@ -229,7 +229,8 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">st_value</span> <span class="o">=</span> <span class="n">fcu</span><span class="o">.</span><span class="n">getFCurveValues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;st_profile&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">divisions</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">st_value</span> <span class="o">=</span> <span class="n">fcu</span><span class="o">.</span><span class="n">getFCurveValues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;st_profile&quot;</span><span class="p">],</span>
+<span class="go">                                        self.divisions)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -280,7 +281,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.2.0',
+            VERSION:'2.3.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

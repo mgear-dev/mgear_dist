@@ -1,30 +1,65 @@
 Release Log
 ===========
 
+2.3.0
+-----
+**Enhancements**
+	* mGear: Attribute: addAttribute not setting default attribute value. [#84]
+	* mGear: Attribute: update with lock and unlock attribute functions [#83]
+	* mGear: PEP8 Style Refactor [#100]
+	* mGear: Refactor all exception handling [#88]
+	* mGear: Vendoring QT [#89]
+	* Shifter: Build command review and log popup window [#73]
+	* Shifter: Change Global_C0_ctl to World_ctl [#66]
+	* Shifter: Control_01: Add option to have mirror behaviour [#68]
+	* Shifter: Improve rig build speed [#65]
+	* Shifter: Leg_2jnts_freeTangents_01:no ikFoot in upvref attribute [#62]
+	* Shifter: Reload components in custom path [#78]
+	* Shifter: Update guide structure in pre custom step [#101]
+	* Simple Rig: Update functionality revision  [#71]
+	* Synoptic: spring bake util [#61]
+
+**Bug Fix**
+	* Rigbits: createCTL function issue [#59]
+	* Rigbits: export skin pack error with crvs [#56]
+	* Rigbits: skin: There is a case in exportSkin function breaks the existing file [#58]
+	* Shifter: 3 joint leg: soft Ik range min in graph editor [#82]
+	* Shifter: arm_2jnt_freeTangents_01 no attribute 'rollRef' [#63]
+	* Shifter: Arms auto upvector and shoulder space jump [#85]
+	* Shifter: Chain_spring_01: pop if manipulate FK ctl after Bake [#75]
+	* Shifter: Connect Ctl_vis [#103]
+	* Shifter: Control_01: rotation axis is missing Y lock [#74]
+	* Shifter: Japanese Ascii [#79]
+	* Shifter: Spring chain: lock control parent and bake spring bug [#67]
+	* Shifter: Synoptic: IK/FK Match with arm_ms_2jnt_01 [#80]
+
+**Known Issues**
+	* Shifter: Undo Build from selection crash maya [#74]
+
 2.2.4
 -----
 **Enhancements**
-	* Issue #50: Global scale and size of controllers.
+	* Shifter: Global scale and size of controllers. [#50]
 
 2.2.3
 -----
 **Enhancements**
-	* Issue #43: Shifter: Custom Steps: Added Stop Build and Try again option if step fail.
+	* Shifter: Custom Steps: Added Stop Build and Try again option if step fail.[#43]
 
 **Bug Fix**
-	* Issue #54: Synoptic: Match IK/FK with split ctl for trans and rot
+	* Synoptic: Match IK/FK with split ctl for trans and rot [#54]
 
 2.2.2
 -----
 **Enhancements**
-	* Issue #47: Shifter: Components: Legs: Mirror axis behavior on upv and mid ctl
-	* Issue #48: Shifter: Componets: Arms: IK ctl mirror behaviour
-	* Issue #53: Shifter: arm roll new reference connector
+	* Shifter: Components: Legs: Mirror axis behavior on upv and mid ctl [#47]
+	* Shifter: Componets: Arms: IK ctl mirror behaviour [#48]
+	* Shifter: arm roll new reference connector [#53]
 
 **Bug Fix**
-	* Issue #42: Shifter: component UI min division hang. Check all components
-	* Issue #44: mGear quadruped rig not being created in 2018
-	* Issue #49: Shifter: Close settings Exception on Maya 2018: Note: This is a workaround. The issue comes from Maya 2018
+	* Shifter: component UI min division hang. Check all components [#42]
+	* Shifter: quadruped rig not being created in 2018 [ #44]
+	* Shifter: Close settings Exception on Maya 2018: Note: This is a workaround. The issue comes from Maya 2018 [#49]
 
 2.2.1
 -----
@@ -40,7 +75,7 @@ Release Log
 	* Simple autorig This a new rigging sytem for basic props.
 	* Channel Wrangler: Channel manager with export import options.
 
-**Improvements**
+**Enhancements**
 	* Synoptic: key/select all for custom widgets
 	* Skin IO: IO skin for curves & nurbs
 	* Skin IO: Now can export with Skin Packs. Every object will be in a separated file.
