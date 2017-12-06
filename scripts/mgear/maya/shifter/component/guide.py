@@ -1,86 +1,49 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-
 """
 Shifter's Component guide class.
 """
 
-##########################################################
-# GLOBAL
-##########################################################
 from functools import partial
 
+import maya.cmds as cmds
 # pyMel
 import pymel.core as pm
-import pymel.core.datatypes as dt
+from pymel.core import datatypes
 
 # mgear
 import mgear
 
-import mgear.string as string
+from mgear import string
 
-import mgear.maya.dag as dag
-import mgear.maya.vector as vec
-import mgear.maya.transform as tra
-import mgear.maya.icon as ico
-import mgear.maya.curve as cur
-import mgear.maya.applyop as aop
-import mgear.maya.attribute as att
-import mgear.maya.pyqt as gqt
+from mgear.maya import dag, vector, transform, applyop, attribute, curve, icon
 
-
-from mgear.maya.shifter.guide import MainGuide
-from mgear.maya.shifter.guide import helperSlots
-import mgear.maya.shifter.gui as gui
+from mgear.maya.shifter import guide, gui
 
 import mainSettingsUI as msui
 
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
-
-
+from mgear.vendor.Qt import QtWidgets, QtCore
 
 ##########################################################
 # COMPONENT GUIDE
 ##########################################################
 
-class ComponentGuide(MainGuide):
-    """
-    Main class for component guide creation.
+
+class ComponentGuide(guide.Main):
+    """Main class for component guide creation.
+
     This class handles all the parameters and objectDefs creation.
-    It also know how to parse its own hierachy of object to retrieve position and transform.
+    It also know how to parse its own hierachy of object to retrieve position
+    and transform.
     Finally it also now how to export itself as xml_node.
 
     Attributes:
-        paramNames (list): List of parameter name cause it's actually important to keep them sorted.
+        paramNames (list): List of parameter name cause it's actually important
+            to keep them sorted.
         paramDefs (dic): Dictionary of parameter definition.
         values (dic): Dictionary of options values.
-        valid (bool): We will check a few things and make sure the guide we are loading is up to date.
-            If parameters or object are missing a warning message will be display and
-            the guide should be updated.
+        valid (bool): We will check a few things and make sure the guide we are
+            loading is up to date.
+            If parameters or object are missing a warning message will be
+                display and the guide should be updated.
         tra (dic): dictionary of global transform
         atra (list): list of global transform
         pos (dic): dictionary of global postion
@@ -88,36 +51,42 @@ class ComponentGuide(MainGuide):
         prim (dic): dictionary of primitive
         blades (dic): dictionary of blades
         size (float): Size reference of the component. Default = .1
-        save_transform (list): Transform of object name in this list will be saved
-        save_primitive (list): Primitive of object name in this list will be saved
+        save_transform (list): Transform of object name in this list will
+            be saved
+        save_primitive (list): Primitive of object name in this list will
+            be saved
         save_blade (list): Normal and BiNormal of object will be saved
         minmax (dic): Define the min and max object for multi location objects
 
     """
-    compType = "component"  ## Component type
-    compName = "component"  ## Component default name
+    compType = "component"  # Component type
+    compName = "component"  # Component default name
     compSide = "C"
-    compIndex = 0 ## Component default index
+    compIndex = 0  # Component default index
 
-    description = "" ## Description of the component
+    description = ""  # Description of the component
 
     connectors = []
     compatible = []
     ctl_grp = ""
 
     # ====================================================
-    ## Init method.
-    # @param self
-    # @param ref an xml definition or a SI3DObject
+    # Init method.
     def __init__(self):
 
         # Parameters names, definition and values.
-        self.paramNames = [] ## List of parameter name cause it's actually important to keep them sorted.
-        self.paramDefs = {} ## Dictionary of parameter definition.
-        self.values = {} ## Dictionary of options values.
+        # List of parameter name cause it's actually important to keep
+        # them sorted.
+        self.paramNames = []
+        # Dictionary of parameter definition.
+        self.paramDefs = {}
+        # Dictionary of options values.
+        self.values = {}
 
-        # We will check a few things and make sure the guide we are loading is up to date.
-        # If parameters or object are missing a warning message will be display and the guide should be updated.
+        # We will check a few things and make sure the guide we are loading is
+        # up to date.
+        # If parameters or object are missing a warning message will be display
+        # and the guide should be updated.
         self.valid = True
 
         self.root = None
@@ -128,31 +97,33 @@ class ComponentGuide(MainGuide):
         self.parentLocalName = None
 
         # List and dictionary used during the creation of the component
-        self.tra = {} ## dictionary of global transform
-        self.atra = [] ## list of global transform
-        self.pos = {} ## dictionary of global postion
-        self.apos = [] ## list of global position
-        self.prim = {} ## dictionary of primitive
+        self.tra = {}  # dictionary of global transform
+        self.atra = []  # list of global transform
+        self.pos = {}  # dictionary of global postion
+        self.apos = []  # list of global position
+        self.prim = {}  # dictionary of primitive
         self.blades = {}
         self.size = .1
         # self.root_size = None
 
-        # List and dictionary used to define data of the guide that should be saved
-        # self.pick_transform = [] ## User will have to pick the position of this object name
-        self.save_transform = [] ## Transform of object name in this list will be saved
-        self.save_primitive = [] ## Primitive of object name in this list will be saved
-        self.save_blade = [] ## Normal and BiNormal of object will be saved
-        self.minmax = {} ## Define the min and max object for multi location objects
+        # List and dictionary used to define data of the guide that
+        # should be saved
+        # Transform of object name in this list will be saved
+        self.save_transform = []
+        # Primitive of object name in this list will be saved
+        self.save_primitive = []
+        # Normal and BiNormal of object will be saved
+        self.save_blade = []
+        # Define the min and max object for multi location objects
+        self.minmax = {}
 
         # Init the guide
         self.postInit()
         self.initialHierarchy()
         self.addParameters()
 
-
     def postInit(self):
-        """
-        Define the objects name and categories.
+        """Define the objects name and categories.
 
         Note:
             REIMPLEMENT. This method should be reimplemented in each component.
@@ -165,21 +136,22 @@ class ComponentGuide(MainGuide):
     # OBJECTS AND PARAMETERS
 
     def initialHierarchy(self):
-        """
-         Initial hierachy. It's no more than the basic set of parameters and layout
+        """Initial hierachy.
+
+         It's no more than the basic set of parameters and layout
          needed for the setting property.
 
         """
         # Parameters --------------------------------------
         # This are the necessary parameter for component guide definition
-        self.pCompType = self.addParam("comp_type",  "string", self.compType)
-        self.pCompName = self.addParam("comp_name",  "string", self.compName)
-        self.pCompSide = self.addParam("comp_side",  "string", self.compSide)
-        self.pCompIndex = self.addParam("comp_index",  "long", self.compIndex, 0)
-        self.pConnector = self.addParam("connector",  "string", "standard")
-        self.pUIHost = self.addParam("ui_host",  "string", "")
-        self.pCtlGroup  = self.addParam("ctlGrp", "string", "")
-
+        self.pCompType = self.addParam("comp_type", "string", self.compType)
+        self.pCompName = self.addParam("comp_name", "string", self.compName)
+        self.pCompSide = self.addParam("comp_side", "string", self.compSide)
+        self.pCompIndex = self.addParam(
+            "comp_index", "long", self.compIndex, 0)
+        self.pConnector = self.addParam("connector", "string", "standard")
+        self.pUIHost = self.addParam("ui_host", "string", "")
+        self.pCtlGroup = self.addParam("ctlGrp", "string", "")
 
         # Items -------------------------------------------
         typeItems = [self.compType, self.compType]
@@ -192,10 +164,8 @@ class ComponentGuide(MainGuide):
             connectorItems.append(item)
             connectorItems.append(item)
 
-
     def addObjects(self):
-        """
-        Create the objects of the guide.
+        """Create the objects of the guide.
 
         Note:
             REIMPLEMENT. This method should be reimplemented in each component.
@@ -203,10 +173,8 @@ class ComponentGuide(MainGuide):
         """
         self.root = self.addRoot()
 
-
     def addParameters(self):
-        """
-        Create the parameter definitions of the guide.
+        """Create the parameter definitions of the guide.
 
         Note:
             REIMPLEMENT. This method should be reimplemented in each component.
@@ -217,8 +185,7 @@ class ComponentGuide(MainGuide):
     # ====================================================
     # SET / GET
     def setFromHierarchy(self, root):
-        """
-        Set the component guide from given hierarchy.
+        """Set the component guide from given hierarchy.
 
         Args:
             root (dagNode): The root of the hierarchy to parse.
@@ -230,7 +197,8 @@ class ComponentGuide(MainGuide):
         # ---------------------------------------------------
         # First check and set the settings
         if not self.root.hasAttr("comp_type"):
-            mgear.log("%s is not a proper guide."%self.root.longName(), mgear.sev_error)
+            mgear.log("%s is not a proper guide." %
+                      self.root.longName(), mgear.sev_error)
             self.valid = False
             return
 
@@ -241,7 +209,8 @@ class ComponentGuide(MainGuide):
         for name in self.save_transform:
             if "#" in name:
                 i = 0
-                while not self.minmax[name].max > 0 or i < self.minmax[name].max:
+                while not self.minmax[name].max > 0 or i < \
+                        self.minmax[name].max:
                     localName = string.replaceSharpWithPadding(name, i)
 
                     node = dag.findChild(self.model, self.getName(localName))
@@ -256,7 +225,9 @@ class ComponentGuide(MainGuide):
                     i += 1
 
                 if i < self.minmax[name].min:
-                    mgear.log("Minimum of object requiered for "+name+" hasn't been reached!!", mgear.sev_warning)
+                    mgear.log("Minimum of object requiered for " +
+                              name + " hasn't been reached!!",
+                              mgear.sev_warning)
                     self.valid = False
                     continue
 
@@ -282,17 +253,15 @@ class ComponentGuide(MainGuide):
                 self.valid = False
                 continue
 
-            self.blades[name] = vec.Blade(node.getMatrix(worldSpace=True))
+            self.blades[name] = vector.Blade(node.getMatrix(worldSpace=True))
 
         self.size = self.getSize()
-
 
     # ====================================================
     # DRAW
 
     def draw(self, parent):
-        """
-        Draw the guide in the scene.
+        """Draw the guide in the scene.
 
         Args:
             parent (dagNode): the parent of the component.
@@ -303,16 +272,12 @@ class ComponentGuide(MainGuide):
         self.addObjects()
         pm.select(self.root)
 
-
-
-        #TODO: add function to scale the points of the icons
+        # TODO: add function to scale the points of the icons
         # Set the size of the root
         # self.root.size = self.root_size
 
-
     def drawFromUI(self, parent):
-        """
-        Draw the guide in the scene from the UI command.
+        """Draw the guide in the scene from the UI command.
 
         Args:
             parent (dagNode): the parent of the component.
@@ -323,19 +288,15 @@ class ComponentGuide(MainGuide):
             return False
 
         self.draw(parent)
-        tra.resetTransform(self.root, r=False, s=False)
+        transform.resetTransform(self.root, r=False, s=False)
 
         gui.Guide_UI.inspectSettings()
 
         return True
 
-
-
     def modalPositions(self):
-        """
-        Launch a modal dialog to set position of the guide.
+        """Launch a modal dialog to set position of the guide."""
 
-        """
         self.jNumberVal = False
         self.dirAxisVal = False
         self.jSpacVal = False
@@ -348,37 +309,38 @@ class ComponentGuide(MainGuide):
 
                     pm.setParent(q=True)
 
-                    pm.columnLayout( adjustableColumn=True, cal="right" )
-                    pm.text(l='', al="center")
+                    pm.columnLayout(adjustableColumn=True, cal="right")
+                    pm.text(label='', al="center")
 
                     fl = pm.formLayout()
-                    jNumber = pm.intFieldGrp(v1=3, l="Joint Number")
-                    pm.setParent( '..' )
-                    pm.formLayout(fl, e=True, af=(jNumber, "left",-30))
+                    jNumber = pm.intFieldGrp(v1=3, label="Joint Number")
+                    pm.setParent('..')
+                    pm.formLayout(fl, e=True, af=(jNumber, "left", -30))
 
                     dirSet = ["X", "-X", "Y", "-Y", "Z", "-Z"]
                     fl = pm.formLayout()
-                    dirAxis = pm.optionMenu(l="Direction")
+                    dirAxis = pm.optionMenu(label="Direction")
                     dirAxis.addMenuItems(dirSet)
-                    pm.setParent( '..' )
+                    pm.setParent('..')
                     pm.formLayout(fl, e=True, af=(dirAxis, "left", 70))
 
                     fl = pm.formLayout()
-                    jSpac = pm.floatFieldGrp(v1=1.0, l="spacing")
-                    pm.setParent( '..' )
-                    pm.formLayout(fl, e=True, af=(jSpac, "left",-30))
+                    jSpac = pm.floatFieldGrp(v1=1.0, label="spacing")
+                    pm.setParent('..')
+                    pm.formLayout(fl, e=True, af=(jSpac, "left", -30))
 
-                    pm.text(l='', al="center")
+                    pm.text(label='', al="center")
 
-                    pm.button(l='Continue', c=partial(_retriveOptions, jNumber, dirAxis, jSpac))
-                    pm.setParent( '..' )
+                    pm.button(label='Continue', c=partial(
+                        _retriveOptions, jNumber, dirAxis, jSpac))
+                    pm.setParent('..')
 
                 def _retriveOptions(jNumber, dirAxis, jSpac, *args):
                     self.jNumberVal = jNumber.getValue()[0]
                     self.dirAxisVal = dirAxis.getValue()
                     self.jSpacVal = jSpac.getValue()[0]
 
-                    pm.layoutDialog( dismiss="Continue" )
+                    pm.layoutDialog(dismiss="Continue")
 
                 def _show():
 
@@ -388,38 +350,37 @@ class ComponentGuide(MainGuide):
 
                 if self.jNumberVal:
                     if self.dirAxisVal == "X":
-                        offVec = dt.Vector(self.jSpacVal, 0, 0)
+                        offVec = datatypes.Vector(self.jSpacVal, 0, 0)
                     elif self.dirAxisVal == "-X":
-                        offVec = dt.Vector(self.jSpacVal*-1, 0, 0)
+                        offVec = datatypes.Vector(self.jSpacVal * -1, 0, 0)
                     elif self.dirAxisVal == "Y":
-                        offVec = dt.Vector(0, self.jSpacVal, 0)
+                        offVec = datatypes.Vector(0, self.jSpacVal, 0)
                     elif self.dirAxisVal == "-Y":
-                        offVec = dt.Vector(0, self.jSpacVal*-1, 0)
+                        offVec = datatypes.Vector(0, self.jSpacVal * -1, 0)
                     elif self.dirAxisVal == "Z":
-                        offVec = dt.Vector(0, 0, self.jSpacVal)
+                        offVec = datatypes.Vector(0, 0, self.jSpacVal)
                     elif self.dirAxisVal == "-Z":
-                        offVec = dt.Vector(0, 0, self.jSpacVal*-1)
+                        offVec = datatypes.Vector(0, 0, self.jSpacVal * -1)
 
-                    newPosition = dt.Vector(0, 0, 0)
+                    newPosition = datatypes.Vector(0, 0, 0)
                     for i in range(self.jNumberVal):
                         newPosition = offVec + newPosition
                         localName = string.replaceSharpWithPadding(name, i)
-                        self.tra[localName] = tra.getTransformFromPos(newPosition)
+                        self.tra[localName] = transform.getTransformFromPos(
+                            newPosition)
         return True
 
     # ====================================================
     # UPDATE
 
-
     def setIndex(self, model):
-        """
-        Update the component index to get the next valid one.
+        """Update the component index to get the next valid one.
 
         Args:
             model (dagNode): The parent model of the guide.
-        """
 
-        self.model =  model.getParent(generations=-1)
+        """
+        self.model = model.getParent(generations=-1)
 
         # Find next index available
         while True:
@@ -428,34 +389,33 @@ class ComponentGuide(MainGuide):
                 break
             self.setParamDefValue("comp_index", self.values["comp_index"] + 1)
 
-
     def symmetrize(self):
-        """
-        Inverse the transform of each element of the guide.
-        """
+        """Inverse the transform of each element of the guide."""
 
         if self.values["comp_side"] not in ["R", "L"]:
             mgear.log("Can't symmetrize central component", mgear.sev_error)
             return False
         for name, paramDef in self.paramDefs.items():
             if paramDef.valueType == "string":
-                self.setParamDefValue(name, mgear.string.convertRLName(self.values[name]))
+                self.setParamDefValue(
+                    name, mgear.string.convertRLName(self.values[name]))
         for name, t in self.tra.items():
-            self.tra[name] = tra.getSymmetricalTransform(t)
+            self.tra[name] = transform.getSymmetricalTransform(t)
         for name, blade in self.blades.items():
-            self.blades[name] = vec.Blade(tra.getSymmetricalTransform(blade.transform))
+            self.blades[name] = vector.Blade(
+                transform.getSymmetricalTransform(blade.transform))
 
         return True
 
     def rename(self, root, newName, newSide, newIndex):
-        """
-        Rename the component.
+        """Rename the component.
 
         Args:
             root (dagNode): The parent of the component
             newName (str): The new name.
             newSide (str): Side of the component.
             newIndex (int): index of the comonent.
+
         """
         self.parent = root
 
@@ -469,59 +429,64 @@ class ComponentGuide(MainGuide):
         self.parent.attr("comp_name").set(newName)
         self.parent.attr("comp_side").set(newSide)
         # set new index and update to the next valid
-        self.setParamDefValue("comp_name",newName)
-        self.setParamDefValue("comp_side",newSide)
+        self.setParamDefValue("comp_name", newName)
+        self.setParamDefValue("comp_side", newSide)
 
-        self.setParamDefValue("comp_index",newIndex)
+        self.setParamDefValue("comp_index", newIndex)
         self.setIndex(self.parent)
 
-        self.parent.attr("comp_index").set( self.values["comp_index"])
+        self.parent.attr("comp_index").set(self.values["comp_index"])
 
-
-        objList =  dag.findComponentChildren(self.parent, oldName, oldSideIndex)
-        newSideIndex = newSide +  str(self.values["comp_index"])
+        # objList = dag.findComponentChildren(self.parent,
+        #                                     oldName, oldSideIndex)
+        # NOTE: Experimenta  using findComponentChildren2
+        objList = dag.findComponentChildren2(
+            self.parent, oldName, oldSideIndex)
+        newSideIndex = newSide + str(self.values["comp_index"])
         objList.append(self.parent)
         for obj in objList:
-            suffix =  obj.name().split("_")[-1]
+            suffix = obj.name().split("_")[-1]
             if len(obj.name().split("_")) == 3:
                 new_name = "_".join([newName, newSideIndex, suffix])
             else:
-                subIndex =  obj.name().split("_")[-2]
+                subIndex = obj.name().split("_")[-2]
                 new_name = "_".join([newName, newSideIndex, subIndex, suffix])
             pm.rename(obj, new_name)
-
 
     # ====================================================
     # ELEMENTS
 
-
     def addRoot(self):
-        """
-        Add a root object to the guide.
+        """Add a root object to the guide.
+
         This method can initialize the object or draw it.
-        Root object is a simple transform with a specific display and a setting property.
+        Root object is a simple transform with a specific display and a setting
+        property.
 
         Returns:
             dagNode: The root
+
         """
         if "root" not in self.tra.keys():
-            self.tra["root"] = tra.getTransformFromPos(dt.Vector(0,0,0))
+            self.tra["root"] = transform.getTransformFromPos(
+                datatypes.Vector(0, 0, 0))
 
-        self.root = ico.guideRootIcon(self.parent, self.getName("root"), color=13,  m=self.tra["root"] )
+        self.root = icon.guideRootIcon(self.parent, self.getName(
+            "root"), color=13, m=self.tra["root"])
 
-        #Add Parameters from parameter definition list.
+        # Add Parameters from parameter definition list.
         for scriptName in self.paramNames:
             paramDef = self.paramDefs[scriptName]
             paramDef.create(self.root)
 
         return self.root
 
-
     def addLoc(self, name, parent, position=None):
-        """
-        Add a loc object to the guide.
+        """Add a loc object to the guide.
+
         This mehod can initialize the object or draw it.
-        Loc object is a simple null to define a position or a tranformation in the guide.
+        Loc object is a simple null to define a position or a tranformation in
+        the guide.
 
         Args:
             name (str): Local name of the element.
@@ -533,35 +498,41 @@ class ComponentGuide(MainGuide):
 
         """
         if name not in self.tra.keys():
-            self.tra[name] = tra.getTransformFromPos(position)
+            self.tra[name] = transform.getTransformFromPos(position)
         if name in self.prim.keys():
-            # this functionality is not implemented. The actual design from softimage Gear should be review to fit in Maya.
-            loc = self.prim[name].create(parent, self.getName(name), self.tra[name],  color=17)
+            # this functionality is not implemented. The actual design from
+            # softimage Gear should be review to fit in Maya.
+            loc = self.prim[name].create(
+                parent, self.getName(name), self.tra[name], color=17)
         else:
-            loc = ico.guideLocatorIcon(parent, self.getName(name), color=17, m=self.tra[name])
+            loc = icon.guideLocatorIcon(parent, self.getName(
+                name), color=17, m=self.tra[name])
 
         return loc
 
+    def addLocMulti(self, name, parent, updateParent=True):
+        """Add multiple loc objects to the guide.
 
-    def addLocMulti(self, name, parent, updateParent = True):
-        """
-        Add multiple loc objects to the guide.
         This method can initialize the object or draw it.
-        Loc object is a simple null to define a position or a tranformation in the guide.
+        Loc object is a simple null to define a position or a tranformation in
+        the guide.
 
         Args:
             name (str): Local name of the element.
             parent (dagNode): The parent of the element.
             minimum (int): The minimum number of loc.
             maximum (int): The maximum number of loc.
-            updateParent (bool): if True update the parent reference. False, keep the same for all loc.
+            updateParent (bool): if True update the parent reference. False,
+                keep the same for all loc.
 
         Returns:
             list of dagNode: The created loc objects in a list.
 
         """
         if "#" not in name:
-            mgear.log("You need to put a '#' in the name of multiple location.", mgear.sev_error)
+            mgear.log(
+                "You need to put a '#' in the name of multiple location.",
+                mgear.sev_error)
             return False
 
         locs = []
@@ -571,7 +542,8 @@ class ComponentGuide(MainGuide):
             if localName not in self.tra.keys():
                 break
 
-            loc = ico.guideLocatorIcon(parent, self.getName(localName), color=17, m=self.tra[localName])
+            loc = icon.guideLocatorIcon(parent, self.getName(
+                localName), color=17, m=self.tra[localName])
             locs.append(loc)
             if updateParent:
                 parent = loc
@@ -579,10 +551,9 @@ class ComponentGuide(MainGuide):
             i += 1
         return locs
 
-
     def addBlade(self, name, parentPos, parentDir):
-        """
-        Add a blade object to the guide.
+        """Add a blade object to the guide.
+
         This mehod can initialize the object or draw it.
         Blade object is a 3points curve to define a plan in the guide.
 
@@ -596,27 +567,32 @@ class ComponentGuide(MainGuide):
 
         """
         if name not in self.blades.keys():
-            self.blades[name] = vec.Blade(tra.getTransformFromPos(dt.Vector(0,0,0)))
+            self.blades[name] = vector.Blade(
+                transform.getTransformFromPos(datatypes.Vector(0, 0, 0)))
             offset = False
         else:
             offset = True
 
         dist = .6 * self.root.attr("scaleX").get()
-        blade = ico.guideBladeIcon(parent=parentPos, name=self.getName(name),lenX=dist, color=13, m=self.blades[name].transform )
-        aim_cns = aop.aimCns(blade, parentDir, axis="xy", wupType=2, wupVector=[0,1,0], wupObject=self.root, maintainOffset=offset)
+        blade = icon.guideBladeIcon(parent=parentPos, name=self.getName(
+            name), lenX=dist, color=13, m=self.blades[name].transform)
+        aim_cns = applyop.aimCns(blade, parentDir, axis="xy", wupType=2,
+                                 wupVector=[0, 1, 0], wupObject=self.root,
+                                 maintainOffset=offset)
         pm.pointConstraint(parentPos, blade)
 
-        offsetAttr = att.addAttribute(blade, "bladeRollOffset", "float", aim_cns.attr("offsetX").get())
+        offsetAttr = attribute.addAttribute(
+            blade, "bladeRollOffset", "float", aim_cns.attr("offsetX").get())
         pm.connectAttr(offsetAttr, aim_cns.attr("offsetX"))
-        att.lockAttribute(blade)
+        attribute.lockAttribute(blade)
 
         return blade
 
-
     def addDispCurve(self, name, centers=[], degree=1):
-        """
-        Add a display curve object to the guide.
-        Display curve object is a simple curve to show the connection between different guide element..
+        """Add a display curve object to the guide.
+
+        Display curve object is a simple curve to show the connection between
+        different guide element..
 
         Args:
             name (str): Local name of the element.
@@ -627,7 +603,8 @@ class ComponentGuide(MainGuide):
             dagNode: The newly creted curve.
 
         """
-        crv = cur.addCnsCurve(centers[0], self.getName(name), centers, degree)
+        crv = curve.addCnsCurve(
+            centers[0], self.getName(name), centers, degree)
         crv.attr("overrideEnabled").set(1)
         crv.attr("overrideDisplayType").set(1)
 
@@ -635,14 +612,8 @@ class ComponentGuide(MainGuide):
 
     # ====================================================
     # MISC
-    ##
-    # @param self
-    # @paran model
-    # @return Dictionary of X3DObject
-
     def getObjects(self, model, includeShapes=True):
-        """
-        Get the objects of the component.
+        """Get the objects of the component.
 
         Args:
             model(dagNode): The root of the component.
@@ -658,41 +629,88 @@ class ComponentGuide(MainGuide):
         else:
             children = pm.listRelatives(model, ad=True, typ='transform')
         pm.select(children)
-        for child in pm.ls(self.fullName+"_*", selection=True):
-            objects[child[child.index(self.fullName+"_")+len(self.fullName+"_"):]] = child
+        for child in pm.ls(self.fullName + "_*", selection=True):
+            objects[child[child.index(
+                self.fullName + "_") + len(self.fullName + "_"):]] = child
 
         return objects
 
+    def getObjects2(self, model, includeShapes=True):
+        """Get the objects of the component.
 
+        Args:
+            model(dagNode): The root of the component.
+            includeShapes (boo): If True, will include the shapes.
+
+        Returns:
+            list of dagNode: The list of the objects.
+
+        """
+        objects = {}
+        if includeShapes:
+            children = [pm.PyNode(x) for x in cmds.listRelatives(
+                model.longName(), ad=True, fullPath=True)]
+        else:
+            children = [pm.PyNode(x) for x in cmds.listRelatives(
+                model.longName(), ad=True, typ='transform', fullPath=True)]
+        for child in children:
+            cName = child.longName()
+            if cName.startswith(self.fullName):
+                objects[cName.split("_")[-1]] = child
+
+        return objects
+
+    def getObjects3(self, model):
+        """
+        NOTE: Experimental function
+        Get the objects of the component.
+        This version only get the transforms by Name using Maya Cmds
+
+        Args:
+            model(dagNode): The root of the component.
+
+        Returns:
+            list of dagNode: The list of the objects.
+
+        """
+        objects = {}
+
+        for child in cmds.ls(self.fullName + "_*", type="transform"):
+            if pm.PyNode(child).getParent(-1) == model:
+                objects[child[child.index(
+                    self.fullName + "_") + len(self.fullName + "_"):]] = child
+
+        return objects
 
     def addMinMax(self, name, minimum=1, maximum=-1):
-        """
-        Add minimun and maximum number of locator when we use the modal menu.
+        """Add minimun and maximum number of locator
+
+        When we use the modal menu.
+
         """
         if "#" not in name:
-            mgear.log("Invalid definition for min/max. You should have a '#' in the name", mgear.sev_error)
+            mgear.log(
+                "Invalid definition for min/max. You should have a '#' in "
+                "the name", mgear.sev_error)
         self.minmax[name] = MinMax(minimum, maximum)
 
-
     def getSize(self):
-        """
-        Get the size of the component.
+        """Get the size of the component.
 
         Returns:
             float: the size
+
         """
         size = .01
         for pos in self.apos:
-            d = vec.getDistance(self.pos["root"], pos)
+            d = vector.getDistance(self.pos["root"], pos)
             size = max(size, d)
         size = max(size, .01)
 
         return size
 
-
     def getName(self, name):
-        """
-        Return the fullname of given element of the component.
+        """Return the fullname of given element of the component.
 
         Args:
             name (str): Localname of the element.
@@ -702,21 +720,18 @@ class ComponentGuide(MainGuide):
         """
         return self.fullName + "_" + name
 
-
     def getFullName(self):
-        """
-        Return the fullname of the component.
+        """Return the fullname of the component.
 
         Returns:
             str: Component fullname.
 
         """
-        return self.values["comp_name"] + "_" + self.values["comp_side"] + str(self.values["comp_index"])
-
+        return self.values["comp_name"] + "_" + self.values["comp_side"] + \
+            str(self.values["comp_index"])
 
     def getType(self):
-        """
-        Return the type of the component.
+        """Return the type of the component.
 
         Returns:
             str: component type.
@@ -724,15 +739,13 @@ class ComponentGuide(MainGuide):
         """
         return self.compType
 
-
     def getObjectNames(self):
-        """
-        Get the objects names of the component
+        """Get the objects names of the component
 
         Returns:
             set: The names set.
-        """
 
+        """
         names = set()
         names.update(self.save_transform)
         names.update(self.save_primitive)
@@ -741,8 +754,7 @@ class ComponentGuide(MainGuide):
         return names
 
     def getVersion(self):
-        """
-        Get the version of the component.
+        """Get the version of the component.
 
         Returns:
             str: versionof the component.
@@ -757,6 +769,8 @@ class ComponentGuide(MainGuide):
 ##########################################################
 # OTHER CLASSES
 ##########################################################
+
+
 class MinMax(object):
     """
     Minimun and maximum class.
@@ -784,12 +798,14 @@ class mainSettingsTab(QtWidgets.QDialog, msui.Ui_Form):
         super(mainSettingsTab, self).__init__()
         self.setupUi(self)
 
-class componentMainSettings(QtWidgets.QDialog, helperSlots):
+
+class componentMainSettings(QtWidgets.QDialog, guide.helperSlots):
     valueChanged = QtCore.Signal(int)
 
     def __init__(self, parent=None):
         super(componentMainSettings, self).__init__()
-        # the inspectSettings function set the current selection to the component root before open the settings dialog
+        # the inspectSettings function set the current selection to the
+        # component root before open the settings dialog
         self.root = pm.selected()[0]
 
         self.mainSettingsTab = mainSettingsTab()
@@ -812,29 +828,36 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         # Close Button
         self.close_button = QtWidgets.QPushButton("Close")
 
-
     def populate_controls(self):
-        """
-        Populate the controls values from the custom attributes of the component.
+        """Populate Controls attribute values
+
+        Populate the controls values from the custom attributes
+        of the component.
 
         """
-        #populate tab
+        # populate tab
         self.tabs.insertTab(0, self.mainSettingsTab, "Main Settings")
 
-        #populate main settings
-        self.mainSettingsTab.name_lineEdit.setText(self.root.attr("comp_name").get())
+        # populate main settings
+        self.mainSettingsTab.name_lineEdit.setText(
+            self.root.attr("comp_name").get())
         sideSet = ["C", "L", "R"]
         sideIndex = sideSet.index(self.root.attr("comp_side").get())
         self.mainSettingsTab.side_comboBox.setCurrentIndex(sideIndex)
-        self.mainSettingsTab.componentIndex_spinBox.setValue(self.root.attr("comp_index").get())
+        self.mainSettingsTab.componentIndex_spinBox.setValue(
+            self.root.attr("comp_index").get())
         if self.root.attr("useIndex").get():
-            self.mainSettingsTab.useJointIndex_checkBox.setCheckState(QtCore.Qt.Checked)
+            self.mainSettingsTab.useJointIndex_checkBox.setCheckState(
+                QtCore.Qt.Checked)
         else:
-            self.mainSettingsTab.useJointIndex_checkBox.setCheckState(QtCore.Qt.Unchecked)
-        self.mainSettingsTab.parentJointIndex_spinBox.setValue(self.root.attr("parentJointIndex").get())
-        self.mainSettingsTab.host_lineEdit.setText(self.root.attr("ui_host").get())
-        self.mainSettingsTab.subGroup_lineEdit.setText(self.root.attr("ctlGrp").get())
-
+            self.mainSettingsTab.useJointIndex_checkBox.setCheckState(
+                QtCore.Qt.Unchecked)
+        self.mainSettingsTab.parentJointIndex_spinBox.setValue(
+            self.root.attr("parentJointIndex").get())
+        self.mainSettingsTab.host_lineEdit.setText(
+            self.root.attr("ui_host").get())
+        self.mainSettingsTab.subGroup_lineEdit.setText(
+            self.root.attr("ctlGrp").get())
 
     def create_layout(self):
         """
@@ -843,7 +866,6 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         """
         return
 
-
     def create_connections(self):
         """
         Create the slots connections to the controls functions
@@ -851,10 +873,25 @@ class componentMainSettings(QtWidgets.QDialog, helperSlots):
         """
         self.close_button.clicked.connect(self.close_settings)
 
-        self.mainSettingsTab.name_lineEdit.editingFinished.connect(self.updateComponentName )
-        self.mainSettingsTab.side_comboBox.currentIndexChanged.connect(self.updateComponentName )
-        self.mainSettingsTab.componentIndex_spinBox.valueChanged.connect(self.updateComponentName )
-        self.mainSettingsTab.useJointIndex_checkBox.stateChanged.connect(partial(self.updateCheck, self.mainSettingsTab.useJointIndex_checkBox, "useIndex"))
-        self.mainSettingsTab.parentJointIndex_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.mainSettingsTab.parentJointIndex_spinBox, "parentJointIndex"))
-        self.mainSettingsTab.host_pushButton.clicked.connect(partial(self.updateHostUI, self.mainSettingsTab.host_lineEdit, "ui_host"))
-        self.mainSettingsTab.subGroup_lineEdit.editingFinished.connect(partial(self.updateLineEdit,  self.mainSettingsTab.subGroup_lineEdit, "ctlGrp") )
+        self.mainSettingsTab.name_lineEdit.editingFinished.connect(
+            self.updateComponentName)
+        self.mainSettingsTab.side_comboBox.currentIndexChanged.connect(
+            self.updateComponentName)
+        self.mainSettingsTab.componentIndex_spinBox.valueChanged.connect(
+            self.updateComponentName)
+        self.mainSettingsTab.useJointIndex_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.mainSettingsTab.useJointIndex_checkBox,
+                    "useIndex"))
+        self.mainSettingsTab.parentJointIndex_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    self.mainSettingsTab.parentJointIndex_spinBox,
+                    "parentJointIndex"))
+        self.mainSettingsTab.host_pushButton.clicked.connect(
+            partial(self.updateHostUI,
+                    self.mainSettingsTab.host_lineEdit,
+                    "ui_host"))
+        self.mainSettingsTab.subGroup_lineEdit.editingFinished.connect(
+            partial(self.updateLineEdit,
+                    self.mainSettingsTab.subGroup_lineEdit,
+                    "ctlGrp"))

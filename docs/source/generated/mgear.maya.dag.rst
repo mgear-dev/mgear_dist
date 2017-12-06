@@ -1,5 +1,5 @@
-mgear.maya.dag
-==============
+mgear\.maya\.dag
+================
 
 .. automodule:: mgear.maya.dag
 
@@ -13,6 +13,7 @@ mgear.maya.dag
       findChildren
       findChildrenPartial
       findComponentChildren
+      findComponentChildren2
       getShapes
       getTopParent
    

@@ -1,5 +1,5 @@
-mgear.maya.meshNavigation
-=========================
+mgear\.maya\.meshNavigation
+===========================
 
 .. automodule:: mgear.maya.meshNavigation
 

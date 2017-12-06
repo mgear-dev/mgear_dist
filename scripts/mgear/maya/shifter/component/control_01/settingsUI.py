@@ -1,37 +1,10 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
-
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(280, 525)
+        Form.resize(733, 550)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.groupBox = QtWidgets.QGroupBox(Form)
@@ -50,6 +23,9 @@ class Ui_Form(object):
         self.neutralRotation_checkBox = QtWidgets.QCheckBox(self.groupBox)
         self.neutralRotation_checkBox.setObjectName("neutralRotation_checkBox")
         self.verticalLayout_4.addWidget(self.neutralRotation_checkBox)
+        self.mirrorBehaviour_checkBox = QtWidgets.QCheckBox(self.groupBox)
+        self.mirrorBehaviour_checkBox.setObjectName("mirrorBehaviour_checkBox")
+        self.verticalLayout_4.addWidget(self.mirrorBehaviour_checkBox)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.ctlSize_label = QtWidgets.QLabel(self.groupBox)
@@ -122,7 +98,7 @@ class Ui_Form(object):
         self.tz_checkBox = QtWidgets.QCheckBox(self.keyable_groupBox)
         self.tz_checkBox.setObjectName("tz_checkBox")
         self.verticalLayout.addWidget(self.tz_checkBox)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout.addItem(spacerItem)
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
@@ -154,7 +130,6 @@ class Ui_Form(object):
         self.verticalLayout_2.addWidget(self.ro_comboBox)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.scale_pushButton = QtWidgets.QPushButton(self.keyable_groupBox)
         self.scale_pushButton.setObjectName("scale_pushButton")
@@ -168,7 +143,7 @@ class Ui_Form(object):
         self.sz_checkBox = QtWidgets.QCheckBox(self.keyable_groupBox)
         self.sz_checkBox.setObjectName("sz_checkBox")
         self.verticalLayout_3.addWidget(self.sz_checkBox)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout_3.addItem(spacerItem1)
         self.horizontalLayout.addLayout(self.verticalLayout_3)
         self.gridLayout_4.addLayout(self.horizontalLayout, 0, 0, 1, 1)
@@ -206,9 +181,9 @@ class Ui_Form(object):
         self.gridLayout.addWidget(self.ikRefArray_groupBox, 2, 0, 1, 1)
 
         self.retranslateUi(Form)
-        QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.tz_checkBox.toggle)
-        QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.ty_checkBox.toggle)
         QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.tx_checkBox.toggle)
+        QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.ty_checkBox.toggle)
+        QtCore.QObject.connect(self.translate_pushButton, QtCore.SIGNAL("clicked()"), self.tz_checkBox.toggle)
         QtCore.QObject.connect(self.rotate_pushButton, QtCore.SIGNAL("clicked()"), self.rx_checkBox.toggle)
         QtCore.QObject.connect(self.rotate_pushButton, QtCore.SIGNAL("clicked()"), self.ry_checkBox.toggle)
         QtCore.QObject.connect(self.rotate_pushButton, QtCore.SIGNAL("clicked()"), self.rz_checkBox.toggle)
@@ -222,7 +197,10 @@ class Ui_Form(object):
         Form.setWindowTitle(gqt.fakeTranslate("Form", "Form", None, -1))
         self.joint_checkBox.setText(gqt.fakeTranslate("Form", "Joint", None, -1))
         self.uniScale_checkBox.setText(gqt.fakeTranslate("Form", "Uniform Scale", None, -1))
+        self.neutralRotation_checkBox.setToolTip(gqt.fakeTranslate("Form", "<html><head/><body><p>If is active, it will align the control with world space</p></body></html>", None, -1))
         self.neutralRotation_checkBox.setText(gqt.fakeTranslate("Form", "World Space Orientation Align", None, -1))
+        self.mirrorBehaviour_checkBox.setToolTip(gqt.fakeTranslate("Form", "<html><head/><body><p>If is active, the control will have symmetrical behaviour on Left and Right side.</p><p><br/></p><p>WARNING: There is a bug in Maya 2018 and 2018.1 that will result in an incorrect behaviour, because this option will negate one of the axis. Other Maya version should be ok.</p></body></html>", None, -1))
+        self.mirrorBehaviour_checkBox.setText(gqt.fakeTranslate("Form", "Mirror Behaviour L and R", None, -1))
         self.ctlSize_label.setText(gqt.fakeTranslate("Form", "Ctl Size", None, -1))
         self.controlShape_comboBox.setItemText(0, gqt.fakeTranslate("Form", "Arrow", None, -1))
         self.controlShape_comboBox.setItemText(1, gqt.fakeTranslate("Form", "Circle", None, -1))

@@ -1,49 +1,23 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
 import pymel.core as pm
-import pymel.core.datatypes as dt
+from pymel.core import datatypes
 from pymel import util as pmu
 
 
 import mgear
-import mgear.maya.icon as ic
-import mgear.maya.applyop as aop
-import mgear.maya.node as nod
-import mgear.maya.transform as tra
-import mgear.maya.primitive as pri
-import mgear.maya.meshNavigation as mnav
 import mgear.string
+from mgear.maya import icon, applyop, node, transform
+from mgear.maya import primitive, meshNavigation
 
 
 def addNPO(objs=None, *args):
-    """
-    Add a transform node as a parent and in the same pose of each of the selected objects.
-    This way neutralize the local transfromation values.
-    NPO stands for "neutral position" terminology from the all mighty Softimage ;)
+    """Add a transform node as a neutral pose
+
+    Add a transform node as a parent and in the same pose of each of the
+    selected objects. This way neutralize the local transfromation
+    values.
+    NPO stands for "neutral position" terminology from the all mighty
+    Softimage ;)
+
     """
     npoList = []
 
@@ -53,7 +27,10 @@ def addNPO(objs=None, *args):
         objs = [objs]
     for obj in objs:
         oParent = obj.getParent()
-        oTra = pm.createNode("transform", n= obj.name() + "_npo", p=oParent, ss=True)
+        oTra = pm.createNode("transform",
+                             n=obj.name() + "_npo",
+                             p=oParent,
+                             ss=True)
         oTra.setTransformation(obj.getMatrix())
         pm.parent(obj, oTra)
         npoList.append(oTra)
@@ -62,73 +39,86 @@ def addNPO(objs=None, *args):
 
 
 def selectDeformers(*args):
-    """
-    Select the deformers from the object skinCluster.
-    """
+    """Select the deformers from the object skinCluster"""
+
     oSel = pm.selected()[0]
     oColl = pm.skinCluster(oSel, query=True, influence=True)
     pm.select(oColl)
 
 
-#Icon creator
-def createCTL(type = "square", child=False, *args):
-    """
-    Create a control for each selected object. The newly create control can be parent or child of the object.
+# Icon creator
+def createCTL(type="square", child=False, *args):
+    """Create a control for each selected object.
+
+    The newly create control can be parent or child of the object.
 
     Args:
         type (str): The shape of the control.
-        child (bool): if True, the control will be created as a child of the object.
+        child (bool): if True, the control will be created as a
+            child of the object.
+
     """
-    iconList =[]
+    iconList = []
     if child:
         if len(pm.selected()) > 0:
             for x in pm.selected():
-                oChilds = [item for item in x.listRelatives(ad=True, type="transform")  if item.longName().split("|")[-2] == x.name()]
+                oChilds = [item for item
+                           in x.listRelatives(ad=True, type="transform")
+                           if item.longName().split("|")[-2] == x.name()]
 
-                icon = ic.create(None, x.name() + "_ctl",None, [1, 0, 0], type)
-                iconList.append(icon)
-                icon.setTransformation(x.getMatrix(worldSpace=True))
-                pm.parent(icon, x)
+                o_icon = icon.create(
+                    None, x.name() + "_ctl", None, [1, 0, 0], type)
+                iconList.append(o_icon)
+                o_icon.setTransformation(x.getMatrix(worldSpace=True))
+                pm.parent(o_icon, x)
                 for child in oChilds:
 
-                    pm.parent(child, icon)
+                    pm.parent(child, o_icon)
         else:
 
-            icon = ic.create(None, type + "_ctl", pm.datatypes.Matrix(), [1, 0, 0], type)
-            iconList.append(icon)
+            o_icon = icon.create(
+                None, type + "_ctl", datatypes.Matrix(), [1, 0, 0], type)
+            iconList.append(o_icon)
     else:
         if len(pm.selected()) > 0:
             for x in pm.selected():
                 oParent = x.getParent()
-                icon = ic.create(oParent, x.name() + "_ctl", x.getMatrix(), [1, 0, 0], type)
-                iconList.append(icon)
-                icon.setTransformation(x.getMatrix())
-                pm.parent(x, icon)
+                o_icon = icon.create(oParent,
+                                     x.name() + "_ctl",
+                                     x.getMatrix(),
+                                     [1, 0, 0],
+                                     type)
+                iconList.append(o_icon)
+                o_icon.setTransformation(x.getMatrix())
+                pm.parent(x, o_icon)
         else:
 
-            icon = ic.create(None, type + "_ctl", pm.datatypes.Matrix(), [1, 0, 0], type)
-            iconList.append(icon)
+            o_icon = icon.create(
+                None, type + "_ctl", datatypes.Matrix(), [1, 0, 0], type)
+            iconList.append(o_icon)
 
     try:
-        defSet = pm.PyNode("rig_controlers_grp")
+        defSet = pm.PyNode("rig_controllers_grp")
         for ico in iconList:
             pm.sets(defSet, add=ico)
-    except:
-        print "not rig_controlers_grp found"
+    except TypeError:
+        print "not rig_controllers_grp found"
         pass
 
 
 def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
-
-    """
-    Create one joint for each selected object.
+    """Create one joint for each selected object.
 
     Args:
-        obj (bool or dagNode, optional): The object to drive the new joint. If False will use the current selection.
-        parent (bool or dagNode, optional): The parent for the joint. If False will try to parent to jnt_org.
-            If jnt_org doesn't exist will parent the joint under the obj
-        noReplace (bool, optional): If True will add the extension "_jnt" to the new joint name
-        grp (pyNode or None, optional): The set to add the new joint. If none will use "rig_deformers_grp"
+        obj (bool or dagNode, optional): The object to drive the new
+            joint. If False will use the current selection.
+        parent (bool or dagNode, optional): The parent for the joint.
+            If False will try to parent to jnt_org. If jnt_org doesn't
+            exist will parent the joint under the obj
+        noReplace (bool, optional): If True will add the extension
+            "_jnt" to the new joint name
+        grp (pyNode or None, optional): The set to add the new joint.
+            If none will use "rig_deformers_grp"
         *args: Maya's dummy
 
     Returns:
@@ -144,14 +134,14 @@ def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
         if not parent:
             try:
                 oParent = pm.PyNode("jnt_org")
-            except:
+            except TypeError:
                 oParent = obj
         else:
             oParent = parent
         if noReplace:
-            jntName = "_".join(obj.name().split("_"))+"_jnt"
+            jntName = "_".join(obj.name().split("_")) + "_jnt"
         else:
-            jntName = "_".join(obj.name().split("_")[:-1])+"_jnt"
+            jntName = "_".join(obj.name().split("_")[:-1]) + "_jnt"
         jnt = pm.createNode("joint", n=jntName)
 
         if grp:
@@ -160,7 +150,7 @@ def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
             try:
                 defSet = pm.PyNode("rig_deformers_grp")
                 pm.sets(defSet, add=jnt)
-            except:
+            except TypeError:
                 pm.sets(n="rig_deformers_grp")
                 defSet = pm.PyNode("rig_deformers_grp")
                 pm.sets(defSet, add=jnt)
@@ -169,12 +159,14 @@ def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
 
         jnt.setAttr("jointOrient", 0, 0, 0)
         try:
-            mulmat_node = nod.createMultMatrixNode(obj + ".worldMatrix", jnt + ".parentInverseMatrix")
-            dm_node = nod.createDecomposeMatrixNode(mulmat_node+".matrixSum")
-            pm.connectAttr(dm_node+".outputTranslate", jnt+".t")
-            pm.connectAttr(dm_node+".outputRotate", jnt+".r")
-            pm.connectAttr(dm_node+".outputScale", jnt+".s")
-        except:
+            mulmat_node = node.createMultMatrixNode(
+                obj + ".worldMatrix", jnt + ".parentInverseMatrix")
+            dm_node = node.createDecomposeMatrixNode(
+                mulmat_node + ".matrixSum")
+            pm.connectAttr(dm_node + ".outputTranslate", jnt + ".t")
+            pm.connectAttr(dm_node + ".outputRotate", jnt + ".r")
+            pm.connectAttr(dm_node + ".outputScale", jnt + ".s")
+        except RuntimeError:
             for axis in ["tx", "ty", "tz", "rx", "ry", "rz"]:
                 jnt.attr(axis).set(0.0)
 
@@ -182,19 +174,18 @@ def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
 
 
 def duplicateSym(*args):
-    """
-    Duplicate one dag hierarchy to/from X/-X renaming "L" to "R"
-    """
+    """Duplicate one dag hierarchy to/from X/-X renaming "L" to "R" """
+
     oSelection = pm.selected()
     if oSelection:
         oSel = oSelection[0]
         oTarget = pm.duplicate()[0]
 
         t = oSel.getTransformation()
-        t = tra.getSymmetricalTransform(t)
+        t = transform.getSymmetricalTransform(t)
         oTarget.setTransformation(t)
 
-        #Quick rename
+        # Quick rename
         pm.select(oTarget, hi=True)
 
         for x in pm.selected():
@@ -205,35 +196,40 @@ def duplicateSym(*args):
 
 
 def matchWorldXform(*args):
-    """
-    Align 2 selected objects in world space.
-    """
-    if len(pm.selected()) <2:
-        mgear.log( "2 objects or more must be selected. Source and Targets transform", mgear.sev_warning)
+    """Align 2 selected objects in world space"""
+
+    if len(pm.selected()) < 2:
+        mgear.log("2 objects or more must be selected. Source and Targets "
+                  "transform", mgear.sev_warning)
     else:
         source = pm.selected()[0]
         for target in pm.selected()[1:]:
-            tra.matchWorldTransform(source, target)
+            transform.matchWorldTransform(source, target)
+
 
 def alignToPointsLoop(points=None, loc=None, name=None, *args):
-    """
-    Create space locator align to the plain define by at less 3 vertex
+    """Create space locator align to the plain define by at less 3 vertex
 
     Args:
-        points (None or vertex list, optional): The reference vertex to align the ref locator
+        points (None or vertex list, optional): The reference vertex to align
+            the ref locator
         loc (None or dagNode, optional): If none will create a new locator
         name (None or string, optional): Name of the new locator
         *args: Description
 
     Returns:
         TYPE: Description
-    """
 
+    """
     if not points:
         oSel = pm.selected(fl=True)
 
-        if not oSel  or len(oSel) < 3  or str(type(oSel[0])) != "<class 'pymel.core.general.MeshVertex'>":
-            pm.displayWarning("We need to select a points loop, with at less 3 or more points")
+        checkType = "<class 'pymel.core.general.MeshVertex'>"
+        if (not oSel
+                or len(oSel) < 3
+                or str(type(oSel[0])) != checkType):
+            pm.displayWarning("We need to select a points loop, with at "
+                              "less 3 or more points")
             return
         else:
             points = oSel
@@ -243,29 +239,31 @@ def alignToPointsLoop(points=None, loc=None, name=None, *args):
         loc = pm.spaceLocator(n=name)
 
     oLen = len(points)
-    wPos = [0,0,0]
+    wPos = [0, 0, 0]
     for x in points:
         pos = x.getPosition(space="world")
         wPos[0] += pos[0]
         wPos[1] += pos[1]
         wPos[2] += pos[2]
 
-    centerPosition = dt.Vector([wPos[0]/oLen, wPos[1]/oLen, wPos[2]/oLen ])
+    centerPosition = datatypes.Vector([wPos[0] / oLen,
+                                       wPos[1] / oLen,
+                                       wPos[2] / oLen])
 
-
-    lookat = dt.Vector(points[0].getPosition(space="world"))
+    lookat = datatypes.Vector(points[0].getPosition(space="world"))
 
     # NORMAL
-    a =  lookat - centerPosition
+    a = lookat - centerPosition
     a.normalize()
 
-    nextV = dt.Vector(points[1].getPosition(space="world"))
-    b =  nextV - centerPosition
+    nextV = datatypes.Vector(points[1].getPosition(space="world"))
+    b = nextV - centerPosition
     b.normalize()
     normal = pmu.cross(b, a)
     normal.normalize()
 
-    trans = tra.getTransformLookingAt(centerPosition,lookat, normal, axis="xy", negate=False)
+    trans = transform.getTransformLookingAt(
+        centerPosition, lookat, normal, axis="xy", negate=False)
 
     loc.setTransformation(trans)
 
@@ -277,18 +275,20 @@ def connectWorldTransform(source, target):
         source (dagNode): Source dagNode.
         target (dagNode): target dagNode.
     """
-    mulmat_node = nod.createMultMatrixNode(source + ".worldMatrix", target + ".parentInverseMatrix")
-    dm_node = nod.createDecomposeMatrixNode(mulmat_node+".matrixSum")
-    pm.connectAttr(dm_node+".outputTranslate", target+".t")
-    pm.connectAttr(dm_node+".outputRotate", target+".r")
-    pm.connectAttr(dm_node+".outputScale", target+".s")
+    mulmat_node = node.createMultMatrixNode(source + ".worldMatrix",
+                                            target + ".parentInverseMatrix")
+    dm_node = node.createDecomposeMatrixNode(mulmat_node + ".matrixSum")
+    pm.connectAttr(dm_node + ".outputTranslate", target + ".t")
+    pm.connectAttr(dm_node + ".outputRotate", target + ".r")
+    pm.connectAttr(dm_node + ".outputScale", target + ".s")
+
 
 def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
-    """
-    Connect scale, rotatio and translation.
+    """Connect scale, rotatio and translation.
 
     Args:
-        objects (None or list of dagNode, optional): If None will use the current selection.
+        objects (None or list of dagNode, optional): If None will use the
+            current selection.
         s (bool, optional): If True will connect the local scale
         r (bool, optional): If True will connect the local rotation
         t (bool, optional): If True will connect the local translation
@@ -299,7 +299,7 @@ def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
             source = objects[0]
             targets = objects[1:]
 
-        else :
+        else:
             source = pm.selected()[0]
             targets = pm.selected()[1:]
 
@@ -313,13 +313,18 @@ def connectLocalTransform(objects=None, s=True, r=True, t=True, *args):
     else:
         pm.displayWarning("Please at less select 2 objects. Source + target/s")
 
+
 def connectUserDefinedChannels(source, targets):
-    """
-    Connects the user defined channels between 2 objects with the same channels. Usually a copy of the same object.
+    """Connects the user defined channels
+
+    Connects the user defined channels between 2 objects with the same
+    channels. Usually a copy of the same object.
 
     Args:
         source (dagNode): The dagNode with the source user defined channels
-        targets (list of dagNode): The list of dagNodes with the same user defined channels to be connected.
+        targets (list of dagNode): The list of dagNodes with the same user
+            defined channels to be connected.
+
     """
     udc = source.listAttr(ud=True)
     if not isinstance(targets, list):
@@ -328,8 +333,10 @@ def connectUserDefinedChannels(source, targets):
         for t in targets:
             try:
                 pm.connectAttr(c, t.attr(c.name().split(".")[-1]))
-            except:
-                pm.displayWarning("%s don't have contrapart channel on %s"%(c, t))
+            except RuntimeError:
+                pm.displayWarning("%s don't have contrapart channel "
+                                  "on %s" % (c, t))
+
 
 def connectInvertSRT(source, target, srt="srt", axis="xyz"):
     """Connect the locat transformations with inverted values.
@@ -337,8 +344,9 @@ def connectInvertSRT(source, target, srt="srt", axis="xyz"):
     Args:
         source (dagNode): The source driver dagNode
         target (dagNode): The target driven dagNode
-        srt (string, optional): String value for the scale(s), rotate(r), translation(t). Default
-            value is "srt". Posible values "s", "r", "t" or any combination
+        srt (string, optional): String value for the scale(s), rotate(r),
+            translation(t). Default value is "srt". Posible values "s", "r",
+            "t" or any combination
         axis (string, optional):  String value for the axis. Default
             value is "xyz". Posible values "x", "y", "z" or any combination
     """
@@ -347,30 +355,33 @@ def connectInvertSRT(source, target, srt="srt", axis="xyz"):
         invList = []
         targetList = []
         for a in axis:
-            soureList.append(source.attr(t+a))
+            soureList.append(source.attr(t + a))
             invList.append(-1)
-            targetList.append(target.attr(t+a))
+            targetList.append(target.attr(t + a))
 
         if soureList:
-            nod.createMulNode(soureList, invList, targetList)
+            node.createMulNode(soureList, invList, targetList)
+
 
 def replaceShape(source=None, targets=None, *args):
-    """
-    Replace the shape of one object by another.
+    """Replace the shape of one object by another.
 
     Args:
         source (None, PyNode): Source object with the original shape.
-        targets (None, list of pyNode): Targets object to apply the source shape.
+        targets (None, list of pyNode): Targets object to apply the
+            source shape.
         *args: Maya's dummy
 
     Returns:
 
-        None: Return non if nothing is selected or the source and targets are none
+        None: Return non if nothing is selected or the source and targets
+        are none
+
     """
     if not source and not targets:
-        oSel =  pm.selected()
-        if len(oSel) <2:
-            pm.displayWarning( "At less 2 objects must be selected")
+        oSel = pm.selected()
+        if len(oSel) < 2:
+            pm.displayWarning("At less 2 objects must be selected")
             return None
         else:
             source = oSel[0]
@@ -382,20 +393,23 @@ def replaceShape(source=None, targets=None, *args):
         pm.delete(shape)
         pm.parent(source2.getShapes(), target, r=True, s=True)
 
-        for  i, sh in enumerate(target.getShapes()):
-            pm.rename( sh, target.name() + "_%s_Shape"%str(i) )
+        for i, sh in enumerate(target.getShapes()):
+            pm.rename(sh, target.name() + "_%s_Shape" % str(i))
 
         pm.delete(source2)
 
 
 def matchPosfromBBox(*args):
-    """
-    Match the position of one object, using the boundig box center of another object.
+    """Match the position usin bounding box of another object another.
+
+    Match the position of one object, using the boundig box center of
+    another object.
+
     """
     source = pm.selected()[0]
     target = pm.selected()[1]
 
-    center = mnav.bboxCenter(source, radius=False)
+    center = meshNavigation.bboxCenter(source, radius=False)
 
     target.setTranslation(center, space="world")
 
@@ -405,8 +419,10 @@ def matchPosfromBBox(*args):
 #######################################
 
 def spaceJump(ref=None, space=None, *args):
-    """
-    This function create a local reference space from another space in the hierarchy
+    """Space Jump gimmick
+
+    This function create a local reference space from another space in the
+    hierarchy
 
     Args:
         ref (None, optional): Transform reference
@@ -415,20 +431,27 @@ def spaceJump(ref=None, space=None, *args):
 
     Returns:
         pyNode: Transform
-    """
 
+    """
     if not ref and not space:
-        if len(pm.selected())==2:
+        if len(pm.selected()) == 2:
             ref = pm.selected()[0]
             space = pm.selected()[1]
         else:
-            pm.displayWarning("Please select 2 objects. Reference Space  and Jump Space")
+            pm.displayWarning("Please select 2 objects. Reference Space  "
+                              "and Jump Space")
             return
 
-    refLocal = pri.addTransform(ref, ref.name()+"_SPACE_"+space.name(), space.getMatrix(worldSpace=True))
-    spaceLocal = pri.addTransform(space, ref.name()+"_JUMP_"+space.name(), space.getMatrix(worldSpace=True))
+    refLocal = primitive.addTransform(ref,
+                                      ref.name() + "_SPACE_" + space.name(),
+                                      space.getMatrix(worldSpace=True))
+    spaceLocal = primitive.addTransform(space,
+                                        ref.name() + "_JUMP_" + space.name(),
+                                        space.getMatrix(worldSpace=True))
 
-    aop.gear_mulmatrix_op(refLocal.attr("worldMatrix"), spaceLocal.attr("parentInverseMatrix[0]"), spaceLocal)
+    applyop.gear_mulmatrix_op(refLocal.attr("worldMatrix"),
+                              spaceLocal.attr("parentInverseMatrix[0]"),
+                              spaceLocal)
 
     pm.displayInfo("Jump Space for local space: " + space.name() + "created")
     return spaceLocal
@@ -436,29 +459,41 @@ def spaceJump(ref=None, space=None, *args):
 
 def createInterpolateTransform(objects=None, blend=.5, *args):
     """
-    Create space locator and apply gear_intmatrix_op, to interpolate the his pose between 2 selected objects.
+    Create space locator and apply gear_intmatrix_op, to interpolate the his
+    pose between 2 selected objects.
 
     Args:
-        objects (None or list of 2 dagNode, optional): The 2 dagNode to interpolate the transform.
+        objects (None or list of 2 dagNode, optional): The 2 dagNode to
+            interpolate the transform.
         blend (float, optional): The interpolation blend factor.
         *args: Maya's dummy
 
     Returns:
-        pyNode: The new transformation witht the interpolate matrix node applied.
+        pyNode: The new transformation witht the interpolate matrix o_node
+        applied.
+
     """
     if objects or len(pm.selected()) >= 2:
         if objects:
             refA = objects[0]
             refB = objects[1]
 
-        else :
+        else:
             refA = pm.selected()[0]
             refB = pm.selected()[1]
 
-        intMatrix = aop.gear_intmatrix_op(refA.attr("worldMatrix"), refB.attr("worldMatrix"), blend)
-        intTrans = pri.addTransform(refA, refA.name()+"_INTER_"+refB.name(), dt.Matrix())
-        aop.gear_mulmatrix_op(intMatrix.attr("output"), intTrans.attr("parentInverseMatrix[0]"), intTrans)
-        pm.displayInfo("Interpolated Transform: " + intTrans.name() + " created")
+        intMatrix = applyop.gear_intmatrix_op(refA.attr("worldMatrix"),
+                                              refB.attr("worldMatrix"),
+                                              blend)
+        intTrans = primitive.addTransform(
+            refA, refA.name() + "_INTER_" + refB.name(), datatypes.Matrix())
+
+        applyop.gear_mulmatrix_op(intMatrix.attr("output"),
+                                  intTrans.attr("parentInverseMatrix[0]"),
+                                  intTrans)
+
+        pm.displayInfo(
+            "Interpolated Transform: " + intTrans.name() + " created")
     else:
         pm.displayWarning("Please select 2 objects. ")
         return
@@ -466,19 +501,28 @@ def createInterpolateTransform(objects=None, blend=.5, *args):
     return intTrans
 
 
-def addBlendedJoint(oSel=None, compScale=True, blend=.5, name=None, select=True, *args):
-    """Create a joint that rotate 50% of the selected joint. This operation is done using a
-    pairBlend node.
+def addBlendedJoint(oSel=None,
+                    compScale=True,
+                    blend=.5,
+                    name=None,
+                    select=True,
+                    *args):
+    """Create and gimmick blended joint
+
+    Create a joint that rotate 50% of the selected joint. This operation is
+    done using a pairBlend node.
 
     Args:
         oSel (None or joint, optional): If None will use the selected joints.
-        compScale (bool, optional): Set the compScale option of the blended joint. Default is True.
+        compScale (bool, optional): Set the compScale option of the blended
+            joint. Default is True.
         blend (float, optional): blend rotation value
-        name (None, optional): Name for the blended node
+        name (None, optional): Name for the blended o_node
         *args: Maya's dummy
 
     Returns:
         list: blended joints list
+
     """
     if not oSel:
         oSel = pm.selected()
@@ -489,30 +533,30 @@ def addBlendedJoint(oSel=None, compScale=True, blend=.5, name=None, select=True,
         if isinstance(x, pm.nodetypes.Joint):
             parent = x.getParent()
             if name:
-                name = 'blend_'+name
+                name = 'blend_' + name
             else:
-                name = 'blend_'+x.name()
+                name = 'blend_' + x.name()
 
             jnt = pm.createNode('joint', n=name, p=x)
             jnt_list.append(jnt)
             jnt.attr('radius').set(1.5)
             pm.parent(jnt, parent)
-            node = pm.createNode("pairBlend")
-            node.attr("rotInterpolation").set(1)
-            pm.setAttr(node+".weight", blend)
-            pm.connectAttr(x+".translate", node+".inTranslate1")
-            pm.connectAttr(x+".translate", node+".inTranslate2")
-            pm.connectAttr(x+".rotate", node+".inRotate1")
+            o_node = pm.createNode("pairBlend")
+            o_node.attr("rotInterpolation").set(1)
+            pm.setAttr(o_node + ".weight", blend)
+            pm.connectAttr(x + ".translate", o_node + ".inTranslate1")
+            pm.connectAttr(x + ".translate", o_node + ".inTranslate2")
+            pm.connectAttr(x + ".rotate", o_node + ".inRotate1")
 
-            pm.connectAttr(node+".outRotateX", jnt+".rotateX")
-            pm.connectAttr(node+".outRotateY", jnt+".rotateY")
-            pm.connectAttr(node+".outRotateZ", jnt+".rotateZ")
+            pm.connectAttr(o_node + ".outRotateX", jnt + ".rotateX")
+            pm.connectAttr(o_node + ".outRotateY", jnt + ".rotateY")
+            pm.connectAttr(o_node + ".outRotateZ", jnt + ".rotateZ")
 
-            pm.connectAttr(node+".outTranslateX", jnt+".translateX")
-            pm.connectAttr(node+".outTranslateY", jnt+".translateY")
-            pm.connectAttr(node+".outTranslateZ", jnt+".translateZ")
+            pm.connectAttr(o_node + ".outTranslateX", jnt + ".translateX")
+            pm.connectAttr(o_node + ".outTranslateY", jnt + ".translateY")
+            pm.connectAttr(o_node + ".outTranslateZ", jnt + ".translateZ")
 
-            pm.connectAttr(x+".scale", jnt+".scale")
+            pm.connectAttr(x + ".scale", jnt + ".scale")
 
             jnt.attr("overrideEnabled").set(1)
             jnt.attr("overrideColor").set(17)
@@ -522,28 +566,34 @@ def addBlendedJoint(oSel=None, compScale=True, blend=.5, name=None, select=True,
             try:
                 defSet = pm.PyNode("rig_deformers_grp")
 
-            except:
+            except TypeError:
                 pm.sets(n="rig_deformers_grp")
                 defSet = pm.PyNode("rig_deformers_grp")
 
             pm.sets(defSet, add=jnt)
         else:
-            pm.displayWarning("Blended Joint can't be added to: %s. Because is not ot type Joint"%x.name())
+            pm.displayWarning("Blended Joint can't be added to: %s. Because "
+                              "is not ot type Joint" % x.name())
 
     if jnt_list and select:
         pm.select(jnt_list)
 
     return jnt_list
 
+
 def addSupportJoint(oSel=None, select=True, *args):
-    """Add an extra joint to the blended joint. This is meant to be use with SDK for game style deformation.
+    """Add an extra joint to the blended joint.
+
+    This is meant to be use with SDK for game style deformation.
 
     Args:
-        oSel (None or blended joint, optional): If None will use the current selection.
+        oSel (None or blended joint, optional): If None will use the current
+            selection.
         *args: Mays's dummy
 
     Returns:
         list: blended joints list
+
     """
     if not oSel:
         oSel = pm.selected()
@@ -553,9 +603,11 @@ def addSupportJoint(oSel=None, select=True, *args):
     jnt_list = []
     for x in oSel:
         if x.name().split("_")[0] == "blend":
-            children = [item for item in pm.selected()[0].listRelatives(ad=True, type="joint")]
+            children = [item for item
+                        in pm.selected()[0].listRelatives(ad=True,
+                                                          type="joint")]
             i = len(children)
-            name = x.name().replace("blend", "blendSupport_%s"%str(i))
+            name = x.name().replace("blend", "blendSupport_%s" % str(i))
             jnt = pm.createNode('joint', n=name, p=x)
             jnt_list.append(jnt)
             jnt.attr('radius').set(1.5)
@@ -564,14 +616,15 @@ def addSupportJoint(oSel=None, select=True, *args):
             try:
                 defSet = pm.PyNode("rig_deformers_grp")
 
-            except:
+            except pm.MayaNodeError:
                 pm.sets(n="rig_deformers_grp")
                 defSet = pm.PyNode("rig_deformers_grp")
 
             pm.sets(defSet, add=jnt)
 
         else:
-            pm.displayWarning("Support Joint can't be added to: %s. Because is not blend joint"%x.name())
+            pm.displayWarning("Support Joint can't be added to: %s. Because "
+                              "is not blend joint" % x.name())
 
     if jnt_list and select:
         pm.select(jnt_list)

@@ -9,7 +9,7 @@ maya.SetupMscver()
 env = excons.MakeBaseEnv()
 
 
-version = (2, 2, 4)
+version = (2, 3, 0)
 versionstr = "%d.%d.%d" % version
 platname = {"win32": "windows", "darwin": "osx"}.get(sys.platform, "linux")
 outprefix = "platforms/%s/%s/%s/plug-ins" % (maya.Version(nice=True), platname, excons.arch_dir)
@@ -19,8 +19,11 @@ outdir = excons.OutputBaseDirectory()
 gen = excons.config.AddGenerator(env, "mgear", {"MGEAR_VERSION": "[%d, %d, %d]" % version,
                                                 "MGEAR_MAJMIN_VERSION": "%d.%d" % (version[0], version[1])})
 
-mgearinit = gen(outdir + "/scripts/mgear/__init__.py", "scripts/mgear/__init__.py.in")
+mgearinit = gen("scripts/mgear/__init__.py", "scripts/mgear/__init__.py.in")
 mgearmod = gen("mGear.mod", "mGear.mod.in")
+mgearpy = filter(lambda x: not os.path.basename(x).startswith("__init__.py"), excons.glob("scripts/mgear/*"))
+qtpy = ["Qtdotpy/Qt.py"]
+NoClean(mgearinit + mgearmod)
 
 defines = []
 if sys.platform == "win32":
@@ -34,6 +37,16 @@ def CVWrapSetup(env):
 
 targets = [
    {
+      "name": "mgear_core",
+      "type": "install",
+      "desc": "mgear core python modules",
+      "install": {"scripts": excons.glob("scripts/*.py"),
+                  "scripts/mgear": mgearpy + mgearinit,
+                  "scripts/mgear/vendor": qtpy,
+                  "tests": excons.glob("tests/*.py"),
+                  "": mgearmod}
+   },
+   {
       "name": "mgear_solvers",
       "type": "dynamicmodule",
       "desc": "mgear solvers plugin",
@@ -43,12 +56,7 @@ targets = [
       "defs": defines,
       "incdirs": ["src"],
       "srcs": excons.glob("src/*.cpp"),
-      "custom": [maya.Require],
-      "install": {"scripts": excons.glob("scripts/*.py"),
-                  "scripts/mgear": filter(lambda x: not x.endswith(".py.in"), excons.glob("scripts/mgear/*")),
-                  "tests": excons.glob("tests/*.py"),
-                  "": mgearmod},
-      "deps": mgearinit
+      "custom": [maya.Require]
    },
    {
       "name": "cvwrap",
@@ -66,11 +74,11 @@ targets = [
    }
 ]
 
-excons.AddHelpTargets(mgear="mgear maya framework")
+excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cvwrap)")
 
 td = excons.DeclareTargets(env, targets)
 
-env.Alias("mgear", mgearinit + [td["mgear_solvers"], td["cvwrap"]])
+env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"]])
 
 td["python"] = filter(lambda x: os.path.splitext(str(x))[1] != ".mel", Glob(outdir + "/scripts/*"))
 td["scripts"] = Glob(outdir + "/scripts/*.mel")

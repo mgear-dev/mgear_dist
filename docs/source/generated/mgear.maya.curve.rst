@@ -1,5 +1,5 @@
-mgear.maya.curve
-================
+mgear\.maya\.curve
+==================
 
 .. automodule:: mgear.maya.curve
 
@@ -12,6 +12,7 @@ mgear.maya.curve
       addCnsCurve
       addCurve
       createCurveFromCurve
+      createCurveFromOrderedEdges
       createCuveFromEdges
       findLenghtFromParam
       getCurveParamAtPosition

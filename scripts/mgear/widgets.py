@@ -1,43 +1,15 @@
-# MGEAR is under the terms of the MIT License
+"""mGear Qt custom widgets"""
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
+from mgear.vendor.Qt import QtCore, QtWidgets
 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-"""
-mGear Qt custom widgets
-"""
-
-import mgear.maya.pyqt as gqt
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 #################################################
-## CUSTOM WIDGETS
+# CUSTOM WIDGETS
 #################################################
 
 class TableWidgetDragRows(QtWidgets.QTableWidget):
-    """qTableWidget with drag and drop functionality
-    """
+    """qTableWidget with drag and drop functionality"""
+
     def __init__(self, *args, **kwargs):
         super(TableWidgetDragRows, self).__init__(*args, **kwargs)
 
@@ -56,8 +28,11 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
             drop_row = self.drop_on(event)
 
             rows = sorted(set(item.row() for item in self.selectedItems()))
-            rows_to_move = [[QtWidgets.QTableWidgetItem(self.item(row_index, column_index)) for column_index in range(self.columnCount())]
-                            for row_index in rows]
+            rows_to_move = [[QtWidgets.QTableWidgetItem(
+                self.item(row_index, column_index))
+                for column_index in range(self.columnCount())]
+                for row_index in rows]
+
             for row_index in reversed(rows):
                 self.removeRow(row_index)
                 if row_index < drop_row:
@@ -71,14 +46,16 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
             event.accept()
             for row_index in range(len(rows_to_move)):
                 for column_index in range(self.columnCount()):
-                    self.item(drop_row + row_index, column_index).setSelected(True)
+                    self.item(drop_row + row_index,
+                              column_index).setSelected(True)
 
     def drop_on(self, event):
         index = self.indexAt(event.pos())
         if not index.isValid():
             return self.rowCount()
 
-        return index.row() + 1 if self.is_below(event.pos(), index) else index.row()
+        return index.row() + 1 if self.is_below(event.pos(),
+                                                index) else index.row()
 
     def is_below(self, pos, index):
         rect = self.visualRect(index)
@@ -87,7 +64,10 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
             return False
         elif rect.bottom() - pos.y() < margin:
             return True
-        return rect.contains(pos, True) and not (int(self.model().flags(index)) & QtCore.Qt.ItemIsDropEnabled) and pos.y() >= rect.center().y()
+        return rect.contains(pos, True) \
+            and not (int(self.model().flags(index))
+                     & QtCore.Qt.ItemIsDropEnabled) \
+            and pos.y() >= rect.center().y()
 
     def getSelectedRowsFast(self):
         selRows = []
@@ -102,7 +82,9 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
         if self.dragDropMode() == QtWidgets.QAbstractItemView.InternalMove:
             dropAction = QtCore.Qt.MoveAction
 
-        if event.source() == self and event.possibleActions() & QtCore.Qt.MoveAction and dropAction == QtCore.Qt.MoveAction:
+        if (event.source() == self
+            and event.possibleActions() & QtCore.Qt.MoveAction
+                and dropAction == QtCore.Qt.MoveAction):
             selectedIndexes = self.selectedIndexes()
             child = index
             while child.isValid() and child != self.rootIndex():
@@ -122,17 +104,20 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
 
         if self.viewport().rect().contains(event.pos()):
             index = self.indexAt(event.pos())
-            if not index.isValid() or not self.visualRect(index).contains(event.pos()):
+            if (not index.isValid()
+                    or not self.visualRect(index).contains(event.pos())):
                 index = self.rootIndex()
 
         if self.model().supportedDropActions() & event.dropAction():
             if index != self.rootIndex():
-                dropIndicatorPosition = self.position(event.pos(), self.visualRect(index), index)
-
-                if dropIndicatorPosition == QtWidgets.QAbstractItemView.AboveItem:
+                dropIndicatorPosition = self.position(event.pos(),
+                                                      self.visualRect(index),
+                                                      index)
+                qabw = QtWidgets.QAbstractItemView
+                if dropIndicatorPosition == qabw.AboveItem:
                     row = index.row()
                     col = index.column()
-                elif dropIndicatorPosition == QtWidgets.QAbstractItemView.BelowItem:
+                elif dropIndicatorPosition == qabw.BelowItem:
                     row = index.row() + 1
                     col = index.column()
                 else:
@@ -154,7 +139,12 @@ class TableWidgetDragRows(QtWidgets.QTableWidget):
         elif rect.contains(pos, True):
             r = QtWidgets.QAbstractItemView.OnItem
 
-        if r == QtWidgets.QAbstractItemView.OnItem and not (self.model().flags(index) & QtCore.Qt.ItemIsDropEnabled):
-            r = QtWidgets.QAbstractItemView.AboveItem if pos.y() < rect.center().y() else QtWidgets.QAbstractItemView.BelowItem
+        if (r == QtWidgets.QAbstractItemView.OnItem
+                and not (self.model().flags(index)
+                         & QtCore.Qt.ItemIsDropEnabled)):
+            if pos.y() < rect.center().y():
+                r = QtWidgets.QAbstractItemView.AboveItem
+            else:
+                r = QtWidgets.QAbstractItemView.BelowItem
 
         return r

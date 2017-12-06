@@ -1,50 +1,21 @@
-# MGEAR is under the terms of the MIT License
+"""Guide Meta 01 module"""
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-##########################################################
-# GLOBAL
-##########################################################
 from functools import partial
 
-# mgear
-from mgear.maya.shifter.component.guide import ComponentGuide
+from mgear.maya.shifter.component import guide
+from mgear.maya import pyqt
+from mgear.vendor.Qt import QtWidgets, QtCore
 
-#Pyside
-from mgear.maya.shifter.component.guide import componentMainSettings
-import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
+
 import settingsUI as sui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1,0,0]
+VERSION = [1, 0, 0]
 TYPE = "meta_01"
 NAME = "meta"
 DESCRIPTION = "metacarpal finger spread."
@@ -52,7 +23,10 @@ DESCRIPTION = "metacarpal finger spread."
 ##########################################################
 # CLASS
 ##########################################################
-class Guide(ComponentGuide):
+
+
+class Guide(guide.ComponentGuide):
+    """Component Guide Class"""
 
     compType = TYPE
     compName = NAME
@@ -63,19 +37,14 @@ class Guide(ComponentGuide):
     email = EMAIL
     version = VERSION
 
-
-    # =====================================================
-    ##
-    # @param self
     def postInit(self):
+        """Initialize the position for the guide"""
         self.save_transform = ["root", "#_loc"]
         self.save_blade = ["blade"]
         self.addMinMax("#_loc", 1, -1)
 
-    # =====================================================
-    ## Add more object to the object definition list.
-    # @param self
     def addObjects(self):
+        """Add the Guide Root, blade and locators"""
 
         self.root = self.addRoot()
         self.locs = self.addLocMulti("#_loc", self.root)
@@ -85,37 +54,38 @@ class Guide(ComponentGuide):
         centers.extend(self.locs)
         self.dispcrv = self.addDispCurve("crv", centers)
 
-    # =====================================================
-    ## Add more parameter to the parameter definition list.
-    # @param self
     def addParameters(self):
-        self.pScale       = self.addParam("intScale", "bool", True)
-        self.pRotate       = self.addParam("intRotation", "bool", True)
-        self.pTranslation      = self.addParam("intTranslation", "bool", True)
-        self.pUseIndex       = self.addParam("useIndex", "bool", False)
-        self.pParentJointIndex = self.addParam("parentJointIndex", "long", -1, None, None)
+        """Add the configurations settings"""
+        self.pScale = self.addParam("intScale", "bool", True)
+        self.pRotate = self.addParam("intRotation", "bool", True)
+        self.pTranslation = self.addParam("intTranslation", "bool", True)
+        self.pUseIndex = self.addParam("useIndex", "bool", False)
+        self.pParentJointIndex = self.addParam(
+            "parentJointIndex", "long", -1, None, None)
 
 ##########################################################
 # Setting Page
 ##########################################################
 
+
 class settingsTab(QtWidgets.QDialog, sui.Ui_Form):
+    """The Component settings UI"""
 
     def __init__(self, parent=None):
         super(settingsTab, self).__init__(parent)
         self.setupUi(self)
 
 
-class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
+class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
+    """Create the component setting window"""
 
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         self.toolName = TYPE
         # Delete old instances of the componet settings window.
-        gqt.deleteInstances(self, MayaQDockWidget)
+        pyqt.deleteInstances(self, MayaQDockWidget)
 
-        super(self.__class__, self).__init__(parent = parent)
+        super(self.__class__, self).__init__(parent=parent)
         self.settingsTab = settingsTab()
-
 
         self.setup_componentSettingWindow()
         self.create_componentControls()
@@ -124,7 +94,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.create_componentConnections()
 
     def setup_componentSettingWindow(self):
-        self.mayaMainWindow = gqt.maya_main_window()
+        self.mayaMainWindow = pyqt.maya_main_window()
 
         self.setObjectName(self.toolName)
         self.setWindowFlags(QtCore.Qt.Window)
@@ -134,21 +104,24 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
     def create_componentControls(self):
         return
 
-
     def populate_componentControls(self):
-        """
-        Populate the controls values from the custom attributes of the component.
+        """Populate the controls values.
+
+        Populate the controls values from the custom attributes of the
+        component.
 
         """
-        #populate tab
+        # populate tab
         self.tabs.insertTab(1, self.settingsTab, "Component Settings")
 
-        #populate component settings
+        # populate component settings
 
-        self.populateCheck(self.settingsTab.intScale_checkBox, "intScale")
-        self.populateCheck(self.settingsTab.intRotation_checkBox, "intRotation")
-        self.populateCheck(self.settingsTab.intTranslation_checkBox, "intTranslation")
-
+        self.populateCheck(self.settingsTab.intScale_checkBox,
+                           "intScale")
+        self.populateCheck(self.settingsTab.intRotation_checkBox,
+                           "intRotation")
+        self.populateCheck(self.settingsTab.intTranslation_checkBox,
+                           "intTranslation")
 
     def create_componentLayout(self):
 
@@ -160,9 +133,19 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentConnections(self):
 
-        self.settingsTab.intScale_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.intScale_checkBox, "intScale"))
-        self.settingsTab.intRotation_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.intRotation_checkBox, "intRotation"))
-        self.settingsTab.intTranslation_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.intTranslation_checkBox, "intTranslation"))
+        self.settingsTab.intScale_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.intScale_checkBox,
+                    "intScale"))
+
+        self.settingsTab.intRotation_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.intRotation_checkBox,
+                    "intRotation"))
+        self.settingsTab.intTranslation_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.intTranslation_checkBox,
+                    "intTranslation"))
 
     def dockCloseEventTriggered(self):
-        gqt.deleteInstances(self, MayaQDockWidget)
+        pyqt.deleteInstances(self, MayaQDockWidget)

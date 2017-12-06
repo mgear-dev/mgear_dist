@@ -1,52 +1,21 @@
-# MGEAR is under the terms of the MIT License
+"""Guide leg 3jnt 01 module"""
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-#############################################
-# GLOBAL
-#############################################
 from functools import partial
 
-# mgear
-from mgear.maya.shifter.component.guide import ComponentGuide
-import mgear.maya.transform as tra
-import mgear.maya.attribute as att
+from mgear.maya.shifter.component import guide
+from mgear.maya import transform, pyqt, attribute
+from mgear.vendor.Qt import QtWidgets, QtCore
 
-#Pyside
-from mgear.maya.shifter.component.guide import componentMainSettings
-import mgear.maya.pyqt as gqt
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from maya.app.general.mayaMixin import MayaQDockWidget
+
 import settingsUI as sui
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 # guide info
 AUTHOR = "Miquel Campos"
 URL = "www.miquel-campos.com"
 EMAIL = "hello@miquel-campos.com"
-VERSION = [1,1,0]
+VERSION = [1, 1, 0]
 TYPE = "leg_3jnt_01"
 NAME = "leg"
 DESCRIPTION = "3 bones leg for quadrupeds and other animals"
@@ -54,7 +23,10 @@ DESCRIPTION = "3 bones leg for quadrupeds and other animals"
 ##########################################################
 # CLASS
 ##########################################################
-class Guide(ComponentGuide):
+
+
+class Guide(guide.ComponentGuide):
+    """Component Guide Class"""
 
     compType = TYPE
     compName = NAME
@@ -65,47 +37,43 @@ class Guide(ComponentGuide):
     email = EMAIL
     version = VERSION
 
-    # =====================================================
-    ##
-    # @param self
     def postInit(self):
+        """Initialize the position for the guide"""
         self.save_transform = ["root", "knee", "ankle", "foot", "eff"]
-    # =====================================================
-    ## Add more object to the object definition list.
-    # @param self
+
     def addObjects(self):
+        """Add the Guide Root, blade and locators"""
         lockAttrs = ["tx", "ry", "rz"]
         self.root = self.addRoot()
-        vTemp = tra.getOffsetPosition( self.root, [0,-3,0.1])
+        vTemp = transform.getOffsetPosition(self.root, [0, -3, 0.1])
         self.knee = self.addLoc("knee", self.root, vTemp)
-        att.lockAttribute(self.knee, lockAttrs)
-        vTemp = tra.getOffsetPosition( self.root, [0,-6,0])
+        attribute.lockAttribute(self.knee, lockAttrs)
+        vTemp = transform.getOffsetPosition(self.root, [0, -6, 0])
         self.ankle = self.addLoc("ankle", self.knee, vTemp)
-        att.lockAttribute(self.ankle, lockAttrs)
-        vTemp = tra.getOffsetPosition( self.root, [0,-9,.2])
+        attribute.lockAttribute(self.ankle, lockAttrs)
+        vTemp = transform.getOffsetPosition(self.root, [0, -9, .2])
         self.foot = self.addLoc("foot", self.ankle, vTemp)
-        att.lockAttribute(self.foot, lockAttrs)
-        vTemp = tra.getOffsetPosition( self.root, [0,-9, 1])
+        attribute.lockAttribute(self.foot, lockAttrs)
+        vTemp = transform.getOffsetPosition(self.root, [0, -9, 1])
         self.eff = self.addLoc("eff", self.foot, vTemp)
 
         centers = [self.root, self.knee, self.ankle, self.foot, self.eff]
         self.dispcrv = self.addDispCurve("crv1", centers)
 
-
-    # =====================================================
-    ## Add more parameter to the parameter definition list.
-    # @param self
     def addParameters(self):
+        """Add the configurations settings"""
 
         # Default Values
-        self.pBlend       = self.addParam("blend", "double", 1, 0, 1)
+        self.pBlend = self.addParam("blend", "double", 1, 0, 1)
         self.pFull3BoneIK = self.addParam("full3BonesIK", "double", 1, 0, 1)
-        self.pIkRefArray  = self.addParam("ikrefarray", "string", "")
+        self.pIkRefArray = self.addParam("ikrefarray", "string", "")
         self.pUpvRefArray = self.addParam("upvrefarray", "string", "")
-        self.pMaxStretch  = self.addParam("maxstretch", "double", 1.5 , 1, None)
-        self.pIKSolver = self.addEnumParam("ikSolver", ["IK Spring", "IK Rotation Plane"], 0)
-        self.pIKOrient = self.addParam("ikOri", "bool", True)
+        self.pMaxStretch = self.addParam("maxstretch", "double", 1.5, 1, None)
 
+        self.pIKSolver = self.addEnumParam(
+            "ikSolver", ["IK Spring", "IK Rotation Plane"], 0)
+
+        self.pIKOrient = self.addParam("ikOri", "bool", True)
 
         # Divisions
         self.pDiv0 = self.addParam("div0", "long", 2, 1, None)
@@ -113,34 +81,40 @@ class Guide(ComponentGuide):
         self.pDiv1 = self.addParam("div2", "long", 2, 1, None)
 
         # FCurves
-        self.pSt_profile = self.addFCurveParam("st_profile", [[0,0],[.5,-1],[1,0]])
-        self.pSq_profile = self.addFCurveParam("sq_profile", [[0,0],[.5,1],[1,0]])
+        self.pSt_profile = self.addFCurveParam(
+            "st_profile", [[0, 0], [.5, -1], [1, 0]])
 
+        self.pSq_profile = self.addFCurveParam(
+            "sq_profile", [[0, 0], [.5, 1], [1, 0]])
 
-        self.pUseIndex       = self.addParam("useIndex", "bool", False)
-        self.pParentJointIndex = self.addParam("parentJointIndex", "long", -1, None, None)
+        self.pUseIndex = self.addParam("useIndex", "bool", False)
+
+        self.pParentJointIndex = self.addParam(
+            "parentJointIndex", "long", -1, None, None)
 
 ##########################################################
 # Setting Page
 ##########################################################
 
+
 class settingsTab(QtWidgets.QDialog, sui.Ui_Form):
+    """The Component settings UI"""
 
     def __init__(self, parent=None):
         super(settingsTab, self).__init__(parent)
         self.setupUi(self)
 
 
-class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
+class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
+    """Create the component setting window"""
 
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         self.toolName = TYPE
         # Delete old instances of the componet settings window.
-        gqt.deleteInstances(self, MayaQDockWidget)
+        pyqt.deleteInstances(self, MayaQDockWidget)
 
-        super(self.__class__, self).__init__(parent = parent)
+        super(self.__class__, self).__init__(parent=parent)
         self.settingsTab = settingsTab()
-
 
         self.setup_componentSettingWindow()
         self.create_componentControls()
@@ -149,7 +123,7 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         self.create_componentConnections()
 
     def setup_componentSettingWindow(self):
-        self.mayaMainWindow = gqt.maya_main_window()
+        self.mayaMainWindow = pyqt.maya_main_window()
 
         self.setObjectName(self.toolName)
         self.setWindowFlags(QtCore.Qt.Window)
@@ -159,22 +133,29 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
     def create_componentControls(self):
         return
 
-
     def populate_componentControls(self):
-        """
-        Populate the controls values from the custom attributes of the component.
+        """Populate the controls values.
+
+        Populate the controls values from the custom attributes of the
+        component.
 
         """
-        #populate tab
+        # populate tab
         self.tabs.insertTab(1, self.settingsTab, "Component Settings")
 
-        #populate component settings
-        self.settingsTab.ikfk_slider.setValue(int(self.root.attr("blend").get()*100))
-        self.settingsTab.ikfk_spinBox.setValue(int(self.root.attr("blend").get()*100))
-        self.settingsTab.full3BonesIK_slider.setValue(int(self.root.attr("full3BonesIK").get()*100))
-        self.settingsTab.full3BonesIK_spinBox.setValue(int(self.root.attr("full3BonesIK").get()*100))
-        self.settingsTab.maxStretch_spinBox.setValue(self.root.attr("maxstretch").get())
-        self.settingsTab.ikSolver_comboBox.setCurrentIndex(self.root.attr("ikSolver").get())
+        # populate component settings
+        self.settingsTab.ikfk_slider.setValue(
+            int(self.root.attr("blend").get() * 100))
+        self.settingsTab.ikfk_spinBox.setValue(
+            int(self.root.attr("blend").get() * 100))
+        self.settingsTab.full3BonesIK_slider.setValue(
+            int(self.root.attr("full3BonesIK").get() * 100))
+        self.settingsTab.full3BonesIK_spinBox.setValue(
+            int(self.root.attr("full3BonesIK").get() * 100))
+        self.settingsTab.maxStretch_spinBox.setValue(
+            self.root.attr("maxstretch").get())
+        self.settingsTab.ikSolver_comboBox.setCurrentIndex(
+            self.root.attr("ikSolver").get())
         self.populateCheck(self.settingsTab.neutralRotation_checkBox, "ikOri")
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
@@ -186,7 +167,6 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         for item in upvRefArrayItems:
             self.settingsTab.upvRefArray_listWidget.addItem(item)
 
-
     def create_componentLayout(self):
 
         self.settings_layout = QtWidgets.QVBoxLayout()
@@ -197,28 +177,81 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
 
     def create_componentConnections(self):
 
-        self.settingsTab.ikfk_slider.valueChanged.connect(partial(self.updateSlider, self.settingsTab.ikfk_slider, "blend"))
-        self.settingsTab.ikfk_spinBox.valueChanged.connect(partial(self.updateSlider, self.settingsTab.ikfk_spinBox, "blend"))
-        self.settingsTab.full3BonesIK_slider.valueChanged.connect(partial(self.updateSlider, self.settingsTab.full3BonesIK_slider, "full3BonesIK"))
-        self.settingsTab.full3BonesIK_spinBox.valueChanged.connect(partial(self.updateSlider, self.settingsTab.full3BonesIK_spinBox, "full3BonesIK"))
-        self.settingsTab.maxStretch_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.maxStretch_spinBox, "maxstretch"))
-        self.settingsTab.ikSolver_comboBox.currentIndexChanged.connect(partial(self.updateComboBox, self.settingsTab.ikSolver_comboBox, "ikSolver"))
-        self.settingsTab.neutralRotation_checkBox.stateChanged.connect(partial(self.updateCheck, self.settingsTab.neutralRotation_checkBox, "ikOri"))
-        self.settingsTab.div0_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div0_spinBox, "div0"))
-        self.settingsTab.div1_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div1_spinBox, "div1"))
-        self.settingsTab.div2_spinBox.valueChanged.connect(partial(self.updateSpinBox, self.settingsTab.div2_spinBox, "div2"))
-        self.settingsTab.squashStretchProfile_pushButton.clicked.connect(self.setProfile)
+        self.settingsTab.ikfk_slider.valueChanged.connect(
+            partial(self.updateSlider, self.settingsTab.ikfk_slider, "blend"))
+        self.settingsTab.ikfk_spinBox.valueChanged.connect(
+            partial(self.updateSlider, self.settingsTab.ikfk_spinBox, "blend"))
 
+        self.settingsTab.full3BonesIK_slider.valueChanged.connect(
+            partial(self.updateSlider,
+                    self.settingsTab.full3BonesIK_slider,
+                    "full3BonesIK"))
 
+        self.settingsTab.full3BonesIK_spinBox.valueChanged.connect(
+            partial(self.updateSlider,
+                    self.settingsTab.full3BonesIK_spinBox,
+                    "full3BonesIK"))
 
-        self.settingsTab.ikRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
-        self.settingsTab.ikRefArrayRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
-        self.settingsTab.ikRefArray_copyRef_pushButton.clicked.connect(partial(self.copyFromListWidget, self.settingsTab.upvRefArray_listWidget, self.settingsTab.ikRefArray_listWidget, "ikrefarray"))
+        self.settingsTab.maxStretch_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    self.settingsTab.maxStretch_spinBox,
+                    "maxstretch"))
+
+        self.settingsTab.ikSolver_comboBox.currentIndexChanged.connect(
+            partial(self.updateComboBox,
+                    self.settingsTab.ikSolver_comboBox,
+                    "ikSolver"))
+
+        self.settingsTab.neutralRotation_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.neutralRotation_checkBox,
+                    "ikOri"))
+
+        self.settingsTab.div0_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox, self.settingsTab.div0_spinBox, "div0"))
+
+        self.settingsTab.div1_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox, self.settingsTab.div1_spinBox, "div1"))
+        self.settingsTab.div2_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox, self.settingsTab.div2_spinBox, "div2"))
+
+        self.settingsTab.squashStretchProfile_pushButton.clicked.connect(
+            self.setProfile)
+
+        self.settingsTab.ikRefArrayAdd_pushButton.clicked.connect(
+            partial(self.addItem2listWidget,
+                    self.settingsTab.ikRefArray_listWidget,
+                    "ikrefarray"))
+
+        self.settingsTab.ikRefArrayRemove_pushButton.clicked.connect(
+            partial(self.removeSelectedFromListWidget,
+                    self.settingsTab.ikRefArray_listWidget,
+                    "ikrefarray"))
+
+        self.settingsTab.ikRefArray_copyRef_pushButton.clicked.connect(
+            partial(self.copyFromListWidget,
+                    self.settingsTab.upvRefArray_listWidget,
+                    self.settingsTab.ikRefArray_listWidget,
+                    "ikrefarray"))
+
         self.settingsTab.ikRefArray_listWidget.installEventFilter(self)
 
-        self.settingsTab.upvRefArrayAdd_pushButton.clicked.connect(partial(self.addItem2listWidget, self.settingsTab.upvRefArray_listWidget, "upvrefarray"))
-        self.settingsTab.upvRefArrayRemove_pushButton.clicked.connect(partial(self.removeSelectedFromListWidget, self.settingsTab.upvRefArray_listWidget, "upvrefarray"))
-        self.settingsTab.upvRefArray_copyRef_pushButton.clicked.connect(partial(self.copyFromListWidget, self.settingsTab.ikRefArray_listWidget, self.settingsTab.upvRefArray_listWidget, "upvrefarray"))
+        self.settingsTab.upvRefArrayAdd_pushButton.clicked.connect(
+            partial(self.addItem2listWidget,
+                    self.settingsTab.upvRefArray_listWidget,
+                    "upvrefarray"))
+
+        self.settingsTab.upvRefArrayRemove_pushButton.clicked.connect(
+            partial(self.removeSelectedFromListWidget,
+                    self.settingsTab.upvRefArray_listWidget,
+                    "upvrefarray"))
+
+        self.settingsTab.upvRefArray_copyRef_pushButton.clicked.connect(
+            partial(self.copyFromListWidget,
+                    self.settingsTab.ikRefArray_listWidget,
+                    self.settingsTab.upvRefArray_listWidget,
+                    "upvrefarray"))
+
         self.settingsTab.upvRefArray_listWidget.installEventFilter(self)
 
     def eventFilter(self, sender, event):
@@ -231,7 +264,5 @@ class componentSettings(MayaQWidgetDockableMixin, componentMainSettings):
         else:
             return QtWidgets.QDialog.eventFilter(self, sender, event)
 
-
-
     def dockCloseEventTriggered(self):
-        gqt.deleteInstances(self, MayaQDockWidget)
+        pyqt.deleteInstances(self, MayaQDockWidget)

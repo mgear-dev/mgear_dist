@@ -1,52 +1,24 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-"""
-NurbsCurve creation functions
-"""
+"""NurbsCurve creation functions"""
 
 #############################################
 # GLOBAL
 #############################################
 import pymel.core as pm
-import pymel.core.datatypes as dt
+from pymel.core import datatypes
 
 import maya.OpenMaya as om
 
-import mgear.maya.applyop as aop
+from mgear.maya import applyop
 
 #############################################
 # CURVE
 #############################################
 
-def addCnsCurve(parent, name, centers, degree=1):
-    """
-    Create a curve attached to given centers. One point per center
 
-    Args:
+def addCnsCurve(parent, name, centers, degree=1):
+    """Create a curve attached to given centers. One point per center
+
+    Arguments:
         parent (dagNode): Parent object.
         name (str): Name
         centers (list of dagNode): Object that will drive the curve.
@@ -62,23 +34,28 @@ def addCnsCurve(parent, name, centers, degree=1):
         elif len(centers) == 3:
             centers.append(centers[-1])
 
-    points = [dt.Vector() for center in centers ]
+    points = [datatypes.Vector() for center in centers]
 
     node = addCurve(parent, name, points, False, degree)
 
-    aop.gear_curvecns_op(node, centers)
+    applyop.gear_curvecns_op(node, centers)
 
     return node
 
 
-def addCurve(parent, name, points, close=False, degree=3, m=dt.Matrix()):
-    """
-    Create a NurbsCurve with a single subcurve.
+def addCurve(parent,
+             name,
+             points,
+             close=False,
+             degree=3,
+             m=datatypes.Matrix()):
+    """Create a NurbsCurve with a single subcurve.
 
-    Args:
+    Arguments:
         parent (dagNode): Parent object.
         name (str): Name
-        positions (list of float): points of the curve in a one dimension array [point0X, point0Y, point0Z, 1, point1X, point1Y, point1Z, 1, ...].
+        positions (list of float): points of the curve in a one dimension array
+            [point0X, point0Y, point0Z, 1, point1X, point1Y, point1Z, 1, ...].
         close (bool): True to close the curve.
         degree (bool): 1 for linear curve, 3 for Cubic.
         m (matrix): Global transform.
@@ -88,7 +65,7 @@ def addCurve(parent, name, points, close=False, degree=3, m=dt.Matrix()):
     """
     if close:
         points.extend(points[:degree])
-        knots = range(len(points)+degree-1)
+        knots = range(len(points) + degree - 1)
         node = pm.curve(n=name, d=degree, p=points, per=close, k=knots)
     else:
         node = pm.curve(n=name, d=degree, p=points)
@@ -101,10 +78,15 @@ def addCurve(parent, name, points, close=False, degree=3, m=dt.Matrix()):
 
     return node
 
-def createCurveFromOrderedEdges(edgeLoop, startVertex, name, parent=None, degree=3):
+
+def createCurveFromOrderedEdges(edgeLoop,
+                                startVertex,
+                                name,
+                                parent=None,
+                                degree=3):
     """Create a curve for a edgeloop ordering the list from starting vertex
 
-    Args:
+    Arguments:
         edgeLoop (list ): List of edges
         startVertex (vertex): Starting vertex
         name (str): Name of the new curve.
@@ -129,7 +111,7 @@ def createCurveFromOrderedEdges(edgeLoop, startVertex, name, parent=None, degree
                 pass
         if len(orderedEdges) == len(edgeLoop):
             break
-        count +=1
+        count += 1
         if count > 100:
             break
 
@@ -146,11 +128,15 @@ def createCurveFromOrderedEdges(edgeLoop, startVertex, name, parent=None, degree
     crv = addCurve(parent, name, orderedVertexPos, degree=degree)
     return crv
 
-def createCuveFromEdges(edgeList, name, parent=None, degree=3, sortingAxis="x"):
-    """
-    Create curve from a edge list.
 
-    Args:
+def createCuveFromEdges(edgeList,
+                        name,
+                        parent=None,
+                        degree=3,
+                        sortingAxis="x"):
+    """Create curve from a edge list.
+
+    Arguments:
         edgeList (list): List of edges.
         name (str): Name of the new curve.
         parent (dagNode): Parent of the new curve.
@@ -169,7 +155,6 @@ def createCuveFromEdges(edgeList, name, parent=None, degree=3, sortingAxis="x"):
         axis = 2
 
     vList = pm.polyListComponentConversion(edgeList, fe=True, tv=True)
-
 
     centers = []
     centersOrdered = []
@@ -191,10 +176,9 @@ def createCuveFromEdges(edgeList, name, parent=None, degree=3, sortingAxis="x"):
 
 
 def createCurveFromCurve(srcCrv, name, nbPoints, parent=None):
-    """
-    Create a curve from a curve
+    """Create a curve from a curve
 
-    Args:
+    Arguments:
         srcCrv (curve): The source curve.
         name (str): The new curve name.
         nbPoints (int): Number of control points for the new curve.
@@ -208,7 +192,7 @@ def createCurveFromCurve(srcCrv, name, nbPoints, parent=None):
     length = srcCrv.length()
     parL = srcCrv.findParamFromLength(length)
     param = []
-    increment = parL / (nbPoints-1)
+    increment = parL / (nbPoints - 1)
     p = 0.0
     for x in range(nbPoints):
         # we need to check that the param value never exceed the parL
@@ -222,17 +206,17 @@ def createCurveFromCurve(srcCrv, name, nbPoints, parent=None):
 
 
 def getCurveParamAtPosition(crv, position):
-    """
-    Get curve parameter from a position
+    """Get curve parameter from a position
 
-    Args:
-        position (list of float): Represents the position in worldSpace exp: [1.4, 3.55, 42.6]
+    Arguments:
+        position (list of float): Represents the position in worldSpace
+            exp: [1.4, 3.55, 42.6]
         crv (curve): The  source curve to get the parameter.
 
     Returns:
         list: paramenter and curve length
     """
-    point = om.MPoint(position[0],position[1],position[2])
+    point = om.MPoint(position[0], position[1], position[2])
 
     dag = om.MDagPath()
     obj = om.MObject()
@@ -244,11 +228,11 @@ def getCurveParamAtPosition(crv, position):
     length = curveFn.length()
     crv.findParamFromLength(length)
 
-    paramUtill=om.MScriptUtil()
-    paramPtr=paramUtill.asDoublePtr()
+    paramUtill = om.MScriptUtil()
+    paramPtr = paramUtill.asDoublePtr()
 
-    point = curveFn.closestPoint(point,paramPtr,0.001,om.MSpace.kObject)
-    curveFn.getParamAtPoint(point , paramPtr,0.001,om.MSpace.kObject)
+    point = curveFn.closestPoint(point, paramPtr, 0.001, om.MSpace.kObject)
+    curveFn.getParamAtPoint(point, paramPtr, 0.001, om.MSpace.kObject)
 
     param = paramUtill.getDouble(paramPtr)
 
@@ -259,7 +243,7 @@ def findLenghtFromParam(crv, param):
     """
     Find lengtht from a curve parameter
 
-    Args:
+    Arguments:
         param (float): The parameter to get the legth
         crv (curve): The source curve.
 
@@ -275,7 +259,8 @@ def findLenghtFromParam(crv, param):
 
     """
     node = pm.createNode("arcLengthDimension")
-    pm.connectAttr(crv.getShape().attr("worldSpace[0]"), node.attr("nurbsGeometry"))
+    pm.connectAttr(crv.getShape().attr("worldSpace[0]"),
+                   node.attr("nurbsGeometry"))
     node.attr("uParamValue").set(param)
     uLength = node.attr("arcLength").get()
     pm.delete(node.getParent())

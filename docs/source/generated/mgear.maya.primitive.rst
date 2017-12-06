@@ -1,5 +1,5 @@
-mgear.maya.primitive
-====================
+mgear\.maya\.primitive
+======================
 
 .. automodule:: mgear.maya.primitive
 

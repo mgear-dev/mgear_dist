@@ -1,83 +1,71 @@
-# MGEAR is under the terms of the MIT License
+"""Component Control 01 module"""
 
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
+from mgear.maya.shifter import component
 
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
-#############################################
-# GLOBAL
-#############################################
-# mgear
-from mgear.maya.shifter.component import MainComponent
-
-import mgear.maya.primitive as pri
-import mgear.maya.transform as tra
-import mgear.maya.attribute as att
-import mgear.maya.vector as vec
+from mgear.maya import attribute, transform, primitive
 
 
 #############################################
 # COMPONENT
 #############################################
-class Component(MainComponent):
 
+
+class Component(component.Main):
+    """Shifter component Class"""
+
+    # =====================================================
+    # OBJECTS
+    # =====================================================
     def addObjects(self):
-        # self.length0 = vec.getDistance(self.guide.apos[0], self.guide.apos[1])
+        """Add all the objects needed to create the component."""
 
         if self.settings["neutralRotation"]:
-            t = tra.getTransformFromPos(self.guide.pos["root"])
+            t = transform.getTransformFromPos(self.guide.pos["root"])
         else:
             t = self.guide.tra["root"]
-            t = tra.setMatrixScale(t)
-        self.ik_cns = pri.addTransform(self.root, self.getName("ik_cns"), t)
+            if self.settings["mirrorBehaviour"] and self.negate:
+                scl = [1, 1, -1]
+            else:
+                scl = [1, 1, 1]
+            t = transform.setMatrixScale(t, scl)
 
-        self.ctl = self.addCtl( self.ik_cns,
-                                "ctl",
-                                t,
-                                self.color_ik,
-                                self.settings["icon"],
-                                w=self.settings["ctlSize"]*self.size,
-                                h=self.settings["ctlSize"]*self.size,
-                                d=self.settings["ctlSize"]*self.size,
-                                tp=self.parentCtlTag)
+        self.ik_cns = primitive.addTransform(
+            self.root, self.getName("ik_cns"), t)
 
-        params = [ s for s in ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"] if self.settings["k_"+s] ]
-        att.setKeyableAttributes(self.ctl, params)
+        self.ctl = self.addCtl(self.ik_cns,
+                               "ctl",
+                               t,
+                               self.color_ik,
+                               self.settings["icon"],
+                               w=self.settings["ctlSize"] * self.size,
+                               h=self.settings["ctlSize"] * self.size,
+                               d=self.settings["ctlSize"] * self.size,
+                               tp=self.parentCtlTag)
+
+        # we need to set the rotation order before lock any rotation axis
+        if self.settings["k_ro"]:
+            rotOderList = ["XYZ", "YZX", "ZXY", "XZY", "YXZ", "ZYX"]
+            attribute.setRotOrder(
+                self.ctl, rotOderList[self.settings["default_rotorder"]])
+
+        params = [s for s in
+                  ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"]
+                  if self.settings["k_" + s]]
+        attribute.setKeyableAttributes(self.ctl, params)
 
         if self.settings["joint"]:
             self.jnt_pos.append([self.ctl, 0, None, self.settings["uniScale"]])
-
-        if self.settings["k_ro"]:
-            rotOderList = ["XYZ", "YZX", "ZXY", "XZY", "YXZ", "ZYX"]
-            att.setRotOrder(self.ctl, rotOderList[self.settings["default_rotorder"]])
 
     def addAttributes(self):
         # Ref
         if self.settings["ikrefarray"]:
             ref_names = self.settings["ikrefarray"].split(",")
             if len(ref_names) > 1:
-                self.ikref_att = self.addAnimEnumParam("ikref", "Ik Ref", 0, self.settings["ikrefarray"].split(","))
-
+                self.ikref_att = self.addAnimEnumParam(
+                    "ikref",
+                    "Ik Ref",
+                    0,
+                    self.settings["ikrefarray"].split(","))
 
     def addOperators(self):
         return
@@ -85,25 +73,22 @@ class Component(MainComponent):
     # =====================================================
     # CONNECTOR
     # =====================================================
-    ## Set the relation beetween object from guide to rig.\n
-    # @param self
     def setRelation(self):
+        """Set the relation beetween object from guide to rig"""
         self.relatives["root"] = self.ctl
         self.controlRelatives["root"] = self.ctl
         if self.settings["joint"]:
             self.jointRelatives["root"] = 0
 
-
-    # @param self
     def addConnection(self):
+        """Add more connection definition to the set"""
         self.connections["standard"] = self.connect_standard
         self.connections["orientation"] = self.connect_orientation
 
-
-    ## standard connection definition.
-    # @param self
     def connect_standard(self):
+        """standard connection definition for the component"""
         self.connect_standardWithSimpleIkRef()
 
     def connect_orientation(self):
+        """Orient connection definition for the component"""
         self.connect_orientCns()

@@ -1,5 +1,5 @@
-mgear.maya.applyop
-==================
+mgear\.maya\.applyop
+====================
 
 .. automodule:: mgear.maya.applyop
 
@@ -10,6 +10,7 @@ mgear.maya.applyop
    .. autosummary::
    
       aimCns
+      curvecns_op
       gear_curvecns_op
       gear_curveslide2_op
       gear_ikfk2bone_op
