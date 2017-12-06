@@ -11,7 +11,7 @@ Originally mGear was design and develope by `Jeremie Passerin <http://www.jeremi
 
 `Join the mGear Google user group <https://groups.google.com/forum/#!forum/mgearusergroup/>`_
 
-Contributors (in alphabetical order):
+Big Thanks! to all contributors (in alphabetical order):
 	- `Akagi-san <https://github.com/akiwoRM/>`_
 	- `Gaetan Guidet <https://github.com/gatgui/>`_
 	- `Lior Ben Horin <https://github.com/liorbenhorin/>`_
