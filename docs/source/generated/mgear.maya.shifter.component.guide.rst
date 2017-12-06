@@ -1,5 +1,5 @@
-mgear.maya.shifter.component.guide
-==================================
+mgear\.maya\.shifter\.component\.guide
+======================================
 
 .. automodule:: mgear.maya.shifter.component.guide
 
@@ -14,9 +14,9 @@ mgear.maya.shifter.component.guide
    .. autosummary::
    
       ComponentGuide
-      MainGuide
       MinMax
-      partial
+      componentMainSettings
+      mainSettingsTab
    
    
 

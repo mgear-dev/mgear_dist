@@ -1,5 +1,5 @@
-mgear.maya.icon
-===============
+mgear\.maya\.icon
+=================
 
 .. automodule:: mgear.maya.icon
 

@@ -1,5 +1,5 @@
-mgear.maya.transform
-====================
+mgear\.maya\.transform
+======================
 
 .. automodule:: mgear.maya.transform
 

@@ -1,5 +1,5 @@
-mgear.maya.fcurve
-=================
+mgear\.maya\.fcurve
+===================
 
 .. automodule:: mgear.maya.fcurve
 

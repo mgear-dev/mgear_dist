@@ -1,5 +1,5 @@
-mgear.maya.vector
-=================
+mgear\.maya\.vector
+===================
 
 .. automodule:: mgear.maya.vector
 

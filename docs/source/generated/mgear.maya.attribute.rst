@@ -1,5 +1,5 @@
-mgear.maya.attribute
-====================
+mgear\.maya\.attribute
+======================
 
 .. automodule:: mgear.maya.attribute
 
@@ -13,10 +13,22 @@ mgear.maya.attribute
       addColorAttribute
       addEnumAttribute
       addFCurve
+      addProxyAttribute
+      connectSet
+      getSelectedChannels
+      getSelectedObjectChannels
+      get_default_value
       lockAttribute
+      moveChannel
+      reset_SRT
+      reset_selected_channels_value
       setInvertMirror
       setKeyableAttributes
+      setNotKeyableAttributes
       setRotOrder
+      set_default_value
+      smart_reset
+      unlockAttribute
    
    
 

@@ -1,5 +1,5 @@
-mgear.maya.synoptic
-===================
+mgear\.maya\.synoptic
+=====================
 
 .. automodule:: mgear.maya.synoptic
 
@@ -9,10 +9,8 @@ mgear.maya.synoptic
 
    .. autosummary::
    
-      getMayaWindow
+      importTab
       open
-      wrapInstance
-      wrapinstance2
    
    
 
@@ -23,6 +21,7 @@ mgear.maya.synoptic
    .. autosummary::
    
       Synoptic
+      SynopticTabWrapper
    
    
 

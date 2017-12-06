@@ -1,5 +1,5 @@
-mgear.maya.shifter.component
-============================
+mgear\.maya\.shifter\.component
+===============================
 
 .. automodule:: mgear.maya.shifter.component
 
@@ -13,6 +13,7 @@ mgear.maya.shifter.component
 
    .. autosummary::
    
+      Main
       MainComponent
    
    

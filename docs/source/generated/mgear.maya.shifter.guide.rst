@@ -1,5 +1,5 @@
-mgear.maya.shifter.guide
-========================
+mgear\.maya\.shifter\.guide
+===========================
 
 .. automodule:: mgear.maya.shifter.guide
 
@@ -13,8 +13,18 @@ mgear.maya.shifter.guide
 
    .. autosummary::
    
+      CustomStepTab
+      GuideSettings
+      GuideSettingsTab
+      HelperSlots
+      Main
       MainGuide
+      Rig
       RigGuide
+      customStepTab
+      guideSettings
+      guideSettingsTab
+      helperSlots
    
    
 

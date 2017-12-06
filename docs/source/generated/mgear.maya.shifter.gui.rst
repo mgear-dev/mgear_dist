@@ -1,5 +1,5 @@
-mgear.maya.shifter.gui
-======================
+mgear\.maya\.shifter\.gui
+=========================
 
 .. automodule:: mgear.maya.shifter.gui
 
@@ -14,7 +14,6 @@ mgear.maya.shifter.gui
    .. autosummary::
    
       Guide_UI
-      partial
    
    
 
