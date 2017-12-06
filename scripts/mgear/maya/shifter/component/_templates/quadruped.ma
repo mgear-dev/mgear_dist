@@ -1,6 +1,6 @@
 //Maya ASCII 2016R2 scene
 //Name: quadruped.ma
-//Last modified: Mon, Oct 16, 2017 06:14:47 PM
+//Last modified: Wed, Dec 06, 2017 11:03:26 AM
 //Codeset: 932
 requires maya "2016R2";
 requires -nodeType "mgear_curveCns" "mgear_solvers" "2.1.0";
@@ -11,26 +11,87 @@ fileInfo "product" "Maya 2016";
 fileInfo "version" "2016 Extension 2 SP2";
 fileInfo "cutIdentifier" "201608220310-1001477-2";
 fileInfo "osv" "Microsoft Windows 8 Business Edition, 64-bit  (Build 9200)\n";
+createNode transform -s -n "persp";
+	rename -uid "6F6D51A8-412B-335E-00CF-37AF07174608";
+	setAttr ".v" no;
+	setAttr ".t" -type "double3" 6.393497340196264 4.7951230051471763 6.3934973401962445 ;
+	setAttr ".r" -type "double3" -27.938352729602379 44.999999999999972 -5.172681101354183e-014 ;
+createNode camera -s -n "perspShape" -p "persp";
+	rename -uid "DB01A37C-402E-FE3C-AED8-B2B423E678B4";
+	setAttr -k off ".v" no;
+	setAttr ".fl" 34.999999999999993;
+	setAttr ".coi" 10.234589445243257;
+	setAttr ".imn" -type "string" "persp";
+	setAttr ".den" -type "string" "persp_depth";
+	setAttr ".man" -type "string" "persp_mask";
+	setAttr ".hc" -type "string" "viewSet -p %camera";
+createNode transform -s -n "top";
+	rename -uid "CE1051E7-406B-1C9A-FBD0-4B9A57293A4F";
+	setAttr ".v" no;
+	setAttr ".t" -type "double3" 0 1000.1 0 ;
+	setAttr ".r" -type "double3" -89.999999999999986 0 0 ;
+createNode camera -s -n "topShape" -p "top";
+	rename -uid "BB93CD62-469E-69F3-108B-E08EC9DEC48A";
+	setAttr -k off ".v" no;
+	setAttr ".rnd" no;
+	setAttr ".coi" 1000.1;
+	setAttr ".ow" 30;
+	setAttr ".imn" -type "string" "top";
+	setAttr ".den" -type "string" "top_depth";
+	setAttr ".man" -type "string" "top_mask";
+	setAttr ".hc" -type "string" "viewSet -t %camera";
+	setAttr ".o" yes;
+createNode transform -s -n "front";
+	rename -uid "19B7E283-4BF5-67A5-5A34-889F4F94222B";
+	setAttr ".v" no;
+	setAttr ".t" -type "double3" 0 0 1000.1 ;
+createNode camera -s -n "frontShape" -p "front";
+	rename -uid "FBE5ED9B-4103-602C-107A-F2BDDBEAA276";
+	setAttr -k off ".v" no;
+	setAttr ".rnd" no;
+	setAttr ".coi" 1000.1;
+	setAttr ".ow" 30;
+	setAttr ".imn" -type "string" "front";
+	setAttr ".den" -type "string" "front_depth";
+	setAttr ".man" -type "string" "front_mask";
+	setAttr ".hc" -type "string" "viewSet -f %camera";
+	setAttr ".o" yes;
+createNode transform -s -n "side";
+	rename -uid "3FF600CD-41A1-5926-0545-6F89E84E794B";
+	setAttr ".v" no;
+	setAttr ".t" -type "double3" 1000.1 0 0 ;
+	setAttr ".r" -type "double3" 0 89.999999999999986 0 ;
+createNode camera -s -n "sideShape" -p "side";
+	rename -uid "F67540FE-417E-719B-DBB5-8FB23E5C080A";
+	setAttr -k off ".v" no;
+	setAttr ".rnd" no;
+	setAttr ".coi" 1000.1;
+	setAttr ".ow" 30;
+	setAttr ".imn" -type "string" "side";
+	setAttr ".den" -type "string" "side_depth";
+	setAttr ".man" -type "string" "side_mask";
+	setAttr ".hc" -type "string" "viewSet -s %camera";
+	setAttr ".o" yes;
 createNode transform -n "guide";
-	rename -uid "410C1E3E-4D85-0458-ADAA-34AE47C82F33";
+	rename -uid "EA964024-4563-ACF7-31AD-0AAF5F11A2D4";
 	addAttr -ci true -sn "rig_name" -ln "rig_name" -dt "string";
 	addAttr -ci true -k true -sn "mode" -ln "mode" -min 0 -max 1 -en "Final:WIP" -at "enum";
 	addAttr -ci true -k true -sn "step" -ln "step" -min 0 -max 6 -en "All Steps:Objects:Properties:Operators:Connect:Joints:Finalize" 
 		-at "enum";
-	addAttr -ci true -sn "ismodel" -ln "ismodel" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ismodel" -ln "ismodel" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "classicChannelNames" -ln "classicChannelNames" -min 0 -max 
 		1 -at "bool";
-	addAttr -ci true -sn "proxyChannels" -ln "proxyChannels" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "worldCtl" -ln "worldCtl" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "proxyChannels" -ln "proxyChannels" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "worldCtl" -ln "worldCtl" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "importSkin" -ln "importSkin" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "skin" -ln "skin" -dt "string";
-	addAttr -ci true -sn "L_color_fk" -ln "L_color_fk" -min 0 -max 31 -at "long";
-	addAttr -ci true -sn "L_color_ik" -ln "L_color_ik" -min 0 -max 31 -at "long";
-	addAttr -ci true -sn "R_color_fk" -ln "R_color_fk" -min 0 -max 31 -at "long";
-	addAttr -ci true -sn "R_color_ik" -ln "R_color_ik" -min 0 -max 31 -at "long";
-	addAttr -ci true -sn "C_color_fk" -ln "C_color_fk" -min 0 -max 31 -at "long";
-	addAttr -ci true -sn "C_color_ik" -ln "C_color_ik" -min 0 -max 31 -at "long";
-	addAttr -ci true -sn "joint_rig" -ln "joint_rig" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "L_color_fk" -ln "L_color_fk" -dv 6 -min 0 -max 31 -at "long";
+	addAttr -ci true -sn "L_color_ik" -ln "L_color_ik" -dv 18 -min 0 -max 31 -at "long";
+	addAttr -ci true -sn "R_color_fk" -ln "R_color_fk" -dv 23 -min 0 -max 31 -at "long";
+	addAttr -ci true -sn "R_color_ik" -ln "R_color_ik" -dv 14 -min 0 -max 31 -at "long";
+	addAttr -ci true -sn "C_color_fk" -ln "C_color_fk" -dv 13 -min 0 -max 31 -at "long";
+	addAttr -ci true -sn "C_color_ik" -ln "C_color_ik" -dv 17 -min 0 -max 31 -at "long";
+	addAttr -ci true -sn "joint_rig" -ln "joint_rig" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "synoptic" -ln "synoptic" -dt "string";
 	addAttr -ci true -sn "doPreCustomStep" -ln "doPreCustomStep" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "doPostCustomStep" -ln "doPostCustomStep" -min 0 -max 1 -at "bool";
@@ -43,17 +104,7 @@ createNode transform -n "guide";
 	addAttr -ci true -sn "gear_version" -ln "gear_version" -dt "string";
 	setAttr ".rig_name" -type "string" "rig";
 	setAttr -k on ".step" 6;
-	setAttr ".ismodel" yes;
-	setAttr ".proxyChannels" yes;
-	setAttr ".worldCtl" yes;
 	setAttr ".skin" -type "string" "";
-	setAttr ".L_color_fk" 6;
-	setAttr ".L_color_ik" 18;
-	setAttr ".R_color_fk" 23;
-	setAttr ".R_color_ik" 14;
-	setAttr ".C_color_fk" 13;
-	setAttr ".C_color_ik" 17;
-	setAttr ".joint_rig" yes;
 	setAttr ".synoptic" -type "string" "quadruped";
 	setAttr ".preCustomStep" -type "string" "";
 	setAttr ".postCustomStep" -type "string" "";
@@ -66,7 +117,7 @@ createNode transform -n "controllers_org" -p "guide";
 	rename -uid "CBDC45CE-4F83-DF55-84F8-268B4BD1DAFC";
 	setAttr ".v" no;
 createNode transform -n "global_C0_root" -p "guide";
-	rename -uid "7E439C90-43C8-4669-35AC-1996F3ED419D";
+	rename -uid "660091ED-4E91-D8D4-70E2-3EBC7D4E9F2A";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -78,22 +129,24 @@ createNode transform -n "global_C0_root" -p "guide";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ro" -ln "k_ro" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_rx" -ln "k_rx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ry" -ln "k_ry" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_rz" -ln "k_rz" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sx" -ln "k_sx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_tx" -ln "k_tx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ty" -ln "k_ty" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_tz" -ln "k_tz" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ro" -ln "k_ro" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_rx" -ln "k_rx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ry" -ln "k_ry" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_rz" -ln "k_rz" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sx" -ln "k_sx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sy" -ln "k_sy" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sz" -ln "k_sz" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 6 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
@@ -113,22 +166,8 @@ createNode transform -n "global_C0_root" -p "guide";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "square";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".k_tx" yes;
-	setAttr ".k_ty" yes;
-	setAttr ".k_tz" yes;
-	setAttr ".k_ro" yes;
-	setAttr ".k_rx" yes;
-	setAttr ".k_ry" yes;
-	setAttr ".k_rz" yes;
-	setAttr ".k_sx" yes;
-	setAttr ".k_sy" yes;
-	setAttr ".k_sz" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 6;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "global_C0_rootShape" -p "global_C0_root";
-	rename -uid "9DE7DA98-4BE3-E410-4133-788B40892D98";
+	rename -uid "C8B82674-47E4-327C-FB18-A7B80B7C8342";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -140,8 +179,8 @@ createNode nurbsCurve -n "global_C0_rootShape" -p "global_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "global_C0_root1Shape" -p "global_C0_root";
-	rename -uid "29B21D6A-43AF-C63D-784F-9490393FCE62";
+createNode nurbsCurve -n "global_C0_root4Shape" -p "global_C0_root";
+	rename -uid "6759D4BB-4FE3-1D97-62A0-2A862E260705";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -153,8 +192,8 @@ createNode nurbsCurve -n "global_C0_root1Shape" -p "global_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "global_C0_root2Shape" -p "global_C0_root";
-	rename -uid "4DE8A3CB-446B-11ED-090C-3BA0D6DFA6D0";
+createNode nurbsCurve -n "global_C0_root5Shape" -p "global_C0_root";
+	rename -uid "92A4D1B4-4FE8-9AC6-88FA-B68C14313E3D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -166,8 +205,8 @@ createNode nurbsCurve -n "global_C0_root2Shape" -p "global_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "global_C0_root3Shape" -p "global_C0_root";
-	rename -uid "22BD5B2B-46CA-BC24-94AE-309490400CD2";
+createNode nurbsCurve -n "global_C0_root6Shape" -p "global_C0_root";
+	rename -uid "2D94F61E-4959-B85A-D6D1-2F86F4579F72";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -194,7 +233,7 @@ createNode nurbsCurve -n "global_C0_root3Shape" -p "global_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "global_C0_sizeRef" -p "global_C0_root";
-	rename -uid "EB35E645-4074-703A-59B2-E1A9093FE10B";
+	rename -uid "40A2BD95-4561-DC27-859E-5A903CC80CB1";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
 	setAttr ".t" -type "double3" 0 0 1 ;
@@ -209,7 +248,7 @@ createNode transform -n "global_C0_sizeRef" -p "global_C0_root";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "local_C0_root" -p "global_C0_root";
-	rename -uid "405AE403-4794-3F7D-B313-07A799E44214";
+	rename -uid "599BEF03-4C7D-AD94-05B1-6C9A5CA0A5D1";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -221,22 +260,24 @@ createNode transform -n "local_C0_root" -p "global_C0_root";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ro" -ln "k_ro" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_rx" -ln "k_rx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ry" -ln "k_ry" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_rz" -ln "k_rz" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sx" -ln "k_sx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_tx" -ln "k_tx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ty" -ln "k_ty" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_tz" -ln "k_tz" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ro" -ln "k_ro" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_rx" -ln "k_rx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ry" -ln "k_ry" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_rz" -ln "k_rz" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sx" -ln "k_sx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sy" -ln "k_sy" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sz" -ln "k_sz" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 5 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
@@ -256,22 +297,8 @@ createNode transform -n "local_C0_root" -p "global_C0_root";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "square";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".k_tx" yes;
-	setAttr ".k_ty" yes;
-	setAttr ".k_tz" yes;
-	setAttr ".k_ro" yes;
-	setAttr ".k_rx" yes;
-	setAttr ".k_ry" yes;
-	setAttr ".k_rz" yes;
-	setAttr ".k_sx" yes;
-	setAttr ".k_sy" yes;
-	setAttr ".k_sz" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 5;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "local_C0_rootShape" -p "local_C0_root";
-	rename -uid "8FDF3F4E-4E07-4D9E-9AD4-4480B30BD737";
+	rename -uid "A9542A6F-45D7-D924-A443-8F951F13F878";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -283,8 +310,8 @@ createNode nurbsCurve -n "local_C0_rootShape" -p "local_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "local_C0_root19Shape" -p "local_C0_root";
-	rename -uid "08FED65C-463F-3950-608F-1BB097361465";
+createNode nurbsCurve -n "local_C0_root22Shape" -p "local_C0_root";
+	rename -uid "FEBB4DEE-452E-59FD-E866-009EBD77D54D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -296,8 +323,8 @@ createNode nurbsCurve -n "local_C0_root19Shape" -p "local_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "local_C0_root20Shape" -p "local_C0_root";
-	rename -uid "6A80E677-4AAB-0CCA-902A-F9A549DB37FA";
+createNode nurbsCurve -n "local_C0_root23Shape" -p "local_C0_root";
+	rename -uid "2D083F6D-4158-460D-6468-D38F5A1A5781";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -309,8 +336,8 @@ createNode nurbsCurve -n "local_C0_root20Shape" -p "local_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "local_C0_root21Shape" -p "local_C0_root";
-	rename -uid "A7AF4883-443B-AC56-5626-799262DE0C74";
+createNode nurbsCurve -n "local_C0_root24Shape" -p "local_C0_root";
+	rename -uid "0CD4D46B-408E-3B9C-321A-DA8D629B6925";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -337,7 +364,7 @@ createNode nurbsCurve -n "local_C0_root21Shape" -p "local_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "local_C0_sizeRef" -p "local_C0_root";
-	rename -uid "F01DBB5B-4BB7-F196-2DAF-AA8CFDB5D8FF";
+	rename -uid "E9B66B5F-4952-DD59-6417-35910705511D";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
 	setAttr ".t" -type "double3" 0 0 1 ;
@@ -352,7 +379,7 @@ createNode transform -n "local_C0_sizeRef" -p "local_C0_root";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "body_C0_root" -p "local_C0_root";
-	rename -uid "451B26AC-40C5-9589-BDB5-8C831E7055FA";
+	rename -uid "2CCC3379-4ED2-1CC5-CCA8-AA9E86F5D710";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -364,22 +391,24 @@ createNode transform -n "body_C0_root" -p "local_C0_root";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ro" -ln "k_ro" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_rx" -ln "k_rx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ry" -ln "k_ry" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_rz" -ln "k_rz" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sx" -ln "k_sx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_tx" -ln "k_tx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ty" -ln "k_ty" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_tz" -ln "k_tz" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ro" -ln "k_ro" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_rx" -ln "k_rx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ry" -ln "k_ry" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_rz" -ln "k_rz" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sx" -ln "k_sx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sy" -ln "k_sy" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sz" -ln "k_sz" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 1 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
 	setAttr ".t" -type "double3" 0 2.4202715014858764 -1.2332282831689589 ;
 	setAttr -k off -cb on ".tx";
@@ -400,22 +429,8 @@ createNode transform -n "body_C0_root" -p "local_C0_root";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "square";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".k_tx" yes;
-	setAttr ".k_ty" yes;
-	setAttr ".k_tz" yes;
-	setAttr ".k_ro" yes;
-	setAttr ".k_rx" yes;
-	setAttr ".k_ry" yes;
-	setAttr ".k_rz" yes;
-	setAttr ".k_sx" yes;
-	setAttr ".k_sy" yes;
-	setAttr ".k_sz" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 1;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "body_C0_rootShape" -p "body_C0_root";
-	rename -uid "6DBF09CB-48AF-D001-24AD-E8848CA337EE";
+	rename -uid "9718C0F9-43BE-5173-F6AA-8C97C95CBDBD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -427,8 +442,8 @@ createNode nurbsCurve -n "body_C0_rootShape" -p "body_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "body_C0_root19Shape" -p "body_C0_root";
-	rename -uid "9E0BBBAE-4396-9590-2F31-CA8E1287EBF2";
+createNode nurbsCurve -n "body_C0_root22Shape" -p "body_C0_root";
+	rename -uid "9E78CF7E-474D-C8BB-81DD-E398E0C2E72D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -440,8 +455,8 @@ createNode nurbsCurve -n "body_C0_root19Shape" -p "body_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "body_C0_root20Shape" -p "body_C0_root";
-	rename -uid "A4F91249-4671-B0AB-3E67-91A1254087D9";
+createNode nurbsCurve -n "body_C0_root23Shape" -p "body_C0_root";
+	rename -uid "E869FFB8-4D5C-6806-0FAA-BBB46AC6AC38";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -453,8 +468,8 @@ createNode nurbsCurve -n "body_C0_root20Shape" -p "body_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "body_C0_root21Shape" -p "body_C0_root";
-	rename -uid "4652393D-41C3-09A0-37E9-D1A2AC75279C";
+createNode nurbsCurve -n "body_C0_root24Shape" -p "body_C0_root";
+	rename -uid "D8DA2DC4-4376-E4D0-2497-F29AEB981C29";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -481,7 +496,7 @@ createNode nurbsCurve -n "body_C0_root21Shape" -p "body_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "body_C0_sizeRef" -p "body_C0_root";
-	rename -uid "24C4187A-4210-C1C0-11D8-8D969E0AA58A";
+	rename -uid "07E64100-4B30-4A3B-5397-45AA50575235";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
 	setAttr ".t" -type "double3" 0 0 1 ;
@@ -496,7 +511,7 @@ createNode transform -n "body_C0_sizeRef" -p "body_C0_root";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "spine_C0_root" -p "body_C0_root";
-	rename -uid "2D61D14F-4D50-BD47-770B-A8B3F0821123";
+	rename -uid "8854EBB0-484B-7F77-F745-B591CFD6F05B";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -506,17 +521,17 @@ createNode transform -n "spine_C0_root" -p "body_C0_root";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
 	addAttr -ci true -sn "position" -ln "position" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1 -min 1 -at "double";
-	addAttr -ci true -sn "maxsquash" -ln "maxsquash" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1.5 -min 1 -at "double";
+	addAttr -ci true -sn "maxsquash" -ln "maxsquash" -dv 0.5 -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "softness" -ln "softness" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "lock_ori" -ln "lock_ori" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "division" -ln "division" -dv 3 -min 3 -at "long";
+	addAttr -ci true -sn "lock_ori" -ln "lock_ori" -dv 1 -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "division" -ln "division" -dv 5 -min 3 -at "long";
 	addAttr -ci true -sn "autoBend" -ln "autoBend" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "centralTangent" -ln "centralTangent" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "centralTangent" -ln "centralTangent" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -k true -sn "st_profile" -ln "st_profile" -at "double";
 	addAttr -ci true -k true -sn "sq_profile" -ln "sq_profile" -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
@@ -536,16 +551,10 @@ createNode transform -n "spine_C0_root" -p "body_C0_root";
 	setAttr ".connector" -type "string" "standard";
 	setAttr ".ui_host" -type "string" "spineUI_C0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".maxstretch" 1.5;
-	setAttr ".maxsquash" 0.5;
-	setAttr ".lock_ori" 1;
-	setAttr ".division" 5;
-	setAttr ".centralTangent" yes;
 	setAttr -k on ".st_profile";
 	setAttr -k on ".sq_profile";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "spine_C0_rootShape" -p "spine_C0_root";
-	rename -uid "D76AD581-456B-E27F-44BA-F5A1784FD0DF";
+	rename -uid "1DA1289E-48DD-01BB-58AF-31B909E52D39";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -557,8 +566,8 @@ createNode nurbsCurve -n "spine_C0_rootShape" -p "spine_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "spine_C0_root19Shape" -p "spine_C0_root";
-	rename -uid "DC9EF553-495F-D0EB-14D3-A4864CC23908";
+createNode nurbsCurve -n "spine_C0_root22Shape" -p "spine_C0_root";
+	rename -uid "2516BC6F-4DFF-3F5A-E4AB-1F855CB43CF8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -570,8 +579,8 @@ createNode nurbsCurve -n "spine_C0_root19Shape" -p "spine_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "spine_C0_root20Shape" -p "spine_C0_root";
-	rename -uid "DD3C41DA-4396-1679-1EF0-C595E9F86BA8";
+createNode nurbsCurve -n "spine_C0_root23Shape" -p "spine_C0_root";
+	rename -uid "EAF18990-43DB-11A7-D48D-CFB2573F6A45";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -583,8 +592,8 @@ createNode nurbsCurve -n "spine_C0_root20Shape" -p "spine_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "spine_C0_root21Shape" -p "spine_C0_root";
-	rename -uid "C6AE6BA9-4EB6-BF48-6B20-559C5FA5F2C9";
+createNode nurbsCurve -n "spine_C0_root24Shape" -p "spine_C0_root";
+	rename -uid "23039AAE-4915-4A85-0E2F-6094C8FA395E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -611,10 +620,10 @@ createNode nurbsCurve -n "spine_C0_root21Shape" -p "spine_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "spine_C0_eff" -p "spine_C0_root";
-	rename -uid "52A6854A-4465-C098-9686-329099BE9914";
+	rename -uid "30D8C3C0-49BB-DE7C-4AEF-56AEC3AE2D51";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0 6.6115768831256645 -2.9361299538902146e-015 ;
+	setAttr ".t" -type "double3" 0 6.6115768831256645 -2.9361299538902142e-015 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -626,7 +635,7 @@ createNode transform -n "spine_C0_eff" -p "spine_C0_root";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "spine_C0_effShape" -p "spine_C0_eff";
-	rename -uid "F1B99CBE-42C4-2385-E001-989ECBAFA5B1";
+	rename -uid "A4DAA3B3-46D9-93EF-6328-79BFB7B0E4C9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -638,8 +647,8 @@ createNode nurbsCurve -n "spine_C0_effShape" -p "spine_C0_eff";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "spine_C0_eff19Shape" -p "spine_C0_eff";
-	rename -uid "24A6D6EA-484C-C934-3FBF-3E8BDB43A9DB";
+createNode nurbsCurve -n "spine_C0_eff22Shape" -p "spine_C0_eff";
+	rename -uid "CFE7D3C1-4997-8DB1-A450-2A92972257D2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -651,8 +660,8 @@ createNode nurbsCurve -n "spine_C0_eff19Shape" -p "spine_C0_eff";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "spine_C0_eff20Shape" -p "spine_C0_eff";
-	rename -uid "4E603BDB-47B4-6C33-72E2-3493E6FC5A87";
+createNode nurbsCurve -n "spine_C0_eff23Shape" -p "spine_C0_eff";
+	rename -uid "9A465314-4470-7599-A12D-D4BAB2A0D356";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -664,8 +673,8 @@ createNode nurbsCurve -n "spine_C0_eff20Shape" -p "spine_C0_eff";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "spine_C0_eff21Shape" -p "spine_C0_eff";
-	rename -uid "2BF99C1E-4047-2BD2-9CCF-C391DB2C8838";
+createNode nurbsCurve -n "spine_C0_eff24Shape" -p "spine_C0_eff";
+	rename -uid "981FF206-47A9-B58F-D080-96BB60FA2C15";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -682,8 +691,8 @@ createNode nurbsCurve -n "spine_C0_eff21Shape" -p "spine_C0_eff";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "spine_C0_eff21_0crvShape" -p "spine_C0_eff";
-	rename -uid "72264602-4963-EE92-62EF-2DA5C09C2239";
+createNode nurbsCurve -n "spine_C0_eff24_0crvShape" -p "spine_C0_eff";
+	rename -uid "858AC638-4A1F-E93D-A4CF-078C8F8AA721";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -700,8 +709,8 @@ createNode nurbsCurve -n "spine_C0_eff21_0crvShape" -p "spine_C0_eff";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "spine_C0_eff21_1crvShape" -p "spine_C0_eff";
-	rename -uid "B985523F-468F-24E8-9E2A-E8B371A5A6F6";
+createNode nurbsCurve -n "spine_C0_eff24_1crvShape" -p "spine_C0_eff";
+	rename -uid "0682D80E-4A27-0C7B-6860-EEAF0FD5EBDE";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -719,7 +728,7 @@ createNode nurbsCurve -n "spine_C0_eff21_1crvShape" -p "spine_C0_eff";
 		0 0 -0.1875
 		;
 createNode transform -n "neck_C0_root" -p "spine_C0_eff";
-	rename -uid "2DDDB7B0-45F4-7CF9-9F99-87897C37E0D7";
+	rename -uid "47B90BAA-4EFA-A524-AF63-FA95BA7B9E5C";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -730,17 +739,18 @@ createNode transform -n "neck_C0_root" -p "spine_C0_eff";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
 	addAttr -ci true -sn "headrefarray" -ln "headrefarray" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
-	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1 -min 1 -at "double";
-	addAttr -ci true -sn "maxsquash" -ln "maxsquash" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1.5 -min 1 -at "double";
+	addAttr -ci true -sn "maxsquash" -ln "maxsquash" -dv 0.5 -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "softness" -ln "softness" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "division" -ln "division" -dv 3 -min 3 -at "long";
-	addAttr -ci true -sn "tangentControls" -ln "tangentControls" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "division" -ln "division" -dv 5 -min 3 -at "long";
+	addAttr -ci true -sn "tangentControls" -ln "tangentControls" -dv 1 -min 0 -max 1 
+		-at "bool";
 	addAttr -ci true -k true -sn "st_profile" -ln "st_profile" -at "double";
 	addAttr -ci true -k true -sn "sq_profile" -ln "sq_profile" -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -0.11164111249562403 0.36062523614417152 -1.1057116273629473e-016 ;
+	setAttr ".t" -type "double3" -0.11164111249562403 0.36062523614417152 -1.1057116273629454e-016 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -761,15 +771,10 @@ createNode transform -n "neck_C0_root" -p "spine_C0_eff";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".headrefarray" -type "string" "";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".maxstretch" 1.5;
-	setAttr ".maxsquash" 0.5;
-	setAttr ".division" 5;
-	setAttr ".tangentControls" yes;
 	setAttr -k on ".st_profile";
 	setAttr -k on ".sq_profile";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "neck_C0_rootShape" -p "neck_C0_root";
-	rename -uid "4E4B5B2B-4CB2-70BF-90A5-078548AF1681";
+	rename -uid "553A31FF-42CA-F40E-8C9D-84A00506DBD6";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -781,8 +786,8 @@ createNode nurbsCurve -n "neck_C0_rootShape" -p "neck_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "neck_C0_root19Shape" -p "neck_C0_root";
-	rename -uid "16537738-424A-AD15-EF90-089722B0F996";
+createNode nurbsCurve -n "neck_C0_root22Shape" -p "neck_C0_root";
+	rename -uid "1F0EF364-47E3-9901-82B2-0792BBE0B189";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -794,8 +799,8 @@ createNode nurbsCurve -n "neck_C0_root19Shape" -p "neck_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "neck_C0_root20Shape" -p "neck_C0_root";
-	rename -uid "C09420C9-44AB-9C9B-C3B0-EBA99BE6AD5B";
+createNode nurbsCurve -n "neck_C0_root23Shape" -p "neck_C0_root";
+	rename -uid "18A05ED3-45CB-BF15-7E71-998C4CB5F4FC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -807,8 +812,8 @@ createNode nurbsCurve -n "neck_C0_root20Shape" -p "neck_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "neck_C0_root21Shape" -p "neck_C0_root";
-	rename -uid "5C5A1F7C-443D-5A0D-FEA1-54B9B57932C1";
+createNode nurbsCurve -n "neck_C0_root24Shape" -p "neck_C0_root";
+	rename -uid "30500D70-4939-2AEE-C22D-66B55480CE35";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -835,10 +840,10 @@ createNode nurbsCurve -n "neck_C0_root21Shape" -p "neck_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "neck_C0_neck" -p "neck_C0_root";
-	rename -uid "A5047793-44C6-5EB8-FF80-69A8A0608B54";
+	rename -uid "0D356E1B-47A8-8717-83B4-CFBF635A7672";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -0.24124837670655674 3.6642870257638149 -8.7131531609605358e-016 ;
+	setAttr ".t" -type "double3" -0.24124837670655674 3.6642870257638149 -8.7131531609605555e-016 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -846,12 +851,12 @@ createNode transform -n "neck_C0_neck" -p "neck_C0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000009 1 1.0000000000000002 ;
+	setAttr ".s" -type "double3" 1.0000000000000011 1 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "neck_C0_neckShape" -p "neck_C0_neck";
-	rename -uid "05A66C1F-4D97-00BC-C1F4-BC96AC64EFD2";
+	rename -uid "C020E8D5-4F7D-6B29-0DA0-D685A00A9CFD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -863,8 +868,8 @@ createNode nurbsCurve -n "neck_C0_neckShape" -p "neck_C0_neck";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "neck_C0_neck19Shape" -p "neck_C0_neck";
-	rename -uid "659A8B36-4472-02EF-0070-EEB931EE1E42";
+createNode nurbsCurve -n "neck_C0_neck22Shape" -p "neck_C0_neck";
+	rename -uid "2A47CEA9-4CEB-D58A-009D-BC8C89B4EDD1";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -876,8 +881,8 @@ createNode nurbsCurve -n "neck_C0_neck19Shape" -p "neck_C0_neck";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "neck_C0_neck20Shape" -p "neck_C0_neck";
-	rename -uid "83C3A1C4-4190-94B8-9E46-6690D4CD83F1";
+createNode nurbsCurve -n "neck_C0_neck23Shape" -p "neck_C0_neck";
+	rename -uid "24FAC434-43F8-5B6E-EC54-93AE826E4CF5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -889,8 +894,8 @@ createNode nurbsCurve -n "neck_C0_neck20Shape" -p "neck_C0_neck";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "neck_C0_neck21Shape" -p "neck_C0_neck";
-	rename -uid "05BC8718-4B7F-8EFB-5DA1-A19276CC3D2B";
+createNode nurbsCurve -n "neck_C0_neck24Shape" -p "neck_C0_neck";
+	rename -uid "63CB5148-4B79-DD92-AD2C-E1986F7D14BB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -907,8 +912,8 @@ createNode nurbsCurve -n "neck_C0_neck21Shape" -p "neck_C0_neck";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_neck21_0crvShape" -p "neck_C0_neck";
-	rename -uid "39DA5915-4EFA-2A81-2C18-139826F84B44";
+createNode nurbsCurve -n "neck_C0_neck24_0crvShape" -p "neck_C0_neck";
+	rename -uid "D7228223-4D14-1AA3-A085-AFA73C82210D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -925,8 +930,8 @@ createNode nurbsCurve -n "neck_C0_neck21_0crvShape" -p "neck_C0_neck";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_neck21_1crvShape" -p "neck_C0_neck";
-	rename -uid "4BEE180B-476B-39EF-5365-AA89E8FB24B4";
+createNode nurbsCurve -n "neck_C0_neck24_1crvShape" -p "neck_C0_neck";
+	rename -uid "B4C3BA46-415D-3BD1-E6AB-3E85565A645A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -944,10 +949,10 @@ createNode nurbsCurve -n "neck_C0_neck21_1crvShape" -p "neck_C0_neck";
 		0 0 -0.1875
 		;
 createNode transform -n "neck_C0_head" -p "neck_C0_neck";
-	rename -uid "F8152750-4C21-D28A-A0EC-9D9A53AFC41C";
+	rename -uid "9BA8DCA9-4B5B-9D4F-2F5E-BA86B627BBD9";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 2.6645352591003757e-015 -7.1054273576010019e-015 3.7470892997998061e-030 ;
+	setAttr ".t" -type "double3" 3.5527136788005009e-015 -7.1054273576010019e-015 5.4727225299707694e-030 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -956,12 +961,12 @@ createNode transform -n "neck_C0_head" -p "neck_C0_neck";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999933 0.999999999999999 0.99999999999999978 ;
+	setAttr ".s" -type "double3" 0.99999999999999933 0.99999999999999878 0.99999999999999933 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "neck_C0_headShape" -p "neck_C0_head";
-	rename -uid "60969E24-4485-B51F-D635-F0B86219158E";
+	rename -uid "1397A51B-4BF5-AE11-7318-72A65DDAAAE0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -973,8 +978,8 @@ createNode nurbsCurve -n "neck_C0_headShape" -p "neck_C0_head";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "neck_C0_head19Shape" -p "neck_C0_head";
-	rename -uid "30494E3C-493F-F56F-9CA8-A088C2DB6E75";
+createNode nurbsCurve -n "neck_C0_head22Shape" -p "neck_C0_head";
+	rename -uid "13E98317-4326-BB9C-906D-E585C55AC7A5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -986,8 +991,8 @@ createNode nurbsCurve -n "neck_C0_head19Shape" -p "neck_C0_head";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "neck_C0_head20Shape" -p "neck_C0_head";
-	rename -uid "BC2FE157-456F-1CE4-A26E-02BFBA3ECA6A";
+createNode nurbsCurve -n "neck_C0_head23Shape" -p "neck_C0_head";
+	rename -uid "5E1C78A0-4071-CDF1-87D5-6F9921068C78";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -999,8 +1004,8 @@ createNode nurbsCurve -n "neck_C0_head20Shape" -p "neck_C0_head";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "neck_C0_head21Shape" -p "neck_C0_head";
-	rename -uid "9D675684-4B3B-6AE8-0DFB-99B45E04FF69";
+createNode nurbsCurve -n "neck_C0_head24Shape" -p "neck_C0_head";
+	rename -uid "0D692FD8-483C-50ED-F6F3-A3AF9CB022A2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1017,8 +1022,8 @@ createNode nurbsCurve -n "neck_C0_head21Shape" -p "neck_C0_head";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_head21_0crvShape" -p "neck_C0_head";
-	rename -uid "ADEDFA4B-4F54-04B9-67EE-0EA5CF5F62FC";
+createNode nurbsCurve -n "neck_C0_head24_0crvShape" -p "neck_C0_head";
+	rename -uid "7CFCC455-467C-DF28-B238-F998AC9A9D2A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1035,8 +1040,8 @@ createNode nurbsCurve -n "neck_C0_head21_0crvShape" -p "neck_C0_head";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_head21_1crvShape" -p "neck_C0_head";
-	rename -uid "AA88DF36-428C-253E-2295-B78D1E7D9FAD";
+createNode nurbsCurve -n "neck_C0_head24_1crvShape" -p "neck_C0_head";
+	rename -uid "FE6F196A-4743-3F5F-F4AA-57A5A76750CA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1054,10 +1059,10 @@ createNode nurbsCurve -n "neck_C0_head21_1crvShape" -p "neck_C0_head";
 		0 0 -0.1875
 		;
 createNode transform -n "neck_C0_eff" -p "neck_C0_head";
-	rename -uid "D9FFE892-486F-775C-574A-0D94A0310E4D";
+	rename -uid "D17DB9AA-41AE-6F82-5CFA-3C83598B1989";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0.028362147187278808 2.6770463465994707 4.5418821062020015e-015 ;
+	setAttr ".t" -type "double3" 0.028362147187275255 2.6770463465994698 4.541882106202e-015 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -1065,12 +1070,12 @@ createNode transform -n "neck_C0_eff" -p "neck_C0_head";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000007 1.0000000000000002 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000004 1.0000000000000002 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "neck_C0_effShape" -p "neck_C0_eff";
-	rename -uid "00E52EBA-4947-369D-0D0F-F3B998CFA1CB";
+	rename -uid "FCD08A25-462B-5828-F504-F386D8B9A61B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1082,8 +1087,8 @@ createNode nurbsCurve -n "neck_C0_effShape" -p "neck_C0_eff";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "neck_C0_eff19Shape" -p "neck_C0_eff";
-	rename -uid "D19650E0-45E8-0833-24C2-B68494BCF733";
+createNode nurbsCurve -n "neck_C0_eff22Shape" -p "neck_C0_eff";
+	rename -uid "A15E8346-4F3F-3613-324E-F995A32888F0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1095,8 +1100,8 @@ createNode nurbsCurve -n "neck_C0_eff19Shape" -p "neck_C0_eff";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "neck_C0_eff20Shape" -p "neck_C0_eff";
-	rename -uid "96F18B0F-45C0-3850-F4BF-1B859D5286D7";
+createNode nurbsCurve -n "neck_C0_eff23Shape" -p "neck_C0_eff";
+	rename -uid "197F5289-4651-D3BA-336B-A89FE8855D5B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1108,8 +1113,8 @@ createNode nurbsCurve -n "neck_C0_eff20Shape" -p "neck_C0_eff";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "neck_C0_eff21Shape" -p "neck_C0_eff";
-	rename -uid "B007CA0C-4D61-4282-44FB-AD9E4A826226";
+createNode nurbsCurve -n "neck_C0_eff24Shape" -p "neck_C0_eff";
+	rename -uid "C54F5E1C-48E7-F359-41F3-048B6371AE30";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1126,8 +1131,8 @@ createNode nurbsCurve -n "neck_C0_eff21Shape" -p "neck_C0_eff";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_eff21_0crvShape" -p "neck_C0_eff";
-	rename -uid "715DBFE7-4DDA-A8BF-79E0-A68117246001";
+createNode nurbsCurve -n "neck_C0_eff24_0crvShape" -p "neck_C0_eff";
+	rename -uid "1ABDBFDF-492D-88E2-8888-65A36EC57FAF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1144,8 +1149,8 @@ createNode nurbsCurve -n "neck_C0_eff21_0crvShape" -p "neck_C0_eff";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_eff21_1crvShape" -p "neck_C0_eff";
-	rename -uid "2CF08974-40CC-99CC-4FBD-7EB14D74C482";
+createNode nurbsCurve -n "neck_C0_eff24_1crvShape" -p "neck_C0_eff";
+	rename -uid "E394A3F4-48C0-C686-6763-05ABB047015E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1163,7 +1168,7 @@ createNode nurbsCurve -n "neck_C0_eff21_1crvShape" -p "neck_C0_eff";
 		0 0 -0.1875
 		;
 createNode transform -n "spineUI_C0_root" -p "neck_C0_eff";
-	rename -uid "9C17D727-4F3D-AC3C-418B-61887B3E7543";
+	rename -uid "59586D3F-437D-B95A-E7B3-32BF16139C76";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -1175,7 +1180,7 @@ createNode transform -n "spineUI_C0_root" -p "neck_C0_eff";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
@@ -1187,21 +1192,23 @@ createNode transform -n "spineUI_C0_root" -p "neck_C0_eff";
 	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 1 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -3.2992211017816819 -0.74362823191861871 -4.3347348183670675 ;
+	setAttr ".t" -type "double3" -3.2992211017816793 -0.74362823191861693 -4.3347348183670693 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
-	setAttr ".r" -type "double3" 0.038224192844409803 89.999999999999957 0 ;
+	setAttr ".r" -type "double3" 0.038224192844406001 89.999999999999957 0 ;
 	setAttr -k off -cb on ".rx";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 2.3915882794427561 2.3915882794427552 2.3915882794427579 ;
+	setAttr ".s" -type "double3" 2.391588279442757 2.3915882794427556 2.3915882794427583 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -1213,12 +1220,8 @@ createNode transform -n "spineUI_C0_root" -p "neck_C0_eff";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "cross";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 1;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "spineUI_C0_rootShape" -p "spineUI_C0_root";
-	rename -uid "D85D3E23-45C4-3DE4-F9D0-7198FEFAE47D";
+	rename -uid "B66352C3-4D24-B286-0E70-D693328FA173";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1230,8 +1233,8 @@ createNode nurbsCurve -n "spineUI_C0_rootShape" -p "spineUI_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "spineUI_C0_root19Shape" -p "spineUI_C0_root";
-	rename -uid "CDA45FEC-4ED3-2DDD-13D1-BA8BA46AC4B3";
+createNode nurbsCurve -n "spineUI_C0_root22Shape" -p "spineUI_C0_root";
+	rename -uid "BF1B2478-4AE2-3294-71DA-699AC21CAE7A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1243,8 +1246,8 @@ createNode nurbsCurve -n "spineUI_C0_root19Shape" -p "spineUI_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "spineUI_C0_root20Shape" -p "spineUI_C0_root";
-	rename -uid "FE176A1F-4B1B-3BDD-854C-6CB742DCCAE0";
+createNode nurbsCurve -n "spineUI_C0_root23Shape" -p "spineUI_C0_root";
+	rename -uid "87A3AFD8-4645-28A5-C095-E3AC5F67D1EF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1256,8 +1259,8 @@ createNode nurbsCurve -n "spineUI_C0_root20Shape" -p "spineUI_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "spineUI_C0_root21Shape" -p "spineUI_C0_root";
-	rename -uid "141C2F25-49DF-C23F-E6F9-90AE3D1BA2B7";
+createNode nurbsCurve -n "spineUI_C0_root24Shape" -p "spineUI_C0_root";
+	rename -uid "6A8BF3CB-4190-9446-824D-66B48993D309";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1284,10 +1287,10 @@ createNode nurbsCurve -n "spineUI_C0_root21Shape" -p "spineUI_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "spineUI_C0_sizeRef" -p "spineUI_C0_root";
-	rename -uid "2C6B53F2-4B4C-B7BC-9503-59AF5567F60C";
+	rename -uid "47EF90FE-4F8B-2AE6-09D9-D28A93A76794";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 8.8817841970012523e-016 0 1 ;
+	setAttr ".t" -type "double3" 0 -8.8817841970012523e-016 0.99999999999999956 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -1295,12 +1298,12 @@ createNode transform -n "spineUI_C0_sizeRef" -p "spineUI_C0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000002 0.99999999999999967 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 0.99999999999999933 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "headUI_C0_root" -p "neck_C0_eff";
-	rename -uid "86BFFE5F-4011-B9DE-578D-918C39CFC7AC";
+	rename -uid "634F1E41-4BA1-FA7F-B8B9-16A55D24F436";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -1312,7 +1315,7 @@ createNode transform -n "headUI_C0_root" -p "neck_C0_eff";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
@@ -1324,12 +1327,14 @@ createNode transform -n "headUI_C0_root" -p "neck_C0_eff";
 	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 0.5 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 7.1054273576010019e-015 2.9303186274198669 6.1165723857933474e-016 ;
+	setAttr ".t" -type "double3" 1.0658141036401503e-014 2.9303186274198687 6.1165723857933553e-016 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -1337,7 +1342,7 @@ createNode transform -n "headUI_C0_root" -p "neck_C0_eff";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 0.99999999999999978 0.99999999999999967 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 1 0.99999999999999989 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -1349,12 +1354,8 @@ createNode transform -n "headUI_C0_root" -p "neck_C0_eff";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "cross";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 0.5;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "headUI_C0_rootShape" -p "headUI_C0_root";
-	rename -uid "DFF72A63-4F69-C8A8-9F23-83BFB371AF9A";
+	rename -uid "B6C1E8C5-4009-6C3E-AA4D-5895C2E19275";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1366,8 +1367,8 @@ createNode nurbsCurve -n "headUI_C0_rootShape" -p "headUI_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "headUI_C0_root10Shape" -p "headUI_C0_root";
-	rename -uid "B0AB637A-422A-7B98-6FB3-719BC1B4CA46";
+createNode nurbsCurve -n "headUI_C0_root13Shape" -p "headUI_C0_root";
+	rename -uid "849D66D3-40FC-78E0-8E9A-86887103CE4E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1379,8 +1380,8 @@ createNode nurbsCurve -n "headUI_C0_root10Shape" -p "headUI_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "headUI_C0_root11Shape" -p "headUI_C0_root";
-	rename -uid "E3707466-4785-DD98-12A5-4DB0F4E98AF6";
+createNode nurbsCurve -n "headUI_C0_root14Shape" -p "headUI_C0_root";
+	rename -uid "245EEB45-43D7-EA6A-800E-6FBF3585078D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1392,8 +1393,8 @@ createNode nurbsCurve -n "headUI_C0_root11Shape" -p "headUI_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "headUI_C0_root12Shape" -p "headUI_C0_root";
-	rename -uid "0997146B-4393-F307-2DDE-6E8780F50212";
+createNode nurbsCurve -n "headUI_C0_root15Shape" -p "headUI_C0_root";
+	rename -uid "F06AF8B8-4622-7BC8-21B3-9C868D7CA982";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1420,24 +1421,24 @@ createNode nurbsCurve -n "headUI_C0_root12Shape" -p "headUI_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "headUI_C0_sizeRef" -p "headUI_C0_root";
-	rename -uid "5853BD55-4B20-0CF7-3050-5EB7DBD981B1";
+	rename -uid "977C0EA2-41DF-E0C9-712A-50A694BB47FD";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 2.3915877472269305 -0.0015955193487808828 -1.0620785493044065e-015 ;
+	setAttr ".t" -type "double3" 2.3915877472269269 -0.0015955193487791064 -1.0620785493044065e-015 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
-	setAttr ".r" -type "double3" 0.038224192844409817 89.999999999999957 0 ;
+	setAttr ".r" -type "double3" 0.038224192844406014 89.999999999999957 0 ;
 	setAttr -k off -cb on ".rx";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 2.3915882794427574 2.3915882794427561 2.391588279442757 ;
+	setAttr ".s" -type "double3" 2.3915882794427565 2.3915882794427561 2.3915882794427561 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "mouth_C0_root" -p "neck_C0_head";
-	rename -uid "36F0E7FF-4F27-224F-DE9A-3C8A3B3CA4F0";
+	rename -uid "91557551-43A4-8822-B550-4BA0F8077897";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -1447,18 +1448,18 @@ createNode transform -n "mouth_C0_root" -p "neck_C0_head";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0.69584514547310761 0.71792767893744003 1.4003887623375056e-015 ;
+	setAttr ".t" -type "double3" 0.69584514547310405 0.71792767893743914 1.4003887623375046e-015 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
-	setAttr ".r" -type "double3" 0.038224192844409824 89.999999999999957 0 ;
+	setAttr ".r" -type "double3" 0.038224192844406014 89.999999999999957 0 ;
 	setAttr -k off -cb on ".rx";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.5373820334294297 0.53738203342942958 0.53738203342943014 ;
+	setAttr ".s" -type "double3" 0.53738203342942958 0.53738203342942947 0.53738203342943014 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -1468,9 +1469,8 @@ createNode transform -n "mouth_C0_root" -p "neck_C0_head";
 	setAttr ".connector" -type "string" "standard";
 	setAttr ".ui_host" -type "string" "headUI_C0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "mouth_C0_rootShape" -p "mouth_C0_root";
-	rename -uid "40CA334A-42C3-8AB0-C612-A78F3AD9052E";
+	rename -uid "CA270A76-4FE2-E556-814C-35B320D1A5F6";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1482,8 +1482,8 @@ createNode nurbsCurve -n "mouth_C0_rootShape" -p "mouth_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_root19Shape" -p "mouth_C0_root";
-	rename -uid "711A2BEF-43E1-EB8A-E5DD-B2B621F46F6A";
+createNode nurbsCurve -n "mouth_C0_root22Shape" -p "mouth_C0_root";
+	rename -uid "AB7A675A-42EC-E84D-4FE8-288BFE7C2F48";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1495,8 +1495,8 @@ createNode nurbsCurve -n "mouth_C0_root19Shape" -p "mouth_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "mouth_C0_root20Shape" -p "mouth_C0_root";
-	rename -uid "E9829553-4065-5BDC-EC31-0B82D3A71440";
+createNode nurbsCurve -n "mouth_C0_root23Shape" -p "mouth_C0_root";
+	rename -uid "3683E301-41D8-0DAA-ABC3-B78624C29CF4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1508,8 +1508,8 @@ createNode nurbsCurve -n "mouth_C0_root20Shape" -p "mouth_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "mouth_C0_root21Shape" -p "mouth_C0_root";
-	rename -uid "EA9C8A0E-4267-11D2-28D5-429D260E885E";
+createNode nurbsCurve -n "mouth_C0_root24Shape" -p "mouth_C0_root";
+	rename -uid "4669D13F-4E4C-2E13-4094-499ACA6B91D4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1536,10 +1536,10 @@ createNode nurbsCurve -n "mouth_C0_root21Shape" -p "mouth_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "mouth_C0_rotcenter" -p "mouth_C0_root";
-	rename -uid "9E51B959-49A7-3E07-436C-F88554D53639";
+	rename -uid "D9EA27ED-4561-7ABE-9371-F186F061298A";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 2.9976714398398449e-029 -3.5527136788005009e-015 2.1316282072803006e-014 ;
+	setAttr ".t" -type "double3" 3.3132158019282496e-029 -3.5527136788005009e-015 2.4868995751603507e-014 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -1547,12 +1547,12 @@ createNode transform -n "mouth_C0_rotcenter" -p "mouth_C0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.999999999999999 0.99999999999999833 0.99999999999999845 ;
+	setAttr ".s" -type "double3" 0.99999999999999911 0.99999999999999833 0.99999999999999845 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "mouth_C0_rotcenterShape" -p "mouth_C0_rotcenter";
-	rename -uid "CC0F29E5-4958-20E2-5EA6-CB92A21EC7F4";
+	rename -uid "F756D1D8-405D-BF37-DEAC-E2A7AD30CA66";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1564,8 +1564,8 @@ createNode nurbsCurve -n "mouth_C0_rotcenterShape" -p "mouth_C0_rotcenter";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_rotcenter19Shape" -p "mouth_C0_rotcenter";
-	rename -uid "20FC48DF-4271-5A19-BA84-52BA51609F05";
+createNode nurbsCurve -n "mouth_C0_rotcenter22Shape" -p "mouth_C0_rotcenter";
+	rename -uid "5BDA84D5-40C3-211D-AF7A-E48FDAF4DB5B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1577,8 +1577,8 @@ createNode nurbsCurve -n "mouth_C0_rotcenter19Shape" -p "mouth_C0_rotcenter";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "mouth_C0_rotcenter20Shape" -p "mouth_C0_rotcenter";
-	rename -uid "B82B5A8B-4551-F60D-81B4-2D9B32AF9B4A";
+createNode nurbsCurve -n "mouth_C0_rotcenter23Shape" -p "mouth_C0_rotcenter";
+	rename -uid "C8A34795-448D-72D2-7060-508DB7F2AFE0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1590,8 +1590,8 @@ createNode nurbsCurve -n "mouth_C0_rotcenter20Shape" -p "mouth_C0_rotcenter";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "mouth_C0_rotcenter21Shape" -p "mouth_C0_rotcenter";
-	rename -uid "54F7A784-475B-8AF9-8AEB-599735F92152";
+createNode nurbsCurve -n "mouth_C0_rotcenter24Shape" -p "mouth_C0_rotcenter";
+	rename -uid "72991C91-45D8-80CF-80E6-60A837E3FBF1";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1608,8 +1608,8 @@ createNode nurbsCurve -n "mouth_C0_rotcenter21Shape" -p "mouth_C0_rotcenter";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_rotcenter21_0crvShape" -p "mouth_C0_rotcenter";
-	rename -uid "11DD6553-494B-51BB-014A-4D8F5A75F9BD";
+createNode nurbsCurve -n "mouth_C0_rotcenter24_0crvShape" -p "mouth_C0_rotcenter";
+	rename -uid "86A4FCED-478C-8CDE-3E03-4CB9672D4A38";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1626,8 +1626,8 @@ createNode nurbsCurve -n "mouth_C0_rotcenter21_0crvShape" -p "mouth_C0_rotcenter
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_rotcenter21_1crvShape" -p "mouth_C0_rotcenter";
-	rename -uid "C1889638-436C-19BA-8521-409E7E5D35A2";
+createNode nurbsCurve -n "mouth_C0_rotcenter24_1crvShape" -p "mouth_C0_rotcenter";
+	rename -uid "A936D7FE-4BC8-C383-8F22-65A49571EA12";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1645,10 +1645,10 @@ createNode nurbsCurve -n "mouth_C0_rotcenter21_1crvShape" -p "mouth_C0_rotcenter
 		0 0 -0.1875
 		;
 createNode transform -n "mouth_C0_lipup" -p "mouth_C0_rotcenter";
-	rename -uid "2B5E0084-4E43-6AD9-CD19-7189666A4EDE";
+	rename -uid "126AE641-44CD-780D-6F44-A4A0200F8764";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 4.2971167579553764e-015 -0.83057537847144047 2.6485854255406984 ;
+	setAttr ".t" -type "double3" 4.2971167579553779e-015 -0.83057537847144047 2.6485854255406984 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -1656,12 +1656,12 @@ createNode transform -n "mouth_C0_lipup" -p "mouth_C0_rotcenter";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999978 0.99999999999999944 0.99999999999999978 ;
+	setAttr ".s" -type "double3" 0.99999999999999967 0.99999999999999944 0.99999999999999956 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "mouth_C0_lipupShape" -p "mouth_C0_lipup";
-	rename -uid "E6946427-4E6B-D365-D7E1-45BD2FD8871A";
+	rename -uid "5EA25A74-4862-8E12-5382-848F892F0FE4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1673,8 +1673,8 @@ createNode nurbsCurve -n "mouth_C0_lipupShape" -p "mouth_C0_lipup";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_lipup19Shape" -p "mouth_C0_lipup";
-	rename -uid "D0CB347F-42EB-F4A4-4585-779F698C31FE";
+createNode nurbsCurve -n "mouth_C0_lipup22Shape" -p "mouth_C0_lipup";
+	rename -uid "C33AEF3B-43A2-3099-4774-6096A8E5D386";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1686,8 +1686,8 @@ createNode nurbsCurve -n "mouth_C0_lipup19Shape" -p "mouth_C0_lipup";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "mouth_C0_lipup20Shape" -p "mouth_C0_lipup";
-	rename -uid "EA2C8128-4F2C-5D84-BE50-B7A4A6694E92";
+createNode nurbsCurve -n "mouth_C0_lipup23Shape" -p "mouth_C0_lipup";
+	rename -uid "A0697985-446D-0FCE-2FE4-B9B58A8D949E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1699,8 +1699,8 @@ createNode nurbsCurve -n "mouth_C0_lipup20Shape" -p "mouth_C0_lipup";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "mouth_C0_lipup21Shape" -p "mouth_C0_lipup";
-	rename -uid "9F37C0A6-4349-7037-A343-07AC29E310DA";
+createNode nurbsCurve -n "mouth_C0_lipup24Shape" -p "mouth_C0_lipup";
+	rename -uid "39BAF601-4C34-6B7A-BCB1-F39EA65B1A96";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1717,8 +1717,8 @@ createNode nurbsCurve -n "mouth_C0_lipup21Shape" -p "mouth_C0_lipup";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_lipup21_0crvShape" -p "mouth_C0_lipup";
-	rename -uid "3E8764D8-417A-6F54-6CEC-B79D608CC44E";
+createNode nurbsCurve -n "mouth_C0_lipup24_0crvShape" -p "mouth_C0_lipup";
+	rename -uid "F68A408F-41C0-D7AF-781B-30A1723CE72E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1735,8 +1735,8 @@ createNode nurbsCurve -n "mouth_C0_lipup21_0crvShape" -p "mouth_C0_lipup";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_lipup21_1crvShape" -p "mouth_C0_lipup";
-	rename -uid "F51B9F0C-414B-10E7-AE77-B090918C442F";
+createNode nurbsCurve -n "mouth_C0_lipup24_1crvShape" -p "mouth_C0_lipup";
+	rename -uid "DC2919AC-4000-8CD1-BF71-E8979C937275";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1754,18 +1754,18 @@ createNode nurbsCurve -n "mouth_C0_lipup21_1crvShape" -p "mouth_C0_lipup";
 		0 0 -0.1875
 		;
 createNode transform -n "mouth_C0_crv" -p "mouth_C0_lipup";
-	rename -uid "DC6A1753-438B-B4FF-A408-C49BB28A8D46";
+	rename -uid "2C70D9F8-4D19-B1E8-A9B9-05BDE026293D";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -1.3722175990868861e-014 -14.161367226604183 -19.457469484456148 ;
-	setAttr ".s" -type "double3" 4.4504433171691238 4.4504433171691282 4.4504433171691229 ;
+	setAttr ".t" -type "double3" -1.3722175990868867e-014 -14.161367226604185 -19.457469484456155 ;
+	setAttr ".s" -type "double3" 4.4504433171691247 4.4504433171691282 4.4504433171691247 ;
 createNode nurbsCurve -n "mouth_C0_crvShape" -p "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv";
-	rename -uid "4B85A4F3-4021-64A6-BE8D-2AB9152713C1";
+	rename -uid "ADFCE0AB-4357-21CF-3670-E29EF0B07320";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "mouth_C0_crvShapeOrig" -p "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv";
-	rename -uid "F39209B6-4787-AAD9-A710-17A85F90CCCB";
+	rename -uid "34A597C5-497C-3343-39D6-218A10893D07";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -1776,7 +1776,7 @@ createNode nurbsCurve -n "mouth_C0_crvShapeOrig" -p "|guide|global_C0_root|local
 		0 0 0
 		;
 createNode transform -n "mouth_C0_liplow" -p "mouth_C0_rotcenter";
-	rename -uid "1C7BE26C-4735-4270-CC32-24B07AEF5CBA";
+	rename -uid "2D5FCAD8-4150-5287-F6D0-C58EC53433D0";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
 	setAttr ".t" -type "double3" 3.7198567879251422e-015 -1.1237321151316078 2.4565606483465565 ;
@@ -1787,12 +1787,12 @@ createNode transform -n "mouth_C0_liplow" -p "mouth_C0_rotcenter";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999978 0.99999999999999944 0.99999999999999978 ;
+	setAttr ".s" -type "double3" 0.99999999999999967 0.99999999999999944 0.99999999999999956 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "mouth_C0_liplowShape" -p "mouth_C0_liplow";
-	rename -uid "7CF2FC64-4C8A-B820-20AA-51B55B9D94D1";
+	rename -uid "FF865A74-48F3-B435-4C2B-37BF2E3F58BD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1804,8 +1804,8 @@ createNode nurbsCurve -n "mouth_C0_liplowShape" -p "mouth_C0_liplow";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_liplow19Shape" -p "mouth_C0_liplow";
-	rename -uid "AD67E42D-403D-D563-3589-988061499BDE";
+createNode nurbsCurve -n "mouth_C0_liplow22Shape" -p "mouth_C0_liplow";
+	rename -uid "D6A8940B-40FD-A869-B094-719BFAA44D0F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1817,8 +1817,8 @@ createNode nurbsCurve -n "mouth_C0_liplow19Shape" -p "mouth_C0_liplow";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "mouth_C0_liplow20Shape" -p "mouth_C0_liplow";
-	rename -uid "A769A2FD-4BE2-7D64-D156-8D907301FB7E";
+createNode nurbsCurve -n "mouth_C0_liplow23Shape" -p "mouth_C0_liplow";
+	rename -uid "265362F5-4FBC-2E68-FFE9-B9A42B4BD986";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1830,8 +1830,8 @@ createNode nurbsCurve -n "mouth_C0_liplow20Shape" -p "mouth_C0_liplow";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "mouth_C0_liplow21Shape" -p "mouth_C0_liplow";
-	rename -uid "A03BEEBD-40C3-CE41-398A-D9AEEB6996B7";
+createNode nurbsCurve -n "mouth_C0_liplow24Shape" -p "mouth_C0_liplow";
+	rename -uid "EA5C51F1-4323-1F6C-F8EC-52B85E0AB193";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1848,8 +1848,8 @@ createNode nurbsCurve -n "mouth_C0_liplow21Shape" -p "mouth_C0_liplow";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_liplow21_0crvShape" -p "mouth_C0_liplow";
-	rename -uid "B7E49BD9-4286-A0AD-4A9A-04B05572346F";
+createNode nurbsCurve -n "mouth_C0_liplow24_0crvShape" -p "mouth_C0_liplow";
+	rename -uid "6F42407B-4C10-15C4-E571-C8A73457E2B4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1866,8 +1866,8 @@ createNode nurbsCurve -n "mouth_C0_liplow21_0crvShape" -p "mouth_C0_liplow";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_liplow21_1crvShape" -p "mouth_C0_liplow";
-	rename -uid "8B540692-44EB-F4DA-6D48-9A9884FC3254";
+createNode nurbsCurve -n "mouth_C0_liplow24_1crvShape" -p "mouth_C0_liplow";
+	rename -uid "42B9409E-4AD5-94F3-A1E4-4B89B66FA4EE";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1885,18 +1885,18 @@ createNode nurbsCurve -n "mouth_C0_liplow21_1crvShape" -p "mouth_C0_liplow";
 		0 0 -0.1875
 		;
 createNode transform -n "mouth_C0_crv" -p "mouth_C0_liplow";
-	rename -uid "5B9696D5-4A33-6F6C-B4C9-55AB55AE8CAC";
+	rename -uid "6CFE16BA-4C68-30A9-15F0-7BBCD2915ECF";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -1.3144916020838624e-014 -13.868210489944016 -19.265444707262002 ;
-	setAttr ".s" -type "double3" 4.4504433171691238 4.4504433171691282 4.4504433171691229 ;
+	setAttr ".t" -type "double3" -1.3144916020838627e-014 -13.868210489944017 -19.265444707262013 ;
+	setAttr ".s" -type "double3" 4.4504433171691247 4.4504433171691282 4.4504433171691247 ;
 createNode nurbsCurve -n "mouth_C0_crvShape" -p "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv";
-	rename -uid "A41A1D5E-48ED-DF47-EC4B-00A22B00C1AD";
+	rename -uid "0682BD75-4BD0-3805-35A9-129CD4488A30";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "mouth_C0_crvShapeOrig" -p "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv";
-	rename -uid "C2B5FF5C-45C3-55C8-FCB9-D1B113C13254";
+	rename -uid "6C8B95A9-49BA-CC2A-F942-BE85C7EF5796";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -1907,10 +1907,10 @@ createNode nurbsCurve -n "mouth_C0_crvShapeOrig" -p "|guide|global_C0_root|local
 		0 0 0
 		;
 createNode transform -n "mouth_C0_jaw" -p "mouth_C0_root";
-	rename -uid "526FC737-44E7-E5FE-74EE-F4976B6E5C29";
+	rename -uid "83E6C5BB-4C0A-0AE7-19B9-D08203689BE1";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 3.3132158019282496e-029 -1.9431960625636933 2.006989566316264 ;
+	setAttr ".t" -type "double3" 3.4709879829724519e-029 -1.9431960625636933 2.0069895663162676 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -1918,12 +1918,12 @@ createNode transform -n "mouth_C0_jaw" -p "mouth_C0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.999999999999999 0.99999999999999833 0.99999999999999845 ;
+	setAttr ".s" -type "double3" 0.99999999999999911 0.99999999999999833 0.99999999999999845 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "mouth_C0_jawShape" -p "mouth_C0_jaw";
-	rename -uid "486F83B2-4443-BFA3-7D39-48ABC7945DF4";
+	rename -uid "09CF5534-4420-EAF3-635F-AA9BC3F760D9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1935,8 +1935,8 @@ createNode nurbsCurve -n "mouth_C0_jawShape" -p "mouth_C0_jaw";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_jaw19Shape" -p "mouth_C0_jaw";
-	rename -uid "2AD85104-428C-E3C1-5725-ADB9601D592C";
+createNode nurbsCurve -n "mouth_C0_jaw22Shape" -p "mouth_C0_jaw";
+	rename -uid "B09F3321-49B9-B553-3E69-2583771E91EF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1948,8 +1948,8 @@ createNode nurbsCurve -n "mouth_C0_jaw19Shape" -p "mouth_C0_jaw";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "mouth_C0_jaw20Shape" -p "mouth_C0_jaw";
-	rename -uid "6B933D92-4068-6118-CB12-05BB91AB4006";
+createNode nurbsCurve -n "mouth_C0_jaw23Shape" -p "mouth_C0_jaw";
+	rename -uid "B8BCB540-45FA-9079-3B28-378EF6253843";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1961,8 +1961,8 @@ createNode nurbsCurve -n "mouth_C0_jaw20Shape" -p "mouth_C0_jaw";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "mouth_C0_jaw21Shape" -p "mouth_C0_jaw";
-	rename -uid "C50FCD44-4C37-957B-889A-0688B6449F49";
+createNode nurbsCurve -n "mouth_C0_jaw24Shape" -p "mouth_C0_jaw";
+	rename -uid "D8827A0A-4C80-B4E0-A9A3-248DEB8CC338";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1979,8 +1979,8 @@ createNode nurbsCurve -n "mouth_C0_jaw21Shape" -p "mouth_C0_jaw";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_jaw21_0crvShape" -p "mouth_C0_jaw";
-	rename -uid "B0C4816A-492D-1528-C0A5-FD826FB4009E";
+createNode nurbsCurve -n "mouth_C0_jaw24_0crvShape" -p "mouth_C0_jaw";
+	rename -uid "FE1F758B-48FA-5531-E514-3387E6ADCF52";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -1997,8 +1997,8 @@ createNode nurbsCurve -n "mouth_C0_jaw21_0crvShape" -p "mouth_C0_jaw";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "mouth_C0_jaw21_1crvShape" -p "mouth_C0_jaw";
-	rename -uid "DE97B9B1-47D1-5C15-6685-138C27B7F2D5";
+createNode nurbsCurve -n "mouth_C0_jaw24_1crvShape" -p "mouth_C0_jaw";
+	rename -uid "E19D81C4-440B-CAED-1B95-37A1C433E3DE";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2016,18 +2016,18 @@ createNode nurbsCurve -n "mouth_C0_jaw21_1crvShape" -p "mouth_C0_jaw";
 		0 0 -0.1875
 		;
 createNode transform -n "mouth_C0_crv" -p "mouth_C0_root";
-	rename -uid "4F522166-4C5A-0E3B-8004-6A8791113BE1";
+	rename -uid "F66898FA-4111-FB81-BF5F-E18B61B60381";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -9.4250592329134309e-015 -14.991942605075595 -16.808884058915393 ;
-	setAttr ".s" -type "double3" 4.4504433171691176 4.4504433171691185 4.4504433171691149 ;
+	setAttr ".t" -type "double3" -9.4250592329134356e-015 -14.991942605075595 -16.808884058915393 ;
+	setAttr ".s" -type "double3" 4.4504433171691185 4.4504433171691185 4.4504433171691149 ;
 createNode nurbsCurve -n "mouth_C0_crvShape" -p "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv";
-	rename -uid "E8A54D73-4925-DE5C-70E8-A9ACE08760D6";
+	rename -uid "E4DEC7B0-4A58-1C15-B794-00B93F924B97";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "mouth_C0_crvShapeOrig" -p "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv";
-	rename -uid "5BF8D945-4F6D-8BCE-4E67-88AFE8325184";
+	rename -uid "7D2D681A-4DAB-EA2E-10C0-6AB8A48C4AA8";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -2037,19 +2037,19 @@ createNode nurbsCurve -n "mouth_C0_crvShapeOrig" -p "|guide|global_C0_root|local
 		0 0 0
 		0 0 0
 		;
-createNode transform -n "mouth_C0_crv7" -p "mouth_C0_root";
-	rename -uid "FB255D8F-4EB2-9983-86D2-1896A9DE4CC9";
+createNode transform -n "mouth_C0_crv8" -p "mouth_C0_root";
+	rename -uid "94AA9D3F-44E8-9E75-A59C-7BAEAD7FE93C";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -9.4250592329134309e-015 -14.991942605075595 -16.808884058915393 ;
-	setAttr ".s" -type "double3" 4.4504433171691176 4.4504433171691185 4.4504433171691149 ;
-createNode nurbsCurve -n "mouth_C0_crv7Shape" -p "mouth_C0_crv7";
-	rename -uid "72ABF2EE-409D-A6C0-89B1-CE885E606CE2";
+	setAttr ".t" -type "double3" -9.4250592329134356e-015 -14.991942605075595 -16.808884058915393 ;
+	setAttr ".s" -type "double3" 4.4504433171691185 4.4504433171691185 4.4504433171691149 ;
+createNode nurbsCurve -n "mouth_C0_crv8Shape" -p "mouth_C0_crv8";
+	rename -uid "A3FA8B5B-4CAE-3DDB-C78B-D093627B0825";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
-createNode nurbsCurve -n "mouth_C0_crv7ShapeOrig" -p "mouth_C0_crv7";
-	rename -uid "D0A4FD87-4047-4045-95C0-6E867A800E81";
+createNode nurbsCurve -n "mouth_C0_crv8ShapeOrig" -p "mouth_C0_crv8";
+	rename -uid "3F7AF5F8-44FA-B891-894B-E4ADFE510EB3";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -2060,7 +2060,7 @@ createNode nurbsCurve -n "mouth_C0_crv7ShapeOrig" -p "mouth_C0_crv7";
 		0 0 0
 		;
 createNode transform -n "eyeslook_C0_root" -p "neck_C0_head";
-	rename -uid "D9226848-4342-9EA5-A43A-088C0312C8D6";
+	rename -uid "4ECDE7D0-4380-A002-245A-CB8FD817BE9F";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -2072,33 +2072,35 @@ createNode transform -n "eyeslook_C0_root" -p "neck_C0_head";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ro" -ln "k_ro" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_rx" -ln "k_rx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_ry" -ln "k_ry" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_rz" -ln "k_rz" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sx" -ln "k_sx" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_tx" -ln "k_tx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ty" -ln "k_ty" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_tz" -ln "k_tz" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ro" -ln "k_ro" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_rx" -ln "k_rx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_ry" -ln "k_ry" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_rz" -ln "k_rz" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sx" -ln "k_sx" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sy" -ln "k_sy" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "k_sz" -ln "k_sz" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 1 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 4.9771436298332112 1.022199806296153 -1.7545700686211258e-015 ;
+	setAttr ".t" -type "double3" 4.9771436298332059 1.0221998062961521 -1.7545700686211268e-015 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
-	setAttr ".r" -type "double3" 0.038224192844409817 89.999999999999957 0 ;
+	setAttr ".r" -type "double3" 0.038224192844406028 89.999999999999957 0 ;
 	setAttr -k off -cb on ".rx";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 2.3915882794427579 2.3915882794427579 2.391588279442757 ;
+	setAttr ".s" -type "double3" 2.3915882794427574 2.3915882794427574 2.3915882794427561 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -2110,22 +2112,8 @@ createNode transform -n "eyeslook_C0_root" -p "neck_C0_head";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "square";
 	setAttr ".ikrefarray" -type "string" "neck_C0_eff,COG_C0_root,local_C0_root";
-	setAttr ".uniScale" yes;
-	setAttr ".k_tx" yes;
-	setAttr ".k_ty" yes;
-	setAttr ".k_tz" yes;
-	setAttr ".k_ro" yes;
-	setAttr ".k_rx" yes;
-	setAttr ".k_ry" yes;
-	setAttr ".k_rz" yes;
-	setAttr ".k_sx" yes;
-	setAttr ".k_sy" yes;
-	setAttr ".k_sz" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 1;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "eyeslook_C0_rootShape" -p "eyeslook_C0_root";
-	rename -uid "62CDB7CD-40C1-5F81-1783-F7AC07A87258";
+	rename -uid "2EA818C9-4DE0-5958-AE2D-ED83D4956A9D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2137,8 +2125,8 @@ createNode nurbsCurve -n "eyeslook_C0_rootShape" -p "eyeslook_C0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "eyeslook_C0_root19Shape" -p "eyeslook_C0_root";
-	rename -uid "98368975-49F9-C534-356A-47B04A33DBF3";
+createNode nurbsCurve -n "eyeslook_C0_root22Shape" -p "eyeslook_C0_root";
+	rename -uid "C1424482-4290-112E-358D-BD9E6EAA2286";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2150,8 +2138,8 @@ createNode nurbsCurve -n "eyeslook_C0_root19Shape" -p "eyeslook_C0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "eyeslook_C0_root20Shape" -p "eyeslook_C0_root";
-	rename -uid "7DBBE8A0-4042-716A-48BB-DD9379ED1300";
+createNode nurbsCurve -n "eyeslook_C0_root23Shape" -p "eyeslook_C0_root";
+	rename -uid "ADAE8539-47A1-F160-57DC-38B70B44686E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2163,8 +2151,8 @@ createNode nurbsCurve -n "eyeslook_C0_root20Shape" -p "eyeslook_C0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "eyeslook_C0_root21Shape" -p "eyeslook_C0_root";
-	rename -uid "1468C6A3-4992-82B6-358A-09ACA131CB57";
+createNode nurbsCurve -n "eyeslook_C0_root24Shape" -p "eyeslook_C0_root";
+	rename -uid "92D6B96A-4847-6391-4EE7-E1BD148F4296";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2191,10 +2179,10 @@ createNode nurbsCurve -n "eyeslook_C0_root21Shape" -p "eyeslook_C0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "eyeslook_C0_sizeRef" -p "eyeslook_C0_root";
-	rename -uid "CAC2B5C7-48F6-ACD9-78C8-E29D67EBF72D";
+	rename -uid "3C9D753E-4251-7929-FAD0-62BC044D2A28";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.1102230246251558e-015 0 1 ;
+	setAttr ".t" -type "double3" 1.1102230246251565e-015 0 1.0000000000000036 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -2202,12 +2190,12 @@ createNode transform -n "eyeslook_C0_sizeRef" -p "eyeslook_C0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999956 0.99999999999999956 1.0000000000000004 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 0.99999999999999978 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "eye_L0_root" -p "neck_C0_head";
-	rename -uid "6946944E-4A19-2B11-208A-5A8F3C027F85";
+	rename -uid "7926DD38-4DF6-BA50-C87E-41A35CDEDD50";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -2220,9 +2208,9 @@ createNode transform -n "eye_L0_root" -p "neck_C0_head";
 		-max 2 -en "X:Y:Z" -at "enum";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0.25733245506886071 1.0267893607782357 -0.42107730061382631 ;
+	setAttr ".t" -type "double3" 0.25733245506885538 1.0267893607782348 -0.42107730061382626 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -2231,7 +2219,7 @@ createNode transform -n "eye_L0_root" -p "neck_C0_head";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 2.3915882794427543 2.3915882794427614 2.391588279442753 ;
+	setAttr ".s" -type "double3" 2.391588279442753 2.391588279442761 2.3915882794427525 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -2243,9 +2231,8 @@ createNode transform -n "eye_L0_root" -p "neck_C0_head";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr -k on ".upVectorDirection" 1;
 	setAttr ".ikrefarray" -type "string" "eyesAim_C0_root";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "eye_L0_rootShape" -p "eye_L0_root";
-	rename -uid "79EF865B-4DFD-39B4-C36A-46A898D74F8C";
+	rename -uid "F83BAD8D-4C02-7A3F-02C8-719383DC5E45";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2257,8 +2244,8 @@ createNode nurbsCurve -n "eye_L0_rootShape" -p "eye_L0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "eye_L0_root19Shape" -p "eye_L0_root";
-	rename -uid "B1F9CA83-4A02-F502-FCFB-818B37AC92DD";
+createNode nurbsCurve -n "eye_L0_root22Shape" -p "eye_L0_root";
+	rename -uid "7EC1AFA0-4096-0093-E1B0-24BEC09586EF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2270,8 +2257,8 @@ createNode nurbsCurve -n "eye_L0_root19Shape" -p "eye_L0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "eye_L0_root20Shape" -p "eye_L0_root";
-	rename -uid "03D5A0BB-4978-A3F1-7ABC-458EAC5E9158";
+createNode nurbsCurve -n "eye_L0_root23Shape" -p "eye_L0_root";
+	rename -uid "1CC223AF-422F-2975-3D45-E1B88EAFA4E8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2283,8 +2270,8 @@ createNode nurbsCurve -n "eye_L0_root20Shape" -p "eye_L0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "eye_L0_root21Shape" -p "eye_L0_root";
-	rename -uid "C9ADE007-48F9-7B93-D87C-E6A2EB2C459D";
+createNode nurbsCurve -n "eye_L0_root24Shape" -p "eye_L0_root";
+	rename -uid "8967C660-4DBF-8246-E0F0-1A935A820C63";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2311,10 +2298,10 @@ createNode nurbsCurve -n "eye_L0_root21Shape" -p "eye_L0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "eye_L0_look" -p "eye_L0_root";
-	rename -uid "06FB62DE-4FC7-0F98-F91B-E694B2BC5D7C";
+	rename -uid "042A68A9-4419-D9DC-1EFA-ACB03B55BC50";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -5.5511151231257827e-016 7.9936057773011271e-015 2.0321341905376475 ;
+	setAttr ".t" -type "double3" -8.8817841970012523e-016 9.7699626167013776e-015 2.0321341905376498 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -2322,12 +2309,12 @@ createNode transform -n "eye_L0_look" -p "eye_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000009 0.99999999999999811 1.0000000000000016 ;
+	setAttr ".s" -type "double3" 1.0000000000000013 0.99999999999999811 1.0000000000000018 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "eye_L0_lookShape" -p "eye_L0_look";
-	rename -uid "6F1FA038-44D0-7D26-FEAF-52BD1753B2F7";
+	rename -uid "ABC4A518-4366-BFBD-6F48-6B8B401EFBF2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2339,8 +2326,8 @@ createNode nurbsCurve -n "eye_L0_lookShape" -p "eye_L0_look";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "eye_L0_look19Shape" -p "eye_L0_look";
-	rename -uid "15090577-4C90-A82A-38E8-5FBBFB7A4CC4";
+createNode nurbsCurve -n "eye_L0_look22Shape" -p "eye_L0_look";
+	rename -uid "095DAA0E-4B70-D84B-A3C2-9482C89438CD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2352,8 +2339,8 @@ createNode nurbsCurve -n "eye_L0_look19Shape" -p "eye_L0_look";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "eye_L0_look20Shape" -p "eye_L0_look";
-	rename -uid "E37518F7-46F7-734D-8415-14A6065DA918";
+createNode nurbsCurve -n "eye_L0_look23Shape" -p "eye_L0_look";
+	rename -uid "4471EA98-44F2-7479-05DA-4884653E7E0E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2365,8 +2352,8 @@ createNode nurbsCurve -n "eye_L0_look20Shape" -p "eye_L0_look";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "eye_L0_look21Shape" -p "eye_L0_look";
-	rename -uid "5257146E-4AB6-A55E-AB69-98B8E6555F1D";
+createNode nurbsCurve -n "eye_L0_look24Shape" -p "eye_L0_look";
+	rename -uid "7916437E-4EA3-4B24-7A7A-B4AD0C2201FA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2383,8 +2370,8 @@ createNode nurbsCurve -n "eye_L0_look21Shape" -p "eye_L0_look";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "eye_L0_look21_0crvShape" -p "eye_L0_look";
-	rename -uid "C9B1C340-43E9-E3D6-371C-D0ACA870E66A";
+createNode nurbsCurve -n "eye_L0_look24_0crvShape" -p "eye_L0_look";
+	rename -uid "0F98BD4C-4CD4-AF36-5565-53AF995EA861";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2401,8 +2388,8 @@ createNode nurbsCurve -n "eye_L0_look21_0crvShape" -p "eye_L0_look";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "eye_L0_look21_1crvShape" -p "eye_L0_look";
-	rename -uid "234372F7-4748-8FEE-6DCE-16B94C538F62";
+createNode nurbsCurve -n "eye_L0_look24_1crvShape" -p "eye_L0_look";
+	rename -uid "3793F46D-49DE-758B-AE5B-74A5C9B840EB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2420,19 +2407,19 @@ createNode nurbsCurve -n "eye_L0_look21_1crvShape" -p "eye_L0_look";
 		0 0 -0.1875
 		;
 createNode transform -n "eye_L0_crv" -p "eye_L0_root";
-	rename -uid "DE0E0EA5-4F6C-0940-F979-01809BD849CC";
+	rename -uid "8D3542CE-499D-61E4-EC58-578370679043";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" 0.69889742974753399 -3.4976629291575771 -3.5292331821335634 ;
-	setAttr ".r" -type "double3" 0 -14.006447505262578 0 ;
-	setAttr ".s" -type "double3" 1.0000000000000011 0.99999999999999811 1.000000000000002 ;
+	setAttr ".t" -type "double3" 0.6988974297475341 -3.4976629291575771 -3.529233182133563 ;
+	setAttr ".r" -type "double3" 0 -14.006447505262575 0 ;
+	setAttr ".s" -type "double3" 1.0000000000000018 0.99999999999999822 1.0000000000000022 ;
 createNode nurbsCurve -n "eye_L0_crvShape" -p "eye_L0_crv";
-	rename -uid "C9866E35-4D63-7DFD-3001-34B35F77456F";
+	rename -uid "B8D76070-45EF-8A59-C87B-E4B63CB9E9CA";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "eye_L0_crvShapeOrig" -p "eye_L0_crv";
-	rename -uid "F8439122-4C28-5C53-D6B0-139E5E16E52C";
+	rename -uid "52246594-4AD9-431B-292E-479C23FFFDDB";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -2443,7 +2430,7 @@ createNode nurbsCurve -n "eye_L0_crvShapeOrig" -p "eye_L0_crv";
 		0 0 0
 		;
 createNode transform -n "eye_R0_root" -p "neck_C0_head";
-	rename -uid "FD9E7880-4FF9-AA20-BC5C-FC9780F5B108";
+	rename -uid "322E4D85-4458-99B7-12C3-51BD64EC9736";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -2456,9 +2443,9 @@ createNode transform -n "eye_R0_root" -p "neck_C0_head";
 		-max 2 -en "X:Y:Z" -at "enum";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0.25733245506886426 1.0267893607782321 0.42107730061382803 ;
+	setAttr ".t" -type "double3" 0.25733245506885893 1.0267893607782295 0.42107730061382798 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -2467,7 +2454,7 @@ createNode transform -n "eye_R0_root" -p "neck_C0_head";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 2.3915882794427552 2.3915882794427614 -2.3915882794427548 ;
+	setAttr ".s" -type "double3" 2.3915882794427543 2.391588279442761 -2.3915882794427543 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -2479,9 +2466,8 @@ createNode transform -n "eye_R0_root" -p "neck_C0_head";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr -k on ".upVectorDirection" 1;
 	setAttr ".ikrefarray" -type "string" "eyesAim_C0_root";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "eye_R0_rootShape" -p "eye_R0_root";
-	rename -uid "E2974B72-4C48-5257-BC5E-51925008D558";
+	rename -uid "0EEF49A8-4D3A-A94F-19D1-02A1D3E4C33C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2493,8 +2479,8 @@ createNode nurbsCurve -n "eye_R0_rootShape" -p "eye_R0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "eye_R0_root10Shape" -p "eye_R0_root";
-	rename -uid "34329639-4734-D239-13AF-1A94868E6723";
+createNode nurbsCurve -n "eye_R0_root13Shape" -p "eye_R0_root";
+	rename -uid "A8EF0677-4018-8CD8-B32A-2A9B017060FB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2506,8 +2492,8 @@ createNode nurbsCurve -n "eye_R0_root10Shape" -p "eye_R0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "eye_R0_root11Shape" -p "eye_R0_root";
-	rename -uid "25E8976E-4540-00B8-F00A-84B45D12A56D";
+createNode nurbsCurve -n "eye_R0_root14Shape" -p "eye_R0_root";
+	rename -uid "0935F170-4BE3-D70E-BB79-11BFC1B82124";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2519,8 +2505,8 @@ createNode nurbsCurve -n "eye_R0_root11Shape" -p "eye_R0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "eye_R0_root12Shape" -p "eye_R0_root";
-	rename -uid "2F5A294B-4205-40F4-3009-9599C9FAD557";
+createNode nurbsCurve -n "eye_R0_root15Shape" -p "eye_R0_root";
+	rename -uid "FE32CD01-41B9-3AEA-B100-D0BC8F141BB9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2547,10 +2533,10 @@ createNode nurbsCurve -n "eye_R0_root12Shape" -p "eye_R0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "eye_R0_look" -p "eye_R0_root";
-	rename -uid "AE5B571D-4E02-F02E-E184-E79C39C8C72C";
+	rename -uid "74F94454-4ADB-D567-0133-D1953BEBD75A";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -3.3306690738754696e-016 7.9936057773011271e-015 2.0321341905376418 ;
+	setAttr ".t" -type "double3" -5.5511151231257827e-016 7.9936057773011271e-015 2.0321341905376422 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -2558,12 +2544,12 @@ createNode transform -n "eye_R0_look" -p "eye_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999978 0.99999999999999778 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999778 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "eye_R0_lookShape" -p "eye_R0_look";
-	rename -uid "D91BF218-407C-F76E-0254-E9B8E705D4E9";
+	rename -uid "E6D27AF4-465A-ECF7-58BC-C9A4EC8643C3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2575,8 +2561,8 @@ createNode nurbsCurve -n "eye_R0_lookShape" -p "eye_R0_look";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "eye_R0_look10Shape" -p "eye_R0_look";
-	rename -uid "1442E189-4C27-EC95-49BC-82A835D66E38";
+createNode nurbsCurve -n "eye_R0_look13Shape" -p "eye_R0_look";
+	rename -uid "13C3F2E0-4FFE-CB3A-03A1-25B4BE34092F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2588,8 +2574,8 @@ createNode nurbsCurve -n "eye_R0_look10Shape" -p "eye_R0_look";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "eye_R0_look11Shape" -p "eye_R0_look";
-	rename -uid "8008CF29-4244-F982-688B-C1815760A521";
+createNode nurbsCurve -n "eye_R0_look14Shape" -p "eye_R0_look";
+	rename -uid "45CCED2A-481B-1C0D-886F-BD94585B9C90";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2601,8 +2587,8 @@ createNode nurbsCurve -n "eye_R0_look11Shape" -p "eye_R0_look";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "eye_R0_look12Shape" -p "eye_R0_look";
-	rename -uid "E44D2C73-4105-AA55-B454-FB89D267AA9D";
+createNode nurbsCurve -n "eye_R0_look15Shape" -p "eye_R0_look";
+	rename -uid "AC31E9DB-4AF8-E3EC-990C-ECA9DAD61CE4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2619,8 +2605,8 @@ createNode nurbsCurve -n "eye_R0_look12Shape" -p "eye_R0_look";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "eye_R0_look12_0crvShape" -p "eye_R0_look";
-	rename -uid "8C06A311-40C9-6B4B-683B-BB9F1413E372";
+createNode nurbsCurve -n "eye_R0_look15_0crvShape" -p "eye_R0_look";
+	rename -uid "3945BD19-4600-0530-19F3-87AD88BB9ABD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2637,8 +2623,8 @@ createNode nurbsCurve -n "eye_R0_look12_0crvShape" -p "eye_R0_look";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "eye_R0_look12_1crvShape" -p "eye_R0_look";
-	rename -uid "6A9C2700-442A-7685-B70F-4CBE6C1F0B81";
+createNode nurbsCurve -n "eye_R0_look15_1crvShape" -p "eye_R0_look";
+	rename -uid "680F0AAE-415C-96DD-EFAA-89AD50AE6080";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2656,19 +2642,19 @@ createNode nurbsCurve -n "eye_R0_look12_1crvShape" -p "eye_R0_look";
 		0 0 -0.1875
 		;
 createNode transform -n "eye_R0_crv" -p "eye_R0_root";
-	rename -uid "A6635ED5-4D77-7DCD-82C8-62AD28D90FBF";
+	rename -uid "229ECC66-4661-E5DD-1895-BDB580A9418D";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" 0.69889742974753455 -3.4976629291575767 -3.5292331821335621 ;
+	setAttr ".t" -type "double3" 0.69889742974753422 -3.4976629291575758 -3.5292331821335599 ;
 	setAttr ".r" -type "double3" 0 165.99355249473743 0 ;
-	setAttr ".s" -type "double3" 1.0000000000000009 0.99999999999999822 -1.0000000000000011 ;
+	setAttr ".s" -type "double3" 1.0000000000000011 0.99999999999999822 -1.0000000000000011 ;
 createNode nurbsCurve -n "eye_R0_crvShape" -p "eye_R0_crv";
-	rename -uid "8E865766-4310-ADB2-AC86-B2AB0407FA4C";
+	rename -uid "8180A9B2-427F-1A29-A5BA-308E2487A55D";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "eye_R0_crvShapeOrig" -p "eye_R0_crv";
-	rename -uid "EE6EF71B-428C-44CE-B238-E2ACE2D76508";
+	rename -uid "DE1D7E74-4D09-FD4A-7ADA-55994D09C3A6";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -2679,10 +2665,10 @@ createNode nurbsCurve -n "eye_R0_crvShapeOrig" -p "eye_R0_crv";
 		0 0 0
 		;
 createNode transform -n "neck_C0_tan1" -p "neck_C0_neck";
-	rename -uid "727C9A47-4F96-8F2B-C69D-099187C75E8C";
+	rename -uid "8D584FF0-4238-6773-FA51-CDB3174DB3C8";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0.094534318000986772 -0.76996010281298766 1.5833033991300372e-016 ;
+	setAttr ".t" -type "double3" 0.094534318000986772 -0.76996010281298766 1.5833033991300544e-016 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -2690,12 +2676,12 @@ createNode transform -n "neck_C0_tan1" -p "neck_C0_neck";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999978 0.99999999999999978 1.0000000000000009 ;
+	setAttr ".s" -type "double3" 0.99999999999999956 0.99999999999999978 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "neck_C0_tanShape1" -p "neck_C0_tan1";
-	rename -uid "93B0F503-4AE9-561B-8171-88ABFB0AF7CA";
+	rename -uid "4302B38A-4AB0-851C-CB26-91A266D3F260";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2707,8 +2693,8 @@ createNode nurbsCurve -n "neck_C0_tanShape1" -p "neck_C0_tan1";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "neck_C0_tanShape4" -p "neck_C0_tan1";
-	rename -uid "6C4AF4BD-49BC-7B24-A884-C3A51F332CD8";
+createNode nurbsCurve -n "neck_C0_tanShape16" -p "neck_C0_tan1";
+	rename -uid "AA0FF60A-4552-799F-2BCC-C885FA0384EA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2720,8 +2706,8 @@ createNode nurbsCurve -n "neck_C0_tanShape4" -p "neck_C0_tan1";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "neck_C0_tanShape5" -p "neck_C0_tan1";
-	rename -uid "7E9A90E1-4326-3391-51B8-5C97A7E79BB6";
+createNode nurbsCurve -n "neck_C0_tanShape17" -p "neck_C0_tan1";
+	rename -uid "36B8F2EB-4FDA-A75D-9AC8-E592FF7C2A1B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2733,8 +2719,8 @@ createNode nurbsCurve -n "neck_C0_tanShape5" -p "neck_C0_tan1";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "neck_C0_tanShape6" -p "neck_C0_tan1";
-	rename -uid "3CA7D249-483E-703A-3C30-D89B5C6FE28E";
+createNode nurbsCurve -n "neck_C0_tanShape18" -p "neck_C0_tan1";
+	rename -uid "0E2CD5EC-4D04-C9C2-A84C-BEA4E0EF6C18";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2751,8 +2737,8 @@ createNode nurbsCurve -n "neck_C0_tanShape6" -p "neck_C0_tan1";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_tan14_0crvShape" -p "neck_C0_tan1";
-	rename -uid "9FF1437B-43AF-C32D-FC19-0591E4FAB91B";
+createNode nurbsCurve -n "neck_C0_tan16_0crvShape" -p "neck_C0_tan1";
+	rename -uid "7A1ACEE7-40F6-75F5-0369-C79D085670EF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2769,8 +2755,8 @@ createNode nurbsCurve -n "neck_C0_tan14_0crvShape" -p "neck_C0_tan1";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_tan14_1crvShape" -p "neck_C0_tan1";
-	rename -uid "D86B1C1A-4C8A-50C2-66E5-4AA1F5DC2027";
+createNode nurbsCurve -n "neck_C0_tan16_1crvShape" -p "neck_C0_tan1";
+	rename -uid "4C653053-4770-018F-0387-D4A27E593CB9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2788,19 +2774,19 @@ createNode nurbsCurve -n "neck_C0_tan14_1crvShape" -p "neck_C0_tan1";
 		0 0 -0.1875
 		;
 createNode transform -n "neck_C0_head_crv" -p "neck_C0_neck";
-	rename -uid "5299B2DE-4224-2EB6-3372-0D97F3FF9787";
+	rename -uid "7491A25F-4687-A9D9-F3C0-92B38EA7595F";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" 4.2174105108550703 -10.274847894363646 4.4383048488342812e-016 ;
-	setAttr ".r" -type "double3" -70.964236232861765 89.999999999999943 0 ;
-	setAttr ".s" -type "double3" 2.3915882794427565 2.3915882794427543 2.3915882794427561 ;
+	setAttr ".t" -type "double3" 4.2174105108550712 -10.274847894363644 4.4383048488342945e-016 ;
+	setAttr ".r" -type "double3" -70.964236232861779 89.999999999999957 0 ;
+	setAttr ".s" -type "double3" 2.3915882794427552 2.3915882794427539 2.3915882794427556 ;
 createNode nurbsCurve -n "neck_C0_head_crvShape" -p "neck_C0_head_crv";
-	rename -uid "049CFF13-4114-B219-0EA3-AC815119299F";
+	rename -uid "6B4680FE-49A0-1E15-1E59-B8B61CBC2126";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "neck_C0_head_crvShapeOrig" -p "neck_C0_head_crv";
-	rename -uid "251FEA07-4712-2522-8472-1394FD916D52";
+	rename -uid "61F91F51-4F38-A26F-5FE3-329981F4D053";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -2812,10 +2798,10 @@ createNode nurbsCurve -n "neck_C0_head_crvShapeOrig" -p "neck_C0_head_crv";
 		0 0 0
 		;
 createNode transform -n "neck_C0_tan0" -p "neck_C0_root";
-	rename -uid "56E305C5-407B-9831-0D24-8A9DB24F48BC";
+	rename -uid "10B44329-47A4-4F6F-7279-DBA16CE72ACD";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -0.016734587625118369 0.81123959492320008 -2.1361002026221281e-016 ;
+	setAttr ".t" -type "double3" -0.016734587625119257 0.81123959492320008 -2.1361002026221389e-016 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -2823,12 +2809,12 @@ createNode transform -n "neck_C0_tan0" -p "neck_C0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000009 1 1.0000000000000002 ;
+	setAttr ".s" -type "double3" 1.0000000000000011 1 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "neck_C0_tanShape0" -p "neck_C0_tan0";
-	rename -uid "FF2E7F71-4E66-2904-D842-47AC5A1102DA";
+	rename -uid "B823142C-4F43-3ACA-DBDA-9785816EFA2B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2840,8 +2826,8 @@ createNode nurbsCurve -n "neck_C0_tanShape0" -p "neck_C0_tan0";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "neck_C0_tanShape1" -p "neck_C0_tan0";
-	rename -uid "4DE6DD5A-4489-0A41-9CFB-BE970D2AB56D";
+createNode nurbsCurve -n "neck_C0_tanShape15" -p "neck_C0_tan0";
+	rename -uid "8FC43EF0-4F52-3A10-152D-E2AAC895EFDD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2853,8 +2839,8 @@ createNode nurbsCurve -n "neck_C0_tanShape1" -p "neck_C0_tan0";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "neck_C0_tanShape2" -p "neck_C0_tan0";
-	rename -uid "B4A8269C-4997-40A0-436E-CBBAE83D06F7";
+createNode nurbsCurve -n "neck_C0_tanShape16" -p "neck_C0_tan0";
+	rename -uid "2549FD33-490D-B493-5E0F-4EA59FE531D2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2866,8 +2852,8 @@ createNode nurbsCurve -n "neck_C0_tanShape2" -p "neck_C0_tan0";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "neck_C0_tanShape3" -p "neck_C0_tan0";
-	rename -uid "401F3B73-4EC8-EF5E-4969-20A702F7E618";
+createNode nurbsCurve -n "neck_C0_tanShape17" -p "neck_C0_tan0";
+	rename -uid "E51298BD-47B8-7362-CB2E-5FB7D52737D9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2884,8 +2870,8 @@ createNode nurbsCurve -n "neck_C0_tanShape3" -p "neck_C0_tan0";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_tan13_0crvShape0" -p "neck_C0_tan0";
-	rename -uid "FC13CBCF-48E2-6166-5347-C8861B6262B8";
+createNode nurbsCurve -n "neck_C0_tan15_0crvShape" -p "neck_C0_tan0";
+	rename -uid "3B3E0FCE-4D90-D634-A060-4E86501B9728";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2902,8 +2888,8 @@ createNode nurbsCurve -n "neck_C0_tan13_0crvShape0" -p "neck_C0_tan0";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "neck_C0_tan13_1crvShape0" -p "neck_C0_tan0";
-	rename -uid "E0CEC0F8-477F-D12A-C0D5-3DA712085C2C";
+createNode nurbsCurve -n "neck_C0_tan15_1crvShape" -p "neck_C0_tan0";
+	rename -uid "EC87E280-4C77-88D5-AD9B-FDB3BF68B94E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2921,8 +2907,8 @@ createNode nurbsCurve -n "neck_C0_tan13_1crvShape0" -p "neck_C0_tan0";
 		0 0 -0.1875
 		;
 createNode transform -n "neck_C0_blade" -p "neck_C0_root";
-	rename -uid "E20E60D9-4862-612E-6948-14B68E83271B";
-	addAttr -ci true -k true -sn "bladeRollOffset" -ln "bladeRollOffset" -at "float";
+	rename -uid "857AA687-4CED-1192-B7B6-5D8D962C7367";
+	addAttr -ci true -k true -sn "bladeRollOffset" -ln "bladeRollOffset" -dv -360 -at "float";
 	setAttr -l on -k off -cb on ".v";
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
@@ -2931,13 +2917,13 @@ createNode transform -n "neck_C0_blade" -p "neck_C0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 1.0000000000000007 0.99999999999999967 ;
+	setAttr ".s" -type "double3" 1.0000000000000004 1.0000000000000009 0.99999999999999967 ;
 	setAttr -l on -k off -cb on ".sx";
 	setAttr -l on -k off -cb on ".sy";
 	setAttr -l on -k off -cb on ".sz";
-	setAttr -k on ".bladeRollOffset" -360;
+	setAttr -k on ".bladeRollOffset";
 createNode nurbsCurve -n "neck_C0_bladeShape" -p "neck_C0_blade";
-	rename -uid "078074D4-4B01-C08F-1CBB-75AC28EC066A";
+	rename -uid "59FD673B-4816-3769-EC90-26991C9739D8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -2951,8 +2937,8 @@ createNode nurbsCurve -n "neck_C0_bladeShape" -p "neck_C0_blade";
 		0 0.1764761597555182 0
 		0 0 0
 		;
-createNode aimConstraint -n "neck_C0_blade_aimConstraint7" -p "neck_C0_blade";
-	rename -uid "ADDEEF8E-4971-2424-50F2-ED81835F0BDB";
+createNode aimConstraint -n "neck_C0_blade_aimConstraint8" -p "neck_C0_blade";
+	rename -uid "D85D1303-4168-E125-8770-6A9472BEAD46";
 	addAttr -dcb 0 -ci true -sn "w0" -ln "neck_C0_tan0W0" -dv 1 -at "double";
 	setAttr -k on ".nds";
 	setAttr -k off ".v";
@@ -2968,10 +2954,10 @@ createNode aimConstraint -n "neck_C0_blade_aimConstraint7" -p "neck_C0_blade";
 	setAttr ".erp" yes;
 	setAttr ".wut" 2;
 	setAttr ".o" -type "double3" -360 0 360 ;
-	setAttr ".rsrr" -type "double3" -540 -2.8249000307521022e-030 451.18175355423011 ;
+	setAttr ".rsrr" -type "double3" -540 -1.4124500153760508e-030 451.18175355423011 ;
 	setAttr -k on ".w0";
-createNode pointConstraint -n "neck_C0_blade_pointConstraint7" -p "neck_C0_blade";
-	rename -uid "FCBCCD59-411F-1D8E-34DC-939AAC057BF8";
+createNode pointConstraint -n "neck_C0_blade_pointConstraint8" -p "neck_C0_blade";
+	rename -uid "B00A9F16-48F5-F271-2883-CE8BCCBD5CAB";
 	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "neck_C0_rootW0" -dv 1 -min 0 -at "double";
 	setAttr -k on ".nds";
 	setAttr -k off ".v";
@@ -2986,22 +2972,22 @@ createNode pointConstraint -n "neck_C0_blade_pointConstraint7" -p "neck_C0_blade
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr ".rst" -type "double3" -1.3322676295501878e-015 8.8817841970012523e-016 
-		-6.4094948549207209e-031 ;
+		-5.4234187233944562e-031 ;
 	setAttr -k on ".w0";
 createNode transform -n "neck_C0_neck_crv" -p "neck_C0_root";
-	rename -uid "CB3CDC63-4F4D-0D32-4051-ACAA2607D63E";
+	rename -uid "46B7BFC9-48AC-9AB7-1206-CCAC7A8DE96E";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" 3.976162134148518 -6.6105608685998307 -4.274848312126261e-016 ;
-	setAttr ".r" -type "double3" -70.964236232861793 89.999999999999957 0 ;
+	setAttr ".t" -type "double3" 3.976162134148518 -6.6105608685998307 -4.2748483121262679e-016 ;
+	setAttr ".r" -type "double3" -70.964236232861779 89.999999999999957 0 ;
 	setAttr ".s" -type "double3" 2.391588279442757 2.3915882794427565 2.3915882794427565 ;
 createNode nurbsCurve -n "neck_C0_neck_crvShape" -p "neck_C0_neck_crv";
-	rename -uid "96897850-4EB4-C197-2AC2-C99379432238";
+	rename -uid "0B3400FF-4E83-F4C6-87C1-83A1D2BE0335";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "neck_C0_neck_crvShapeOrig" -p "neck_C0_neck_crv";
-	rename -uid "B1B3DE30-4E42-72A7-3E12-BABBCE9A547E";
+	rename -uid "69DA851F-46E4-CF32-3E81-E0B5138FB3D2";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -3014,7 +3000,7 @@ createNode nurbsCurve -n "neck_C0_neck_crvShapeOrig" -p "neck_C0_neck_crv";
 		0 0 0
 		;
 createNode transform -n "shoulder_L0_root" -p "spine_C0_eff";
-	rename -uid "8420FDA3-4558-D555-216D-54A85866B763";
+	rename -uid "B3912BDB-41C2-F9B3-2638-5DAA1B95D3C5";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -3024,13 +3010,13 @@ createNode transform -n "shoulder_L0_root" -p "spine_C0_eff";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
 	addAttr -ci true -sn "mode" -ln "mode" -min 0 -at "long";
-	addAttr -ci true -sn "blend" -ln "blend" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "neutralpose" -ln "neutralpose" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "blend" -ln "blend" -dv 1 -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "neutralpose" -ln "neutralpose" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -0.23232496368006927 0.19745119313991832 -0.20082401790608242 ;
+	setAttr ".t" -type "double3" -0.23232496368006927 0.19745119313991832 -0.20082401790608245 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -3049,12 +3035,9 @@ createNode transform -n "shoulder_L0_root" -p "spine_C0_eff";
 	setAttr ".connector" -type "string" "standard";
 	setAttr ".ui_host" -type "string" "frontLegUI_L0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".blend" 1;
-	setAttr ".neutralpose" yes;
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "shoulder_L0_rootShape" -p "shoulder_L0_root";
-	rename -uid "52097B2C-4DE3-D6FA-341D-80AF1FEE3FFB";
+	rename -uid "1CA84D8A-473D-3624-E123-009C46956678";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3066,8 +3049,8 @@ createNode nurbsCurve -n "shoulder_L0_rootShape" -p "shoulder_L0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "shoulder_L0_root19Shape" -p "shoulder_L0_root";
-	rename -uid "7FBD9A65-4F4E-1803-B4DD-45B065372063";
+createNode nurbsCurve -n "shoulder_L0_root22Shape" -p "shoulder_L0_root";
+	rename -uid "46C07D5F-406E-0654-CFD6-9289D395EAEC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3079,8 +3062,8 @@ createNode nurbsCurve -n "shoulder_L0_root19Shape" -p "shoulder_L0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "shoulder_L0_root20Shape" -p "shoulder_L0_root";
-	rename -uid "74B2FAEF-4C3D-D229-7785-6DA2EB26390F";
+createNode nurbsCurve -n "shoulder_L0_root23Shape" -p "shoulder_L0_root";
+	rename -uid "316FB429-42DF-5990-203A-A886C51072CA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3092,8 +3075,8 @@ createNode nurbsCurve -n "shoulder_L0_root20Shape" -p "shoulder_L0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "shoulder_L0_root21Shape" -p "shoulder_L0_root";
-	rename -uid "39BD3C6D-4CCF-37E6-B468-56ABB0BE0C1D";
+createNode nurbsCurve -n "shoulder_L0_root24Shape" -p "shoulder_L0_root";
+	rename -uid "53D3EED3-4A52-9271-F55A-B9A2609D4EB7";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3120,10 +3103,10 @@ createNode nurbsCurve -n "shoulder_L0_root21Shape" -p "shoulder_L0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "shoulder_L0_0_loc" -p "shoulder_L0_root";
-	rename -uid "C0FE6F06-46C3-F998-E8CB-C692B9380BB4";
+	rename -uid "A32B308D-4710-F594-290C-8881868C1B81";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0.83252561455724661 -0.20882616370654938 0.20663608494886754 ;
+	setAttr ".t" -type "double3" 0.83252561455724661 -0.20882616370654894 0.20663608494886754 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -3136,7 +3119,7 @@ createNode transform -n "shoulder_L0_0_loc" -p "shoulder_L0_root";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "shoulder_L0_0_locShape" -p "shoulder_L0_0_loc";
-	rename -uid "F16F8FD9-4233-4BA7-293D-A7A18E134DCD";
+	rename -uid "AD847ADD-469C-E7F9-ADA0-FD93E2B7A007";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3148,8 +3131,8 @@ createNode nurbsCurve -n "shoulder_L0_0_locShape" -p "shoulder_L0_0_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "shoulder_L0_0_loc19Shape" -p "shoulder_L0_0_loc";
-	rename -uid "15A40232-4209-A1A6-379C-0BBE04B0B0B1";
+createNode nurbsCurve -n "shoulder_L0_0_loc22Shape" -p "shoulder_L0_0_loc";
+	rename -uid "E2D6EE9D-4EEF-AB5E-A858-D592CBA52A4E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3161,8 +3144,8 @@ createNode nurbsCurve -n "shoulder_L0_0_loc19Shape" -p "shoulder_L0_0_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "shoulder_L0_0_loc20Shape" -p "shoulder_L0_0_loc";
-	rename -uid "25A7DF8B-431E-C855-7D0F-EB8B2894F5DF";
+createNode nurbsCurve -n "shoulder_L0_0_loc23Shape" -p "shoulder_L0_0_loc";
+	rename -uid "12EBB428-4DBF-F205-8E0F-53BC3B0DBD00";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3174,8 +3157,8 @@ createNode nurbsCurve -n "shoulder_L0_0_loc20Shape" -p "shoulder_L0_0_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "shoulder_L0_0_loc21Shape" -p "shoulder_L0_0_loc";
-	rename -uid "91F27373-4BF9-B944-FA5E-B38BCC30A8F9";
+createNode nurbsCurve -n "shoulder_L0_0_loc24Shape" -p "shoulder_L0_0_loc";
+	rename -uid "467EDF38-4A8E-B1AA-6D1B-8EA7361880E1";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3192,8 +3175,8 @@ createNode nurbsCurve -n "shoulder_L0_0_loc21Shape" -p "shoulder_L0_0_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "shoulder_L0_0_loc21_0crvShape" -p "shoulder_L0_0_loc";
-	rename -uid "291EFF06-4FEE-626B-C959-1EBBE6EB303F";
+createNode nurbsCurve -n "shoulder_L0_0_loc24_0crvShape" -p "shoulder_L0_0_loc";
+	rename -uid "B40B679D-4AAB-2A52-111A-48B7EB8D97ED";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3210,8 +3193,8 @@ createNode nurbsCurve -n "shoulder_L0_0_loc21_0crvShape" -p "shoulder_L0_0_loc";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "shoulder_L0_0_loc21_1crvShape" -p "shoulder_L0_0_loc";
-	rename -uid "9F17FF66-46DF-70BD-E34A-6F9CC89C2A10";
+createNode nurbsCurve -n "shoulder_L0_0_loc24_1crvShape" -p "shoulder_L0_0_loc";
+	rename -uid "8ACB199D-4B79-C4AC-C412-67A069C7D52B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3229,7 +3212,7 @@ createNode nurbsCurve -n "shoulder_L0_0_loc21_1crvShape" -p "shoulder_L0_0_loc";
 		0 0 -0.1875
 		;
 createNode transform -n "legFront_L0_root" -p "shoulder_L0_0_loc";
-	rename -uid "CC228F5F-40C4-6101-250D-3B971CD7ED2E";
+	rename -uid "C4E57082-4386-422E-97C7-A99B6EAC28BA";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -3238,23 +3221,23 @@ createNode transform -n "legFront_L0_root" -p "shoulder_L0_0_loc";
 	addAttr -ci true -sn "connector" -ln "connector" -dt "string";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
-	addAttr -ci true -sn "blend" -ln "blend" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "full3BonesIK" -ln "full3BonesIK" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "blend" -ln "blend" -dv 1 -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "full3BonesIK" -ln "full3BonesIK" -dv 1 -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "upvrefarray" -ln "upvrefarray" -dt "string";
-	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1 -min 1 -at "double";
+	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1.5 -min 1 -at "double";
 	addAttr -ci true -k true -sn "ikSolver" -ln "ikSolver" -min 0 -max 1 -en "IK Spring:IK Rotation Plane" 
 		-at "enum";
-	addAttr -ci true -sn "ikOri" -ln "ikOri" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "div0" -ln "div0" -dv 1 -min 1 -at "long";
-	addAttr -ci true -sn "div1" -ln "div1" -dv 1 -min 1 -at "long";
-	addAttr -ci true -sn "div2" -ln "div2" -dv 1 -min 1 -at "long";
+	addAttr -ci true -sn "ikOri" -ln "ikOri" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "div0" -ln "div0" -dv 2 -min 1 -at "long";
+	addAttr -ci true -sn "div1" -ln "div1" -dv 2 -min 1 -at "long";
+	addAttr -ci true -sn "div2" -ln "div2" -dv 2 -min 1 -at "long";
 	addAttr -ci true -k true -sn "st_profile" -ln "st_profile" -at "double";
 	addAttr -ci true -k true -sn "sq_profile" -ln "sq_profile" -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.1102230246251565e-015 -3.5527136788005009e-015 -4.4408920985006262e-016 ;
+	setAttr ".t" -type "double3" -1.2212453270876722e-015 -3.9968028886505635e-015 -4.4408920985006262e-016 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -3262,7 +3245,7 @@ createNode transform -n "legFront_L0_root" -p "shoulder_L0_0_loc";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.39967062595950276 0.3996706259595032 0.39967062595950281 ;
+	setAttr ".s" -type "double3" 0.39967062595950276 0.39967062595950326 0.39967062595950281 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -3272,21 +3255,13 @@ createNode transform -n "legFront_L0_root" -p "shoulder_L0_0_loc";
 	setAttr ".connector" -type "string" "standard";
 	setAttr ".ui_host" -type "string" "frontLegUI_L0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".blend" 1;
-	setAttr ".full3BonesIK" 1;
 	setAttr ".ikrefarray" -type "string" "local_C0_root,spine_C0_root,global_C0_root";
 	setAttr ".upvrefarray" -type "string" "local_C0_root,spine_C0_root,global_C0_root";
-	setAttr ".maxstretch" 1.5;
 	setAttr -k on ".ikSolver" 1;
-	setAttr ".ikOri" yes;
-	setAttr ".div0" 2;
-	setAttr ".div1" 2;
-	setAttr ".div2" 2;
 	setAttr -k on ".st_profile";
 	setAttr -k on ".sq_profile";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "legFront_L0_rootShape" -p "legFront_L0_root";
-	rename -uid "CE447A0A-47D3-F72B-1450-82A8D29FE775";
+	rename -uid "623B1E4A-451A-6F06-8493-31B96FACEA2B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3298,8 +3273,8 @@ createNode nurbsCurve -n "legFront_L0_rootShape" -p "legFront_L0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_root19Shape" -p "legFront_L0_root";
-	rename -uid "A7D94E9B-4AE2-CEBA-3CA6-D5ACFB1482AA";
+createNode nurbsCurve -n "legFront_L0_root22Shape" -p "legFront_L0_root";
+	rename -uid "F6091BC4-44AF-87A0-20C7-D9889ECCBE19";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3311,8 +3286,8 @@ createNode nurbsCurve -n "legFront_L0_root19Shape" -p "legFront_L0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_L0_root20Shape" -p "legFront_L0_root";
-	rename -uid "BD4579F7-4EA3-B093-5E71-2DBFDB14C3DC";
+createNode nurbsCurve -n "legFront_L0_root23Shape" -p "legFront_L0_root";
+	rename -uid "91DF8B77-4C60-CEAA-2E6E-A2A7B98DB06B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3324,8 +3299,8 @@ createNode nurbsCurve -n "legFront_L0_root20Shape" -p "legFront_L0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_L0_root21Shape" -p "legFront_L0_root";
-	rename -uid "6F751258-4802-F68C-3D85-E682A5B693F0";
+createNode nurbsCurve -n "legFront_L0_root24Shape" -p "legFront_L0_root";
+	rename -uid "C824F064-4AD7-E8F4-A957-048F9DBF14F9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3352,10 +3327,10 @@ createNode nurbsCurve -n "legFront_L0_root21Shape" -p "legFront_L0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "legFront_L0_knee" -p "legFront_L0_root";
-	rename -uid "64486636-43B8-536A-968E-17980CFCA184";
+	rename -uid "C135654D-474B-F30B-98E7-869FBFF19EAA";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 3.1086244689504383e-015 -2.1240863021370493 -0.48633856256837404 ;
+	setAttr ".t" -type "double3" 3.1086244689504383e-015 -2.1240863021370493 -0.48633856256837493 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -3363,12 +3338,12 @@ createNode transform -n "legFront_L0_knee" -p "legFront_L0_root";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999933 1.0000000000000004 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999889 1.0000000000000002 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legFront_L0_kneeShape" -p "legFront_L0_knee";
-	rename -uid "28072697-4411-228E-63B6-B192E87CDBE2";
+	rename -uid "E6EC6441-437D-8127-7462-658E8C043B22";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3380,8 +3355,8 @@ createNode nurbsCurve -n "legFront_L0_kneeShape" -p "legFront_L0_knee";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_knee19Shape" -p "legFront_L0_knee";
-	rename -uid "4CB73FB3-4579-F4EA-4B90-138DCBCF485B";
+createNode nurbsCurve -n "legFront_L0_knee22Shape" -p "legFront_L0_knee";
+	rename -uid "E928B499-42B8-2813-4555-D183E84C4646";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3393,8 +3368,8 @@ createNode nurbsCurve -n "legFront_L0_knee19Shape" -p "legFront_L0_knee";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_L0_knee20Shape" -p "legFront_L0_knee";
-	rename -uid "670837A9-4A50-6776-C7EA-BAA4DC41F1BB";
+createNode nurbsCurve -n "legFront_L0_knee23Shape" -p "legFront_L0_knee";
+	rename -uid "0FBB48F2-46C9-EF95-8895-849AFBFEED46";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3406,8 +3381,8 @@ createNode nurbsCurve -n "legFront_L0_knee20Shape" -p "legFront_L0_knee";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_L0_knee21Shape" -p "legFront_L0_knee";
-	rename -uid "47813DCB-4FCC-E3BB-E0ED-839585928F2C";
+createNode nurbsCurve -n "legFront_L0_knee24Shape" -p "legFront_L0_knee";
+	rename -uid "00DF5E02-4A43-4DC5-07B3-8988ECE677A7";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3424,8 +3399,8 @@ createNode nurbsCurve -n "legFront_L0_knee21Shape" -p "legFront_L0_knee";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_knee21_0crvShape" -p "legFront_L0_knee";
-	rename -uid "C0311EFA-4A20-5E90-DEDB-0991757179FE";
+createNode nurbsCurve -n "legFront_L0_knee24_0crvShape" -p "legFront_L0_knee";
+	rename -uid "50E1EFC3-4353-9D63-271C-C8950DA2BAA9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3442,8 +3417,8 @@ createNode nurbsCurve -n "legFront_L0_knee21_0crvShape" -p "legFront_L0_knee";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_knee21_1crvShape" -p "legFront_L0_knee";
-	rename -uid "D92E7E6F-4CF1-1512-30F6-67A6275B834C";
+createNode nurbsCurve -n "legFront_L0_knee24_1crvShape" -p "legFront_L0_knee";
+	rename -uid "7DA45A1B-4929-7A86-466A-9F9236A53A5D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3461,7 +3436,7 @@ createNode nurbsCurve -n "legFront_L0_knee21_1crvShape" -p "legFront_L0_knee";
 		0 0 -0.1875
 		;
 createNode transform -n "legFront_L0_ankle" -p "legFront_L0_knee";
-	rename -uid "F2FD4BAD-431B-7479-1892-D6A52B49E068";
+	rename -uid "52304CDA-4A0A-004F-C197-D5B27D719B4B";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
 	setAttr ".t" -type "double3" 5.773159728050814e-015 -2.3651516407059168 0.073902270404610171 ;
@@ -3472,12 +3447,12 @@ createNode transform -n "legFront_L0_ankle" -p "legFront_L0_knee";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999978 0.99999999999999978 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999989 0.99999999999999978 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legFront_L0_ankleShape" -p "legFront_L0_ankle";
-	rename -uid "33475878-41E4-934D-F598-E38EA73D13DD";
+	rename -uid "26B8CE30-4869-91E1-4E96-71BD57437DF1";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3489,8 +3464,8 @@ createNode nurbsCurve -n "legFront_L0_ankleShape" -p "legFront_L0_ankle";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_ankle19Shape" -p "legFront_L0_ankle";
-	rename -uid "5C0C670F-4BFA-0C0D-D2C7-D1B1A3558030";
+createNode nurbsCurve -n "legFront_L0_ankle22Shape" -p "legFront_L0_ankle";
+	rename -uid "ADB1A2A8-4EBA-BDCF-86D0-9BA9653F4C01";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3502,8 +3477,8 @@ createNode nurbsCurve -n "legFront_L0_ankle19Shape" -p "legFront_L0_ankle";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_L0_ankle20Shape" -p "legFront_L0_ankle";
-	rename -uid "3F519FF1-41E1-EBEF-2463-D29885054B14";
+createNode nurbsCurve -n "legFront_L0_ankle23Shape" -p "legFront_L0_ankle";
+	rename -uid "59E653FF-4008-1324-C4B8-5080A0E88DEA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3515,8 +3490,8 @@ createNode nurbsCurve -n "legFront_L0_ankle20Shape" -p "legFront_L0_ankle";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_L0_ankle21Shape" -p "legFront_L0_ankle";
-	rename -uid "BF60B122-4CBC-4BED-E441-50A563E91A2E";
+createNode nurbsCurve -n "legFront_L0_ankle24Shape" -p "legFront_L0_ankle";
+	rename -uid "0F648F40-4515-5E02-25C4-A69072FBEBBB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3533,8 +3508,8 @@ createNode nurbsCurve -n "legFront_L0_ankle21Shape" -p "legFront_L0_ankle";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_ankle21_0crvShape" -p "legFront_L0_ankle";
-	rename -uid "552FE9AE-4585-D73C-A63C-8E8AEFBAF760";
+createNode nurbsCurve -n "legFront_L0_ankle24_0crvShape" -p "legFront_L0_ankle";
+	rename -uid "B08D7641-4CE2-49F0-9C11-64A252AD84F5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3551,8 +3526,8 @@ createNode nurbsCurve -n "legFront_L0_ankle21_0crvShape" -p "legFront_L0_ankle";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_ankle21_1crvShape" -p "legFront_L0_ankle";
-	rename -uid "40AE7EED-47AA-FCC6-FA46-3F824B688537";
+createNode nurbsCurve -n "legFront_L0_ankle24_1crvShape" -p "legFront_L0_ankle";
+	rename -uid "FE1603E8-4D00-7507-DB90-538449CBA231";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3570,10 +3545,10 @@ createNode nurbsCurve -n "legFront_L0_ankle21_1crvShape" -p "legFront_L0_ankle";
 		0 0 -0.1875
 		;
 createNode transform -n "legFront_L0_foot" -p "legFront_L0_ankle";
-	rename -uid "4458F3EF-4DF6-1ADA-7F5C-DCA7C751F319";
+	rename -uid "428345C2-480C-6A0D-DDB3-6294C2A683EF";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.7763568394002505e-015 -1.1294425054275508 0.023148533894220336 ;
+	setAttr ".t" -type "double3" 1.3322676295501878e-015 -1.1294425054275514 0.023148533894218559 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -3586,7 +3561,7 @@ createNode transform -n "legFront_L0_foot" -p "legFront_L0_ankle";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legFront_L0_footShape" -p "legFront_L0_foot";
-	rename -uid "8A6D0694-4035-8DF0-BD99-9ABA2A2E5CBF";
+	rename -uid "801211EE-46A5-7C74-EEA6-CEAFD9959D20";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3598,8 +3573,8 @@ createNode nurbsCurve -n "legFront_L0_footShape" -p "legFront_L0_foot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_foot19Shape" -p "legFront_L0_foot";
-	rename -uid "E9DCA08A-4690-8B72-532D-619943C42406";
+createNode nurbsCurve -n "legFront_L0_foot22Shape" -p "legFront_L0_foot";
+	rename -uid "B9412E2E-4070-0DCB-A1C4-F1A53E00CC20";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3611,8 +3586,8 @@ createNode nurbsCurve -n "legFront_L0_foot19Shape" -p "legFront_L0_foot";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_L0_foot20Shape" -p "legFront_L0_foot";
-	rename -uid "7FB7D4B7-44C1-42E8-95DF-86A21B4DD5CF";
+createNode nurbsCurve -n "legFront_L0_foot23Shape" -p "legFront_L0_foot";
+	rename -uid "695DACEE-43C0-2CBD-83CE-6E8AB698514C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3624,8 +3599,8 @@ createNode nurbsCurve -n "legFront_L0_foot20Shape" -p "legFront_L0_foot";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_L0_foot21Shape" -p "legFront_L0_foot";
-	rename -uid "BB03D7A5-48CC-C0FB-9573-558E26E34C41";
+createNode nurbsCurve -n "legFront_L0_foot24Shape" -p "legFront_L0_foot";
+	rename -uid "388CB80D-42CF-C9DA-E8F7-8AA859F54BDF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3642,8 +3617,8 @@ createNode nurbsCurve -n "legFront_L0_foot21Shape" -p "legFront_L0_foot";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_foot21_0crvShape" -p "legFront_L0_foot";
-	rename -uid "1B0215A7-4C9A-8157-61B0-9083A112E09E";
+createNode nurbsCurve -n "legFront_L0_foot24_0crvShape" -p "legFront_L0_foot";
+	rename -uid "3432E38C-44EC-671A-9F2B-AC9FDD1565EB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3660,8 +3635,8 @@ createNode nurbsCurve -n "legFront_L0_foot21_0crvShape" -p "legFront_L0_foot";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_foot21_1crvShape" -p "legFront_L0_foot";
-	rename -uid "38D7CF39-4395-8E40-B8AD-25A5A7C3C7AC";
+createNode nurbsCurve -n "legFront_L0_foot24_1crvShape" -p "legFront_L0_foot";
+	rename -uid "620411CC-4295-38C4-043A-AFADE90A0A82";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3679,10 +3654,10 @@ createNode nurbsCurve -n "legFront_L0_foot21_1crvShape" -p "legFront_L0_foot";
 		0 0 -0.1875
 		;
 createNode transform -n "legFront_L0_eff" -p "legFront_L0_foot";
-	rename -uid "C76A7E89-4802-E2B4-2529-2F8C813E6191";
+	rename -uid "D3D7EE7D-4A5A-D0A8-A2A0-89965D032F62";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 3.1086244689504383e-015 8.8817841970012523e-016 0.5965779785192078 ;
+	setAttr ".t" -type "double3" 3.9968028886505635e-015 9.1593399531575415e-016 0.59657797851920957 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -3690,12 +3665,12 @@ createNode transform -n "legFront_L0_eff" -p "legFront_L0_foot";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999967 0.99999999999999922 0.99999999999999867 ;
+	setAttr ".s" -type "double3" 0.99999999999999967 0.99999999999999922 0.99999999999999878 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legFront_L0_effShape" -p "legFront_L0_eff";
-	rename -uid "E1187598-4227-AD8B-8A1E-C38DEEBE18BF";
+	rename -uid "B6988F5B-4808-1CFE-316E-FFA1F76EE1BF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3707,8 +3682,8 @@ createNode nurbsCurve -n "legFront_L0_effShape" -p "legFront_L0_eff";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_eff19Shape" -p "legFront_L0_eff";
-	rename -uid "2E05F7EB-4623-9715-73A8-2D9F20F83EEA";
+createNode nurbsCurve -n "legFront_L0_eff22Shape" -p "legFront_L0_eff";
+	rename -uid "75320078-48C7-7AEA-4D8B-2691336BB3A0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3720,8 +3695,8 @@ createNode nurbsCurve -n "legFront_L0_eff19Shape" -p "legFront_L0_eff";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_L0_eff20Shape" -p "legFront_L0_eff";
-	rename -uid "A3AC8B02-481F-CF78-F9E9-26914C74CF71";
+createNode nurbsCurve -n "legFront_L0_eff23Shape" -p "legFront_L0_eff";
+	rename -uid "0A0A8CFE-497A-A379-49B4-1789A1AA7E61";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3733,8 +3708,8 @@ createNode nurbsCurve -n "legFront_L0_eff20Shape" -p "legFront_L0_eff";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_L0_eff21Shape" -p "legFront_L0_eff";
-	rename -uid "0361AF3D-48A6-1625-21B6-AD93AD0269B4";
+createNode nurbsCurve -n "legFront_L0_eff24Shape" -p "legFront_L0_eff";
+	rename -uid "E467A6C6-4737-AA45-6782-E9B34452B735";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3751,8 +3726,8 @@ createNode nurbsCurve -n "legFront_L0_eff21Shape" -p "legFront_L0_eff";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_eff21_0crvShape" -p "legFront_L0_eff";
-	rename -uid "0DF34D6D-44C5-4CD2-8B86-88A16DE5C795";
+createNode nurbsCurve -n "legFront_L0_eff24_0crvShape" -p "legFront_L0_eff";
+	rename -uid "ABAF383D-467B-7422-E698-E3BEDB5A9B2F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3769,8 +3744,8 @@ createNode nurbsCurve -n "legFront_L0_eff21_0crvShape" -p "legFront_L0_eff";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_L0_eff21_1crvShape" -p "legFront_L0_eff";
-	rename -uid "33E31DA6-4591-FB2C-39D9-878A6323974D";
+createNode nurbsCurve -n "legFront_L0_eff24_1crvShape" -p "legFront_L0_eff";
+	rename -uid "B999E0AD-4533-A0E3-9417-60A037137228";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3788,7 +3763,7 @@ createNode nurbsCurve -n "legFront_L0_eff21_1crvShape" -p "legFront_L0_eff";
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_L0_root" -p "legFront_L0_foot";
-	rename -uid "9D4E145A-4D24-6823-491E-12B5B98FCC8C";
+	rename -uid "B159BA42-4217-6493-BE4A-F197505ED214";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -3797,11 +3772,11 @@ createNode transform -n "footFront_L0_root" -p "legFront_L0_foot";
 	addAttr -ci true -sn "connector" -ln "connector" -dt "string";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
-	addAttr -ci true -sn "useRollCtl" -ln "useRollCtl" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "useRollCtl" -ln "useRollCtl" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 2.6645352591003757e-015 7.4940054162198066e-016 -3.5527136788005009e-015 ;
+	setAttr ".t" -type "double3" 3.5527136788005009e-015 7.7715611723760958e-016 -1.7763568394002505e-015 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -3809,7 +3784,7 @@ createNode transform -n "footFront_L0_root" -p "legFront_L0_foot";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.31499517602514093 0.31499517602514088 0.31499517602514071 ;
+	setAttr ".s" -type "double3" 0.31499517602514093 0.31499517602514093 0.31499517602514082 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -3819,10 +3794,8 @@ createNode transform -n "footFront_L0_root" -p "legFront_L0_foot";
 	setAttr ".connector" -type "string" "leg_3jnt_01";
 	setAttr ".ui_host" -type "string" "frontLegUI_L0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".useRollCtl" yes;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "footFront_L0_rootShape" -p "footFront_L0_root";
-	rename -uid "8F269CA7-42E9-41D4-9B72-C98E963F3A92";
+	rename -uid "BDA25D8F-49A3-1071-052B-71A487F96241";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3834,8 +3807,8 @@ createNode nurbsCurve -n "footFront_L0_rootShape" -p "footFront_L0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_root19Shape" -p "footFront_L0_root";
-	rename -uid "1637B650-44F9-7B51-745E-919BFCEAFB10";
+createNode nurbsCurve -n "footFront_L0_root22Shape" -p "footFront_L0_root";
+	rename -uid "5816E7DD-4A63-E471-9AA7-9E9633748A1F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3847,8 +3820,8 @@ createNode nurbsCurve -n "footFront_L0_root19Shape" -p "footFront_L0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_L0_root20Shape" -p "footFront_L0_root";
-	rename -uid "A2D560FE-4006-ACDC-97CF-E49BDFF2C789";
+createNode nurbsCurve -n "footFront_L0_root23Shape" -p "footFront_L0_root";
+	rename -uid "5A25ED8E-4AA3-C3D6-656E-1395C0E86149";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3860,8 +3833,8 @@ createNode nurbsCurve -n "footFront_L0_root20Shape" -p "footFront_L0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_L0_root21Shape" -p "footFront_L0_root";
-	rename -uid "B18AF3C8-440B-F5F8-E51B-B79E2C51D78E";
+createNode nurbsCurve -n "footFront_L0_root24Shape" -p "footFront_L0_root";
+	rename -uid "6C2D0442-4A1F-C516-65E7-928A7C61E794";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3888,10 +3861,10 @@ createNode nurbsCurve -n "footFront_L0_root21Shape" -p "footFront_L0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "footFront_L0_0_loc" -p "footFront_L0_root";
-	rename -uid "9210DD27-45EE-98A3-A326-40887903E7EE";
+	rename -uid "CFD79D57-4D6E-0232-D8F3-3AB96E83A202";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 5.3290705182007514e-015 8.8817841970012523e-016 0.75996190873517477 ;
+	setAttr ".t" -type "double3" 5.3290705182007514e-015 1.1102230246251565e-015 0.75996190873517833 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -3899,12 +3872,12 @@ createNode transform -n "footFront_L0_0_loc" -p "footFront_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_L0_0_locShape" -p "footFront_L0_0_loc";
-	rename -uid "456B646B-4AFF-D9C7-EC67-AEB63CE899BA";
+	rename -uid "1440C918-4929-209F-AB69-B4B413B66730";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3916,8 +3889,8 @@ createNode nurbsCurve -n "footFront_L0_0_locShape" -p "footFront_L0_0_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_0_loc19Shape" -p "footFront_L0_0_loc";
-	rename -uid "A04CFEEF-46F3-EEB9-67E3-AFAD9D362F23";
+createNode nurbsCurve -n "footFront_L0_0_loc22Shape" -p "footFront_L0_0_loc";
+	rename -uid "491B739E-405B-8E60-EC51-B1B69EE93823";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3929,8 +3902,8 @@ createNode nurbsCurve -n "footFront_L0_0_loc19Shape" -p "footFront_L0_0_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_L0_0_loc20Shape" -p "footFront_L0_0_loc";
-	rename -uid "381B43D7-417B-D683-52B6-3F87CF510C92";
+createNode nurbsCurve -n "footFront_L0_0_loc23Shape" -p "footFront_L0_0_loc";
+	rename -uid "4FB21F22-49A6-B06F-4AEA-FFB21DA8FA58";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3942,8 +3915,8 @@ createNode nurbsCurve -n "footFront_L0_0_loc20Shape" -p "footFront_L0_0_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_L0_0_loc21Shape" -p "footFront_L0_0_loc";
-	rename -uid "AFFCF9E0-4F26-D3D1-E712-9984DACD6C27";
+createNode nurbsCurve -n "footFront_L0_0_loc24Shape" -p "footFront_L0_0_loc";
+	rename -uid "828BC471-4DDD-A9B4-1D4B-6BB4B91AD8C3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3960,8 +3933,8 @@ createNode nurbsCurve -n "footFront_L0_0_loc21Shape" -p "footFront_L0_0_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_0_loc21_0crvShape" -p "footFront_L0_0_loc";
-	rename -uid "B22C9AA4-4A1C-574F-DF9E-FDAFEA902F69";
+createNode nurbsCurve -n "footFront_L0_0_loc24_0crvShape" -p "footFront_L0_0_loc";
+	rename -uid "5FA2F6A0-479C-07B1-A434-758AF4B41C8B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3978,8 +3951,8 @@ createNode nurbsCurve -n "footFront_L0_0_loc21_0crvShape" -p "footFront_L0_0_loc
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_0_loc21_1crvShape" -p "footFront_L0_0_loc";
-	rename -uid "14D66390-4F70-36C0-A0BE-17A9C04828C5";
+createNode nurbsCurve -n "footFront_L0_0_loc24_1crvShape" -p "footFront_L0_0_loc";
+	rename -uid "9C9E3B1A-470A-EC65-447E-95B13F8B21BE";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -3997,10 +3970,10 @@ createNode nurbsCurve -n "footFront_L0_0_loc21_1crvShape" -p "footFront_L0_0_loc
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_L0_1_loc" -p "footFront_L0_0_loc";
-	rename -uid "BA0E83FB-46FF-1CED-7399-7591D2DF8DD1";
+	rename -uid "033F73D3-4D37-1404-9A51-8880DCA9F286";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -2.6645352591003757e-015 -0.31771180755405098 0.73937999249395148 ;
+	setAttr ".t" -type "double3" -3.5527136788005009e-015 -0.31771180755405121 0.73937999249394792 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -4008,12 +3981,12 @@ createNode transform -n "footFront_L0_1_loc" -p "footFront_L0_0_loc";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000002 1.0000000000000002 ;
+	setAttr ".s" -type "double3" 0.99999999999999989 1 1 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_L0_1_locShape" -p "footFront_L0_1_loc";
-	rename -uid "17A0EFE5-47CE-E5C5-C2C0-BAAB0F655A49";
+	rename -uid "11B7CED5-466E-9BEC-E1C5-38817BA47330";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4025,8 +3998,8 @@ createNode nurbsCurve -n "footFront_L0_1_locShape" -p "footFront_L0_1_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_1_loc19Shape" -p "footFront_L0_1_loc";
-	rename -uid "EEB4A478-4F19-3123-9F86-DD9D2FF447D2";
+createNode nurbsCurve -n "footFront_L0_1_loc22Shape" -p "footFront_L0_1_loc";
+	rename -uid "76041E72-454A-226C-53AC-A1B28C697ACE";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4038,8 +4011,8 @@ createNode nurbsCurve -n "footFront_L0_1_loc19Shape" -p "footFront_L0_1_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_L0_1_loc20Shape" -p "footFront_L0_1_loc";
-	rename -uid "352DA60F-420E-65D4-F2B3-8EB38C7BE9E1";
+createNode nurbsCurve -n "footFront_L0_1_loc23Shape" -p "footFront_L0_1_loc";
+	rename -uid "4ACA6E18-45F0-20F9-3486-BEA8F747A020";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4051,8 +4024,8 @@ createNode nurbsCurve -n "footFront_L0_1_loc20Shape" -p "footFront_L0_1_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_L0_1_loc21Shape" -p "footFront_L0_1_loc";
-	rename -uid "1C1A984E-4BCB-FA47-88DC-81B03452DA43";
+createNode nurbsCurve -n "footFront_L0_1_loc24Shape" -p "footFront_L0_1_loc";
+	rename -uid "69137D6E-48B8-3124-141D-EFB7194A884C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4069,8 +4042,8 @@ createNode nurbsCurve -n "footFront_L0_1_loc21Shape" -p "footFront_L0_1_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_1_loc21_0crvShape" -p "footFront_L0_1_loc";
-	rename -uid "FB4B28D7-41E1-90A4-21D4-86AA249931E0";
+createNode nurbsCurve -n "footFront_L0_1_loc24_0crvShape" -p "footFront_L0_1_loc";
+	rename -uid "6B31A5BE-4929-2CCC-A31E-5A8BE944710E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4087,8 +4060,8 @@ createNode nurbsCurve -n "footFront_L0_1_loc21_0crvShape" -p "footFront_L0_1_loc
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_1_loc21_1crvShape" -p "footFront_L0_1_loc";
-	rename -uid "4404B694-464B-49C5-2614-3CB7EBD4838D";
+createNode nurbsCurve -n "footFront_L0_1_loc24_1crvShape" -p "footFront_L0_1_loc";
+	rename -uid "D7D4415B-4231-D957-34EB-8BB1465D2137";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4106,18 +4079,18 @@ createNode nurbsCurve -n "footFront_L0_1_loc21_1crvShape" -p "footFront_L0_1_loc
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_L0_crv" -p "footFront_L0_root";
-	rename -uid "EF5F4824-443C-1D38-E405-328821181FB6";
+	rename -uid "DBB9D436-4E3C-648D-848F-2BBB6FD9A673";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -7.3687973355373595 -0.60300743522685729 -16.239037496288901 ;
-	setAttr ".s" -type "double3" 7.9431701648148092 7.9431701648148092 7.943170164814811 ;
+	setAttr ".t" -type "double3" -7.3687973355373586 -0.60300743522685718 -16.239037496288894 ;
+	setAttr ".s" -type "double3" 7.9431701648148074 7.9431701648148074 7.9431701648148074 ;
 createNode nurbsCurve -n "footFront_L0_crvShape" -p "footFront_L0_crv";
-	rename -uid "358B7DA4-4533-4ECD-221D-90999BEDBFE2";
+	rename -uid "00A7061D-4244-7491-4374-0584FE37C2AB";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "footFront_L0_crvShapeOrig" -p "footFront_L0_crv";
-	rename -uid "2D3AC4B0-4306-DFD1-25DF-C19D4B6AE50A";
+	rename -uid "7C12557E-466E-505B-7732-5CA224ED7A56";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -4129,10 +4102,10 @@ createNode nurbsCurve -n "footFront_L0_crvShapeOrig" -p "footFront_L0_crv";
 		0 0 0
 		;
 createNode transform -n "footFront_L0_heel" -p "footFront_L0_root";
-	rename -uid "AE4CE432-4983-53B9-B62E-25AA434724C1";
+	rename -uid "B37C978C-4D83-2A1F-FF34-07B5F833CEAD";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.0658141036401503e-014 -0.3177118075540506 -0.067899908672082177 ;
+	setAttr ".t" -type "double3" 1.1546319456101628e-014 -0.31771180755405048 -0.067899908672078624 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -4140,12 +4113,12 @@ createNode transform -n "footFront_L0_heel" -p "footFront_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_L0_heelShape" -p "footFront_L0_heel";
-	rename -uid "D8567762-44F3-5D45-09AF-47A8EB3FD6E1";
+	rename -uid "65270125-452A-9DFB-A737-D2A7E394890A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4157,8 +4130,8 @@ createNode nurbsCurve -n "footFront_L0_heelShape" -p "footFront_L0_heel";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_heel19Shape" -p "footFront_L0_heel";
-	rename -uid "3BFD7560-4814-F0A2-DA25-AD95FCA520C2";
+createNode nurbsCurve -n "footFront_L0_heel22Shape" -p "footFront_L0_heel";
+	rename -uid "4E069AA6-42C7-5559-E191-DF9AAF8F740E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4170,8 +4143,8 @@ createNode nurbsCurve -n "footFront_L0_heel19Shape" -p "footFront_L0_heel";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_L0_heel20Shape" -p "footFront_L0_heel";
-	rename -uid "C13B7266-4F08-C786-14D6-45AF8619FA9E";
+createNode nurbsCurve -n "footFront_L0_heel23Shape" -p "footFront_L0_heel";
+	rename -uid "1FC102F7-46C0-CAA9-D877-A99EDF27E1EC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4183,8 +4156,8 @@ createNode nurbsCurve -n "footFront_L0_heel20Shape" -p "footFront_L0_heel";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_L0_heel21Shape" -p "footFront_L0_heel";
-	rename -uid "D02C79BD-413C-BF61-22C0-F7897F49BE65";
+createNode nurbsCurve -n "footFront_L0_heel24Shape" -p "footFront_L0_heel";
+	rename -uid "3F8DB8A1-41B0-3578-065C-54B17FD88213";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4201,8 +4174,8 @@ createNode nurbsCurve -n "footFront_L0_heel21Shape" -p "footFront_L0_heel";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_heel21_0crvShape" -p "footFront_L0_heel";
-	rename -uid "36E6E4CB-4A09-EB58-DD65-0D9FA48AFAB6";
+createNode nurbsCurve -n "footFront_L0_heel24_0crvShape" -p "footFront_L0_heel";
+	rename -uid "1CBAB902-49EA-C8B6-10BD-32A7E8EB85D8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4219,8 +4192,8 @@ createNode nurbsCurve -n "footFront_L0_heel21_0crvShape" -p "footFront_L0_heel";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_heel21_1crvShape" -p "footFront_L0_heel";
-	rename -uid "77CFBEFC-4D3B-B0F4-C732-FB93B15C356F";
+createNode nurbsCurve -n "footFront_L0_heel24_1crvShape" -p "footFront_L0_heel";
+	rename -uid "07A904A8-40D8-B0F1-6430-72B142BE6706";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4238,10 +4211,10 @@ createNode nurbsCurve -n "footFront_L0_heel21_1crvShape" -p "footFront_L0_heel";
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_L0_outpivot" -p "footFront_L0_root";
-	rename -uid "84A7312E-4797-0AEA-544D-E7BBDD17061D";
+	rename -uid "408C28F4-433E-A324-3C97-2FBC0F4F3312";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.1000376131120619 -0.31771180755404888 0.69157185350466577 ;
+	setAttr ".t" -type "double3" 1.1000376131120611 -0.31771180755404871 0.69157185350466932 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -4249,12 +4222,12 @@ createNode transform -n "footFront_L0_outpivot" -p "footFront_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_L0_outpivotShape" -p "footFront_L0_outpivot";
-	rename -uid "A60062FF-4E30-D15E-9506-D5B2E7E7D1C5";
+	rename -uid "31C3FE73-4399-00DF-53C7-B5BA62076C42";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4266,8 +4239,8 @@ createNode nurbsCurve -n "footFront_L0_outpivotShape" -p "footFront_L0_outpivot"
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_outpivot19Shape" -p "footFront_L0_outpivot";
-	rename -uid "DF5B1317-4EED-2BBD-6685-598F08519E66";
+createNode nurbsCurve -n "footFront_L0_outpivot22Shape" -p "footFront_L0_outpivot";
+	rename -uid "32E7427F-40BC-843A-F660-A7A0BA53CD1D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4279,8 +4252,8 @@ createNode nurbsCurve -n "footFront_L0_outpivot19Shape" -p "footFront_L0_outpivo
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_L0_outpivot20Shape" -p "footFront_L0_outpivot";
-	rename -uid "37F5D3F4-46B4-8E34-5EAE-97ABD57A50C1";
+createNode nurbsCurve -n "footFront_L0_outpivot23Shape" -p "footFront_L0_outpivot";
+	rename -uid "C57F0FE3-42AB-506C-745C-C6B20BB3C454";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4292,8 +4265,8 @@ createNode nurbsCurve -n "footFront_L0_outpivot20Shape" -p "footFront_L0_outpivo
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_L0_outpivot21Shape" -p "footFront_L0_outpivot";
-	rename -uid "B2AEC9E7-4BC9-7B09-A7BF-4087ADA6C83A";
+createNode nurbsCurve -n "footFront_L0_outpivot24Shape" -p "footFront_L0_outpivot";
+	rename -uid "8440270B-46DE-773F-09AC-158A25ABB6F0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4310,8 +4283,8 @@ createNode nurbsCurve -n "footFront_L0_outpivot21Shape" -p "footFront_L0_outpivo
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_outpivot21_0crvShape" -p "footFront_L0_outpivot";
-	rename -uid "06E247BA-47AC-6387-F8B4-2C9FCE0A01B9";
+createNode nurbsCurve -n "footFront_L0_outpivot24_0crvShape" -p "footFront_L0_outpivot";
+	rename -uid "6E367C33-46BA-8E46-49DB-24A7B4714363";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4328,8 +4301,8 @@ createNode nurbsCurve -n "footFront_L0_outpivot21_0crvShape" -p "footFront_L0_ou
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_outpivot21_1crvShape" -p "footFront_L0_outpivot";
-	rename -uid "93489D82-4DB0-2237-0572-63A222E20B03";
+createNode nurbsCurve -n "footFront_L0_outpivot24_1crvShape" -p "footFront_L0_outpivot";
+	rename -uid "419F18A8-41C9-1989-6C7D-E3A8A66AEA33";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4347,10 +4320,10 @@ createNode nurbsCurve -n "footFront_L0_outpivot21_1crvShape" -p "footFront_L0_ou
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_L0_inpivot" -p "footFront_L0_root";
-	rename -uid "F87FBCD9-4D71-D9E5-16A6-75B7B2587D2A";
+	rename -uid "8F029F05-41CC-54E0-5A07-59902DE78502";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.0162439288722931 -0.31771180755405115 0.86340011285664531 ;
+	setAttr ".t" -type "double3" -1.0162439288722922 -0.31771180755405098 0.86340011285664886 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -4358,12 +4331,12 @@ createNode transform -n "footFront_L0_inpivot" -p "footFront_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_L0_inpivotShape" -p "footFront_L0_inpivot";
-	rename -uid "7720973B-4EAD-8614-7365-AE98DFCD0214";
+	rename -uid "FF5B4748-47DE-1439-2EBC-8F830168BD47";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4375,8 +4348,8 @@ createNode nurbsCurve -n "footFront_L0_inpivotShape" -p "footFront_L0_inpivot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_inpivot19Shape" -p "footFront_L0_inpivot";
-	rename -uid "CDA6567C-4116-7993-0277-CAAF46E3102C";
+createNode nurbsCurve -n "footFront_L0_inpivot22Shape" -p "footFront_L0_inpivot";
+	rename -uid "B2CF3B62-48A3-EDAF-BAD5-11973EB55CAD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4388,8 +4361,8 @@ createNode nurbsCurve -n "footFront_L0_inpivot19Shape" -p "footFront_L0_inpivot"
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_L0_inpivot20Shape" -p "footFront_L0_inpivot";
-	rename -uid "022E1DEB-45E0-0F63-983C-EFA1A6B6F2BA";
+createNode nurbsCurve -n "footFront_L0_inpivot23Shape" -p "footFront_L0_inpivot";
+	rename -uid "0303A1FD-42A9-AA8D-1283-19B32C3FC95B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4401,8 +4374,8 @@ createNode nurbsCurve -n "footFront_L0_inpivot20Shape" -p "footFront_L0_inpivot"
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_L0_inpivot21Shape" -p "footFront_L0_inpivot";
-	rename -uid "9DA96D1F-4DAC-952F-3843-87A6AC30B1D9";
+createNode nurbsCurve -n "footFront_L0_inpivot24Shape" -p "footFront_L0_inpivot";
+	rename -uid "6DDB9C4E-4257-6E01-40E4-3490BB6917B9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4419,8 +4392,8 @@ createNode nurbsCurve -n "footFront_L0_inpivot21Shape" -p "footFront_L0_inpivot"
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_inpivot21_0crvShape" -p "footFront_L0_inpivot";
-	rename -uid "AFD54613-4EF9-77CB-CB31-609706F1E399";
+createNode nurbsCurve -n "footFront_L0_inpivot24_0crvShape" -p "footFront_L0_inpivot";
+	rename -uid "A388EE25-48F3-9131-20E7-66B10755AD7D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4437,8 +4410,8 @@ createNode nurbsCurve -n "footFront_L0_inpivot21_0crvShape" -p "footFront_L0_inp
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_L0_inpivot21_1crvShape" -p "footFront_L0_inpivot";
-	rename -uid "CC2E6B9C-4D43-AD74-B24A-618669B60AE7";
+createNode nurbsCurve -n "footFront_L0_inpivot24_1crvShape" -p "footFront_L0_inpivot";
+	rename -uid "F299B667-4597-094A-53F0-C7854727322A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4456,18 +4429,18 @@ createNode nurbsCurve -n "footFront_L0_inpivot21_1crvShape" -p "footFront_L0_inp
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_L0_1" -p "footFront_L0_root";
-	rename -uid "1E3B08E4-4E0B-43FD-6BA6-13B154AE833F";
+	rename -uid "2EC11645-478B-16B6-87A9-099C1DB3D91E";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -7.3687973355373595 -0.60300743522685729 -16.239037496288901 ;
-	setAttr ".s" -type "double3" 7.9431701648148092 7.9431701648148092 7.943170164814811 ;
+	setAttr ".t" -type "double3" -7.3687973355373586 -0.60300743522685718 -16.239037496288894 ;
+	setAttr ".s" -type "double3" 7.9431701648148074 7.9431701648148074 7.9431701648148074 ;
 createNode nurbsCurve -n "footFront_L0_Shape1" -p "footFront_L0_1";
-	rename -uid "F5DFCF5C-4059-9A80-57AA-089A76E5452A";
+	rename -uid "33623A7A-4BAC-096F-C552-1C9DA05B626E";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
-createNode nurbsCurve -n "footFront_L0_Shape1Orig1" -p "footFront_L0_1";
-	rename -uid "1E9197DE-429B-6EE4-9B0D-D8967957D749";
+createNode nurbsCurve -n "footFront_L0_Shape1Orig" -p "footFront_L0_1";
+	rename -uid "488F26C1-4360-5BC3-2BEC-058DE8D1C320";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -4481,7 +4454,7 @@ createNode nurbsCurve -n "footFront_L0_Shape1Orig1" -p "footFront_L0_1";
 		0 0 0
 		;
 createNode transform -n "frontLegUI_L0_root" -p "footFront_L0_root";
-	rename -uid "BC012ED8-42C7-71AD-59B3-93BD03A2FF01";
+	rename -uid "20BD61D7-46B4-41B4-DA2E-55AFF317097C";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -4493,7 +4466,7 @@ createNode transform -n "frontLegUI_L0_root" -p "footFront_L0_root";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
@@ -4505,12 +4478,14 @@ createNode transform -n "frontLegUI_L0_root" -p "footFront_L0_root";
 	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 0.5 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 10.017876024668173 5.4248605945583259 2.5678955088138053 ;
+	setAttr ".t" -type "double3" 10.017876024668169 5.4248605945583259 2.5678955088138089 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -4518,7 +4493,7 @@ createNode transform -n "frontLegUI_L0_root" -p "footFront_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 7.943170164814811 7.943170164814811 7.9431701648148163 ;
+	setAttr ".s" -type "double3" 7.943170164814811 7.943170164814811 7.9431701648148145 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -4530,12 +4505,8 @@ createNode transform -n "frontLegUI_L0_root" -p "footFront_L0_root";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "cross";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 0.5;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "frontLegUI_L0_rootShape" -p "frontLegUI_L0_root";
-	rename -uid "91E626F7-4935-694D-77AE-82817F786341";
+	rename -uid "1882EA62-4034-DF92-C7D4-83B99F11EE5E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4547,8 +4518,8 @@ createNode nurbsCurve -n "frontLegUI_L0_rootShape" -p "frontLegUI_L0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "frontLegUI_L0_root19Shape" -p "frontLegUI_L0_root";
-	rename -uid "7D686BD4-45DD-DAC7-F876-A190D1C9C5D4";
+createNode nurbsCurve -n "frontLegUI_L0_root22Shape" -p "frontLegUI_L0_root";
+	rename -uid "793A3855-40C6-04C7-60A4-929129BFDDD0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4560,8 +4531,8 @@ createNode nurbsCurve -n "frontLegUI_L0_root19Shape" -p "frontLegUI_L0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "frontLegUI_L0_root20Shape" -p "frontLegUI_L0_root";
-	rename -uid "BE28A04B-4C87-FA0D-6597-0986EC91BBDB";
+createNode nurbsCurve -n "frontLegUI_L0_root23Shape" -p "frontLegUI_L0_root";
+	rename -uid "A6CBC522-4861-6F81-32AB-3FBEDF62A913";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4573,8 +4544,8 @@ createNode nurbsCurve -n "frontLegUI_L0_root20Shape" -p "frontLegUI_L0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "frontLegUI_L0_root21Shape" -p "frontLegUI_L0_root";
-	rename -uid "07620351-4575-A16C-3DA8-4F96F8509839";
+createNode nurbsCurve -n "frontLegUI_L0_root24Shape" -p "frontLegUI_L0_root";
+	rename -uid "5E05E57E-4C77-7466-03FA-EFBA5D53F2AB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4601,10 +4572,10 @@ createNode nurbsCurve -n "frontLegUI_L0_root21Shape" -p "frontLegUI_L0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "frontLegUI_L0_sizeRef" -p "frontLegUI_L0_root";
-	rename -uid "89486ECC-4B57-2937-6515-E5914CCA7811";
+	rename -uid "8D60DC3B-4B8E-46A0-5D91-ECAECA0ABCC0";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 8.8817841970012523e-016 3.3306690738754696e-016 0.99999999999999911 ;
+	setAttr ".t" -type "double3" 1.3322676295501878e-015 3.3306690738754696e-016 0.99999999999999867 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -4617,18 +4588,18 @@ createNode transform -n "frontLegUI_L0_sizeRef" -p "frontLegUI_L0_root";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "legFront_L0_crv1" -p "legFront_L0_root";
-	rename -uid "70EA73F9-4D0D-4053-00D0-758A8E8FF1A5";
+	rename -uid "01E3E57A-41FA-34F4-051B-C793F47CFBA3";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -2.3211356138011676 -5.8086248814742651 -5.5045062328919334 ;
-	setAttr ".s" -type "double3" 2.5020602842634889 2.5020602842634863 2.5020602842634885 ;
+	setAttr ".t" -type "double3" -2.3211356138011672 -5.8086248814742643 -5.5045062328919334 ;
+	setAttr ".s" -type "double3" 2.5020602842634885 2.5020602842634854 2.502060284263488 ;
 createNode nurbsCurve -n "legFront_L0_crvShape1" -p "legFront_L0_crv1";
-	rename -uid "8A05E1F7-444A-A937-CAC2-07BC39555D1E";
+	rename -uid "A6C4662A-4F5D-BB9C-412B-07B4F70F06FA";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
-createNode nurbsCurve -n "legFront_L0_crvShape1Orig1" -p "legFront_L0_crv1";
-	rename -uid "DBE61757-4E29-5E59-9A96-DD943B992074";
+createNode nurbsCurve -n "legFront_L0_crvShape1Orig" -p "legFront_L0_crv1";
+	rename -uid "BA6F9E41-4667-D3F8-0C7C-7B8951A59991";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -4642,7 +4613,7 @@ createNode nurbsCurve -n "legFront_L0_crvShape1Orig1" -p "legFront_L0_crv1";
 		0 0 0
 		;
 createNode transform -n "shoulder_L0_blade" -p "shoulder_L0_root";
-	rename -uid "7309DBD4-4628-617F-D9C8-AEAC92D917E5";
+	rename -uid "ADADFF55-47DF-D9F5-2D92-BA84AE546225";
 	addAttr -ci true -k true -sn "bladeRollOffset" -ln "bladeRollOffset" -at "float";
 	setAttr -l on -k off -cb on ".v";
 	setAttr -k off -cb on ".tx";
@@ -4652,13 +4623,13 @@ createNode transform -n "shoulder_L0_blade" -p "shoulder_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999911 0.99999999999999922 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 0.999999999999999 0.99999999999999911 ;
 	setAttr -l on -k off -cb on ".sx";
 	setAttr -l on -k off -cb on ".sy";
 	setAttr -l on -k off -cb on ".sz";
 	setAttr -k on ".bladeRollOffset";
 createNode nurbsCurve -n "shoulder_L0_bladeShape" -p "shoulder_L0_blade";
-	rename -uid "6B71284B-41CA-6D45-7D51-E1A07C657215";
+	rename -uid "74332985-4D5A-E967-AEEE-008BBED22C8A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4672,8 +4643,8 @@ createNode nurbsCurve -n "shoulder_L0_bladeShape" -p "shoulder_L0_blade";
 		0 0.42205831527236448 0
 		0 0 0
 		;
-createNode aimConstraint -n "shoulder_L0_blade_aimConstraint7" -p "shoulder_L0_blade";
-	rename -uid "4EBA0134-428C-1BB2-3962-0387428CF806";
+createNode aimConstraint -n "shoulder_L0_blade_aimConstraint8" -p "shoulder_L0_blade";
+	rename -uid "A4F08224-4766-EA43-9ED9-3191CF5EE1ED";
 	addAttr -dcb 0 -ci true -sn "w0" -ln "shoulder_L0_0_locW0" -dv 1 -at "double";
 	setAttr -k on ".nds";
 	setAttr -k off ".v";
@@ -4688,10 +4659,10 @@ createNode aimConstraint -n "shoulder_L0_blade_aimConstraint7" -p "shoulder_L0_b
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr ".wut" 2;
-	setAttr ".rsrr" -type "double3" 3.359975138206766 -13.536129435773097 -14.081236533000178 ;
+	setAttr ".rsrr" -type "double3" 3.3599751382069831 -13.536129435773113 -14.081236533000165 ;
 	setAttr -k on ".w0";
-createNode pointConstraint -n "shoulder_L0_blade_pointConstraint7" -p "shoulder_L0_blade";
-	rename -uid "B87C2D0B-4460-E342-E8FE-9DBC44DD8754";
+createNode pointConstraint -n "shoulder_L0_blade_pointConstraint8" -p "shoulder_L0_blade";
+	rename -uid "675CD841-4200-C27E-1C57-C39DD4F07A95";
 	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "shoulder_L0_rootW0" -dv 1 -min 0 
 		-at "double";
 	setAttr -k on ".nds";
@@ -4708,18 +4679,18 @@ createNode pointConstraint -n "shoulder_L0_blade_pointConstraint7" -p "shoulder_
 	setAttr ".erp" yes;
 	setAttr -k on ".w0";
 createNode transform -n "shoulder_L0_crv" -p "shoulder_L0_root";
-	rename -uid "F9FEF86C-4525-95FC-1F4C-908FBA067161";
+	rename -uid "8A0C6A40-4125-7689-77EA-2F87F5580CEB";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -0.09516410914756232 -2.5303629060493171 -1.9933533667490368 ;
+	setAttr ".t" -type "double3" -0.095164109147562334 -2.5303629060493171 -1.9933533667490368 ;
 	setAttr ".s" -type "double3" 1.0000000000000007 1 1 ;
 createNode nurbsCurve -n "shoulder_L0_crvShape" -p "shoulder_L0_crv";
-	rename -uid "A4822224-4231-A281-2253-05B156623E52";
+	rename -uid "FEBF6777-4294-8B99-C180-82B97AC073D9";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "shoulder_L0_crvShapeOrig" -p "shoulder_L0_crv";
-	rename -uid "F145FBA5-45D8-126E-C67C-0199A1077ED0";
+	rename -uid "AC4D2D2E-40B9-925A-2A3D-ED8CB7AF1A15";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -4730,7 +4701,7 @@ createNode nurbsCurve -n "shoulder_L0_crvShapeOrig" -p "shoulder_L0_crv";
 		0 0 0
 		;
 createNode transform -n "shoulder_R0_root" -p "spine_C0_eff";
-	rename -uid "511AA17D-4A20-B043-FE5D-278EFDEAC979";
+	rename -uid "C9749823-40D9-1856-0293-CA8714AA1EA2";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -4740,17 +4711,17 @@ createNode transform -n "shoulder_R0_root" -p "spine_C0_eff";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
 	addAttr -ci true -sn "mode" -ln "mode" -min 0 -at "long";
-	addAttr -ci true -sn "blend" -ln "blend" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "neutralpose" -ln "neutralpose" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "blend" -ln "blend" -dv 1 -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "neutralpose" -ln "neutralpose" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -0.23232496368006927 0.19745119313991832 0.20082401790608298 ;
+	setAttr ".t" -type "double3" -0.23232496368006927 0.19745119313991832 0.20082401790608295 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
-	setAttr ".r" -type "double3" 89.999999999999986 -89.999999999999957 0 ;
+	setAttr ".r" -type "double3" 90 -89.999999999999972 0 ;
 	setAttr -k off -cb on ".rx";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
@@ -4765,12 +4736,9 @@ createNode transform -n "shoulder_R0_root" -p "spine_C0_eff";
 	setAttr ".connector" -type "string" "standard";
 	setAttr ".ui_host" -type "string" "frontLegUI_R0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".blend" 1;
-	setAttr ".neutralpose" yes;
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "shoulder_R0_rootShape" -p "shoulder_R0_root";
-	rename -uid "B1FAB1D7-44D3-57D3-F5AF-CE8B9579854C";
+	rename -uid "CF462632-4283-A5AC-ED6D-BA9A6A6912F3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4782,8 +4750,8 @@ createNode nurbsCurve -n "shoulder_R0_rootShape" -p "shoulder_R0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "shoulder_R0_root1Shape" -p "shoulder_R0_root";
-	rename -uid "8B604321-43F9-D551-8ACB-93BFD7BFF219";
+createNode nurbsCurve -n "shoulder_R0_root4Shape" -p "shoulder_R0_root";
+	rename -uid "1A63C5FA-42F4-AF1E-B955-05BCA8173EB9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4795,8 +4763,8 @@ createNode nurbsCurve -n "shoulder_R0_root1Shape" -p "shoulder_R0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "shoulder_R0_root2Shape" -p "shoulder_R0_root";
-	rename -uid "D393A3AE-42E0-3647-C624-1882006EA824";
+createNode nurbsCurve -n "shoulder_R0_root5Shape" -p "shoulder_R0_root";
+	rename -uid "4E7008A8-46B7-1598-91EE-03AAA713FAB2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4808,8 +4776,8 @@ createNode nurbsCurve -n "shoulder_R0_root2Shape" -p "shoulder_R0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "shoulder_R0_root3Shape" -p "shoulder_R0_root";
-	rename -uid "62835E66-4515-4CAF-8B16-BC94F7317D8A";
+createNode nurbsCurve -n "shoulder_R0_root6Shape" -p "shoulder_R0_root";
+	rename -uid "A45304BA-42FB-741D-C524-E0BCEB34446D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4836,10 +4804,10 @@ createNode nurbsCurve -n "shoulder_R0_root3Shape" -p "shoulder_R0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "shoulder_R0_0_loc" -p "shoulder_R0_root";
-	rename -uid "CCD12C3E-42CA-E466-BE4C-99A339ECE785";
+	rename -uid "0033C476-4AC1-1DF5-CEE5-43B7B2A66860";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0.83252561455724627 -0.20882616370655027 0.2066360849488682 ;
+	setAttr ".t" -type "double3" 0.83252561455724627 -0.20882616370655116 0.2066360849488682 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -4847,12 +4815,12 @@ createNode transform -n "shoulder_R0_0_loc" -p "shoulder_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000007 0.99999999999999989 1 ;
+	setAttr ".s" -type "double3" 1.0000000000000007 0.99999999999999978 1 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "shoulder_R0_0_locShape" -p "shoulder_R0_0_loc";
-	rename -uid "32C6CF4E-4FD1-67FD-5EFB-39A5116D0FE5";
+	rename -uid "73617647-4603-15B1-C9AC-3393710C56B0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4864,8 +4832,8 @@ createNode nurbsCurve -n "shoulder_R0_0_locShape" -p "shoulder_R0_0_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "shoulder_R0_0_loc1Shape" -p "shoulder_R0_0_loc";
-	rename -uid "B9AF32FB-4B3C-4D1F-0B4F-5E8ED72C7B39";
+createNode nurbsCurve -n "shoulder_R0_0_loc4Shape" -p "shoulder_R0_0_loc";
+	rename -uid "F54FC6EB-4BAA-2935-B7A6-DDB44F2C5E1F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4877,8 +4845,8 @@ createNode nurbsCurve -n "shoulder_R0_0_loc1Shape" -p "shoulder_R0_0_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "shoulder_R0_0_loc2Shape" -p "shoulder_R0_0_loc";
-	rename -uid "6A314E6E-43C3-D387-D313-E685A8EB11EC";
+createNode nurbsCurve -n "shoulder_R0_0_loc5Shape" -p "shoulder_R0_0_loc";
+	rename -uid "BEA8A0A8-405E-3934-2E43-2ABAD19D3F41";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4890,8 +4858,8 @@ createNode nurbsCurve -n "shoulder_R0_0_loc2Shape" -p "shoulder_R0_0_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "shoulder_R0_0_loc3Shape" -p "shoulder_R0_0_loc";
-	rename -uid "378327BD-4B81-C220-BC94-9C990F331D14";
+createNode nurbsCurve -n "shoulder_R0_0_loc6Shape" -p "shoulder_R0_0_loc";
+	rename -uid "3D5F9059-430E-C67B-9A04-65B10E4E4956";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4908,8 +4876,8 @@ createNode nurbsCurve -n "shoulder_R0_0_loc3Shape" -p "shoulder_R0_0_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "shoulder_R0_0_loc3_0crvShape" -p "shoulder_R0_0_loc";
-	rename -uid "0E26F936-4766-5449-3C7D-FDAD797B3135";
+createNode nurbsCurve -n "shoulder_R0_0_loc6_0crvShape" -p "shoulder_R0_0_loc";
+	rename -uid "7FBA1FCA-469A-D36A-DBF2-CC80196CB741";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4926,8 +4894,8 @@ createNode nurbsCurve -n "shoulder_R0_0_loc3_0crvShape" -p "shoulder_R0_0_loc";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "shoulder_R0_0_loc3_1crvShape" -p "shoulder_R0_0_loc";
-	rename -uid "55E36521-4803-7878-DDE6-CCBE04222BE4";
+createNode nurbsCurve -n "shoulder_R0_0_loc6_1crvShape" -p "shoulder_R0_0_loc";
+	rename -uid "705D864D-4D67-F3AF-6210-879B940C7B93";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -4945,7 +4913,7 @@ createNode nurbsCurve -n "shoulder_R0_0_loc3_1crvShape" -p "shoulder_R0_0_loc";
 		0 0 -0.1875
 		;
 createNode transform -n "legFront_R0_root" -p "shoulder_R0_0_loc";
-	rename -uid "E091009A-4F49-FA69-40E0-5EAA584ED7DE";
+	rename -uid "34DE18E7-44AB-6F8B-A50E-2FA05782ABBF";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -4954,23 +4922,23 @@ createNode transform -n "legFront_R0_root" -p "shoulder_R0_0_loc";
 	addAttr -ci true -sn "connector" -ln "connector" -dt "string";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
-	addAttr -ci true -sn "blend" -ln "blend" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "full3BonesIK" -ln "full3BonesIK" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "blend" -ln "blend" -dv 1 -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "full3BonesIK" -ln "full3BonesIK" -dv 1 -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "upvrefarray" -ln "upvrefarray" -dt "string";
-	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1 -min 1 -at "double";
+	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1.5 -min 1 -at "double";
 	addAttr -ci true -k true -sn "ikSolver" -ln "ikSolver" -min 0 -max 1 -en "IK Spring:IK Rotation Plane" 
 		-at "enum";
-	addAttr -ci true -sn "ikOri" -ln "ikOri" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "div0" -ln "div0" -dv 1 -min 1 -at "long";
-	addAttr -ci true -sn "div1" -ln "div1" -dv 1 -min 1 -at "long";
-	addAttr -ci true -sn "div2" -ln "div2" -dv 1 -min 1 -at "long";
+	addAttr -ci true -sn "ikOri" -ln "ikOri" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "div0" -ln "div0" -dv 2 -min 1 -at "long";
+	addAttr -ci true -sn "div1" -ln "div1" -dv 2 -min 1 -at "long";
+	addAttr -ci true -sn "div2" -ln "div2" -dv 2 -min 1 -at "long";
 	addAttr -ci true -k true -sn "st_profile" -ln "st_profile" -at "double";
 	addAttr -ci true -k true -sn "sq_profile" -ln "sq_profile" -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -9.9920072216264089e-016 -3.1086244689504383e-015 -4.4408920985006262e-016 ;
+	setAttr ".t" -type "double3" -1.1102230246251565e-015 -2.6645352591003757e-015 -4.4408920985006262e-016 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -4978,7 +4946,7 @@ createNode transform -n "legFront_R0_root" -p "shoulder_R0_0_loc";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.39967062595950276 0.39967062595950315 0.39967062595950281 ;
+	setAttr ".s" -type "double3" 0.39967062595950276 0.3996706259595032 0.39967062595950281 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -4988,21 +4956,13 @@ createNode transform -n "legFront_R0_root" -p "shoulder_R0_0_loc";
 	setAttr ".connector" -type "string" "standard";
 	setAttr ".ui_host" -type "string" "frontLegUI_R0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".blend" 1;
-	setAttr ".full3BonesIK" 1;
 	setAttr ".ikrefarray" -type "string" "local_C0_root,spine_C0_root,global_C0_root";
 	setAttr ".upvrefarray" -type "string" "local_C0_root,spine_C0_root,global_C0_root";
-	setAttr ".maxstretch" 1.5;
 	setAttr -k on ".ikSolver" 1;
-	setAttr ".ikOri" yes;
-	setAttr ".div0" 2;
-	setAttr ".div1" 2;
-	setAttr ".div2" 2;
 	setAttr -k on ".st_profile";
 	setAttr -k on ".sq_profile";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "legFront_R0_rootShape" -p "legFront_R0_root";
-	rename -uid "E8421493-4322-8527-486D-7183C1D4D003";
+	rename -uid "739D7CB4-4BF6-0821-1BCF-6984F5D14CDD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5014,8 +4974,8 @@ createNode nurbsCurve -n "legFront_R0_rootShape" -p "legFront_R0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_root1Shape" -p "legFront_R0_root";
-	rename -uid "4D5C9579-4A1A-26BF-883A-DFB9DAAFA635";
+createNode nurbsCurve -n "legFront_R0_root4Shape" -p "legFront_R0_root";
+	rename -uid "B193E9CB-40F6-9289-AE25-A0AC76777913";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5027,8 +4987,8 @@ createNode nurbsCurve -n "legFront_R0_root1Shape" -p "legFront_R0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_R0_root2Shape" -p "legFront_R0_root";
-	rename -uid "03D7C974-4BED-E63C-84A5-0C89312740F4";
+createNode nurbsCurve -n "legFront_R0_root5Shape" -p "legFront_R0_root";
+	rename -uid "14D05DE1-4A74-7283-C36C-9B8F156FE3BB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5040,8 +5000,8 @@ createNode nurbsCurve -n "legFront_R0_root2Shape" -p "legFront_R0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_R0_root3Shape" -p "legFront_R0_root";
-	rename -uid "36020B22-40E8-6DBD-90A8-D48889328351";
+createNode nurbsCurve -n "legFront_R0_root6Shape" -p "legFront_R0_root";
+	rename -uid "46337DDA-4D44-F3E9-7B21-CD87212B360C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5068,10 +5028,10 @@ createNode nurbsCurve -n "legFront_R0_root3Shape" -p "legFront_R0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "legFront_R0_knee" -p "legFront_R0_root";
-	rename -uid "32AFCE0F-4173-8021-E5B4-2B87AB6B0A41";
+	rename -uid "0B5462FA-4C50-8C1C-BF0C-13B639357721";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.3322676295501878e-015 -2.1240863021370489 -0.48633856256837316 ;
+	setAttr ".t" -type "double3" 1.3322676295501878e-015 -2.1240863021370475 -0.48633856256837316 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5079,12 +5039,12 @@ createNode transform -n "legFront_R0_knee" -p "legFront_R0_root";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999956 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999978 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legFront_R0_kneeShape" -p "legFront_R0_knee";
-	rename -uid "40686C9E-4CDD-9EB5-950C-43AC1EEF59E4";
+	rename -uid "34D0EDB8-434B-539B-B34F-798F0403385A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5096,8 +5056,8 @@ createNode nurbsCurve -n "legFront_R0_kneeShape" -p "legFront_R0_knee";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_knee1Shape" -p "legFront_R0_knee";
-	rename -uid "E1C22D70-45DB-9874-7AD3-ACB4A158F841";
+createNode nurbsCurve -n "legFront_R0_knee4Shape" -p "legFront_R0_knee";
+	rename -uid "2AF5F2DE-4D9F-3BB8-D1D3-96A51E814FDB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5109,8 +5069,8 @@ createNode nurbsCurve -n "legFront_R0_knee1Shape" -p "legFront_R0_knee";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_R0_knee2Shape" -p "legFront_R0_knee";
-	rename -uid "20F1EDA7-4284-254A-1CEA-A5ADE7B3977C";
+createNode nurbsCurve -n "legFront_R0_knee5Shape" -p "legFront_R0_knee";
+	rename -uid "B769211B-4B90-222B-CECA-679765B27E7C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5122,8 +5082,8 @@ createNode nurbsCurve -n "legFront_R0_knee2Shape" -p "legFront_R0_knee";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_R0_knee3Shape" -p "legFront_R0_knee";
-	rename -uid "2DBAF0C4-42A4-E2F7-48F0-30860A148E8D";
+createNode nurbsCurve -n "legFront_R0_knee6Shape" -p "legFront_R0_knee";
+	rename -uid "3EBBDC36-4CB8-F18B-2EC2-5DBDB54434B9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5140,8 +5100,8 @@ createNode nurbsCurve -n "legFront_R0_knee3Shape" -p "legFront_R0_knee";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_knee3_0crvShape" -p "legFront_R0_knee";
-	rename -uid "02C3E02F-43D6-4633-4EB7-99BF6905B975";
+createNode nurbsCurve -n "legFront_R0_knee6_0crvShape" -p "legFront_R0_knee";
+	rename -uid "B78DBDA1-4931-70B8-C7CB-5995E8EE80D6";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5158,8 +5118,8 @@ createNode nurbsCurve -n "legFront_R0_knee3_0crvShape" -p "legFront_R0_knee";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_knee3_1crvShape" -p "legFront_R0_knee";
-	rename -uid "38F23D74-41AE-8244-EDE6-ADB11D14D967";
+createNode nurbsCurve -n "legFront_R0_knee6_1crvShape" -p "legFront_R0_knee";
+	rename -uid "4D34D482-4B83-371B-9B04-0D87232711D3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5177,10 +5137,10 @@ createNode nurbsCurve -n "legFront_R0_knee3_1crvShape" -p "legFront_R0_knee";
 		0 0 -0.1875
 		;
 createNode transform -n "legFront_R0_ankle" -p "legFront_R0_knee";
-	rename -uid "B670F120-4B71-8DDA-88EC-25923E279ACD";
+	rename -uid "6B8BE426-43D7-882B-52E4-499B57E02607";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 4.4408920985006262e-015 -2.3651516407059177 0.073902270404609283 ;
+	setAttr ".t" -type "double3" 2.6645352591003757e-015 -2.365151640705919 0.073902270404608394 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5188,12 +5148,12 @@ createNode transform -n "legFront_R0_ankle" -p "legFront_R0_knee";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999967 0.99999999999999944 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999978 0.99999999999999944 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legFront_R0_ankleShape" -p "legFront_R0_ankle";
-	rename -uid "7D8F2FA7-4207-C49A-22B8-85825F6F1F37";
+	rename -uid "BD7CC5C7-47D9-9949-E9A7-448DB8A519E0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5205,8 +5165,8 @@ createNode nurbsCurve -n "legFront_R0_ankleShape" -p "legFront_R0_ankle";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_ankle1Shape" -p "legFront_R0_ankle";
-	rename -uid "38A37E48-4958-FB4A-85CB-C2BC2EB04D4F";
+createNode nurbsCurve -n "legFront_R0_ankle4Shape" -p "legFront_R0_ankle";
+	rename -uid "946B40F1-40E6-B2E5-3AD1-5BBE158443B3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5218,8 +5178,8 @@ createNode nurbsCurve -n "legFront_R0_ankle1Shape" -p "legFront_R0_ankle";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_R0_ankle2Shape" -p "legFront_R0_ankle";
-	rename -uid "0A3A3DAB-4FFD-8035-1B24-B0A7C6CE1E0C";
+createNode nurbsCurve -n "legFront_R0_ankle5Shape" -p "legFront_R0_ankle";
+	rename -uid "840AC465-4901-0D6B-0431-9FB713C2F6A2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5231,8 +5191,8 @@ createNode nurbsCurve -n "legFront_R0_ankle2Shape" -p "legFront_R0_ankle";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_R0_ankle3Shape" -p "legFront_R0_ankle";
-	rename -uid "E0DA3CB3-4830-405E-672F-C5A6E011A73F";
+createNode nurbsCurve -n "legFront_R0_ankle6Shape" -p "legFront_R0_ankle";
+	rename -uid "88E954D7-469A-9CF8-3E4A-DD8AA219B0FF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5249,8 +5209,8 @@ createNode nurbsCurve -n "legFront_R0_ankle3Shape" -p "legFront_R0_ankle";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_ankle3_0crvShape" -p "legFront_R0_ankle";
-	rename -uid "FB817882-48BB-BB72-0120-D88D62F2925C";
+createNode nurbsCurve -n "legFront_R0_ankle6_0crvShape" -p "legFront_R0_ankle";
+	rename -uid "0A693D11-4FAC-751D-3C86-D9BBBB6BBACB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5267,8 +5227,8 @@ createNode nurbsCurve -n "legFront_R0_ankle3_0crvShape" -p "legFront_R0_ankle";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_ankle3_1crvShape" -p "legFront_R0_ankle";
-	rename -uid "43FB16C7-4344-51EE-8CE3-DC971534FB2C";
+createNode nurbsCurve -n "legFront_R0_ankle6_1crvShape" -p "legFront_R0_ankle";
+	rename -uid "FC3E3A2D-47D8-A553-43E9-FB95BC07D286";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5286,10 +5246,10 @@ createNode nurbsCurve -n "legFront_R0_ankle3_1crvShape" -p "legFront_R0_ankle";
 		0 0 -0.1875
 		;
 createNode transform -n "legFront_R0_foot" -p "legFront_R0_ankle";
-	rename -uid "1CDC322E-4060-6A5E-A14B-44BC2DC7B332";
+	rename -uid "18A02A7E-43F1-6A6F-D1D4-7F815A2349C1";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 0 -1.1294425054275503 0.023148533894219447 ;
+	setAttr ".t" -type "double3" -4.4408920985006262e-016 -1.1294425054275496 0.023148533894220336 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5297,12 +5257,12 @@ createNode transform -n "legFront_R0_foot" -p "legFront_R0_ankle";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000002 1.0000000000000004 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legFront_R0_footShape" -p "legFront_R0_foot";
-	rename -uid "2560C5A8-4758-1467-0E0E-719885F2B646";
+	rename -uid "99FFA4F9-4B93-6C51-33A8-E5AA3E029D2D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5314,8 +5274,8 @@ createNode nurbsCurve -n "legFront_R0_footShape" -p "legFront_R0_foot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_foot1Shape" -p "legFront_R0_foot";
-	rename -uid "DB2AE7A5-4180-7E68-5BA0-25B12653ECF4";
+createNode nurbsCurve -n "legFront_R0_foot4Shape" -p "legFront_R0_foot";
+	rename -uid "60D9F634-4D45-9DD9-9363-EAADC88425A7";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5327,8 +5287,8 @@ createNode nurbsCurve -n "legFront_R0_foot1Shape" -p "legFront_R0_foot";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_R0_foot2Shape" -p "legFront_R0_foot";
-	rename -uid "93B35DC7-4FD2-0E71-E94D-BCA6CD6A4897";
+createNode nurbsCurve -n "legFront_R0_foot5Shape" -p "legFront_R0_foot";
+	rename -uid "B956C9C3-46E7-D1F9-4E39-F986F8FB3343";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5340,8 +5300,8 @@ createNode nurbsCurve -n "legFront_R0_foot2Shape" -p "legFront_R0_foot";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_R0_foot3Shape" -p "legFront_R0_foot";
-	rename -uid "018AFD1A-4511-14F4-09E2-D9B572B27144";
+createNode nurbsCurve -n "legFront_R0_foot6Shape" -p "legFront_R0_foot";
+	rename -uid "9937917E-4396-8816-0088-3AAA986A448F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5358,8 +5318,8 @@ createNode nurbsCurve -n "legFront_R0_foot3Shape" -p "legFront_R0_foot";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_foot3_0crvShape" -p "legFront_R0_foot";
-	rename -uid "E7306891-4D19-A798-53FE-649F14393739";
+createNode nurbsCurve -n "legFront_R0_foot6_0crvShape" -p "legFront_R0_foot";
+	rename -uid "615F96E1-4493-62B8-8F5B-78AE51DBE99E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5376,8 +5336,8 @@ createNode nurbsCurve -n "legFront_R0_foot3_0crvShape" -p "legFront_R0_foot";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_foot3_1crvShape" -p "legFront_R0_foot";
-	rename -uid "C94E93F9-4D31-BD64-5112-2097E7B7111E";
+createNode nurbsCurve -n "legFront_R0_foot6_1crvShape" -p "legFront_R0_foot";
+	rename -uid "455D8F99-4458-9B5A-D2B7-AC869CE6564F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5395,10 +5355,10 @@ createNode nurbsCurve -n "legFront_R0_foot3_1crvShape" -p "legFront_R0_foot";
 		0 0 -0.1875
 		;
 createNode transform -n "legFront_R0_eff" -p "legFront_R0_foot";
-	rename -uid "63CD4CB1-4212-63CC-D2C8-4182C56E4BCE";
+	rename -uid "7E6360B5-40AA-4441-5D39-2EBD6885B61C";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 2.6645352591003757e-015 8.8817841970012523e-016 0.59657797851920691 ;
+	setAttr ".t" -type "double3" 3.1086244689504383e-015 8.6042284408449632e-016 0.59657797851920868 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5406,12 +5366,12 @@ createNode transform -n "legFront_R0_eff" -p "legFront_R0_foot";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999944 0.99999999999999922 0.99999999999999867 ;
+	setAttr ".s" -type "double3" 0.99999999999999967 0.99999999999999922 0.99999999999999867 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legFront_R0_effShape" -p "legFront_R0_eff";
-	rename -uid "FAF374E2-4851-56B3-E8C2-B39995B9CE38";
+	rename -uid "34347F68-4B4C-0918-6D4F-7087FCB206CA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5423,8 +5383,8 @@ createNode nurbsCurve -n "legFront_R0_effShape" -p "legFront_R0_eff";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_eff1Shape" -p "legFront_R0_eff";
-	rename -uid "FB1E547D-4B7C-5790-9A67-1A915C131448";
+createNode nurbsCurve -n "legFront_R0_eff4Shape" -p "legFront_R0_eff";
+	rename -uid "61B4025F-42BD-1D6C-AB3F-F3BCF4CD690A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5436,8 +5396,8 @@ createNode nurbsCurve -n "legFront_R0_eff1Shape" -p "legFront_R0_eff";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legFront_R0_eff2Shape" -p "legFront_R0_eff";
-	rename -uid "46B9F2E4-421B-EC6B-10B4-069EA880787A";
+createNode nurbsCurve -n "legFront_R0_eff5Shape" -p "legFront_R0_eff";
+	rename -uid "99338A14-4C51-F3A2-EF9E-65A2DECCE72E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5449,8 +5409,8 @@ createNode nurbsCurve -n "legFront_R0_eff2Shape" -p "legFront_R0_eff";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legFront_R0_eff3Shape" -p "legFront_R0_eff";
-	rename -uid "A6773FBA-4FA7-9278-8930-97B9B1D52851";
+createNode nurbsCurve -n "legFront_R0_eff6Shape" -p "legFront_R0_eff";
+	rename -uid "2862B3B4-4F8D-E8B0-35E1-B1A7F8FF6E8A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5467,8 +5427,8 @@ createNode nurbsCurve -n "legFront_R0_eff3Shape" -p "legFront_R0_eff";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_eff3_0crvShape" -p "legFront_R0_eff";
-	rename -uid "FFDCDB71-466A-F0C6-F58C-D9AB00DF5FC0";
+createNode nurbsCurve -n "legFront_R0_eff6_0crvShape" -p "legFront_R0_eff";
+	rename -uid "172959DC-414E-197B-9304-08882059DEDB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5485,8 +5445,8 @@ createNode nurbsCurve -n "legFront_R0_eff3_0crvShape" -p "legFront_R0_eff";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legFront_R0_eff3_1crvShape" -p "legFront_R0_eff";
-	rename -uid "6ABDD94C-45C6-15B7-2B12-E28A4E978653";
+createNode nurbsCurve -n "legFront_R0_eff6_1crvShape" -p "legFront_R0_eff";
+	rename -uid "58C2E2BB-4C40-5DAF-5AC4-0E8EE5D70EA6";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5504,7 +5464,7 @@ createNode nurbsCurve -n "legFront_R0_eff3_1crvShape" -p "legFront_R0_eff";
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_R0_root" -p "legFront_R0_foot";
-	rename -uid "99D04758-4090-69EF-124B-9DBEB1618BDB";
+	rename -uid "702E0129-442E-2981-86BF-5DB1E4F7FEF9";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -5513,11 +5473,11 @@ createNode transform -n "footFront_R0_root" -p "legFront_R0_foot";
 	addAttr -ci true -sn "connector" -ln "connector" -dt "string";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
-	addAttr -ci true -sn "useRollCtl" -ln "useRollCtl" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "useRollCtl" -ln "useRollCtl" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 2.6645352591003757e-015 7.7715611723760958e-016 -3.5527136788005009e-015 ;
+	setAttr ".t" -type "double3" 3.1086244689504383e-015 9.1593399531575415e-016 -1.7763568394002505e-015 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5525,7 +5485,7 @@ createNode transform -n "footFront_R0_root" -p "legFront_R0_foot";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.31499517602514088 0.31499517602514093 0.31499517602514077 ;
+	setAttr ".s" -type "double3" 0.31499517602514099 0.31499517602514093 0.31499517602514077 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -5535,10 +5495,8 @@ createNode transform -n "footFront_R0_root" -p "legFront_R0_foot";
 	setAttr ".connector" -type "string" "leg_3jnt_01";
 	setAttr ".ui_host" -type "string" "frontLegUI_R0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".useRollCtl" yes;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "footFront_R0_rootShape" -p "footFront_R0_root";
-	rename -uid "4C6FC73D-4D55-0487-8EDE-4CAC238B5B5D";
+	rename -uid "8855F3FA-4916-E179-C56E-9EB3D214162B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5550,8 +5508,8 @@ createNode nurbsCurve -n "footFront_R0_rootShape" -p "footFront_R0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_root1Shape" -p "footFront_R0_root";
-	rename -uid "0439C1B2-4640-BEB3-AD29-7D8F34F833CC";
+createNode nurbsCurve -n "footFront_R0_root4Shape" -p "footFront_R0_root";
+	rename -uid "E5FD2780-426F-CEFD-B585-F5841228D1F3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5563,8 +5521,8 @@ createNode nurbsCurve -n "footFront_R0_root1Shape" -p "footFront_R0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_R0_root2Shape" -p "footFront_R0_root";
-	rename -uid "22C3035F-4CCF-50F3-0818-A7ACA13AFD7A";
+createNode nurbsCurve -n "footFront_R0_root5Shape" -p "footFront_R0_root";
+	rename -uid "CD799EFA-46DC-E08A-794C-B9B712D3ACEA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5576,8 +5534,8 @@ createNode nurbsCurve -n "footFront_R0_root2Shape" -p "footFront_R0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_R0_root3Shape" -p "footFront_R0_root";
-	rename -uid "74932CE5-47BA-C3FF-0DE8-49B6C1504B77";
+createNode nurbsCurve -n "footFront_R0_root6Shape" -p "footFront_R0_root";
+	rename -uid "7084AA59-4C77-A960-8FC0-0D9B6A08E2B8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5604,10 +5562,10 @@ createNode nurbsCurve -n "footFront_R0_root3Shape" -p "footFront_R0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "footFront_R0_0_loc" -p "footFront_R0_root";
-	rename -uid "CE98A608-460A-FEF6-F424-538A14CD09B6";
+	rename -uid "FBFC1FE2-42DE-9F84-6CEB-468E507AC5EC";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 5.3290705182007514e-015 7.7715611723760958e-016 0.75996190873517477 ;
+	setAttr ".t" -type "double3" 6.2172489379008766e-015 5.5511151231257827e-016 0.75996190873517833 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5615,12 +5573,12 @@ createNode transform -n "footFront_R0_0_loc" -p "footFront_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_R0_0_locShape" -p "footFront_R0_0_loc";
-	rename -uid "7B6AD316-4531-E7F7-1F83-BAB4524B2530";
+	rename -uid "3F7167B3-4BE8-F8B5-4F2E-C2AC27BA0690";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5632,8 +5590,8 @@ createNode nurbsCurve -n "footFront_R0_0_locShape" -p "footFront_R0_0_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_0_loc1Shape" -p "footFront_R0_0_loc";
-	rename -uid "A2EE855B-4F15-8BE3-68C8-F6A4448A7F66";
+createNode nurbsCurve -n "footFront_R0_0_loc4Shape" -p "footFront_R0_0_loc";
+	rename -uid "82046614-4A9F-F8BE-98D2-16A13692E082";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5645,8 +5603,8 @@ createNode nurbsCurve -n "footFront_R0_0_loc1Shape" -p "footFront_R0_0_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_R0_0_loc2Shape" -p "footFront_R0_0_loc";
-	rename -uid "D074C882-4BDB-66F6-4B36-82A50B72E338";
+createNode nurbsCurve -n "footFront_R0_0_loc5Shape" -p "footFront_R0_0_loc";
+	rename -uid "A16357B5-49AC-0FC0-762D-5BBF7133D76F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5658,8 +5616,8 @@ createNode nurbsCurve -n "footFront_R0_0_loc2Shape" -p "footFront_R0_0_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_R0_0_loc3Shape" -p "footFront_R0_0_loc";
-	rename -uid "6110BA49-4371-D4C1-1FE9-FDB92D25F510";
+createNode nurbsCurve -n "footFront_R0_0_loc6Shape" -p "footFront_R0_0_loc";
+	rename -uid "D6A7BB8A-413E-ED25-B1EF-55B781FA9F74";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5676,8 +5634,8 @@ createNode nurbsCurve -n "footFront_R0_0_loc3Shape" -p "footFront_R0_0_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_0_loc3_0crvShape" -p "footFront_R0_0_loc";
-	rename -uid "6C3DBADC-4E0C-1E06-788A-9C88D4283C16";
+createNode nurbsCurve -n "footFront_R0_0_loc6_0crvShape" -p "footFront_R0_0_loc";
+	rename -uid "CEA05339-45C4-ADDF-55A7-4884D42F5FD4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5694,8 +5652,8 @@ createNode nurbsCurve -n "footFront_R0_0_loc3_0crvShape" -p "footFront_R0_0_loc"
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_0_loc3_1crvShape" -p "footFront_R0_0_loc";
-	rename -uid "18FFB24F-4441-190F-C858-0B895FCD05E3";
+createNode nurbsCurve -n "footFront_R0_0_loc6_1crvShape" -p "footFront_R0_0_loc";
+	rename -uid "2DC51BC2-4D92-7425-AA72-4D99A7658839";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5713,10 +5671,10 @@ createNode nurbsCurve -n "footFront_R0_0_loc3_1crvShape" -p "footFront_R0_0_loc"
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_R0_1_loc" -p "footFront_R0_0_loc";
-	rename -uid "C3C1E183-4F51-E597-7CD0-62911371400B";
+	rename -uid "D6759845-47D0-67C5-3BBD-FB84934ACD02";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -3.5527136788005009e-015 -0.31771180755405082 0.73937999249394792 ;
+	setAttr ".t" -type "double3" -3.5527136788005009e-015 -0.31771180755405087 0.73937999249394437 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5724,12 +5682,12 @@ createNode transform -n "footFront_R0_1_loc" -p "footFront_R0_0_loc";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000002 1.0000000000000002 ;
+	setAttr ".s" -type "double3" 1 1.0000000000000002 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_R0_1_locShape" -p "footFront_R0_1_loc";
-	rename -uid "BD0006F1-4DE5-23BD-29A9-189490929B7E";
+	rename -uid "624D2066-4611-0E8E-82D2-539403CBCD21";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5741,8 +5699,8 @@ createNode nurbsCurve -n "footFront_R0_1_locShape" -p "footFront_R0_1_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_1_loc1Shape" -p "footFront_R0_1_loc";
-	rename -uid "3A310A5A-4D5F-F2F0-3CF5-638C42387539";
+createNode nurbsCurve -n "footFront_R0_1_loc4Shape" -p "footFront_R0_1_loc";
+	rename -uid "B63437C0-4D5C-4FB4-1F01-5F9F96068D40";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5754,8 +5712,8 @@ createNode nurbsCurve -n "footFront_R0_1_loc1Shape" -p "footFront_R0_1_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_R0_1_loc2Shape" -p "footFront_R0_1_loc";
-	rename -uid "C596B9BC-43BA-CD4E-462D-C5BE2EC021BD";
+createNode nurbsCurve -n "footFront_R0_1_loc5Shape" -p "footFront_R0_1_loc";
+	rename -uid "A42D5F0B-4C73-8DA1-758E-B993A9D7D753";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5767,8 +5725,8 @@ createNode nurbsCurve -n "footFront_R0_1_loc2Shape" -p "footFront_R0_1_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_R0_1_loc3Shape" -p "footFront_R0_1_loc";
-	rename -uid "7794D06B-419F-999C-56EB-819B095DF5A2";
+createNode nurbsCurve -n "footFront_R0_1_loc6Shape" -p "footFront_R0_1_loc";
+	rename -uid "9EB83CEA-46F2-85BD-97E8-AA8884CAAF7B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5785,8 +5743,8 @@ createNode nurbsCurve -n "footFront_R0_1_loc3Shape" -p "footFront_R0_1_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_1_loc3_0crvShape" -p "footFront_R0_1_loc";
-	rename -uid "A4D4A6D1-4C63-155F-BEDC-74A0FF483B43";
+createNode nurbsCurve -n "footFront_R0_1_loc6_0crvShape" -p "footFront_R0_1_loc";
+	rename -uid "FC16B102-4479-824B-D614-71BCB8AD3128";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5803,8 +5761,8 @@ createNode nurbsCurve -n "footFront_R0_1_loc3_0crvShape" -p "footFront_R0_1_loc"
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_1_loc3_1crvShape" -p "footFront_R0_1_loc";
-	rename -uid "A8A93811-4DE5-3AD2-4746-339E137587F0";
+createNode nurbsCurve -n "footFront_R0_1_loc6_1crvShape" -p "footFront_R0_1_loc";
+	rename -uid "69D5962B-4C84-1061-D91E-5E8091631A8A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5822,19 +5780,19 @@ createNode nurbsCurve -n "footFront_R0_1_loc3_1crvShape" -p "footFront_R0_1_loc"
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_R0_crv" -p "footFront_R0_root";
-	rename -uid "636B96CC-4563-C3BE-8755-AC8B8A8A3FD6";
+	rename -uid "B5B99B85-410A-A0AF-6F94-B3986F8821DB";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -7.3687973355373479 -0.60300743522685085 -16.239037496288905 ;
-	setAttr ".r" -type "double3" 0 180 0 ;
-	setAttr ".s" -type "double3" 7.9431701648148074 7.9431701648148074 -7.9431701648148092 ;
+	setAttr ".t" -type "double3" -7.3687973355373444 -0.60300743522684541 -16.239037496288905 ;
+	setAttr ".r" -type "double3" 0 179.99999999999997 0 ;
+	setAttr ".s" -type "double3" 7.9431701648148065 7.9431701648148074 -7.9431701648148083 ;
 createNode nurbsCurve -n "footFront_R0_crvShape" -p "footFront_R0_crv";
-	rename -uid "9832A372-48F8-C2C3-E3E9-4AAF848D49C5";
+	rename -uid "88F1AA9D-4915-7D9F-8982-ECA41D306011";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "footFront_R0_crvShapeOrig" -p "footFront_R0_crv";
-	rename -uid "8C8F79AF-4565-6A23-B782-7A8610AB3461";
+	rename -uid "430A8DD1-4FCD-EC17-A47F-D593A1E8624B";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -5846,10 +5804,10 @@ createNode nurbsCurve -n "footFront_R0_crvShapeOrig" -p "footFront_R0_crv";
 		0 0 0
 		;
 createNode transform -n "footFront_R0_heel" -p "footFront_R0_root";
-	rename -uid "C6FCAB5F-4E66-2B48-D5F7-9B9377B694E6";
+	rename -uid "661D0ED7-44D9-00D7-ED75-368AEB62E9C4";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.0658141036401503e-014 -0.31771180755405071 -0.067899908672082177 ;
+	setAttr ".t" -type "double3" 1.2434497875801753e-014 -0.31771180755405076 -0.067899908672078624 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5857,12 +5815,12 @@ createNode transform -n "footFront_R0_heel" -p "footFront_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_R0_heelShape" -p "footFront_R0_heel";
-	rename -uid "20F89F00-49A4-087F-A822-FEB76B62A286";
+	rename -uid "A331B82C-4199-B97C-C352-A4A4E20F8D1E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5874,8 +5832,8 @@ createNode nurbsCurve -n "footFront_R0_heelShape" -p "footFront_R0_heel";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_heel1Shape" -p "footFront_R0_heel";
-	rename -uid "D95A0642-4F29-1517-12DA-91A65698E222";
+createNode nurbsCurve -n "footFront_R0_heel4Shape" -p "footFront_R0_heel";
+	rename -uid "D3D47616-494C-C79D-FE0B-0BA22BA371EA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5887,8 +5845,8 @@ createNode nurbsCurve -n "footFront_R0_heel1Shape" -p "footFront_R0_heel";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_R0_heel2Shape" -p "footFront_R0_heel";
-	rename -uid "FB774452-4495-F40A-CF9C-2591174F800D";
+createNode nurbsCurve -n "footFront_R0_heel5Shape" -p "footFront_R0_heel";
+	rename -uid "6820DF11-47FE-DF15-D9E6-D7A020C74C96";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5900,8 +5858,8 @@ createNode nurbsCurve -n "footFront_R0_heel2Shape" -p "footFront_R0_heel";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_R0_heel3Shape" -p "footFront_R0_heel";
-	rename -uid "4C4CF61E-4289-F971-EFF9-B1A2325B4D24";
+createNode nurbsCurve -n "footFront_R0_heel6Shape" -p "footFront_R0_heel";
+	rename -uid "6769CAD5-490D-5E2B-B179-B5B2C633B885";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5918,8 +5876,8 @@ createNode nurbsCurve -n "footFront_R0_heel3Shape" -p "footFront_R0_heel";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_heel3_0crvShape" -p "footFront_R0_heel";
-	rename -uid "AA893B58-4BB2-E7F5-FEBD-309E70CB6AF2";
+createNode nurbsCurve -n "footFront_R0_heel6_0crvShape" -p "footFront_R0_heel";
+	rename -uid "957C6DC0-4507-2BA9-95AB-26AFC11C5771";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5936,8 +5894,8 @@ createNode nurbsCurve -n "footFront_R0_heel3_0crvShape" -p "footFront_R0_heel";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_heel3_1crvShape" -p "footFront_R0_heel";
-	rename -uid "51FD4D10-4680-EDA3-BACE-D098B299D272";
+createNode nurbsCurve -n "footFront_R0_heel6_1crvShape" -p "footFront_R0_heel";
+	rename -uid "1F60AA1D-4F0B-12B7-536A-2A9C9A404453";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5955,10 +5913,10 @@ createNode nurbsCurve -n "footFront_R0_heel3_1crvShape" -p "footFront_R0_heel";
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_R0_outpivot" -p "footFront_R0_root";
-	rename -uid "D5AC151D-4434-9727-3276-6396049BBE87";
+	rename -uid "7E36FAF5-4976-4020-1B77-42A5ACFA2B26";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.1000376131120593 -0.31771180755404999 0.69157185350466577 ;
+	setAttr ".t" -type "double3" 1.1000376131120611 -0.31771180755405032 0.69157185350466932 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -5966,12 +5924,12 @@ createNode transform -n "footFront_R0_outpivot" -p "footFront_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_R0_outpivotShape" -p "footFront_R0_outpivot";
-	rename -uid "C3C99581-4564-BFA3-E59F-BFB97AB22F87";
+	rename -uid "35B9798B-4553-7D19-9EFA-EE8029336FC5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5983,8 +5941,8 @@ createNode nurbsCurve -n "footFront_R0_outpivotShape" -p "footFront_R0_outpivot"
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_outpivot1Shape" -p "footFront_R0_outpivot";
-	rename -uid "2BF6E798-441F-800A-57A5-3B824C287DB3";
+createNode nurbsCurve -n "footFront_R0_outpivot4Shape" -p "footFront_R0_outpivot";
+	rename -uid "FEF23520-41CD-77D4-2238-77800EC5CDCA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -5996,8 +5954,8 @@ createNode nurbsCurve -n "footFront_R0_outpivot1Shape" -p "footFront_R0_outpivot
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_R0_outpivot2Shape" -p "footFront_R0_outpivot";
-	rename -uid "54DE553E-40F1-FDCB-3B6F-37A1AE918D24";
+createNode nurbsCurve -n "footFront_R0_outpivot5Shape" -p "footFront_R0_outpivot";
+	rename -uid "A048245F-4ED6-5960-B68C-99BC99532345";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6009,8 +5967,8 @@ createNode nurbsCurve -n "footFront_R0_outpivot2Shape" -p "footFront_R0_outpivot
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_R0_outpivot3Shape" -p "footFront_R0_outpivot";
-	rename -uid "28D0E9CF-48F0-6C40-7292-259154B0AFF0";
+createNode nurbsCurve -n "footFront_R0_outpivot6Shape" -p "footFront_R0_outpivot";
+	rename -uid "4DF6D918-4978-6B70-185C-E1890E7D589E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6027,8 +5985,8 @@ createNode nurbsCurve -n "footFront_R0_outpivot3Shape" -p "footFront_R0_outpivot
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_outpivot3_0crvShape" -p "footFront_R0_outpivot";
-	rename -uid "CE02B642-4C97-0518-3CD5-DFA502D1611C";
+createNode nurbsCurve -n "footFront_R0_outpivot6_0crvShape" -p "footFront_R0_outpivot";
+	rename -uid "ABD331FD-4135-0B73-CA3E-EBA4411CFFE9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6045,8 +6003,8 @@ createNode nurbsCurve -n "footFront_R0_outpivot3_0crvShape" -p "footFront_R0_out
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_outpivot3_1crvShape" -p "footFront_R0_outpivot";
-	rename -uid "79C0EE33-4816-DBF5-BE46-27B0802FDBC7";
+createNode nurbsCurve -n "footFront_R0_outpivot6_1crvShape" -p "footFront_R0_outpivot";
+	rename -uid "3A1F448B-413D-5FC2-8A21-0DBDA33A4821";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6064,10 +6022,10 @@ createNode nurbsCurve -n "footFront_R0_outpivot3_1crvShape" -p "footFront_R0_out
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_R0_inpivot" -p "footFront_R0_root";
-	rename -uid "1A3B79BC-4FDB-2A7C-AD2C-BF9AE698DC2F";
+	rename -uid "09C7854D-4271-6379-78FD-FB8FA490257E";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.0162439288722949 -0.31771180755405037 0.86340011285664531 ;
+	setAttr ".t" -type "double3" -1.0162439288722931 -0.31771180755405054 0.86340011285664531 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -6075,12 +6033,12 @@ createNode transform -n "footFront_R0_inpivot" -p "footFront_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1 1.0000000000000004 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footFront_R0_inpivotShape" -p "footFront_R0_inpivot";
-	rename -uid "FD61D5FC-4AAF-4A84-3C79-6D9A1314C6B4";
+	rename -uid "5982959D-480F-A903-FA9B-2E8FF5DAB4B2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6092,8 +6050,8 @@ createNode nurbsCurve -n "footFront_R0_inpivotShape" -p "footFront_R0_inpivot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_inpivot1Shape" -p "footFront_R0_inpivot";
-	rename -uid "2EDEB4DD-41E3-A83C-427F-599002C58472";
+createNode nurbsCurve -n "footFront_R0_inpivot4Shape" -p "footFront_R0_inpivot";
+	rename -uid "B2D5A66D-4C31-7BEE-7E3A-B7ACF6D1B6DB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6105,8 +6063,8 @@ createNode nurbsCurve -n "footFront_R0_inpivot1Shape" -p "footFront_R0_inpivot";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footFront_R0_inpivot2Shape" -p "footFront_R0_inpivot";
-	rename -uid "6E25A42A-484A-A004-AD6A-418D6D8ECB68";
+createNode nurbsCurve -n "footFront_R0_inpivot5Shape" -p "footFront_R0_inpivot";
+	rename -uid "03A28E23-4073-0132-AE46-6795028CD56C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6118,8 +6076,8 @@ createNode nurbsCurve -n "footFront_R0_inpivot2Shape" -p "footFront_R0_inpivot";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footFront_R0_inpivot3Shape" -p "footFront_R0_inpivot";
-	rename -uid "837E93D5-4541-747D-7088-9A8BB5A80BD4";
+createNode nurbsCurve -n "footFront_R0_inpivot6Shape" -p "footFront_R0_inpivot";
+	rename -uid "E9D820AC-4BA7-66F6-ACF2-849D38FCFBC2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6136,8 +6094,8 @@ createNode nurbsCurve -n "footFront_R0_inpivot3Shape" -p "footFront_R0_inpivot";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_inpivot3_0crvShape" -p "footFront_R0_inpivot";
-	rename -uid "7CAA3DE6-4893-C174-0516-4998704AA54A";
+createNode nurbsCurve -n "footFront_R0_inpivot6_0crvShape" -p "footFront_R0_inpivot";
+	rename -uid "B72209C6-486A-74FA-1853-96A250F0478E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6154,8 +6112,8 @@ createNode nurbsCurve -n "footFront_R0_inpivot3_0crvShape" -p "footFront_R0_inpi
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footFront_R0_inpivot3_1crvShape" -p "footFront_R0_inpivot";
-	rename -uid "267AB165-43B5-1970-05C1-37B5BE3E2327";
+createNode nurbsCurve -n "footFront_R0_inpivot6_1crvShape" -p "footFront_R0_inpivot";
+	rename -uid "171E3CD9-4490-23FB-7320-A6A91DF045D7";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6173,19 +6131,19 @@ createNode nurbsCurve -n "footFront_R0_inpivot3_1crvShape" -p "footFront_R0_inpi
 		0 0 -0.1875
 		;
 createNode transform -n "footFront_R0_1" -p "footFront_R0_root";
-	rename -uid "7DB7FFA1-4403-F86B-8D79-5A8945265C3D";
+	rename -uid "95B0821B-462E-A628-2D50-9E8CCE90D7C7";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -7.3687973355373479 -0.60300743522685085 -16.239037496288905 ;
-	setAttr ".r" -type "double3" 0 180 0 ;
-	setAttr ".s" -type "double3" 7.9431701648148074 7.9431701648148074 -7.9431701648148092 ;
+	setAttr ".t" -type "double3" -7.3687973355373444 -0.60300743522684541 -16.239037496288905 ;
+	setAttr ".r" -type "double3" 0 179.99999999999997 0 ;
+	setAttr ".s" -type "double3" 7.9431701648148065 7.9431701648148074 -7.9431701648148083 ;
 createNode nurbsCurve -n "footFront_R0_Shape1" -p "footFront_R0_1";
-	rename -uid "A95942CB-48FC-22AB-22CC-D0836A6C1952";
+	rename -uid "0FE07C2B-4A5B-7595-14F4-A38E77D30A2A";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "footFront_R0_Shape1Orig" -p "footFront_R0_1";
-	rename -uid "B48FDC01-484D-D04A-F6D2-EA96341855C6";
+	rename -uid "7634BE0F-4FBA-B891-21E3-03B437A3B16F";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -6199,7 +6157,7 @@ createNode nurbsCurve -n "footFront_R0_Shape1Orig" -p "footFront_R0_1";
 		0 0 0
 		;
 createNode transform -n "frontLegUI_R0_root" -p "footFront_R0_root";
-	rename -uid "810383A8-4A0E-C921-F555-59856745D311";
+	rename -uid "24E5FD72-4FE1-F591-A5DB-92B7217D0334";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -6211,7 +6169,7 @@ createNode transform -n "frontLegUI_R0_root" -p "footFront_R0_root";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
@@ -6223,12 +6181,14 @@ createNode transform -n "frontLegUI_R0_root" -p "footFront_R0_root";
 	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 0.5 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 10.017876024668173 5.4248605945583162 2.5678955088138089 ;
+	setAttr ".t" -type "double3" 10.017876024668176 5.4248605945583135 2.5678955088138089 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -6236,7 +6196,7 @@ createNode transform -n "frontLegUI_R0_root" -p "footFront_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 7.943170164814811 7.943170164814811 7.9431701648148163 ;
+	setAttr ".s" -type "double3" 7.9431701648148101 7.943170164814811 7.9431701648148154 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -6248,12 +6208,8 @@ createNode transform -n "frontLegUI_R0_root" -p "footFront_R0_root";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "cross";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 0.5;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "frontLegUI_R0_rootShape" -p "frontLegUI_R0_root";
-	rename -uid "EA2B3706-42A8-27D4-1912-91A62AA75693";
+	rename -uid "49DD17E8-40AE-9059-7BEA-23954B45944A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6265,8 +6221,8 @@ createNode nurbsCurve -n "frontLegUI_R0_rootShape" -p "frontLegUI_R0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "frontLegUI_R0_root1Shape" -p "frontLegUI_R0_root";
-	rename -uid "1844F2B5-43E7-8C42-A8D7-B28886D1B4DE";
+createNode nurbsCurve -n "frontLegUI_R0_root4Shape" -p "frontLegUI_R0_root";
+	rename -uid "D3564921-4F43-4D4A-4EB9-9DB6AEA53973";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6278,8 +6234,8 @@ createNode nurbsCurve -n "frontLegUI_R0_root1Shape" -p "frontLegUI_R0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "frontLegUI_R0_root2Shape" -p "frontLegUI_R0_root";
-	rename -uid "02E9DAD7-442C-1549-33C4-F4A3FDD193BF";
+createNode nurbsCurve -n "frontLegUI_R0_root5Shape" -p "frontLegUI_R0_root";
+	rename -uid "32B1702F-4977-2BF3-1469-6DA430EFE380";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6291,8 +6247,8 @@ createNode nurbsCurve -n "frontLegUI_R0_root2Shape" -p "frontLegUI_R0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "frontLegUI_R0_root3Shape" -p "frontLegUI_R0_root";
-	rename -uid "C8ED4C1D-4F88-712A-BD6F-5FB7ABC91278";
+createNode nurbsCurve -n "frontLegUI_R0_root6Shape" -p "frontLegUI_R0_root";
+	rename -uid "5252F7DA-487A-83A3-8DAE-808A7E70E733";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6319,10 +6275,10 @@ createNode nurbsCurve -n "frontLegUI_R0_root3Shape" -p "frontLegUI_R0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "frontLegUI_R0_sizeRef" -p "frontLegUI_R0_root";
-	rename -uid "E578BAB4-4EF4-684F-9907-E6BF8970186E";
+	rename -uid "DADE9129-4083-A594-3B09-3EBAADD2E898";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 4.4408920985006262e-016 3.3306690738754696e-016 1 ;
+	setAttr ".t" -type "double3" -4.4408920985006262e-016 1.1102230246251565e-016 1.0000000000000004 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -6330,24 +6286,24 @@ createNode transform -n "frontLegUI_R0_sizeRef" -p "frontLegUI_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999956 0.99999999999999967 0.99999999999999889 ;
+	setAttr ".s" -type "double3" 0.99999999999999944 0.99999999999999956 0.99999999999999911 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "legFront_R0_crv1" -p "legFront_R0_root";
-	rename -uid "CDDB0D08-4D0C-5224-1732-C9AE92C9DE58";
+	rename -uid "42A978A4-4EEB-9598-1408-748B4539E735";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -2.3211356138011685 -5.8086248814742651 -5.504506232891937 ;
+	setAttr ".t" -type "double3" -2.3211356138011698 -5.8086248814742634 -5.5045062328919379 ;
 	setAttr ".r" -type "double3" 0 179.99999999999994 0 ;
-	setAttr ".s" -type "double3" 2.5020602842634889 2.5020602842634871 -2.5020602842634889 ;
+	setAttr ".s" -type "double3" 2.5020602842634889 2.5020602842634871 -2.5020602842634885 ;
 createNode nurbsCurve -n "legFront_R0_crvShape1" -p "legFront_R0_crv1";
-	rename -uid "FF1E86F3-4F87-7E58-B5CB-26AC27D77854";
+	rename -uid "EE087502-4DBC-B4EB-6ED8-F9A5D657F2CA";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "legFront_R0_crvShape1Orig" -p "legFront_R0_crv1";
-	rename -uid "713B7474-4B17-1E21-BB6B-6B85F5309B98";
+	rename -uid "72C9CE30-4285-6A23-9753-F48DFB63063B";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -6361,7 +6317,7 @@ createNode nurbsCurve -n "legFront_R0_crvShape1Orig" -p "legFront_R0_crv1";
 		0 0 0
 		;
 createNode transform -n "shoulder_R0_blade" -p "shoulder_R0_root";
-	rename -uid "E423A847-46E4-1F4F-C5AD-BDB9E57ED0D9";
+	rename -uid "3A2B04C4-4186-886D-DEAD-48AA75346B2E";
 	addAttr -ci true -k true -sn "bladeRollOffset" -ln "bladeRollOffset" -at "float";
 	setAttr -l on -k off -cb on ".v";
 	setAttr -k off -cb on ".tx";
@@ -6371,13 +6327,13 @@ createNode transform -n "shoulder_R0_blade" -p "shoulder_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000004 0.999999999999999 0.99999999999999922 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999878 0.999999999999999 ;
 	setAttr -l on -k off -cb on ".sx";
 	setAttr -l on -k off -cb on ".sy";
 	setAttr -l on -k off -cb on ".sz";
 	setAttr -k on ".bladeRollOffset";
 createNode nurbsCurve -n "shoulder_R0_bladeShape" -p "shoulder_R0_blade";
-	rename -uid "A4B1FB2C-41FC-6EFF-A0D5-3BA39F9B45F1";
+	rename -uid "0C637EB6-4C6C-AADC-E8BE-9D926D7A9F46";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6391,8 +6347,8 @@ createNode nurbsCurve -n "shoulder_R0_bladeShape" -p "shoulder_R0_blade";
 		0 0.42205831527236448 0
 		0 0 0
 		;
-createNode aimConstraint -n "shoulder_R0_blade_aimConstraint1" -p "shoulder_R0_blade";
-	rename -uid "689D9D71-489F-B245-80C5-118F5678A17B";
+createNode aimConstraint -n "shoulder_R0_blade_aimConstraint2" -p "shoulder_R0_blade";
+	rename -uid "FCF42663-4280-0146-B8D8-9CB96EF040E3";
 	addAttr -dcb 0 -ci true -sn "w0" -ln "shoulder_R0_0_locW0" -dv 1 -at "double";
 	setAttr -k on ".nds";
 	setAttr -k off ".v";
@@ -6407,10 +6363,10 @@ createNode aimConstraint -n "shoulder_R0_blade_aimConstraint1" -p "shoulder_R0_b
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr ".wut" 2;
-	setAttr ".rsrr" -type "double3" 3.3599751382067859 -13.53612943577315 -14.081236533000286 ;
+	setAttr ".rsrr" -type "double3" 3.3599751382072194 -13.536129435773134 -14.081236533000302 ;
 	setAttr -k on ".w0";
-createNode pointConstraint -n "shoulder_R0_blade_pointConstraint1" -p "shoulder_R0_blade";
-	rename -uid "C03D78F2-4DED-B1ED-86A9-BC8CB912C6BF";
+createNode pointConstraint -n "shoulder_R0_blade_pointConstraint2" -p "shoulder_R0_blade";
+	rename -uid "32F81504-420E-3149-31BF-EAAB5F0ABA6E";
 	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "shoulder_R0_rootW0" -dv 1 -min 0 
 		-at "double";
 	setAttr -k on ".nds";
@@ -6428,19 +6384,19 @@ createNode pointConstraint -n "shoulder_R0_blade_pointConstraint1" -p "shoulder_
 	setAttr ".rst" -type "double3" 0 -4.4408920985006262e-016 0 ;
 	setAttr -k on ".w0";
 createNode transform -n "shoulder_R0_crv" -p "shoulder_R0_root";
-	rename -uid "91552044-4392-BA8C-EC4A-8A8377D34205";
+	rename -uid "2A548B73-47FB-3695-A4FF-548257281EF3";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -0.095164109147563028 -2.5303629060493176 -1.9933533667490371 ;
+	setAttr ".t" -type "double3" -0.095164109147563708 -2.5303629060493167 -1.9933533667490371 ;
 	setAttr ".r" -type "double3" 0 179.99999999999997 0 ;
-	setAttr ".s" -type "double3" 1.0000000000000007 1 -1 ;
+	setAttr ".s" -type "double3" 1.0000000000000007 0.99999999999999989 -1 ;
 createNode nurbsCurve -n "shoulder_R0_crvShape" -p "shoulder_R0_crv";
-	rename -uid "3C5BE165-4AC9-8902-59ED-579E975E3F4E";
+	rename -uid "EC24E0D2-4AB3-458B-998C-7F8E59FD79C1";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "shoulder_R0_crvShapeOrig" -p "shoulder_R0_crv";
-	rename -uid "088FDDD5-4F1A-2BFC-E939-218C6DA3DDD7";
+	rename -uid "9E4F5E85-4472-91BE-FDE2-E0B50BD8C5CD";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -6451,7 +6407,7 @@ createNode nurbsCurve -n "shoulder_R0_crvShapeOrig" -p "shoulder_R0_crv";
 		0 0 0
 		;
 createNode transform -n "spine_C0_blade" -p "spine_C0_root";
-	rename -uid "9E4715F0-4B74-6FC7-4CC2-9980467F0259";
+	rename -uid "27D9D197-4948-9D90-9050-5D9C3EF8AC9A";
 	addAttr -ci true -k true -sn "bladeRollOffset" -ln "bladeRollOffset" -at "float";
 	setAttr -l on -k off -cb on ".v";
 	setAttr -k off -cb on ".tx";
@@ -6461,13 +6417,13 @@ createNode transform -n "spine_C0_blade" -p "spine_C0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000013 1.0000000000000013 1 ;
+	setAttr ".s" -type "double3" 1.0000000000000016 1.0000000000000016 1 ;
 	setAttr -l on -k off -cb on ".sx";
 	setAttr -l on -k off -cb on ".sy";
 	setAttr -l on -k off -cb on ".sz";
 	setAttr -k on ".bladeRollOffset";
 createNode nurbsCurve -n "spine_C0_bladeShape" -p "spine_C0_blade";
-	rename -uid "55861B4B-4531-AE15-2666-EEAD527BCDB3";
+	rename -uid "5DCA5992-49B2-0D89-C3D5-9E92E3AE5D0B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6481,8 +6437,8 @@ createNode nurbsCurve -n "spine_C0_bladeShape" -p "spine_C0_blade";
 		0 0.094773633293273707 0
 		0 0 0
 		;
-createNode aimConstraint -n "spine_C0_blade_aimConstraint7" -p "spine_C0_blade";
-	rename -uid "8EBFB292-48C8-14A8-4478-6E9DCBBA88E2";
+createNode aimConstraint -n "spine_C0_blade_aimConstraint8" -p "spine_C0_blade";
+	rename -uid "C77946FE-4E4D-EA8A-2084-089296B03A66";
 	addAttr -dcb 0 -ci true -sn "w0" -ln "spine_C0_effW0" -dv 1 -at "double";
 	setAttr -k on ".nds";
 	setAttr -k off ".v";
@@ -6497,11 +6453,11 @@ createNode aimConstraint -n "spine_C0_blade_aimConstraint7" -p "spine_C0_blade";
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr ".wut" 2;
-	setAttr ".rsrr" -type "double3" 2.5444437451708122e-014 2.5444437451708125e-014 
+	setAttr ".rsrr" -type "double3" 2.5444437451708115e-014 2.5444437451708118e-014 
 		89.999999999999986 ;
 	setAttr -k on ".w0";
-createNode pointConstraint -n "spine_C0_blade_pointConstraint7" -p "spine_C0_blade";
-	rename -uid "59DFA766-4741-63BC-07FD-B6AF151841D8";
+createNode pointConstraint -n "spine_C0_blade_pointConstraint8" -p "spine_C0_blade";
+	rename -uid "369EB39A-4966-13D3-137E-A0B779AD5EFD";
 	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "spine_C0_rootW0" -dv 1 -min 0 -at "double";
 	setAttr -k on ".nds";
 	setAttr -k off ".v";
@@ -6515,22 +6471,22 @@ createNode pointConstraint -n "spine_C0_blade_pointConstraint7" -p "spine_C0_bla
 	setAttr -k off ".sy";
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
-	setAttr ".rst" -type "double3" 0 -4.4408920985006262e-016 3.9443045261050599e-031 ;
+	setAttr ".rst" -type "double3" 0 -4.4408920985006262e-016 3.944304526105059e-031 ;
 	setAttr -k on ".w0";
 createNode transform -n "spine_C0_crv" -p "spine_C0_root";
-	rename -uid "CE0A26A5-45C7-4FD2-FFCA-228CBC0A3ABC";
+	rename -uid "62811439-4938-20B0-66AA-2583F2A81B6F";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
 	setAttr ".t" -type "double3" 5.1074785620942285 2.6024712577026077 -3.4239055234572094e-015 ;
 	setAttr ".r" -type "double3" -89.999999999999986 89.999999999999957 0 ;
 	setAttr ".s" -type "double3" 2.1102915763618237 2.1102915763618237 2.1102915763618237 ;
 createNode nurbsCurve -n "spine_C0_crvShape" -p "spine_C0_crv";
-	rename -uid "C4BE312F-416E-4089-9555-5EB545DC88AB";
+	rename -uid "EF896225-4E8B-75D8-176A-D094857742AC";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "spine_C0_crvShapeOrig" -p "spine_C0_crv";
-	rename -uid "BB860B9D-44F2-CBF3-0A5F-1D9B7C4437E8";
+	rename -uid "8F22A56A-4145-AB51-94FA-D78A242C2D0F";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -6541,7 +6497,7 @@ createNode nurbsCurve -n "spine_C0_crvShapeOrig" -p "spine_C0_crv";
 		0 0 0
 		;
 createNode transform -n "legBack_L0_root" -p "spine_C0_root";
-	rename -uid "BDB0EC8A-4226-38D6-D1CC-ACB702179421";
+	rename -uid "DD2E660A-4823-BABF-4B24-E3A9E51D27B0";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -6550,21 +6506,21 @@ createNode transform -n "legBack_L0_root" -p "spine_C0_root";
 	addAttr -ci true -sn "connector" -ln "connector" -dt "string";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
-	addAttr -ci true -sn "blend" -ln "blend" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "full3BonesIK" -ln "full3BonesIK" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "blend" -ln "blend" -dv 1 -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "full3BonesIK" -ln "full3BonesIK" -dv 1 -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "upvrefarray" -ln "upvrefarray" -dt "string";
-	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1 -min 1 -at "double";
+	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1.5 -min 1 -at "double";
 	addAttr -ci true -k true -sn "ikSolver" -ln "ikSolver" -min 0 -max 1 -en "IK Spring:IK Rotation Plane" 
 		-at "enum";
-	addAttr -ci true -sn "ikOri" -ln "ikOri" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "div0" -ln "div0" -dv 1 -min 1 -at "long";
-	addAttr -ci true -sn "div1" -ln "div1" -dv 1 -min 1 -at "long";
-	addAttr -ci true -sn "div2" -ln "div2" -dv 1 -min 1 -at "long";
+	addAttr -ci true -sn "ikOri" -ln "ikOri" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "div0" -ln "div0" -dv 2 -min 1 -at "long";
+	addAttr -ci true -sn "div1" -ln "div1" -dv 2 -min 1 -at "long";
+	addAttr -ci true -sn "div2" -ln "div2" -dv 2 -min 1 -at "long";
 	addAttr -ci true -k true -sn "st_profile" -ln "st_profile" -at "double";
 	addAttr -ci true -k true -sn "sq_profile" -ln "sq_profile" -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
 	setAttr ".t" -type "double3" 0.21090213141047975 -0.097927178047045871 -2.6808811877076879 ;
 	setAttr -k off -cb on ".tx";
@@ -6585,20 +6541,12 @@ createNode transform -n "legBack_L0_root" -p "spine_C0_root";
 	setAttr ".connector" -type "string" "standard";
 	setAttr ".ui_host" -type "string" "backLegUI_L0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".blend" 1;
-	setAttr ".full3BonesIK" 1;
 	setAttr ".ikrefarray" -type "string" "local_C0_root,spine_C0_root,global_C0_root";
 	setAttr ".upvrefarray" -type "string" "local_C0_root,spine_C0_root,global_C0_root";
-	setAttr ".maxstretch" 1.5;
-	setAttr ".ikOri" yes;
-	setAttr ".div0" 2;
-	setAttr ".div1" 2;
-	setAttr ".div2" 2;
 	setAttr -k on ".st_profile";
 	setAttr -k on ".sq_profile";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "legBack_L0_rootShape" -p "legBack_L0_root";
-	rename -uid "2D0B5578-4914-3274-19BE-CD8A6525E16B";
+	rename -uid "C81F333B-41D1-DB64-B1C7-6DAE44EE110A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6610,8 +6558,8 @@ createNode nurbsCurve -n "legBack_L0_rootShape" -p "legBack_L0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_root19Shape" -p "legBack_L0_root";
-	rename -uid "552FCEF5-4FC7-AB2D-1CF7-A482821708A0";
+createNode nurbsCurve -n "legBack_L0_root22Shape" -p "legBack_L0_root";
+	rename -uid "2DE918A2-45D5-F9C9-44BD-388D709D42FD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6623,8 +6571,8 @@ createNode nurbsCurve -n "legBack_L0_root19Shape" -p "legBack_L0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_L0_root20Shape" -p "legBack_L0_root";
-	rename -uid "894AC13F-4FB1-0B7B-E0D1-669C4985C61E";
+createNode nurbsCurve -n "legBack_L0_root23Shape" -p "legBack_L0_root";
+	rename -uid "ED3D07EB-4709-F76C-2EB0-3EB88D87D4F5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6636,8 +6584,8 @@ createNode nurbsCurve -n "legBack_L0_root20Shape" -p "legBack_L0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_L0_root21Shape" -p "legBack_L0_root";
-	rename -uid "20E9000A-4F09-B0C0-266C-91AE24EE78F8";
+createNode nurbsCurve -n "legBack_L0_root24Shape" -p "legBack_L0_root";
+	rename -uid "43FA7A96-48D1-64CD-A7F7-9FAC10215125";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6664,10 +6612,10 @@ createNode nurbsCurve -n "legBack_L0_root21Shape" -p "legBack_L0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "legBack_L0_knee" -p "legBack_L0_root";
-	rename -uid "FF6007E8-4AE2-6631-A97B-D0820F726B92";
+	rename -uid "8F12D725-417A-8B2C-D084-85B06371BE86";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 5.1070259132757201e-015 -1.1559508743798506 0.33714517700502245 ;
+	setAttr ".t" -type "double3" 5.1070259132757201e-015 -1.1559508743798506 0.33714517700502222 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -6680,7 +6628,7 @@ createNode transform -n "legBack_L0_knee" -p "legBack_L0_root";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legBack_L0_kneeShape" -p "legBack_L0_knee";
-	rename -uid "6C0D73CB-4E9F-ADFB-452F-0180573F9BE7";
+	rename -uid "84E3EEF7-4012-66B8-D262-32BB4AC3D6B0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6692,8 +6640,8 @@ createNode nurbsCurve -n "legBack_L0_kneeShape" -p "legBack_L0_knee";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_knee19Shape" -p "legBack_L0_knee";
-	rename -uid "0AAD4238-42D1-FBF4-25D1-EBBFEEEE978C";
+createNode nurbsCurve -n "legBack_L0_knee22Shape" -p "legBack_L0_knee";
+	rename -uid "99313235-4CB5-6732-B39E-C2B535CA16DC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6705,8 +6653,8 @@ createNode nurbsCurve -n "legBack_L0_knee19Shape" -p "legBack_L0_knee";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_L0_knee20Shape" -p "legBack_L0_knee";
-	rename -uid "6FDD8E27-4AEA-7461-1E50-84AA6496C771";
+createNode nurbsCurve -n "legBack_L0_knee23Shape" -p "legBack_L0_knee";
+	rename -uid "42C538DA-4E0E-CC8C-1BD1-4C93CC1A43C5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6718,8 +6666,8 @@ createNode nurbsCurve -n "legBack_L0_knee20Shape" -p "legBack_L0_knee";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_L0_knee21Shape" -p "legBack_L0_knee";
-	rename -uid "10B16924-48BE-5192-7887-34A18041759F";
+createNode nurbsCurve -n "legBack_L0_knee24Shape" -p "legBack_L0_knee";
+	rename -uid "66ABD77D-4176-BE21-B210-798DD3156B06";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6736,8 +6684,8 @@ createNode nurbsCurve -n "legBack_L0_knee21Shape" -p "legBack_L0_knee";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_knee21_0crvShape" -p "legBack_L0_knee";
-	rename -uid "AFE1B7EF-4CAD-885D-C87D-1D902D1823BD";
+createNode nurbsCurve -n "legBack_L0_knee24_0crvShape" -p "legBack_L0_knee";
+	rename -uid "5E38A0F2-45FD-69BB-3D33-22B99D7E264F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6754,8 +6702,8 @@ createNode nurbsCurve -n "legBack_L0_knee21_0crvShape" -p "legBack_L0_knee";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_knee21_1crvShape" -p "legBack_L0_knee";
-	rename -uid "3A815501-4D30-DA5C-EC82-D187AA771307";
+createNode nurbsCurve -n "legBack_L0_knee24_1crvShape" -p "legBack_L0_knee";
+	rename -uid "90CAC7AE-426A-2EA5-D559-449BF7F7A281";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6773,10 +6721,10 @@ createNode nurbsCurve -n "legBack_L0_knee21_1crvShape" -p "legBack_L0_knee";
 		0 0 -0.1875
 		;
 createNode transform -n "legBack_L0_ankle" -p "legBack_L0_knee";
-	rename -uid "8599C415-481F-B26C-72E4-E48F0CF5AB88";
+	rename -uid "D7CDABAC-49F7-3341-E56F-3EB8ADA519DC";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 3.1086244689504383e-015 -1.4950431842245466 -0.57333193410462346 ;
+	setAttr ".t" -type "double3" 3.1086244689504383e-015 -1.4950431842245464 -0.57333193410462391 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -6784,12 +6732,12 @@ createNode transform -n "legBack_L0_ankle" -p "legBack_L0_knee";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000004 1.0000000000000002 1.0000000000000002 ;
+	setAttr ".s" -type "double3" 1.0000000000000007 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legBack_L0_ankleShape" -p "legBack_L0_ankle";
-	rename -uid "8D6DCCED-4A63-E7B5-F2B5-868635DF7F8A";
+	rename -uid "9997E525-47B4-7377-5EA6-1782F766C6A0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6801,8 +6749,8 @@ createNode nurbsCurve -n "legBack_L0_ankleShape" -p "legBack_L0_ankle";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_ankle19Shape" -p "legBack_L0_ankle";
-	rename -uid "1B23A36E-40F4-630D-17FA-598A374845DA";
+createNode nurbsCurve -n "legBack_L0_ankle22Shape" -p "legBack_L0_ankle";
+	rename -uid "51734489-48A9-A80A-A452-CDAFEC5A4280";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6814,8 +6762,8 @@ createNode nurbsCurve -n "legBack_L0_ankle19Shape" -p "legBack_L0_ankle";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_L0_ankle20Shape" -p "legBack_L0_ankle";
-	rename -uid "55DD6972-4485-D83B-D8EF-11A4B872C036";
+createNode nurbsCurve -n "legBack_L0_ankle23Shape" -p "legBack_L0_ankle";
+	rename -uid "43FEC98F-4EA8-386D-A44E-A6A73DC1377B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6827,8 +6775,8 @@ createNode nurbsCurve -n "legBack_L0_ankle20Shape" -p "legBack_L0_ankle";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_L0_ankle21Shape" -p "legBack_L0_ankle";
-	rename -uid "0F3425A0-4DF4-AFED-05FE-F6A874526D57";
+createNode nurbsCurve -n "legBack_L0_ankle24Shape" -p "legBack_L0_ankle";
+	rename -uid "0D5C4EA8-4968-05FF-EA5F-DDB57765AF63";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6845,8 +6793,8 @@ createNode nurbsCurve -n "legBack_L0_ankle21Shape" -p "legBack_L0_ankle";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_ankle21_0crvShape" -p "legBack_L0_ankle";
-	rename -uid "4DD8AA9D-43EE-61EF-3EA3-56928542F858";
+createNode nurbsCurve -n "legBack_L0_ankle24_0crvShape" -p "legBack_L0_ankle";
+	rename -uid "348FB0F8-4CF5-CFF0-C1F4-828CD1F68CD0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6863,8 +6811,8 @@ createNode nurbsCurve -n "legBack_L0_ankle21_0crvShape" -p "legBack_L0_ankle";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_ankle21_1crvShape" -p "legBack_L0_ankle";
-	rename -uid "910719FA-4936-4AEC-630A-B894486AF6EA";
+createNode nurbsCurve -n "legBack_L0_ankle24_1crvShape" -p "legBack_L0_ankle";
+	rename -uid "313967FB-499A-A5FE-6F1D-42A370979EF8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6882,10 +6830,10 @@ createNode nurbsCurve -n "legBack_L0_ankle21_1crvShape" -p "legBack_L0_ankle";
 		0 0 -0.1875
 		;
 createNode transform -n "legBack_L0_foot" -p "legBack_L0_ankle";
-	rename -uid "403C2BAD-462D-AF1B-A32D-1BAA8241577C";
+	rename -uid "521D11EE-4FDB-2007-F635-DC963A692F47";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.5543122344752192e-015 -0.5480558075197921 0.15050522089872964 ;
+	setAttr ".t" -type "double3" 1.5543122344752192e-015 -0.54805580751979233 0.15050522089872986 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -6893,12 +6841,12 @@ createNode transform -n "legBack_L0_foot" -p "legBack_L0_ankle";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999956 1.0000000000000004 1.0000000000000004 ;
+	setAttr ".s" -type "double3" 0.99999999999999944 1.0000000000000004 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legBack_L0_footShape" -p "legBack_L0_foot";
-	rename -uid "0581E5CF-4B68-0B37-DB88-F7B321A37517";
+	rename -uid "001A12A6-44A3-45AB-0458-F796BE2F2CAC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6910,8 +6858,8 @@ createNode nurbsCurve -n "legBack_L0_footShape" -p "legBack_L0_foot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_foot19Shape" -p "legBack_L0_foot";
-	rename -uid "88E59D56-4D61-F7E0-4C93-27A413048C82";
+createNode nurbsCurve -n "legBack_L0_foot22Shape" -p "legBack_L0_foot";
+	rename -uid "BFB2E7D7-447B-3A08-F16B-F6A35488CEA5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6923,8 +6871,8 @@ createNode nurbsCurve -n "legBack_L0_foot19Shape" -p "legBack_L0_foot";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_L0_foot20Shape" -p "legBack_L0_foot";
-	rename -uid "28C2B126-45F5-0406-675F-39A414EB5BF6";
+createNode nurbsCurve -n "legBack_L0_foot23Shape" -p "legBack_L0_foot";
+	rename -uid "56612704-49B2-967D-77AF-0295294D85AF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6936,8 +6884,8 @@ createNode nurbsCurve -n "legBack_L0_foot20Shape" -p "legBack_L0_foot";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_L0_foot21Shape" -p "legBack_L0_foot";
-	rename -uid "0AA4151B-4E20-6E1A-400C-A88C162CDAFE";
+createNode nurbsCurve -n "legBack_L0_foot24Shape" -p "legBack_L0_foot";
+	rename -uid "134626B9-4982-4B1A-33BA-8A9878FC196C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6954,8 +6902,8 @@ createNode nurbsCurve -n "legBack_L0_foot21Shape" -p "legBack_L0_foot";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_foot21_0crvShape" -p "legBack_L0_foot";
-	rename -uid "CAF2DE47-464A-C5AD-BF0C-ABAAE0A92E1D";
+createNode nurbsCurve -n "legBack_L0_foot24_0crvShape" -p "legBack_L0_foot";
+	rename -uid "131DE8F0-416A-7CC0-6BBC-30BC7970605E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6972,8 +6920,8 @@ createNode nurbsCurve -n "legBack_L0_foot21_0crvShape" -p "legBack_L0_foot";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_foot21_1crvShape" -p "legBack_L0_foot";
-	rename -uid "8F8A2E9F-4E8E-F394-7181-B0A6F20A73CF";
+createNode nurbsCurve -n "legBack_L0_foot24_1crvShape" -p "legBack_L0_foot";
+	rename -uid "38EF279C-4A0C-901E-91BE-2BB12B68590D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -6991,10 +6939,10 @@ createNode nurbsCurve -n "legBack_L0_foot21_1crvShape" -p "legBack_L0_foot";
 		0 0 -0.1875
 		;
 createNode transform -n "legBack_L0_eff" -p "legBack_L0_foot";
-	rename -uid "76858053-47A1-67A7-F211-A899D5E32BBA";
+	rename -uid "57B35BA6-481F-834E-86EE-71A3B79FD9A7";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 2.6645352591003757e-015 7.4940054162198066e-016 0.28135643819707434 ;
+	setAttr ".t" -type "double3" 2.6645352591003757e-015 8.4654505627668186e-016 0.2813564381970739 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7002,12 +6950,12 @@ createNode transform -n "legBack_L0_eff" -p "legBack_L0_foot";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999989 0.99999999999999911 0.99999999999999878 ;
+	setAttr ".s" -type "double3" 0.99999999999999989 0.99999999999999878 0.99999999999999845 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legBack_L0_effShape" -p "legBack_L0_eff";
-	rename -uid "1F828126-4967-081D-FC74-FE9FA07564DF";
+	rename -uid "0802E2EB-4E53-1358-FFE7-1B941DA57CD0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7019,8 +6967,8 @@ createNode nurbsCurve -n "legBack_L0_effShape" -p "legBack_L0_eff";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_eff19Shape" -p "legBack_L0_eff";
-	rename -uid "2B47682E-4E39-912A-B862-7894373DEC57";
+createNode nurbsCurve -n "legBack_L0_eff22Shape" -p "legBack_L0_eff";
+	rename -uid "2ADBCFBD-4789-C2FE-E0E0-05AC76675D6B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7032,8 +6980,8 @@ createNode nurbsCurve -n "legBack_L0_eff19Shape" -p "legBack_L0_eff";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_L0_eff20Shape" -p "legBack_L0_eff";
-	rename -uid "94E13331-4069-1BA1-4337-75A6928F80DE";
+createNode nurbsCurve -n "legBack_L0_eff23Shape" -p "legBack_L0_eff";
+	rename -uid "882AD08E-458A-FB13-5126-038680AD100F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7045,8 +6993,8 @@ createNode nurbsCurve -n "legBack_L0_eff20Shape" -p "legBack_L0_eff";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_L0_eff21Shape" -p "legBack_L0_eff";
-	rename -uid "B951A57D-4F7D-FE34-2FF4-069857E5ECBF";
+createNode nurbsCurve -n "legBack_L0_eff24Shape" -p "legBack_L0_eff";
+	rename -uid "99A5AE21-4DBA-B59F-FA77-3392B6A88043";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7063,8 +7011,8 @@ createNode nurbsCurve -n "legBack_L0_eff21Shape" -p "legBack_L0_eff";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_eff21_0crvShape" -p "legBack_L0_eff";
-	rename -uid "44A68BD1-4FD9-9DCE-2263-169687549E94";
+createNode nurbsCurve -n "legBack_L0_eff24_0crvShape" -p "legBack_L0_eff";
+	rename -uid "4A878836-408C-9C09-A7A6-9494163D11AA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7081,8 +7029,8 @@ createNode nurbsCurve -n "legBack_L0_eff21_0crvShape" -p "legBack_L0_eff";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_L0_eff21_1crvShape" -p "legBack_L0_eff";
-	rename -uid "C97D7B08-41EE-F696-56E5-69B8E322815F";
+createNode nurbsCurve -n "legBack_L0_eff24_1crvShape" -p "legBack_L0_eff";
+	rename -uid "B8BF2770-477B-DED0-2294-3A95E48EDCB1";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7100,7 +7048,7 @@ createNode nurbsCurve -n "legBack_L0_eff21_1crvShape" -p "legBack_L0_eff";
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_L0_root" -p "legBack_L0_foot";
-	rename -uid "91977E37-4189-6EEA-9934-BF83082C8AF4";
+	rename -uid "F4EBA4A9-4985-5416-EDE5-238E202ED7F2";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -7109,11 +7057,11 @@ createNode transform -n "footBack_L0_root" -p "legBack_L0_foot";
 	addAttr -ci true -sn "connector" -ln "connector" -dt "string";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
-	addAttr -ci true -sn "useRollCtl" -ln "useRollCtl" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "useRollCtl" -ln "useRollCtl" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.5543122344752192e-015 7.9103390504542404e-016 -6.6613381477509392e-016 ;
+	setAttr ".t" -type "double3" 1.5543122344752192e-015 9.0205620750793969e-016 -1.1102230246251565e-015 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7121,7 +7069,7 @@ createNode transform -n "footBack_L0_root" -p "legBack_L0_foot";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.16356254765398098 0.16356254765398087 0.16356254765398079 ;
+	setAttr ".s" -type "double3" 0.16356254765398098 0.16356254765398082 0.16356254765398076 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -7131,10 +7079,8 @@ createNode transform -n "footBack_L0_root" -p "legBack_L0_foot";
 	setAttr ".connector" -type "string" "leg_3jnt_01";
 	setAttr ".ui_host" -type "string" "backLegUI_L0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".useRollCtl" yes;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "footBack_L0_rootShape" -p "footBack_L0_root";
-	rename -uid "04D0109E-4E1A-643A-AE44-7BA92E61B1C1";
+	rename -uid "0D78688E-4A97-2416-69B3-C19029C8F83F";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7146,8 +7092,8 @@ createNode nurbsCurve -n "footBack_L0_rootShape" -p "footBack_L0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_root19Shape" -p "footBack_L0_root";
-	rename -uid "D8F9BB5C-404B-88ED-7612-2CB36A45059F";
+createNode nurbsCurve -n "footBack_L0_root22Shape" -p "footBack_L0_root";
+	rename -uid "1B2A9923-4789-C1CE-B693-C7A213F13338";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7159,8 +7105,8 @@ createNode nurbsCurve -n "footBack_L0_root19Shape" -p "footBack_L0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_L0_root20Shape" -p "footBack_L0_root";
-	rename -uid "7ECE42E4-49DE-B81D-3738-6996EEC65FA5";
+createNode nurbsCurve -n "footBack_L0_root23Shape" -p "footBack_L0_root";
+	rename -uid "37C545C5-4941-690C-A14C-C8844EC3F1AF";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7172,8 +7118,8 @@ createNode nurbsCurve -n "footBack_L0_root20Shape" -p "footBack_L0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_L0_root21Shape" -p "footBack_L0_root";
-	rename -uid "C0412FBB-436D-5615-5742-D4A223CC39F0";
+createNode nurbsCurve -n "footBack_L0_root24Shape" -p "footBack_L0_root";
+	rename -uid "A8DE1004-4B11-610C-742A-2AA65D5F55A2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7200,10 +7146,10 @@ createNode nurbsCurve -n "footBack_L0_root21Shape" -p "footBack_L0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "footBack_L0_0_loc" -p "footBack_L0_root";
-	rename -uid "A2012E36-4800-A9C1-FC04-BDADE45BC90B";
+	rename -uid "7BA67857-49CC-871D-7930-649EDEFDD360";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.7763568394002505e-014 2.2204460492503131e-016 0.54565565303279762 ;
+	setAttr ".t" -type "double3" -1.7763568394002505e-014 2.2204460492503131e-016 0.54565565303280117 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7211,12 +7157,12 @@ createNode transform -n "footBack_L0_0_loc" -p "footBack_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 1.0000000000000009 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000004 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_L0_0_locShape" -p "footBack_L0_0_loc";
-	rename -uid "869F2A94-4922-CF4C-61C0-9BB64E86672F";
+	rename -uid "0EE7A04E-4DA6-C6AB-3B93-4CB233C38E39";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7228,8 +7174,8 @@ createNode nurbsCurve -n "footBack_L0_0_locShape" -p "footBack_L0_0_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_0_loc19Shape" -p "footBack_L0_0_loc";
-	rename -uid "7BA74D78-4401-7D2B-0B62-AAB9D31BC1EC";
+createNode nurbsCurve -n "footBack_L0_0_loc22Shape" -p "footBack_L0_0_loc";
+	rename -uid "9C2298A0-4F7B-5607-CA9B-14B4D30E61CA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7241,8 +7187,8 @@ createNode nurbsCurve -n "footBack_L0_0_loc19Shape" -p "footBack_L0_0_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_L0_0_loc20Shape" -p "footBack_L0_0_loc";
-	rename -uid "E45202FD-41A8-E2C3-185C-D48B30F8CB22";
+createNode nurbsCurve -n "footBack_L0_0_loc23Shape" -p "footBack_L0_0_loc";
+	rename -uid "B157E95B-4979-9388-ED00-DCA9FDD2C9AE";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7254,8 +7200,8 @@ createNode nurbsCurve -n "footBack_L0_0_loc20Shape" -p "footBack_L0_0_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_L0_0_loc21Shape" -p "footBack_L0_0_loc";
-	rename -uid "47A85AC6-4E3F-4E4C-D021-459FC4B63C0A";
+createNode nurbsCurve -n "footBack_L0_0_loc24Shape" -p "footBack_L0_0_loc";
+	rename -uid "DFE16248-4529-F5E0-B7F0-61AFEE6A5416";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7272,8 +7218,8 @@ createNode nurbsCurve -n "footBack_L0_0_loc21Shape" -p "footBack_L0_0_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_0_loc21_0crvShape" -p "footBack_L0_0_loc";
-	rename -uid "4100A738-4135-A82B-AE40-B185867773BE";
+createNode nurbsCurve -n "footBack_L0_0_loc24_0crvShape" -p "footBack_L0_0_loc";
+	rename -uid "5F9F76A8-43D4-0B12-CB2C-309AA74DCAE6";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7290,8 +7236,8 @@ createNode nurbsCurve -n "footBack_L0_0_loc21_0crvShape" -p "footBack_L0_0_loc";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_0_loc21_1crvShape" -p "footBack_L0_0_loc";
-	rename -uid "A448AC90-4712-FF5F-717E-07BE4D660C7F";
+createNode nurbsCurve -n "footBack_L0_0_loc24_1crvShape" -p "footBack_L0_0_loc";
+	rename -uid "85F03C6C-4173-15ED-0F98-F285081FD48B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7309,10 +7255,10 @@ createNode nurbsCurve -n "footBack_L0_0_loc21_1crvShape" -p "footBack_L0_0_loc";
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_L0_1_loc" -p "footBack_L0_0_loc";
-	rename -uid "A1987AC5-45EC-9C92-5B0B-E99C9AC53905";
+	rename -uid "C4552480-462B-359A-85E4-5F8EC30B4A8F";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 5.3290705182007514e-015 -0.34547277013915562 0.77046072389792997 ;
+	setAttr ".t" -type "double3" 1.7763568394002505e-015 -0.34547277013915567 0.77046072389793352 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7320,12 +7266,12 @@ createNode transform -n "footBack_L0_1_loc" -p "footBack_L0_0_loc";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000007 0.99999999999999978 1.0000000000000004 ;
+	setAttr ".s" -type "double3" 1.0000000000000007 0.99999999999999933 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_L0_1_locShape" -p "footBack_L0_1_loc";
-	rename -uid "89950501-4D47-BD8D-8432-63A58F0824C4";
+	rename -uid "68062AAA-4951-B1BC-B182-72A11D9314A4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7337,8 +7283,8 @@ createNode nurbsCurve -n "footBack_L0_1_locShape" -p "footBack_L0_1_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_1_loc19Shape" -p "footBack_L0_1_loc";
-	rename -uid "98C6B219-4853-5D77-3477-3C91ED15447B";
+createNode nurbsCurve -n "footBack_L0_1_loc22Shape" -p "footBack_L0_1_loc";
+	rename -uid "28D5F932-47E2-1967-92EC-CFAF452F0F5D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7350,8 +7296,8 @@ createNode nurbsCurve -n "footBack_L0_1_loc19Shape" -p "footBack_L0_1_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_L0_1_loc20Shape" -p "footBack_L0_1_loc";
-	rename -uid "2419AB6B-4323-28CD-8BE4-798EBFB69834";
+createNode nurbsCurve -n "footBack_L0_1_loc23Shape" -p "footBack_L0_1_loc";
+	rename -uid "8CE0D046-44AD-DB93-3186-FD83EF1AA1AB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7363,8 +7309,8 @@ createNode nurbsCurve -n "footBack_L0_1_loc20Shape" -p "footBack_L0_1_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_L0_1_loc21Shape" -p "footBack_L0_1_loc";
-	rename -uid "DDA03361-4123-DD06-8B01-25827B25D6A0";
+createNode nurbsCurve -n "footBack_L0_1_loc24Shape" -p "footBack_L0_1_loc";
+	rename -uid "5EA757F0-495B-00D9-A043-F4B5CFC52607";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7381,8 +7327,8 @@ createNode nurbsCurve -n "footBack_L0_1_loc21Shape" -p "footBack_L0_1_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_1_loc21_0crvShape" -p "footBack_L0_1_loc";
-	rename -uid "A1A12062-4F1A-2F0F-F289-1F9D510490E4";
+createNode nurbsCurve -n "footBack_L0_1_loc24_0crvShape" -p "footBack_L0_1_loc";
+	rename -uid "DA78EACF-4F6B-A5BF-AAC5-E39B4C4A1A67";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7399,8 +7345,8 @@ createNode nurbsCurve -n "footBack_L0_1_loc21_0crvShape" -p "footBack_L0_1_loc";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_1_loc21_1crvShape" -p "footBack_L0_1_loc";
-	rename -uid "8A64324A-4693-C68B-3FE2-76AB4AEF2F49";
+createNode nurbsCurve -n "footBack_L0_1_loc24_1crvShape" -p "footBack_L0_1_loc";
+	rename -uid "A9528742-4308-2BCA-45A9-DA872DB20715";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7418,18 +7364,18 @@ createNode nurbsCurve -n "footBack_L0_1_loc21_1crvShape" -p "footBack_L0_1_loc";
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_L0_crv" -p "footBack_L0_root";
-	rename -uid "8431B7B2-43DD-B732-685D-44922C80F1FF";
+	rename -uid "550841A1-4EE3-98F2-1D8D-00A526AB2298";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -10.980332218718949 -0.49678747209358587 11.584116504196627 ;
-	setAttr ".s" -type "double3" 8.6433157474725757 8.6433157474725757 8.6433157474725792 ;
+	setAttr ".t" -type "double3" -10.980332218718948 -0.49678747209358604 11.584116504196629 ;
+	setAttr ".s" -type "double3" 8.6433157474725757 8.6433157474725757 8.6433157474725775 ;
 createNode nurbsCurve -n "footBack_L0_crvShape" -p "footBack_L0_crv";
-	rename -uid "F813FE96-452B-73CE-95E4-31A9C88058A0";
+	rename -uid "9C866AB6-4B02-9984-D6D5-B2A82478F7DF";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "footBack_L0_crvShapeOrig" -p "footBack_L0_crv";
-	rename -uid "CA337E73-457B-8A40-D337-1DAFDEDB9860";
+	rename -uid "747A0734-4409-94F3-374A-B585A7B327BC";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -7441,10 +7387,10 @@ createNode nurbsCurve -n "footBack_L0_crvShapeOrig" -p "footBack_L0_crv";
 		0 0 0
 		;
 createNode transform -n "footBack_L0_heel" -p "footBack_L0_root";
-	rename -uid "E69DC031-443D-F99A-7DE9-8EBFAA833BF7";
+	rename -uid "07C4781C-4AE4-F396-6438-558999EA583A";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.9539925233402755e-014 -0.34547277013915645 -0.37260003933978325 ;
+	setAttr ".t" -type "double3" -1.9539925233402755e-014 -0.34547277013915656 -0.3726000393397797 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7452,12 +7398,12 @@ createNode transform -n "footBack_L0_heel" -p "footBack_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 1.0000000000000009 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000004 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_L0_heelShape" -p "footBack_L0_heel";
-	rename -uid "42A696E6-41DD-304A-618A-8DB31269F3FD";
+	rename -uid "F8ABB6B3-48A4-F66C-57AD-2493C2EF9373";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7469,8 +7415,8 @@ createNode nurbsCurve -n "footBack_L0_heelShape" -p "footBack_L0_heel";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_heel19Shape" -p "footBack_L0_heel";
-	rename -uid "E0851BC1-439D-FFC1-B4C3-30A7BB6FDE4E";
+createNode nurbsCurve -n "footBack_L0_heel22Shape" -p "footBack_L0_heel";
+	rename -uid "91E506B2-42AD-42BF-00F3-369DD0E17D36";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7482,8 +7428,8 @@ createNode nurbsCurve -n "footBack_L0_heel19Shape" -p "footBack_L0_heel";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_L0_heel20Shape" -p "footBack_L0_heel";
-	rename -uid "6852CBB1-4A92-65D5-69CD-CE98C282D974";
+createNode nurbsCurve -n "footBack_L0_heel23Shape" -p "footBack_L0_heel";
+	rename -uid "3470E01B-4C66-70AA-7AE5-51ADB187EA83";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7495,8 +7441,8 @@ createNode nurbsCurve -n "footBack_L0_heel20Shape" -p "footBack_L0_heel";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_L0_heel21Shape" -p "footBack_L0_heel";
-	rename -uid "1F25FD35-47F7-493B-BA97-0BB00B7DE992";
+createNode nurbsCurve -n "footBack_L0_heel24Shape" -p "footBack_L0_heel";
+	rename -uid "9C524D82-4ED3-30A8-8EE2-119AFAAEC384";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7513,8 +7459,8 @@ createNode nurbsCurve -n "footBack_L0_heel21Shape" -p "footBack_L0_heel";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_heel21_0crvShape" -p "footBack_L0_heel";
-	rename -uid "730561AE-48DC-D54E-925E-AC9D56DA19A6";
+createNode nurbsCurve -n "footBack_L0_heel24_0crvShape" -p "footBack_L0_heel";
+	rename -uid "0A1155F6-4EDA-2612-9B1F-12AE2B10494E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7531,8 +7477,8 @@ createNode nurbsCurve -n "footBack_L0_heel21_0crvShape" -p "footBack_L0_heel";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_heel21_1crvShape" -p "footBack_L0_heel";
-	rename -uid "E1A156B4-4076-EF0A-132E-53BFA0BB36BE";
+createNode nurbsCurve -n "footBack_L0_heel24_1crvShape" -p "footBack_L0_heel";
+	rename -uid "63A2CE5D-44A4-B315-B1F5-0D92D21458B3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7550,10 +7496,10 @@ createNode nurbsCurve -n "footBack_L0_heel21_1crvShape" -p "footBack_L0_heel";
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_L0_outpivot" -p "footBack_L0_root";
-	rename -uid "B7886E06-4F18-3AB6-3281-3BA39035267D";
+	rename -uid "1E845418-4932-9E51-A651-68AC31876889";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.0422206583139726 -0.34547277013915523 0.11497296198779061 ;
+	setAttr ".t" -type "double3" 1.0422206583139726 -0.34547277013915534 0.11497296198779416 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7561,12 +7507,12 @@ createNode transform -n "footBack_L0_outpivot" -p "footBack_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 1.0000000000000009 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000004 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_L0_outpivotShape" -p "footBack_L0_outpivot";
-	rename -uid "8B50CE45-4CA3-1BBD-7C6E-AEA8DE0096C2";
+	rename -uid "821CF5B0-4C22-A2DF-92A3-57AF7EF578A0";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7578,8 +7524,8 @@ createNode nurbsCurve -n "footBack_L0_outpivotShape" -p "footBack_L0_outpivot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_outpivot19Shape" -p "footBack_L0_outpivot";
-	rename -uid "1FD910E3-433A-07AA-42C4-E39A34BD6CF1";
+createNode nurbsCurve -n "footBack_L0_outpivot22Shape" -p "footBack_L0_outpivot";
+	rename -uid "032B1972-4755-DE9D-3D1D-C5A0280CCF32";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7591,8 +7537,8 @@ createNode nurbsCurve -n "footBack_L0_outpivot19Shape" -p "footBack_L0_outpivot"
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_L0_outpivot20Shape" -p "footBack_L0_outpivot";
-	rename -uid "584FB068-4286-98BA-1A81-80BD9A829C06";
+createNode nurbsCurve -n "footBack_L0_outpivot23Shape" -p "footBack_L0_outpivot";
+	rename -uid "74236917-4AD9-072B-03A1-7EAF03ABDC22";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7604,8 +7550,8 @@ createNode nurbsCurve -n "footBack_L0_outpivot20Shape" -p "footBack_L0_outpivot"
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_L0_outpivot21Shape" -p "footBack_L0_outpivot";
-	rename -uid "9C32BC3F-4C5C-BDB5-AF9D-17A89535AED8";
+createNode nurbsCurve -n "footBack_L0_outpivot24Shape" -p "footBack_L0_outpivot";
+	rename -uid "F075F2EF-495B-490D-E4EB-33A237EEC662";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7622,8 +7568,8 @@ createNode nurbsCurve -n "footBack_L0_outpivot21Shape" -p "footBack_L0_outpivot"
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_outpivot21_0crvShape" -p "footBack_L0_outpivot";
-	rename -uid "2BDB9D6C-493B-4033-150E-E285CD3F4482";
+createNode nurbsCurve -n "footBack_L0_outpivot24_0crvShape" -p "footBack_L0_outpivot";
+	rename -uid "0A50A87C-4CD3-A78A-8F1E-7283E0C1805E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7640,8 +7586,8 @@ createNode nurbsCurve -n "footBack_L0_outpivot21_0crvShape" -p "footBack_L0_outp
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_outpivot21_1crvShape" -p "footBack_L0_outpivot";
-	rename -uid "6DACE284-4401-5E56-FAA2-1FB8D0FA8D58";
+createNode nurbsCurve -n "footBack_L0_outpivot24_1crvShape" -p "footBack_L0_outpivot";
+	rename -uid "1EFF2A35-4951-92D7-94E8-A0BECD0EA09D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7659,10 +7605,10 @@ createNode nurbsCurve -n "footBack_L0_outpivot21_1crvShape" -p "footBack_L0_outp
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_L0_inpivot" -p "footBack_L0_root";
-	rename -uid "D33DB17B-413C-15D4-0FC6-43A3EFBB812B";
+	rename -uid "1E38A98F-4292-985F-124B-9AAA3BC5A6F2";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.1682146826215725 -0.34547277013915723 0.21228136011732168 ;
+	setAttr ".t" -type "double3" -1.1682146826215742 -0.34547277013915734 0.21228136011732524 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7670,12 +7616,12 @@ createNode transform -n "footBack_L0_inpivot" -p "footBack_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 1.0000000000000009 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000004 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_L0_inpivotShape" -p "footBack_L0_inpivot";
-	rename -uid "602EA6E5-42FB-AF2B-4324-DE9683B15142";
+	rename -uid "8135752A-4A17-0A3B-F189-BD82AA9ACF69";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7687,8 +7633,8 @@ createNode nurbsCurve -n "footBack_L0_inpivotShape" -p "footBack_L0_inpivot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_inpivot19Shape" -p "footBack_L0_inpivot";
-	rename -uid "98675451-405C-E392-6205-EDA9FAA37C01";
+createNode nurbsCurve -n "footBack_L0_inpivot22Shape" -p "footBack_L0_inpivot";
+	rename -uid "E26CC19B-407B-96D1-BCEA-EF92CB941EE5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7700,8 +7646,8 @@ createNode nurbsCurve -n "footBack_L0_inpivot19Shape" -p "footBack_L0_inpivot";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_L0_inpivot20Shape" -p "footBack_L0_inpivot";
-	rename -uid "174ABD0B-4B98-617D-A384-F197CBF9C908";
+createNode nurbsCurve -n "footBack_L0_inpivot23Shape" -p "footBack_L0_inpivot";
+	rename -uid "14904978-488B-A94E-C3A1-74874D2A259E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7713,8 +7659,8 @@ createNode nurbsCurve -n "footBack_L0_inpivot20Shape" -p "footBack_L0_inpivot";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_L0_inpivot21Shape" -p "footBack_L0_inpivot";
-	rename -uid "7097AB6E-497F-C370-2C10-A49BFE43032F";
+createNode nurbsCurve -n "footBack_L0_inpivot24Shape" -p "footBack_L0_inpivot";
+	rename -uid "3F599A75-4BE2-FA5E-6456-3FBFF8D95B2C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7731,8 +7677,8 @@ createNode nurbsCurve -n "footBack_L0_inpivot21Shape" -p "footBack_L0_inpivot";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_inpivot21_0crvShape" -p "footBack_L0_inpivot";
-	rename -uid "EF29CA29-4167-1B2F-68F4-5799A96BA8B6";
+createNode nurbsCurve -n "footBack_L0_inpivot24_0crvShape" -p "footBack_L0_inpivot";
+	rename -uid "8C1E2156-44F0-B771-D1AB-038839CEC295";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7749,8 +7695,8 @@ createNode nurbsCurve -n "footBack_L0_inpivot21_0crvShape" -p "footBack_L0_inpiv
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_L0_inpivot21_1crvShape" -p "footBack_L0_inpivot";
-	rename -uid "582DFBB6-4084-A3C1-983B-C189F3A18262";
+createNode nurbsCurve -n "footBack_L0_inpivot24_1crvShape" -p "footBack_L0_inpivot";
+	rename -uid "DB4CD451-4354-5100-3BD9-50B843AC5402";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7768,18 +7714,18 @@ createNode nurbsCurve -n "footBack_L0_inpivot21_1crvShape" -p "footBack_L0_inpiv
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_L0_1" -p "footBack_L0_root";
-	rename -uid "C2F826E6-4EC5-C1C0-26D6-D3A0DF1F260B";
+	rename -uid "E2463FCF-472C-3D45-32C4-0B8FA08D01FB";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -10.980332218718949 -0.49678747209358587 11.584116504196627 ;
-	setAttr ".s" -type "double3" 8.6433157474725757 8.6433157474725757 8.6433157474725792 ;
+	setAttr ".t" -type "double3" -10.980332218718948 -0.49678747209358604 11.584116504196629 ;
+	setAttr ".s" -type "double3" 8.6433157474725757 8.6433157474725757 8.6433157474725775 ;
 createNode nurbsCurve -n "footBack_L0_Shape1" -p "footBack_L0_1";
-	rename -uid "29546393-41C4-BB4A-BC90-F4B3C0AE6753";
+	rename -uid "CECBDBED-4E02-9D69-B572-CCB060CD353E";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
-createNode nurbsCurve -n "footBack_L0_Shape1Orig1" -p "footBack_L0_1";
-	rename -uid "35625F3C-48E3-34DF-71A3-AEB571F5B8F7";
+createNode nurbsCurve -n "footBack_L0_Shape1Orig" -p "footBack_L0_1";
+	rename -uid "7155103C-4707-F8CF-5C53-F1A0E7B8FE7F";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -7793,7 +7739,7 @@ createNode nurbsCurve -n "footBack_L0_Shape1Orig1" -p "footBack_L0_1";
 		0 0 0
 		;
 createNode transform -n "backLegUI_L0_root" -p "footBack_L0_root";
-	rename -uid "499AA056-4EE3-83B3-61BB-C6A197D2866E";
+	rename -uid "380D9C8C-4B72-B969-89A5-0A8785D162DC";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -7805,7 +7751,7 @@ createNode transform -n "backLegUI_L0_root" -p "footBack_L0_root";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
@@ -7817,12 +7763,14 @@ createNode transform -n "backLegUI_L0_root" -p "footBack_L0_root";
 	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 0.5 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 7.9148715870389701 6.0337539388988626 -0.92016921390297313 ;
+	setAttr ".t" -type "double3" 7.9148715870389683 6.0337539388988635 -0.92016921390296957 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7830,7 +7778,7 @@ createNode transform -n "backLegUI_L0_root" -p "footBack_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 8.6433157474725739 8.6433157474725792 8.6433157474725828 ;
+	setAttr ".s" -type "double3" 8.6433157474725739 8.643315747472581 8.643315747472581 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -7842,12 +7790,8 @@ createNode transform -n "backLegUI_L0_root" -p "footBack_L0_root";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "cross";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 0.5;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "backLegUI_L0_rootShape" -p "backLegUI_L0_root";
-	rename -uid "B133EE6C-4BA8-128A-3A37-62B6C2331CC3";
+	rename -uid "B135A542-4318-F4E1-5EA6-3C94265C74EC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7859,8 +7803,8 @@ createNode nurbsCurve -n "backLegUI_L0_rootShape" -p "backLegUI_L0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "backLegUI_L0_root19Shape" -p "backLegUI_L0_root";
-	rename -uid "365B133E-41E7-461D-344D-14A1CEE508F8";
+createNode nurbsCurve -n "backLegUI_L0_root22Shape" -p "backLegUI_L0_root";
+	rename -uid "13E428A0-4E9A-916D-15AE-52A9560FC787";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7872,8 +7816,8 @@ createNode nurbsCurve -n "backLegUI_L0_root19Shape" -p "backLegUI_L0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "backLegUI_L0_root20Shape" -p "backLegUI_L0_root";
-	rename -uid "3B0E94E0-424E-F7D2-7998-ADA46503078A";
+createNode nurbsCurve -n "backLegUI_L0_root23Shape" -p "backLegUI_L0_root";
+	rename -uid "6BB7EEE1-405E-B6D0-3E30-58B9C22C58D9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7885,8 +7829,8 @@ createNode nurbsCurve -n "backLegUI_L0_root20Shape" -p "backLegUI_L0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "backLegUI_L0_root21Shape" -p "backLegUI_L0_root";
-	rename -uid "81CC9C7B-4EDE-8C8D-D4C1-308B2D5ECC00";
+createNode nurbsCurve -n "backLegUI_L0_root24Shape" -p "backLegUI_L0_root";
+	rename -uid "F06B8B07-4B0F-7654-865E-1ABFF181A46D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -7913,10 +7857,10 @@ createNode nurbsCurve -n "backLegUI_L0_root21Shape" -p "backLegUI_L0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "backLegUI_L0_sizeRef" -p "backLegUI_L0_root";
-	rename -uid "728B3BB0-44CE-B73A-17C2-77B59F4D89E6";
+	rename -uid "754E3199-4FF7-B2C8-FED1-5E94D8BF0230";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 4.4408920985006262e-016 3.3306690738754696e-016 0.99999999999999956 ;
+	setAttr ".t" -type "double3" 4.4408920985006262e-016 3.3306690738754696e-016 1 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -7924,23 +7868,23 @@ createNode transform -n "backLegUI_L0_sizeRef" -p "backLegUI_L0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999933 0.99999999999999956 ;
+	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999911 0.99999999999999956 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "legBack_L0_crv1" -p "legBack_L0_root";
-	rename -uid "1DBBB5A4-447F-042B-3B55-62A7AE8C52A3";
+	rename -uid "D4F3DA5A-4EB0-63ED-5FA0-8C8994A4F04D";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
 	setAttr ".t" -type "double3" -1.7959711117807502 -3.2803056907023973 1.8090460715460559 ;
 	setAttr ".s" -type "double3" 1.4137227438343885 1.4137227438343878 1.4137227438343878 ;
 createNode nurbsCurve -n "legBack_L0_crvShape1" -p "legBack_L0_crv1";
-	rename -uid "9924AF2D-479A-DFB8-700E-78906282D8FE";
+	rename -uid "C1958170-4DC7-426E-52A9-B09B27CC062A";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
-createNode nurbsCurve -n "legBack_L0_crvShape1Orig1" -p "legBack_L0_crv1";
-	rename -uid "BA92EA3F-4414-7064-6E51-C99DF6552AA8";
+createNode nurbsCurve -n "legBack_L0_crvShape1Orig" -p "legBack_L0_crv1";
+	rename -uid "4E361CFA-4986-2D6E-CCD7-3095FAA3BE90";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -7954,7 +7898,7 @@ createNode nurbsCurve -n "legBack_L0_crvShape1Orig1" -p "legBack_L0_crv1";
 		0 0 0
 		;
 createNode transform -n "legBack_R0_root" -p "spine_C0_root";
-	rename -uid "0E73891C-46B9-E14E-A683-FC9DA99D8622";
+	rename -uid "D4BAAD52-44AB-B482-22C5-61A633A9359F";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -7963,27 +7907,27 @@ createNode transform -n "legBack_R0_root" -p "spine_C0_root";
 	addAttr -ci true -sn "connector" -ln "connector" -dt "string";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
-	addAttr -ci true -sn "blend" -ln "blend" -min 0 -max 1 -at "double";
-	addAttr -ci true -sn "full3BonesIK" -ln "full3BonesIK" -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "blend" -ln "blend" -dv 1 -min 0 -max 1 -at "double";
+	addAttr -ci true -sn "full3BonesIK" -ln "full3BonesIK" -dv 1 -min 0 -max 1 -at "double";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "upvrefarray" -ln "upvrefarray" -dt "string";
-	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1 -min 1 -at "double";
+	addAttr -ci true -sn "maxstretch" -ln "maxstretch" -dv 1.5 -min 1 -at "double";
 	addAttr -ci true -k true -sn "ikSolver" -ln "ikSolver" -min 0 -max 1 -en "IK Spring:IK Rotation Plane" 
 		-at "enum";
-	addAttr -ci true -sn "ikOri" -ln "ikOri" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "div0" -ln "div0" -dv 1 -min 1 -at "long";
-	addAttr -ci true -sn "div1" -ln "div1" -dv 1 -min 1 -at "long";
-	addAttr -ci true -sn "div2" -ln "div2" -dv 1 -min 1 -at "long";
+	addAttr -ci true -sn "ikOri" -ln "ikOri" -dv 1 -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "div0" -ln "div0" -dv 2 -min 1 -at "long";
+	addAttr -ci true -sn "div1" -ln "div1" -dv 2 -min 1 -at "long";
+	addAttr -ci true -sn "div2" -ln "div2" -dv 2 -min 1 -at "long";
 	addAttr -ci true -k true -sn "st_profile" -ln "st_profile" -at "double";
 	addAttr -ci true -k true -sn "sq_profile" -ln "sq_profile" -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
 	setAttr ".t" -type "double3" 0.21090213141048153 -0.09792717804704365 2.6808811877076875 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
-	setAttr ".r" -type "double3" 89.999999999999986 -89.999999999999957 0 ;
+	setAttr ".r" -type "double3" 90 -89.999999999999972 0 ;
 	setAttr -k off -cb on ".rx";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
@@ -7998,20 +7942,12 @@ createNode transform -n "legBack_R0_root" -p "spine_C0_root";
 	setAttr ".connector" -type "string" "standard";
 	setAttr ".ui_host" -type "string" "backLegUI_R0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".blend" 1;
-	setAttr ".full3BonesIK" 1;
 	setAttr ".ikrefarray" -type "string" "local_C0_root,spine_C0_root,global_C0_root";
 	setAttr ".upvrefarray" -type "string" "local_C0_root,spine_C0_root,global_C0_root";
-	setAttr ".maxstretch" 1.5;
-	setAttr ".ikOri" yes;
-	setAttr ".div0" 2;
-	setAttr ".div1" 2;
-	setAttr ".div2" 2;
 	setAttr -k on ".st_profile";
 	setAttr -k on ".sq_profile";
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "legBack_R0_rootShape" -p "legBack_R0_root";
-	rename -uid "FAAD7EB7-4ACD-05CD-BBFA-E8949DDC1632";
+	rename -uid "709734FF-4810-D3D3-4BAD-E4AFA1995DA5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8023,8 +7959,8 @@ createNode nurbsCurve -n "legBack_R0_rootShape" -p "legBack_R0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_root1Shape" -p "legBack_R0_root";
-	rename -uid "F1A58CC0-4621-523B-CF36-55A8286BF59B";
+createNode nurbsCurve -n "legBack_R0_root4Shape" -p "legBack_R0_root";
+	rename -uid "AAE230B2-4470-F58A-C9E8-EF9138B8F4D6";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8036,8 +7972,8 @@ createNode nurbsCurve -n "legBack_R0_root1Shape" -p "legBack_R0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_R0_root2Shape" -p "legBack_R0_root";
-	rename -uid "DD303FF3-4572-0DFC-DB34-B9957848CFF7";
+createNode nurbsCurve -n "legBack_R0_root5Shape" -p "legBack_R0_root";
+	rename -uid "9B8780FA-4388-AC0C-F85F-A1A8803A4FB7";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8049,8 +7985,8 @@ createNode nurbsCurve -n "legBack_R0_root2Shape" -p "legBack_R0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_R0_root3Shape" -p "legBack_R0_root";
-	rename -uid "EF467F6C-4214-EF7E-8699-A78A1CEC0B82";
+createNode nurbsCurve -n "legBack_R0_root6Shape" -p "legBack_R0_root";
+	rename -uid "D949972A-4DE1-EDAC-AA5B-D79C0E02ED60";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8077,10 +8013,10 @@ createNode nurbsCurve -n "legBack_R0_root3Shape" -p "legBack_R0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "legBack_R0_knee" -p "legBack_R0_root";
-	rename -uid "946AF9FC-4EBA-3BAA-EA14-B19C99228381";
+	rename -uid "B87985BB-461D-407E-5ECD-0DA613DFB201";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 3.5527136788005009e-015 -1.1559508743798506 0.33714517700502222 ;
+	setAttr ".t" -type "double3" 3.1086244689504383e-015 -1.1559508743798506 0.337145177005022 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8088,12 +8024,12 @@ createNode transform -n "legBack_R0_knee" -p "legBack_R0_root";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000007 1.0000000000000007 1.0000000000000004 ;
+	setAttr ".s" -type "double3" 1.0000000000000007 1.0000000000000009 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legBack_R0_kneeShape" -p "legBack_R0_knee";
-	rename -uid "F684946D-4D6B-899F-6C81-02BB6B2BCBB6";
+	rename -uid "7F09D014-49A7-194E-3611-34AD3D164DF4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8105,8 +8041,8 @@ createNode nurbsCurve -n "legBack_R0_kneeShape" -p "legBack_R0_knee";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_knee1Shape" -p "legBack_R0_knee";
-	rename -uid "1D286B1E-4414-6C03-1FB2-3AB4122EFB9B";
+createNode nurbsCurve -n "legBack_R0_knee4Shape" -p "legBack_R0_knee";
+	rename -uid "253B479A-46F1-323C-6B17-F48068A2B39B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8118,8 +8054,8 @@ createNode nurbsCurve -n "legBack_R0_knee1Shape" -p "legBack_R0_knee";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_R0_knee2Shape" -p "legBack_R0_knee";
-	rename -uid "A712AB77-4C83-3610-26F8-44AE8AF68FE8";
+createNode nurbsCurve -n "legBack_R0_knee5Shape" -p "legBack_R0_knee";
+	rename -uid "7750FECD-40D9-4BC6-2297-2C859FCC9AF9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8131,8 +8067,8 @@ createNode nurbsCurve -n "legBack_R0_knee2Shape" -p "legBack_R0_knee";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_R0_knee3Shape" -p "legBack_R0_knee";
-	rename -uid "852C6E81-45BD-4FBC-67CD-87A2643AC005";
+createNode nurbsCurve -n "legBack_R0_knee6Shape" -p "legBack_R0_knee";
+	rename -uid "54E4F0F3-425A-26FB-A95C-399E54134F72";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8149,8 +8085,8 @@ createNode nurbsCurve -n "legBack_R0_knee3Shape" -p "legBack_R0_knee";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_knee3_0crvShape" -p "legBack_R0_knee";
-	rename -uid "861EFFF2-4982-942E-ABC7-FD911A291A13";
+createNode nurbsCurve -n "legBack_R0_knee6_0crvShape" -p "legBack_R0_knee";
+	rename -uid "6D24539D-452D-77DD-C598-438CB0445DA3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8167,8 +8103,8 @@ createNode nurbsCurve -n "legBack_R0_knee3_0crvShape" -p "legBack_R0_knee";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_knee3_1crvShape" -p "legBack_R0_knee";
-	rename -uid "121C6BB3-4CD2-AC23-76E0-3A920F8AB7E9";
+createNode nurbsCurve -n "legBack_R0_knee6_1crvShape" -p "legBack_R0_knee";
+	rename -uid "1A6AF126-45F5-269B-1142-FD9E637009D1";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8186,10 +8122,10 @@ createNode nurbsCurve -n "legBack_R0_knee3_1crvShape" -p "legBack_R0_knee";
 		0 0 -0.1875
 		;
 createNode transform -n "legBack_R0_ankle" -p "legBack_R0_knee";
-	rename -uid "A76AA381-41D1-9758-1A6F-4993888908B0";
+	rename -uid "C4A0FEA1-46C7-30B0-4A25-698E9DBE5AF6";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 2.2204460492503131e-015 -1.4950431842245462 -0.57333193410462346 ;
+	setAttr ".t" -type "double3" 2.2204460492503131e-015 -1.4950431842245453 -0.57333193410462324 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8197,12 +8133,12 @@ createNode transform -n "legBack_R0_ankle" -p "legBack_R0_knee";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000004 0.99999999999999989 1.0000000000000004 ;
+	setAttr ".s" -type "double3" 1.0000000000000004 0.99999999999999944 1.0000000000000007 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legBack_R0_ankleShape" -p "legBack_R0_ankle";
-	rename -uid "45D2296C-457F-52AC-DBB2-9AA88833393E";
+	rename -uid "AA2BD92B-4F1E-598E-D7C1-3FBB25F67EA3";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8214,8 +8150,8 @@ createNode nurbsCurve -n "legBack_R0_ankleShape" -p "legBack_R0_ankle";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_ankle1Shape" -p "legBack_R0_ankle";
-	rename -uid "05DBDA7F-43A8-EA98-97FE-18A5B75FD222";
+createNode nurbsCurve -n "legBack_R0_ankle4Shape" -p "legBack_R0_ankle";
+	rename -uid "D06DA2A7-4F98-F51B-E3EC-CB9F7D33AADA";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8227,8 +8163,8 @@ createNode nurbsCurve -n "legBack_R0_ankle1Shape" -p "legBack_R0_ankle";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_R0_ankle2Shape" -p "legBack_R0_ankle";
-	rename -uid "568E0EA0-4396-81E9-B347-62BE30DE37CB";
+createNode nurbsCurve -n "legBack_R0_ankle5Shape" -p "legBack_R0_ankle";
+	rename -uid "FB422D33-4C07-0A9E-BAE3-C5A6D6B18C24";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8240,8 +8176,8 @@ createNode nurbsCurve -n "legBack_R0_ankle2Shape" -p "legBack_R0_ankle";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_R0_ankle3Shape" -p "legBack_R0_ankle";
-	rename -uid "8E9953D7-4B67-6ABF-D8C4-0EBE25242808";
+createNode nurbsCurve -n "legBack_R0_ankle6Shape" -p "legBack_R0_ankle";
+	rename -uid "FAB98D6B-4068-2CDD-EF6F-C89BDF436059";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8258,8 +8194,8 @@ createNode nurbsCurve -n "legBack_R0_ankle3Shape" -p "legBack_R0_ankle";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_ankle3_0crvShape" -p "legBack_R0_ankle";
-	rename -uid "378F45F0-4C32-AF86-AB67-529CE23985C3";
+createNode nurbsCurve -n "legBack_R0_ankle6_0crvShape" -p "legBack_R0_ankle";
+	rename -uid "244579BD-47E4-5009-E4F1-7388DCE2F34D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8276,8 +8212,8 @@ createNode nurbsCurve -n "legBack_R0_ankle3_0crvShape" -p "legBack_R0_ankle";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_ankle3_1crvShape" -p "legBack_R0_ankle";
-	rename -uid "ADA943AD-4CBB-09B0-1E61-2AA7AFAD9FC3";
+createNode nurbsCurve -n "legBack_R0_ankle6_1crvShape" -p "legBack_R0_ankle";
+	rename -uid "D949142E-4F7C-F31F-F755-45833E4F15D8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8295,10 +8231,10 @@ createNode nurbsCurve -n "legBack_R0_ankle3_1crvShape" -p "legBack_R0_ankle";
 		0 0 -0.1875
 		;
 createNode transform -n "legBack_R0_foot" -p "legBack_R0_ankle";
-	rename -uid "1620AE42-442D-7F2B-1B0F-60A0EB9BDAC6";
+	rename -uid "48514193-4A22-FBEA-2024-3D8D8A611285";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.3322676295501878e-015 -0.54805580751979255 0.1505052208987292 ;
+	setAttr ".t" -type "double3" 1.1102230246251565e-015 -0.54805580751979266 0.15050522089872898 ;
 	setAttr -l on -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8306,12 +8242,12 @@ createNode transform -n "legBack_R0_foot" -p "legBack_R0_ankle";
 	setAttr -l on -k off -cb on ".ry";
 	setAttr -l on -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999956 1.0000000000000007 1 ;
+	setAttr ".s" -type "double3" 0.99999999999999956 1.0000000000000009 0.99999999999999989 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legBack_R0_footShape" -p "legBack_R0_foot";
-	rename -uid "BD877DCC-420E-1E1A-1897-32AC0EC1324B";
+	rename -uid "3DB28E7C-4FAC-4DDC-458C-739F4115A35E";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8323,8 +8259,8 @@ createNode nurbsCurve -n "legBack_R0_footShape" -p "legBack_R0_foot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_foot1Shape" -p "legBack_R0_foot";
-	rename -uid "275D82A1-4497-18AB-8D78-359E4F106FC1";
+createNode nurbsCurve -n "legBack_R0_foot4Shape" -p "legBack_R0_foot";
+	rename -uid "ED5EFD9D-4443-DDCB-3C7D-EAA4C694D157";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8336,8 +8272,8 @@ createNode nurbsCurve -n "legBack_R0_foot1Shape" -p "legBack_R0_foot";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_R0_foot2Shape" -p "legBack_R0_foot";
-	rename -uid "B7CD5F18-42D8-BBF2-5EFB-0CBB9D8D6B5E";
+createNode nurbsCurve -n "legBack_R0_foot5Shape" -p "legBack_R0_foot";
+	rename -uid "8FB8BD24-47AD-83FA-7C4F-14B45C4D29C9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8349,8 +8285,8 @@ createNode nurbsCurve -n "legBack_R0_foot2Shape" -p "legBack_R0_foot";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_R0_foot3Shape" -p "legBack_R0_foot";
-	rename -uid "09CD6890-48C7-0DE2-4AA4-50AB1C730B19";
+createNode nurbsCurve -n "legBack_R0_foot6Shape" -p "legBack_R0_foot";
+	rename -uid "93409780-4929-5FC1-6648-3481F3DEBD14";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8367,8 +8303,8 @@ createNode nurbsCurve -n "legBack_R0_foot3Shape" -p "legBack_R0_foot";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_foot3_0crvShape" -p "legBack_R0_foot";
-	rename -uid "BA9D2656-4740-C212-039F-A0A8264C9DE0";
+createNode nurbsCurve -n "legBack_R0_foot6_0crvShape" -p "legBack_R0_foot";
+	rename -uid "390C8D1C-44B6-217D-33B9-FC8CF03EC443";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8385,8 +8321,8 @@ createNode nurbsCurve -n "legBack_R0_foot3_0crvShape" -p "legBack_R0_foot";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_foot3_1crvShape" -p "legBack_R0_foot";
-	rename -uid "05D315E4-4CA9-E090-66AC-F3BF8C6E9FC2";
+createNode nurbsCurve -n "legBack_R0_foot6_1crvShape" -p "legBack_R0_foot";
+	rename -uid "6AC0ACCB-4B70-A31F-C6C8-C387AD96F1B5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8404,10 +8340,10 @@ createNode nurbsCurve -n "legBack_R0_foot3_1crvShape" -p "legBack_R0_foot";
 		0 0 -0.1875
 		;
 createNode transform -n "legBack_R0_eff" -p "legBack_R0_foot";
-	rename -uid "2AADA600-443E-E6D7-351D-1C8D62EA5574";
+	rename -uid "F99FEB71-4A08-3100-EC86-17BBF050CBF6";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.7763568394002505e-015 7.6327832942979512e-016 0.28135643819707457 ;
+	setAttr ".t" -type "double3" 1.3322676295501878e-015 6.9388939039072284e-016 0.28135643819707479 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8415,12 +8351,12 @@ createNode transform -n "legBack_R0_eff" -p "legBack_R0_foot";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999967 0.99999999999999911 0.99999999999999911 ;
+	setAttr ".s" -type "double3" 0.99999999999999956 0.99999999999999889 0.99999999999999889 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "legBack_R0_effShape" -p "legBack_R0_eff";
-	rename -uid "38B951FA-4300-DEB4-BF4A-62B5FB74B70F";
+	rename -uid "63165659-487D-3070-CC1E-E0A3EB006383";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8432,8 +8368,8 @@ createNode nurbsCurve -n "legBack_R0_effShape" -p "legBack_R0_eff";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_eff1Shape" -p "legBack_R0_eff";
-	rename -uid "DDC65033-475A-AB40-5637-DC9716F12AA3";
+createNode nurbsCurve -n "legBack_R0_eff4Shape" -p "legBack_R0_eff";
+	rename -uid "47CBFA3F-4D11-641E-8E74-04B6180AC8D6";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8445,8 +8381,8 @@ createNode nurbsCurve -n "legBack_R0_eff1Shape" -p "legBack_R0_eff";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "legBack_R0_eff2Shape" -p "legBack_R0_eff";
-	rename -uid "57E4C922-4B29-CC70-A2ED-F1B10311644D";
+createNode nurbsCurve -n "legBack_R0_eff5Shape" -p "legBack_R0_eff";
+	rename -uid "C1D213BF-429D-BDAA-AD8F-6F98C40F5E34";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8458,8 +8394,8 @@ createNode nurbsCurve -n "legBack_R0_eff2Shape" -p "legBack_R0_eff";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "legBack_R0_eff3Shape" -p "legBack_R0_eff";
-	rename -uid "F7C8DF6A-46E1-9800-BA74-33A2B72C9F9C";
+createNode nurbsCurve -n "legBack_R0_eff6Shape" -p "legBack_R0_eff";
+	rename -uid "05F9BC79-43D1-FFF2-8E5E-5A9A089667FE";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8476,8 +8412,8 @@ createNode nurbsCurve -n "legBack_R0_eff3Shape" -p "legBack_R0_eff";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_eff3_0crvShape" -p "legBack_R0_eff";
-	rename -uid "47A96C66-40BD-EC68-F3FF-8D92AF30E17A";
+createNode nurbsCurve -n "legBack_R0_eff6_0crvShape" -p "legBack_R0_eff";
+	rename -uid "EA8A3A6F-45CC-06AA-3D7B-4B921FA606E8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8494,8 +8430,8 @@ createNode nurbsCurve -n "legBack_R0_eff3_0crvShape" -p "legBack_R0_eff";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "legBack_R0_eff3_1crvShape" -p "legBack_R0_eff";
-	rename -uid "45E62EB3-422D-EED7-7D0A-C6B0FB1E8D0F";
+createNode nurbsCurve -n "legBack_R0_eff6_1crvShape" -p "legBack_R0_eff";
+	rename -uid "9D8E096C-427D-5B43-7207-DDA0FC30F890";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8513,7 +8449,7 @@ createNode nurbsCurve -n "legBack_R0_eff3_1crvShape" -p "legBack_R0_eff";
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_R0_root" -p "legBack_R0_foot";
-	rename -uid "69E1D63E-4FE5-22DB-AD35-5A94F468CBAA";
+	rename -uid "F285FA53-405F-8783-4104-3C9C9A84DA07";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -8522,11 +8458,11 @@ createNode transform -n "footBack_R0_root" -p "legBack_R0_foot";
 	addAttr -ci true -sn "connector" -ln "connector" -dt "string";
 	addAttr -ci true -sn "ui_host" -ln "ui_host" -dt "string";
 	addAttr -ci true -sn "ctlGrp" -ln "ctlGrp" -dt "string";
-	addAttr -ci true -sn "useRollCtl" -ln "useRollCtl" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "useRollCtl" -ln "useRollCtl" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 8.8817841970012523e-016 8.0491169285323849e-016 -4.4408920985006262e-016 ;
+	setAttr ".t" -type "double3" 6.6613381477509392e-016 8.1878948066105295e-016 -2.2204460492503131e-016 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8534,7 +8470,7 @@ createNode transform -n "footBack_R0_root" -p "legBack_R0_foot";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.16356254765398096 0.16356254765398087 0.16356254765398084 ;
+	setAttr ".s" -type "double3" 0.16356254765398093 0.16356254765398084 0.16356254765398082 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -8544,10 +8480,8 @@ createNode transform -n "footBack_R0_root" -p "legBack_R0_foot";
 	setAttr ".connector" -type "string" "leg_3jnt_01";
 	setAttr ".ui_host" -type "string" "backLegUI_R0_root";
 	setAttr ".ctlGrp" -type "string" "";
-	setAttr ".useRollCtl" yes;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "footBack_R0_rootShape" -p "footBack_R0_root";
-	rename -uid "A155AD28-4C4E-4E8F-7696-7AB999F8F8C3";
+	rename -uid "AA947537-4AEB-6315-4A80-3585AF363EA9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8559,8 +8493,8 @@ createNode nurbsCurve -n "footBack_R0_rootShape" -p "footBack_R0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_root1Shape" -p "footBack_R0_root";
-	rename -uid "A6D0F45F-4A45-0124-7CFD-2AB5614ED412";
+createNode nurbsCurve -n "footBack_R0_root4Shape" -p "footBack_R0_root";
+	rename -uid "D9951079-4747-8ECD-C4D0-3BB8495040D8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8572,8 +8506,8 @@ createNode nurbsCurve -n "footBack_R0_root1Shape" -p "footBack_R0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_R0_root2Shape" -p "footBack_R0_root";
-	rename -uid "2BFF6121-4609-6A31-8525-0FB3738FB914";
+createNode nurbsCurve -n "footBack_R0_root5Shape" -p "footBack_R0_root";
+	rename -uid "47591DAF-4407-294A-E0E2-24ADAB6A78F1";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8585,8 +8519,8 @@ createNode nurbsCurve -n "footBack_R0_root2Shape" -p "footBack_R0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_R0_root3Shape" -p "footBack_R0_root";
-	rename -uid "CBF2063E-4875-48E7-BBCF-4ABF18D6DFBB";
+createNode nurbsCurve -n "footBack_R0_root6Shape" -p "footBack_R0_root";
+	rename -uid "DFD0AABD-4518-C0A9-9AC2-2E8C7DA366DC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8613,10 +8547,10 @@ createNode nurbsCurve -n "footBack_R0_root3Shape" -p "footBack_R0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "footBack_R0_0_loc" -p "footBack_R0_root";
-	rename -uid "493AAD14-49FB-CF8D-9A19-B3B594438EC8";
+	rename -uid "0BB011C3-4A43-1085-4833-A6B2F554A06D";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.5987211554602254e-014 1.1102230246251565e-016 0.54565565303279762 ;
+	setAttr ".t" -type "double3" -1.4210854715202004e-014 -5.5511151231257827e-017 0.54565565303279584 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8624,12 +8558,12 @@ createNode transform -n "footBack_R0_0_loc" -p "footBack_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000002 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 1.0000000000000009 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_R0_0_locShape" -p "footBack_R0_0_loc";
-	rename -uid "309B5ABC-47B5-3A3B-674C-E58774A939AD";
+	rename -uid "5E40C53A-43CB-0413-64FA-44BC5BC6AD6D";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8641,8 +8575,8 @@ createNode nurbsCurve -n "footBack_R0_0_locShape" -p "footBack_R0_0_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_0_loc1Shape" -p "footBack_R0_0_loc";
-	rename -uid "7AD4BAB5-4665-340F-7E82-3DABFF3BAD5E";
+createNode nurbsCurve -n "footBack_R0_0_loc4Shape" -p "footBack_R0_0_loc";
+	rename -uid "68EF8543-46B8-39F4-BF27-D9950C68F697";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8654,8 +8588,8 @@ createNode nurbsCurve -n "footBack_R0_0_loc1Shape" -p "footBack_R0_0_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_R0_0_loc2Shape" -p "footBack_R0_0_loc";
-	rename -uid "4D7F4FF4-483D-DCF0-0A21-2690526B394F";
+createNode nurbsCurve -n "footBack_R0_0_loc5Shape" -p "footBack_R0_0_loc";
+	rename -uid "981F86E0-4AB5-1C93-6D1E-C8860DD6251A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8667,8 +8601,8 @@ createNode nurbsCurve -n "footBack_R0_0_loc2Shape" -p "footBack_R0_0_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_R0_0_loc3Shape" -p "footBack_R0_0_loc";
-	rename -uid "83BE8EF0-4FE2-C430-9F81-91AE78C48F3B";
+createNode nurbsCurve -n "footBack_R0_0_loc6Shape" -p "footBack_R0_0_loc";
+	rename -uid "7FBC2386-4096-B3F7-38D5-B780763E6C06";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8685,8 +8619,8 @@ createNode nurbsCurve -n "footBack_R0_0_loc3Shape" -p "footBack_R0_0_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_0_loc3_0crvShape" -p "footBack_R0_0_loc";
-	rename -uid "12913D4B-4E1F-7D35-D568-E08104A09AFF";
+createNode nurbsCurve -n "footBack_R0_0_loc6_0crvShape" -p "footBack_R0_0_loc";
+	rename -uid "EDA26D41-4595-D3F0-38E8-678CF4C4E1E4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8703,8 +8637,8 @@ createNode nurbsCurve -n "footBack_R0_0_loc3_0crvShape" -p "footBack_R0_0_loc";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_0_loc3_1crvShape" -p "footBack_R0_0_loc";
-	rename -uid "904A28FA-4322-2D78-C64E-778087A29025";
+createNode nurbsCurve -n "footBack_R0_0_loc6_1crvShape" -p "footBack_R0_0_loc";
+	rename -uid "B4DB6B4A-4F72-9D71-5BB7-B984F1CDC8F4";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8722,10 +8656,10 @@ createNode nurbsCurve -n "footBack_R0_0_loc3_1crvShape" -p "footBack_R0_0_loc";
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_R0_1_loc" -p "footBack_R0_0_loc";
-	rename -uid "63C175AE-492A-5A40-2A3E-D887E35616F5";
+	rename -uid "99083FC0-431B-6FCC-20B5-A1B6361E083A";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 3.5527136788005009e-015 -0.34547277013915567 0.77046072389793174 ;
+	setAttr ".t" -type "double3" 1.7763568394002505e-015 -0.34547277013915595 0.77046072389793352 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8733,12 +8667,12 @@ createNode transform -n "footBack_R0_1_loc" -p "footBack_R0_0_loc";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000009 0.99999999999999978 1.0000000000000004 ;
+	setAttr ".s" -type "double3" 1.0000000000000011 0.99999999999999978 1.0000000000000004 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_R0_1_locShape" -p "footBack_R0_1_loc";
-	rename -uid "0E78D748-4822-6211-08E6-2990EFDB37E8";
+	rename -uid "CF1272F9-4567-AFE6-FFF3-E8A2A7A1ADAE";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8750,8 +8684,8 @@ createNode nurbsCurve -n "footBack_R0_1_locShape" -p "footBack_R0_1_loc";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_1_loc1Shape" -p "footBack_R0_1_loc";
-	rename -uid "5DB8FA90-4E2C-16EC-09E8-5C88FE8C8030";
+createNode nurbsCurve -n "footBack_R0_1_loc4Shape" -p "footBack_R0_1_loc";
+	rename -uid "5C87CFAF-473C-E9B2-FF43-6198D68630EB";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8763,8 +8697,8 @@ createNode nurbsCurve -n "footBack_R0_1_loc1Shape" -p "footBack_R0_1_loc";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_R0_1_loc2Shape" -p "footBack_R0_1_loc";
-	rename -uid "16DB8866-40EE-3CE6-279E-3FB3CD4BDFDA";
+createNode nurbsCurve -n "footBack_R0_1_loc5Shape" -p "footBack_R0_1_loc";
+	rename -uid "140C8FB8-4FDD-2D3D-52A1-FC82C682AB72";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8776,8 +8710,8 @@ createNode nurbsCurve -n "footBack_R0_1_loc2Shape" -p "footBack_R0_1_loc";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_R0_1_loc3Shape" -p "footBack_R0_1_loc";
-	rename -uid "C4BABFA6-45CD-3D20-057F-9DB95FBC446C";
+createNode nurbsCurve -n "footBack_R0_1_loc6Shape" -p "footBack_R0_1_loc";
+	rename -uid "B510D63C-4AD8-DE27-879B-5EA11782D537";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8794,8 +8728,8 @@ createNode nurbsCurve -n "footBack_R0_1_loc3Shape" -p "footBack_R0_1_loc";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_1_loc3_0crvShape" -p "footBack_R0_1_loc";
-	rename -uid "A0F1F342-4F78-290D-C7F7-B4A3E2285F19";
+createNode nurbsCurve -n "footBack_R0_1_loc6_0crvShape" -p "footBack_R0_1_loc";
+	rename -uid "DCDAA76B-4890-A558-210C-4A8B69DE4F36";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8812,8 +8746,8 @@ createNode nurbsCurve -n "footBack_R0_1_loc3_0crvShape" -p "footBack_R0_1_loc";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_1_loc3_1crvShape" -p "footBack_R0_1_loc";
-	rename -uid "CD69AB85-4E96-94A1-FD84-0693199E01D9";
+createNode nurbsCurve -n "footBack_R0_1_loc6_1crvShape" -p "footBack_R0_1_loc";
+	rename -uid "8555527F-4148-5582-AFC8-8CADB827AF9A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8831,19 +8765,19 @@ createNode nurbsCurve -n "footBack_R0_1_loc3_1crvShape" -p "footBack_R0_1_loc";
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_R0_crv" -p "footBack_R0_root";
-	rename -uid "FCD1B155-41B3-DEE8-4260-EEA2A0B8A43B";
+	rename -uid "1A0872BE-424E-C547-F070-70AA296A6783";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -10.980332218718958 -0.49678747209357621 11.584116504196617 ;
+	setAttr ".t" -type "double3" -10.980332218718956 -0.49678747209357832 11.584116504196617 ;
 	setAttr ".r" -type "double3" 0 179.99999999999997 0 ;
-	setAttr ".s" -type "double3" 8.6433157474725775 8.6433157474725739 -8.6433157474725775 ;
+	setAttr ".s" -type "double3" 8.6433157474725775 8.6433157474725739 -8.6433157474725792 ;
 createNode nurbsCurve -n "footBack_R0_crvShape" -p "footBack_R0_crv";
-	rename -uid "2B2B049D-4914-A2EB-6869-05A14D571FEF";
+	rename -uid "74BBB355-4B78-9DAB-3C14-73A5A18321B5";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "footBack_R0_crvShapeOrig" -p "footBack_R0_crv";
-	rename -uid "042AC039-4920-8AA8-F15C-88934C25896F";
+	rename -uid "B3CBEAB9-4F8F-56A0-A203-6BA30870C288";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -8855,10 +8789,10 @@ createNode nurbsCurve -n "footBack_R0_crvShapeOrig" -p "footBack_R0_crv";
 		0 0 0
 		;
 createNode transform -n "footBack_R0_heel" -p "footBack_R0_root";
-	rename -uid "AADA33A1-4B6F-DF07-146C-A9BD84F4B0CD";
+	rename -uid "CDBE241D-446E-EF0F-5379-99B86705E9C5";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.7763568394002505e-014 -0.34547277013915656 -0.37260003933978325 ;
+	setAttr ".t" -type "double3" -1.5987211554602254e-014 -0.34547277013915645 -0.37260003933978503 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8866,12 +8800,12 @@ createNode transform -n "footBack_R0_heel" -p "footBack_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000002 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 1.0000000000000009 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_R0_heelShape" -p "footBack_R0_heel";
-	rename -uid "7C15FDF4-4832-E6F2-E827-DB9E9EC0C8C0";
+	rename -uid "18BA8C64-484A-14C2-1E86-FF9BFDF4C32C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8883,8 +8817,8 @@ createNode nurbsCurve -n "footBack_R0_heelShape" -p "footBack_R0_heel";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_heel1Shape" -p "footBack_R0_heel";
-	rename -uid "6AA87FAC-429A-50F8-6771-15B10B75205C";
+createNode nurbsCurve -n "footBack_R0_heel4Shape" -p "footBack_R0_heel";
+	rename -uid "8DF61FC1-4A34-00BF-EF15-05BD7506AC8C";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8896,8 +8830,8 @@ createNode nurbsCurve -n "footBack_R0_heel1Shape" -p "footBack_R0_heel";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_R0_heel2Shape" -p "footBack_R0_heel";
-	rename -uid "425CB78B-40FD-EE8A-6E90-4F801988B6F1";
+createNode nurbsCurve -n "footBack_R0_heel5Shape" -p "footBack_R0_heel";
+	rename -uid "999F91BF-4FD8-EABD-0831-47AEFC68A4BC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8909,8 +8843,8 @@ createNode nurbsCurve -n "footBack_R0_heel2Shape" -p "footBack_R0_heel";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_R0_heel3Shape" -p "footBack_R0_heel";
-	rename -uid "1FE38401-465E-45F9-9785-8592D15E38BA";
+createNode nurbsCurve -n "footBack_R0_heel6Shape" -p "footBack_R0_heel";
+	rename -uid "3073D05E-4CE2-CD2D-1C5E-88A155E8E604";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8927,8 +8861,8 @@ createNode nurbsCurve -n "footBack_R0_heel3Shape" -p "footBack_R0_heel";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_heel3_0crvShape" -p "footBack_R0_heel";
-	rename -uid "47773F2A-4FE9-352E-3E9B-09BAEBCCB9AD";
+createNode nurbsCurve -n "footBack_R0_heel6_0crvShape" -p "footBack_R0_heel";
+	rename -uid "8E1BBAEF-4CB7-C4A5-5E48-D58AE574FCA9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8945,8 +8879,8 @@ createNode nurbsCurve -n "footBack_R0_heel3_0crvShape" -p "footBack_R0_heel";
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_heel3_1crvShape" -p "footBack_R0_heel";
-	rename -uid "7A72A506-43B8-0E7B-B59A-EE9E0D015A7D";
+createNode nurbsCurve -n "footBack_R0_heel6_1crvShape" -p "footBack_R0_heel";
+	rename -uid "A2E9A7E7-4C34-7709-9AAD-A18A1C6D3F34";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8964,10 +8898,10 @@ createNode nurbsCurve -n "footBack_R0_heel3_1crvShape" -p "footBack_R0_heel";
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_R0_outpivot" -p "footBack_R0_root";
-	rename -uid "40616D99-4F3F-D697-5816-D5A063C7EFF0";
+	rename -uid "92CDCE67-410A-0FC4-CFE1-09B0716090B9";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 1.0422206583139744 -0.34547277013915628 0.11497296198779239 ;
+	setAttr ".t" -type "double3" 1.0422206583139761 -0.3454727701391565 0.11497296198779061 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -8975,12 +8909,12 @@ createNode transform -n "footBack_R0_outpivot" -p "footBack_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000002 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 1.0000000000000009 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_R0_outpivotShape" -p "footBack_R0_outpivot";
-	rename -uid "BE08395A-4D68-D372-1A3E-FF92A90BE0D1";
+	rename -uid "5A53B976-4964-EC1F-32E3-3294873E65A6";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -8992,8 +8926,8 @@ createNode nurbsCurve -n "footBack_R0_outpivotShape" -p "footBack_R0_outpivot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_outpivot1Shape" -p "footBack_R0_outpivot";
-	rename -uid "B1B14E15-44D0-53B4-CAF0-A1A9C231EFA8";
+createNode nurbsCurve -n "footBack_R0_outpivot4Shape" -p "footBack_R0_outpivot";
+	rename -uid "60A2EC1E-4603-53B5-31F5-E5945F3BBC80";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9005,8 +8939,8 @@ createNode nurbsCurve -n "footBack_R0_outpivot1Shape" -p "footBack_R0_outpivot";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_R0_outpivot2Shape" -p "footBack_R0_outpivot";
-	rename -uid "9EF62CD0-4FE8-340B-572E-778CC372CC76";
+createNode nurbsCurve -n "footBack_R0_outpivot5Shape" -p "footBack_R0_outpivot";
+	rename -uid "32E378AE-402D-D459-1E9A-A0B20C38CFB1";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9018,8 +8952,8 @@ createNode nurbsCurve -n "footBack_R0_outpivot2Shape" -p "footBack_R0_outpivot";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_R0_outpivot3Shape" -p "footBack_R0_outpivot";
-	rename -uid "0BE48FFB-4495-8AA1-E9CA-6B91D067670E";
+createNode nurbsCurve -n "footBack_R0_outpivot6Shape" -p "footBack_R0_outpivot";
+	rename -uid "FD678B76-4C97-2012-9DE7-3CB92F7CC17B";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9036,8 +8970,8 @@ createNode nurbsCurve -n "footBack_R0_outpivot3Shape" -p "footBack_R0_outpivot";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_outpivot3_0crvShape" -p "footBack_R0_outpivot";
-	rename -uid "2D95104B-4982-7DCA-F8F8-138BF031E179";
+createNode nurbsCurve -n "footBack_R0_outpivot6_0crvShape" -p "footBack_R0_outpivot";
+	rename -uid "5EC4FA04-4BB0-4085-2021-1D81D7F63461";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9054,8 +8988,8 @@ createNode nurbsCurve -n "footBack_R0_outpivot3_0crvShape" -p "footBack_R0_outpi
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_outpivot3_1crvShape" -p "footBack_R0_outpivot";
-	rename -uid "68B541CF-4F87-C175-7604-FB98074FB65E";
+createNode nurbsCurve -n "footBack_R0_outpivot6_1crvShape" -p "footBack_R0_outpivot";
+	rename -uid "3AF9588E-49D4-787C-99A0-5CAC1E1C17A9";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9073,10 +9007,10 @@ createNode nurbsCurve -n "footBack_R0_outpivot3_1crvShape" -p "footBack_R0_outpi
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_R0_inpivot" -p "footBack_R0_root";
-	rename -uid "6401BF6B-4B25-EDA8-59B9-34ADBC55245C";
+	rename -uid "093A094B-4EA4-A47A-C9AD-1B912E7DEDFE";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -1.1682146826215707 -0.34547277013915628 0.21228136011731991 ;
+	setAttr ".t" -type "double3" -1.1682146826215689 -0.34547277013915628 0.21228136011731813 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -9084,12 +9018,12 @@ createNode transform -n "footBack_R0_inpivot" -p "footBack_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 0.99999999999999989 1.0000000000000002 1.0000000000000007 ;
+	setAttr ".s" -type "double3" 0.99999999999999978 1.0000000000000002 1.0000000000000009 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode nurbsCurve -n "footBack_R0_inpivotShape" -p "footBack_R0_inpivot";
-	rename -uid "7C3341B9-4966-A630-9F12-8CB2E5CBF514";
+	rename -uid "DDC3925B-4EDF-E076-46EB-84978305EEAD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9101,8 +9035,8 @@ createNode nurbsCurve -n "footBack_R0_inpivotShape" -p "footBack_R0_inpivot";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_inpivot1Shape" -p "footBack_R0_inpivot";
-	rename -uid "99612423-49C7-33EF-0AD9-E98E456E511F";
+createNode nurbsCurve -n "footBack_R0_inpivot4Shape" -p "footBack_R0_inpivot";
+	rename -uid "BAF45AF7-4A12-65AB-DF37-CFB22ACC30E5";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9114,8 +9048,8 @@ createNode nurbsCurve -n "footBack_R0_inpivot1Shape" -p "footBack_R0_inpivot";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "footBack_R0_inpivot2Shape" -p "footBack_R0_inpivot";
-	rename -uid "7BDE0DF0-4A88-91D2-63B3-0C81874FA138";
+createNode nurbsCurve -n "footBack_R0_inpivot5Shape" -p "footBack_R0_inpivot";
+	rename -uid "AD3F1EC7-457F-79AB-1EB0-BC9B20EE9A9A";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9127,8 +9061,8 @@ createNode nurbsCurve -n "footBack_R0_inpivot2Shape" -p "footBack_R0_inpivot";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "footBack_R0_inpivot3Shape" -p "footBack_R0_inpivot";
-	rename -uid "98484AF7-42C9-7423-D3F5-9C9DFDAADA37";
+createNode nurbsCurve -n "footBack_R0_inpivot6Shape" -p "footBack_R0_inpivot";
+	rename -uid "7578B2BE-4DDE-7EE5-7010-A194812470FC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9145,8 +9079,8 @@ createNode nurbsCurve -n "footBack_R0_inpivot3Shape" -p "footBack_R0_inpivot";
 		0 -0.1875 0
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_inpivot3_0crvShape" -p "footBack_R0_inpivot";
-	rename -uid "8FE0752D-47B4-5131-9DE4-9C9B079E6CC0";
+createNode nurbsCurve -n "footBack_R0_inpivot6_0crvShape" -p "footBack_R0_inpivot";
+	rename -uid "2810C542-4FA1-D67B-0178-7CB056EEEBFC";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9163,8 +9097,8 @@ createNode nurbsCurve -n "footBack_R0_inpivot3_0crvShape" -p "footBack_R0_inpivo
 		0 0 -0.1875
 		-0.1875 0 0
 		;
-createNode nurbsCurve -n "footBack_R0_inpivot3_1crvShape" -p "footBack_R0_inpivot";
-	rename -uid "17B03CEC-4AFC-C076-D302-92B89D6756C4";
+createNode nurbsCurve -n "footBack_R0_inpivot6_1crvShape" -p "footBack_R0_inpivot";
+	rename -uid "15FD54D8-4F8C-E139-C8EB-DD96721AA8E8";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9182,19 +9116,19 @@ createNode nurbsCurve -n "footBack_R0_inpivot3_1crvShape" -p "footBack_R0_inpivo
 		0 0 -0.1875
 		;
 createNode transform -n "footBack_R0_1" -p "footBack_R0_root";
-	rename -uid "BC52FE92-4D8C-8CA5-5C4F-4195206BBEF0";
+	rename -uid "FAC4F949-4FDF-8881-5EBF-ECB41C1EFB35";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -10.980332218718958 -0.49678747209357621 11.584116504196617 ;
+	setAttr ".t" -type "double3" -10.980332218718956 -0.49678747209357832 11.584116504196617 ;
 	setAttr ".r" -type "double3" 0 179.99999999999997 0 ;
-	setAttr ".s" -type "double3" 8.6433157474725775 8.6433157474725739 -8.6433157474725775 ;
+	setAttr ".s" -type "double3" 8.6433157474725775 8.6433157474725739 -8.6433157474725792 ;
 createNode nurbsCurve -n "footBack_R0_Shape1" -p "footBack_R0_1";
-	rename -uid "E4F4E065-4022-0BCB-6184-91ACFEB2C46E";
+	rename -uid "E7C7F59D-4673-D762-C667-1D939176D8BD";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "footBack_R0_Shape1Orig" -p "footBack_R0_1";
-	rename -uid "8E123112-4F18-5BD6-0FFC-9A95FB167AE6";
+	rename -uid "F8F04B7C-4354-B320-4B88-1BA308B3DA22";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -9208,7 +9142,7 @@ createNode nurbsCurve -n "footBack_R0_Shape1Orig" -p "footBack_R0_1";
 		0 0 0
 		;
 createNode transform -n "backLegUI_R0_root" -p "footBack_R0_root";
-	rename -uid "6021D261-40D9-B0AA-7D2E-F7902BA115F7";
+	rename -uid "628CC7A1-4B8B-D00E-AFA2-B3BAEC6F13FE";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "comp_type" -ln "comp_type" -dt "string";
 	addAttr -ci true -sn "comp_name" -ln "comp_name" -dt "string";
@@ -9220,7 +9154,7 @@ createNode transform -n "backLegUI_R0_root" -p "footBack_R0_root";
 	addAttr -ci true -sn "icon" -ln "icon" -dt "string";
 	addAttr -ci true -sn "ikrefarray" -ln "ikrefarray" -dt "string";
 	addAttr -ci true -sn "joint" -ln "joint" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "uniScale" -ln "uniScale" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "uniScale" -ln "uniScale" -dv 1 -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tx" -ln "k_tx" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_ty" -ln "k_ty" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_tz" -ln "k_tz" -min 0 -max 1 -at "bool";
@@ -9232,12 +9166,14 @@ createNode transform -n "backLegUI_R0_root" -p "footBack_R0_root";
 	addAttr -ci true -sn "k_sy" -ln "k_sy" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "k_sz" -ln "k_sz" -min 0 -max 1 -at "bool";
 	addAttr -ci true -sn "default_rotorder" -ln "default_rotorder" -min 0 -max 5 -at "long";
-	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -at "double";
+	addAttr -ci true -sn "neutralRotation" -ln "neutralRotation" -dv 1 -min 0 -max 1 
+		-at "bool";
+	addAttr -ci true -sn "mirrorBehaviour" -ln "mirrorBehaviour" -min 0 -max 1 -at "bool";
+	addAttr -ci true -sn "ctlSize" -ln "ctlSize" -dv 0.5 -at "double";
 	addAttr -ci true -sn "useIndex" -ln "useIndex" -min 0 -max 1 -at "bool";
-	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -at "long";
+	addAttr -ci true -sn "parentJointIndex" -ln "parentJointIndex" -dv -1 -at "long";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" 7.914871587038979 6.0337539388988555 -0.92016921390296424 ;
+	setAttr ".t" -type "double3" 7.9148715870389807 6.0337539388988546 -0.92016921390296602 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -9245,7 +9181,7 @@ createNode transform -n "backLegUI_R0_root" -p "footBack_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 8.6433157474725757 8.6433157474725792 8.643315747472581 ;
+	setAttr ".s" -type "double3" 8.6433157474725757 8.6433157474725792 8.6433157474725828 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
@@ -9257,12 +9193,8 @@ createNode transform -n "backLegUI_R0_root" -p "footBack_R0_root";
 	setAttr ".ctlGrp" -type "string" "";
 	setAttr ".icon" -type "string" "cross";
 	setAttr ".ikrefarray" -type "string" "";
-	setAttr ".uniScale" yes;
-	setAttr ".neutralRotation" yes;
-	setAttr ".ctlSize" 0.5;
-	setAttr ".parentJointIndex" -1;
 createNode nurbsCurve -n "backLegUI_R0_rootShape" -p "backLegUI_R0_root";
-	rename -uid "6372446E-4EEC-C6DE-C6EC-B39C18F3AB4D";
+	rename -uid "9D15BB8A-46CF-F23F-9AE1-02A4A2D06442";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9274,8 +9206,8 @@ createNode nurbsCurve -n "backLegUI_R0_rootShape" -p "backLegUI_R0_root";
 		0.25 0 0
 		-0.25 0 0
 		;
-createNode nurbsCurve -n "backLegUI_R0_root1Shape" -p "backLegUI_R0_root";
-	rename -uid "8804CEC8-48E2-E9C3-A888-BB8AC8A213AB";
+createNode nurbsCurve -n "backLegUI_R0_root4Shape" -p "backLegUI_R0_root";
+	rename -uid "7D00E214-4177-DCA9-1B5B-82B72A8F5724";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9287,8 +9219,8 @@ createNode nurbsCurve -n "backLegUI_R0_root1Shape" -p "backLegUI_R0_root";
 		0 0.25 0
 		0 -0.25 0
 		;
-createNode nurbsCurve -n "backLegUI_R0_root2Shape" -p "backLegUI_R0_root";
-	rename -uid "DAA0D081-4E3D-C218-5439-8D816BB18BF0";
+createNode nurbsCurve -n "backLegUI_R0_root5Shape" -p "backLegUI_R0_root";
+	rename -uid "E59E0832-4952-B571-C7ED-DF9193ACF4FD";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9300,8 +9232,8 @@ createNode nurbsCurve -n "backLegUI_R0_root2Shape" -p "backLegUI_R0_root";
 		0 0 0.25
 		0 0 -0.25
 		;
-createNode nurbsCurve -n "backLegUI_R0_root3Shape" -p "backLegUI_R0_root";
-	rename -uid "7167A3F5-4BEB-1917-B3BD-B7B13A576667";
+createNode nurbsCurve -n "backLegUI_R0_root6Shape" -p "backLegUI_R0_root";
+	rename -uid "6E8B09ED-426B-39D0-0226-9F9E7A0534E2";
 	setAttr ".ihi" 0;
 	setAttr -k off ".v";
 	setAttr ".ove" yes;
@@ -9328,10 +9260,10 @@ createNode nurbsCurve -n "backLegUI_R0_root3Shape" -p "backLegUI_R0_root";
 		-0.125 -0.125 -0.125
 		;
 createNode transform -n "backLegUI_R0_sizeRef" -p "backLegUI_R0_root";
-	rename -uid "41E4CB50-42ED-5A2D-CB63-94959B9CDEFF";
+	rename -uid "F8A26303-41E0-7716-33D4-C5BF602E3784";
 	addAttr -ci true -sn "isGearGuide" -ln "isGearGuide" -dv 1 -min 0 -max 1 -at "bool";
 	setAttr -k off -cb on ".v";
-	setAttr ".t" -type "double3" -4.4408920985006262e-016 4.4408920985006262e-016 0.99999999999999933 ;
+	setAttr ".t" -type "double3" -4.4408920985006262e-016 1.1102230246251565e-016 0.99999999999999956 ;
 	setAttr -k off -cb on ".tx";
 	setAttr -k off -cb on ".ty";
 	setAttr -k off -cb on ".tz";
@@ -9339,24 +9271,24 @@ createNode transform -n "backLegUI_R0_sizeRef" -p "backLegUI_R0_root";
 	setAttr -k off -cb on ".ry";
 	setAttr -k off -cb on ".rz";
 	setAttr -cb on ".ro";
-	setAttr ".s" -type "double3" 1.0000000000000002 0.99999999999999944 0.99999999999999967 ;
+	setAttr ".s" -type "double3" 1.0000000000000004 0.99999999999999933 0.99999999999999967 ;
 	setAttr -k off -cb on ".sx";
 	setAttr -k off -cb on ".sy";
 	setAttr -k off -cb on ".sz";
 createNode transform -n "legBack_R0_crv1" -p "legBack_R0_root";
-	rename -uid "E91CC31B-4412-5F60-DD0B-B589A305516F";
+	rename -uid "930F6C49-418E-9381-14A6-1B8BE78F1958";
 	setAttr ".ovdt" 1;
 	setAttr ".ove" yes;
-	setAttr ".t" -type "double3" -1.7959711117807546 -3.2803056907023964 1.8090460715460548 ;
+	setAttr ".t" -type "double3" -1.7959711117807555 -3.2803056907023964 1.8090460715460541 ;
 	setAttr ".r" -type "double3" 0 180 0 ;
 	setAttr ".s" -type "double3" 1.4137227438343885 1.413722743834388 -1.4137227438343878 ;
 createNode nurbsCurve -n "legBack_R0_crvShape1" -p "legBack_R0_crv1";
-	rename -uid "CF348A42-4EEE-62BA-E76F-90AB72AEA3C2";
+	rename -uid "348D1718-41BA-0000-3C0C-EAAED36C94D0";
 	setAttr -k off ".v";
 	setAttr -s 4 ".iog[0].og";
 	setAttr ".tw" yes;
 createNode nurbsCurve -n "legBack_R0_crvShape1Orig" -p "legBack_R0_crv1";
-	rename -uid "35AD983C-43B3-A6F6-643F-1A87E6C9C177";
+	rename -uid "D63B35F1-488E-35A1-34CD-F5AACD167CBD";
 	setAttr -k off ".v";
 	setAttr ".io" yes;
 	setAttr ".cc" -type "nurbsCurve" 
@@ -9369,699 +9301,796 @@ createNode nurbsCurve -n "legBack_R0_crvShape1Orig" -p "legBack_R0_crv1";
 		0 0 0
 		0 0 0
 		;
-createNode animCurveUU -n "spine_C0_root_st_profile";
-	rename -uid "363D8BE3-42AD-1BFA-1E4A-54A9AE6EC631";
+createNode lightLinker -s -n "lightLinker1";
+	rename -uid "6928B63B-4CB2-C38C-B04D-5F9986479C4D";
+	setAttr -s 2 ".lnk";
+	setAttr -s 2 ".slnk";
+createNode shapeEditorManager -n "shapeEditorManager";
+	rename -uid "4F2FCCC8-4693-A422-5E13-CFA0ACE59619";
+createNode poseInterpolatorManager -n "poseInterpolatorManager";
+	rename -uid "8B00DE24-422B-77A1-CE2B-12B4188D2ADC";
+createNode displayLayerManager -n "layerManager";
+	rename -uid "EC538FE5-4F66-16B0-D0EE-F8AC8150FD3D";
+createNode displayLayer -n "defaultLayer";
+	rename -uid "160727EA-4568-0465-2638-FBA688FB6A44";
+createNode renderLayerManager -n "renderLayerManager";
+	rename -uid "3B0A98D0-4187-DEBD-63B7-289C7032E904";
+createNode renderLayer -n "defaultRenderLayer";
+	rename -uid "148C8E50-48C3-2544-0ED2-E59E92D8DE71";
+	setAttr ".g" yes;
+createNode animCurveUU -n "spine_C0_root_st_profile1";
+	rename -uid "C9D17E97-469F-3D0F-2DC2-FCAFEB60B7BA";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
-createNode animCurveUU -n "spine_C0_root_sq_profile";
-	rename -uid "FAE224E6-4AFE-4E58-E28B-D7A8F298F713";
+createNode animCurveUU -n "spine_C0_root_sq_profile1";
+	rename -uid "FA2FBC20-4ECA-B559-904F-69BF682D153F";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
-createNode animCurveUU -n "neck_C0_root_st_profile";
-	rename -uid "6D4B1784-41A8-F6CA-50EB-77B39C20FDC6";
-	setAttr ".tan" 18;
-	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
-createNode animCurveUU -n "neck_C0_root_sq_profile";
-	rename -uid "9E00FCB7-40CC-9F3E-FE45-58986C589F0F";
-	setAttr ".tan" 18;
-	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
-createNode mgear_curveCns -n "mgear_curveCns160";
-	rename -uid "C46AC291-4433-44E9-FF1E-DCA6AFD8F87D";
-	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns160Set";
-	rename -uid "6826E33F-4CCB-EAD9-4C7F-8CAFBA7B8129";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns160GroupId";
-	rename -uid "307AF40B-48E2-1D2F-48D3-A1815FDE8DEC";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns160GroupParts";
-	rename -uid "59BE1B5E-41E0-6E14-5378-1EAFF2668EB1";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak160";
-	rename -uid "44AD54D5-4AA6-A052-1778-2DBF9B481F81";
-createNode objectSet -n "tweakSet160";
-	rename -uid "95985CC6-4D03-DDF8-16A2-3DB69DB41561";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId320";
-	rename -uid "673497D6-4E08-99EA-C8A5-4183E2771DFC";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts320";
-	rename -uid "EA1DFB82-420A-B4A9-D346-44928D49F123";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns161";
-	rename -uid "908F2D89-49BA-C0BE-9236-368F10887F22";
-	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns161Set";
-	rename -uid "DD847B68-4BD9-50DB-0941-7F9B029D6F4D";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns161GroupId";
-	rename -uid "57BFCF22-4E17-4CC0-C9C3-C0828E9C61FA";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns161GroupParts";
-	rename -uid "8130A0FE-441D-2D39-A8C1-D2B55FBB6EC3";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak161";
-	rename -uid "5CC9D03B-415D-E573-09E7-698670E10528";
-createNode objectSet -n "tweakSet161";
-	rename -uid "BAD98D06-4C0B-74D2-648E-6D973F5F943C";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId322";
-	rename -uid "94D9D31E-43BD-CAF7-1545-5B9AAE5ABDD5";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts322";
-	rename -uid "993C91DF-4AB9-120F-A2B3-828B2C77B730";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns159";
-	rename -uid "F4C586A0-4F43-E0A7-3582-80A145B97C1A";
-	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns159Set";
-	rename -uid "C394FA65-48C7-075F-A882-0AAD6861F2EF";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns159GroupId";
-	rename -uid "A049A75F-44E2-70CF-5B10-958A3ADD9E38";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns159GroupParts";
-	rename -uid "0E2D47A4-473C-D106-F10F-1CA0533E7CF5";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak159";
-	rename -uid "CC685F0D-4DE9-2CE9-605E-A88B905F0819";
-createNode objectSet -n "tweakSet159";
-	rename -uid "4FF90709-45CF-A5A8-51E9-5E83DB705890";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId318";
-	rename -uid "63F17790-4415-8291-AE86-24852E455482";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts318";
-	rename -uid "6CC99F85-4883-0097-1AFD-738BF064479F";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns162";
-	rename -uid "3B61B18F-42E5-CBAA-9DD1-A6A4FD988F8C";
-	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns162Set";
-	rename -uid "27D8D7F7-4FFF-3D12-7BC5-C1920880A4A7";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns162GroupId";
-	rename -uid "917207FB-47B7-ECAB-5EFE-8F888AE09624";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns162GroupParts";
-	rename -uid "E6773AD2-40B2-6CB1-0005-A89FFB68AB4C";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak162";
-	rename -uid "22DC21A4-40F5-03E5-4EAF-93AFBDF32855";
-createNode objectSet -n "tweakSet162";
-	rename -uid "8E8AE1EC-4EF0-8231-C992-E19E3F3BC5A0";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId324";
-	rename -uid "985B9375-4C26-BE9F-F1F1-D598F516BF4A";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts324";
-	rename -uid "B7843D6B-443D-25E6-979A-F896D35ECD17";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns163";
-	rename -uid "2653008B-4016-9DE4-4B36-B3ACF65134A9";
-	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns163Set";
-	rename -uid "D73863DB-406C-2C11-BE4F-E1B2A8D5F421";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns163GroupId";
-	rename -uid "525FDB94-4230-A756-5A47-DBAD39FDFE5A";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns163GroupParts";
-	rename -uid "FCE55CC8-4A2D-8573-E8D9-3F84A85A7175";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak163";
-	rename -uid "0ECAF168-4123-ABC3-10CE-33AF7F6CB2BF";
-createNode objectSet -n "tweakSet163";
-	rename -uid "5FE1AAAA-4C5C-6129-36DF-CDAB88C86F59";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId326";
-	rename -uid "E4459752-43E6-CA6E-76B5-DB8B4865FB81";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts326";
-	rename -uid "40EF6680-41E8-966A-2969-67931DC40153";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns164";
-	rename -uid "5603AA79-46B0-A7E1-E68F-BD921E6CFB2C";
-	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns164Set";
-	rename -uid "CB8BB0A0-42E8-2FC1-11D8-B3AC7A2FA67B";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns164GroupId";
-	rename -uid "D7CFA8DF-4AF0-BC39-E9B3-2AAD699D3D08";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns164GroupParts";
-	rename -uid "FD3A7C4F-42B0-CAC6-FCB6-8B96A27F20EF";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak164";
-	rename -uid "019A7635-4EFC-222E-A39C-F8AEBD6AD664";
-createNode objectSet -n "tweakSet164";
-	rename -uid "BFBA2FE3-452E-3AEC-13D8-09BE1C1569AF";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId328";
-	rename -uid "4D20A1F8-46CE-D6AC-B2EE-378AF98E7307";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts328";
-	rename -uid "B8B7E4E1-4812-0522-3CE1-4B817AC422D2";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns158";
-	rename -uid "C6C446CA-415A-9B5E-8704-9C8BA7A5C1C8";
-	setAttr -s 3 ".inputs";
-createNode objectSet -n "mgear_curveCns158Set";
-	rename -uid "B5975822-487B-4440-0225-548F137BDC5B";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns158GroupId";
-	rename -uid "8687D40B-46FC-7CF7-58FD-6F9F7FA43950";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns158GroupParts";
-	rename -uid "D8CAFC25-417C-20BF-C0BD-799807C1C71B";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak158";
-	rename -uid "BC1DA409-4734-8B52-805A-27AB3750FBA4";
-createNode objectSet -n "tweakSet158";
-	rename -uid "296E3D4C-4C13-294F-C2A9-2ABA6E4048F0";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId316";
-	rename -uid "1F4CEA8B-4A98-2E6A-856B-5585D85D805A";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts316";
-	rename -uid "2E9742A0-4F52-129E-3363-64A9E8072665";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode unitConversion -n "unitConversion29";
-	rename -uid "7AF7FEA0-49FC-A487-C1A1-E6926B2DF954";
+createNode unitConversion -n "unitConversion32";
+	rename -uid "7454BA6C-4D72-A2E8-A2AA-EE893B82938C";
 	setAttr ".cf" 0.017453292519943295;
-createNode mgear_curveCns -n "mgear_curveCns157";
-	rename -uid "7A73DC31-4088-D407-FF14-9DB62E92CBB7";
+createNode mgear_curveCns -n "mgear_curveCns183";
+	rename -uid "B4A759DC-496B-0B8B-3D8B-C198F74F96BD";
+	setAttr -s 2 ".inputs";
+createNode tweak -n "tweak183";
+	rename -uid "50464DC8-432D-AF0D-FF1A-49B546659065";
+createNode objectSet -n "mgear_curveCns183Set";
+	rename -uid "F7F6BC47-4CBA-8D0C-1A8B-32AF1C5E5BD8";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns183GroupId";
+	rename -uid "F4B09369-4112-C8A1-31B5-33BC8A558620";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns183GroupParts";
+	rename -uid "79688A10-495A-2EED-5C6F-008466AECCB9";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet183";
+	rename -uid "62943B6F-420C-8572-F67A-8683A7F3A47F";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId366";
+	rename -uid "13B73348-4D64-813B-E78A-8E84AA0B6BB9";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts366";
+	rename -uid "D0FBBE72-467D-D922-4E8F-4FBD9F2B52D7";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode animCurveUU -n "neck_C0_root_st_profile1";
+	rename -uid "EB6281D9-45F2-003A-4F15-5F966FD1C198";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
+createNode animCurveUU -n "neck_C0_root_sq_profile1";
+	rename -uid "BAB1C044-4DED-C3C4-78B6-BDA14C20948A";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
+createNode unitConversion -n "unitConversion33";
+	rename -uid "5B295E9F-43A9-BCB4-23D4-9A8F677A8C4F";
+	setAttr ".cf" 0.017453292519943295;
+createNode mgear_curveCns -n "mgear_curveCns184";
+	rename -uid "3EEEC1A5-46CA-DF93-E556-8BB32982BA3D";
 	setAttr -s 4 ".inputs";
-createNode objectSet -n "mgear_curveCns157Set";
-	rename -uid "A2AF4E0F-4418-30AB-3370-7BB313F9435E";
+createNode tweak -n "tweak184";
+	rename -uid "B8257E47-4BEB-EBE5-AC34-1B822B146168";
+createNode objectSet -n "mgear_curveCns184Set";
+	rename -uid "D1A3C72F-4C62-67A7-3A8F-B88FE5CB7E9B";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns157GroupId";
-	rename -uid "6CABBFC3-4B20-031D-DBC9-288144B0C6D3";
+createNode groupId -n "mgear_curveCns184GroupId";
+	rename -uid "EE6D18CF-4D4B-BD23-86CE-6488747797DE";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns157GroupParts";
-	rename -uid "C8F6CF37-4C37-5402-B2A8-DAAEE98F898A";
+createNode groupParts -n "mgear_curveCns184GroupParts";
+	rename -uid "6D45AECD-465A-50EC-1381-6F9432533BB7";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak157";
-	rename -uid "480C1663-49F2-49F5-4099-719DAD5B6B42";
-createNode objectSet -n "tweakSet157";
-	rename -uid "FF137071-4C87-4082-8975-28BA025434E7";
+createNode objectSet -n "tweakSet184";
+	rename -uid "54C6802E-43D8-843C-0568-A3BA7B0A9A87";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId314";
-	rename -uid "0AB5411C-4208-273E-E88C-A4BCBC06F73D";
+createNode groupId -n "groupId368";
+	rename -uid "47900F31-490E-FAAE-81B9-1DAABA9E6414";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts314";
-	rename -uid "8659180E-4237-17D1-EA9B-EEACD1FE2B7C";
+createNode groupParts -n "groupParts368";
+	rename -uid "99865061-4384-0F39-8160-59B80D31EA0F";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode animCurveUU -n "legFront_L0_root_st_profile";
-	rename -uid "3DA6E3E1-4AAF-C983-9E40-948DC970F079";
-	setAttr ".tan" 18;
-	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
-createNode animCurveUU -n "legFront_L0_root_sq_profile";
-	rename -uid "B0FEEB05-4ADC-7164-51D9-288F396AB80C";
-	setAttr ".tan" 18;
-	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
-createNode mgear_curveCns -n "mgear_curveCns167";
-	rename -uid "54D079CD-4B19-B6FA-900E-9584BEE86610";
+createNode mgear_curveCns -n "mgear_curveCns185";
+	rename -uid "FE94D78B-4D16-5587-5A29-F7BEB733DA9E";
 	setAttr -s 3 ".inputs";
-createNode objectSet -n "mgear_curveCns167Set";
-	rename -uid "B594DF1D-45BC-3264-A322-8D9D6D6B5FCE";
+createNode tweak -n "tweak185";
+	rename -uid "25CB3D37-4CBF-CA0D-01F5-A4BA34D17DDA";
+createNode objectSet -n "mgear_curveCns185Set";
+	rename -uid "AF9E256D-40BD-C01B-9F53-29BFA198E86F";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns167GroupId";
-	rename -uid "4C3A2D90-4401-7AEF-FE71-D49BF3FB5CA1";
+createNode groupId -n "mgear_curveCns185GroupId";
+	rename -uid "67760A5E-49C7-FEF3-1CFE-DBBBBC1F0399";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns167GroupParts";
-	rename -uid "B1EEFD03-4A1C-3CD6-EAB1-5A9E627CCE16";
+createNode groupParts -n "mgear_curveCns185GroupParts";
+	rename -uid "466FB98F-4560-9A26-69E0-32A80BA63863";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak167";
-	rename -uid "1DBC11CF-43EC-0D20-CECB-C2B42B0EC610";
-createNode objectSet -n "tweakSet167";
-	rename -uid "6A5F9980-48EF-B90F-792A-82BA13D1496E";
+createNode objectSet -n "tweakSet185";
+	rename -uid "5DFCD5F2-40E3-51D8-79AE-918E17F97A31";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId334";
-	rename -uid "3F08CA25-402A-FBE4-387A-31A0BBC1B70D";
+createNode groupId -n "groupId370";
+	rename -uid "EAFB591D-491F-CBA0-3DC5-4288F3BEA2FF";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts334";
-	rename -uid "F52CA01A-4268-CA4D-5C28-3BB9AC366688";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns168";
-	rename -uid "52A8046E-4112-B68D-E401-9FA15B460BCB";
-	setAttr -s 5 ".inputs";
-createNode objectSet -n "mgear_curveCns168Set";
-	rename -uid "8759E934-4800-49C6-A0A0-B68270CF199B";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns168GroupId";
-	rename -uid "EEE59D47-4929-3235-B9CD-2B926B087977";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns168GroupParts";
-	rename -uid "17C0F96A-4C65-F4A8-8537-0BBFE534E6EC";
+createNode groupParts -n "groupParts370";
+	rename -uid "8499E0F4-48D6-834B-8B70-5F8D552B8665";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak168";
-	rename -uid "7F3EF21B-470A-57DD-5D1F-D5A1FF9AFB98";
-createNode objectSet -n "tweakSet168";
-	rename -uid "9B2F7C82-4F69-25F2-FE51-4CBB79B2C7FE";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId336";
-	rename -uid "6E42BE75-4F10-36C6-9A38-A78FD5A8277E";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts336";
-	rename -uid "060A07F8-46A2-B3BB-F06E-24A2D405428E";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns166";
-	rename -uid "E0668C8C-4F11-03EA-D283-68A1D30EFEFE";
-	setAttr -s 5 ".inputs";
-createNode objectSet -n "mgear_curveCns166Set";
-	rename -uid "7194ED0B-4A54-6D16-12B8-F38BE30489EB";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns166GroupId";
-	rename -uid "A9052CB1-4339-A57B-893B-9C882FD18C04";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns166GroupParts";
-	rename -uid "C620E0EF-457B-83DE-FCD0-FEB19DC09758";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak166";
-	rename -uid "EAAC516D-4B56-A789-2217-7B9806E2D23D";
-createNode objectSet -n "tweakSet166";
-	rename -uid "9D8EEABC-4B3A-B759-0E72-A7BA9CF93E0A";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId332";
-	rename -uid "1B433BC0-43C8-6735-198C-F1A23A7212B4";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts332";
-	rename -uid "6733726F-4891-2924-1249-7AB4BE217B5A";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode unitConversion -n "unitConversion30";
-	rename -uid "AF6ECFCF-4483-0887-7CE0-31991CB1C331";
-	setAttr ".cf" 0.017453292519943295;
-createNode mgear_curveCns -n "mgear_curveCns165";
-	rename -uid "124306B8-4B4D-F202-2595-478B28FB5072";
+createNode mgear_curveCns -n "mgear_curveCns186";
+	rename -uid "A8846675-4F02-7EB3-7769-FEB44605E577";
 	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns165Set";
-	rename -uid "713ACCF4-4837-512E-6910-E6BBD3842969";
+createNode tweak -n "tweak186";
+	rename -uid "7A3048D5-4541-FCD3-BC43-42AA7E2B6CE1";
+createNode objectSet -n "mgear_curveCns186Set";
+	rename -uid "CB97DA2C-4EFA-F696-E538-4EB17C143715";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns165GroupId";
-	rename -uid "5F402620-4E22-AFAC-055D-EC8B4D2F43F4";
+createNode groupId -n "mgear_curveCns186GroupId";
+	rename -uid "8C132B31-4664-8F63-E939-BB946EFAE8DE";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns165GroupParts";
-	rename -uid "B649ED2E-44B1-36C3-02E7-28B2513D16F6";
+createNode groupParts -n "mgear_curveCns186GroupParts";
+	rename -uid "B2C10EBB-45C3-B6F3-23AA-FE8F96A26772";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak165";
-	rename -uid "CAE6AC97-40F3-03A4-1DDD-1B84A4409BC3";
-createNode objectSet -n "tweakSet165";
-	rename -uid "91735C0D-475E-21AB-0D9F-B8A576F79503";
+createNode objectSet -n "tweakSet186";
+	rename -uid "08B48BC0-484E-AFF7-34E4-9C9D2BB434AC";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId330";
-	rename -uid "824FECEE-4CB4-D725-1D29-A28BEFA6F423";
+createNode groupId -n "groupId372";
+	rename -uid "898EB5D0-4080-878C-1030-028A6EAF8E25";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts330";
-	rename -uid "3D9666AB-426A-6805-468C-9D97AE1379AB";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode animCurveUU -n "legFront_R0_root_st_profile";
-	rename -uid "0AF51226-425F-A45D-D468-FFA21B905555";
-	setAttr ".tan" 18;
-	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
-createNode animCurveUU -n "legFront_R0_root_sq_profile";
-	rename -uid "3CEE7719-4CFC-4B9B-0836-F1B91F601A81";
-	setAttr ".tan" 18;
-	setAttr ".wgt" no;
-	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
-createNode mgear_curveCns -n "mgear_curveCns181";
-	rename -uid "3CF4FE84-4135-80A5-1071-15B92F0B4EE0";
-	setAttr -s 3 ".inputs";
-createNode objectSet -n "mgear_curveCns181Set";
-	rename -uid "0721F6EB-4B88-9D26-B7C5-E9B25E702EA1";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns181GroupId";
-	rename -uid "58CC08FC-4C44-A721-1269-268859C52243";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns181GroupParts";
-	rename -uid "A74D9551-4729-3AB7-733B-53BCF10D609A";
+createNode groupParts -n "groupParts372";
+	rename -uid "BCAA02C9-4CBC-F222-51CE-EA946FAE6B82";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak181";
-	rename -uid "07AA57F1-497E-FE5E-EF5E-DA9695D59E96";
-createNode objectSet -n "tweakSet181";
-	rename -uid "ED488B69-42E0-F866-BD51-00804CE066CF";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId362";
-	rename -uid "8ADEB8EB-41BF-1F02-2D86-EFB011767CA6";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts362";
-	rename -uid "1FF55FDA-4B05-F551-139B-9BA3D21814C6";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns182";
-	rename -uid "EC0B0441-4F99-6242-82E8-1292D1414F47";
-	setAttr -s 5 ".inputs";
-createNode objectSet -n "mgear_curveCns182Set";
-	rename -uid "80F9D3E0-4B68-643A-FC5A-08B948487824";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns182GroupId";
-	rename -uid "A9F47892-4B95-8E21-FAD4-0BB5076F1758";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns182GroupParts";
-	rename -uid "D1A45C24-498B-61C7-275F-FE8D622D3127";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak182";
-	rename -uid "DE06A261-49E6-C5F9-A804-AE83D6E19309";
-createNode objectSet -n "tweakSet182";
-	rename -uid "1FB48147-4C5A-41B8-4B12-B69A470ED569";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId364";
-	rename -uid "07597A06-459F-DCF7-4B5D-A9928EB0ACDB";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts364";
-	rename -uid "EE2FCECC-4C28-70CD-C98F-45B9B11E0167";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns180";
-	rename -uid "7747F8EA-4D61-7636-BA00-FBB26251EA17";
-	setAttr -s 5 ".inputs";
-createNode objectSet -n "mgear_curveCns180Set";
-	rename -uid "7B72800E-40AC-12E6-28C5-49A60C99618F";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns180GroupId";
-	rename -uid "2E5F0CD5-4D21-071E-F14D-5496EDC62475";
-	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns180GroupParts";
-	rename -uid "1463EA88-4E3F-4C9D-F33E-33AF974B63EB";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak180";
-	rename -uid "59284B5E-4D9A-FA81-003B-89953941C0A2";
-createNode objectSet -n "tweakSet180";
-	rename -uid "C334CF08-4C50-5D6A-41B3-7AB8E30F01B8";
-	setAttr ".ihi" 0;
-	setAttr ".vo" yes;
-createNode groupId -n "groupId360";
-	rename -uid "CAA03350-45EE-DB1D-701C-FFA1401106C8";
-	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts360";
-	rename -uid "E1608407-42ED-47D0-0130-ACB675F7C3E1";
-	setAttr ".ihi" 0;
-	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode unitConversion -n "unitConversion31";
-	rename -uid "655C4B38-416D-FC2B-303E-56B2DFDFDC4D";
-	setAttr ".cf" 0.017453292519943295;
-createNode mgear_curveCns -n "mgear_curveCns179";
-	rename -uid "C3773446-44EA-3DE6-3610-52B820946FBE";
+createNode mgear_curveCns -n "mgear_curveCns187";
+	rename -uid "591040AE-4077-EB3E-9CBE-A6943786490A";
 	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns179Set";
-	rename -uid "D7D6D510-4EAE-6894-A072-BDBFBDCB6C0A";
+createNode tweak -n "tweak187";
+	rename -uid "79C8B6F1-4734-CCED-EC53-0DBC353CFD52";
+createNode objectSet -n "mgear_curveCns187Set";
+	rename -uid "E9D78926-4F8B-2F46-11C1-56AFB1F48C35";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns179GroupId";
-	rename -uid "D03FE963-463F-10B2-4D3B-00B34B7524BE";
+createNode groupId -n "mgear_curveCns187GroupId";
+	rename -uid "C07F1610-4DF4-2B37-9904-F4BADEF8927D";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns179GroupParts";
-	rename -uid "DE4DC584-476F-BED4-BD59-1C9241628023";
+createNode groupParts -n "mgear_curveCns187GroupParts";
+	rename -uid "6DF8C15B-47B3-1B9B-134F-2E9E85DC9AC1";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak179";
-	rename -uid "B53413C0-41D1-8527-E895-D997A00F8E7A";
-createNode objectSet -n "tweakSet179";
-	rename -uid "F0D14227-4319-6EBE-B0C8-B1BFF8783DB3";
+createNode objectSet -n "tweakSet187";
+	rename -uid "9351A3FD-43C7-087E-EEC1-FD825FAE55D8";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId358";
-	rename -uid "6BCC3E70-4234-C89F-BB5C-879FBE4B6F57";
+createNode groupId -n "groupId374";
+	rename -uid "EE4E7482-4D7B-8EAE-8CCD-78BB043983B2";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts358";
-	rename -uid "0A7BE987-4FFC-1B2F-F973-BE9CB75CE863";
+createNode groupParts -n "groupParts374";
+	rename -uid "0C6A370B-48A2-FD2D-BBF0-9193336918C5";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode unitConversion -n "unitConversion28";
-	rename -uid "AC700A5C-426B-E3D6-A5F8-31AAA1480F7A";
-	setAttr ".cf" 0.017453292519943295;
-createNode mgear_curveCns -n "mgear_curveCns156";
-	rename -uid "D12ADECD-4CA4-929B-2680-EFBC0F2E749A";
+createNode mgear_curveCns -n "mgear_curveCns188";
+	rename -uid "3856F211-4DB8-DC53-AA5E-2C85B81AD51F";
 	setAttr -s 2 ".inputs";
-createNode objectSet -n "mgear_curveCns156Set";
-	rename -uid "785B099B-4163-470B-2140-FD87B21DF44A";
+createNode tweak -n "tweak188";
+	rename -uid "DB52CD60-46C3-76AD-C096-5EA19F1A08D3";
+createNode objectSet -n "mgear_curveCns188Set";
+	rename -uid "C4A57F10-4D04-BA54-229B-64A809773EBC";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns156GroupId";
-	rename -uid "982F78D9-4468-0936-8937-8ABEC12372DD";
+createNode groupId -n "mgear_curveCns188GroupId";
+	rename -uid "5E8CDD3D-4587-037B-EB08-4AB7BB9C4ACB";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns156GroupParts";
-	rename -uid "ADCE644F-442F-18E7-3FEB-00B481421712";
+createNode groupParts -n "mgear_curveCns188GroupParts";
+	rename -uid "AEC4F2D1-4432-750A-952F-B39890749C79";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak156";
-	rename -uid "BD12A9FC-4DB5-0DF9-6DF4-8ABFD3E442C7";
-createNode objectSet -n "tweakSet156";
-	rename -uid "4B1C65A4-4CC2-F463-895F-4BBCA7A79B5D";
+createNode objectSet -n "tweakSet188";
+	rename -uid "CECE9CCB-4006-BD9A-610E-0FBF3477D1B3";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId312";
-	rename -uid "27F624E7-4C50-B868-BEA3-6AA8C8C19C83";
+createNode groupId -n "groupId376";
+	rename -uid "8282C970-4A10-EA12-013C-14AA9990F048";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts312";
-	rename -uid "F0679B82-4B3E-752A-5968-D3A33F345E0B";
+createNode groupParts -n "groupParts376";
+	rename -uid "4283FC60-4E8E-A021-65F4-C399CDB06E92";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode animCurveUU -n "legBack_L0_root_st_profile";
-	rename -uid "2B3162D3-4F8A-7F71-07A4-1E890FE4CC63";
+createNode mgear_curveCns -n "mgear_curveCns189";
+	rename -uid "A1CA27B2-496A-6BB9-5707-39A1577C24E6";
+	setAttr -s 2 ".inputs";
+createNode tweak -n "tweak189";
+	rename -uid "60DD30BA-43B8-B13E-2FB8-1B9F8EA8A393";
+createNode objectSet -n "mgear_curveCns189Set";
+	rename -uid "270CA835-4F89-0E86-ED5B-8D932FE1BC5D";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns189GroupId";
+	rename -uid "1244F9A0-49A6-F404-5878-B28F98167790";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns189GroupParts";
+	rename -uid "81D9EB80-4B01-F426-F937-E9B060AECD49";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet189";
+	rename -uid "FAD0A8F7-4AB9-4978-DE08-37A9BA3AB752";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId378";
+	rename -uid "320E830A-46E8-C88F-7369-F48E17186773";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts378";
+	rename -uid "943192C7-4F36-742F-6F68-A99DEA81CD58";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode mgear_curveCns -n "mgear_curveCns190";
+	rename -uid "C84B6EA3-4F8F-74B5-3928-9C97AEA5AF4D";
+	setAttr -s 2 ".inputs";
+createNode tweak -n "tweak190";
+	rename -uid "3F543231-44E3-C4CB-3D69-439B386686E4";
+createNode objectSet -n "mgear_curveCns190Set";
+	rename -uid "94326E95-43B1-1064-CDCA-B5ACCC55C495";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns190GroupId";
+	rename -uid "3BBFE3D2-4EC2-005D-8CA9-0D8B5C314502";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns190GroupParts";
+	rename -uid "7BBA29C4-4591-4E56-551B-99A2B527ED22";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet190";
+	rename -uid "F9C7471D-4FFC-7607-BAC7-4D9982022CCD";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId380";
+	rename -uid "5D60552F-45AF-B8B0-1BA2-7BBF5C741C9D";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts380";
+	rename -uid "371C4504-4BF6-2DAB-7B3F-96BBAF1988DD";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode mgear_curveCns -n "mgear_curveCns191";
+	rename -uid "465FB26C-4701-16F6-5BE8-32BD7E4666D7";
+	setAttr -s 2 ".inputs";
+createNode tweak -n "tweak191";
+	rename -uid "7E3D0E1F-49A8-DC60-3AB8-4D9287C62052";
+createNode objectSet -n "mgear_curveCns191Set";
+	rename -uid "7E0BBC2F-4153-EC0E-8E7C-B7BDC3BADCEF";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns191GroupId";
+	rename -uid "165EB922-4B58-6D84-C1B4-078F9E40AEED";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns191GroupParts";
+	rename -uid "2CADA8D3-4937-82E5-0FCC-85B91F67DDFE";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet191";
+	rename -uid "7937EE14-451E-A510-604D-84A66762F47A";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId382";
+	rename -uid "3815AE70-46EE-7BB3-C8DF-5DBB633F0082";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts382";
+	rename -uid "A6F2300E-42E0-97A3-06CF-AB9C99350BAF";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode unitConversion -n "unitConversion34";
+	rename -uid "2CE2613C-4CB8-E67D-07EC-A9BB9EBF9F7E";
+	setAttr ".cf" 0.017453292519943295;
+createNode mgear_curveCns -n "mgear_curveCns192";
+	rename -uid "183D9DF5-49ED-31FA-DEF2-2481CE9D1029";
+	setAttr -s 2 ".inputs";
+createNode tweak -n "tweak192";
+	rename -uid "5DEBB05C-4588-CB71-DB04-38B57024D3C9";
+createNode objectSet -n "mgear_curveCns192Set";
+	rename -uid "85459B48-4AB8-B38D-88E9-FFA80B1EB8DB";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns192GroupId";
+	rename -uid "D80DBBFE-4592-EA10-70D9-A2971180E36F";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns192GroupParts";
+	rename -uid "D3D9B12C-40C5-F232-D330-8CAD1CDCE7B2";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet192";
+	rename -uid "E3D17D87-404C-11EB-041C-F89335D43487";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId384";
+	rename -uid "403342E4-4278-1FA3-BFD7-B28F1D8E3F79";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts384";
+	rename -uid "D7C832AB-4C86-E9EC-E295-E5A40801A6B0";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode animCurveUU -n "legFront_L0_root_st_profile1";
+	rename -uid "F7F5A93E-4C11-87E7-58B0-B48781E4E4EB";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
-createNode animCurveUU -n "legBack_L0_root_sq_profile";
-	rename -uid "4F295B79-4E35-3556-7877-01B279A4C390";
+createNode animCurveUU -n "legFront_L0_root_sq_profile1";
+	rename -uid "A5EA90AB-46F8-ADC3-6AD3-9588B1DE16D0";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
-createNode mgear_curveCns -n "mgear_curveCns174";
-	rename -uid "F2F384C3-42E3-0ABC-C7E0-C8827A99369E";
+createNode mgear_curveCns -n "mgear_curveCns193";
+	rename -uid "4D953076-468C-1A27-4607-B884CF1F7874";
+	setAttr -s 5 ".inputs";
+createNode tweak -n "tweak193";
+	rename -uid "0C833A5B-471B-FA2C-B560-DABBE087A13C";
+createNode objectSet -n "mgear_curveCns193Set";
+	rename -uid "87DF384F-450C-3631-FFF2-ECB3B716B379";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns193GroupId";
+	rename -uid "4EBDE493-49C2-1801-E65A-C2A8BCD8B76D";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns193GroupParts";
+	rename -uid "37EF4893-451B-6A3E-D569-D0A4EAD2CE3F";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet193";
+	rename -uid "86B22D4F-4B82-298E-04DB-6186DDACBBF7";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId386";
+	rename -uid "7DB88CB3-4F9F-D65F-C716-8588C4334413";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts386";
+	rename -uid "CC0D316B-4FA8-8AF0-2DBB-2799F39EEA79";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode mgear_curveCns -n "mgear_curveCns194";
+	rename -uid "6665B84D-479B-4CB4-D16C-F9A6CD3E5C73";
 	setAttr -s 3 ".inputs";
-createNode objectSet -n "mgear_curveCns174Set";
-	rename -uid "E78AD091-4AE6-052B-12CF-71A0B45C9D2F";
+createNode tweak -n "tweak194";
+	rename -uid "740991D3-4247-7074-DD6D-E38CDA300760";
+createNode objectSet -n "mgear_curveCns194Set";
+	rename -uid "5248003A-40BC-698C-1865-0585754ED983";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns174GroupId";
-	rename -uid "C4DC0AD8-4FBE-ED1D-936D-F89D04B4967C";
+createNode groupId -n "mgear_curveCns194GroupId";
+	rename -uid "E3C39CA2-4C96-11BD-BFF9-508C314786C1";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns174GroupParts";
-	rename -uid "98867574-4C7A-6C69-325F-94B03BEBFBB0";
+createNode groupParts -n "mgear_curveCns194GroupParts";
+	rename -uid "D2A38D49-4BBB-94C8-F80C-34A90A68B89C";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak174";
-	rename -uid "63AB8AD1-42BC-322C-362A-D182C9AC65B6";
-createNode objectSet -n "tweakSet174";
-	rename -uid "50D8C6D8-42BF-2C59-0216-B3BE7FA43151";
+createNode objectSet -n "tweakSet194";
+	rename -uid "B2C5BA6A-46AD-81E0-C1B2-29928DFA64FA";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId348";
-	rename -uid "6843F2F9-4246-1ECE-F54F-D7A79B531EED";
+createNode groupId -n "groupId388";
+	rename -uid "F43DB70F-4705-C981-B684-258C29873E3F";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts348";
-	rename -uid "C83801FA-45E0-B3C4-F4F2-0290627FE6B1";
+createNode groupParts -n "groupParts388";
+	rename -uid "36EF0DEE-4620-5484-504F-BD9C8BE9BCD6";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns175";
-	rename -uid "EEFD214C-48DC-E80D-30C8-D6B8CB96F5BD";
+createNode mgear_curveCns -n "mgear_curveCns195";
+	rename -uid "DD725DA7-4EF1-BF51-E708-029D55AF9B57";
 	setAttr -s 5 ".inputs";
-createNode objectSet -n "mgear_curveCns175Set";
-	rename -uid "18DF929A-41D7-EAB0-8763-52A40FA53B53";
+createNode tweak -n "tweak195";
+	rename -uid "50752A76-4E45-2F02-6808-3498ED398A2A";
+createNode objectSet -n "mgear_curveCns195Set";
+	rename -uid "7504D07A-42F3-31A8-B114-D383B996B09C";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns175GroupId";
-	rename -uid "19B36CC8-4451-0EF4-2A96-76BC2650A5AB";
+createNode groupId -n "mgear_curveCns195GroupId";
+	rename -uid "6C28D4BD-43EA-918A-9E35-2A8FC10D5FB9";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns175GroupParts";
-	rename -uid "D9D17387-4183-B2C9-4F3D-79AECBF611F0";
+createNode groupParts -n "mgear_curveCns195GroupParts";
+	rename -uid "F5DBDC78-46FD-3E3E-F835-0A8A7B9F2299";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak175";
-	rename -uid "B85D4286-4549-39C1-F2FC-2187010B0646";
-createNode objectSet -n "tweakSet175";
-	rename -uid "1D098C6D-4856-6298-D952-D1BC05701041";
+createNode objectSet -n "tweakSet195";
+	rename -uid "603C8EA7-4B4E-F029-2743-9E9420DC1804";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId350";
-	rename -uid "7D026C50-43B7-57A6-C8DA-34A35AA6C521";
+createNode groupId -n "groupId390";
+	rename -uid "5D6968F4-4233-6868-5705-0BAFFAC45D43";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts350";
-	rename -uid "F2FE0293-4661-36F2-3972-9E85920DE412";
+createNode groupParts -n "groupParts390";
+	rename -uid "6D86B320-4A08-28C1-137E-6FA3C48865D3";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns173";
-	rename -uid "E2F7CD4A-4392-6E09-9475-11990E518576";
-	setAttr -s 5 ".inputs";
-createNode objectSet -n "mgear_curveCns173Set";
-	rename -uid "110C8EE0-495A-BBB3-D08C-44B11AAB3078";
+createNode unitConversion -n "unitConversion35";
+	rename -uid "1A60D4D8-4BCC-7839-5AAB-8EABC7FA4200";
+	setAttr ".cf" 0.017453292519943295;
+createNode mgear_curveCns -n "mgear_curveCns196";
+	rename -uid "838F2F68-4BD7-9779-DD61-D6936A4ADCAB";
+	setAttr -s 2 ".inputs";
+createNode tweak -n "tweak196";
+	rename -uid "2200686D-4E89-CEC0-1FCE-50A1EC26E467";
+createNode objectSet -n "mgear_curveCns196Set";
+	rename -uid "17C06CC9-4F1F-9597-C50F-8FBBD5718657";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns173GroupId";
-	rename -uid "8A23A1AD-4733-8DB0-413A-F5B064DBAA47";
+createNode groupId -n "mgear_curveCns196GroupId";
+	rename -uid "422D0EA8-4C26-D192-B60A-85B060D4AC95";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns173GroupParts";
-	rename -uid "65EB290D-47ED-A250-C48F-389CB3D137A1";
+createNode groupParts -n "mgear_curveCns196GroupParts";
+	rename -uid "66E992B4-4699-75AD-5C21-9D91BF9A4FD6";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak173";
-	rename -uid "94A35894-4518-B00D-D9CF-2588B5762F55";
-createNode objectSet -n "tweakSet173";
-	rename -uid "F89BD380-479E-9507-2A41-029BE535C785";
+createNode objectSet -n "tweakSet196";
+	rename -uid "0A7D1DA3-4B97-AE86-30AA-27AC6B39B10B";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId346";
-	rename -uid "6F548DAB-49F7-3D2A-CBCF-11BD75F27D9E";
+createNode groupId -n "groupId392";
+	rename -uid "6BE19E6B-445E-D05D-D0EA-3DBCE82F9A58";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts346";
-	rename -uid "70EA9388-4A2B-D1C4-1B05-B68EF0A94A44";
+createNode groupParts -n "groupParts392";
+	rename -uid "D4DD9505-4F3C-4B8F-F301-23AB39EA0609";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode animCurveUU -n "legBack_R0_root_st_profile";
-	rename -uid "087816FF-49C3-6C6C-F5E3-5AAF325C6849";
+createNode animCurveUU -n "legFront_R0_root_st_profile1";
+	rename -uid "9E7CFC7D-4AAC-4324-710B-FBB924DFCD76";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
-createNode animCurveUU -n "legBack_R0_root_sq_profile";
-	rename -uid "B8CE86A9-456E-A52F-9677-6F9A0D2E5941";
+createNode animCurveUU -n "legFront_R0_root_sq_profile1";
+	rename -uid "16B19B37-413D-C191-14D1-3C8C0A89E044";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
-createNode mgear_curveCns -n "mgear_curveCns177";
-	rename -uid "BA8C5C94-4867-7C5C-5B2F-D5827109AC20";
+createNode mgear_curveCns -n "mgear_curveCns197";
+	rename -uid "F021B733-47A6-75A0-1D40-97BF57FFEF54";
+	setAttr -s 5 ".inputs";
+createNode tweak -n "tweak197";
+	rename -uid "FFE48F12-48DC-B8E2-5A8B-AFAFA65077CF";
+createNode objectSet -n "mgear_curveCns197Set";
+	rename -uid "F416CAD4-41E9-AE88-D526-53814E65808D";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns197GroupId";
+	rename -uid "97E2B5A3-49D4-1372-6EB8-D3AB4669792A";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns197GroupParts";
+	rename -uid "A25AF003-497F-4EBA-C237-BCA73C4DEFE8";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet197";
+	rename -uid "EA65AC90-461D-2A0A-7405-6080B9A38D30";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId394";
+	rename -uid "4A2EF0D4-43C9-8077-E807-61BAB3879CB1";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts394";
+	rename -uid "821D8376-47B1-0EEC-98C8-829965089C7B";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode mgear_curveCns -n "mgear_curveCns198";
+	rename -uid "864A0153-4870-DB45-D813-52850C466A02";
 	setAttr -s 3 ".inputs";
-createNode objectSet -n "mgear_curveCns177Set";
-	rename -uid "CFB17882-46A1-09AA-6A85-12873EEAD3D5";
+createNode tweak -n "tweak198";
+	rename -uid "1CB7503B-43A3-ECFE-78CD-34942379508C";
+createNode objectSet -n "mgear_curveCns198Set";
+	rename -uid "580384FC-44B6-8EA0-63CE-5A90BB2C7E4F";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns177GroupId";
-	rename -uid "B179D96B-4008-0A38-EDB8-4DBE75D06679";
+createNode groupId -n "mgear_curveCns198GroupId";
+	rename -uid "D1F70E33-4D58-D433-A53B-159FBA2016F0";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns177GroupParts";
-	rename -uid "92EE38C0-45C9-2FD9-8BD6-9D8BCB40FDC6";
+createNode groupParts -n "mgear_curveCns198GroupParts";
+	rename -uid "30D2F809-47A7-0D47-2F20-2597F7E14E38";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak177";
-	rename -uid "ACE37B7E-4E37-C680-FC05-FBBCB0F7CFAA";
-createNode objectSet -n "tweakSet177";
-	rename -uid "1C02325F-4904-DF93-84D1-8AA51DFAE29A";
+createNode objectSet -n "tweakSet198";
+	rename -uid "75776081-438D-3618-FEF6-F3B2BEB47375";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId354";
-	rename -uid "34B6C12C-4D53-3110-C336-02BD00587C65";
+createNode groupId -n "groupId396";
+	rename -uid "286ECEE2-4D96-4194-BF1C-FEB242579148";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts354";
-	rename -uid "91038817-405F-2484-6FEA-99BD0AD7123C";
+createNode groupParts -n "groupParts396";
+	rename -uid "392053D1-44F8-2B1E-3A19-1C8DF3540447";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns178";
-	rename -uid "B6717E75-4B4D-9C6D-E0C4-5E947A8F1610";
+createNode mgear_curveCns -n "mgear_curveCns199";
+	rename -uid "44373E99-410D-A4D1-147C-569AD4C6647E";
 	setAttr -s 5 ".inputs";
-createNode objectSet -n "mgear_curveCns178Set";
-	rename -uid "9EDF373D-4274-C9AE-28B9-729B79EA3C76";
+createNode tweak -n "tweak199";
+	rename -uid "8C620EA3-42F0-958B-E12D-A1A7A0E7DC6C";
+createNode objectSet -n "mgear_curveCns199Set";
+	rename -uid "A644DB62-42D4-78F3-5912-959E17387D30";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns178GroupId";
-	rename -uid "6F59A620-4EBE-82C2-2601-04B69AB6A0A7";
+createNode groupId -n "mgear_curveCns199GroupId";
+	rename -uid "B1CFF983-4B8B-9827-15EC-5CB003A6F216";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns178GroupParts";
-	rename -uid "A8100D75-436E-1388-278C-E6AC5DBCF768";
+createNode groupParts -n "mgear_curveCns199GroupParts";
+	rename -uid "34E3E80B-4605-9098-0F80-E7A72223DC63";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak178";
-	rename -uid "6B8C4424-45A0-6E6A-1DBA-CCB79870B86B";
-createNode objectSet -n "tweakSet178";
-	rename -uid "9D5C2CA9-44BE-82B0-2245-3FA768428411";
+createNode objectSet -n "tweakSet199";
+	rename -uid "09FD9EE3-47A4-82F0-14BF-E2AB03CEBB5F";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId356";
-	rename -uid "8B41E987-4D7A-DE11-05C0-4D9C04EBE168";
+createNode groupId -n "groupId398";
+	rename -uid "E843ECE3-4D95-69EF-B5CD-199FED311FB5";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts356";
-	rename -uid "CB0D8B1B-4B04-5219-C9BB-149625869ED3";
+createNode groupParts -n "groupParts398";
+	rename -uid "1A6F68EE-49B9-7AC6-0924-D5BDF324A168";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode mgear_curveCns -n "mgear_curveCns176";
-	rename -uid "5816E2B6-4181-1C2A-343A-B8B3BA8C8863";
+createNode animCurveUU -n "legBack_L0_root_st_profile1";
+	rename -uid "63753751-43C6-81C1-8631-AAADBC494538";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
+createNode animCurveUU -n "legBack_L0_root_sq_profile1";
+	rename -uid "754BF9F3-4ABE-2C6D-9510-47B1DC667B14";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
+createNode mgear_curveCns -n "mgear_curveCns200";
+	rename -uid "59538381-4D37-CE33-2707-A1A80EBDBDC4";
 	setAttr -s 5 ".inputs";
-createNode objectSet -n "mgear_curveCns176Set";
-	rename -uid "48C89000-4364-326A-0E15-5E86791C4794";
+createNode tweak -n "tweak200";
+	rename -uid "17E622B4-45D9-7248-EA40-69B3552075EC";
+createNode objectSet -n "mgear_curveCns200Set";
+	rename -uid "710E5537-4B48-A311-E15D-E3936AB1E1E1";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "mgear_curveCns176GroupId";
-	rename -uid "EBE02648-4C32-B36F-4AF0-35A7B38635B0";
+createNode groupId -n "mgear_curveCns200GroupId";
+	rename -uid "2EF4A523-4174-F2B8-F0A7-C59F0B4A8E95";
 	setAttr ".ihi" 0;
-createNode groupParts -n "mgear_curveCns176GroupParts";
-	rename -uid "09EFF952-4FE4-F39D-AF98-1EA830A29946";
+createNode groupParts -n "mgear_curveCns200GroupParts";
+	rename -uid "70F7F6C1-4FC6-FB9E-756E-528859E779CC";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
-createNode tweak -n "tweak176";
-	rename -uid "D4C28885-4BE5-DA99-6856-DB9721538219";
-createNode objectSet -n "tweakSet176";
-	rename -uid "2B6260AA-4736-1683-B284-97AC3F46846B";
+createNode objectSet -n "tweakSet200";
+	rename -uid "124AF794-40D0-9137-C69B-FEA79CDEF9BE";
 	setAttr ".ihi" 0;
 	setAttr ".vo" yes;
-createNode groupId -n "groupId352";
-	rename -uid "A446A3C0-494C-FDEF-FCE2-3889A74219E2";
+createNode groupId -n "groupId400";
+	rename -uid "777C0B77-41E4-E081-732A-7B8387DC59EC";
 	setAttr ".ihi" 0;
-createNode groupParts -n "groupParts352";
-	rename -uid "451E1D0B-4CBC-A8D0-9AB8-948075B9FEF9";
+createNode groupParts -n "groupParts400";
+	rename -uid "BECCA4A3-432D-7553-75B7-33ADA4A71117";
 	setAttr ".ihi" 0;
 	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode mgear_curveCns -n "mgear_curveCns201";
+	rename -uid "C93EB88D-46F3-5D97-90BF-648DD5CE9566";
+	setAttr -s 3 ".inputs";
+createNode tweak -n "tweak201";
+	rename -uid "E2C3C30F-4263-A620-3F1C-F8AFA38DB8D1";
+createNode objectSet -n "mgear_curveCns201Set";
+	rename -uid "7E5A9F10-4B3B-A5BF-A449-DC8E0DAC91B0";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns201GroupId";
+	rename -uid "17C29421-48B7-FA2F-F4E6-FA88463BB1C8";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns201GroupParts";
+	rename -uid "BF0FC7E0-43EC-2F7D-35A9-3D9F6473E0A9";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet201";
+	rename -uid "4969C409-42B6-1CA3-C6DD-CD85F1071D91";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId402";
+	rename -uid "6B9D457E-4DDA-671A-BF75-F383B57CDEDB";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts402";
+	rename -uid "98F76D13-4141-AE05-EB34-2F80034DEF0F";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode mgear_curveCns -n "mgear_curveCns202";
+	rename -uid "8A38D017-4C1E-1722-A46A-B58A8411EFA0";
+	setAttr -s 5 ".inputs";
+createNode tweak -n "tweak202";
+	rename -uid "6B0306D7-46D0-8760-E899-29B958429795";
+createNode objectSet -n "mgear_curveCns202Set";
+	rename -uid "FDA6F2C3-45D8-18BE-4120-0ABC757D2D9B";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns202GroupId";
+	rename -uid "D2390497-4C11-7BBC-5FCB-8C807379D377";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns202GroupParts";
+	rename -uid "F0200884-4811-BD41-2945-9AB4020D925A";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet202";
+	rename -uid "B74F179E-4301-F308-85F7-74A0BD95CCC9";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId404";
+	rename -uid "FF40C057-41A6-F9DE-7301-A989619F3022";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts404";
+	rename -uid "16DCCB9C-49F6-AECE-9704-A6A67CC94F53";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode animCurveUU -n "legBack_R0_root_st_profile1";
+	rename -uid "AB613EC9-4EC5-C65C-C865-18B78AB7D01D";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 -1 1 0;
+createNode animCurveUU -n "legBack_R0_root_sq_profile1";
+	rename -uid "63D80007-4272-E7D5-463F-8980C0546355";
+	setAttr ".tan" 18;
+	setAttr ".wgt" no;
+	setAttr -s 3 ".ktv[0:2]"  0 0 0.5 1 1 0;
+createNode mgear_curveCns -n "mgear_curveCns203";
+	rename -uid "B5BD0D76-4CB8-73CE-23AE-F0B57234E7C3";
+	setAttr -s 5 ".inputs";
+createNode tweak -n "tweak203";
+	rename -uid "69B612D3-414A-73B2-FC72-E3AE37CBB476";
+createNode objectSet -n "mgear_curveCns203Set";
+	rename -uid "CFDFC27B-4C6F-6AE1-C062-ECA30AF28EDF";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns203GroupId";
+	rename -uid "858FCD7E-4821-3DB6-3737-7AA1D132890A";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns203GroupParts";
+	rename -uid "ACE3E8F7-435B-6E27-7D3E-D18EE454DC4D";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet203";
+	rename -uid "FD62A262-4B76-C1EA-DCF6-388EAA0ED048";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId406";
+	rename -uid "F89D4A34-43D9-1540-E284-9CBB96C3D770";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts406";
+	rename -uid "C455165E-44C6-B92F-7685-59A40013735B";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode mgear_curveCns -n "mgear_curveCns204";
+	rename -uid "58CA756D-4320-370A-0C92-9EBDDFA9F960";
+	setAttr -s 3 ".inputs";
+createNode tweak -n "tweak204";
+	rename -uid "77B337D4-408A-9FC5-8078-3784AD709307";
+createNode objectSet -n "mgear_curveCns204Set";
+	rename -uid "E43362B7-4844-3EB4-EE24-22915DCF8DDA";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns204GroupId";
+	rename -uid "746C564D-4781-09D7-5A7C-589F6E46D923";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns204GroupParts";
+	rename -uid "5E50172D-444A-DDA6-21F6-F7BF094D2155";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet204";
+	rename -uid "786B8472-4114-07E6-5D8D-90A5E6EF6218";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId408";
+	rename -uid "BCDDAF94-4BD2-14B3-BD9C-0084767D779C";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts408";
+	rename -uid "5B6ABFB3-4743-44A7-C4A0-8BB645A3EBE8";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode mgear_curveCns -n "mgear_curveCns205";
+	rename -uid "AE4CEC41-4FD6-6751-A7B4-A79EEFC27C1A";
+	setAttr -s 5 ".inputs";
+createNode tweak -n "tweak205";
+	rename -uid "67DC8234-449C-E2BC-98DA-B382B7E21F5D";
+createNode objectSet -n "mgear_curveCns205Set";
+	rename -uid "09E0ADDE-4A50-AFBC-7F97-829EDAED0424";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "mgear_curveCns205GroupId";
+	rename -uid "964C6F63-48E8-551E-53DA-8A826946B5D4";
+	setAttr ".ihi" 0;
+createNode groupParts -n "mgear_curveCns205GroupParts";
+	rename -uid "29EF41E9-44F2-5C80-A379-EBB087824CF0";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode objectSet -n "tweakSet205";
+	rename -uid "0D231BD4-4193-63AA-85C8-CB8D8F7EFF52";
+	setAttr ".ihi" 0;
+	setAttr ".vo" yes;
+createNode groupId -n "groupId410";
+	rename -uid "12667403-4AFD-7524-9712-30A5BCC2D350";
+	setAttr ".ihi" 0;
+createNode groupParts -n "groupParts410";
+	rename -uid "D32F9A9F-4A55-0D37-50D1-47AAEE96DEB2";
+	setAttr ".ihi" 0;
+	setAttr ".ic" -type "componentList" 1 "cv[*]";
+createNode script -n "uiConfigurationScriptNode";
+	rename -uid "1F8008E2-497C-466B-5D53-D49D1586B774";
+	setAttr ".b" -type "string" (
+		"// Maya Mel UI Configuration File.\n//\n//  This script is machine generated.  Edit at your own risk.\n//\n//\n\nglobal string $gMainPane;\nif (`paneLayout -exists $gMainPane`) {\n\n\tglobal int $gUseScenePanelConfig;\n\tint    $useSceneConfig = $gUseScenePanelConfig;\n\tint    $menusOkayInPanels = `optionVar -q allowMenusInPanels`;\tint    $nVisPanes = `paneLayout -q -nvp $gMainPane`;\n\tint    $nPanes = 0;\n\tstring $editorName;\n\tstring $panelName;\n\tstring $itemFilterName;\n\tstring $panelConfig;\n\n\t//\n\t//  get current state of the UI\n\t//\n\tsceneUIReplacement -update $gMainPane;\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Top View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"top\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n"
+		+ "                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n                -maxConstantTransparency 1\n"
+		+ "                -rendererName \"vp2Renderer\" \n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 256 256 \n                -bumpResolution 512 512 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n"
+		+ "                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 1\n                -height 1\n                -sceneRenderFilter 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n"
+		+ "                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"top\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n"
+		+ "            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n"
+		+ "            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n"
+		+ "        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"side\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n"
+		+ "                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n                -maxConstantTransparency 1\n                -rendererName \"vp2Renderer\" \n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 256 256 \n                -bumpResolution 512 512 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n"
+		+ "                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n"
+		+ "                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 1\n                -height 1\n                -sceneRenderFilter 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"side\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n"
+		+ "            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n"
+		+ "            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n"
+		+ "            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels `;\n"
+		+ "\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"front\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n"
+		+ "                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n                -maxConstantTransparency 1\n                -rendererName \"vp2Renderer\" \n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 256 256 \n                -bumpResolution 512 512 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n"
+		+ "                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -captureSequenceNumber -1\n"
+		+ "                -width 1\n                -height 1\n                -sceneRenderFilter 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n"
+		+ "            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n"
+		+ "            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n"
+		+ "            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `modelPanel -unParent -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            modelEditor -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n"
+		+ "                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n                -maxConstantTransparency 1\n                -rendererName \"vp2Renderer\" \n                -objectFilterShowInHUD 1\n                -isFiltered 0\n"
+		+ "                -colorResolution 256 256 \n                -bumpResolution 512 512 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 1\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n"
+		+ "                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 1300\n                -height 740\n                -sceneRenderFilter 0\n                $editorName;\n            modelEditor -e -viewSelected 0 $editorName;\n            modelEditor -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n"
+		+ "\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -camera \"persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n"
+		+ "            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n"
+		+ "            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1300\n            -height 740\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n        modelEditor -e \n            -pluginObjects \"gpuCacheDisplayFilter\" 1 \n"
+		+ "            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `outlinerPanel -unParent -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels `;\n\t\t\t$editorName = $panelName;\n            outlinerEditor -e \n                -docTag \"isolOutln_fromSeln\" \n                -showShapes 0\n                -showAssignedMaterials 0\n                -showReferenceNodes 1\n                -showReferenceMembers 1\n                -showAttributes 0\n                -showConnected 0\n                -showAnimCurvesOnly 0\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 0\n                -showDagOnly 1\n                -showAssets 1\n                -showContainedOnly 1\n                -showPublishedAsConnected 0\n                -showContainerContents 1\n"
+		+ "                -ignoreDagHierarchy 0\n                -expandConnections 0\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 1\n                -showLeafs 1\n                -showNumericAttrsOnly 0\n                -highlightActive 1\n                -autoSelectNewObjects 0\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 0\n                -setFilter \"defaultSetFilter\" \n                -showSetMembers 1\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -isSet 0\n                -isSetMember 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n"
+		+ "                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 0\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                -renderFilterIndex 0\n                -selectionOrder \"chronological\" \n                -expandAttribute 0\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showReferenceNodes 1\n            -showReferenceMembers 1\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n"
+		+ "            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -isSet 0\n            -isSetMember 0\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n"
+		+ "            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            -renderFilterIndex 0\n            -selectionOrder \"chronological\" \n            -expandAttribute 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"graphEditor\" (localizedPanelLabel(\"Graph Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"graphEditor\" -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n"
+		+ "                -showShapes 1\n                -showAssignedMaterials 0\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n                -dropIsParent 1\n                -transmitFilters 1\n"
+		+ "                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n            animCurveEditor -e \n                -displayKeys 1\n"
+		+ "                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 1\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showResults \"off\" \n                -showBufferCurves \"off\" \n                -smoothness \"fine\" \n                -resultSamples 1\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -showCurveNames 0\n                -showActiveCurveNames 0\n                -stackedCurves 0\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -displayNormalized 0\n                -preSelectionHighlight 0\n                -constrainDrag 0\n                -classicMode 1\n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Graph Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 1\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 1\n                -showCompounds 0\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 1\n                -doNotSelectNewObjects 0\n"
+		+ "                -dropIsParent 1\n                -transmitFilters 1\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 1\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"GraphEd\");\n"
+		+ "            animCurveEditor -e \n                -displayKeys 1\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 1\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -showResults \"off\" \n                -showBufferCurves \"off\" \n                -smoothness \"fine\" \n                -resultSamples 1\n                -resultScreenSamples 0\n                -resultUpdate \"delayed\" \n                -showUpstreamCurves 1\n                -showCurveNames 0\n                -showActiveCurveNames 0\n                -stackedCurves 0\n                -stackedCurvesMin -1\n                -stackedCurvesMax 1\n                -stackedCurvesSpace 0.2\n                -displayNormalized 0\n                -preSelectionHighlight 0\n                -constrainDrag 0\n                -classicMode 1\n                $editorName;\n\t\tif (!$useSceneConfig) {\n"
+		+ "\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dopeSheetPanel\" (localizedPanelLabel(\"Dope Sheet\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"dopeSheetPanel\" -l (localizedPanelLabel(\"Dope Sheet\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 0\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n"
+		+ "                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 0\n                -showCompounds 1\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 0\n                -doNotSelectNewObjects 1\n                -dropIsParent 1\n                -transmitFilters 0\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n"
+		+ "                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"DopeSheetEd\");\n            dopeSheetEditor -e \n                -displayKeys 1\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -outliner \"dopeSheetPanel1OutlineEd\" \n                -showSummary 1\n                -showScene 0\n                -hierarchyBelow 0\n                -showTicks 1\n                -selectionWindow 0 0 0 0 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dope Sheet\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\n\t\t\t$editorName = ($panelName+\"OutlineEd\");\n            outlinerEditor -e \n                -showShapes 1\n                -showAssignedMaterials 0\n                -showReferenceNodes 0\n                -showReferenceMembers 0\n                -showAttributes 1\n                -showConnected 1\n                -showAnimCurvesOnly 1\n                -showMuteInfo 0\n                -organizeByLayer 1\n                -showAnimLayerWeight 1\n                -autoExpandLayers 1\n                -autoExpand 0\n                -showDagOnly 0\n                -showAssets 1\n                -showContainedOnly 0\n                -showPublishedAsConnected 0\n                -showContainerContents 0\n                -ignoreDagHierarchy 0\n                -expandConnections 1\n                -showUpstreamCurves 1\n                -showUnitlessCurves 0\n                -showCompounds 1\n                -showLeafs 1\n                -showNumericAttrsOnly 1\n                -highlightActive 0\n                -autoSelectNewObjects 0\n                -doNotSelectNewObjects 1\n"
+		+ "                -dropIsParent 1\n                -transmitFilters 0\n                -setFilter \"0\" \n                -showSetMembers 0\n                -allowMultiSelection 1\n                -alwaysToggleSelect 0\n                -directSelect 0\n                -displayMode \"DAG\" \n                -expandObjects 0\n                -setsIgnoreFilters 1\n                -containersIgnoreFilters 0\n                -editAttrName 0\n                -showAttrValues 0\n                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"DopeSheetEd\");\n"
+		+ "            dopeSheetEditor -e \n                -displayKeys 1\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -outliner \"dopeSheetPanel1OutlineEd\" \n                -showSummary 1\n                -showScene 0\n                -hierarchyBelow 0\n                -showTicks 1\n                -selectionWindow 0 0 0 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"clipEditorPanel\" (localizedPanelLabel(\"Trax Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"clipEditorPanel\" -l (localizedPanelLabel(\"Trax Editor\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = clipEditorNameFromPanel($panelName);\n            clipEditor -e \n"
+		+ "                -displayKeys 0\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 0 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Trax Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = clipEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayKeys 0\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 0 \n"
+		+ "                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"sequenceEditorPanel\" (localizedPanelLabel(\"Camera Sequencer\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"sequenceEditorPanel\" -l (localizedPanelLabel(\"Camera Sequencer\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = sequenceEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayKeys 0\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Camera Sequencer\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\n\t\t\t$editorName = sequenceEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayKeys 0\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 1 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperGraphPanel\" (localizedPanelLabel(\"Hypergraph Hierarchy\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"hyperGraphPanel\" -l (localizedPanelLabel(\"Hypergraph Hierarchy\")) -mbv $menusOkayInPanels `;\n\n\t\t\t$editorName = ($panelName+\"HyperGraphEd\");\n            hyperGraph -e \n                -graphLayoutStyle \"hierarchicalLayout\" \n                -orientation \"horiz\" \n"
+		+ "                -mergeConnections 0\n                -zoom 1\n                -animateTransition 0\n                -showRelationships 1\n                -showShapes 0\n                -showDeformers 0\n                -showExpressions 0\n                -showConstraints 0\n                -showConnectionFromSelected 0\n                -showConnectionToSelected 0\n                -showConstraintLabels 0\n                -showUnderworld 0\n                -showInvisible 0\n                -transitionFrames 1\n                -opaqueContainers 0\n                -freeform 0\n                -imagePosition 0 0 \n                -imageScale 1\n                -imageEnabled 0\n                -graphType \"DAG\" \n                -heatMapDisplay 0\n                -updateSelection 1\n                -updateNodeAdded 1\n                -useDrawOverrideColor 0\n                -limitGraphTraversal -1\n                -range 0 0 \n                -iconSize \"smallIcons\" \n                -showCachedConnections 0\n                $editorName;\n\t\t}\n\t} else {\n"
+		+ "\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypergraph Hierarchy\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"HyperGraphEd\");\n            hyperGraph -e \n                -graphLayoutStyle \"hierarchicalLayout\" \n                -orientation \"horiz\" \n                -mergeConnections 0\n                -zoom 1\n                -animateTransition 0\n                -showRelationships 1\n                -showShapes 0\n                -showDeformers 0\n                -showExpressions 0\n                -showConstraints 0\n                -showConnectionFromSelected 0\n                -showConnectionToSelected 0\n                -showConstraintLabels 0\n                -showUnderworld 0\n                -showInvisible 0\n                -transitionFrames 1\n                -opaqueContainers 0\n                -freeform 0\n                -imagePosition 0 0 \n                -imageScale 1\n                -imageEnabled 0\n                -graphType \"DAG\" \n                -heatMapDisplay 0\n"
+		+ "                -updateSelection 1\n                -updateNodeAdded 1\n                -useDrawOverrideColor 0\n                -limitGraphTraversal -1\n                -range 0 0 \n                -iconSize \"smallIcons\" \n                -showCachedConnections 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"visorPanel\" (localizedPanelLabel(\"Visor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"visorPanel\" -l (localizedPanelLabel(\"Visor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Visor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"createNodePanel\" (localizedPanelLabel(\"Create Node\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"createNodePanel\" -l (localizedPanelLabel(\"Create Node\")) -mbv $menusOkayInPanels `;\n"
+		+ "\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Create Node\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"polyTexturePlacementPanel\" (localizedPanelLabel(\"UV Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"polyTexturePlacementPanel\" -l (localizedPanelLabel(\"UV Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"UV Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"renderWindowPanel\" (localizedPanelLabel(\"Render View\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"renderWindowPanel\" -l (localizedPanelLabel(\"Render View\")) -mbv $menusOkayInPanels `;\n"
+		+ "\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Render View\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"shapePanel\" (localizedPanelLabel(\"Shape Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tshapePanel -unParent -l (localizedPanelLabel(\"Shape Editor\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tshapePanel -edit -l (localizedPanelLabel(\"Shape Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"posePanel\" (localizedPanelLabel(\"Pose Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\tposePanel -unParent -l (localizedPanelLabel(\"Pose Editor\")) -mbv $menusOkayInPanels ;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tposePanel -edit -l (localizedPanelLabel(\"Pose Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynRelEdPanel\" (localizedPanelLabel(\"Dynamic Relationships\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"dynRelEdPanel\" -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"relationshipPanel\" (localizedPanelLabel(\"Relationship Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"relationshipPanel\" -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"referenceEditorPanel\" (localizedPanelLabel(\"Reference Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"referenceEditorPanel\" -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"componentEditorPanel\" (localizedPanelLabel(\"Component Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"componentEditorPanel\" -l (localizedPanelLabel(\"Component Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Component Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynPaintScriptedPanelType\" (localizedPanelLabel(\"Paint Effects\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"dynPaintScriptedPanelType\" -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"scriptEditorPanel\" (localizedPanelLabel(\"Script Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"scriptEditorPanel\" -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"profilerPanel\" (localizedPanelLabel(\"Profiler Tool\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"profilerPanel\" -l (localizedPanelLabel(\"Profiler Tool\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Profiler Tool\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"contentBrowserPanel\" (localizedPanelLabel(\"Content Browser\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"contentBrowserPanel\" -l (localizedPanelLabel(\"Content Browser\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Content Browser\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"Stereo\" -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels `;\nstring $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n"
+		+ "                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n"
+		+ "                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n"
+		+ "                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 0\n                -height 0\n                -sceneRenderFilter 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName;\n            stereoCameraView -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\nstring $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n"
+		+ "                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n"
+		+ "                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n"
+		+ "                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -greasePencils 1\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 0\n                -height 0\n                -sceneRenderFilter 0\n                -displayMode \"centerEye\" \n                -viewColor 0 0 0 1 \n                -useCustomBackground 1\n"
+		+ "                $editorName;\n            stereoCameraView -e -viewSelected 0 $editorName;\n            stereoCameraView -e \n                -pluginObjects \"gpuCacheDisplayFilter\" 1 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperShadePanel\" (localizedPanelLabel(\"Hypershade\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"hyperShadePanel\" -l (localizedPanelLabel(\"Hypershade\")) -mbv $menusOkayInPanels `;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypershade\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"nodeEditorPanel\" (localizedPanelLabel(\"Node Editor\")) `;\n\tif (\"\" == $panelName) {\n\t\tif ($useSceneConfig) {\n\t\t\t$panelName = `scriptedPanel -unParent  -type \"nodeEditorPanel\" -l (localizedPanelLabel(\"Node Editor\")) -mbv $menusOkayInPanels `;\n"
+		+ "\n\t\t\t$editorName = ($panelName+\"NodeEditorEd\");\n            nodeEditor -e \n                -allAttributes 0\n                -allNodes 0\n                -autoSizeNodes 1\n                -consistentNameSize 1\n                -createNodeCommand \"nodeEdCreateNodeCommand\" \n                -defaultPinnedState 0\n                -additiveGraphingMode 0\n                -settingsChangedCallback \"nodeEdSyncControls\" \n                -traversalDepthLimit -1\n                -keyPressCommand \"nodeEdKeyPressCommand\" \n                -nodeTitleMode \"name\" \n                -gridSnap 0\n                -gridVisibility 1\n                -popupMenuScript \"nodeEdBuildPanelMenus\" \n                -showNamespace 1\n                -showShapes 1\n                -showSGShapes 0\n                -showTransforms 1\n                -useAssets 1\n                -syncedSelection 1\n                -extendToShapes 1\n                -activeTab -1\n                -editorMode \"default\" \n                $editorName;\n\t\t}\n\t} else {\n\t\t$label = `panel -q -label $panelName`;\n"
+		+ "\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Node Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"NodeEditorEd\");\n            nodeEditor -e \n                -allAttributes 0\n                -allNodes 0\n                -autoSizeNodes 1\n                -consistentNameSize 1\n                -createNodeCommand \"nodeEdCreateNodeCommand\" \n                -defaultPinnedState 0\n                -additiveGraphingMode 0\n                -settingsChangedCallback \"nodeEdSyncControls\" \n                -traversalDepthLimit -1\n                -keyPressCommand \"nodeEdKeyPressCommand\" \n                -nodeTitleMode \"name\" \n                -gridSnap 0\n                -gridVisibility 1\n                -popupMenuScript \"nodeEdBuildPanelMenus\" \n                -showNamespace 1\n                -showShapes 1\n                -showSGShapes 0\n                -showTransforms 1\n                -useAssets 1\n                -syncedSelection 1\n                -extendToShapes 1\n                -activeTab -1\n                -editorMode \"default\" \n"
+		+ "                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\tif ($useSceneConfig) {\n        string $configName = `getPanel -cwl (localizedPanelLabel(\"Current Layout\"))`;\n        if (\"\" != $configName) {\n\t\t\tpanelConfiguration -edit -label (localizedPanelLabel(\"Current Layout\")) \n\t\t\t\t-defaultImage \"\"\n\t\t\t\t-image \"\"\n\t\t\t\t-sc false\n\t\t\t\t-configString \"global string $gMainPane; paneLayout -e -cn \\\"left3\\\" -ps 1 80 78 -ps 2 20 100 -ps 3 80 22 $gMainPane;\"\n\t\t\t\t-removeAllPanels\n\t\t\t\t-ap true\n\t\t\t\t\t(localizedPanelLabel(\"Persp View\")) \n\t\t\t\t\t\"modelPanel\"\n"
+		+ "\t\t\t\t\t\"$panelName = `modelPanel -unParent -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1300\\n    -height 740\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
+		+ "\t\t\t\t\t\"modelPanel -edit -l (localizedPanelLabel(\\\"Persp View\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\nmodelEditor -e \\n    -cam `findStartUpCamera persp` \\n    -useInteractiveMode 0\\n    -displayLights \\\"default\\\" \\n    -displayAppearance \\\"smoothShaded\\\" \\n    -activeOnly 0\\n    -ignorePanZoom 0\\n    -wireframeOnShaded 0\\n    -headsUpDisplay 1\\n    -holdOuts 1\\n    -selectionHiliteDisplay 1\\n    -useDefaultMaterial 0\\n    -bufferMode \\\"double\\\" \\n    -twoSidedLighting 0\\n    -backfaceCulling 0\\n    -xray 0\\n    -jointXray 0\\n    -activeComponentsXray 0\\n    -displayTextures 0\\n    -smoothWireframe 0\\n    -lineWidth 1\\n    -textureAnisotropic 0\\n    -textureHilight 1\\n    -textureSampling 2\\n    -textureDisplay \\\"modulate\\\" \\n    -textureMaxSize 32768\\n    -fogging 0\\n    -fogSource \\\"fragment\\\" \\n    -fogMode \\\"linear\\\" \\n    -fogStart 0\\n    -fogEnd 100\\n    -fogDensity 0.1\\n    -fogColor 0.5 0.5 0.5 1 \\n    -depthOfFieldPreview 1\\n    -maxConstantTransparency 1\\n    -rendererName \\\"vp2Renderer\\\" \\n    -objectFilterShowInHUD 1\\n    -isFiltered 0\\n    -colorResolution 256 256 \\n    -bumpResolution 512 512 \\n    -textureCompression 0\\n    -transparencyAlgorithm \\\"frontAndBackCull\\\" \\n    -transpInShadows 0\\n    -cullingOverride \\\"none\\\" \\n    -lowQualityLighting 0\\n    -maximumNumHardwareLights 1\\n    -occlusionCulling 0\\n    -shadingModel 0\\n    -useBaseRenderer 0\\n    -useReducedRenderer 0\\n    -smallObjectCulling 0\\n    -smallObjectThreshold -1 \\n    -interactiveDisableShadows 0\\n    -interactiveBackFaceCull 0\\n    -sortTransparent 1\\n    -nurbsCurves 1\\n    -nurbsSurfaces 1\\n    -polymeshes 1\\n    -subdivSurfaces 1\\n    -planes 1\\n    -lights 1\\n    -cameras 1\\n    -controlVertices 1\\n    -hulls 1\\n    -grid 1\\n    -imagePlane 1\\n    -joints 1\\n    -ikHandles 1\\n    -deformers 1\\n    -dynamics 1\\n    -particleInstancers 1\\n    -fluids 1\\n    -hairSystems 1\\n    -follicles 1\\n    -nCloths 1\\n    -nParticles 1\\n    -nRigids 1\\n    -dynamicConstraints 1\\n    -locators 1\\n    -manipulators 1\\n    -pluginShapes 1\\n    -dimensions 1\\n    -handles 1\\n    -pivots 1\\n    -textures 1\\n    -strokes 1\\n    -motionTrails 1\\n    -clipGhosts 1\\n    -greasePencils 1\\n    -shadows 0\\n    -captureSequenceNumber -1\\n    -width 1300\\n    -height 740\\n    -sceneRenderFilter 0\\n    $editorName;\\nmodelEditor -e -viewSelected 0 $editorName;\\nmodelEditor -e \\n    -pluginObjects \\\"gpuCacheDisplayFilter\\\" 1 \\n    $editorName\"\n"
+		+ "\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Outliner\")) \n\t\t\t\t\t\"outlinerPanel\"\n\t\t\t\t\t\"$panelName = `outlinerPanel -unParent -l (localizedPanelLabel(\\\"Outliner\\\")) -mbv $menusOkayInPanels `;\\n$editorName = $panelName;\\noutlinerEditor -e \\n    -docTag \\\"isolOutln_fromSeln\\\" \\n    -showShapes 0\\n    -showAssignedMaterials 0\\n    -showReferenceNodes 1\\n    -showReferenceMembers 1\\n    -showAttributes 0\\n    -showConnected 0\\n    -showAnimCurvesOnly 0\\n    -showMuteInfo 0\\n    -organizeByLayer 1\\n    -showAnimLayerWeight 1\\n    -autoExpandLayers 1\\n    -autoExpand 0\\n    -showDagOnly 1\\n    -showAssets 1\\n    -showContainedOnly 1\\n    -showPublishedAsConnected 0\\n    -showContainerContents 1\\n    -ignoreDagHierarchy 0\\n    -expandConnections 0\\n    -showUpstreamCurves 1\\n    -showUnitlessCurves 1\\n    -showCompounds 1\\n    -showLeafs 1\\n    -showNumericAttrsOnly 0\\n    -highlightActive 1\\n    -autoSelectNewObjects 0\\n    -doNotSelectNewObjects 0\\n    -dropIsParent 1\\n    -transmitFilters 0\\n    -setFilter \\\"defaultSetFilter\\\" \\n    -showSetMembers 1\\n    -allowMultiSelection 1\\n    -alwaysToggleSelect 0\\n    -directSelect 0\\n    -isSet 0\\n    -isSetMember 0\\n    -displayMode \\\"DAG\\\" \\n    -expandObjects 0\\n    -setsIgnoreFilters 1\\n    -containersIgnoreFilters 0\\n    -editAttrName 0\\n    -showAttrValues 0\\n    -highlightSecondary 0\\n    -showUVAttrsOnly 0\\n    -showTextureNodesOnly 0\\n    -attrAlphaOrder \\\"default\\\" \\n    -animLayerFilterOptions \\\"allAffecting\\\" \\n    -sortOrder \\\"none\\\" \\n    -longNames 0\\n    -niceNames 1\\n    -showNamespace 1\\n    -showPinIcons 0\\n    -mapMotionTrails 0\\n    -ignoreHiddenAttribute 0\\n    -ignoreOutlinerColor 0\\n    -renderFilterVisible 0\\n    -renderFilterIndex 0\\n    -selectionOrder \\\"chronological\\\" \\n    -expandAttribute 0\\n    $editorName\"\n"
+		+ "\t\t\t\t\t\"outlinerPanel -edit -l (localizedPanelLabel(\\\"Outliner\\\")) -mbv $menusOkayInPanels  $panelName;\\n$editorName = $panelName;\\noutlinerEditor -e \\n    -docTag \\\"isolOutln_fromSeln\\\" \\n    -showShapes 0\\n    -showAssignedMaterials 0\\n    -showReferenceNodes 1\\n    -showReferenceMembers 1\\n    -showAttributes 0\\n    -showConnected 0\\n    -showAnimCurvesOnly 0\\n    -showMuteInfo 0\\n    -organizeByLayer 1\\n    -showAnimLayerWeight 1\\n    -autoExpandLayers 1\\n    -autoExpand 0\\n    -showDagOnly 1\\n    -showAssets 1\\n    -showContainedOnly 1\\n    -showPublishedAsConnected 0\\n    -showContainerContents 1\\n    -ignoreDagHierarchy 0\\n    -expandConnections 0\\n    -showUpstreamCurves 1\\n    -showUnitlessCurves 1\\n    -showCompounds 1\\n    -showLeafs 1\\n    -showNumericAttrsOnly 0\\n    -highlightActive 1\\n    -autoSelectNewObjects 0\\n    -doNotSelectNewObjects 0\\n    -dropIsParent 1\\n    -transmitFilters 0\\n    -setFilter \\\"defaultSetFilter\\\" \\n    -showSetMembers 1\\n    -allowMultiSelection 1\\n    -alwaysToggleSelect 0\\n    -directSelect 0\\n    -isSet 0\\n    -isSetMember 0\\n    -displayMode \\\"DAG\\\" \\n    -expandObjects 0\\n    -setsIgnoreFilters 1\\n    -containersIgnoreFilters 0\\n    -editAttrName 0\\n    -showAttrValues 0\\n    -highlightSecondary 0\\n    -showUVAttrsOnly 0\\n    -showTextureNodesOnly 0\\n    -attrAlphaOrder \\\"default\\\" \\n    -animLayerFilterOptions \\\"allAffecting\\\" \\n    -sortOrder \\\"none\\\" \\n    -longNames 0\\n    -niceNames 1\\n    -showNamespace 1\\n    -showPinIcons 0\\n    -mapMotionTrails 0\\n    -ignoreHiddenAttribute 0\\n    -ignoreOutlinerColor 0\\n    -renderFilterVisible 0\\n    -renderFilterIndex 0\\n    -selectionOrder \\\"chronological\\\" \\n    -expandAttribute 0\\n    $editorName\"\n"
+		+ "\t\t\t\t-ap false\n\t\t\t\t\t(localizedPanelLabel(\"Script Editor\")) \n\t\t\t\t\t\"scriptedPanel\"\n\t\t\t\t\t\"$panelName = `scriptedPanel -unParent  -type \\\"scriptEditorPanel\\\" -l (localizedPanelLabel(\\\"Script Editor\\\")) -mbv $menusOkayInPanels `\"\n\t\t\t\t\t\"scriptedPanel -edit -l (localizedPanelLabel(\\\"Script Editor\\\")) -mbv $menusOkayInPanels  $panelName\"\n\t\t\t\t$configName;\n\n            setNamedPanelLayout (localizedPanelLabel(\"Current Layout\"));\n        }\n\n        panelHistory -e -clear mainPanelHistory;\n        setFocus `paneLayout -q -p1 $gMainPane`;\n        sceneUIReplacement -deleteRemaining;\n        sceneUIReplacement -clear;\n\t}\n\n\ngrid -spacing 5 -size 12 -divisions 5 -displayAxes yes -displayGridLines yes -displayDivisionLines yes -displayPerspectiveLabels no -displayOrthographicLabels no -displayAxesBold yes -perspectiveLabelPosition axis -orthographicLabelPosition edge;\nviewManip -drawCompass 0 -compassAngle 0 -frontParameters \"\" -homeParameters \"\" -selectionLockParameters \"\";\n}\n");
+	setAttr ".st" 3;
+createNode script -n "sceneConfigurationScriptNode";
+	rename -uid "3E12F2DC-41AF-B7A5-408C-939B47AC531D";
+	setAttr ".b" -type "string" "playbackOptions -min 1 -max 120 -ast 1 -aet 200 ";
+	setAttr ".st" 6;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -10079,7 +10108,6 @@ select -ne :defaultShaderList1;
 select -ne :postProcessList1;
 	setAttr -s 2 ".p";
 select -ne :defaultRenderingList1;
-	setAttr -s 2 ".r";
 select -ne :initialShadingGroup;
 	setAttr ".ro" yes;
 select -ne :initialParticleSE;
@@ -10089,712 +10117,717 @@ select -ne :defaultResolution;
 select -ne :hardwareRenderGlobals;
 	setAttr ".ctrs" 256;
 	setAttr ".btrs" 512;
-select -ne :ikSystem;
-	setAttr -s 4 ".sol";
-connectAttr "spine_C0_root_st_profile.o" "spine_C0_root.st_profile";
-connectAttr "spine_C0_root_sq_profile.o" "spine_C0_root.sq_profile";
-connectAttr "neck_C0_root_st_profile.o" "neck_C0_root.st_profile";
-connectAttr "neck_C0_root_sq_profile.o" "neck_C0_root.sq_profile";
-connectAttr "mgear_curveCns160.og[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.cr"
+connectAttr "spine_C0_root_st_profile1.o" "spine_C0_root.st_profile";
+connectAttr "spine_C0_root_sq_profile1.o" "spine_C0_root.sq_profile";
+connectAttr "neck_C0_root_st_profile1.o" "neck_C0_root.st_profile";
+connectAttr "neck_C0_root_sq_profile1.o" "neck_C0_root.sq_profile";
+connectAttr "mgear_curveCns187.og[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.cr"
 		;
-connectAttr "tweak160.pl[0].cp[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.twl"
+connectAttr "tweak187.pl[0].cp[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.twl"
 		;
-connectAttr "mgear_curveCns160GroupId.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gid"
+connectAttr "mgear_curveCns187GroupId.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gid"
 		;
-connectAttr "mgear_curveCns160Set.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gco"
+connectAttr "mgear_curveCns187Set.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gco"
 		;
-connectAttr "groupId320.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gid"
+connectAttr "groupId374.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gid"
 		;
-connectAttr "tweakSet160.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gco"
+connectAttr "tweakSet187.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gco"
 		;
-connectAttr "mgear_curveCns161.og[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.cr"
+connectAttr "mgear_curveCns188.og[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.cr"
 		;
-connectAttr "tweak161.pl[0].cp[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.twl"
+connectAttr "tweak188.pl[0].cp[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.twl"
 		;
-connectAttr "mgear_curveCns161GroupId.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gid"
+connectAttr "mgear_curveCns188GroupId.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gid"
 		;
-connectAttr "mgear_curveCns161Set.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gco"
+connectAttr "mgear_curveCns188Set.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gco"
 		;
-connectAttr "groupId322.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gid"
+connectAttr "groupId376.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gid"
 		;
-connectAttr "tweakSet161.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gco"
+connectAttr "tweakSet188.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gco"
 		;
-connectAttr "mgear_curveCns159.og[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.cr"
+connectAttr "mgear_curveCns186.og[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.cr"
 		;
-connectAttr "tweak159.pl[0].cp[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.twl"
+connectAttr "tweak186.pl[0].cp[0]" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.twl"
 		;
-connectAttr "mgear_curveCns159GroupId.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gid"
+connectAttr "mgear_curveCns186GroupId.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gid"
 		;
-connectAttr "mgear_curveCns159Set.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gco"
+connectAttr "mgear_curveCns186Set.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[0].gco"
 		;
-connectAttr "groupId318.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gid"
+connectAttr "groupId372.id" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gid"
 		;
-connectAttr "tweakSet159.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gco"
+connectAttr "tweakSet186.mwc" "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[1].gco"
 		;
-connectAttr "mgear_curveCns162.og[0]" "mouth_C0_crv7Shape.cr";
-connectAttr "tweak162.pl[0].cp[0]" "mouth_C0_crv7Shape.twl";
-connectAttr "mgear_curveCns162GroupId.id" "mouth_C0_crv7Shape.iog.og[0].gid";
-connectAttr "mgear_curveCns162Set.mwc" "mouth_C0_crv7Shape.iog.og[0].gco";
-connectAttr "groupId324.id" "mouth_C0_crv7Shape.iog.og[1].gid";
-connectAttr "tweakSet162.mwc" "mouth_C0_crv7Shape.iog.og[1].gco";
-connectAttr "mgear_curveCns163.og[0]" "eye_L0_crvShape.cr";
-connectAttr "tweak163.pl[0].cp[0]" "eye_L0_crvShape.twl";
-connectAttr "mgear_curveCns163GroupId.id" "eye_L0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns163Set.mwc" "eye_L0_crvShape.iog.og[0].gco";
-connectAttr "groupId326.id" "eye_L0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet163.mwc" "eye_L0_crvShape.iog.og[1].gco";
-connectAttr "mgear_curveCns164.og[0]" "eye_R0_crvShape.cr";
-connectAttr "tweak164.pl[0].cp[0]" "eye_R0_crvShape.twl";
-connectAttr "mgear_curveCns164GroupId.id" "eye_R0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns164Set.mwc" "eye_R0_crvShape.iog.og[0].gco";
-connectAttr "groupId328.id" "eye_R0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet164.mwc" "eye_R0_crvShape.iog.og[1].gco";
-connectAttr "mgear_curveCns158.og[0]" "neck_C0_head_crvShape.cr";
-connectAttr "tweak158.pl[0].cp[0]" "neck_C0_head_crvShape.twl";
-connectAttr "mgear_curveCns158GroupId.id" "neck_C0_head_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns158Set.mwc" "neck_C0_head_crvShape.iog.og[0].gco";
-connectAttr "groupId316.id" "neck_C0_head_crvShape.iog.og[1].gid";
-connectAttr "tweakSet158.mwc" "neck_C0_head_crvShape.iog.og[1].gco";
-connectAttr "neck_C0_blade_pointConstraint7.ctx" "neck_C0_blade.tx" -l on;
-connectAttr "neck_C0_blade_pointConstraint7.cty" "neck_C0_blade.ty" -l on;
-connectAttr "neck_C0_blade_pointConstraint7.ctz" "neck_C0_blade.tz" -l on;
-connectAttr "neck_C0_blade_aimConstraint7.crx" "neck_C0_blade.rx" -l on;
-connectAttr "neck_C0_blade_aimConstraint7.cry" "neck_C0_blade.ry" -l on;
-connectAttr "neck_C0_blade_aimConstraint7.crz" "neck_C0_blade.rz" -l on;
-connectAttr "neck_C0_blade.pim" "neck_C0_blade_aimConstraint7.cpim";
-connectAttr "neck_C0_blade.t" "neck_C0_blade_aimConstraint7.ct";
-connectAttr "neck_C0_blade.rp" "neck_C0_blade_aimConstraint7.crp";
-connectAttr "neck_C0_blade.rpt" "neck_C0_blade_aimConstraint7.crt";
-connectAttr "neck_C0_blade.ro" "neck_C0_blade_aimConstraint7.cro";
-connectAttr "neck_C0_tan0.t" "neck_C0_blade_aimConstraint7.tg[0].tt";
-connectAttr "neck_C0_tan0.rp" "neck_C0_blade_aimConstraint7.tg[0].trp";
-connectAttr "neck_C0_tan0.rpt" "neck_C0_blade_aimConstraint7.tg[0].trt";
-connectAttr "neck_C0_tan0.pm" "neck_C0_blade_aimConstraint7.tg[0].tpm";
-connectAttr "neck_C0_blade_aimConstraint7.w0" "neck_C0_blade_aimConstraint7.tg[0].tw"
+connectAttr "mgear_curveCns189.og[0]" "mouth_C0_crv8Shape.cr";
+connectAttr "tweak189.pl[0].cp[0]" "mouth_C0_crv8Shape.twl";
+connectAttr "mgear_curveCns189GroupId.id" "mouth_C0_crv8Shape.iog.og[0].gid";
+connectAttr "mgear_curveCns189Set.mwc" "mouth_C0_crv8Shape.iog.og[0].gco";
+connectAttr "groupId378.id" "mouth_C0_crv8Shape.iog.og[1].gid";
+connectAttr "tweakSet189.mwc" "mouth_C0_crv8Shape.iog.og[1].gco";
+connectAttr "mgear_curveCns190.og[0]" "eye_L0_crvShape.cr";
+connectAttr "tweak190.pl[0].cp[0]" "eye_L0_crvShape.twl";
+connectAttr "mgear_curveCns190GroupId.id" "eye_L0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns190Set.mwc" "eye_L0_crvShape.iog.og[0].gco";
+connectAttr "groupId380.id" "eye_L0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet190.mwc" "eye_L0_crvShape.iog.og[1].gco";
+connectAttr "mgear_curveCns191.og[0]" "eye_R0_crvShape.cr";
+connectAttr "tweak191.pl[0].cp[0]" "eye_R0_crvShape.twl";
+connectAttr "mgear_curveCns191GroupId.id" "eye_R0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns191Set.mwc" "eye_R0_crvShape.iog.og[0].gco";
+connectAttr "groupId382.id" "eye_R0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet191.mwc" "eye_R0_crvShape.iog.og[1].gco";
+connectAttr "mgear_curveCns185.og[0]" "neck_C0_head_crvShape.cr";
+connectAttr "tweak185.pl[0].cp[0]" "neck_C0_head_crvShape.twl";
+connectAttr "mgear_curveCns185GroupId.id" "neck_C0_head_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns185Set.mwc" "neck_C0_head_crvShape.iog.og[0].gco";
+connectAttr "groupId370.id" "neck_C0_head_crvShape.iog.og[1].gid";
+connectAttr "tweakSet185.mwc" "neck_C0_head_crvShape.iog.og[1].gco";
+connectAttr "neck_C0_blade_pointConstraint8.ctx" "neck_C0_blade.tx" -l on;
+connectAttr "neck_C0_blade_pointConstraint8.cty" "neck_C0_blade.ty" -l on;
+connectAttr "neck_C0_blade_pointConstraint8.ctz" "neck_C0_blade.tz" -l on;
+connectAttr "neck_C0_blade_aimConstraint8.crx" "neck_C0_blade.rx" -l on;
+connectAttr "neck_C0_blade_aimConstraint8.cry" "neck_C0_blade.ry" -l on;
+connectAttr "neck_C0_blade_aimConstraint8.crz" "neck_C0_blade.rz" -l on;
+connectAttr "neck_C0_blade.pim" "neck_C0_blade_aimConstraint8.cpim";
+connectAttr "neck_C0_blade.t" "neck_C0_blade_aimConstraint8.ct";
+connectAttr "neck_C0_blade.rp" "neck_C0_blade_aimConstraint8.crp";
+connectAttr "neck_C0_blade.rpt" "neck_C0_blade_aimConstraint8.crt";
+connectAttr "neck_C0_blade.ro" "neck_C0_blade_aimConstraint8.cro";
+connectAttr "neck_C0_tan0.t" "neck_C0_blade_aimConstraint8.tg[0].tt";
+connectAttr "neck_C0_tan0.rp" "neck_C0_blade_aimConstraint8.tg[0].trp";
+connectAttr "neck_C0_tan0.rpt" "neck_C0_blade_aimConstraint8.tg[0].trt";
+connectAttr "neck_C0_tan0.pm" "neck_C0_blade_aimConstraint8.tg[0].tpm";
+connectAttr "neck_C0_blade_aimConstraint8.w0" "neck_C0_blade_aimConstraint8.tg[0].tw"
 		;
-connectAttr "neck_C0_root.wm" "neck_C0_blade_aimConstraint7.wum";
-connectAttr "unitConversion29.o" "neck_C0_blade_aimConstraint7.ox";
-connectAttr "neck_C0_blade.pim" "neck_C0_blade_pointConstraint7.cpim";
-connectAttr "neck_C0_blade.rp" "neck_C0_blade_pointConstraint7.crp";
-connectAttr "neck_C0_blade.rpt" "neck_C0_blade_pointConstraint7.crt";
-connectAttr "neck_C0_root.t" "neck_C0_blade_pointConstraint7.tg[0].tt";
-connectAttr "neck_C0_root.rp" "neck_C0_blade_pointConstraint7.tg[0].trp";
-connectAttr "neck_C0_root.rpt" "neck_C0_blade_pointConstraint7.tg[0].trt";
-connectAttr "neck_C0_root.pm" "neck_C0_blade_pointConstraint7.tg[0].tpm";
-connectAttr "neck_C0_blade_pointConstraint7.w0" "neck_C0_blade_pointConstraint7.tg[0].tw"
+connectAttr "neck_C0_root.wm" "neck_C0_blade_aimConstraint8.wum";
+connectAttr "unitConversion33.o" "neck_C0_blade_aimConstraint8.ox";
+connectAttr "neck_C0_blade.pim" "neck_C0_blade_pointConstraint8.cpim";
+connectAttr "neck_C0_blade.rp" "neck_C0_blade_pointConstraint8.crp";
+connectAttr "neck_C0_blade.rpt" "neck_C0_blade_pointConstraint8.crt";
+connectAttr "neck_C0_root.t" "neck_C0_blade_pointConstraint8.tg[0].tt";
+connectAttr "neck_C0_root.rp" "neck_C0_blade_pointConstraint8.tg[0].trp";
+connectAttr "neck_C0_root.rpt" "neck_C0_blade_pointConstraint8.tg[0].trt";
+connectAttr "neck_C0_root.pm" "neck_C0_blade_pointConstraint8.tg[0].tpm";
+connectAttr "neck_C0_blade_pointConstraint8.w0" "neck_C0_blade_pointConstraint8.tg[0].tw"
 		;
-connectAttr "mgear_curveCns157.og[0]" "neck_C0_neck_crvShape.cr";
-connectAttr "tweak157.pl[0].cp[0]" "neck_C0_neck_crvShape.twl";
-connectAttr "mgear_curveCns157GroupId.id" "neck_C0_neck_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns157Set.mwc" "neck_C0_neck_crvShape.iog.og[0].gco";
-connectAttr "groupId314.id" "neck_C0_neck_crvShape.iog.og[1].gid";
-connectAttr "tweakSet157.mwc" "neck_C0_neck_crvShape.iog.og[1].gco";
-connectAttr "legFront_L0_root_st_profile.o" "legFront_L0_root.st_profile";
-connectAttr "legFront_L0_root_sq_profile.o" "legFront_L0_root.sq_profile";
-connectAttr "mgear_curveCns167.og[0]" "footFront_L0_crvShape.cr";
-connectAttr "tweak167.pl[0].cp[0]" "footFront_L0_crvShape.twl";
-connectAttr "mgear_curveCns167GroupId.id" "footFront_L0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns167Set.mwc" "footFront_L0_crvShape.iog.og[0].gco";
-connectAttr "groupId334.id" "footFront_L0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet167.mwc" "footFront_L0_crvShape.iog.og[1].gco";
-connectAttr "mgear_curveCns168.og[0]" "footFront_L0_Shape1.cr";
-connectAttr "tweak168.pl[0].cp[0]" "footFront_L0_Shape1.twl";
-connectAttr "mgear_curveCns168GroupId.id" "footFront_L0_Shape1.iog.og[0].gid";
-connectAttr "mgear_curveCns168Set.mwc" "footFront_L0_Shape1.iog.og[0].gco";
-connectAttr "groupId336.id" "footFront_L0_Shape1.iog.og[1].gid";
-connectAttr "tweakSet168.mwc" "footFront_L0_Shape1.iog.og[1].gco";
-connectAttr "mgear_curveCns166.og[0]" "legFront_L0_crvShape1.cr";
-connectAttr "tweak166.pl[0].cp[0]" "legFront_L0_crvShape1.twl";
-connectAttr "mgear_curveCns166GroupId.id" "legFront_L0_crvShape1.iog.og[0].gid";
-connectAttr "mgear_curveCns166Set.mwc" "legFront_L0_crvShape1.iog.og[0].gco";
-connectAttr "groupId332.id" "legFront_L0_crvShape1.iog.og[1].gid";
-connectAttr "tweakSet166.mwc" "legFront_L0_crvShape1.iog.og[1].gco";
-connectAttr "shoulder_L0_blade_pointConstraint7.ctx" "shoulder_L0_blade.tx" -l on
+connectAttr "mgear_curveCns184.og[0]" "neck_C0_neck_crvShape.cr";
+connectAttr "tweak184.pl[0].cp[0]" "neck_C0_neck_crvShape.twl";
+connectAttr "mgear_curveCns184GroupId.id" "neck_C0_neck_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns184Set.mwc" "neck_C0_neck_crvShape.iog.og[0].gco";
+connectAttr "groupId368.id" "neck_C0_neck_crvShape.iog.og[1].gid";
+connectAttr "tweakSet184.mwc" "neck_C0_neck_crvShape.iog.og[1].gco";
+connectAttr "legFront_L0_root_st_profile1.o" "legFront_L0_root.st_profile";
+connectAttr "legFront_L0_root_sq_profile1.o" "legFront_L0_root.sq_profile";
+connectAttr "mgear_curveCns194.og[0]" "footFront_L0_crvShape.cr";
+connectAttr "tweak194.pl[0].cp[0]" "footFront_L0_crvShape.twl";
+connectAttr "mgear_curveCns194GroupId.id" "footFront_L0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns194Set.mwc" "footFront_L0_crvShape.iog.og[0].gco";
+connectAttr "groupId388.id" "footFront_L0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet194.mwc" "footFront_L0_crvShape.iog.og[1].gco";
+connectAttr "mgear_curveCns195.og[0]" "footFront_L0_Shape1.cr";
+connectAttr "tweak195.pl[0].cp[0]" "footFront_L0_Shape1.twl";
+connectAttr "mgear_curveCns195GroupId.id" "footFront_L0_Shape1.iog.og[0].gid";
+connectAttr "mgear_curveCns195Set.mwc" "footFront_L0_Shape1.iog.og[0].gco";
+connectAttr "groupId390.id" "footFront_L0_Shape1.iog.og[1].gid";
+connectAttr "tweakSet195.mwc" "footFront_L0_Shape1.iog.og[1].gco";
+connectAttr "mgear_curveCns193.og[0]" "legFront_L0_crvShape1.cr";
+connectAttr "tweak193.pl[0].cp[0]" "legFront_L0_crvShape1.twl";
+connectAttr "mgear_curveCns193GroupId.id" "legFront_L0_crvShape1.iog.og[0].gid";
+connectAttr "mgear_curveCns193Set.mwc" "legFront_L0_crvShape1.iog.og[0].gco";
+connectAttr "groupId386.id" "legFront_L0_crvShape1.iog.og[1].gid";
+connectAttr "tweakSet193.mwc" "legFront_L0_crvShape1.iog.og[1].gco";
+connectAttr "shoulder_L0_blade_pointConstraint8.ctx" "shoulder_L0_blade.tx" -l on
 		;
-connectAttr "shoulder_L0_blade_pointConstraint7.cty" "shoulder_L0_blade.ty" -l on
+connectAttr "shoulder_L0_blade_pointConstraint8.cty" "shoulder_L0_blade.ty" -l on
 		;
-connectAttr "shoulder_L0_blade_pointConstraint7.ctz" "shoulder_L0_blade.tz" -l on
+connectAttr "shoulder_L0_blade_pointConstraint8.ctz" "shoulder_L0_blade.tz" -l on
 		;
-connectAttr "shoulder_L0_blade_aimConstraint7.crx" "shoulder_L0_blade.rx" -l on;
-connectAttr "shoulder_L0_blade_aimConstraint7.cry" "shoulder_L0_blade.ry" -l on;
-connectAttr "shoulder_L0_blade_aimConstraint7.crz" "shoulder_L0_blade.rz" -l on;
-connectAttr "shoulder_L0_blade.pim" "shoulder_L0_blade_aimConstraint7.cpim";
-connectAttr "shoulder_L0_blade.t" "shoulder_L0_blade_aimConstraint7.ct";
-connectAttr "shoulder_L0_blade.rp" "shoulder_L0_blade_aimConstraint7.crp";
-connectAttr "shoulder_L0_blade.rpt" "shoulder_L0_blade_aimConstraint7.crt";
-connectAttr "shoulder_L0_blade.ro" "shoulder_L0_blade_aimConstraint7.cro";
-connectAttr "shoulder_L0_0_loc.t" "shoulder_L0_blade_aimConstraint7.tg[0].tt";
-connectAttr "shoulder_L0_0_loc.rp" "shoulder_L0_blade_aimConstraint7.tg[0].trp";
-connectAttr "shoulder_L0_0_loc.rpt" "shoulder_L0_blade_aimConstraint7.tg[0].trt"
+connectAttr "shoulder_L0_blade_aimConstraint8.crx" "shoulder_L0_blade.rx" -l on;
+connectAttr "shoulder_L0_blade_aimConstraint8.cry" "shoulder_L0_blade.ry" -l on;
+connectAttr "shoulder_L0_blade_aimConstraint8.crz" "shoulder_L0_blade.rz" -l on;
+connectAttr "shoulder_L0_blade.pim" "shoulder_L0_blade_aimConstraint8.cpim";
+connectAttr "shoulder_L0_blade.t" "shoulder_L0_blade_aimConstraint8.ct";
+connectAttr "shoulder_L0_blade.rp" "shoulder_L0_blade_aimConstraint8.crp";
+connectAttr "shoulder_L0_blade.rpt" "shoulder_L0_blade_aimConstraint8.crt";
+connectAttr "shoulder_L0_blade.ro" "shoulder_L0_blade_aimConstraint8.cro";
+connectAttr "shoulder_L0_0_loc.t" "shoulder_L0_blade_aimConstraint8.tg[0].tt";
+connectAttr "shoulder_L0_0_loc.rp" "shoulder_L0_blade_aimConstraint8.tg[0].trp";
+connectAttr "shoulder_L0_0_loc.rpt" "shoulder_L0_blade_aimConstraint8.tg[0].trt"
 		;
-connectAttr "shoulder_L0_0_loc.pm" "shoulder_L0_blade_aimConstraint7.tg[0].tpm";
-connectAttr "shoulder_L0_blade_aimConstraint7.w0" "shoulder_L0_blade_aimConstraint7.tg[0].tw"
+connectAttr "shoulder_L0_0_loc.pm" "shoulder_L0_blade_aimConstraint8.tg[0].tpm";
+connectAttr "shoulder_L0_blade_aimConstraint8.w0" "shoulder_L0_blade_aimConstraint8.tg[0].tw"
 		;
-connectAttr "shoulder_L0_root.wm" "shoulder_L0_blade_aimConstraint7.wum";
-connectAttr "unitConversion30.o" "shoulder_L0_blade_aimConstraint7.ox";
-connectAttr "shoulder_L0_blade.pim" "shoulder_L0_blade_pointConstraint7.cpim";
-connectAttr "shoulder_L0_blade.rp" "shoulder_L0_blade_pointConstraint7.crp";
-connectAttr "shoulder_L0_blade.rpt" "shoulder_L0_blade_pointConstraint7.crt";
-connectAttr "shoulder_L0_root.t" "shoulder_L0_blade_pointConstraint7.tg[0].tt";
-connectAttr "shoulder_L0_root.rp" "shoulder_L0_blade_pointConstraint7.tg[0].trp"
+connectAttr "shoulder_L0_root.wm" "shoulder_L0_blade_aimConstraint8.wum";
+connectAttr "unitConversion34.o" "shoulder_L0_blade_aimConstraint8.ox";
+connectAttr "shoulder_L0_blade.pim" "shoulder_L0_blade_pointConstraint8.cpim";
+connectAttr "shoulder_L0_blade.rp" "shoulder_L0_blade_pointConstraint8.crp";
+connectAttr "shoulder_L0_blade.rpt" "shoulder_L0_blade_pointConstraint8.crt";
+connectAttr "shoulder_L0_root.t" "shoulder_L0_blade_pointConstraint8.tg[0].tt";
+connectAttr "shoulder_L0_root.rp" "shoulder_L0_blade_pointConstraint8.tg[0].trp"
 		;
-connectAttr "shoulder_L0_root.rpt" "shoulder_L0_blade_pointConstraint7.tg[0].trt"
+connectAttr "shoulder_L0_root.rpt" "shoulder_L0_blade_pointConstraint8.tg[0].trt"
 		;
-connectAttr "shoulder_L0_root.pm" "shoulder_L0_blade_pointConstraint7.tg[0].tpm"
+connectAttr "shoulder_L0_root.pm" "shoulder_L0_blade_pointConstraint8.tg[0].tpm"
 		;
-connectAttr "shoulder_L0_blade_pointConstraint7.w0" "shoulder_L0_blade_pointConstraint7.tg[0].tw"
+connectAttr "shoulder_L0_blade_pointConstraint8.w0" "shoulder_L0_blade_pointConstraint8.tg[0].tw"
 		;
-connectAttr "mgear_curveCns165.og[0]" "shoulder_L0_crvShape.cr";
-connectAttr "tweak165.pl[0].cp[0]" "shoulder_L0_crvShape.twl";
-connectAttr "mgear_curveCns165GroupId.id" "shoulder_L0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns165Set.mwc" "shoulder_L0_crvShape.iog.og[0].gco";
-connectAttr "groupId330.id" "shoulder_L0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet165.mwc" "shoulder_L0_crvShape.iog.og[1].gco";
-connectAttr "legFront_R0_root_st_profile.o" "legFront_R0_root.st_profile";
-connectAttr "legFront_R0_root_sq_profile.o" "legFront_R0_root.sq_profile";
-connectAttr "mgear_curveCns181.og[0]" "footFront_R0_crvShape.cr";
-connectAttr "tweak181.pl[0].cp[0]" "footFront_R0_crvShape.twl";
-connectAttr "mgear_curveCns181GroupId.id" "footFront_R0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns181Set.mwc" "footFront_R0_crvShape.iog.og[0].gco";
-connectAttr "groupId362.id" "footFront_R0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet181.mwc" "footFront_R0_crvShape.iog.og[1].gco";
-connectAttr "mgear_curveCns182.og[0]" "footFront_R0_Shape1.cr";
-connectAttr "tweak182.pl[0].cp[0]" "footFront_R0_Shape1.twl";
-connectAttr "mgear_curveCns182GroupId.id" "footFront_R0_Shape1.iog.og[0].gid";
-connectAttr "mgear_curveCns182Set.mwc" "footFront_R0_Shape1.iog.og[0].gco";
-connectAttr "groupId364.id" "footFront_R0_Shape1.iog.og[1].gid";
-connectAttr "tweakSet182.mwc" "footFront_R0_Shape1.iog.og[1].gco";
-connectAttr "mgear_curveCns180.og[0]" "legFront_R0_crvShape1.cr";
-connectAttr "tweak180.pl[0].cp[0]" "legFront_R0_crvShape1.twl";
-connectAttr "mgear_curveCns180GroupId.id" "legFront_R0_crvShape1.iog.og[0].gid";
-connectAttr "mgear_curveCns180Set.mwc" "legFront_R0_crvShape1.iog.og[0].gco";
-connectAttr "groupId360.id" "legFront_R0_crvShape1.iog.og[1].gid";
-connectAttr "tweakSet180.mwc" "legFront_R0_crvShape1.iog.og[1].gco";
-connectAttr "shoulder_R0_blade_pointConstraint1.ctx" "shoulder_R0_blade.tx" -l on
+connectAttr "mgear_curveCns192.og[0]" "shoulder_L0_crvShape.cr";
+connectAttr "tweak192.pl[0].cp[0]" "shoulder_L0_crvShape.twl";
+connectAttr "mgear_curveCns192GroupId.id" "shoulder_L0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns192Set.mwc" "shoulder_L0_crvShape.iog.og[0].gco";
+connectAttr "groupId384.id" "shoulder_L0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet192.mwc" "shoulder_L0_crvShape.iog.og[1].gco";
+connectAttr "legFront_R0_root_st_profile1.o" "legFront_R0_root.st_profile";
+connectAttr "legFront_R0_root_sq_profile1.o" "legFront_R0_root.sq_profile";
+connectAttr "mgear_curveCns198.og[0]" "footFront_R0_crvShape.cr";
+connectAttr "tweak198.pl[0].cp[0]" "footFront_R0_crvShape.twl";
+connectAttr "mgear_curveCns198GroupId.id" "footFront_R0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns198Set.mwc" "footFront_R0_crvShape.iog.og[0].gco";
+connectAttr "groupId396.id" "footFront_R0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet198.mwc" "footFront_R0_crvShape.iog.og[1].gco";
+connectAttr "mgear_curveCns199.og[0]" "footFront_R0_Shape1.cr";
+connectAttr "tweak199.pl[0].cp[0]" "footFront_R0_Shape1.twl";
+connectAttr "mgear_curveCns199GroupId.id" "footFront_R0_Shape1.iog.og[0].gid";
+connectAttr "mgear_curveCns199Set.mwc" "footFront_R0_Shape1.iog.og[0].gco";
+connectAttr "groupId398.id" "footFront_R0_Shape1.iog.og[1].gid";
+connectAttr "tweakSet199.mwc" "footFront_R0_Shape1.iog.og[1].gco";
+connectAttr "mgear_curveCns197.og[0]" "legFront_R0_crvShape1.cr";
+connectAttr "tweak197.pl[0].cp[0]" "legFront_R0_crvShape1.twl";
+connectAttr "mgear_curveCns197GroupId.id" "legFront_R0_crvShape1.iog.og[0].gid";
+connectAttr "mgear_curveCns197Set.mwc" "legFront_R0_crvShape1.iog.og[0].gco";
+connectAttr "groupId394.id" "legFront_R0_crvShape1.iog.og[1].gid";
+connectAttr "tweakSet197.mwc" "legFront_R0_crvShape1.iog.og[1].gco";
+connectAttr "shoulder_R0_blade_pointConstraint2.ctx" "shoulder_R0_blade.tx" -l on
 		;
-connectAttr "shoulder_R0_blade_pointConstraint1.cty" "shoulder_R0_blade.ty" -l on
+connectAttr "shoulder_R0_blade_pointConstraint2.cty" "shoulder_R0_blade.ty" -l on
 		;
-connectAttr "shoulder_R0_blade_pointConstraint1.ctz" "shoulder_R0_blade.tz" -l on
+connectAttr "shoulder_R0_blade_pointConstraint2.ctz" "shoulder_R0_blade.tz" -l on
 		;
-connectAttr "shoulder_R0_blade_aimConstraint1.crx" "shoulder_R0_blade.rx" -l on;
-connectAttr "shoulder_R0_blade_aimConstraint1.cry" "shoulder_R0_blade.ry" -l on;
-connectAttr "shoulder_R0_blade_aimConstraint1.crz" "shoulder_R0_blade.rz" -l on;
-connectAttr "shoulder_R0_blade.pim" "shoulder_R0_blade_aimConstraint1.cpim";
-connectAttr "shoulder_R0_blade.t" "shoulder_R0_blade_aimConstraint1.ct";
-connectAttr "shoulder_R0_blade.rp" "shoulder_R0_blade_aimConstraint1.crp";
-connectAttr "shoulder_R0_blade.rpt" "shoulder_R0_blade_aimConstraint1.crt";
-connectAttr "shoulder_R0_blade.ro" "shoulder_R0_blade_aimConstraint1.cro";
-connectAttr "shoulder_R0_0_loc.t" "shoulder_R0_blade_aimConstraint1.tg[0].tt";
-connectAttr "shoulder_R0_0_loc.rp" "shoulder_R0_blade_aimConstraint1.tg[0].trp";
-connectAttr "shoulder_R0_0_loc.rpt" "shoulder_R0_blade_aimConstraint1.tg[0].trt"
+connectAttr "shoulder_R0_blade_aimConstraint2.crx" "shoulder_R0_blade.rx" -l on;
+connectAttr "shoulder_R0_blade_aimConstraint2.cry" "shoulder_R0_blade.ry" -l on;
+connectAttr "shoulder_R0_blade_aimConstraint2.crz" "shoulder_R0_blade.rz" -l on;
+connectAttr "shoulder_R0_blade.pim" "shoulder_R0_blade_aimConstraint2.cpim";
+connectAttr "shoulder_R0_blade.t" "shoulder_R0_blade_aimConstraint2.ct";
+connectAttr "shoulder_R0_blade.rp" "shoulder_R0_blade_aimConstraint2.crp";
+connectAttr "shoulder_R0_blade.rpt" "shoulder_R0_blade_aimConstraint2.crt";
+connectAttr "shoulder_R0_blade.ro" "shoulder_R0_blade_aimConstraint2.cro";
+connectAttr "shoulder_R0_0_loc.t" "shoulder_R0_blade_aimConstraint2.tg[0].tt";
+connectAttr "shoulder_R0_0_loc.rp" "shoulder_R0_blade_aimConstraint2.tg[0].trp";
+connectAttr "shoulder_R0_0_loc.rpt" "shoulder_R0_blade_aimConstraint2.tg[0].trt"
 		;
-connectAttr "shoulder_R0_0_loc.pm" "shoulder_R0_blade_aimConstraint1.tg[0].tpm";
-connectAttr "shoulder_R0_blade_aimConstraint1.w0" "shoulder_R0_blade_aimConstraint1.tg[0].tw"
+connectAttr "shoulder_R0_0_loc.pm" "shoulder_R0_blade_aimConstraint2.tg[0].tpm";
+connectAttr "shoulder_R0_blade_aimConstraint2.w0" "shoulder_R0_blade_aimConstraint2.tg[0].tw"
 		;
-connectAttr "shoulder_R0_root.wm" "shoulder_R0_blade_aimConstraint1.wum";
-connectAttr "unitConversion31.o" "shoulder_R0_blade_aimConstraint1.ox";
-connectAttr "shoulder_R0_blade.pim" "shoulder_R0_blade_pointConstraint1.cpim";
-connectAttr "shoulder_R0_blade.rp" "shoulder_R0_blade_pointConstraint1.crp";
-connectAttr "shoulder_R0_blade.rpt" "shoulder_R0_blade_pointConstraint1.crt";
-connectAttr "shoulder_R0_root.t" "shoulder_R0_blade_pointConstraint1.tg[0].tt";
-connectAttr "shoulder_R0_root.rp" "shoulder_R0_blade_pointConstraint1.tg[0].trp"
+connectAttr "shoulder_R0_root.wm" "shoulder_R0_blade_aimConstraint2.wum";
+connectAttr "unitConversion35.o" "shoulder_R0_blade_aimConstraint2.ox";
+connectAttr "shoulder_R0_blade.pim" "shoulder_R0_blade_pointConstraint2.cpim";
+connectAttr "shoulder_R0_blade.rp" "shoulder_R0_blade_pointConstraint2.crp";
+connectAttr "shoulder_R0_blade.rpt" "shoulder_R0_blade_pointConstraint2.crt";
+connectAttr "shoulder_R0_root.t" "shoulder_R0_blade_pointConstraint2.tg[0].tt";
+connectAttr "shoulder_R0_root.rp" "shoulder_R0_blade_pointConstraint2.tg[0].trp"
 		;
-connectAttr "shoulder_R0_root.rpt" "shoulder_R0_blade_pointConstraint1.tg[0].trt"
+connectAttr "shoulder_R0_root.rpt" "shoulder_R0_blade_pointConstraint2.tg[0].trt"
 		;
-connectAttr "shoulder_R0_root.pm" "shoulder_R0_blade_pointConstraint1.tg[0].tpm"
+connectAttr "shoulder_R0_root.pm" "shoulder_R0_blade_pointConstraint2.tg[0].tpm"
 		;
-connectAttr "shoulder_R0_blade_pointConstraint1.w0" "shoulder_R0_blade_pointConstraint1.tg[0].tw"
+connectAttr "shoulder_R0_blade_pointConstraint2.w0" "shoulder_R0_blade_pointConstraint2.tg[0].tw"
 		;
-connectAttr "mgear_curveCns179.og[0]" "shoulder_R0_crvShape.cr";
-connectAttr "tweak179.pl[0].cp[0]" "shoulder_R0_crvShape.twl";
-connectAttr "mgear_curveCns179GroupId.id" "shoulder_R0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns179Set.mwc" "shoulder_R0_crvShape.iog.og[0].gco";
-connectAttr "groupId358.id" "shoulder_R0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet179.mwc" "shoulder_R0_crvShape.iog.og[1].gco";
-connectAttr "spine_C0_blade_pointConstraint7.ctx" "spine_C0_blade.tx" -l on;
-connectAttr "spine_C0_blade_pointConstraint7.cty" "spine_C0_blade.ty" -l on;
-connectAttr "spine_C0_blade_pointConstraint7.ctz" "spine_C0_blade.tz" -l on;
-connectAttr "spine_C0_blade_aimConstraint7.crx" "spine_C0_blade.rx" -l on;
-connectAttr "spine_C0_blade_aimConstraint7.cry" "spine_C0_blade.ry" -l on;
-connectAttr "spine_C0_blade_aimConstraint7.crz" "spine_C0_blade.rz" -l on;
-connectAttr "spine_C0_blade.pim" "spine_C0_blade_aimConstraint7.cpim";
-connectAttr "spine_C0_blade.t" "spine_C0_blade_aimConstraint7.ct";
-connectAttr "spine_C0_blade.rp" "spine_C0_blade_aimConstraint7.crp";
-connectAttr "spine_C0_blade.rpt" "spine_C0_blade_aimConstraint7.crt";
-connectAttr "spine_C0_blade.ro" "spine_C0_blade_aimConstraint7.cro";
-connectAttr "spine_C0_eff.t" "spine_C0_blade_aimConstraint7.tg[0].tt";
-connectAttr "spine_C0_eff.rp" "spine_C0_blade_aimConstraint7.tg[0].trp";
-connectAttr "spine_C0_eff.rpt" "spine_C0_blade_aimConstraint7.tg[0].trt";
-connectAttr "spine_C0_eff.pm" "spine_C0_blade_aimConstraint7.tg[0].tpm";
-connectAttr "spine_C0_blade_aimConstraint7.w0" "spine_C0_blade_aimConstraint7.tg[0].tw"
+connectAttr "mgear_curveCns196.og[0]" "shoulder_R0_crvShape.cr";
+connectAttr "tweak196.pl[0].cp[0]" "shoulder_R0_crvShape.twl";
+connectAttr "mgear_curveCns196GroupId.id" "shoulder_R0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns196Set.mwc" "shoulder_R0_crvShape.iog.og[0].gco";
+connectAttr "groupId392.id" "shoulder_R0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet196.mwc" "shoulder_R0_crvShape.iog.og[1].gco";
+connectAttr "spine_C0_blade_pointConstraint8.ctx" "spine_C0_blade.tx" -l on;
+connectAttr "spine_C0_blade_pointConstraint8.cty" "spine_C0_blade.ty" -l on;
+connectAttr "spine_C0_blade_pointConstraint8.ctz" "spine_C0_blade.tz" -l on;
+connectAttr "spine_C0_blade_aimConstraint8.crx" "spine_C0_blade.rx" -l on;
+connectAttr "spine_C0_blade_aimConstraint8.cry" "spine_C0_blade.ry" -l on;
+connectAttr "spine_C0_blade_aimConstraint8.crz" "spine_C0_blade.rz" -l on;
+connectAttr "spine_C0_blade.pim" "spine_C0_blade_aimConstraint8.cpim";
+connectAttr "spine_C0_blade.t" "spine_C0_blade_aimConstraint8.ct";
+connectAttr "spine_C0_blade.rp" "spine_C0_blade_aimConstraint8.crp";
+connectAttr "spine_C0_blade.rpt" "spine_C0_blade_aimConstraint8.crt";
+connectAttr "spine_C0_blade.ro" "spine_C0_blade_aimConstraint8.cro";
+connectAttr "spine_C0_eff.t" "spine_C0_blade_aimConstraint8.tg[0].tt";
+connectAttr "spine_C0_eff.rp" "spine_C0_blade_aimConstraint8.tg[0].trp";
+connectAttr "spine_C0_eff.rpt" "spine_C0_blade_aimConstraint8.tg[0].trt";
+connectAttr "spine_C0_eff.pm" "spine_C0_blade_aimConstraint8.tg[0].tpm";
+connectAttr "spine_C0_blade_aimConstraint8.w0" "spine_C0_blade_aimConstraint8.tg[0].tw"
 		;
-connectAttr "spine_C0_root.wm" "spine_C0_blade_aimConstraint7.wum";
-connectAttr "unitConversion28.o" "spine_C0_blade_aimConstraint7.ox";
-connectAttr "spine_C0_blade.pim" "spine_C0_blade_pointConstraint7.cpim";
-connectAttr "spine_C0_blade.rp" "spine_C0_blade_pointConstraint7.crp";
-connectAttr "spine_C0_blade.rpt" "spine_C0_blade_pointConstraint7.crt";
-connectAttr "spine_C0_root.t" "spine_C0_blade_pointConstraint7.tg[0].tt";
-connectAttr "spine_C0_root.rp" "spine_C0_blade_pointConstraint7.tg[0].trp";
-connectAttr "spine_C0_root.rpt" "spine_C0_blade_pointConstraint7.tg[0].trt";
-connectAttr "spine_C0_root.pm" "spine_C0_blade_pointConstraint7.tg[0].tpm";
-connectAttr "spine_C0_blade_pointConstraint7.w0" "spine_C0_blade_pointConstraint7.tg[0].tw"
+connectAttr "spine_C0_root.wm" "spine_C0_blade_aimConstraint8.wum";
+connectAttr "unitConversion32.o" "spine_C0_blade_aimConstraint8.ox";
+connectAttr "spine_C0_blade.pim" "spine_C0_blade_pointConstraint8.cpim";
+connectAttr "spine_C0_blade.rp" "spine_C0_blade_pointConstraint8.crp";
+connectAttr "spine_C0_blade.rpt" "spine_C0_blade_pointConstraint8.crt";
+connectAttr "spine_C0_root.t" "spine_C0_blade_pointConstraint8.tg[0].tt";
+connectAttr "spine_C0_root.rp" "spine_C0_blade_pointConstraint8.tg[0].trp";
+connectAttr "spine_C0_root.rpt" "spine_C0_blade_pointConstraint8.tg[0].trt";
+connectAttr "spine_C0_root.pm" "spine_C0_blade_pointConstraint8.tg[0].tpm";
+connectAttr "spine_C0_blade_pointConstraint8.w0" "spine_C0_blade_pointConstraint8.tg[0].tw"
 		;
-connectAttr "mgear_curveCns156.og[0]" "spine_C0_crvShape.cr";
-connectAttr "tweak156.pl[0].cp[0]" "spine_C0_crvShape.twl";
-connectAttr "mgear_curveCns156GroupId.id" "spine_C0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns156Set.mwc" "spine_C0_crvShape.iog.og[0].gco";
-connectAttr "groupId312.id" "spine_C0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet156.mwc" "spine_C0_crvShape.iog.og[1].gco";
-connectAttr "legBack_L0_root_st_profile.o" "legBack_L0_root.st_profile";
-connectAttr "legBack_L0_root_sq_profile.o" "legBack_L0_root.sq_profile";
-connectAttr "mgear_curveCns174.og[0]" "footBack_L0_crvShape.cr";
-connectAttr "tweak174.pl[0].cp[0]" "footBack_L0_crvShape.twl";
-connectAttr "mgear_curveCns174GroupId.id" "footBack_L0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns174Set.mwc" "footBack_L0_crvShape.iog.og[0].gco";
-connectAttr "groupId348.id" "footBack_L0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet174.mwc" "footBack_L0_crvShape.iog.og[1].gco";
-connectAttr "mgear_curveCns175.og[0]" "footBack_L0_Shape1.cr";
-connectAttr "tweak175.pl[0].cp[0]" "footBack_L0_Shape1.twl";
-connectAttr "mgear_curveCns175GroupId.id" "footBack_L0_Shape1.iog.og[0].gid";
-connectAttr "mgear_curveCns175Set.mwc" "footBack_L0_Shape1.iog.og[0].gco";
-connectAttr "groupId350.id" "footBack_L0_Shape1.iog.og[1].gid";
-connectAttr "tweakSet175.mwc" "footBack_L0_Shape1.iog.og[1].gco";
-connectAttr "mgear_curveCns173.og[0]" "legBack_L0_crvShape1.cr";
-connectAttr "tweak173.pl[0].cp[0]" "legBack_L0_crvShape1.twl";
-connectAttr "mgear_curveCns173GroupId.id" "legBack_L0_crvShape1.iog.og[0].gid";
-connectAttr "mgear_curveCns173Set.mwc" "legBack_L0_crvShape1.iog.og[0].gco";
-connectAttr "groupId346.id" "legBack_L0_crvShape1.iog.og[1].gid";
-connectAttr "tweakSet173.mwc" "legBack_L0_crvShape1.iog.og[1].gco";
-connectAttr "legBack_R0_root_st_profile.o" "legBack_R0_root.st_profile";
-connectAttr "legBack_R0_root_sq_profile.o" "legBack_R0_root.sq_profile";
-connectAttr "mgear_curveCns177.og[0]" "footBack_R0_crvShape.cr";
-connectAttr "tweak177.pl[0].cp[0]" "footBack_R0_crvShape.twl";
-connectAttr "mgear_curveCns177GroupId.id" "footBack_R0_crvShape.iog.og[0].gid";
-connectAttr "mgear_curveCns177Set.mwc" "footBack_R0_crvShape.iog.og[0].gco";
-connectAttr "groupId354.id" "footBack_R0_crvShape.iog.og[1].gid";
-connectAttr "tweakSet177.mwc" "footBack_R0_crvShape.iog.og[1].gco";
-connectAttr "mgear_curveCns178.og[0]" "footBack_R0_Shape1.cr";
-connectAttr "tweak178.pl[0].cp[0]" "footBack_R0_Shape1.twl";
-connectAttr "mgear_curveCns178GroupId.id" "footBack_R0_Shape1.iog.og[0].gid";
-connectAttr "mgear_curveCns178Set.mwc" "footBack_R0_Shape1.iog.og[0].gco";
-connectAttr "groupId356.id" "footBack_R0_Shape1.iog.og[1].gid";
-connectAttr "tweakSet178.mwc" "footBack_R0_Shape1.iog.og[1].gco";
-connectAttr "mgear_curveCns176.og[0]" "legBack_R0_crvShape1.cr";
-connectAttr "tweak176.pl[0].cp[0]" "legBack_R0_crvShape1.twl";
-connectAttr "mgear_curveCns176GroupId.id" "legBack_R0_crvShape1.iog.og[0].gid";
-connectAttr "mgear_curveCns176Set.mwc" "legBack_R0_crvShape1.iog.og[0].gco";
-connectAttr "groupId352.id" "legBack_R0_crvShape1.iog.og[1].gid";
-connectAttr "tweakSet176.mwc" "legBack_R0_crvShape1.iog.og[1].gco";
-connectAttr "mgear_curveCns160GroupParts.og" "mgear_curveCns160.ip[0].ig";
-connectAttr "mgear_curveCns160GroupId.id" "mgear_curveCns160.ip[0].gi";
-connectAttr "mouth_C0_lipup.wm" "mgear_curveCns160.inputs[0]";
-connectAttr "mouth_C0_rotcenter.wm" "mgear_curveCns160.inputs[1]";
-connectAttr "mgear_curveCns160GroupId.msg" "mgear_curveCns160Set.gn" -na;
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[0]" "mgear_curveCns160Set.dsm"
+connectAttr "mgear_curveCns183.og[0]" "spine_C0_crvShape.cr";
+connectAttr "tweak183.pl[0].cp[0]" "spine_C0_crvShape.twl";
+connectAttr "mgear_curveCns183GroupId.id" "spine_C0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns183Set.mwc" "spine_C0_crvShape.iog.og[0].gco";
+connectAttr "groupId366.id" "spine_C0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet183.mwc" "spine_C0_crvShape.iog.og[1].gco";
+connectAttr "legBack_L0_root_st_profile1.o" "legBack_L0_root.st_profile";
+connectAttr "legBack_L0_root_sq_profile1.o" "legBack_L0_root.sq_profile";
+connectAttr "mgear_curveCns201.og[0]" "footBack_L0_crvShape.cr";
+connectAttr "tweak201.pl[0].cp[0]" "footBack_L0_crvShape.twl";
+connectAttr "mgear_curveCns201GroupId.id" "footBack_L0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns201Set.mwc" "footBack_L0_crvShape.iog.og[0].gco";
+connectAttr "groupId402.id" "footBack_L0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet201.mwc" "footBack_L0_crvShape.iog.og[1].gco";
+connectAttr "mgear_curveCns202.og[0]" "footBack_L0_Shape1.cr";
+connectAttr "tweak202.pl[0].cp[0]" "footBack_L0_Shape1.twl";
+connectAttr "mgear_curveCns202GroupId.id" "footBack_L0_Shape1.iog.og[0].gid";
+connectAttr "mgear_curveCns202Set.mwc" "footBack_L0_Shape1.iog.og[0].gco";
+connectAttr "groupId404.id" "footBack_L0_Shape1.iog.og[1].gid";
+connectAttr "tweakSet202.mwc" "footBack_L0_Shape1.iog.og[1].gco";
+connectAttr "mgear_curveCns200.og[0]" "legBack_L0_crvShape1.cr";
+connectAttr "tweak200.pl[0].cp[0]" "legBack_L0_crvShape1.twl";
+connectAttr "mgear_curveCns200GroupId.id" "legBack_L0_crvShape1.iog.og[0].gid";
+connectAttr "mgear_curveCns200Set.mwc" "legBack_L0_crvShape1.iog.og[0].gco";
+connectAttr "groupId400.id" "legBack_L0_crvShape1.iog.og[1].gid";
+connectAttr "tweakSet200.mwc" "legBack_L0_crvShape1.iog.og[1].gco";
+connectAttr "legBack_R0_root_st_profile1.o" "legBack_R0_root.st_profile";
+connectAttr "legBack_R0_root_sq_profile1.o" "legBack_R0_root.sq_profile";
+connectAttr "mgear_curveCns204.og[0]" "footBack_R0_crvShape.cr";
+connectAttr "tweak204.pl[0].cp[0]" "footBack_R0_crvShape.twl";
+connectAttr "mgear_curveCns204GroupId.id" "footBack_R0_crvShape.iog.og[0].gid";
+connectAttr "mgear_curveCns204Set.mwc" "footBack_R0_crvShape.iog.og[0].gco";
+connectAttr "groupId408.id" "footBack_R0_crvShape.iog.og[1].gid";
+connectAttr "tweakSet204.mwc" "footBack_R0_crvShape.iog.og[1].gco";
+connectAttr "mgear_curveCns205.og[0]" "footBack_R0_Shape1.cr";
+connectAttr "tweak205.pl[0].cp[0]" "footBack_R0_Shape1.twl";
+connectAttr "mgear_curveCns205GroupId.id" "footBack_R0_Shape1.iog.og[0].gid";
+connectAttr "mgear_curveCns205Set.mwc" "footBack_R0_Shape1.iog.og[0].gco";
+connectAttr "groupId410.id" "footBack_R0_Shape1.iog.og[1].gid";
+connectAttr "tweakSet205.mwc" "footBack_R0_Shape1.iog.og[1].gco";
+connectAttr "mgear_curveCns203.og[0]" "legBack_R0_crvShape1.cr";
+connectAttr "tweak203.pl[0].cp[0]" "legBack_R0_crvShape1.twl";
+connectAttr "mgear_curveCns203GroupId.id" "legBack_R0_crvShape1.iog.og[0].gid";
+connectAttr "mgear_curveCns203Set.mwc" "legBack_R0_crvShape1.iog.og[0].gco";
+connectAttr "groupId406.id" "legBack_R0_crvShape1.iog.og[1].gid";
+connectAttr "tweakSet203.mwc" "legBack_R0_crvShape1.iog.og[1].gco";
+relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
+relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
+relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
+relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
+connectAttr "layerManager.dli[0]" "defaultLayer.id";
+connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
+connectAttr "spine_C0_blade.bladeRollOffset" "unitConversion32.i";
+connectAttr "mgear_curveCns183GroupParts.og" "mgear_curveCns183.ip[0].ig";
+connectAttr "mgear_curveCns183GroupId.id" "mgear_curveCns183.ip[0].gi";
+connectAttr "spine_C0_root.wm" "mgear_curveCns183.inputs[0]";
+connectAttr "spine_C0_eff.wm" "mgear_curveCns183.inputs[1]";
+connectAttr "groupParts366.og" "tweak183.ip[0].ig";
+connectAttr "groupId366.id" "tweak183.ip[0].gi";
+connectAttr "mgear_curveCns183GroupId.msg" "mgear_curveCns183Set.gn" -na;
+connectAttr "spine_C0_crvShape.iog.og[0]" "mgear_curveCns183Set.dsm" -na;
+connectAttr "mgear_curveCns183.msg" "mgear_curveCns183Set.ub[0]";
+connectAttr "tweak183.og[0]" "mgear_curveCns183GroupParts.ig";
+connectAttr "mgear_curveCns183GroupId.id" "mgear_curveCns183GroupParts.gi";
+connectAttr "groupId366.msg" "tweakSet183.gn" -na;
+connectAttr "spine_C0_crvShape.iog.og[1]" "tweakSet183.dsm" -na;
+connectAttr "tweak183.msg" "tweakSet183.ub[0]";
+connectAttr "spine_C0_crvShapeOrig.ws" "groupParts366.ig";
+connectAttr "groupId366.id" "groupParts366.gi";
+connectAttr "neck_C0_blade.bladeRollOffset" "unitConversion33.i";
+connectAttr "mgear_curveCns184GroupParts.og" "mgear_curveCns184.ip[0].ig";
+connectAttr "mgear_curveCns184GroupId.id" "mgear_curveCns184.ip[0].gi";
+connectAttr "neck_C0_root.wm" "mgear_curveCns184.inputs[0]";
+connectAttr "neck_C0_tan0.wm" "mgear_curveCns184.inputs[1]";
+connectAttr "neck_C0_tan1.wm" "mgear_curveCns184.inputs[2]";
+connectAttr "neck_C0_neck.wm" "mgear_curveCns184.inputs[3]";
+connectAttr "groupParts368.og" "tweak184.ip[0].ig";
+connectAttr "groupId368.id" "tweak184.ip[0].gi";
+connectAttr "mgear_curveCns184GroupId.msg" "mgear_curveCns184Set.gn" -na;
+connectAttr "neck_C0_neck_crvShape.iog.og[0]" "mgear_curveCns184Set.dsm" -na;
+connectAttr "mgear_curveCns184.msg" "mgear_curveCns184Set.ub[0]";
+connectAttr "tweak184.og[0]" "mgear_curveCns184GroupParts.ig";
+connectAttr "mgear_curveCns184GroupId.id" "mgear_curveCns184GroupParts.gi";
+connectAttr "groupId368.msg" "tweakSet184.gn" -na;
+connectAttr "neck_C0_neck_crvShape.iog.og[1]" "tweakSet184.dsm" -na;
+connectAttr "tweak184.msg" "tweakSet184.ub[0]";
+connectAttr "neck_C0_neck_crvShapeOrig.ws" "groupParts368.ig";
+connectAttr "groupId368.id" "groupParts368.gi";
+connectAttr "mgear_curveCns185GroupParts.og" "mgear_curveCns185.ip[0].ig";
+connectAttr "mgear_curveCns185GroupId.id" "mgear_curveCns185.ip[0].gi";
+connectAttr "neck_C0_neck.wm" "mgear_curveCns185.inputs[0]";
+connectAttr "neck_C0_head.wm" "mgear_curveCns185.inputs[1]";
+connectAttr "neck_C0_eff.wm" "mgear_curveCns185.inputs[2]";
+connectAttr "groupParts370.og" "tweak185.ip[0].ig";
+connectAttr "groupId370.id" "tweak185.ip[0].gi";
+connectAttr "mgear_curveCns185GroupId.msg" "mgear_curveCns185Set.gn" -na;
+connectAttr "neck_C0_head_crvShape.iog.og[0]" "mgear_curveCns185Set.dsm" -na;
+connectAttr "mgear_curveCns185.msg" "mgear_curveCns185Set.ub[0]";
+connectAttr "tweak185.og[0]" "mgear_curveCns185GroupParts.ig";
+connectAttr "mgear_curveCns185GroupId.id" "mgear_curveCns185GroupParts.gi";
+connectAttr "groupId370.msg" "tweakSet185.gn" -na;
+connectAttr "neck_C0_head_crvShape.iog.og[1]" "tweakSet185.dsm" -na;
+connectAttr "tweak185.msg" "tweakSet185.ub[0]";
+connectAttr "neck_C0_head_crvShapeOrig.ws" "groupParts370.ig";
+connectAttr "groupId370.id" "groupParts370.gi";
+connectAttr "mgear_curveCns186GroupParts.og" "mgear_curveCns186.ip[0].ig";
+connectAttr "mgear_curveCns186GroupId.id" "mgear_curveCns186.ip[0].gi";
+connectAttr "mouth_C0_root.wm" "mgear_curveCns186.inputs[0]";
+connectAttr "mouth_C0_rotcenter.wm" "mgear_curveCns186.inputs[1]";
+connectAttr "groupParts372.og" "tweak186.ip[0].ig";
+connectAttr "groupId372.id" "tweak186.ip[0].gi";
+connectAttr "mgear_curveCns186GroupId.msg" "mgear_curveCns186Set.gn" -na;
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[0]" "mgear_curveCns186Set.dsm"
 		 -na;
-connectAttr "mgear_curveCns160.msg" "mgear_curveCns160Set.ub[0]";
-connectAttr "tweak160.og[0]" "mgear_curveCns160GroupParts.ig";
-connectAttr "mgear_curveCns160GroupId.id" "mgear_curveCns160GroupParts.gi";
-connectAttr "groupParts320.og" "tweak160.ip[0].ig";
-connectAttr "groupId320.id" "tweak160.ip[0].gi";
-connectAttr "groupId320.msg" "tweakSet160.gn" -na;
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[1]" "tweakSet160.dsm"
+connectAttr "mgear_curveCns186.msg" "mgear_curveCns186Set.ub[0]";
+connectAttr "tweak186.og[0]" "mgear_curveCns186GroupParts.ig";
+connectAttr "mgear_curveCns186GroupId.id" "mgear_curveCns186GroupParts.gi";
+connectAttr "groupId372.msg" "tweakSet186.gn" -na;
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[1]" "tweakSet186.dsm"
 		 -na;
-connectAttr "tweak160.msg" "tweakSet160.ub[0]";
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShapeOrig.ws" "groupParts320.ig"
+connectAttr "tweak186.msg" "tweakSet186.ub[0]";
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShapeOrig.ws" "groupParts372.ig"
 		;
-connectAttr "groupId320.id" "groupParts320.gi";
-connectAttr "mgear_curveCns161GroupParts.og" "mgear_curveCns161.ip[0].ig";
-connectAttr "mgear_curveCns161GroupId.id" "mgear_curveCns161.ip[0].gi";
-connectAttr "mouth_C0_liplow.wm" "mgear_curveCns161.inputs[0]";
-connectAttr "mouth_C0_rotcenter.wm" "mgear_curveCns161.inputs[1]";
-connectAttr "mgear_curveCns161GroupId.msg" "mgear_curveCns161Set.gn" -na;
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[0]" "mgear_curveCns161Set.dsm"
+connectAttr "groupId372.id" "groupParts372.gi";
+connectAttr "mgear_curveCns187GroupParts.og" "mgear_curveCns187.ip[0].ig";
+connectAttr "mgear_curveCns187GroupId.id" "mgear_curveCns187.ip[0].gi";
+connectAttr "mouth_C0_lipup.wm" "mgear_curveCns187.inputs[0]";
+connectAttr "mouth_C0_rotcenter.wm" "mgear_curveCns187.inputs[1]";
+connectAttr "groupParts374.og" "tweak187.ip[0].ig";
+connectAttr "groupId374.id" "tweak187.ip[0].gi";
+connectAttr "mgear_curveCns187GroupId.msg" "mgear_curveCns187Set.gn" -na;
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[0]" "mgear_curveCns187Set.dsm"
 		 -na;
-connectAttr "mgear_curveCns161.msg" "mgear_curveCns161Set.ub[0]";
-connectAttr "tweak161.og[0]" "mgear_curveCns161GroupParts.ig";
-connectAttr "mgear_curveCns161GroupId.id" "mgear_curveCns161GroupParts.gi";
-connectAttr "groupParts322.og" "tweak161.ip[0].ig";
-connectAttr "groupId322.id" "tweak161.ip[0].gi";
-connectAttr "groupId322.msg" "tweakSet161.gn" -na;
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[1]" "tweakSet161.dsm"
+connectAttr "mgear_curveCns187.msg" "mgear_curveCns187Set.ub[0]";
+connectAttr "tweak187.og[0]" "mgear_curveCns187GroupParts.ig";
+connectAttr "mgear_curveCns187GroupId.id" "mgear_curveCns187GroupParts.gi";
+connectAttr "groupId374.msg" "tweakSet187.gn" -na;
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShape.iog.og[1]" "tweakSet187.dsm"
 		 -na;
-connectAttr "tweak161.msg" "tweakSet161.ub[0]";
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShapeOrig.ws" "groupParts322.ig"
+connectAttr "tweak187.msg" "tweakSet187.ub[0]";
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_lipup|mouth_C0_crv|mouth_C0_crvShapeOrig.ws" "groupParts374.ig"
 		;
-connectAttr "groupId322.id" "groupParts322.gi";
-connectAttr "mgear_curveCns159GroupParts.og" "mgear_curveCns159.ip[0].ig";
-connectAttr "mgear_curveCns159GroupId.id" "mgear_curveCns159.ip[0].gi";
-connectAttr "mouth_C0_root.wm" "mgear_curveCns159.inputs[0]";
-connectAttr "mouth_C0_rotcenter.wm" "mgear_curveCns159.inputs[1]";
-connectAttr "mgear_curveCns159GroupId.msg" "mgear_curveCns159Set.gn" -na;
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[0]" "mgear_curveCns159Set.dsm"
+connectAttr "groupId374.id" "groupParts374.gi";
+connectAttr "mgear_curveCns188GroupParts.og" "mgear_curveCns188.ip[0].ig";
+connectAttr "mgear_curveCns188GroupId.id" "mgear_curveCns188.ip[0].gi";
+connectAttr "mouth_C0_liplow.wm" "mgear_curveCns188.inputs[0]";
+connectAttr "mouth_C0_rotcenter.wm" "mgear_curveCns188.inputs[1]";
+connectAttr "groupParts376.og" "tweak188.ip[0].ig";
+connectAttr "groupId376.id" "tweak188.ip[0].gi";
+connectAttr "mgear_curveCns188GroupId.msg" "mgear_curveCns188Set.gn" -na;
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[0]" "mgear_curveCns188Set.dsm"
 		 -na;
-connectAttr "mgear_curveCns159.msg" "mgear_curveCns159Set.ub[0]";
-connectAttr "tweak159.og[0]" "mgear_curveCns159GroupParts.ig";
-connectAttr "mgear_curveCns159GroupId.id" "mgear_curveCns159GroupParts.gi";
-connectAttr "groupParts318.og" "tweak159.ip[0].ig";
-connectAttr "groupId318.id" "tweak159.ip[0].gi";
-connectAttr "groupId318.msg" "tweakSet159.gn" -na;
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShape.iog.og[1]" "tweakSet159.dsm"
+connectAttr "mgear_curveCns188.msg" "mgear_curveCns188Set.ub[0]";
+connectAttr "tweak188.og[0]" "mgear_curveCns188GroupParts.ig";
+connectAttr "mgear_curveCns188GroupId.id" "mgear_curveCns188GroupParts.gi";
+connectAttr "groupId376.msg" "tweakSet188.gn" -na;
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShape.iog.og[1]" "tweakSet188.dsm"
 		 -na;
-connectAttr "tweak159.msg" "tweakSet159.ub[0]";
-connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_crv|mouth_C0_crvShapeOrig.ws" "groupParts318.ig"
+connectAttr "tweak188.msg" "tweakSet188.ub[0]";
+connectAttr "|guide|global_C0_root|local_C0_root|body_C0_root|spine_C0_root|spine_C0_eff|neck_C0_root|neck_C0_neck|neck_C0_head|mouth_C0_root|mouth_C0_rotcenter|mouth_C0_liplow|mouth_C0_crv|mouth_C0_crvShapeOrig.ws" "groupParts376.ig"
 		;
-connectAttr "groupId318.id" "groupParts318.gi";
-connectAttr "mgear_curveCns162GroupParts.og" "mgear_curveCns162.ip[0].ig";
-connectAttr "mgear_curveCns162GroupId.id" "mgear_curveCns162.ip[0].gi";
-connectAttr "mouth_C0_root.wm" "mgear_curveCns162.inputs[0]";
-connectAttr "mouth_C0_jaw.wm" "mgear_curveCns162.inputs[1]";
-connectAttr "mgear_curveCns162GroupId.msg" "mgear_curveCns162Set.gn" -na;
-connectAttr "mouth_C0_crv7Shape.iog.og[0]" "mgear_curveCns162Set.dsm" -na;
-connectAttr "mgear_curveCns162.msg" "mgear_curveCns162Set.ub[0]";
-connectAttr "tweak162.og[0]" "mgear_curveCns162GroupParts.ig";
-connectAttr "mgear_curveCns162GroupId.id" "mgear_curveCns162GroupParts.gi";
-connectAttr "groupParts324.og" "tweak162.ip[0].ig";
-connectAttr "groupId324.id" "tweak162.ip[0].gi";
-connectAttr "groupId324.msg" "tweakSet162.gn" -na;
-connectAttr "mouth_C0_crv7Shape.iog.og[1]" "tweakSet162.dsm" -na;
-connectAttr "tweak162.msg" "tweakSet162.ub[0]";
-connectAttr "mouth_C0_crv7ShapeOrig.ws" "groupParts324.ig";
-connectAttr "groupId324.id" "groupParts324.gi";
-connectAttr "mgear_curveCns163GroupParts.og" "mgear_curveCns163.ip[0].ig";
-connectAttr "mgear_curveCns163GroupId.id" "mgear_curveCns163.ip[0].gi";
-connectAttr "eye_L0_root.wm" "mgear_curveCns163.inputs[0]";
-connectAttr "eye_L0_look.wm" "mgear_curveCns163.inputs[1]";
-connectAttr "mgear_curveCns163GroupId.msg" "mgear_curveCns163Set.gn" -na;
-connectAttr "eye_L0_crvShape.iog.og[0]" "mgear_curveCns163Set.dsm" -na;
-connectAttr "mgear_curveCns163.msg" "mgear_curveCns163Set.ub[0]";
-connectAttr "tweak163.og[0]" "mgear_curveCns163GroupParts.ig";
-connectAttr "mgear_curveCns163GroupId.id" "mgear_curveCns163GroupParts.gi";
-connectAttr "groupParts326.og" "tweak163.ip[0].ig";
-connectAttr "groupId326.id" "tweak163.ip[0].gi";
-connectAttr "groupId326.msg" "tweakSet163.gn" -na;
-connectAttr "eye_L0_crvShape.iog.og[1]" "tweakSet163.dsm" -na;
-connectAttr "tweak163.msg" "tweakSet163.ub[0]";
-connectAttr "eye_L0_crvShapeOrig.ws" "groupParts326.ig";
-connectAttr "groupId326.id" "groupParts326.gi";
-connectAttr "mgear_curveCns164GroupParts.og" "mgear_curveCns164.ip[0].ig";
-connectAttr "mgear_curveCns164GroupId.id" "mgear_curveCns164.ip[0].gi";
-connectAttr "eye_R0_root.wm" "mgear_curveCns164.inputs[0]";
-connectAttr "eye_R0_look.wm" "mgear_curveCns164.inputs[1]";
-connectAttr "mgear_curveCns164GroupId.msg" "mgear_curveCns164Set.gn" -na;
-connectAttr "eye_R0_crvShape.iog.og[0]" "mgear_curveCns164Set.dsm" -na;
-connectAttr "mgear_curveCns164.msg" "mgear_curveCns164Set.ub[0]";
-connectAttr "tweak164.og[0]" "mgear_curveCns164GroupParts.ig";
-connectAttr "mgear_curveCns164GroupId.id" "mgear_curveCns164GroupParts.gi";
-connectAttr "groupParts328.og" "tweak164.ip[0].ig";
-connectAttr "groupId328.id" "tweak164.ip[0].gi";
-connectAttr "groupId328.msg" "tweakSet164.gn" -na;
-connectAttr "eye_R0_crvShape.iog.og[1]" "tweakSet164.dsm" -na;
-connectAttr "tweak164.msg" "tweakSet164.ub[0]";
-connectAttr "eye_R0_crvShapeOrig.ws" "groupParts328.ig";
-connectAttr "groupId328.id" "groupParts328.gi";
-connectAttr "mgear_curveCns158GroupParts.og" "mgear_curveCns158.ip[0].ig";
-connectAttr "mgear_curveCns158GroupId.id" "mgear_curveCns158.ip[0].gi";
-connectAttr "neck_C0_neck.wm" "mgear_curveCns158.inputs[0]";
-connectAttr "neck_C0_head.wm" "mgear_curveCns158.inputs[1]";
-connectAttr "neck_C0_eff.wm" "mgear_curveCns158.inputs[2]";
-connectAttr "mgear_curveCns158GroupId.msg" "mgear_curveCns158Set.gn" -na;
-connectAttr "neck_C0_head_crvShape.iog.og[0]" "mgear_curveCns158Set.dsm" -na;
-connectAttr "mgear_curveCns158.msg" "mgear_curveCns158Set.ub[0]";
-connectAttr "tweak158.og[0]" "mgear_curveCns158GroupParts.ig";
-connectAttr "mgear_curveCns158GroupId.id" "mgear_curveCns158GroupParts.gi";
-connectAttr "groupParts316.og" "tweak158.ip[0].ig";
-connectAttr "groupId316.id" "tweak158.ip[0].gi";
-connectAttr "groupId316.msg" "tweakSet158.gn" -na;
-connectAttr "neck_C0_head_crvShape.iog.og[1]" "tweakSet158.dsm" -na;
-connectAttr "tweak158.msg" "tweakSet158.ub[0]";
-connectAttr "neck_C0_head_crvShapeOrig.ws" "groupParts316.ig";
-connectAttr "groupId316.id" "groupParts316.gi";
-connectAttr "neck_C0_blade.bladeRollOffset" "unitConversion29.i";
-connectAttr "mgear_curveCns157GroupParts.og" "mgear_curveCns157.ip[0].ig";
-connectAttr "mgear_curveCns157GroupId.id" "mgear_curveCns157.ip[0].gi";
-connectAttr "neck_C0_root.wm" "mgear_curveCns157.inputs[0]";
-connectAttr "neck_C0_tan0.wm" "mgear_curveCns157.inputs[1]";
-connectAttr "neck_C0_tan1.wm" "mgear_curveCns157.inputs[2]";
-connectAttr "neck_C0_neck.wm" "mgear_curveCns157.inputs[3]";
-connectAttr "mgear_curveCns157GroupId.msg" "mgear_curveCns157Set.gn" -na;
-connectAttr "neck_C0_neck_crvShape.iog.og[0]" "mgear_curveCns157Set.dsm" -na;
-connectAttr "mgear_curveCns157.msg" "mgear_curveCns157Set.ub[0]";
-connectAttr "tweak157.og[0]" "mgear_curveCns157GroupParts.ig";
-connectAttr "mgear_curveCns157GroupId.id" "mgear_curveCns157GroupParts.gi";
-connectAttr "groupParts314.og" "tweak157.ip[0].ig";
-connectAttr "groupId314.id" "tweak157.ip[0].gi";
-connectAttr "groupId314.msg" "tweakSet157.gn" -na;
-connectAttr "neck_C0_neck_crvShape.iog.og[1]" "tweakSet157.dsm" -na;
-connectAttr "tweak157.msg" "tweakSet157.ub[0]";
-connectAttr "neck_C0_neck_crvShapeOrig.ws" "groupParts314.ig";
-connectAttr "groupId314.id" "groupParts314.gi";
-connectAttr "mgear_curveCns167GroupParts.og" "mgear_curveCns167.ip[0].ig";
-connectAttr "mgear_curveCns167GroupId.id" "mgear_curveCns167.ip[0].gi";
-connectAttr "footFront_L0_root.wm" "mgear_curveCns167.inputs[0]";
-connectAttr "footFront_L0_0_loc.wm" "mgear_curveCns167.inputs[1]";
-connectAttr "footFront_L0_1_loc.wm" "mgear_curveCns167.inputs[2]";
-connectAttr "mgear_curveCns167GroupId.msg" "mgear_curveCns167Set.gn" -na;
-connectAttr "footFront_L0_crvShape.iog.og[0]" "mgear_curveCns167Set.dsm" -na;
-connectAttr "mgear_curveCns167.msg" "mgear_curveCns167Set.ub[0]";
-connectAttr "tweak167.og[0]" "mgear_curveCns167GroupParts.ig";
-connectAttr "mgear_curveCns167GroupId.id" "mgear_curveCns167GroupParts.gi";
-connectAttr "groupParts334.og" "tweak167.ip[0].ig";
-connectAttr "groupId334.id" "tweak167.ip[0].gi";
-connectAttr "groupId334.msg" "tweakSet167.gn" -na;
-connectAttr "footFront_L0_crvShape.iog.og[1]" "tweakSet167.dsm" -na;
-connectAttr "tweak167.msg" "tweakSet167.ub[0]";
-connectAttr "footFront_L0_crvShapeOrig.ws" "groupParts334.ig";
-connectAttr "groupId334.id" "groupParts334.gi";
-connectAttr "mgear_curveCns168GroupParts.og" "mgear_curveCns168.ip[0].ig";
-connectAttr "mgear_curveCns168GroupId.id" "mgear_curveCns168.ip[0].gi";
-connectAttr "footFront_L0_root.wm" "mgear_curveCns168.inputs[0]";
-connectAttr "footFront_L0_heel.wm" "mgear_curveCns168.inputs[1]";
-connectAttr "footFront_L0_outpivot.wm" "mgear_curveCns168.inputs[2]";
-connectAttr "footFront_L0_heel.wm" "mgear_curveCns168.inputs[3]";
-connectAttr "footFront_L0_inpivot.wm" "mgear_curveCns168.inputs[4]";
-connectAttr "mgear_curveCns168GroupId.msg" "mgear_curveCns168Set.gn" -na;
-connectAttr "footFront_L0_Shape1.iog.og[0]" "mgear_curveCns168Set.dsm" -na;
-connectAttr "mgear_curveCns168.msg" "mgear_curveCns168Set.ub[0]";
-connectAttr "tweak168.og[0]" "mgear_curveCns168GroupParts.ig";
-connectAttr "mgear_curveCns168GroupId.id" "mgear_curveCns168GroupParts.gi";
-connectAttr "groupParts336.og" "tweak168.ip[0].ig";
-connectAttr "groupId336.id" "tweak168.ip[0].gi";
-connectAttr "groupId336.msg" "tweakSet168.gn" -na;
-connectAttr "footFront_L0_Shape1.iog.og[1]" "tweakSet168.dsm" -na;
-connectAttr "tweak168.msg" "tweakSet168.ub[0]";
-connectAttr "footFront_L0_Shape1Orig1.ws" "groupParts336.ig";
-connectAttr "groupId336.id" "groupParts336.gi";
-connectAttr "mgear_curveCns166GroupParts.og" "mgear_curveCns166.ip[0].ig";
-connectAttr "mgear_curveCns166GroupId.id" "mgear_curveCns166.ip[0].gi";
-connectAttr "legFront_L0_root.wm" "mgear_curveCns166.inputs[0]";
-connectAttr "legFront_L0_knee.wm" "mgear_curveCns166.inputs[1]";
-connectAttr "legFront_L0_ankle.wm" "mgear_curveCns166.inputs[2]";
-connectAttr "legFront_L0_foot.wm" "mgear_curveCns166.inputs[3]";
-connectAttr "legFront_L0_eff.wm" "mgear_curveCns166.inputs[4]";
-connectAttr "mgear_curveCns166GroupId.msg" "mgear_curveCns166Set.gn" -na;
-connectAttr "legFront_L0_crvShape1.iog.og[0]" "mgear_curveCns166Set.dsm" -na;
-connectAttr "mgear_curveCns166.msg" "mgear_curveCns166Set.ub[0]";
-connectAttr "tweak166.og[0]" "mgear_curveCns166GroupParts.ig";
-connectAttr "mgear_curveCns166GroupId.id" "mgear_curveCns166GroupParts.gi";
-connectAttr "groupParts332.og" "tweak166.ip[0].ig";
-connectAttr "groupId332.id" "tweak166.ip[0].gi";
-connectAttr "groupId332.msg" "tweakSet166.gn" -na;
-connectAttr "legFront_L0_crvShape1.iog.og[1]" "tweakSet166.dsm" -na;
-connectAttr "tweak166.msg" "tweakSet166.ub[0]";
-connectAttr "legFront_L0_crvShape1Orig1.ws" "groupParts332.ig";
-connectAttr "groupId332.id" "groupParts332.gi";
-connectAttr "shoulder_L0_blade.bladeRollOffset" "unitConversion30.i";
-connectAttr "mgear_curveCns165GroupParts.og" "mgear_curveCns165.ip[0].ig";
-connectAttr "mgear_curveCns165GroupId.id" "mgear_curveCns165.ip[0].gi";
-connectAttr "shoulder_L0_root.wm" "mgear_curveCns165.inputs[0]";
-connectAttr "shoulder_L0_0_loc.wm" "mgear_curveCns165.inputs[1]";
-connectAttr "mgear_curveCns165GroupId.msg" "mgear_curveCns165Set.gn" -na;
-connectAttr "shoulder_L0_crvShape.iog.og[0]" "mgear_curveCns165Set.dsm" -na;
-connectAttr "mgear_curveCns165.msg" "mgear_curveCns165Set.ub[0]";
-connectAttr "tweak165.og[0]" "mgear_curveCns165GroupParts.ig";
-connectAttr "mgear_curveCns165GroupId.id" "mgear_curveCns165GroupParts.gi";
-connectAttr "groupParts330.og" "tweak165.ip[0].ig";
-connectAttr "groupId330.id" "tweak165.ip[0].gi";
-connectAttr "groupId330.msg" "tweakSet165.gn" -na;
-connectAttr "shoulder_L0_crvShape.iog.og[1]" "tweakSet165.dsm" -na;
-connectAttr "tweak165.msg" "tweakSet165.ub[0]";
-connectAttr "shoulder_L0_crvShapeOrig.ws" "groupParts330.ig";
-connectAttr "groupId330.id" "groupParts330.gi";
-connectAttr "mgear_curveCns181GroupParts.og" "mgear_curveCns181.ip[0].ig";
-connectAttr "mgear_curveCns181GroupId.id" "mgear_curveCns181.ip[0].gi";
-connectAttr "footFront_R0_root.wm" "mgear_curveCns181.inputs[0]";
-connectAttr "footFront_R0_0_loc.wm" "mgear_curveCns181.inputs[1]";
-connectAttr "footFront_R0_1_loc.wm" "mgear_curveCns181.inputs[2]";
-connectAttr "mgear_curveCns181GroupId.msg" "mgear_curveCns181Set.gn" -na;
-connectAttr "footFront_R0_crvShape.iog.og[0]" "mgear_curveCns181Set.dsm" -na;
-connectAttr "mgear_curveCns181.msg" "mgear_curveCns181Set.ub[0]";
-connectAttr "tweak181.og[0]" "mgear_curveCns181GroupParts.ig";
-connectAttr "mgear_curveCns181GroupId.id" "mgear_curveCns181GroupParts.gi";
-connectAttr "groupParts362.og" "tweak181.ip[0].ig";
-connectAttr "groupId362.id" "tweak181.ip[0].gi";
-connectAttr "groupId362.msg" "tweakSet181.gn" -na;
-connectAttr "footFront_R0_crvShape.iog.og[1]" "tweakSet181.dsm" -na;
-connectAttr "tweak181.msg" "tweakSet181.ub[0]";
-connectAttr "footFront_R0_crvShapeOrig.ws" "groupParts362.ig";
-connectAttr "groupId362.id" "groupParts362.gi";
-connectAttr "mgear_curveCns182GroupParts.og" "mgear_curveCns182.ip[0].ig";
-connectAttr "mgear_curveCns182GroupId.id" "mgear_curveCns182.ip[0].gi";
-connectAttr "footFront_R0_root.wm" "mgear_curveCns182.inputs[0]";
-connectAttr "footFront_R0_heel.wm" "mgear_curveCns182.inputs[1]";
-connectAttr "footFront_R0_outpivot.wm" "mgear_curveCns182.inputs[2]";
-connectAttr "footFront_R0_heel.wm" "mgear_curveCns182.inputs[3]";
-connectAttr "footFront_R0_inpivot.wm" "mgear_curveCns182.inputs[4]";
-connectAttr "mgear_curveCns182GroupId.msg" "mgear_curveCns182Set.gn" -na;
-connectAttr "footFront_R0_Shape1.iog.og[0]" "mgear_curveCns182Set.dsm" -na;
-connectAttr "mgear_curveCns182.msg" "mgear_curveCns182Set.ub[0]";
-connectAttr "tweak182.og[0]" "mgear_curveCns182GroupParts.ig";
-connectAttr "mgear_curveCns182GroupId.id" "mgear_curveCns182GroupParts.gi";
-connectAttr "groupParts364.og" "tweak182.ip[0].ig";
-connectAttr "groupId364.id" "tweak182.ip[0].gi";
-connectAttr "groupId364.msg" "tweakSet182.gn" -na;
-connectAttr "footFront_R0_Shape1.iog.og[1]" "tweakSet182.dsm" -na;
-connectAttr "tweak182.msg" "tweakSet182.ub[0]";
-connectAttr "footFront_R0_Shape1Orig.ws" "groupParts364.ig";
-connectAttr "groupId364.id" "groupParts364.gi";
-connectAttr "mgear_curveCns180GroupParts.og" "mgear_curveCns180.ip[0].ig";
-connectAttr "mgear_curveCns180GroupId.id" "mgear_curveCns180.ip[0].gi";
-connectAttr "legFront_R0_root.wm" "mgear_curveCns180.inputs[0]";
-connectAttr "legFront_R0_knee.wm" "mgear_curveCns180.inputs[1]";
-connectAttr "legFront_R0_ankle.wm" "mgear_curveCns180.inputs[2]";
-connectAttr "legFront_R0_foot.wm" "mgear_curveCns180.inputs[3]";
-connectAttr "legFront_R0_eff.wm" "mgear_curveCns180.inputs[4]";
-connectAttr "mgear_curveCns180GroupId.msg" "mgear_curveCns180Set.gn" -na;
-connectAttr "legFront_R0_crvShape1.iog.og[0]" "mgear_curveCns180Set.dsm" -na;
-connectAttr "mgear_curveCns180.msg" "mgear_curveCns180Set.ub[0]";
-connectAttr "tweak180.og[0]" "mgear_curveCns180GroupParts.ig";
-connectAttr "mgear_curveCns180GroupId.id" "mgear_curveCns180GroupParts.gi";
-connectAttr "groupParts360.og" "tweak180.ip[0].ig";
-connectAttr "groupId360.id" "tweak180.ip[0].gi";
-connectAttr "groupId360.msg" "tweakSet180.gn" -na;
-connectAttr "legFront_R0_crvShape1.iog.og[1]" "tweakSet180.dsm" -na;
-connectAttr "tweak180.msg" "tweakSet180.ub[0]";
-connectAttr "legFront_R0_crvShape1Orig.ws" "groupParts360.ig";
-connectAttr "groupId360.id" "groupParts360.gi";
-connectAttr "shoulder_R0_blade.bladeRollOffset" "unitConversion31.i";
-connectAttr "mgear_curveCns179GroupParts.og" "mgear_curveCns179.ip[0].ig";
-connectAttr "mgear_curveCns179GroupId.id" "mgear_curveCns179.ip[0].gi";
-connectAttr "shoulder_R0_root.wm" "mgear_curveCns179.inputs[0]";
-connectAttr "shoulder_R0_0_loc.wm" "mgear_curveCns179.inputs[1]";
-connectAttr "mgear_curveCns179GroupId.msg" "mgear_curveCns179Set.gn" -na;
-connectAttr "shoulder_R0_crvShape.iog.og[0]" "mgear_curveCns179Set.dsm" -na;
-connectAttr "mgear_curveCns179.msg" "mgear_curveCns179Set.ub[0]";
-connectAttr "tweak179.og[0]" "mgear_curveCns179GroupParts.ig";
-connectAttr "mgear_curveCns179GroupId.id" "mgear_curveCns179GroupParts.gi";
-connectAttr "groupParts358.og" "tweak179.ip[0].ig";
-connectAttr "groupId358.id" "tweak179.ip[0].gi";
-connectAttr "groupId358.msg" "tweakSet179.gn" -na;
-connectAttr "shoulder_R0_crvShape.iog.og[1]" "tweakSet179.dsm" -na;
-connectAttr "tweak179.msg" "tweakSet179.ub[0]";
-connectAttr "shoulder_R0_crvShapeOrig.ws" "groupParts358.ig";
-connectAttr "groupId358.id" "groupParts358.gi";
-connectAttr "spine_C0_blade.bladeRollOffset" "unitConversion28.i";
-connectAttr "mgear_curveCns156GroupParts.og" "mgear_curveCns156.ip[0].ig";
-connectAttr "mgear_curveCns156GroupId.id" "mgear_curveCns156.ip[0].gi";
-connectAttr "spine_C0_root.wm" "mgear_curveCns156.inputs[0]";
-connectAttr "spine_C0_eff.wm" "mgear_curveCns156.inputs[1]";
-connectAttr "mgear_curveCns156GroupId.msg" "mgear_curveCns156Set.gn" -na;
-connectAttr "spine_C0_crvShape.iog.og[0]" "mgear_curveCns156Set.dsm" -na;
-connectAttr "mgear_curveCns156.msg" "mgear_curveCns156Set.ub[0]";
-connectAttr "tweak156.og[0]" "mgear_curveCns156GroupParts.ig";
-connectAttr "mgear_curveCns156GroupId.id" "mgear_curveCns156GroupParts.gi";
-connectAttr "groupParts312.og" "tweak156.ip[0].ig";
-connectAttr "groupId312.id" "tweak156.ip[0].gi";
-connectAttr "groupId312.msg" "tweakSet156.gn" -na;
-connectAttr "spine_C0_crvShape.iog.og[1]" "tweakSet156.dsm" -na;
-connectAttr "tweak156.msg" "tweakSet156.ub[0]";
-connectAttr "spine_C0_crvShapeOrig.ws" "groupParts312.ig";
-connectAttr "groupId312.id" "groupParts312.gi";
-connectAttr "mgear_curveCns174GroupParts.og" "mgear_curveCns174.ip[0].ig";
-connectAttr "mgear_curveCns174GroupId.id" "mgear_curveCns174.ip[0].gi";
-connectAttr "footBack_L0_root.wm" "mgear_curveCns174.inputs[0]";
-connectAttr "footBack_L0_0_loc.wm" "mgear_curveCns174.inputs[1]";
-connectAttr "footBack_L0_1_loc.wm" "mgear_curveCns174.inputs[2]";
-connectAttr "mgear_curveCns174GroupId.msg" "mgear_curveCns174Set.gn" -na;
-connectAttr "footBack_L0_crvShape.iog.og[0]" "mgear_curveCns174Set.dsm" -na;
-connectAttr "mgear_curveCns174.msg" "mgear_curveCns174Set.ub[0]";
-connectAttr "tweak174.og[0]" "mgear_curveCns174GroupParts.ig";
-connectAttr "mgear_curveCns174GroupId.id" "mgear_curveCns174GroupParts.gi";
-connectAttr "groupParts348.og" "tweak174.ip[0].ig";
-connectAttr "groupId348.id" "tweak174.ip[0].gi";
-connectAttr "groupId348.msg" "tweakSet174.gn" -na;
-connectAttr "footBack_L0_crvShape.iog.og[1]" "tweakSet174.dsm" -na;
-connectAttr "tweak174.msg" "tweakSet174.ub[0]";
-connectAttr "footBack_L0_crvShapeOrig.ws" "groupParts348.ig";
-connectAttr "groupId348.id" "groupParts348.gi";
-connectAttr "mgear_curveCns175GroupParts.og" "mgear_curveCns175.ip[0].ig";
-connectAttr "mgear_curveCns175GroupId.id" "mgear_curveCns175.ip[0].gi";
-connectAttr "footBack_L0_root.wm" "mgear_curveCns175.inputs[0]";
-connectAttr "footBack_L0_heel.wm" "mgear_curveCns175.inputs[1]";
-connectAttr "footBack_L0_outpivot.wm" "mgear_curveCns175.inputs[2]";
-connectAttr "footBack_L0_heel.wm" "mgear_curveCns175.inputs[3]";
-connectAttr "footBack_L0_inpivot.wm" "mgear_curveCns175.inputs[4]";
-connectAttr "mgear_curveCns175GroupId.msg" "mgear_curveCns175Set.gn" -na;
-connectAttr "footBack_L0_Shape1.iog.og[0]" "mgear_curveCns175Set.dsm" -na;
-connectAttr "mgear_curveCns175.msg" "mgear_curveCns175Set.ub[0]";
-connectAttr "tweak175.og[0]" "mgear_curveCns175GroupParts.ig";
-connectAttr "mgear_curveCns175GroupId.id" "mgear_curveCns175GroupParts.gi";
-connectAttr "groupParts350.og" "tweak175.ip[0].ig";
-connectAttr "groupId350.id" "tweak175.ip[0].gi";
-connectAttr "groupId350.msg" "tweakSet175.gn" -na;
-connectAttr "footBack_L0_Shape1.iog.og[1]" "tweakSet175.dsm" -na;
-connectAttr "tweak175.msg" "tweakSet175.ub[0]";
-connectAttr "footBack_L0_Shape1Orig1.ws" "groupParts350.ig";
-connectAttr "groupId350.id" "groupParts350.gi";
-connectAttr "mgear_curveCns173GroupParts.og" "mgear_curveCns173.ip[0].ig";
-connectAttr "mgear_curveCns173GroupId.id" "mgear_curveCns173.ip[0].gi";
-connectAttr "legBack_L0_root.wm" "mgear_curveCns173.inputs[0]";
-connectAttr "legBack_L0_knee.wm" "mgear_curveCns173.inputs[1]";
-connectAttr "legBack_L0_ankle.wm" "mgear_curveCns173.inputs[2]";
-connectAttr "legBack_L0_foot.wm" "mgear_curveCns173.inputs[3]";
-connectAttr "legBack_L0_eff.wm" "mgear_curveCns173.inputs[4]";
-connectAttr "mgear_curveCns173GroupId.msg" "mgear_curveCns173Set.gn" -na;
-connectAttr "legBack_L0_crvShape1.iog.og[0]" "mgear_curveCns173Set.dsm" -na;
-connectAttr "mgear_curveCns173.msg" "mgear_curveCns173Set.ub[0]";
-connectAttr "tweak173.og[0]" "mgear_curveCns173GroupParts.ig";
-connectAttr "mgear_curveCns173GroupId.id" "mgear_curveCns173GroupParts.gi";
-connectAttr "groupParts346.og" "tweak173.ip[0].ig";
-connectAttr "groupId346.id" "tweak173.ip[0].gi";
-connectAttr "groupId346.msg" "tweakSet173.gn" -na;
-connectAttr "legBack_L0_crvShape1.iog.og[1]" "tweakSet173.dsm" -na;
-connectAttr "tweak173.msg" "tweakSet173.ub[0]";
-connectAttr "legBack_L0_crvShape1Orig1.ws" "groupParts346.ig";
-connectAttr "groupId346.id" "groupParts346.gi";
-connectAttr "mgear_curveCns177GroupParts.og" "mgear_curveCns177.ip[0].ig";
-connectAttr "mgear_curveCns177GroupId.id" "mgear_curveCns177.ip[0].gi";
-connectAttr "footBack_R0_root.wm" "mgear_curveCns177.inputs[0]";
-connectAttr "footBack_R0_0_loc.wm" "mgear_curveCns177.inputs[1]";
-connectAttr "footBack_R0_1_loc.wm" "mgear_curveCns177.inputs[2]";
-connectAttr "mgear_curveCns177GroupId.msg" "mgear_curveCns177Set.gn" -na;
-connectAttr "footBack_R0_crvShape.iog.og[0]" "mgear_curveCns177Set.dsm" -na;
-connectAttr "mgear_curveCns177.msg" "mgear_curveCns177Set.ub[0]";
-connectAttr "tweak177.og[0]" "mgear_curveCns177GroupParts.ig";
-connectAttr "mgear_curveCns177GroupId.id" "mgear_curveCns177GroupParts.gi";
-connectAttr "groupParts354.og" "tweak177.ip[0].ig";
-connectAttr "groupId354.id" "tweak177.ip[0].gi";
-connectAttr "groupId354.msg" "tweakSet177.gn" -na;
-connectAttr "footBack_R0_crvShape.iog.og[1]" "tweakSet177.dsm" -na;
-connectAttr "tweak177.msg" "tweakSet177.ub[0]";
-connectAttr "footBack_R0_crvShapeOrig.ws" "groupParts354.ig";
-connectAttr "groupId354.id" "groupParts354.gi";
-connectAttr "mgear_curveCns178GroupParts.og" "mgear_curveCns178.ip[0].ig";
-connectAttr "mgear_curveCns178GroupId.id" "mgear_curveCns178.ip[0].gi";
-connectAttr "footBack_R0_root.wm" "mgear_curveCns178.inputs[0]";
-connectAttr "footBack_R0_heel.wm" "mgear_curveCns178.inputs[1]";
-connectAttr "footBack_R0_outpivot.wm" "mgear_curveCns178.inputs[2]";
-connectAttr "footBack_R0_heel.wm" "mgear_curveCns178.inputs[3]";
-connectAttr "footBack_R0_inpivot.wm" "mgear_curveCns178.inputs[4]";
-connectAttr "mgear_curveCns178GroupId.msg" "mgear_curveCns178Set.gn" -na;
-connectAttr "footBack_R0_Shape1.iog.og[0]" "mgear_curveCns178Set.dsm" -na;
-connectAttr "mgear_curveCns178.msg" "mgear_curveCns178Set.ub[0]";
-connectAttr "tweak178.og[0]" "mgear_curveCns178GroupParts.ig";
-connectAttr "mgear_curveCns178GroupId.id" "mgear_curveCns178GroupParts.gi";
-connectAttr "groupParts356.og" "tweak178.ip[0].ig";
-connectAttr "groupId356.id" "tweak178.ip[0].gi";
-connectAttr "groupId356.msg" "tweakSet178.gn" -na;
-connectAttr "footBack_R0_Shape1.iog.og[1]" "tweakSet178.dsm" -na;
-connectAttr "tweak178.msg" "tweakSet178.ub[0]";
-connectAttr "footBack_R0_Shape1Orig.ws" "groupParts356.ig";
-connectAttr "groupId356.id" "groupParts356.gi";
-connectAttr "mgear_curveCns176GroupParts.og" "mgear_curveCns176.ip[0].ig";
-connectAttr "mgear_curveCns176GroupId.id" "mgear_curveCns176.ip[0].gi";
-connectAttr "legBack_R0_root.wm" "mgear_curveCns176.inputs[0]";
-connectAttr "legBack_R0_knee.wm" "mgear_curveCns176.inputs[1]";
-connectAttr "legBack_R0_ankle.wm" "mgear_curveCns176.inputs[2]";
-connectAttr "legBack_R0_foot.wm" "mgear_curveCns176.inputs[3]";
-connectAttr "legBack_R0_eff.wm" "mgear_curveCns176.inputs[4]";
-connectAttr "mgear_curveCns176GroupId.msg" "mgear_curveCns176Set.gn" -na;
-connectAttr "legBack_R0_crvShape1.iog.og[0]" "mgear_curveCns176Set.dsm" -na;
-connectAttr "mgear_curveCns176.msg" "mgear_curveCns176Set.ub[0]";
-connectAttr "tweak176.og[0]" "mgear_curveCns176GroupParts.ig";
-connectAttr "mgear_curveCns176GroupId.id" "mgear_curveCns176GroupParts.gi";
-connectAttr "groupParts352.og" "tweak176.ip[0].ig";
-connectAttr "groupId352.id" "tweak176.ip[0].gi";
-connectAttr "groupId352.msg" "tweakSet176.gn" -na;
-connectAttr "legBack_R0_crvShape1.iog.og[1]" "tweakSet176.dsm" -na;
-connectAttr "tweak176.msg" "tweakSet176.ub[0]";
-connectAttr "legBack_R0_crvShape1Orig.ws" "groupParts352.ig";
-connectAttr "groupId352.id" "groupParts352.gi";
+connectAttr "groupId376.id" "groupParts376.gi";
+connectAttr "mgear_curveCns189GroupParts.og" "mgear_curveCns189.ip[0].ig";
+connectAttr "mgear_curveCns189GroupId.id" "mgear_curveCns189.ip[0].gi";
+connectAttr "mouth_C0_root.wm" "mgear_curveCns189.inputs[0]";
+connectAttr "mouth_C0_jaw.wm" "mgear_curveCns189.inputs[1]";
+connectAttr "groupParts378.og" "tweak189.ip[0].ig";
+connectAttr "groupId378.id" "tweak189.ip[0].gi";
+connectAttr "mgear_curveCns189GroupId.msg" "mgear_curveCns189Set.gn" -na;
+connectAttr "mouth_C0_crv8Shape.iog.og[0]" "mgear_curveCns189Set.dsm" -na;
+connectAttr "mgear_curveCns189.msg" "mgear_curveCns189Set.ub[0]";
+connectAttr "tweak189.og[0]" "mgear_curveCns189GroupParts.ig";
+connectAttr "mgear_curveCns189GroupId.id" "mgear_curveCns189GroupParts.gi";
+connectAttr "groupId378.msg" "tweakSet189.gn" -na;
+connectAttr "mouth_C0_crv8Shape.iog.og[1]" "tweakSet189.dsm" -na;
+connectAttr "tweak189.msg" "tweakSet189.ub[0]";
+connectAttr "mouth_C0_crv8ShapeOrig.ws" "groupParts378.ig";
+connectAttr "groupId378.id" "groupParts378.gi";
+connectAttr "mgear_curveCns190GroupParts.og" "mgear_curveCns190.ip[0].ig";
+connectAttr "mgear_curveCns190GroupId.id" "mgear_curveCns190.ip[0].gi";
+connectAttr "eye_L0_root.wm" "mgear_curveCns190.inputs[0]";
+connectAttr "eye_L0_look.wm" "mgear_curveCns190.inputs[1]";
+connectAttr "groupParts380.og" "tweak190.ip[0].ig";
+connectAttr "groupId380.id" "tweak190.ip[0].gi";
+connectAttr "mgear_curveCns190GroupId.msg" "mgear_curveCns190Set.gn" -na;
+connectAttr "eye_L0_crvShape.iog.og[0]" "mgear_curveCns190Set.dsm" -na;
+connectAttr "mgear_curveCns190.msg" "mgear_curveCns190Set.ub[0]";
+connectAttr "tweak190.og[0]" "mgear_curveCns190GroupParts.ig";
+connectAttr "mgear_curveCns190GroupId.id" "mgear_curveCns190GroupParts.gi";
+connectAttr "groupId380.msg" "tweakSet190.gn" -na;
+connectAttr "eye_L0_crvShape.iog.og[1]" "tweakSet190.dsm" -na;
+connectAttr "tweak190.msg" "tweakSet190.ub[0]";
+connectAttr "eye_L0_crvShapeOrig.ws" "groupParts380.ig";
+connectAttr "groupId380.id" "groupParts380.gi";
+connectAttr "mgear_curveCns191GroupParts.og" "mgear_curveCns191.ip[0].ig";
+connectAttr "mgear_curveCns191GroupId.id" "mgear_curveCns191.ip[0].gi";
+connectAttr "eye_R0_root.wm" "mgear_curveCns191.inputs[0]";
+connectAttr "eye_R0_look.wm" "mgear_curveCns191.inputs[1]";
+connectAttr "groupParts382.og" "tweak191.ip[0].ig";
+connectAttr "groupId382.id" "tweak191.ip[0].gi";
+connectAttr "mgear_curveCns191GroupId.msg" "mgear_curveCns191Set.gn" -na;
+connectAttr "eye_R0_crvShape.iog.og[0]" "mgear_curveCns191Set.dsm" -na;
+connectAttr "mgear_curveCns191.msg" "mgear_curveCns191Set.ub[0]";
+connectAttr "tweak191.og[0]" "mgear_curveCns191GroupParts.ig";
+connectAttr "mgear_curveCns191GroupId.id" "mgear_curveCns191GroupParts.gi";
+connectAttr "groupId382.msg" "tweakSet191.gn" -na;
+connectAttr "eye_R0_crvShape.iog.og[1]" "tweakSet191.dsm" -na;
+connectAttr "tweak191.msg" "tweakSet191.ub[0]";
+connectAttr "eye_R0_crvShapeOrig.ws" "groupParts382.ig";
+connectAttr "groupId382.id" "groupParts382.gi";
+connectAttr "shoulder_L0_blade.bladeRollOffset" "unitConversion34.i";
+connectAttr "mgear_curveCns192GroupParts.og" "mgear_curveCns192.ip[0].ig";
+connectAttr "mgear_curveCns192GroupId.id" "mgear_curveCns192.ip[0].gi";
+connectAttr "shoulder_L0_root.wm" "mgear_curveCns192.inputs[0]";
+connectAttr "shoulder_L0_0_loc.wm" "mgear_curveCns192.inputs[1]";
+connectAttr "groupParts384.og" "tweak192.ip[0].ig";
+connectAttr "groupId384.id" "tweak192.ip[0].gi";
+connectAttr "mgear_curveCns192GroupId.msg" "mgear_curveCns192Set.gn" -na;
+connectAttr "shoulder_L0_crvShape.iog.og[0]" "mgear_curveCns192Set.dsm" -na;
+connectAttr "mgear_curveCns192.msg" "mgear_curveCns192Set.ub[0]";
+connectAttr "tweak192.og[0]" "mgear_curveCns192GroupParts.ig";
+connectAttr "mgear_curveCns192GroupId.id" "mgear_curveCns192GroupParts.gi";
+connectAttr "groupId384.msg" "tweakSet192.gn" -na;
+connectAttr "shoulder_L0_crvShape.iog.og[1]" "tweakSet192.dsm" -na;
+connectAttr "tweak192.msg" "tweakSet192.ub[0]";
+connectAttr "shoulder_L0_crvShapeOrig.ws" "groupParts384.ig";
+connectAttr "groupId384.id" "groupParts384.gi";
+connectAttr "mgear_curveCns193GroupParts.og" "mgear_curveCns193.ip[0].ig";
+connectAttr "mgear_curveCns193GroupId.id" "mgear_curveCns193.ip[0].gi";
+connectAttr "legFront_L0_root.wm" "mgear_curveCns193.inputs[0]";
+connectAttr "legFront_L0_knee.wm" "mgear_curveCns193.inputs[1]";
+connectAttr "legFront_L0_ankle.wm" "mgear_curveCns193.inputs[2]";
+connectAttr "legFront_L0_foot.wm" "mgear_curveCns193.inputs[3]";
+connectAttr "legFront_L0_eff.wm" "mgear_curveCns193.inputs[4]";
+connectAttr "groupParts386.og" "tweak193.ip[0].ig";
+connectAttr "groupId386.id" "tweak193.ip[0].gi";
+connectAttr "mgear_curveCns193GroupId.msg" "mgear_curveCns193Set.gn" -na;
+connectAttr "legFront_L0_crvShape1.iog.og[0]" "mgear_curveCns193Set.dsm" -na;
+connectAttr "mgear_curveCns193.msg" "mgear_curveCns193Set.ub[0]";
+connectAttr "tweak193.og[0]" "mgear_curveCns193GroupParts.ig";
+connectAttr "mgear_curveCns193GroupId.id" "mgear_curveCns193GroupParts.gi";
+connectAttr "groupId386.msg" "tweakSet193.gn" -na;
+connectAttr "legFront_L0_crvShape1.iog.og[1]" "tweakSet193.dsm" -na;
+connectAttr "tweak193.msg" "tweakSet193.ub[0]";
+connectAttr "legFront_L0_crvShape1Orig.ws" "groupParts386.ig";
+connectAttr "groupId386.id" "groupParts386.gi";
+connectAttr "mgear_curveCns194GroupParts.og" "mgear_curveCns194.ip[0].ig";
+connectAttr "mgear_curveCns194GroupId.id" "mgear_curveCns194.ip[0].gi";
+connectAttr "footFront_L0_root.wm" "mgear_curveCns194.inputs[0]";
+connectAttr "footFront_L0_0_loc.wm" "mgear_curveCns194.inputs[1]";
+connectAttr "footFront_L0_1_loc.wm" "mgear_curveCns194.inputs[2]";
+connectAttr "groupParts388.og" "tweak194.ip[0].ig";
+connectAttr "groupId388.id" "tweak194.ip[0].gi";
+connectAttr "mgear_curveCns194GroupId.msg" "mgear_curveCns194Set.gn" -na;
+connectAttr "footFront_L0_crvShape.iog.og[0]" "mgear_curveCns194Set.dsm" -na;
+connectAttr "mgear_curveCns194.msg" "mgear_curveCns194Set.ub[0]";
+connectAttr "tweak194.og[0]" "mgear_curveCns194GroupParts.ig";
+connectAttr "mgear_curveCns194GroupId.id" "mgear_curveCns194GroupParts.gi";
+connectAttr "groupId388.msg" "tweakSet194.gn" -na;
+connectAttr "footFront_L0_crvShape.iog.og[1]" "tweakSet194.dsm" -na;
+connectAttr "tweak194.msg" "tweakSet194.ub[0]";
+connectAttr "footFront_L0_crvShapeOrig.ws" "groupParts388.ig";
+connectAttr "groupId388.id" "groupParts388.gi";
+connectAttr "mgear_curveCns195GroupParts.og" "mgear_curveCns195.ip[0].ig";
+connectAttr "mgear_curveCns195GroupId.id" "mgear_curveCns195.ip[0].gi";
+connectAttr "footFront_L0_root.wm" "mgear_curveCns195.inputs[0]";
+connectAttr "footFront_L0_heel.wm" "mgear_curveCns195.inputs[1]";
+connectAttr "footFront_L0_outpivot.wm" "mgear_curveCns195.inputs[2]";
+connectAttr "footFront_L0_heel.wm" "mgear_curveCns195.inputs[3]";
+connectAttr "footFront_L0_inpivot.wm" "mgear_curveCns195.inputs[4]";
+connectAttr "groupParts390.og" "tweak195.ip[0].ig";
+connectAttr "groupId390.id" "tweak195.ip[0].gi";
+connectAttr "mgear_curveCns195GroupId.msg" "mgear_curveCns195Set.gn" -na;
+connectAttr "footFront_L0_Shape1.iog.og[0]" "mgear_curveCns195Set.dsm" -na;
+connectAttr "mgear_curveCns195.msg" "mgear_curveCns195Set.ub[0]";
+connectAttr "tweak195.og[0]" "mgear_curveCns195GroupParts.ig";
+connectAttr "mgear_curveCns195GroupId.id" "mgear_curveCns195GroupParts.gi";
+connectAttr "groupId390.msg" "tweakSet195.gn" -na;
+connectAttr "footFront_L0_Shape1.iog.og[1]" "tweakSet195.dsm" -na;
+connectAttr "tweak195.msg" "tweakSet195.ub[0]";
+connectAttr "footFront_L0_Shape1Orig.ws" "groupParts390.ig";
+connectAttr "groupId390.id" "groupParts390.gi";
+connectAttr "shoulder_R0_blade.bladeRollOffset" "unitConversion35.i";
+connectAttr "mgear_curveCns196GroupParts.og" "mgear_curveCns196.ip[0].ig";
+connectAttr "mgear_curveCns196GroupId.id" "mgear_curveCns196.ip[0].gi";
+connectAttr "shoulder_R0_root.wm" "mgear_curveCns196.inputs[0]";
+connectAttr "shoulder_R0_0_loc.wm" "mgear_curveCns196.inputs[1]";
+connectAttr "groupParts392.og" "tweak196.ip[0].ig";
+connectAttr "groupId392.id" "tweak196.ip[0].gi";
+connectAttr "mgear_curveCns196GroupId.msg" "mgear_curveCns196Set.gn" -na;
+connectAttr "shoulder_R0_crvShape.iog.og[0]" "mgear_curveCns196Set.dsm" -na;
+connectAttr "mgear_curveCns196.msg" "mgear_curveCns196Set.ub[0]";
+connectAttr "tweak196.og[0]" "mgear_curveCns196GroupParts.ig";
+connectAttr "mgear_curveCns196GroupId.id" "mgear_curveCns196GroupParts.gi";
+connectAttr "groupId392.msg" "tweakSet196.gn" -na;
+connectAttr "shoulder_R0_crvShape.iog.og[1]" "tweakSet196.dsm" -na;
+connectAttr "tweak196.msg" "tweakSet196.ub[0]";
+connectAttr "shoulder_R0_crvShapeOrig.ws" "groupParts392.ig";
+connectAttr "groupId392.id" "groupParts392.gi";
+connectAttr "mgear_curveCns197GroupParts.og" "mgear_curveCns197.ip[0].ig";
+connectAttr "mgear_curveCns197GroupId.id" "mgear_curveCns197.ip[0].gi";
+connectAttr "legFront_R0_root.wm" "mgear_curveCns197.inputs[0]";
+connectAttr "legFront_R0_knee.wm" "mgear_curveCns197.inputs[1]";
+connectAttr "legFront_R0_ankle.wm" "mgear_curveCns197.inputs[2]";
+connectAttr "legFront_R0_foot.wm" "mgear_curveCns197.inputs[3]";
+connectAttr "legFront_R0_eff.wm" "mgear_curveCns197.inputs[4]";
+connectAttr "groupParts394.og" "tweak197.ip[0].ig";
+connectAttr "groupId394.id" "tweak197.ip[0].gi";
+connectAttr "mgear_curveCns197GroupId.msg" "mgear_curveCns197Set.gn" -na;
+connectAttr "legFront_R0_crvShape1.iog.og[0]" "mgear_curveCns197Set.dsm" -na;
+connectAttr "mgear_curveCns197.msg" "mgear_curveCns197Set.ub[0]";
+connectAttr "tweak197.og[0]" "mgear_curveCns197GroupParts.ig";
+connectAttr "mgear_curveCns197GroupId.id" "mgear_curveCns197GroupParts.gi";
+connectAttr "groupId394.msg" "tweakSet197.gn" -na;
+connectAttr "legFront_R0_crvShape1.iog.og[1]" "tweakSet197.dsm" -na;
+connectAttr "tweak197.msg" "tweakSet197.ub[0]";
+connectAttr "legFront_R0_crvShape1Orig.ws" "groupParts394.ig";
+connectAttr "groupId394.id" "groupParts394.gi";
+connectAttr "mgear_curveCns198GroupParts.og" "mgear_curveCns198.ip[0].ig";
+connectAttr "mgear_curveCns198GroupId.id" "mgear_curveCns198.ip[0].gi";
+connectAttr "footFront_R0_root.wm" "mgear_curveCns198.inputs[0]";
+connectAttr "footFront_R0_0_loc.wm" "mgear_curveCns198.inputs[1]";
+connectAttr "footFront_R0_1_loc.wm" "mgear_curveCns198.inputs[2]";
+connectAttr "groupParts396.og" "tweak198.ip[0].ig";
+connectAttr "groupId396.id" "tweak198.ip[0].gi";
+connectAttr "mgear_curveCns198GroupId.msg" "mgear_curveCns198Set.gn" -na;
+connectAttr "footFront_R0_crvShape.iog.og[0]" "mgear_curveCns198Set.dsm" -na;
+connectAttr "mgear_curveCns198.msg" "mgear_curveCns198Set.ub[0]";
+connectAttr "tweak198.og[0]" "mgear_curveCns198GroupParts.ig";
+connectAttr "mgear_curveCns198GroupId.id" "mgear_curveCns198GroupParts.gi";
+connectAttr "groupId396.msg" "tweakSet198.gn" -na;
+connectAttr "footFront_R0_crvShape.iog.og[1]" "tweakSet198.dsm" -na;
+connectAttr "tweak198.msg" "tweakSet198.ub[0]";
+connectAttr "footFront_R0_crvShapeOrig.ws" "groupParts396.ig";
+connectAttr "groupId396.id" "groupParts396.gi";
+connectAttr "mgear_curveCns199GroupParts.og" "mgear_curveCns199.ip[0].ig";
+connectAttr "mgear_curveCns199GroupId.id" "mgear_curveCns199.ip[0].gi";
+connectAttr "footFront_R0_root.wm" "mgear_curveCns199.inputs[0]";
+connectAttr "footFront_R0_heel.wm" "mgear_curveCns199.inputs[1]";
+connectAttr "footFront_R0_outpivot.wm" "mgear_curveCns199.inputs[2]";
+connectAttr "footFront_R0_heel.wm" "mgear_curveCns199.inputs[3]";
+connectAttr "footFront_R0_inpivot.wm" "mgear_curveCns199.inputs[4]";
+connectAttr "groupParts398.og" "tweak199.ip[0].ig";
+connectAttr "groupId398.id" "tweak199.ip[0].gi";
+connectAttr "mgear_curveCns199GroupId.msg" "mgear_curveCns199Set.gn" -na;
+connectAttr "footFront_R0_Shape1.iog.og[0]" "mgear_curveCns199Set.dsm" -na;
+connectAttr "mgear_curveCns199.msg" "mgear_curveCns199Set.ub[0]";
+connectAttr "tweak199.og[0]" "mgear_curveCns199GroupParts.ig";
+connectAttr "mgear_curveCns199GroupId.id" "mgear_curveCns199GroupParts.gi";
+connectAttr "groupId398.msg" "tweakSet199.gn" -na;
+connectAttr "footFront_R0_Shape1.iog.og[1]" "tweakSet199.dsm" -na;
+connectAttr "tweak199.msg" "tweakSet199.ub[0]";
+connectAttr "footFront_R0_Shape1Orig.ws" "groupParts398.ig";
+connectAttr "groupId398.id" "groupParts398.gi";
+connectAttr "mgear_curveCns200GroupParts.og" "mgear_curveCns200.ip[0].ig";
+connectAttr "mgear_curveCns200GroupId.id" "mgear_curveCns200.ip[0].gi";
+connectAttr "legBack_L0_root.wm" "mgear_curveCns200.inputs[0]";
+connectAttr "legBack_L0_knee.wm" "mgear_curveCns200.inputs[1]";
+connectAttr "legBack_L0_ankle.wm" "mgear_curveCns200.inputs[2]";
+connectAttr "legBack_L0_foot.wm" "mgear_curveCns200.inputs[3]";
+connectAttr "legBack_L0_eff.wm" "mgear_curveCns200.inputs[4]";
+connectAttr "groupParts400.og" "tweak200.ip[0].ig";
+connectAttr "groupId400.id" "tweak200.ip[0].gi";
+connectAttr "mgear_curveCns200GroupId.msg" "mgear_curveCns200Set.gn" -na;
+connectAttr "legBack_L0_crvShape1.iog.og[0]" "mgear_curveCns200Set.dsm" -na;
+connectAttr "mgear_curveCns200.msg" "mgear_curveCns200Set.ub[0]";
+connectAttr "tweak200.og[0]" "mgear_curveCns200GroupParts.ig";
+connectAttr "mgear_curveCns200GroupId.id" "mgear_curveCns200GroupParts.gi";
+connectAttr "groupId400.msg" "tweakSet200.gn" -na;
+connectAttr "legBack_L0_crvShape1.iog.og[1]" "tweakSet200.dsm" -na;
+connectAttr "tweak200.msg" "tweakSet200.ub[0]";
+connectAttr "legBack_L0_crvShape1Orig.ws" "groupParts400.ig";
+connectAttr "groupId400.id" "groupParts400.gi";
+connectAttr "mgear_curveCns201GroupParts.og" "mgear_curveCns201.ip[0].ig";
+connectAttr "mgear_curveCns201GroupId.id" "mgear_curveCns201.ip[0].gi";
+connectAttr "footBack_L0_root.wm" "mgear_curveCns201.inputs[0]";
+connectAttr "footBack_L0_0_loc.wm" "mgear_curveCns201.inputs[1]";
+connectAttr "footBack_L0_1_loc.wm" "mgear_curveCns201.inputs[2]";
+connectAttr "groupParts402.og" "tweak201.ip[0].ig";
+connectAttr "groupId402.id" "tweak201.ip[0].gi";
+connectAttr "mgear_curveCns201GroupId.msg" "mgear_curveCns201Set.gn" -na;
+connectAttr "footBack_L0_crvShape.iog.og[0]" "mgear_curveCns201Set.dsm" -na;
+connectAttr "mgear_curveCns201.msg" "mgear_curveCns201Set.ub[0]";
+connectAttr "tweak201.og[0]" "mgear_curveCns201GroupParts.ig";
+connectAttr "mgear_curveCns201GroupId.id" "mgear_curveCns201GroupParts.gi";
+connectAttr "groupId402.msg" "tweakSet201.gn" -na;
+connectAttr "footBack_L0_crvShape.iog.og[1]" "tweakSet201.dsm" -na;
+connectAttr "tweak201.msg" "tweakSet201.ub[0]";
+connectAttr "footBack_L0_crvShapeOrig.ws" "groupParts402.ig";
+connectAttr "groupId402.id" "groupParts402.gi";
+connectAttr "mgear_curveCns202GroupParts.og" "mgear_curveCns202.ip[0].ig";
+connectAttr "mgear_curveCns202GroupId.id" "mgear_curveCns202.ip[0].gi";
+connectAttr "footBack_L0_root.wm" "mgear_curveCns202.inputs[0]";
+connectAttr "footBack_L0_heel.wm" "mgear_curveCns202.inputs[1]";
+connectAttr "footBack_L0_outpivot.wm" "mgear_curveCns202.inputs[2]";
+connectAttr "footBack_L0_heel.wm" "mgear_curveCns202.inputs[3]";
+connectAttr "footBack_L0_inpivot.wm" "mgear_curveCns202.inputs[4]";
+connectAttr "groupParts404.og" "tweak202.ip[0].ig";
+connectAttr "groupId404.id" "tweak202.ip[0].gi";
+connectAttr "mgear_curveCns202GroupId.msg" "mgear_curveCns202Set.gn" -na;
+connectAttr "footBack_L0_Shape1.iog.og[0]" "mgear_curveCns202Set.dsm" -na;
+connectAttr "mgear_curveCns202.msg" "mgear_curveCns202Set.ub[0]";
+connectAttr "tweak202.og[0]" "mgear_curveCns202GroupParts.ig";
+connectAttr "mgear_curveCns202GroupId.id" "mgear_curveCns202GroupParts.gi";
+connectAttr "groupId404.msg" "tweakSet202.gn" -na;
+connectAttr "footBack_L0_Shape1.iog.og[1]" "tweakSet202.dsm" -na;
+connectAttr "tweak202.msg" "tweakSet202.ub[0]";
+connectAttr "footBack_L0_Shape1Orig.ws" "groupParts404.ig";
+connectAttr "groupId404.id" "groupParts404.gi";
+connectAttr "mgear_curveCns203GroupParts.og" "mgear_curveCns203.ip[0].ig";
+connectAttr "mgear_curveCns203GroupId.id" "mgear_curveCns203.ip[0].gi";
+connectAttr "legBack_R0_root.wm" "mgear_curveCns203.inputs[0]";
+connectAttr "legBack_R0_knee.wm" "mgear_curveCns203.inputs[1]";
+connectAttr "legBack_R0_ankle.wm" "mgear_curveCns203.inputs[2]";
+connectAttr "legBack_R0_foot.wm" "mgear_curveCns203.inputs[3]";
+connectAttr "legBack_R0_eff.wm" "mgear_curveCns203.inputs[4]";
+connectAttr "groupParts406.og" "tweak203.ip[0].ig";
+connectAttr "groupId406.id" "tweak203.ip[0].gi";
+connectAttr "mgear_curveCns203GroupId.msg" "mgear_curveCns203Set.gn" -na;
+connectAttr "legBack_R0_crvShape1.iog.og[0]" "mgear_curveCns203Set.dsm" -na;
+connectAttr "mgear_curveCns203.msg" "mgear_curveCns203Set.ub[0]";
+connectAttr "tweak203.og[0]" "mgear_curveCns203GroupParts.ig";
+connectAttr "mgear_curveCns203GroupId.id" "mgear_curveCns203GroupParts.gi";
+connectAttr "groupId406.msg" "tweakSet203.gn" -na;
+connectAttr "legBack_R0_crvShape1.iog.og[1]" "tweakSet203.dsm" -na;
+connectAttr "tweak203.msg" "tweakSet203.ub[0]";
+connectAttr "legBack_R0_crvShape1Orig.ws" "groupParts406.ig";
+connectAttr "groupId406.id" "groupParts406.gi";
+connectAttr "mgear_curveCns204GroupParts.og" "mgear_curveCns204.ip[0].ig";
+connectAttr "mgear_curveCns204GroupId.id" "mgear_curveCns204.ip[0].gi";
+connectAttr "footBack_R0_root.wm" "mgear_curveCns204.inputs[0]";
+connectAttr "footBack_R0_0_loc.wm" "mgear_curveCns204.inputs[1]";
+connectAttr "footBack_R0_1_loc.wm" "mgear_curveCns204.inputs[2]";
+connectAttr "groupParts408.og" "tweak204.ip[0].ig";
+connectAttr "groupId408.id" "tweak204.ip[0].gi";
+connectAttr "mgear_curveCns204GroupId.msg" "mgear_curveCns204Set.gn" -na;
+connectAttr "footBack_R0_crvShape.iog.og[0]" "mgear_curveCns204Set.dsm" -na;
+connectAttr "mgear_curveCns204.msg" "mgear_curveCns204Set.ub[0]";
+connectAttr "tweak204.og[0]" "mgear_curveCns204GroupParts.ig";
+connectAttr "mgear_curveCns204GroupId.id" "mgear_curveCns204GroupParts.gi";
+connectAttr "groupId408.msg" "tweakSet204.gn" -na;
+connectAttr "footBack_R0_crvShape.iog.og[1]" "tweakSet204.dsm" -na;
+connectAttr "tweak204.msg" "tweakSet204.ub[0]";
+connectAttr "footBack_R0_crvShapeOrig.ws" "groupParts408.ig";
+connectAttr "groupId408.id" "groupParts408.gi";
+connectAttr "mgear_curveCns205GroupParts.og" "mgear_curveCns205.ip[0].ig";
+connectAttr "mgear_curveCns205GroupId.id" "mgear_curveCns205.ip[0].gi";
+connectAttr "footBack_R0_root.wm" "mgear_curveCns205.inputs[0]";
+connectAttr "footBack_R0_heel.wm" "mgear_curveCns205.inputs[1]";
+connectAttr "footBack_R0_outpivot.wm" "mgear_curveCns205.inputs[2]";
+connectAttr "footBack_R0_heel.wm" "mgear_curveCns205.inputs[3]";
+connectAttr "footBack_R0_inpivot.wm" "mgear_curveCns205.inputs[4]";
+connectAttr "groupParts410.og" "tweak205.ip[0].ig";
+connectAttr "groupId410.id" "tweak205.ip[0].gi";
+connectAttr "mgear_curveCns205GroupId.msg" "mgear_curveCns205Set.gn" -na;
+connectAttr "footBack_R0_Shape1.iog.og[0]" "mgear_curveCns205Set.dsm" -na;
+connectAttr "mgear_curveCns205.msg" "mgear_curveCns205Set.ub[0]";
+connectAttr "tweak205.og[0]" "mgear_curveCns205GroupParts.ig";
+connectAttr "mgear_curveCns205GroupId.id" "mgear_curveCns205GroupParts.gi";
+connectAttr "groupId410.msg" "tweakSet205.gn" -na;
+connectAttr "footBack_R0_Shape1.iog.og[1]" "tweakSet205.dsm" -na;
+connectAttr "tweak205.msg" "tweakSet205.ub[0]";
+connectAttr "footBack_R0_Shape1Orig.ws" "groupParts410.ig";
+connectAttr "groupId410.id" "groupParts410.gi";
+connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 // End of quadruped.ma
