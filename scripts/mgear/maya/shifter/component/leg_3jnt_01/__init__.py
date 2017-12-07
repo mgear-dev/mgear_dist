@@ -533,6 +533,16 @@ class Component(component.Main):
                                                         "UpV Ref",
                                                         0,
                                                         ref_names)
+        if self.validProxyChannels:
+            attribute.addProxyAttribute(
+                [self.blend_att, self.roundness_att],
+                [self.fk0_ctl,
+                    self.fk1_ctl,
+                    self.fk2_ctl,
+                    self.ik_ctl,
+                    self.upv_ctl])
+            attribute.addProxyAttribute(self.roll_att,
+                                        [self.ik_ctl, self.upv_ctl])
 
         # Setup ------------------------------------------
         # Eval Fcurve
