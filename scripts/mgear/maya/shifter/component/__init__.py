@@ -87,6 +87,7 @@ class Main(object):
         self.relatives = {}
         self.jointRelatives = {}  # joint relatives mapping for auto connection
         self.controlRelatives = {}
+        self.aliasRelatives = {} # alias names for pretty names on combo box
 
         # --------------------------------------------------
         # Joint positions init
@@ -723,6 +724,28 @@ class Main(object):
             return False
 
         return self.controlRelatives[name]
+
+    def getAliasRelation(self, name):
+        """Return the relational name alias from guide to rig.
+
+        Args:
+            name (str): Local name of the guide object.
+
+        Returns:
+            dagNode: The relational object.
+
+        """
+        comp_name = self.rig.getComponentName(name)
+        comp_relative = self.rig.findComponent(name)
+        rel_name = self.rig.getRelativeName(name)
+        if rel_name not in comp_relative.aliasRelatives.keys():
+            mgear.log("Can't find alias name for object : " +
+                      self.fullName + "." + name + ". Guide name will be use",
+                      mgear.sev_warning)
+            return name
+
+        return "{}_{}".format(comp_name,
+                              comp_relative.aliasRelatives[rel_name])
 
     def initControlTag(self):
         """Initialice the control tag parent.

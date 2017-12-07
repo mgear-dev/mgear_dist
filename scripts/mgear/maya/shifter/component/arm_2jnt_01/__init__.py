@@ -462,12 +462,16 @@ class Component(component.Main):
         # Ref
         if self.settings["ikrefarray"]:
             ref_names = self.settings["ikrefarray"].split(",")
-            if len(ref_names) > 1:
+            ref_alias = [self.getAliasRelation(rn)
+                         for rn in ref_names]
+            print ref_alias
+
+            if len(ref_alias) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_alias)
 
         if self.settings["ikTR"]:
             ref_names = ["Auto", "ik_ctl"]
@@ -773,6 +777,12 @@ class Component(component.Main):
         self.controlRelatives["elbow"] = self.fk1_ctl
         self.controlRelatives["wrist"] = self.fk2_ctl
         self.controlRelatives["eff"] = self.fk2_ctl
+
+        # here is really don't needed because the name is the same as the alias
+        self.aliasRelatives["root"] = "root"
+        self.aliasRelatives["elbow"] = "elbow"
+        self.aliasRelatives["wrist"] = "wrist"
+        self.aliasRelatives["eff"] = "hand"
 
     def addConnection(self):
         """Add more connection definition to the set"""
