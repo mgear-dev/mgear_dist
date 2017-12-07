@@ -59,13 +59,14 @@ class Component(component.Main):
     def addAttributes(self):
         # Ref
         if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["ikrefarray"].split(","))
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_names)
 
     def addOperators(self):
         return
@@ -79,6 +80,8 @@ class Component(component.Main):
         self.controlRelatives["root"] = self.ctl
         if self.settings["joint"]:
             self.jointRelatives["root"] = 0
+
+        self.aliasRelatives["root"] = "ctl"
 
     def addConnection(self):
         """Add more connection definition to the set"""

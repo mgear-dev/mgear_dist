@@ -78,13 +78,14 @@ class Component(component.Main):
 
         # Ref
         if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["ikrefarray"].split(","))
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_names)
 
     # =====================================================
     # OPERATORS

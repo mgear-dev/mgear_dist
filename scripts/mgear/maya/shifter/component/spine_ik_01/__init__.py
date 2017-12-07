@@ -625,5 +625,5 @@ class Component(component.Main):
         self.jointRelatives["root"] = 0
         self.jointRelatives["eff"] = -1
 
-        self.aliasRelatives["root"] = "hip"
-        self.aliasRelatives["eff"] = "chest"
+        self.aliasRelatives["root"] = "base"
+        self.aliasRelatives["eff"] = "tip"

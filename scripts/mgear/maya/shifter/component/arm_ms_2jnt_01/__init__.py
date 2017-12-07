@@ -576,22 +576,24 @@ class Component(component.Main):
                     self.settings["fkrefarray"].split(","))
 
         if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["ikrefarray"].split(","))
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_names)
 
         if self.settings["upvrefarray"]:
-            ref_names = self.settings["upvrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["upvrefarray"].split(","))
             if len(ref_names) > 1:
                 self.upvref_att = self.addAnimEnumParam(
                     "upvref",
                     "UpV Ref",
                     0,
-                    self.settings["upvrefarray"].split(","))
+                    ref_names)
 
         # Setup ------------------------------------------
         # Eval Fcurve
@@ -995,6 +997,8 @@ class Component(component.Main):
         self.controlRelatives["elbow"] = self.fk1_ctl
         self.controlRelatives["wrist"] = self.fk2_ctl
         self.controlRelatives["eff"] = self.fk2_ctl
+
+        self.aliasRelatives["eff"] = "hand"
 
     def connect_standard(self):
         """standard connection definition for the component"""

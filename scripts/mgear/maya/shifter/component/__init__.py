@@ -87,7 +87,7 @@ class Main(object):
         self.relatives = {}
         self.jointRelatives = {}  # joint relatives mapping for auto connection
         self.controlRelatives = {}
-        self.aliasRelatives = {} # alias names for pretty names on combo box
+        self.aliasRelatives = {}  # alias names for pretty names on combo box
 
         # --------------------------------------------------
         # Joint positions init
@@ -725,8 +725,11 @@ class Main(object):
 
         return self.controlRelatives[name]
 
-    def getAliasRelation(self, name):
+    def get_alias_relation(self, name, comp_relative):
         """Return the relational name alias from guide to rig.
+
+        If not alias name has been set, this function will return the original
+        guide reference name.
 
         Args:
             name (str): Local name of the guide object.
@@ -736,16 +739,64 @@ class Main(object):
 
         """
         comp_name = self.rig.getComponentName(name)
-        comp_relative = self.rig.findComponent(name)
         rel_name = self.rig.getRelativeName(name)
         if rel_name not in comp_relative.aliasRelatives.keys():
-            mgear.log("Can't find alias name for object : " +
-                      self.fullName + "." + name + ". Guide name will be use",
-                      mgear.sev_warning)
             return name
 
         return "{}_{}".format(comp_name,
                               comp_relative.aliasRelatives[rel_name])
+
+    def get_valid_ref_list(self, ref_list):
+        """Returns the purged list of ref_list
+
+        If the component doesn't exist will skip it
+
+        Args:
+            ref_list (list): Initial references names list
+
+        Returns:
+            list: Purged relatives list
+        """
+        return self._get_valid_array_list(ref_list)[1]
+
+    def get_valid_alias_list(self, ref_list):
+        """Returns the alias list of valid components
+
+        If the component doesn't exist will skip it
+
+        Args:
+            ref_list (list): Initial references names list
+
+        Returns:
+            list: Alias names list
+        """
+        return self._get_valid_array_list(ref_list)[0]
+
+    def _get_valid_array_list(self, array_list):
+        """Returns the alias list of valid components and the purged array_list
+
+        If the component doesn't exist will skip it
+
+        Args:
+            ref_list (list): Initial references names list
+
+        Returns:
+            list of list: Alias names list and purged relatives list
+        """
+        alias_list = [[], []]
+        for rn in array_list:
+            comp_relative = self.rig.findComponent(rn)
+            if comp_relative:
+                o_name = self.get_alias_relation(rn, comp_relative)
+                alias_list[0].append(o_name)
+                alias_list[1].append(rn)
+            else:
+                pm.displayWarning("While connecting reference array {}"
+                                  " was not found. This will be skipped. But"
+                                  " you should check your guides "
+                                  "configuration".format(rn))
+
+        return alias_list
 
     def initControlTag(self):
         """Initialice the control tag parent.
@@ -827,7 +878,7 @@ class Main(object):
         refArray = self.settings["ikrefarray"]
 
         if refArray:
-            ref_names = refArray.split(",")
+            ref_names = self.get_valid_ref_list(refArray.split(","))
             if len(ref_names) == 1:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(self.ik_cns, ref)
@@ -868,7 +919,7 @@ class Main(object):
         refArray = self.settings["ikrefarray"]
 
         if refArray:
-            ref_names = refArray.split(",")
+            ref_names = self.get_valid_ref_list(refArray.split(","))
             if len(ref_names) == 1:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(self.ik_cns, ref)
@@ -885,19 +936,27 @@ class Main(object):
                 for i, attr in enumerate(cns_attr):
                     pm.setAttr(attr, 1.0)
 
-    def connectRef(self, refArray, cns_obj, upVAttr=None):
-        """
-        Connect the cns_obj to a multiple object using parentConstraint.
+    def connectRef(self, refArray, cns_obj, upVAttr=None, init_refNames=False):
+        """Connect the cns_obj to a multiple object using parentConstraint.
 
         Args:
             refArray (list of dagNode): List of driver objects
             cns_obj (dagNode): The driven object.
             upVAttr (bool): Set if the ref Array is for IK or Up vector
         """
-
         if refArray:
-            ref_names = refArray.split(",")
-            if len(ref_names) == 1:
+            if upVAttr and not init_refNames:
+                # we only can perform name validation if the init_refnames are
+                # provided in a separated list. This check ensures backwards
+                # copatibility
+                ref_names = refArray.split(",")
+            else:
+                ref_names = self.get_valid_ref_list(refArray.split(","))
+
+            if not ref_names:
+                # return if the not ref_names list
+                return
+            elif len(ref_names) == 1:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(cns_obj, ref)
             else:
@@ -924,24 +983,39 @@ class Main(object):
                     pm.setAttr(node_name + ".colorIfFalseR", 0)
                     pm.connectAttr(node_name + ".outColorR", attr)
 
-    def connectRef2(self, refArray, cns_obj, in_attr, init_ref=False,
-                    skipTranslate=False):
+    def connectRef2(self,
+                    refArray,
+                    cns_obj,
+                    in_attr,
+                    init_ref=False,
+                    skipTranslate=False,
+                    init_refNames=False):
         """Connect the cns_obj to a multiple object using parentConstraint.
 
         Args:
             refArray (string): List of driver objects divided by ",".
             cns_obj (dagNode): The driven object.
-            upVAttr (bool): Set if the ref Array is for IK or Up vector
+            in_attr (attr): The attribute to connect the switch
             init_ref (list of dagNode): Set the initial default ref connections
             skipTranslate (bool): if True will skip the translation connections
+            init_refNames (list of str, optional): Set initial default names
+                for the initial default connections
 
         """
         if refArray:
-            ref_names = refArray.split(",")
+            if init_refNames:
+                # we only can perform name validation if the init_refnames are
+                # provided in a separated list. This check ensures backwards
+                # copatibility
+                ref_names = self.get_valid_ref_list(refArray.split(","))
+            else:
+                ref_names = refArray.split(",")
             if len(ref_names) == 1:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(cns_obj, ref)
             else:
+                if init_refNames:
+                    ref_names = ref_names + init_refNames
                 ref = []
                 for ref_name in ref_names:
                     rrn = self.rig.findRelative(ref_name)
@@ -982,7 +1056,7 @@ class Main(object):
 
         """
         if refArray:
-            ref_names = refArray.split(",")
+            ref_names = self.get_valid_ref_list(refArray.split(","))
             if len(ref_names) >= 1:
                 ref = []
                 for ref_name in ref_names:

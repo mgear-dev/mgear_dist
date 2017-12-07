@@ -305,16 +305,18 @@ class Component(component.Main):
 
         # Ref
         if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["ikrefarray"].split(","))
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_names)
 
         if self.settings["headrefarray"]:
-            ref_names = self.settings["headrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["headrefarray"].split(","))
             if len(ref_names) > 1:
                 ref_names.insert(0, "self")
                 self.headref_att = self.addAnimEnumParam(
@@ -498,6 +500,11 @@ class Component(component.Main):
         self.jointRelatives["neck"] = len(self.jnt_pos) - 1
         self.jointRelatives["head"] = len(self.jnt_pos) - 1
         self.jointRelatives["eff"] = len(self.jnt_pos) - 1
+
+        self.aliasRelatives["tan1"] = "root"
+        self.aliasRelatives["tan2"] = "head"
+        self.aliasRelatives["neck"] = "head"
+        self.aliasRelatives["eff"] = "head"
 
     def connect_standard(self):
         self.connect_standardWithIkRef()
