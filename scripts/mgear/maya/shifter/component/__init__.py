@@ -850,10 +850,11 @@ class Main(object):
         if self.settings["connector"] not in self.connections.keys():
             mgear.log("Unable to connect object", mgear.sev_error)
             return False
-
-        self.connections[self.settings["connector"]]()
-
-        return True
+        try:
+            self.connections[self.settings["connector"]]()
+            return True
+        except AttributeError:
+            return False
 
     def connect_standard(self):
         """Standard Connection
@@ -978,19 +979,24 @@ class Main(object):
                 cns_attr = pm.parentConstraint(
                     cns_node, query=True, weightAliasList=True)
                 # check if the ref Array is for IK or Up vector
-                if upVAttr:
-                    oAttr = self.upvref_att
-                else:
-                    oAttr = self.ikref_att
+                try:
+                    if upVAttr:
+                        oAttr = self.upvref_att
+                    else:
+                        oAttr = self.ikref_att
 
-                for i, attr in enumerate(cns_attr):
-                    node_name = pm.createNode("condition")
-                    pm.connectAttr(oAttr, node_name + ".firstTerm")
-                    pm.setAttr(node_name + ".secondTerm", i)
-                    pm.setAttr(node_name + ".operation", 0)
-                    pm.setAttr(node_name + ".colorIfTrueR", 1)
-                    pm.setAttr(node_name + ".colorIfFalseR", 0)
-                    pm.connectAttr(node_name + ".outColorR", attr)
+                except AttributeError:
+                    oAttr = None
+
+                if oAttr:
+                    for i, attr in enumerate(cns_attr):
+                        node_name = pm.createNode("condition")
+                        pm.connectAttr(oAttr, node_name + ".firstTerm")
+                        pm.setAttr(node_name + ".secondTerm", i)
+                        pm.setAttr(node_name + ".operation", 0)
+                        pm.setAttr(node_name + ".colorIfTrueR", 1)
+                        pm.setAttr(node_name + ".colorIfFalseR", 0)
+                        pm.connectAttr(node_name + ".outColorR", attr)
 
     def connectRef2(self,
                     refArray,
