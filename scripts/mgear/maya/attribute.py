@@ -486,10 +486,7 @@ def setNotKeyableAttributes(nodes,
 
     for attr_name in attributes:
         for node in nodes:
-            node.setAttr(attr_name,
-                         lock=True,
-                         keyable=False,
-                         channelBox=False)
+            node.setAttr(attr_name, lock=False, keyable=False, cb=True)
 
 
 def setRotOrder(node, s="XYZ"):
