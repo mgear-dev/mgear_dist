@@ -1,31 +1,6 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -102,6 +77,9 @@ class Ui_Form(object):
         self.mirrorMid_checkBox = QtWidgets.QCheckBox(self.groupBox)
         self.mirrorMid_checkBox.setObjectName("mirrorMid_checkBox")
         self.verticalLayout.addWidget(self.mirrorMid_checkBox)
+        self.extraTweak_checkBox = QtWidgets.QCheckBox(self.groupBox)
+        self.extraTweak_checkBox.setObjectName("extraTweak_checkBox")
+        self.verticalLayout.addWidget(self.extraTweak_checkBox)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.squashStretchProfile_pushButton = QtWidgets.QPushButton(self.groupBox)
@@ -232,6 +210,10 @@ class Ui_Form(object):
         self.mirrorMid_checkBox.setStatusTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
         self.mirrorMid_checkBox.setWhatsThis(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
         self.mirrorMid_checkBox.setText(gqt.fakeTranslate("Form", "MirrorMid Ctl and UPV  axis behaviour", None, -1))
+        self.extraTweak_checkBox.setToolTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
+        self.extraTweak_checkBox.setStatusTip(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
+        self.extraTweak_checkBox.setWhatsThis(gqt.fakeTranslate("Form", "This option set the axis of the mid CTL (elbow) and the up vector control to move in a mirror behaviour ", None, -1))
+        self.extraTweak_checkBox.setText(gqt.fakeTranslate("Form", "Add Extra Tweak Ctl", None, -1))
         self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
         self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
         self.ikRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from UpV Ref", None, -1))

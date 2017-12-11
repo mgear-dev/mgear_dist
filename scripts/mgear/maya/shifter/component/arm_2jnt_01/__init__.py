@@ -124,6 +124,33 @@ class Component(component.Main):
         for x in self.fk_ctl:
             attribute.setInvertMirror(x, ["tx", "ty", "tz"])
 
+        # IK upv ---------------------------------
+        v = self.guide.apos[2] - self.guide.apos[0]
+        v = self.normal ^ v
+        v.normalize()
+        v *= self.size * .5
+        v += self.guide.apos[1]
+
+        self.upv_cns = primitive.addTransformFromPos(self.root,
+                                                     self.getName("upv_cns"),
+                                                     v)
+
+        self.upv_ctl = self.addCtl(self.upv_cns,
+                                   "upv_ctl",
+                                   transform.getTransform(self.upv_cns),
+                                   self.color_ik,
+                                   "diamond",
+                                   w=self.size * .12,
+                                   tp=self.parentCtlTag)
+
+        if self.settings["mirrorMid"]:
+            if self.negate:
+                self.upv_cns.rz.set(180)
+                self.upv_cns.sy.set(-1)
+        else:
+            attribute.setInvertMirror(self.upv_ctl, ["tx"])
+        attribute.setKeyableAttributes(self.upv_ctl, self.t_params)
+
         # IK Controlers -----------------------------------
 
         self.ik_cns = primitive.addTransformFromPos(
@@ -161,7 +188,7 @@ class Component(component.Main):
                                   w=self.size * .12,
                                   h=self.size * .12,
                                   d=self.size * .12,
-                                  tp=self.ikcns_ctl)
+                                  tp=self.upv_ctl)
 
         if self.settings["mirrorIK"]:
             if self.negate:
@@ -173,33 +200,6 @@ class Component(component.Main):
         self.ik_ctl_ref = primitive.addTransform(self.ik_ctl,
                                                  self.getName("ikCtl_ref"),
                                                  m)
-
-        # upv
-        v = self.guide.apos[2] - self.guide.apos[0]
-        v = self.normal ^ v
-        v.normalize()
-        v *= self.size * .5
-        v += self.guide.apos[1]
-
-        self.upv_cns = primitive.addTransformFromPos(self.root,
-                                                     self.getName("upv_cns"),
-                                                     v)
-
-        self.upv_ctl = self.addCtl(self.upv_cns,
-                                   "upv_ctl",
-                                   transform.getTransform(self.upv_cns),
-                                   self.color_ik,
-                                   "diamond",
-                                   w=self.size * .12,
-                                   tp=self.parentCtlTag)
-
-        if self.settings["mirrorMid"]:
-            if self.negate:
-                self.upv_cns.rz.set(180)
-                self.upv_cns.sy.set(-1)
-        else:
-            attribute.setInvertMirror(self.upv_ctl, ["tx"])
-        attribute.setKeyableAttributes(self.upv_ctl, self.t_params)
 
         # IK rotation controls
         if self.settings["ikTR"]:
@@ -276,6 +276,9 @@ class Component(component.Main):
                                    "sphere",
                                    w=self.size * .2,
                                    tp=self.parentCtlTag)
+
+        attribute.setNotKeyableAttributes(self.mid_ctl, ["v", "sy", "sz"])
+
         if self.settings["mirrorMid"]:
             if self.negate:
                 self.mid_cns.rz.set(180)
@@ -339,13 +342,35 @@ class Component(component.Main):
         self.divisions = self.settings["div0"] + self.settings["div1"] + 3 + 2
 
         self.div_cns = []
+
+        if self.settings["extraTweak"]:
+            tagP = self.parentCtlTag
+            self.tweak_ctl = []
+
         for i in range(self.divisions):
 
             div_cns = primitive.addTransform(self.root,
                                              self.getName("div%s_loc" % i))
 
             self.div_cns.append(div_cns)
-            self.jnt_pos.append([div_cns, i])
+
+            if self.settings["extraTweak"]:
+                t = transform.getTransform(div_cns)
+                tweak_ctl = self.addCtl(div_cns,
+                                        "tweak%s_ctl" % i,
+                                        t,
+                                        self.color_fk,
+                                        "square",
+                                        w=self.size * .15,
+                                        ro=datatypes.Vector([0, 0, 1.5708]),
+                                        tp=tagP)
+                attribute.setKeyableAttributes(tweak_ctl)
+
+                tagP = tweak_ctl
+                self.tweak_ctl.append(tweak_ctl)
+                self.jnt_pos.append([tweak_ctl, i, None, False])
+            else:
+                self.jnt_pos.append([div_cns, i])
 
         # End reference ------------------------------------
         # To help the deformation on the wrist
@@ -459,6 +484,10 @@ class Component(component.Main):
                                             0,
                                             1)
 
+        if self.settings["extraTweak"]:
+            self.tweakVis_att = self.addAnimParam(
+                "Tweak_vis", "Tweak Vis", "bool", False)
+
         # Ref
         if self.settings["ikrefarray"]:
             ref_names = self.get_valid_alias_list(
@@ -502,13 +531,17 @@ class Component(component.Main):
                                                      ref_names)
 
         if self.validProxyChannels:
+            attrs_list = [self.blend_att, self.roundness_att]
+            if self.settings["extraTweak"]:
+                attrs_list += [self.tweakVis_att]
             attribute.addProxyAttribute(
-                [self.blend_att, self.roundness_att],
+                attrs_list,
                 [self.fk0_ctl,
                     self.fk1_ctl,
                     self.fk2_ctl,
                     self.ik_ctl,
-                    self.upv_ctl])
+                    self.upv_ctl,
+                    self.mid_ctl])
             attribute.addProxyAttribute(self.roll_att,
                                         [self.ik_ctl, self.upv_ctl])
 
@@ -657,8 +690,7 @@ class Component(component.Main):
 
         pm.pointConstraint(self.mid_ctl_twst_ref,
                            self.tws1_npo, maintainOffset=False)
-        pm.scaleConstraint(self.mid_ctl_twst_ref,
-                           self.tws1_npo, maintainOffset=False)
+        pm.connectAttr(self.mid_ctl.scaleX, self.tws1_loc.scaleX)
         pm.orientConstraint(self.mid_ctl_twst_ref,
                             self.tws1_npo, maintainOffset=False)
 
@@ -707,6 +739,11 @@ class Component(component.Main):
         div_node2 = node.createDivNode(div_node + ".outputX",
                                        dm_node + ".outputScaleX")
         self.volDriver_att = div_node2 + ".outputX"
+
+        if self.settings["extraTweak"]:
+            for tweak_ctl in self.tweak_ctl:
+                for shp in tweak_ctl.getShapes():
+                    pm.connectAttr(self.tweakVis_att, shp.attr("visibility"))
 
         # Divisions ----------------------------------------
         # at 0 or 1 the division will follow exactly the rotation of the

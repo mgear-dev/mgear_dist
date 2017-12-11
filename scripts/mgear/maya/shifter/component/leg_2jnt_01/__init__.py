@@ -164,8 +164,7 @@ class Component(component.Main):
             "cube",
             w=self.size * .12,
             h=self.size * .12,
-            d=self.size * .12,
-            tp=self.ikcns_ctl)
+            d=self.size * .12)
         attribute.setKeyableAttributes(self.ik_ctl)
         attribute.setRotOrder(self.ik_ctl, "XZY")
         attribute.setInvertMirror(self.ik_ctl, ["tx", "ry", "rz"])
@@ -189,6 +188,8 @@ class Component(component.Main):
             "diamond",
             w=self.size * .12,
             tp=self.root_ctl)
+
+        self.add_controller_tag(self.ik_ctl, self.upv_ctl)
         if self.settings["mirrorMid"]:
             if self.negate:
                 self.upv_cns.rz.set(180)
@@ -257,6 +258,8 @@ class Component(component.Main):
                                    w=self.size * .2,
                                    tp=self.root_ctl)
 
+        attribute.setNotKeyableAttributes(self.mid_ctl, ["v", "sy", "sz"])
+
         if self.settings["mirrorMid"]:
             if self.negate:
                 self.mid_cns.rz.set(180)
@@ -319,13 +322,35 @@ class Component(component.Main):
         self.divisions = self.settings["div0"] + self.settings["div1"] + 3 + 2
 
         self.div_cns = []
+
+        if self.settings["extraTweak"]:
+            tagP = self.parentCtlTag
+            self.tweak_ctl = []
+
         for i in range(self.divisions):
 
             div_cns = primitive.addTransform(self.root_ctl,
                                              self.getName("div%s_loc" % i))
 
             self.div_cns.append(div_cns)
-            self.jnt_pos.append([div_cns, i])
+
+            if self.settings["extraTweak"]:
+                t = transform.getTransform(div_cns)
+                tweak_ctl = self.addCtl(div_cns,
+                                        "tweak%s_ctl" % i,
+                                        t,
+                                        self.color_fk,
+                                        "square",
+                                        w=self.size * .15,
+                                        ro=datatypes.Vector([0, 0, 1.5708]),
+                                        tp=tagP)
+                attribute.setKeyableAttributes(tweak_ctl)
+
+                tagP = tweak_ctl
+                self.tweak_ctl.append(tweak_ctl)
+                self.jnt_pos.append([tweak_ctl, i, None, False])
+            else:
+                self.jnt_pos.append([div_cns, i])
 
         # End reference ------------------------------------
         # To help the deformation on the ankle
@@ -391,6 +416,10 @@ class Component(component.Main):
         self.volume_att = self.addAnimParam(
             "volume", "Volume", "double", 1, 0, 1)
 
+        if self.settings["extraTweak"]:
+            self.tweakVis_att = self.addAnimParam(
+                "Tweak_vis", "Tweak Vis", "bool", False)
+
         # Ref
         if self.settings["ikrefarray"]:
             ref_names = self.get_valid_alias_list(
@@ -419,13 +448,17 @@ class Component(component.Main):
                                                      0,
                                                      ref_names)
         if self.validProxyChannels:
+            attrs_list = [self.blend_att, self.roundness_att]
+            if self.settings["extraTweak"]:
+                attrs_list += [self.tweakVis_att]
             attribute.addProxyAttribute(
-                [self.blend_att, self.roundness_att],
+                attrs_list,
                 [self.fk0_ctl,
                     self.fk1_ctl,
                     self.fk2_ctl,
                     self.ik_ctl,
-                    self.upv_ctl])
+                    self.upv_ctl,
+                    self.mid_ctl])
             attribute.addProxyAttribute(self.roll_att,
                                         [self.ik_ctl, self.upv_ctl])
 
@@ -529,7 +562,7 @@ class Component(component.Main):
             cParent=self.bone0)
 
         pm.pointConstraint(self.mid_ctl, self.tws1_loc, maintainOffset=False)
-        pm.scaleConstraint(self.mid_ctl, self.tws1_loc, maintainOffset=False)
+        pm.connectAttr(self.mid_ctl.scaleX, self.tws1_loc.scaleX)
         applyop.oriCns(self.mid_ctl, self.tws1_rot, maintainOffset=False)
 
         pm.pointConstraint(self.eff_loc, self.tws2_loc, maintainOffset=False)
@@ -560,6 +593,11 @@ class Component(component.Main):
                                        dm_node + ".outputScaleX")
 
         self.volDriver_att = div_node2 + ".outputX"
+
+        if self.settings["extraTweak"]:
+            for tweak_ctl in self.tweak_ctl:
+                for shp in tweak_ctl.getShapes():
+                    pm.connectAttr(self.tweakVis_att, shp.attr("visibility"))
 
         # Divisions ----------------------------------------
         # at 0 or 1 the division will follow exactly the rotation of the

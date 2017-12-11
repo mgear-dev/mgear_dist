@@ -15,7 +15,7 @@ import settingsUI as sui
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1, 3, 0]
+VERSION = [1, 4, 0]
 TYPE = "leg_2jnt_01"
 NAME = "leg"
 DESCRIPTION = "2 bones leg with stretch, roundess, ik/fk..., This component "\
@@ -66,6 +66,7 @@ class Guide(guide.ComponentGuide):
         self.pUpvRefArray = self.addParam("pinrefarray", "string", "")
         self.pMaxStretch = self.addParam("maxstretch", "double", 1.5, 1, None)
         self.pMirrorMid = self.addParam("mirrorMid", "bool", False)
+        self.pExtraTweak = self.addParam("extraTweak", "bool", False)
 
         # Divisions
         self.pDiv0 = self.addParam("div0", "long", 2, 1, None)
@@ -145,6 +146,7 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             self.root.attr("maxstretch").get())
 
         self.populateCheck(self.settingsTab.mirrorMid_checkBox, "mirrorMid")
+        self.populateCheck(self.settingsTab.extraTweak_checkBox, "extraTweak")
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
@@ -190,6 +192,10 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             partial(self.updateCheck,
                     self.settingsTab.mirrorMid_checkBox,
                     "mirrorMid"))
+
+        self.settingsTab.extraTweak_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.extraTweak_checkBox, "extraTweak"))
 
         self.settingsTab.ikRefArrayAdd_pushButton.clicked.connect(
             partial(self.addItem2listWidget,
