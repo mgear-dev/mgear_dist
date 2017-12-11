@@ -365,6 +365,7 @@ class Component(component.Main):
                                         self.color_fk,
                                         "square",
                                         w=self.size * .15,
+                                        d=self.size * .15,
                                         ro=datatypes.Vector([0, 0, 1.5708]),
                                         tp=tagP)
                 attribute.setKeyableAttributes(tweak_ctl)
