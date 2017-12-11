@@ -258,7 +258,10 @@ class Component(component.Main):
                                    w=self.size * .2,
                                    tp=self.root_ctl)
 
-        attribute.setNotKeyableAttributes(self.mid_ctl, ["v", "sy", "sz"])
+        attribute.setKeyableAttributes(self.mid_ctl,
+                                       params=["tx", "ty", "tz",
+                                               "ro", "rx", "ry", "rz",
+                                               "sx"])
 
         if self.settings["mirrorMid"]:
             if self.negate:
