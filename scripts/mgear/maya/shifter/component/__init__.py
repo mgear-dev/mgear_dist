@@ -215,7 +215,12 @@ class Main(object):
         """
         return
 
-    def addJoint(self, obj, name, newActiveJnt=None, UniScale=True, segComp=0,
+    def addJoint(self,
+                 obj,
+                 name,
+                 newActiveJnt=None,
+                 UniScale=False,
+                 segComp=0,
                  gearMulMatrix=True):
         """Add joint as child of the active joint or under driver object.
 
@@ -1184,7 +1189,7 @@ class Main(object):
             if len(jpo) == 4 and self.options["joint_rig"]:
                 uniScale = jpo[3]
             else:
-                uniScale = True
+                uniScale = False
             # handle the matrix node connection
             if len(jpo) == 5 and self.options["joint_rig"]:
                 gearMulMatrix = jpo[4]
