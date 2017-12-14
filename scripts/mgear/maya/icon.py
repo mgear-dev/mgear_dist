@@ -457,6 +457,11 @@ def cylinder(parent=None,
     dlen = width * .5
     dhei = heigth * .5
 
+    if degree == 3:
+        offsetMult = 1
+    else:
+        offsetMult = 1.108
+
     # upper circle
     v0 = datatypes.Vector(0, dhei, -dlen * 1.108)
     v1 = datatypes.Vector(dlen * .78, dhei, -dlen * .78)
@@ -478,15 +483,15 @@ def cylinder(parent=None,
     v15 = datatypes.Vector(-dlen * .78, -dhei, -dlen * .78)
 
     # curves
-    v16 = datatypes.Vector(0, dhei, -dlen)
-    v17 = datatypes.Vector(0, -dhei, -dlen)
-    v18 = datatypes.Vector(0, -dhei, dlen)
-    v19 = datatypes.Vector(0, dhei, dlen)
+    v16 = datatypes.Vector(0, dhei, -dlen * offsetMult)
+    v17 = datatypes.Vector(0, -dhei, -dlen * offsetMult)
+    v18 = datatypes.Vector(0, -dhei, dlen * offsetMult)
+    v19 = datatypes.Vector(0, dhei, dlen * offsetMult)
 
-    v20 = datatypes.Vector(dlen, dhei, 0)
-    v21 = datatypes.Vector(dlen, -dhei, 0)
-    v22 = datatypes.Vector(-dlen, -dhei, 0)
-    v23 = datatypes.Vector(-dlen, dhei, 0)
+    v20 = datatypes.Vector(dlen * offsetMult, dhei, 0)
+    v21 = datatypes.Vector(dlen * offsetMult, -dhei, 0)
+    v22 = datatypes.Vector(-dlen * offsetMult, - dhei, 0)
+    v23 = datatypes.Vector(-dlen * offsetMult, dhei, 0)
 
     points = getPointArrayWithOffset(
         [v0, v1, v2, v3, v4, v5, v6, v7], pos_offset, rot_offset)
