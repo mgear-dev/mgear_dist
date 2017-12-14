@@ -391,6 +391,9 @@ class Rig(object):
             dagNode: The Control.
 
         """
+        if "degree" not in kwargs.keys():
+            kwargs["degree"] = 1
+
         bufferName = name + "_controlBuffer"
         if bufferName in self.guide.controllers.keys():
             ctl_ref = self.guide.controllers[bufferName]

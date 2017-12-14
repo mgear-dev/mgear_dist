@@ -53,6 +53,8 @@ def create(parent=None,
         kwargs["po"] = None
     if "ro" not in kwargs.keys():
         kwargs["ro"] = None
+    if "degree" not in kwargs.keys():
+        kwargs["degree"] = 3
 
     if icon == "cube":
         ctl = cube(parent,
@@ -90,7 +92,8 @@ def create(parent=None,
                      color,
                      m,
                      kwargs["po"],
-                     kwargs["ro"])
+                     kwargs["ro"],
+                     kwargs["degree"])
     elif icon == "circle":
         ctl = circle(parent,
                      name,
@@ -98,7 +101,8 @@ def create(parent=None,
                      color,
                      m,
                      kwargs["po"],
-                     kwargs["ro"])
+                     kwargs["ro"],
+                     kwargs["degree"])
     elif icon == "cylinder":
         ctl = cylinder(parent,
                        name,
@@ -107,7 +111,8 @@ def create(parent=None,
                        color,
                        m,
                        kwargs["po"],
-                       kwargs["ro"])
+                       kwargs["ro"],
+                       kwargs["degree"])
     elif icon == "compas":
         ctl = compas(parent,
                      name,
@@ -115,7 +120,8 @@ def create(parent=None,
                      color,
                      m,
                      kwargs["po"],
-                     kwargs["ro"])
+                     kwargs["ro"],
+                     kwargs["degree"])
     elif icon == "diamond":
         ctl = diamond(parent,
                       name,
@@ -139,7 +145,8 @@ def create(parent=None,
                      color,
                      m,
                      kwargs["po"],
-                     kwargs["ro"])
+                     kwargs["ro"],
+                     kwargs["degree"])
     elif icon == "arrow":
         ctl = arrow(parent,
                     name,
@@ -334,7 +341,8 @@ def flower(parent=None,
            color=[0, 0, 0],
            m=datatypes.Matrix(),
            pos_offset=None,
-           rot_offset=None):
+           rot_offset=None,
+           degree=3):
     """Create a curve with a FLOWER shape.
 
     Arguments:
@@ -366,7 +374,7 @@ def flower(parent=None,
     points = getPointArrayWithOffset(
         [v0, v1, v2, v3, v4, v5, v6, v7], pos_offset, rot_offset)
 
-    node = curve.addCurve(parent, name, points, True, 3, m)
+    node = curve.addCurve(parent, name, points, True, degree, m)
 
     setcolor(node, color)
 
@@ -379,7 +387,8 @@ def circle(parent=None,
            color=[0, 0, 0],
            m=datatypes.Matrix(),
            pos_offset=None,
-           rot_offset=None):
+           rot_offset=None,
+           degree=3):
     """Create a curve with a CIRCLE shape.
 
     Arguments:
@@ -411,7 +420,7 @@ def circle(parent=None,
     points = getPointArrayWithOffset(
         [v0, v1, v2, v3, v4, v5, v6, v7], pos_offset, rot_offset)
 
-    node = curve.addCurve(parent, name, points, True, 3, m)
+    node = curve.addCurve(parent, name, points, True, degree, m)
 
     setcolor(node, color)
 
@@ -425,7 +434,8 @@ def cylinder(parent=None,
              color=[0, 0, 0],
              m=datatypes.Matrix(),
              pos_offset=None,
-             rot_offset=None):
+             rot_offset=None,
+             degree=3):
     """Create a curve with a CYLINDER shape.
 
     Arguments:
@@ -480,11 +490,11 @@ def cylinder(parent=None,
 
     points = getPointArrayWithOffset(
         [v0, v1, v2, v3, v4, v5, v6, v7], pos_offset, rot_offset)
-    node = curve.addCurve(parent, name, points, True, 3, m)
+    node = curve.addCurve(parent, name, points, True, degree, m)
 
     points = getPointArrayWithOffset(
         [v8, v9, v10, v11, v12, v13, v14, v15], pos_offset, rot_offset)
-    crv_0 = curve.addCurve(parent, node + "_0crv", points, True, 3, m)
+    crv_0 = curve.addCurve(parent, node + "_0crv", points, True, degree, m)
 
     points = getPointArrayWithOffset([v16, v17], pos_offset, rot_offset)
     crv_1 = curve.addCurve(parent, node + "_1crv", points, True, 1, m)
@@ -514,7 +524,8 @@ def compas(parent=None,
            color=[0, 0, 0],
            m=datatypes.Matrix(),
            pos_offset=None,
-           rot_offset=None):
+           rot_offset=None,
+           degree=3):
     """Create a curve with a COMPAS shape.
 
     Arguments:
@@ -548,7 +559,7 @@ def compas(parent=None,
         v = v.rotateBy((0, (2 * pmu.math.pi) / (division + 0.0), 0))
 
     points = getPointArrayWithOffset(point_pos, pos_offset, rot_offset)
-    node = curve.addCurve(parent, name, points, True, 3, m)
+    node = curve.addCurve(parent, name, points, True, degree, m)
 
     setcolor(node, color)
 
@@ -656,7 +667,8 @@ def sphere(parent=None,
            color=[0, 0, 0],
            m=datatypes.Matrix(),
            pos_offset=None,
-           rot_offset=None):
+           rot_offset=None,
+           degree=3):
     """Create a curve with a SPHERE shape.
 
     Arguments:
@@ -674,31 +686,40 @@ def sphere(parent=None,
         dagNode: The newly created icon.
 
     """
-    dlen = width
+    dlen = width * .5
 
-    v0 = datatypes.Vector(0.75 * dlen, 0, 0)
-    v1 = datatypes.Vector(0, -.75 * dlen, 0)
-    v2 = datatypes.Vector(-.75 * dlen, 0, 0)
-    v3 = datatypes.Vector(0, 0.75 * dlen, 0)
-    v4 = datatypes.Vector(0.75 * dlen, 0, 0)
-    v5 = datatypes.Vector(0, 0, -.75 * dlen)
-    v6 = datatypes.Vector(-.75 * dlen, 0, 0)
-    v7 = datatypes.Vector(0, 0, 0.75 * dlen)
-    v8 = datatypes.Vector(0, 0, 0.75 * dlen)
-    v9 = datatypes.Vector(0, -.75 * dlen, 0)
-    v10 = datatypes.Vector(0, 0, -.75 * dlen)
-    v11 = datatypes.Vector(0, 0.75 * dlen, 0)
+    v0 = datatypes.Vector(0, 0, -dlen * 1.108)
+    v1 = datatypes.Vector(dlen * .78, 0, -dlen * .78)
+    v2 = datatypes.Vector(dlen * 1.108, 0, 0)
+    v3 = datatypes.Vector(dlen * .78, 0, dlen * .78)
+    v4 = datatypes.Vector(0, 0, dlen * 1.108)
+    v5 = datatypes.Vector(-dlen * .78, 0, dlen * .78)
+    v6 = datatypes.Vector(-dlen * 1.108, 0, 0)
+    v7 = datatypes.Vector(-dlen * .78, 0, -dlen * .78)
 
-    points = getPointArrayWithOffset([v0, v1, v2, v3], pos_offset, rot_offset)
-    node = curve.addCurve(parent, name, points, True, 3, m)
-
-    points = getPointArrayWithOffset([v4, v5, v6, v7], pos_offset, rot_offset)
-    crv_0 = curve.addCurve(parent, node + "_0crv", points, True, 3, m)
+    ro = datatypes.Vector([1.5708, 0, 0])
 
     points = getPointArrayWithOffset(
-        [v8, v9, v10, v11], pos_offset, rot_offset)
+        [v0, v1, v2, v3, v4, v5, v6, v7], pos_offset, rot_offset)
+    node = curve.addCurve(parent, name, points, True, degree, m)
 
-    crv_1 = curve.addCurve(parent, node + "_1crv", points, True, 3, m)
+    if rot_offset:
+        rot_offset += ro
+    else:
+        rot_offset = ro
+    points = getPointArrayWithOffset(
+        [v0, v1, v2, v3, v4, v5, v6, v7], pos_offset, rot_offset)
+    crv_0 = curve.addCurve(parent, node + "_0crv", points, True, degree, m)
+
+    ro = datatypes.Vector([1.5708, 0, 1.5708])
+    if rot_offset:
+        rot_offset += ro
+    else:
+        rot_offset = ro
+    points = getPointArrayWithOffset(
+        [v0, v1, v2, v3, v4, v5, v6, v7], pos_offset, rot_offset + ro + ro)
+
+    crv_1 = curve.addCurve(parent, node + "_1crv", points, True, degree, m)
 
     for crv in [crv_0, crv_1]:
         for shp in crv.listRelatives(shapes=True):
@@ -1061,7 +1082,7 @@ def guideLocatorIcon(parent=None,
     spheWidth = width / 2.0
 
     sphereIco = sphere(
-        parent, name, spheWidth, color, m, pos_offset, rot_offset)
+        parent, name, spheWidth, color, m, pos_offset, rot_offset, degree=3)
 
     for shp in sphereIco.listRelatives(shapes=True):
         rootIco.addChild(shp, add=True, shape=True)

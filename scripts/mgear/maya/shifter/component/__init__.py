@@ -405,6 +405,9 @@ class Main(object):
             dagNode: The Control.
 
         """
+        if "degree" not in kwargs.keys():
+            kwargs["degree"] = 1
+
         fullName = self.getName(name)
         bufferName = fullName + "_controlBuffer"
         if bufferName in self.rig.guide.controllers.keys():
@@ -415,7 +418,8 @@ class Main(object):
                 pm.rename(shape, fullName + "Shape")
             icon.setcolor(ctl, color)
         else:
-            ctl = icon.create(parent, fullName, m, color, iconShape, **kwargs)
+            ctl = icon.create(
+                parent, fullName, m, color, iconShape, **kwargs)
 
         # create the attributes to handlde mirror and symetrical pose
         attribute.addAttribute(ctl, "invTx", "bool", 0, keyable=False,
