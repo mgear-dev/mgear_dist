@@ -70,7 +70,7 @@ class Guide(guide.ComponentGuide):
         self.pIkRefArray = self.addParam("ikrefarray", "string", "")
 
         self.pJoint = self.addParam("joint", "bool", False)
-        self.pJoint = self.addParam("uniScale", "bool", True)
+        self.pJoint = self.addParam("uniScale", "bool", False)
 
         for s in ["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"]:
             self.addParam("k_" + s, "bool", True)
