@@ -248,6 +248,10 @@ class Main(object):
 
             jnt = primitive.addJoint(self.active_jnt, self.getName(
                 str(name) + "_jnt"), transform.getTransform(obj))
+
+            # Disconnect inversScale for better preformance
+            if isinstance(self.active_jnt, pm.nodetypes.Joint):
+                pm.disconnectAttr(self.active_jnt.scale, jnt.inverseScale)
             # All new jnts are the active by default
             self.active_jnt = jnt
 
