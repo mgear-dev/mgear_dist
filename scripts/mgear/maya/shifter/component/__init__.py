@@ -1038,7 +1038,7 @@ class Main(object):
                 ref_names = self.get_valid_ref_list(refArray.split(","))
             else:
                 ref_names = refArray.split(",")
-            if len(ref_names) == 1:
+            if len(ref_names) == 1 and not init_refNames:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(cns_obj, ref)
             else:
