@@ -5,7 +5,7 @@ from pymel.core import datatypes
 
 from mgear.maya.shifter import component
 
-from mgear.maya import node, fcurve, applyop, vector
+from mgear.maya import node, fcurve, applyop, vector, icon
 from mgear.maya import attribute, transform, primitive
 
 #############################################
@@ -474,6 +474,10 @@ class Component(component.Main):
             self.getName("end_ref"),
             transform.getTransform(self.legBones[3]))
         self.jnt_pos.append([self.end_ref, 'end'])
+
+        # add visual reference
+        self.line_ref = icon.connection_display_curve(
+            self.getName("visalRef"), [self.upv_ctl, self.knee_ctl])
 
     def addAttributes(self):
 
@@ -1008,7 +1012,7 @@ class Component(component.Main):
             for shp in ctrl.getShapes():
                 pm.connectAttr(fkvis_node + ".outputX", shp.attr("visibility"))
         # ik
-        for ctrl in [self.ik_ctl, self.roll_ctl]:
+        for ctrl in [self.ik_ctl, self.roll_ctl, self.upv_ctl, self.line_ref]:
             for shp in ctrl.getShapes():
                 pm.connectAttr(self.blend_att, shp.attr("visibility"))
 

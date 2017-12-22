@@ -20,7 +20,7 @@ from pymel.core import datatypes
 
 from mgear.maya.shifter import component
 
-from mgear.maya import node, fcurve, applyop, vector
+from mgear.maya import node, fcurve, applyop, vector, icon
 from mgear.maya import attribute, transform, primitive
 
 #############################################
@@ -520,6 +520,10 @@ class Component(component.Main):
             self.getName("upv_mth"),
             transform.getTransform(self.upv_ctl))
 
+        # add visual reference
+        self.line_ref = icon.connection_display_curve(
+            self.getName("visalRef"), [self.upv_ctl, self.mid_ctl])
+
     # =====================================================
     # ATTRIBUTES
     # =====================================================
@@ -668,6 +672,8 @@ class Component(component.Main):
         for shp in self.ikcns_ctl.getShapes():
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
         for shp in self.ik_ctl.getShapes():
+            pm.connectAttr(self.blend_att, shp.attr("visibility"))
+        for shp in self.line_ref.getShapes():
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
 
         # jnt ctl

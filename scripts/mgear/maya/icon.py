@@ -1002,8 +1002,33 @@ def axis(parent=None,
 
 
 ##########################################################
+# Display helper Icons
+##########################################################
+def connection_display_curve(name, centers=[], degree=1):
+    """Visual reference curves connectiong points.
+
+    Display curve object is a simple curve to show the connection between
+    different guide element..
+
+    Args:
+        name (str): Local name of the element.
+        centers (list of dagNode):  List of object to define the curve.
+        degree (int): Curve degree. Default 1 = lineal.
+
+    Returns:
+        dagNode: The newly creted curve.
+
+    """
+    crv = curve.addCnsCurve(centers[0], name, centers, degree)
+    crv.attr("overrideEnabled").set(1)
+    crv.attr("overrideDisplayType").set(1)
+
+    return crv
+
+##########################################################
 # Guide Icons
 ##########################################################
+
 
 def guideRootIcon(parent=None,
                   name="root",

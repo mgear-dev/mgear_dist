@@ -5,7 +5,7 @@ from pymel.core import datatypes
 
 from mgear.maya.shifter import component
 
-from mgear.maya import node, fcurve, applyop, vector
+from mgear.maya import node, fcurve, applyop, vector, icon
 from mgear.maya import attribute, transform, primitive
 
 
@@ -606,6 +606,10 @@ class Component(component.Main):
             self.elbowTangent_npo.sz.set(-1)
         attribute.setKeyableAttributes(self.elbowTangent_ctl, self.t_params)
 
+        # add visual reference
+        self.line_ref = icon.connection_display_curve(
+            self.getName("visalRef"), [self.upv_ctl, self.mid_ctl])
+
     # =====================================================
     # ATTRIBUTES
     # =====================================================
@@ -786,6 +790,8 @@ class Component(component.Main):
         for shp in self.ikcns_ctl.getShapes():
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
         for shp in self.ik_ctl.getShapes():
+            pm.connectAttr(self.blend_att, shp.attr("visibility"))
+        for shp in self.line_ref.getShapes():
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
         if self.settings["ikTR"]:
             for shp in self.ikRot_ctl.getShapes():
