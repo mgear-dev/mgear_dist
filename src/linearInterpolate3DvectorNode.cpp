@@ -60,6 +60,10 @@ mgear_linearInterpolate3DvectorNode::mgear_linearInterpolate3DvectorNode(){}
 
 mgear_linearInterpolate3DvectorNode::~mgear_linearInterpolate3DvectorNode(){}
 
+mgear_linearInterpolate3DvectorNode::SchedulingType mgear_linearInterpolate3DvectorNode::schedulingType() const
+{
+	return kParallel;
+}
 
 void* mgear_linearInterpolate3DvectorNode::creator()
 {

@@ -57,6 +57,12 @@ mgear_spinePointAt::~mgear_spinePointAt() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_spinePointAt::SchedulingType mgear_spinePointAt::schedulingType() const
+{
+    return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_spinePointAt::creator()
 {
@@ -69,8 +75,8 @@ MStatus mgear_spinePointAt::initialize()
    MFnNumericAttribute nAttr;
    MFnEnumAttribute eAttr;
    MStatus stat;
-   
-    // Inputs 
+
+    // Inputs
     rotA = nAttr.createPoint("rotA", "ra" );
     rotAx = nAttr.child(0);
     rotAy = nAttr.child(1);
@@ -81,7 +87,7 @@ MStatus mgear_spinePointAt::initialize()
     nAttr.setKeyable(false);
     stat = addAttribute( rotA );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-    
+
     rotB = nAttr.createPoint("rotB", "rb" );
     rotBx = nAttr.child(0);
     rotBy = nAttr.child(1);
@@ -92,7 +98,7 @@ MStatus mgear_spinePointAt::initialize()
     nAttr.setKeyable(false);
     stat = addAttribute( rotB );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
     axe = eAttr.create( "axe", "a", 2 );
     eAttr.addField("X", 0);
     eAttr.addField("Y", 1);
@@ -106,7 +112,7 @@ MStatus mgear_spinePointAt::initialize()
     eAttr.setKeyable(false);
     stat = addAttribute( axe );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-    
+
     blend = nAttr.create( "blend", "b", MFnNumericData::kFloat, 0.5 );
     nAttr.setWritable(true);
     nAttr.setStorable(true);
@@ -124,7 +130,7 @@ MStatus mgear_spinePointAt::initialize()
     nAttr.setReadable(true);
     stat = addAttribute( pointAt );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
     // Connections
     stat = attributeAffects ( rotA, pointAt );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
@@ -156,7 +162,7 @@ MStatus mgear_spinePointAt::compute(const MPlug& plug, MDataBlock& data)
 
 	if( plug != pointAt )
 		return MS::kUnknownParameter;
-	
+
 	MString sx, sy, sz, sw;
 
     // Get inputs
@@ -173,21 +179,21 @@ MStatus mgear_spinePointAt::compute(const MPlug& plug, MDataBlock& data)
     double rBx = v.x;
     double rBy = v.y;
     double rBz = v.z;
-        
+
 	h = data.inputValue( axe );
     int axe = h.asShort();
-        
+
 	h = data.inputValue( blend );
     double in_blend = (double)h.asFloat();
-	
+
     // Process
-    // There is no such thing as siTransformation in Maya, 
+    // There is no such thing as siTransformation in Maya,
     // so what we really need to compute this +/-360 roll is the global rotation of the object
     // We then need to convert this eulerRotation to Quaternion
     // Maybe it would be faster to use the MEulerRotation class, but anyway, this code can do it
     MQuaternion qA = e2q(rAx, rAy, rAz);
     MQuaternion qB = e2q(rBx, rBy, rBz);
-	
+
     MQuaternion qC = slerp2(qA, qB, in_blend);
 
 	MVector vOut;
@@ -212,7 +218,7 @@ MStatus mgear_spinePointAt::compute(const MPlug& plug, MDataBlock& data)
 			vOut = MVector(0,0,-1);
 			break;
 	}
-	
+
     vOut = vOut.rotateBy(qC);
     float x = (float)vOut.x;
     float y = (float)vOut.y;

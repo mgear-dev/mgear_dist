@@ -50,6 +50,10 @@ mgear_intMatrix::~mgear_intMatrix() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+mgear_intMatrix::SchedulingType mgear_intMatrix::schedulingType() const
+{
+	return kParallel;
+}
 // CREATOR ======================================
 void* mgear_intMatrix::creator()
 {

@@ -57,6 +57,10 @@ mgear_rollSplineKine::~mgear_rollSplineKine() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+mgear_rollSplineKine::SchedulingType mgear_rollSplineKine::schedulingType() const
+{
+	return kParallel;
+}
 // CREATOR ======================================
 void* mgear_rollSplineKine::creator()
 {

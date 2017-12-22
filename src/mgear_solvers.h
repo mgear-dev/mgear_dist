@@ -156,6 +156,7 @@ class mgear_slideCurve2 : public MPxDeformerNode
 public:
                     mgear_slideCurve2() {};
     virtual MStatus deform( MDataBlock& data, MItGeometry& itGeo, const MMatrix &localToWorldMatrix, unsigned int mIndex );
+    virtual SchedulingType schedulingType() const;
     static  void*   creator();
     static  MStatus initialize();
 
@@ -179,6 +180,7 @@ class mgear_curveCns : public MPxDeformerNode
 public:
                     mgear_curveCns() {};
     virtual MStatus deform( MDataBlock& data, MItGeometry& itGeo, const MMatrix &localToWorldMatrix, unsigned int mIndex );
+    virtual SchedulingType schedulingType() const;
     static  void*   creator();
     static  MStatus initialize();
 
@@ -193,6 +195,7 @@ class mgear_rollSplineKine : public MPxNode
    virtual	 ~mgear_rollSplineKine();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -221,6 +224,7 @@ class mgear_squashStretch2 : public MPxNode
    virtual	 ~mgear_squashStretch2();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -254,6 +258,7 @@ class mgear_percentageToU : public MPxNode
    virtual	 ~mgear_percentageToU();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -278,6 +283,7 @@ class mgear_uToPercentage : public MPxNode
    virtual	 ~mgear_uToPercentage();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -302,6 +308,7 @@ class mgear_spinePointAt : public MPxNode
    virtual	 ~mgear_spinePointAt();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -332,6 +339,7 @@ class mgear_inverseRotOrder : public MPxNode
    virtual	 ~mgear_inverseRotOrder();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -353,6 +361,7 @@ class mgear_mulMatrix : public MPxNode
    virtual	 ~mgear_mulMatrix();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -375,6 +384,7 @@ class mgear_intMatrix : public MPxNode
    virtual	 ~mgear_intMatrix();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -400,6 +410,7 @@ class mgear_ikfk2Bone : public MPxNode
    virtual	 ~mgear_ikfk2Bone();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
    MTransformationMatrix getIKTransform(s_GetIKTransform values, MString outportName);
@@ -451,6 +462,7 @@ class mgear_add10scalarNode : public MPxNode
 public:
 	mgear_add10scalarNode();
 	virtual			~mgear_add10scalarNode();
+	virtual SchedulingType schedulingType() const;
 	static	void*	creator();
 
 	virtual MStatus		compute(const MPlug& plug, MDataBlock& data);
@@ -476,6 +488,7 @@ class mgear_linearInterpolate3DvectorNode : public MPxNode
 public:
 	mgear_linearInterpolate3DvectorNode();
 	virtual			~mgear_linearInterpolate3DvectorNode();
+	virtual SchedulingType schedulingType() const;
 	static	void*	creator();
 
 	virtual MStatus		compute(const MPlug& plug, MDataBlock& data);
@@ -507,6 +520,7 @@ class mgear_springNode : public MPxNode
 public:
 	mgear_springNode();
 	virtual			~mgear_springNode();
+	virtual SchedulingType schedulingType() const;
 	static	void*	creator();
 
 	virtual MStatus		compute(const MPlug& plug, MDataBlock& data);
@@ -540,6 +554,7 @@ class mgear_rayCastPosition : public MPxNode
    virtual	 ~mgear_rayCastPosition();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -563,6 +578,7 @@ class mgear_trigonometryAngle : public MPxNode
    virtual	 ~mgear_trigonometryAngle();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 
@@ -585,6 +601,7 @@ class mgear_vertexPosition : public MPxNode
    virtual	 ~mgear_vertexPosition();
 
    virtual MStatus compute( const MPlug& plug, MDataBlock& data );
+   virtual SchedulingType schedulingType() const;
    static void* creator();
    static MStatus initialize();
 

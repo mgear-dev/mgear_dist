@@ -42,33 +42,33 @@ MTypeId mgear_ikfk2Bone::id(0x0011FEC3);
 
 MObject mgear_ikfk2Bone::blend;
 
-MObject mgear_ikfk2Bone::lengthA; 
-MObject mgear_ikfk2Bone::lengthB; 
-MObject mgear_ikfk2Bone::negate; 
-MObject mgear_ikfk2Bone::scaleA; 
-MObject mgear_ikfk2Bone::scaleB; 
-MObject mgear_ikfk2Bone::roll; 
-MObject mgear_ikfk2Bone::maxstretch; 
-MObject mgear_ikfk2Bone::slide; 
-MObject mgear_ikfk2Bone::softness; 
-MObject mgear_ikfk2Bone::reverse; 
+MObject mgear_ikfk2Bone::lengthA;
+MObject mgear_ikfk2Bone::lengthB;
+MObject mgear_ikfk2Bone::negate;
+MObject mgear_ikfk2Bone::scaleA;
+MObject mgear_ikfk2Bone::scaleB;
+MObject mgear_ikfk2Bone::roll;
+MObject mgear_ikfk2Bone::maxstretch;
+MObject mgear_ikfk2Bone::slide;
+MObject mgear_ikfk2Bone::softness;
+MObject mgear_ikfk2Bone::reverse;
 
-MObject mgear_ikfk2Bone::root; 
-MObject mgear_ikfk2Bone::ikref; 
+MObject mgear_ikfk2Bone::root;
+MObject mgear_ikfk2Bone::ikref;
 MObject mgear_ikfk2Bone::upv;
-MObject mgear_ikfk2Bone::fk0;	
-MObject mgear_ikfk2Bone::fk1;	
-MObject mgear_ikfk2Bone::fk2;		
+MObject mgear_ikfk2Bone::fk0;
+MObject mgear_ikfk2Bone::fk1;
+MObject mgear_ikfk2Bone::fk2;
 
-MObject mgear_ikfk2Bone::inAparent; 
-MObject mgear_ikfk2Bone::inBparent; 
-MObject mgear_ikfk2Bone::inCenterparent; 
-MObject mgear_ikfk2Bone::inEffparent; 
+MObject mgear_ikfk2Bone::inAparent;
+MObject mgear_ikfk2Bone::inBparent;
+MObject mgear_ikfk2Bone::inCenterparent;
+MObject mgear_ikfk2Bone::inEffparent;
 
-MObject mgear_ikfk2Bone::outA; 
-MObject mgear_ikfk2Bone::outB; 
-MObject mgear_ikfk2Bone::outCenter; 
-MObject mgear_ikfk2Bone::outEff; 
+MObject mgear_ikfk2Bone::outA;
+MObject mgear_ikfk2Bone::outB;
+MObject mgear_ikfk2Bone::outCenter;
+MObject mgear_ikfk2Bone::outEff;
 
 mgear_ikfk2Bone::mgear_ikfk2Bone() {} // constructor
 mgear_ikfk2Bone::~mgear_ikfk2Bone() {} // destructor
@@ -78,6 +78,11 @@ mgear_ikfk2Bone::~mgear_ikfk2Bone() {} // destructor
 /////////////////////////////////////////////////
 
 // CREATOR ======================================
+mgear_ikfk2Bone::SchedulingType mgear_ikfk2Bone::schedulingType() const
+{
+	return kParallel;
+}
+
 void* mgear_ikfk2Bone::creator()
 {
    return new mgear_ikfk2Bone();
@@ -140,19 +145,19 @@ MStatus mgear_ikfk2Bone::initialize()
    nAttr.setKeyable(true);
 	stat = addAttribute( maxstretch );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-   
+
    slide = nAttr.create( "slide", "sl", MFnNumericData::kFloat, 0.5 );
    nAttr.setStorable(true);
    nAttr.setKeyable(true);
 	stat = addAttribute( slide );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-   
+
    softness = nAttr.create( "softness", "so", MFnNumericData::kFloat, 0.0 );
    nAttr.setStorable(true);
    nAttr.setKeyable(true);
 	stat = addAttribute( softness );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-   
+
    reverse = nAttr.create( "reverse", "re", MFnNumericData::kFloat, 0.0 );
    nAttr.setStorable(true);
    nAttr.setKeyable(true);
@@ -187,42 +192,42 @@ MStatus mgear_ikfk2Bone::initialize()
    mAttr.setConnectable(true);
 	stat = addAttribute( fk0 );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
    fk1 = mAttr.create( "fk1", "fk1" );
    mAttr.setStorable(true);
    mAttr.setKeyable(true);
    mAttr.setConnectable(true);
 	stat = addAttribute( fk1 );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
    fk2 = mAttr.create( "fk2", "fk2" );
    mAttr.setStorable(true);
    mAttr.setKeyable(true);
    mAttr.setConnectable(true);
 	stat = addAttribute( fk2 );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
    inAparent = mAttr.create( "inAparent", "inAparent" );
    mAttr.setStorable(true);
    mAttr.setKeyable(true);
    mAttr.setConnectable(true);
 	stat = addAttribute( inAparent );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
    inBparent = mAttr.create( "inBparent", "inBparent" );
    mAttr.setStorable(true);
    mAttr.setKeyable(true);
    mAttr.setConnectable(true);
 	stat = addAttribute( inBparent );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
    inCenterparent = mAttr.create( "inCenterparent", "inCenterparent" );
    mAttr.setStorable(true);
    mAttr.setKeyable(true);
    mAttr.setConnectable(true);
 	stat = addAttribute( inCenterparent );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
    inEffparent = mAttr.create( "inEffparent", "inEffparent" );
    mAttr.setStorable(true);
    mAttr.setKeyable(true);
@@ -258,7 +263,7 @@ MStatus mgear_ikfk2Bone::initialize()
 	mAttr.setConnectable(true);
 	stat = addAttribute( outEff );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-	
+
 	// Attributes Affects
 	stat = attributeAffects( blend, outA );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
@@ -303,7 +308,7 @@ MStatus mgear_ikfk2Bone::initialize()
 	stat = attributeAffects( inEffparent, outA );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
 
-	
+
 	stat = attributeAffects( blend, outB );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
 	stat = attributeAffects( lengthA, outB );
@@ -346,7 +351,7 @@ MStatus mgear_ikfk2Bone::initialize()
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
 	stat = attributeAffects( inEffparent, outB );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
-		
+
 	stat = attributeAffects( blend, outCenter );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
 	stat = attributeAffects( lengthA, outCenter );
@@ -389,7 +394,7 @@ MStatus mgear_ikfk2Bone::initialize()
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
 	stat = attributeAffects( inEffparent, outCenter );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
-		
+
 	stat = attributeAffects( blend, outEff );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
 	stat = attributeAffects( lengthA, outEff );
@@ -455,7 +460,7 @@ MStatus mgear_ikfk2Bone::compute(const MPlug& plug, MDataBlock& data)
 
 	// SLIDERS
 	double in_blend = (double)data.inputValue( blend ).asFloat();
-	
+
 	// setup the base IK parameters
 	s_GetIKTransform ikparams;
 
@@ -473,7 +478,7 @@ MStatus mgear_ikfk2Bone::compute(const MPlug& plug, MDataBlock& data)
 	ikparams.softness = (double)data.inputValue( softness ).asFloat();
 	ikparams.slide = (double)data.inputValue( slide ).asFloat();
 	ikparams.reverse = (double)data.inputValue( reverse ).asFloat();
-	
+
 	// setup the base FK parameters
 	s_GetFKTransform fkparams;
 
@@ -485,7 +490,7 @@ MStatus mgear_ikfk2Bone::compute(const MPlug& plug, MDataBlock& data)
 	fkparams.lengthA = ikparams.lengthA;
 	fkparams.lengthB = ikparams.lengthB;
 	fkparams.negate = ikparams.negate;
-	
+
 	MStringArray outNameArray;
 	plug.name().split('.', outNameArray);
 	MString outName = outNameArray[outNameArray.length() - 1];
@@ -504,9 +509,9 @@ MStatus mgear_ikfk2Bone::compute(const MPlug& plug, MDataBlock& data)
         MTransformationMatrix fkbone1 = getFKTransform(fkparams, "outA");
         MTransformationMatrix fkbone2 = getFKTransform(fkparams, "outB");
         MTransformationMatrix fkeff = getFKTransform(fkparams, "outEff");
-            
+
         // remove scale to avoid shearing issue
-        // This is not necessary in Softimage because the scaling hierarchy is not computed the same way. 
+        // This is not necessary in Softimage because the scaling hierarchy is not computed the same way.
 		double noScale[3] = {1,1,1};
 		ikbone1.setScale(noScale, MSpace::kWorld);
 		ikbone2.setScale(noScale, MSpace::kWorld);
@@ -514,7 +519,7 @@ MStatus mgear_ikfk2Bone::compute(const MPlug& plug, MDataBlock& data)
 		fkbone1.setScale(noScale, MSpace::kWorld);
 		fkbone2.setScale(noScale, MSpace::kWorld);
 		fkeff.setScale(noScale, MSpace::kWorld);
-            
+
         // map the secondary transforms from global to local
         ikeff = mapWorldPoseToObjectSpace(ikbone2, ikeff);
         fkeff = mapWorldPoseToObjectSpace(fkbone2, fkeff);
@@ -525,7 +530,7 @@ MStatus mgear_ikfk2Bone::compute(const MPlug& plug, MDataBlock& data)
 		fkparams.bone1 = interpolateTransform(fkbone1, ikbone1, in_blend);
 		fkparams.bone2 = interpolateTransform(fkbone2, ikbone2, in_blend);
 		fkparams.eff = interpolateTransform(fkeff, ikeff, in_blend);
-            
+
 
         // now map the local transform back to global!
 		fkparams.bone2 = mapObjectPoseToWorldSpace(fkparams.bone1, fkparams.bone2);
@@ -534,7 +539,7 @@ MStatus mgear_ikfk2Bone::compute(const MPlug& plug, MDataBlock& data)
         // calculate the result based on that
         result = getFKTransform(fkparams, outName);
 	}
-	
+
     // Output
 	MDataHandle h;
     if (plug == outA){
@@ -567,7 +572,7 @@ MStatus mgear_ikfk2Bone::compute(const MPlug& plug, MDataBlock& data)
 }
 
 MTransformationMatrix mgear_ikfk2Bone::getIKTransform(s_GetIKTransform data, MString name){
-	
+
     // prepare all variables
 	MTransformationMatrix result;
 	MVector bonePos, rootPos, effPos, upvPos, rootEff, xAxis, yAxis, zAxis, rollAxis;
@@ -673,7 +678,7 @@ MTransformationMatrix mgear_ikfk2Bone::getIKTransform(s_GetIKTransform data, MSt
     zAxis.normalize();
     yAxis = zAxis ^ xAxis;
     yAxis.normalize();
-        
+
     // switch depending on our mode
     if (name == "outA"){
 
@@ -794,7 +799,7 @@ MTransformationMatrix mgear_ikfk2Bone::getIKTransform(s_GetIKTransform data, MSt
 }
 
 MTransformationMatrix mgear_ikfk2Bone::getFKTransform(s_GetFKTransform data, MString name){
-	
+
 	// prepare all variables
 	MTransformationMatrix result;
 
@@ -812,7 +817,7 @@ MTransformationMatrix mgear_ikfk2Bone::getFKTransform(s_GetFKTransform data, MSt
 
 		// cross the yAxis and normalize
 		xAxis.normalize();
-            
+
 		zAxis = MVector(0,0,1);
 		zAxis = zAxis.rotateBy(data.bone1.rotation());
 		yAxis = zAxis ^ xAxis;
@@ -825,7 +830,7 @@ MTransformationMatrix mgear_ikfk2Bone::getFKTransform(s_GetFKTransform data, MSt
 
 		result = data.bone2;
 		xAxis = data.eff.getTranslation(MSpace::kWorld) - data.bone2.getTranslation(MSpace::kWorld);
-		
+
 		double scale[3] = {xAxis.length(), 1.0, 1.0};
 		result.setScale(scale, MSpace::kWorld);
 
@@ -846,8 +851,8 @@ MTransformationMatrix mgear_ikfk2Bone::getFKTransform(s_GetFKTransform data, MSt
 		result.setRotationQuaternion(q.x, q.y, q.z, q.w);
 	}
 	else if (name == "outCenter"){
-        
-        
+
+
         // Only +/-180 degree with this one but we don't get the shear issue anymore
         MTransformationMatrix t = mapWorldPoseToObjectSpace(data.bone1, data.bone2);
 		MEulerRotation er = t.eulerRotation();
@@ -856,7 +861,7 @@ MTransformationMatrix mgear_ikfk2Bone::getFKTransform(s_GetFKTransform data, MSt
         t.setRotationQuaternion(q.x, q.y, q.z, q.w);
         t = mapObjectPoseToWorldSpace(data.bone1, t);
         q = t.rotation();
-        
+
         result.setRotationQuaternion(q.x, q.y, q.z, q.w);
 
 		// rotation

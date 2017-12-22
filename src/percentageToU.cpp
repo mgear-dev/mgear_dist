@@ -51,6 +51,12 @@ mgear_percentageToU::~mgear_percentageToU() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_percentageToU::SchedulingType mgear_percentageToU::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_percentageToU::creator()
 {
@@ -63,7 +69,7 @@ MStatus mgear_percentageToU::initialize()
 	MFnTypedAttribute tAttr;
 	MFnNumericAttribute nAttr;
 	MStatus stat;
-	
+
     // Curve
     curve = tAttr.create("curve", "crv", MFnData::kNurbsCurve);
     stat = addAttribute( curve );
@@ -75,7 +81,7 @@ MStatus mgear_percentageToU::initialize()
 	nAttr.setKeyable(true);
     stat = addAttribute( normalizedU );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	percentage = nAttr.create( "percentage", "p", MFnNumericData::kFloat, 0 );
 	nAttr.setStorable(true);
 	nAttr.setKeyable(true);
@@ -97,7 +103,7 @@ MStatus mgear_percentageToU::initialize()
     stat = addAttribute( u );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
 
-    // Connections 
+    // Connections
     stat = attributeAffects ( curve, u );
 		if (!stat) {stat.perror("attributeAffects"); return stat;}
     stat = attributeAffects ( steps, u );
@@ -117,10 +123,10 @@ MStatus mgear_percentageToU::compute(const MPlug& plug, MDataBlock& data)
 	// Error check
     if (plug != percentage)
         return MS::kUnknownParameter;
-	
+
 	// Curve
    MObject crvObj = data.inputValue( curve ).asNurbsCurve();
-   
+
 	MFnNurbsCurve crv(crvObj);
 
 	// Sliders
@@ -139,8 +145,8 @@ MStatus mgear_percentageToU::compute(const MPlug& plug, MDataBlock& data)
 		crv.getPointAtParam(u_list[i], pt, MSpace::kWorld);
 		u_subpos[i] = MVector(pt);
 	}
-	
-	
+
+
 	double t_length = 0;
 	MDoubleArray dist(in_steps);
 	MVector v;

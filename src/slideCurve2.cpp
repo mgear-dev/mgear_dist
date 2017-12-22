@@ -38,22 +38,28 @@ Date:       2016 / 10 / 10
 /////////////////////////////////////////////////
 MTypeId mgear_slideCurve2::id(0x0011FECA);
 
-MObject mgear_slideCurve2::master_crv; 
+MObject mgear_slideCurve2::master_crv;
 MObject mgear_slideCurve2::master_mat;
 
-MObject mgear_slideCurve2::slave_length; 
-MObject mgear_slideCurve2::master_length; 
-MObject mgear_slideCurve2::position; 
-MObject mgear_slideCurve2::maxstretch; 
-MObject mgear_slideCurve2::maxsquash; 
-MObject mgear_slideCurve2::softness; 
- 
+MObject mgear_slideCurve2::slave_length;
+MObject mgear_slideCurve2::master_length;
+MObject mgear_slideCurve2::position;
+MObject mgear_slideCurve2::maxstretch;
+MObject mgear_slideCurve2::maxsquash;
+MObject mgear_slideCurve2::softness;
+
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_slideCurve2::SchedulingType mgear_slideCurve2::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_slideCurve2::creator() { return new mgear_slideCurve2; }
- 
+
 // INIT =========================================
 MStatus mgear_slideCurve2::initialize()
 {
@@ -63,7 +69,7 @@ MStatus mgear_slideCurve2::initialize()
 	MStatus stat;
 
 	// INPUTS MESH
-	
+
     master_crv = tAttr.create("master_crv", "mcrv", MFnData::kNurbsCurve);
     stat = addAttribute( master_crv );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
@@ -101,7 +107,7 @@ MStatus mgear_slideCurve2::initialize()
 	nAttr.setMin(1);
     stat = addAttribute( maxstretch );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	maxsquash = nAttr.create("maxsquash", "msq", MFnNumericData::kFloat, .5);
 	nAttr.setStorable(true);
 	nAttr.setKeyable(true);
@@ -109,7 +115,7 @@ MStatus mgear_slideCurve2::initialize()
 	nAttr.setMax(1);
     stat = addAttribute( maxsquash );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	softness = nAttr.create("softness", "s", MFnNumericData::kFloat, 0.5);
 	nAttr.setStorable(true);
 	nAttr.setKeyable(true);
@@ -117,7 +123,7 @@ MStatus mgear_slideCurve2::initialize()
 	nAttr.setMax(1);
     stat = addAttribute( softness );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	// CONNECTIONS
 	stat = attributeAffects( master_crv, outputGeom );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
@@ -144,14 +150,14 @@ MStatus mgear_slideCurve2::initialize()
 MStatus mgear_slideCurve2::deform( MDataBlock& data, MItGeometry& iter, const MMatrix &mat, unsigned int /* mIndex */ )
 {
     MStatus returnStatus;
-	
+
     // Inputs ---------------------------------------------------------
     // Input NurbsCurve
 	// Curve
     MObject crvObj = data.inputValue( master_crv ).asNurbsCurve();
 	MFnNurbsCurve crv(crvObj);
     MMatrix m = data.inputValue(master_mat).asMatrix();
-        
+
     // Input Sliders
     double in_sl = (double)data.inputValue(slave_length).asFloat();
     double in_ml = (double)data.inputValue(master_length).asFloat();
@@ -159,13 +165,13 @@ MStatus mgear_slideCurve2::deform( MDataBlock& data, MItGeometry& iter, const MM
     double in_maxstretch = (double)data.inputValue(maxstretch).asFloat();
 	double in_maxsquash = (double)data.inputValue(maxsquash).asFloat();
     double in_softness = (double)data.inputValue(softness).asFloat();
-	
+
     // Init -----------------------------------------------------------
     double mstCrvLength = crv.length();
 
-    int slvPointCount = iter.exactCount(); // Can we use .count() ? 
+    int slvPointCount = iter.exactCount(); // Can we use .count() ?
     int mstPointCount = crv.numCVs();
-	
+
     // Stretch --------------------------------------------------------
 	double expo = 1;
     if ((mstCrvLength > in_ml) && (in_maxstretch > 1)){
@@ -188,7 +194,7 @@ MStatus mgear_slideCurve2::deform( MDataBlock& data, MItGeometry& iter, const MM
 
         in_sl -= ext;
 	}
-		
+
     // Position --------------------------------------------------------
     double size = in_sl / mstCrvLength;
     double sizeLeft = 1 - size;
@@ -198,7 +204,7 @@ MStatus mgear_slideCurve2::deform( MDataBlock& data, MItGeometry& iter, const MM
 
 	double tStart, tEnd;
 	crv.getKnotDomain(tStart, tEnd);
-	
+
     // Process --------------------------------------------------------
     double step = (end - start) / (slvPointCount - 1.0);
     MPoint pt;
@@ -234,8 +240,7 @@ MStatus mgear_slideCurve2::deform( MDataBlock& data, MItGeometry& iter, const MM
         iter.setPosition(pt);
         iter.next();
 	}
- 
+
     return MS::kSuccess;
 }
- 
- 
+

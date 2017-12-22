@@ -50,6 +50,12 @@ mgear_rayCastPosition::~mgear_rayCastPosition() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_rayCastPosition::SchedulingType mgear_rayCastPosition::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_rayCastPosition::creator()
 {
@@ -176,7 +182,7 @@ MStatus mgear_rayCastPosition::compute(const MPlug& plug, MDataBlock& data)
 		//newVec.z = hitPoint.z - vRS.z;
 		double newLength = newVec.length();
 
-		
+
 
 		if (newLength > oriLength)
 		{
@@ -186,7 +192,7 @@ MStatus mgear_rayCastPosition::compute(const MPlug& plug, MDataBlock& data)
 		{
 			result.setTranslation(hitPoint, MSpace::kWorld);
 		}
-		
+
 	}
 	else
 	{
@@ -194,7 +200,7 @@ MStatus mgear_rayCastPosition::compute(const MPlug& plug, MDataBlock& data)
 	}
 
 	MMatrix mC = result.asMatrix();
-		
+
 	// Output
 	MDataHandle h;
 	h = data.outputValue( output );

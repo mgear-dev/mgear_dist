@@ -39,8 +39,8 @@ MTypeId mgear_inverseRotOrder::id(0x0011FEC5);
 
 // Define the Node's attribute specifiers
 
-MObject mgear_inverseRotOrder::rotOrder; 
-MObject mgear_inverseRotOrder::output; 
+MObject mgear_inverseRotOrder::rotOrder;
+MObject mgear_inverseRotOrder::output;
 
 mgear_inverseRotOrder::mgear_inverseRotOrder() {} // constructor
 mgear_inverseRotOrder::~mgear_inverseRotOrder() {} // destructor
@@ -48,6 +48,12 @@ mgear_inverseRotOrder::~mgear_inverseRotOrder() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_inverseRotOrder::SchedulingType mgear_inverseRotOrder::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_inverseRotOrder::creator()
 {
@@ -60,7 +66,7 @@ MStatus mgear_inverseRotOrder::initialize()
    MFnNumericAttribute nAttr;
    MFnEnumAttribute eAttr;
    MStatus stat;
-   
+
     // Inputs
     rotOrder = eAttr.create( "rotOrder", "ro", 0 );
     eAttr.addField("xyz", 0);
@@ -75,7 +81,7 @@ MStatus mgear_inverseRotOrder::initialize()
     eAttr.setKeyable(true);
 	stat = addAttribute( rotOrder );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-    
+
     // Outputs
 	output = nAttr.create( "output", "out", MFnNumericData::kShort, 0 );
 	nAttr.setWritable(false);

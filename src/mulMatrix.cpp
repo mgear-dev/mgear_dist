@@ -39,9 +39,9 @@ MTypeId mgear_mulMatrix::id(0x0011FEC7);
 
 // Define the Node's attribute specifiers
 
-MObject mgear_mulMatrix::matrixA; 
-MObject mgear_mulMatrix::matrixB; 
-MObject mgear_mulMatrix::output; 
+MObject mgear_mulMatrix::matrixA;
+MObject mgear_mulMatrix::matrixB;
+MObject mgear_mulMatrix::output;
 
 mgear_mulMatrix::mgear_mulMatrix() {} // constructor
 mgear_mulMatrix::~mgear_mulMatrix() {} // destructor
@@ -49,6 +49,12 @@ mgear_mulMatrix::~mgear_mulMatrix() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_mulMatrix::SchedulingType mgear_mulMatrix::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_mulMatrix::creator()
 {
@@ -75,7 +81,7 @@ MStatus mgear_mulMatrix::initialize()
 	mAttr.setConnectable(true);
 	stat = addAttribute( matrixB );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	// OUTPUTS
 	output = mAttr.create( "output", "out" );
 	mAttr.setStorable(false);
