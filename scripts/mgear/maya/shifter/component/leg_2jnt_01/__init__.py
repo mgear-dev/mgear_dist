@@ -243,8 +243,12 @@ class Component(component.Main):
             datatypes.Vector(0, -1, 0), self.normal, "xz", self.negate)
         t = transform.setMatrixPosition(t, self.guide.pos["ankle"])
 
+        # addind an npo parent transform to fix flip in Maya 2018.2
+        self.tws_npo = primitive.addTransform(
+            self.eff_loc, self.getName("tws_npo"), t)
+
         self.tws_ref = primitive.addTransform(
-            self.eff_loc, self.getName("tws_ref"), t)
+            self.tws_npo, self.getName("tws_ref"), t)
 
         # Mid Controler ------------------------------------
         t = transform.getTransform(self.ctrn_loc)
