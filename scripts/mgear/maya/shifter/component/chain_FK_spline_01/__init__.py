@@ -6,6 +6,7 @@ from pymel.core import datatypes
 from mgear.maya.shifter import component
 
 from mgear.maya import transform, primitive, vector, curve, applyop
+from mgear.maya import attribute, node
 
 ##########################################################
 # COMPONENT
@@ -140,6 +141,10 @@ class Component(component.Main):
             self.tweak_ctl.append(tweak_ctl)
             self.upv_curv_lvl.append(upv_curv_lvl)
 
+        # set keyable attr for tweak controls
+        [attribute.setKeyableAttributes(t_ctl, ["tx", "ty", "tz", "rx"])
+            for t_ctl in self.tweak_ctl]
+
         # Curves -------------------------------------------
         self.mst_crv = curve.addCnsCurve(self.root,
                                          self.getName("mst_crv"),
@@ -197,17 +202,18 @@ class Component(component.Main):
         we shouldn't create any new object in this method.
 
         """
+        dm_node_scl = node.createDecomposeMatrixNode(self.root.worldMatrix)
         if self.settings["keepLength"]:
             arclen_node = pm.arclen(self.mst_crv, ch=True)
             alAttr = pm.getAttr(arclen_node + ".arcLength")
-            muldiv_node = pm.createNode("multiplyDivide")
-            pm.connectAttr(arclen_node + ".arcLength",
-                           muldiv_node + ".input1X")
-            pm.setAttr(muldiv_node + ".input2X", alAttr)
-            pm.setAttr(muldiv_node + ".operation", 2)
+
             pm.addAttr(self.mst_crv, ln="length_ratio", k=True, w=True)
-            pm.connectAttr(muldiv_node + ".outputX",
-                           self.mst_crv + ".length_ratio")
+            node.createDivNode(arclen_node.arcLength,
+                               alAttr,
+                               self.mst_crv.length_ratio)
+
+            div_node_scl = node.createDivNode(self.mst_crv.length_ratio,
+                                              dm_node_scl.outputScaleX)
 
         step = 1.000 / (self.def_number - 1)
         u = 0.000
@@ -221,26 +227,24 @@ class Component(component.Main):
             cns = applyop.pathCns(
                 self.div_cns[i], self.mst_crv, False, u, True)
 
-            if self.settings["keepLength"]:
-                muldiv_node2 = pm.createNode("multiplyDivide")
-                condition_node = pm.createNode("condition")
-                pm.setAttr(muldiv_node2 + ".operation", 2)
-                pm.setAttr(muldiv_node2 + ".input1X", u)
-                pm.connectAttr(self.mst_crv + ".length_ratio",
-                               muldiv_node2 + ".input2X")
-                pm.connectAttr(muldiv_node2 + ".outputX",
-                               condition_node + ".colorIfFalseR")
-                pm.connectAttr(muldiv_node2 + ".outputX",
-                               condition_node + ".secondTerm")
-                pm.connectAttr(muldiv_node2 + ".input1X",
-                               condition_node + ".colorIfTrueR")
-                pm.connectAttr(muldiv_node2 + ".input1X",
-                               condition_node + ".firstTerm")
-                pm.setAttr(condition_node + ".operation", 4)
+            # Connectiong the scale for scaling compensation
+            for axis, AX in zip("xyz", "XYZ"):
+                pm.connectAttr(dm_node_scl.attr("outputScale{}".format(AX)),
+                               self.div_cns[i].attr("s{}".format(axis)))
 
-                pm.connectAttr(condition_node + ".outColorR",
+            if self.settings["keepLength"]:
+
+                div_node2 = node.createDivNode(u, div_node_scl.outputX)
+
+                cond_node = node.createConditionNode(div_node2.input1X,
+                                                     div_node2.outputX,
+                                                     4,
+                                                     div_node2.input1X,
+                                                     div_node2.outputX)
+
+                pm.connectAttr(cond_node + ".outColorR",
                                cnsUpv + ".uValue")
-                pm.connectAttr(condition_node + ".outColorR",
+                pm.connectAttr(cond_node + ".outColorR",
                                cns + ".uValue")
 
             cns.setAttr("worldUpType", 1)

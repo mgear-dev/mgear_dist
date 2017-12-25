@@ -64,7 +64,7 @@ class Guide(guide.ComponentGuide):
         self.pNeutralPose = self.addParam("neutralpose", "bool", False)
         self.pKeepLength = self.addParam("keepLength", "bool", False)
         self.pOverrideJointNb = self.addParam("overrideJntNb", "bool", False)
-        self.pJntNb = self.addParam("jntNb", "long", 3, 3)
+        self.pJntNb = self.addParam("jntNb", "long", 3, 1)
 
         self.pUseIndex = self.addParam("useIndex", "bool", False)
         self.pParentJointIndex = self.addParam(
@@ -120,12 +120,13 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         self.tabs.insertTab(1, self.settingsTab, "Component Settings")
 
         # populate component settings
-        if self.root.attr("neutralpose").get():
-            self.settingsTab.neutralPose_checkBox.setCheckState(
-                QtCore.Qt.Checked)
-        else:
-            self.settingsTab.neutralPose_checkBox.setCheckState(
-                QtCore.Qt.Unchecked)
+        self.populateCheck(self.settingsTab.neutralPose_checkBox,
+                           "neutralpose")
+        self.populateCheck(self.settingsTab.keepLength_checkBox,
+                           "keepLength")
+        self.populateCheck(self.settingsTab.overrideJntNb_checkBox,
+                           "overrideJntNb")
+        self.settingsTab.jntNb_spinBox.setValue(self.root.attr("jntNb").get())
 
     def create_componentLayout(self):
 
@@ -141,6 +142,21 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             partial(self.updateCheck,
                     self.settingsTab.neutralPose_checkBox,
                     "neutralpose"))
+
+        self.settingsTab.keepLength_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.keepLength_checkBox,
+                    "keepLength"))
+
+        self.settingsTab.overrideJntNb_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.overrideJntNb_checkBox,
+                    "overrideJntNb"))
+
+        self.settingsTab.jntNb_spinBox.valueChanged.connect(
+            partial(self.updateSpinBox,
+                    self.settingsTab.jntNb_spinBox,
+                    "jntNb"))
 
     def dockCloseEventTriggered(self):
         pyqt.deleteInstances(self, MayaQDockWidget)
