@@ -6,7 +6,7 @@ from pymel.core import datatypes
 from mgear.maya.shifter import component
 
 from mgear.maya import transform, primitive, vector, curve, applyop
-from mgear.maya import attribute, node
+from mgear.maya import attribute, node, icon
 
 ##########################################################
 # COMPONENT
@@ -109,7 +109,11 @@ class Component(component.Main):
             tweak_ctl, self.getName("upvEnd_lvl"), t)
         upv_curv_lvl.attr("tz").set(.01)
 
-        tweak_npo.attr("tx").set(self.dist)
+        if self.negate:
+            self.off_dist = self.dist * -1
+        else:
+            self.off_dist = self.dist
+        tweak_npo.attr("tx").set(self.off_dist)
 
         self.tweak_ctl.append(tweak_ctl)
         self.upv_curv_lvl.append(upv_curv_lvl)
@@ -121,7 +125,7 @@ class Component(component.Main):
                 tweak_ctl, self.getName("tweakTip_npo"), t)
             tweak_ctl = self.addCtl(
                 self.tweakTip_npo,
-                "tweakEnd_ctl",
+                "tweakTip_ctl",
                 t,
                 self.color_fk,
                 "square",
@@ -140,6 +144,11 @@ class Component(component.Main):
 
             self.tweak_ctl.append(tweak_ctl)
             self.upv_curv_lvl.append(upv_curv_lvl)
+
+            # add visual reference
+            self.line_ref = icon.connection_display_curve(
+                self.getName("visualRef"),
+                [self.tweakTip_npo.getParent(), tweak_ctl])
 
         # set keyable attr for tweak controls
         [attribute.setKeyableAttributes(t_ctl, ["tx", "ty", "tz", "rx"])
@@ -257,7 +266,7 @@ class Component(component.Main):
 
         if self.settings["keepLength"]:
             # add the safty distance offset
-            self.tweakTip_npo.attr("tx").set(self.dist)
+            self.tweakTip_npo.attr("tx").set(self.off_dist)
     # =====================================================
     # CONNECTOR
     # =====================================================
