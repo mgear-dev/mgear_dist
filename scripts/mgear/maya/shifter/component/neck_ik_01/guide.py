@@ -15,7 +15,7 @@ import settingsUI as sui
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquletd.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [2, 0, 0]
+VERSION = [2, 1, 0]
 TYPE = "neck_ik_01"
 NAME = "neck"
 DESCRIPTION = "Neck ik and FK with optional tangent controls"
@@ -89,6 +89,7 @@ class Guide(guide.ComponentGuide):
         # Options
         self.pDivision = self.addParam("division", "long", 5, 3)
         self.pTangentControls = self.addParam("tangentControls", "bool", False)
+        self.pChickenStyleIk = self.addParam("chickenStyleIK", "bool", True)
 
         # FCurves
         self.pSt_profile = self.addFCurveParam(
@@ -172,6 +173,9 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         self.populateCheck(self.settingsTab.tangentControls_checkBox,
                            "tangentControls")
 
+        self.populateCheck(self.settingsTab.chickenStyleIK_checkBox,
+                           "chickenStyleIK")
+
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
         for item in ikRefArrayItems:
             self.settingsTab.ikRefArray_listWidget.addItem(item)
@@ -218,6 +222,11 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             partial(self.updateCheck,
                     self.settingsTab.tangentControls_checkBox,
                     "tangentControls"))
+
+        self.settingsTab.chickenStyleIK_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.chickenStyleIK_checkBox,
+                    "chickenStyleIK"))
 
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(
             self.setProfile)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>269</width>
-    <height>559</height>
+    <width>238</width>
+    <height>538</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -180,6 +180,27 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="chickenStyle_label">
+          <property name="text">
+           <string>Chicken style IK</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="chickenStyleIK_checkBox">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this option is &lt;span style=&quot; font-weight:600;&quot;&gt;checked&lt;/span&gt;. The IK reference will connect rotation and translation. This is very useful for &lt;span style=&quot; font-weight:600;&quot;&gt;chicken&lt;/span&gt;/birds style neck pinning.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Unchecked&lt;/span&gt; will only connect the rotation. This is much more useful&lt;span style=&quot; font-weight:600;&quot;&gt; for human neck &lt;/span&gt;style and other regular necks.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
        <layout class="QHBoxLayout" name="ikRefArray_horizontalLayout">
         <item>
          <layout class="QVBoxLayout" name="ikRefArray_verticalLayout_1">

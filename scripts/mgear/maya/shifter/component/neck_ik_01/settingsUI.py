@@ -1,37 +1,12 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
 class Ui_Form(object):
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(269, 559)
+        Form.resize(238, 538)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.groupBox = QtWidgets.QGroupBox(Form)
@@ -42,7 +17,7 @@ class Ui_Form(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.formLayout = QtWidgets.QFormLayout()
-        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName("formLayout")
         self.softness_label = QtWidgets.QLabel(self.groupBox)
         self.softness_label.setObjectName("softness_label")
@@ -104,7 +79,7 @@ class Ui_Form(object):
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.divisions_label)
         self.division_spinBox = QtWidgets.QSpinBox(self.groupBox)
         self.division_spinBox.setMinimum(3)
-        self.division_spinBox.setProperty("value", 2)
+        self.division_spinBox.setProperty("value", 3)
         self.division_spinBox.setObjectName("division_spinBox")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.division_spinBox)
         self.tangentControls_checkBox = QtWidgets.QCheckBox(self.groupBox)
@@ -124,6 +99,16 @@ class Ui_Form(object):
         self.ikRefArray_groupBox.setObjectName("ikRefArray_groupBox")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.ikRefArray_groupBox)
         self.gridLayout_3.setObjectName("gridLayout_3")
+        self.formLayout_2 = QtWidgets.QFormLayout()
+        self.formLayout_2.setObjectName("formLayout_2")
+        self.chickenStyle_label = QtWidgets.QLabel(self.ikRefArray_groupBox)
+        self.chickenStyle_label.setObjectName("chickenStyle_label")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.chickenStyle_label)
+        self.chickenStyleIK_checkBox = QtWidgets.QCheckBox(self.ikRefArray_groupBox)
+        self.chickenStyleIK_checkBox.setText("")
+        self.chickenStyleIK_checkBox.setObjectName("chickenStyleIK_checkBox")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.chickenStyleIK_checkBox)
+        self.gridLayout_3.addLayout(self.formLayout_2, 0, 0, 1, 1)
         self.ikRefArray_horizontalLayout = QtWidgets.QHBoxLayout()
         self.ikRefArray_horizontalLayout.setObjectName("ikRefArray_horizontalLayout")
         self.ikRefArray_verticalLayout_1 = QtWidgets.QVBoxLayout()
@@ -152,7 +137,7 @@ class Ui_Form(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.ikRefArray_verticalLayout_2.addItem(spacerItem)
         self.ikRefArray_horizontalLayout.addLayout(self.ikRefArray_verticalLayout_2)
-        self.gridLayout_3.addLayout(self.ikRefArray_horizontalLayout, 0, 0, 1, 1)
+        self.gridLayout_3.addLayout(self.ikRefArray_horizontalLayout, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.ikRefArray_groupBox, 1, 0, 1, 1)
         self.upvRefArray_groupBox = QtWidgets.QGroupBox(Form)
         self.upvRefArray_groupBox.setObjectName("upvRefArray_groupBox")
@@ -203,6 +188,8 @@ class Ui_Form(object):
         self.tangentControls_label.setText(gqt.fakeTranslate("Form", "Tangent Controls", None, -1))
         self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
         self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
+        self.chickenStyle_label.setText(gqt.fakeTranslate("Form", "Chicken style IK", None, -1))
+        self.chickenStyleIK_checkBox.setToolTip(gqt.fakeTranslate("Form", "<html><head/><body><p>If this option is <span style=\" font-weight:600;\">checked</span>. The IK reference will connect rotation and translation. This is very useful for <span style=\" font-weight:600;\">chicken</span>/birds style neck pinning.</p><p><span style=\" font-weight:600;\">Unchecked</span> will only connect the rotation. This is much more useful<span style=\" font-weight:600;\"> for human neck </span>style and other regular necks.</p></body></html>", None, -1))
         self.ikRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from Head Ref", None, -1))
         self.ikRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
         self.ikRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
@@ -210,4 +197,3 @@ class Ui_Form(object):
         self.headRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from IK Ref", None, -1))
         self.headRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
         self.headRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
-

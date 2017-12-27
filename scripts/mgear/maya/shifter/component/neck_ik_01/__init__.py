@@ -515,6 +515,10 @@ class Component(component.Main):
 
         self.connectRef(self.settings["ikrefarray"], self.ik_cns)
 
+        if not self.settings["chickenStyleIK"]:
+            for axis in ["tx", "ty", "tz"]:
+                self.ik_cns.attr(axis).disconnect()
+
         if self.settings["headrefarray"]:
             ref_names = self.settings["headrefarray"].split(",")
 
