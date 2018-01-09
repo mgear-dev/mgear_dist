@@ -17,10 +17,6 @@ from mgear.maya import transform, attribute, skin, vector
 
 from mgear.vendor.Qt import QtCore, QtWidgets
 
-# TODO
-# -update controls icon
-# -zipper lips
-
 ##########################################################
 # Lips rig constructor
 ##########################################################
