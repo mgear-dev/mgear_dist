@@ -13,7 +13,9 @@ from mgear.maya.rigbits import (
     rope,
     proxySlicer,
     utils,
-    channelWrangler
+    channelWrangler,
+    eye_rigger,
+    lips_rigger
 )
 
 from mGear_guidesTemplates import (
@@ -169,6 +171,11 @@ def createMenu():
     pm.menuItem(divider=True)
     pm.menuItem(label="Channel Wrangler",
                 command=channelWrangler.openChannelWrangler)
+    pm.menuItem(divider=True)
+    pm.menuItem(label="FACIAL: Eye Rigger",
+                command=eye_rigger.showEyeRigUI)
+    pm.menuItem(label="FACIAL: Lips Rigger",
+                command=lips_rigger.showLipRigUI)
 
     # skinning tools
     pm.menuItem(parent="mGear", subMenu=True, tearOff=True, label="Skinning")
