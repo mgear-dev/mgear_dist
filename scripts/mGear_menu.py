@@ -8,6 +8,7 @@ import pymel.core as pm
 import mgear
 
 from mgear.maya import synoptic, skin, simpleRig, rigbits, attribute, shifter
+from mgear.maya.animbits import softTweaks
 from mgear.maya.rigbits import (
     postSpring,
     rope,
@@ -201,6 +202,8 @@ def createMenu():
     # Animation Tools
     pm.menuItem(parent="mGear", subMenu=True, tearOff=True, label="Animation")
     pm.menuItem(label="Synoptic", command=synoptic.open)
+    pm.menuItem(divider=True)
+    pm.menuItem(label="Soft Tweaks", command=softTweaks.openSoftTweakManager)
     pm.menuItem(divider=True)
     pm.menuItem(label="Import Mocap Skeleton Biped",
                 command=importSkeletonBiped)
