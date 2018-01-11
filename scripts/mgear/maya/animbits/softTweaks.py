@@ -316,7 +316,7 @@ def _importConfiguration(configDict):
             for t in smConfig["affected"]:
                 try:
                     targets.append(pm.PyNode(t))
-                except:
+                except pm.MayaNodeError:
                     pm.displayWarning("{}: has not been found in the scene "
                                       "and will be skipped".format(t))
 
