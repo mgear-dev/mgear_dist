@@ -12,3 +12,6 @@ install:
 script:
   - docker run -ti --rm -v $(pwd):/workspace mgear
 
+notifications:
+  email: false
+
