@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>670</width>
-    <height>757</height>
+    <width>330</width>
+    <height>724</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,15 +16,29 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_6">
     <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QGroupBox" name="groupBox_2">
         <property name="title">
          <string>Mapping Template</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QListWidget" name="listWidget"/>
+         <item row="0" column="1">
+          <widget class="QScrollArea" name="rules_scrollArea">
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>288</width>
+              <height>247</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -38,14 +52,14 @@
          <item row="0" column="0">
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QPushButton" name="newRule_pushButton">
              <property name="text">
               <string>New Rule</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="autoRulesFromGroup_pushButton">
              <property name="text">
               <string>Auto Rules From Group</string>
              </property>
@@ -54,7 +68,7 @@
           </layout>
          </item>
          <item row="1" column="0">
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="QPushButton" name="prepopulateHumanIKRules_pushButton">
            <property name="text">
             <string>Pre-Populate HumanIK Source Rules</string>
            </property>
@@ -102,14 +116,14 @@
          <item row="0" column="0">
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QPushButton" name="pushButton_3">
+            <widget class="QPushButton" name="attach_pushButton">
              <property name="text">
               <string>Attach</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_4">
+            <widget class="QPushButton" name="dettach_pushButton">
              <property name="text">
               <string>Detache</string>
              </property>
@@ -121,55 +135,86 @@
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_4">
+       <widget class="QGroupBox" name="groupBox_6">
         <property name="title">
-         <string>Transfer</string>
+         <string>Frames</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout">
+          <widget class="QCheckBox" name="checkBox">
+           <property name="text">
+            <string>Only Source Keyframes</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QComboBox" name="comboBox">
-             <item>
-              <property name="text">
-               <string>Source Keyframes</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Every Frame</string>
-              </property>
-             </item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Start</string>
+             </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_5">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-               <horstretch>0</horstretch>
-               <verstretch>20</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>0</width>
-               <height>20</height>
-              </size>
-             </property>
+            <widget class="QSpinBox" name="spinBox"/>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>Transfer Animation</string>
+              <string>End</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="spinBox_2"/>
+           </item>
+          </layout>
+         </item>
+         <item row="2" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QPushButton" name="attach_pushButton_2">
+             <property name="text">
+              <string>All Frames</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="dettach_pushButton_2">
+             <property name="text">
+              <string>Time Slider</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>20</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Transfer Animation</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -181,7 +226,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>670</width>
+     <width>330</width>
      <height>21</height>
     </rect>
    </property>
