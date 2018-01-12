@@ -11,7 +11,7 @@ from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 import mgear.maya.pyqt as gqt
 
 from mgear.maya import meshNavigation, curve, applyop, node, primitive, icon
-from mgear.maya import transform, utils, attribute, skin
+from mgear.maya import transform, utils, attribute, skin, rigbits
 
 from mgear import string
 
@@ -100,11 +100,14 @@ def eyeRig(eyeMesh,
     vertexList = extr_v[5]
 
     normalPos = outPos
+    npw = normalPos.getPosition(space='world')
     # Detect the side L or R from the x value
     if inPos.getPosition(space='world')[0] < 0.0:
         side = "R"
+        normalVec = npw - bboxCenter
     else:
         side = "L"
+        normalVec = bboxCenter - npw
     # Manual Vertex corners
     if customCorner:
         if intCorner:
@@ -122,11 +125,14 @@ def eyeRig(eyeMesh,
 
         if extCorner:
             try:
+                normalPos = pm.PyNode(extCorner)
+                npw = normalPos.getPosition(space='world')
                 if side == "R":
                     outPos = pm.PyNode(intCorner)
+                    normalVec = npw - bboxCenter
                 else:
                     outPos = pm.PyNode(extCorner)
-                normalPos = pm.PyNode(extCorner)
+                    normalVec = bboxCenter - npw
             except pm.MayaNodeError:
                 pm.displayWarning("%s can not be found" % extCorner)
                 return
@@ -242,7 +248,7 @@ def eyeRig(eyeMesh,
     t = transform.getTransformLookingAt(
         bboxCenter,
         averagePosition,
-        bboxCenter - normalPos.getPosition(space='world'),
+        normalVec,
         axis=axis,
         negate=negate)
 
@@ -262,10 +268,15 @@ def eyeRig(eyeMesh,
         over_ctl,
         params=["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"])
 
-    if side == "R":
-        over_npo.attr("ry").set(over_npo.attr("ry").get() + 180)
-        over_npo.attr("rx").set(over_npo.attr("rx").get() * -1)
-        over_npo.attr("sz").set(-1)
+    # if side == "R":
+    #     t2 = over_npo.getTransformation()
+    #     t2 = transform.getSymmetricalTransform(t)
+    #     transform.setMatrixPosition(t2, bboxCenter)
+    #     over_npo.setTransformation(t2)
+
+        # over_npo.attr("ry").set(over_npo.attr("ry").get() + 180)
+        # over_npo.attr("rx").set(over_npo.attr("rx").get() * -1)
+        # over_npo.attr("sz").set(-1)
     if len(ctlName.split("_")) == 2 and ctlName.split("_")[-1] == "ghost":
         pass
     else:
@@ -498,6 +509,10 @@ def eyeRig(eyeMesh,
     # setting default values
     bs_mid[0].attr(upTarget.name()).set(blinkH)
 
+    # joints root
+    jnt_root = primitive.addTransformFromPos(
+        eye_root, setName("joints"), pos=bboxCenter)
+
     # head joint
     if headJnt:
         try:
@@ -509,20 +524,15 @@ def eyeRig(eyeMesh,
             return
     else:
         # Eye root
-        jnt_base = primitive.addTransformFromPos(
-            eye_root, setName("joints"), pos=bboxCenter)
+        jnt_base = jnt_root
 
     eyeTargets_root = primitive.addTransform(eye_root,
                                              setName("targets"))
 
-    # Creating Center joints
-    eyeCenter_jnt = primitive.addJointFromPos(jnt_base,
-                                              setName("center_jnt"),
-                                              pos=bboxCenter)
-    eyeCenter_jnt.attr("radius").set(.3)
-    eyeCenter_jnt.attr("visibility").set(False)
-    pm.parentConstraint(arrow_ctl, eyeCenter_jnt, mo=True)
-    pm.sets(defset, add=eyeCenter_jnt)
+    eyeCenter_jnt = rigbits.addJnt(arrow_ctl,
+                                   jnt_base,
+                                   grp=defset,
+                                   jntName=setName("center_jnt"))
 
     # Upper Eyelid joints ##################################################
 
@@ -546,21 +556,25 @@ def eyeRig(eyeMesh,
                        trn.attr("translate"))
 
         # joints
-        jntRoot = primitive.addJointFromPos(jnt_base,
-                                            setName("upEyelid_base", i),
+        jntRoot = primitive.addJointFromPos(jnt_root,
+                                            setName("upEyelid_jnt_base", i),
                                             pos=bboxCenter)
         jntRoot.attr("radius").set(.08)
         jntRoot.attr("visibility").set(False)
         upperEyelid_jntRoot.append(jntRoot)
-        applyop.aimCns(jntRoot, trn, axis="zy", wupObject=jnt_base)
+        applyop.aimCns(jntRoot, trn, axis="zy", wupObject=jnt_root)
 
-        jnt = primitive.addJointFromPos(jntRoot,
-                                        setName("upEyelid_jnt", i),
-                                        pos=cv)
-        jnt.attr("radius").set(.08)
-        jnt.attr("visibility").set(False)
+        jnt_ref = primitive.addJointFromPos(jntRoot,
+                                            setName("upEyelid_jnt_ref", i),
+                                            pos=cv)
+        jnt_ref.attr("radius").set(.08)
+        jnt_ref.attr("visibility").set(False)
+
+        jnt = rigbits.addJnt(jnt_ref,
+                             jnt_base,
+                             grp=defset,
+                             jntName=setName("upEyelid_jnt", i))
         upperEyelid_jnt.append(jnt)
-        pm.sets(defset, add=jnt)
 
     # Lower Eyelid joints ##################################################
 
@@ -586,21 +600,25 @@ def eyeRig(eyeMesh,
                        trn.attr("translate"))
 
         # joints
-        jntRoot = primitive.addJointFromPos(jnt_base,
+        jntRoot = primitive.addJointFromPos(jnt_root,
                                             setName("lowEyelid_base", i),
                                             pos=bboxCenter)
         jntRoot.attr("radius").set(.08)
         jntRoot.attr("visibility").set(False)
         lowerEyelid_jntRoot.append(jntRoot)
-        applyop.aimCns(jntRoot, trn, axis="zy", wupObject=jnt_base)
+        applyop.aimCns(jntRoot, trn, axis="zy", wupObject=jnt_root)
 
-        jnt = primitive.addJointFromPos(jntRoot,
-                                        setName("lowEyelid_jnt", i),
-                                        pos=cv)
-        jnt.attr("radius").set(.08)
-        jnt.attr("visibility").set(False)
+        jnt_ref = primitive.addJointFromPos(jntRoot,
+                                            setName("lowEyelid_jnt_ref", i),
+                                            pos=cv)
+        jnt_ref.attr("radius").set(.08)
+        jnt_ref.attr("visibility").set(False)
+
+        jnt = rigbits.addJnt(jnt_ref,
+                             jnt_base,
+                             grp=defset,
+                             jntName=setName("lowEyelid_jnt", i))
         lowerEyelid_jnt.append(jnt)
-        pm.sets(defset, add=jnt)
 
     # Channels
     # Adding and connecting attributes for the blink
