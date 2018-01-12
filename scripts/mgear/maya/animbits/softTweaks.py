@@ -17,7 +17,7 @@ import pymel.core as pm
 from pymel.core import datatypes
 
 from mgear.maya import pyqt, attribute, icon, node, primitive, applyop
-import anima_rig.softTweakWindowUI as stUI
+import animbits.softTweakWindowUI as stUI
 
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 
