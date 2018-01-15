@@ -362,7 +362,8 @@ class Rig(object):
         # Bind pose ---------------------------------------
         # controls_grp = self.groups["controllers"]
         # pprint(controls_grp, stream=None, indent=1, width=100)
-        pm.select(self.groups["controllers"])
+        ctl_master_grp = pm.PyNode(self.model.name() + "_controllers_grp")
+        pm.select(ctl_master_grp, replace=True)
         node = pm.dagPose(save=True, selection=True)
         pm.connectAttr(node.message, self.model.rigPoses[0])
         print node
