@@ -426,10 +426,8 @@ class Main(object):
 
             except TypeError:
                 pass
-            pm.controller(ctl)
 
-            if tp:
-                self.add_controller_tag(ctl, tp)
+            self.add_controller_tag(ctl, tp)
 
         return ctl
 
