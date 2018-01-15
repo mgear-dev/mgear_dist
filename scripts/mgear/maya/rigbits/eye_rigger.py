@@ -99,14 +99,18 @@ def eyeRig(eyeMesh,
     edgeList = extr_v[4]
     vertexList = extr_v[5]
 
-    normalPos = outPos
-    npw = normalPos.getPosition(space='world')
     # Detect the side L or R from the x value
     if inPos.getPosition(space='world')[0] < 0.0:
         side = "R"
+        inPos = extr_v[3]
+        outPos = extr_v[2]
+        normalPos = outPos
+        npw = normalPos.getPosition(space='world')
         normalVec = npw - bboxCenter
     else:
         side = "L"
+        normalPos = outPos
+        npw = normalPos.getPosition(space='world')
         normalVec = bboxCenter - npw
     # Manual Vertex corners
     if customCorner:
@@ -241,7 +245,8 @@ def eyeRig(eyeMesh,
         over_offset = dRadius
 
     if side == "R" and sideRange or side == "R" and customCorner:
-        axis = "zx"
+        axis = "z-x"
+        # axis = "zx"
     else:
         axis = "z-x"
 
@@ -268,15 +273,11 @@ def eyeRig(eyeMesh,
         over_ctl,
         params=["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"])
 
-    # if side == "R":
-    #     t2 = over_npo.getTransformation()
-    #     t2 = transform.getSymmetricalTransform(t)
-    #     transform.setMatrixPosition(t2, bboxCenter)
-    #     over_npo.setTransformation(t2)
+    if side == "R":
+        over_npo.attr("rx").set(over_npo.attr("rx").get() * -1)
+        over_npo.attr("ry").set(over_npo.attr("ry").get() + 180)
+        over_npo.attr("sz").set(-1)
 
-        # over_npo.attr("ry").set(over_npo.attr("ry").get() + 180)
-        # over_npo.attr("rx").set(over_npo.attr("rx").get() * -1)
-        # over_npo.attr("sz").set(-1)
     if len(ctlName.split("_")) == 2 and ctlName.split("_")[-1] == "ghost":
         pass
     else:
@@ -1178,7 +1179,10 @@ def showEyeRigUI(*args):
 
 
 if __name__ == "__main__":
-    showEyeRigUI()
+    # showEyeRigUI()
 
-    # path = "C:\\Users\\miquel\\Desktop\\eye2Test.eyes"
-    # eyesFromfile(path)
+    path = "C:\\Users\\miquel\\Desktop\\eye_L.eyes"
+    eyesFromfile(path)
+
+    path = "C:\\Users\\miquel\\Desktop\\eye_R.eyes"
+    eyesFromfile(path)
