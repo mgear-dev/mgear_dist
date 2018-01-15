@@ -426,24 +426,7 @@ class Main(object):
                 parent, fullName, m, color, iconShape, **kwargs)
 
         # create the attributes to handlde mirror and symetrical pose
-        attribute.addAttribute(ctl, "invTx", "bool", 0, keyable=False,
-                               niceName="Invert Mirror TX")
-        attribute.addAttribute(ctl, "invTy", "bool", 0, keyable=False,
-                               niceName="Invert Mirror TY")
-        attribute.addAttribute(ctl, "invTz", "bool", 0, keyable=False,
-                               niceName="Invert Mirror TZ")
-        attribute.addAttribute(ctl, "invRx", "bool", 0, keyable=False,
-                               niceName="Invert Mirror RX")
-        attribute.addAttribute(ctl, "invRy", "bool", 0, keyable=False,
-                               niceName="Invert Mirror RY")
-        attribute.addAttribute(ctl, "invRz", "bool", 0, keyable=False,
-                               niceName="Invert Mirror RZ")
-        attribute.addAttribute(ctl, "invSx", "bool", 0, keyable=False,
-                               niceName="Invert Mirror SX")
-        attribute.addAttribute(ctl, "invSy", "bool", 0, keyable=False,
-                               niceName="Invert Mirror SY")
-        attribute.addAttribute(ctl, "invSz", "bool", 0, keyable=False,
-                               niceName="Invert Mirror SZ")
+        attribute.add_mirror_config_channels(ctl)
 
         if self.settings["ctlGrp"]:
             ctlGrp = self.settings["ctlGrp"]
