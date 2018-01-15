@@ -774,7 +774,7 @@ class lipRigUI(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.control_lineEdit = QtWidgets.QLineEdit()
         self.control_lineEdit.setText("ctl")
 
-        #joints
+        # joints
         self.joints_group = QtWidgets.QGroupBox("Joints")
         self.headJnt_label = QtWidgets.QLabel("Head or Upper Lip Joint:")
         self.headJnt_lineEdit = QtWidgets.QLineEdit()
@@ -799,7 +799,6 @@ class lipRigUI(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.topSkin_check = QtWidgets.QCheckBox(
             'Compute Topological Autoskin')
         self.topSkin_check.setChecked(True)
-
 
         # Options
         self.options_group = QtWidgets.QGroupBox("Options")
