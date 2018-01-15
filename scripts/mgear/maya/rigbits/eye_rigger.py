@@ -1,6 +1,7 @@
 """Rigbits eye rigger tool"""
 
 import json
+import traceback
 from functools import partial
 
 import pymel.core as pm
@@ -168,21 +169,33 @@ def eyeRig(eyeMesh,
     eyeCrv_root = primitive.addTransform(eye_root, setName("crvs"))
 
     # Eyelid Main crvs
-    upEyelid = meshNavigation.edgeRangeInLoopFromMid(
-        edgeList, upPos, inPos, outPos)
-    upCrv = curve.createCurveFromOrderedEdges(
-        upEyelid, inPos, setName("upperEyelid"), parent=eyeCrv_root)
-    upCrv_ctl = curve.createCurveFromOrderedEdges(
-        upEyelid, inPos, setName("upCrv_%s" % ctlName), parent=eyeCrv_root)
-    pm.rebuildCurve(upCrv_ctl, s=2, rt=0, rpo=True, ch=False)
+    try:
+        upEyelid = meshNavigation.edgeRangeInLoopFromMid(
+            edgeList, upPos, inPos, outPos)
+        upCrv = curve.createCurveFromOrderedEdges(
+            upEyelid, inPos, setName("upperEyelid"), parent=eyeCrv_root)
+        upCrv_ctl = curve.createCurveFromOrderedEdges(
+            upEyelid, inPos, setName("upCrv_%s" % ctlName), parent=eyeCrv_root)
+        pm.rebuildCurve(upCrv_ctl, s=2, rt=0, rpo=True, ch=False)
 
-    lowEyelid = meshNavigation.edgeRangeInLoopFromMid(
-        edgeList, lowPos, inPos, outPos)
-    lowCrv = curve.createCurveFromOrderedEdges(
-        lowEyelid, inPos, setName("lowerEyelid"), parent=eyeCrv_root)
-    lowCrv_ctl = curve.createCurveFromOrderedEdges(
-        lowEyelid, inPos, setName("lowCrv_%s" % ctlName), parent=eyeCrv_root)
-    pm.rebuildCurve(lowCrv_ctl, s=2, rt=0, rpo=True, ch=False)
+        lowEyelid = meshNavigation.edgeRangeInLoopFromMid(
+            edgeList, lowPos, inPos, outPos)
+        lowCrv = curve.createCurveFromOrderedEdges(
+            lowEyelid, inPos, setName("lowerEyelid"), parent=eyeCrv_root)
+        lowCrv_ctl = curve.createCurveFromOrderedEdges(
+            lowEyelid,
+            inPos,
+            setName("lowCrv_%s" % ctlName),
+            parent=eyeCrv_root)
+
+        pm.rebuildCurve(lowCrv_ctl, s=2, rt=0, rpo=True, ch=False)
+
+    except UnboundLocalError:
+        if customCorner:
+            pm.displayWarning("This error is maybe caused because the custom "
+                              "Corner vertex is not part of the edge loop")
+        pm.displayError(traceback.format_exc())
+        return
 
     upBlink = curve.createCurveFromCurve(
         upCrv, setName("upblink_crv"), nbPoints=30, parent=eyeCrv_root)
@@ -269,6 +282,8 @@ def eyeRig(eyeMesh,
                            ro=datatypes.Vector(1.57079633, 0, 0),
                            po=datatypes.Vector(0, 0, over_offset),
                            color=4)
+    node.add_controller_tag(over_ctl)
+    attribute.add_mirror_config_channels(over_ctl)
     attribute.setKeyableAttributes(
         over_ctl,
         params=["tx", "ty", "tz", "ro", "rx", "ry", "rz", "sx", "sy", "sz"])
@@ -376,6 +391,8 @@ def eyeRig(eyeMesh,
                           ro=datatypes.Vector(1.57079633, 0, 0),
                           po=datatypes.Vector(0, 0, offset),
                           color=color)
+        attribute.add_mirror_config_channels(ctl)
+        node.add_controller_tag(ctl, over_ctl)
         upControls.append(ctl)
         if len(ctlName.split("_")) == 2 and ctlName.split("_")[-1] == "ghost":
             pass
@@ -449,6 +466,7 @@ def eyeRig(eyeMesh,
                           ro=datatypes.Vector(1.57079633, 0, 0),
                           po=datatypes.Vector(0, 0, offset),
                           color=color)
+        attribute.add_mirror_config_channels(ctl)
 
         lowControls.append(ctl)
         if len(ctlName.split("_")) == 2 and ctlName.split("_")[-1] == "ghost":
@@ -460,6 +478,8 @@ def eyeRig(eyeMesh,
         if side == "R":
             npoBase.attr("ry").set(180)
             npoBase.attr("sz").set(-1)
+    for lctl in reversed(lowControls[1:]):
+        node.add_controller_tag(lctl, over_ctl)
     lowControls.append(upControls[-1])
 
     # adding parent average contrains to odd controls
@@ -1179,10 +1199,10 @@ def showEyeRigUI(*args):
 
 
 if __name__ == "__main__":
-    # showEyeRigUI()
+    showEyeRigUI()
 
-    path = "C:\\Users\\miquel\\Desktop\\eye_L.eyes"
-    eyesFromfile(path)
+    # path = "C:\\Users\\miquel\\Desktop\\eye_L.eyes"
+    # eyesFromfile(path)
 
-    path = "C:\\Users\\miquel\\Desktop\\eye_R.eyes"
-    eyesFromfile(path)
+    # path = "C:\\Users\\miquel\\Desktop\\eye_R.eyes"
+    # eyesFromfile(path)
