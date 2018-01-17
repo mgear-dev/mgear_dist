@@ -405,6 +405,7 @@ class Rig(object):
             ctl = primitive.addTransform(parent, name, m)
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
+                pm.rename(shape, name + "Shape")
         else:
             ctl = icon.create(parent, name, m, color, iconShape, **kwargs)
 
