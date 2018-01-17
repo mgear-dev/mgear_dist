@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>255</width>
+    <width>294</width>
     <height>290</height>
    </rect>
   </property>
@@ -26,6 +26,13 @@
          <widget class="QCheckBox" name="neutralPose_checkBox">
           <property name="text">
            <string notr="true">Neutral pose</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="overrideNegate_checkBox">
+          <property name="text">
+           <string notr="true">Override Negate Axis Direction For &quot;R&quot; Side</string>
           </property>
          </widget>
         </item>

@@ -62,6 +62,7 @@ class Guide(guide.ComponentGuide):
         """Add the configurations settings"""
 
         self.pNeutralPose = self.addParam("neutralpose", "bool", False)
+        self.pOverrideNegate = self.addParam("overrideNegate", "bool", False)
         self.pKeepLength = self.addParam("keepLength", "bool", False)
         self.pOverrideJointNb = self.addParam("overrideJntNb", "bool", False)
         self.pJntNb = self.addParam("jntNb", "long", 3, 1)
@@ -122,6 +123,8 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         # populate component settings
         self.populateCheck(self.settingsTab.neutralPose_checkBox,
                            "neutralpose")
+        self.populateCheck(self.settingsTab.overrideNegate_checkBox,
+                           "overrideNegate")
         self.populateCheck(self.settingsTab.keepLength_checkBox,
                            "keepLength")
         self.populateCheck(self.settingsTab.overrideJntNb_checkBox,
@@ -142,6 +145,11 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             partial(self.updateCheck,
                     self.settingsTab.neutralPose_checkBox,
                     "neutralpose"))
+
+        self.settingsTab.overrideNegate_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.overrideNegate_checkBox,
+                    "overrideNegate"))
 
         self.settingsTab.keepLength_checkBox.stateChanged.connect(
             partial(self.updateCheck,

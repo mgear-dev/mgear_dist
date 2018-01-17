@@ -60,6 +60,7 @@ class Guide(guide.ComponentGuide):
         """Add the configurations settings"""
 
         self.pNeutralPose = self.addParam("neutralpose", "bool", False)
+        self.pOverrideNegate = self.addParam("overrideNegate", "bool", False)
         self.pUseIndex = self.addParam("useIndex", "bool", False)
         self.pParentJointIndex = self.addParam(
             "parentJointIndex", "long", -1, None, None)
@@ -114,12 +115,10 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         self.tabs.insertTab(1, self.settingsTab, "Component Settings")
 
         # populate component settings
-        if self.root.attr("neutralpose").get():
-            self.settingsTab.neutralPose_checkBox.setCheckState(
-                QtCore.Qt.Checked)
-        else:
-            self.settingsTab.neutralPose_checkBox.setCheckState(
-                QtCore.Qt.Unchecked)
+        self.populateCheck(self.settingsTab.neutralPose_checkBox,
+                           "neutralpose")
+        self.populateCheck(self.settingsTab.overrideNegate_checkBox,
+                           "overrideNegate")
 
     def create_componentLayout(self):
 
@@ -135,6 +134,11 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             partial(self.updateCheck,
                     self.settingsTab.neutralPose_checkBox,
                     "neutralpose"))
+
+        self.settingsTab.overrideNegate_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.overrideNegate_checkBox,
+                    "overrideNegate"))
 
     def dockCloseEventTriggered(self):
         pyqt.deleteInstances(self, MayaQDockWidget)

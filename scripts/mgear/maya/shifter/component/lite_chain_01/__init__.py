@@ -25,6 +25,10 @@ class Component(component.Main):
 
         self.WIP = self.options["mode"]
 
+        if self.negate and self.settings["overrideNegate"]:
+            self.negate = False
+            self.n_factor = 1
+
         # FK controllers ------------------------------------
         self.fk_npo = []
         self.fk_ctl = []
