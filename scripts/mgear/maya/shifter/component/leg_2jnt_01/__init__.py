@@ -641,7 +641,7 @@ class Component(component.Main):
                         * .5
                         / (self.settings["div1"] + 1.0))
 
-            perc = max(.001, min(.999, perc))
+            perc = max(.0001, min(.990, perc))
 
             # Roll
             if self.negate:
