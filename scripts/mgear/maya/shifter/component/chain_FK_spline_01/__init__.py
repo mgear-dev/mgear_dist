@@ -275,6 +275,9 @@ class Component(component.Main):
         if self.settings["keepLength"]:
             # add the safty distance offset
             self.tweakTip_npo.attr("tx").set(self.off_dist)
+            # connect vis line ref
+            for shp in self.line_ref.getShapes():
+                pm.connectAttr(self.ikVis_att, shp.attr("visibility"))
 
         for ctl in self.tweak_ctl:
             for shp in ctl.getShapes():
