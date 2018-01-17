@@ -198,7 +198,15 @@ class Component(component.Main):
     # =====================================================
     def addAttributes(self):
         """Create the anim and setupr rig attributes for the component"""
-        return
+        self.ikVis_att = self.addAnimParam("IK_vis",
+                                           "IK vis",
+                                           "bool",
+                                           True)
+
+        self.fkVis_att = self.addAnimParam("FK_vis",
+                                           "FK vis",
+                                           "bool",
+                                           True)
 
     # =====================================================
     # OPERATORS
@@ -267,6 +275,13 @@ class Component(component.Main):
         if self.settings["keepLength"]:
             # add the safty distance offset
             self.tweakTip_npo.attr("tx").set(self.off_dist)
+
+        for ctl in self.tweak_ctl:
+            for shp in ctl.getShapes():
+                pm.connectAttr(self.ikVis_att, shp.attr("visibility"))
+        for ctl in self.fk_ctl:
+            for shp in ctl.getShapes():
+                pm.connectAttr(self.fkVis_att, shp.attr("visibility"))
     # =====================================================
     # CONNECTOR
     # =====================================================
