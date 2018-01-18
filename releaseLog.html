@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Log &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
+  <title>Release Log &mdash; mGear: Rigging Framework 2.4.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.4.0 documentation" href="index.html"/>
         <link rel="next" title="License" href="license.html"/>
         <link rel="prev" title="FAQ" href="FAQ.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                2.3
+                2.4
               </div>
             
           
@@ -100,14 +100,15 @@
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">2.3.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">2.2.4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">2.2.3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">2.2.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">2.2.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">2.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">2.1.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">2.2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">2.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">2.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">2.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">2.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">2.0</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -177,7 +178,48 @@
   <div class="section" id="release-log">
 <h1>Release Log<a class="headerlink" href="#release-log" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>2.3.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>2.4.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
+<dd><ul class="first last simple">
+<li>Animbits: SoftTweaks tool [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/133">#133</a>]</li>
+<li>LINUX: Maya 2018 solvers</li>
+<li>Rigbits: Eye rigger tool [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/127">#127</a>]</li>
+<li>Rigbits: Lips Rigger tool [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/128">#128</a>]</li>
+<li>Shifter: New Component: Chain FK spline Component [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/104">#104</a>]</li>
+<li>Shifter: New Component: Lite FK chain [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/115">#115</a>]</li>
+<li>Shifter: New Component: Spine_S_shape [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/96">#96</a>]</li>
+</ul>
+</dd>
+<dt><strong>Enhancements</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter: Add alias names for space references [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/110">#110</a>]</li>
+<li>Shifter: Add visual crv connection for the upVector controls [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/124">#124</a>]</li>
+<li>Shifter: arm and leg 2jnt: add optional controls x Joint [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/114">#114</a>]</li>
+<li>Shifter: chain_FK_spline: add option to control visibility of controls [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/136">#136</a>]</li>
+<li>Shifter: Hide controls on Playback rig setting [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/131">#131</a>]</li>
+<li>Shifter: Improve parallel evaluation [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/123">#123</a>]</li>
+<li>Shifter: Lite_chain and Chain_FK_spline. Option to override side negation [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/139">#139</a>]</li>
+<li>Shifter: Neck_ik_01: add option to have only IK space reference [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/132">#132</a>]</li>
+<li>Shifter: Review rollspline solver precision values [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/138">#138</a>]</li>
+<li>Shifter: Set all controls shape to d1 curves [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/118">#118</a>]</li>
+<li>Shifter: Set to False the default use of uniscale in joints [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/117">#117</a>]</li>
+<li>Shifter: Update component with Proxy attributes [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/111">#111</a>]</li>
+</ul>
+</dd>
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter: Bindpose bug with custom controllers grp [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/134">#134</a>]</li>
+<li>Shifter: Component addJnt error if negative scaling [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/141">#141</a>]</li>
+<li>Shifter: Extracted controls doesn’t clean shape name [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/135">#135</a>]</li>
+<li>Shifter: leg_2jnt_01 maxStretch setting is lost at build time [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/140">#140</a>]</li>
+<li>Shifter: Maya 2018.2 flip in leg_2jnt_01 component [<a class="reference external" href="https://github.com/miquelcampos/mgear/issues/125">#125</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id2">
+<h2>2.3.0<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
@@ -220,8 +262,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id2">
-<h2>2.2.4<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h2>2.2.4<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
@@ -230,8 +272,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id3">
-<h2>2.2.3<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>2.2.3<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
@@ -245,8 +287,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id4">
-<h2>2.2.2<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>2.2.2<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
@@ -264,8 +306,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id5">
-<h2>2.2.1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>2.2.1<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Bug Fix</strong></dt>
 <dd><ul class="first last simple">
@@ -276,8 +318,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id6">
-<h2>2.2.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>2.2.0<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -310,8 +352,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id7">
-<h2>2.1.1<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>2.1.1<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -351,8 +393,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id8">
-<h2>2.0<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h2>2.0<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -430,7 +472,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.3.0',
+            VERSION:'2.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

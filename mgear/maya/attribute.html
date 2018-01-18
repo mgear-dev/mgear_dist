@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.attribute &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
+  <title>mgear.maya.attribute &mdash; mGear: Rigging Framework 2.4.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.4.0 documentation" href="../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
         <link rel="next" title="mgear.maya.curve" href="curve.html"/>
         <link rel="prev" title="mgear.maya.applyop" href="applyop.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.3
+                2.4
               </div>
             
           
@@ -98,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../string.html">mgear.string</a></li>
@@ -476,6 +477,20 @@ proxy paramenter</li>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="mgear.maya.attribute.add_mirror_config_channels">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">add_mirror_config_channels</code><span class="sig-paren">(</span><em>ctl</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.add_mirror_config_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add channels to configure the mirror posing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ctl</strong> (<em>dagNode</em>) – Control Object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="class">
 <dt id="mgear.maya.attribute.colorParamDef">
 <em class="property">class </em><code class="descclassname">mgear.maya.attribute.</code><code class="descname">colorParamDef</code><span class="sig-paren">(</span><em>scriptName</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.colorParamDef" title="Permalink to this definition">¶</a></dt>
@@ -507,6 +522,26 @@ exp [1.0, 0.99, 0.13].</li>
 </table>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.connectSet">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">connectSet</code><span class="sig-paren">(</span><em>source</em>, <em>target</em>, <em>testInstance</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.connectSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect or set attributes</p>
+<p>Connects or set attributes depending if is instance of a instance check</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>source</strong> (<em>str</em><em> or </em><em>Attr</em>) – Striname of the attribute or PyNode attribute</li>
+<li><strong>target</strong> (<em>str</em><em> or </em><em>Attr</em>) – Striname of the attribute or PyNode attribute</li>
+<li><strong>testInstance</strong> (<em>tuple</em>) – Tuple of types to check</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="class">
@@ -589,6 +624,30 @@ will be return</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.attribute.get_default_value">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">get_default_value</code><span class="sig-paren">(</span><em>node</em>, <em>attribute</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.get_default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default attribute value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>str</em><em>, </em><em>PyNode</em>) – The object with the attribute</li>
+<li><strong>attribute</strong> (<em>str</em>) – The attribute to get the value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The attribute value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">variant</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.attribute.lockAttribute">
 <code class="descclassname">mgear.maya.attribute.</code><code class="descname">lockAttribute</code><span class="sig-paren">(</span><em>node, attributes=[‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.lockAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lock attributes of a node.</p>
@@ -647,6 +706,42 @@ the channel</td>
 <li><strong>sourceNode</strong> (<em>PyNoe</em><em> or </em><em>str</em>) – The source node with the channel</li>
 <li><strong>targetNode</strong> (<em>PyNoe</em><em> or </em><em>str</em>) – The target node for the channel</li>
 <li><strong>duplicatedPolicy</strong> (<em>None</em><em>, </em><em>str</em>) – Set the duplicated channel policy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.reset_SRT">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">reset_SRT</code><span class="sig-paren">(</span><em>objects=None, attributes=[‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.reset_SRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset Scale Rotation and translation attributes to default value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>None</em><em>, </em><em>optional</em>) – The objects to reset the channels</li>
+<li><strong>attribute</strong> (<em>list</em>) – The attribute to reset</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.reset_selected_channels_value">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">reset_selected_channels_value</code><span class="sig-paren">(</span><em>objects=None</em>, <em>attributes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.reset_selected_channels_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the the selected channels if not attribute is provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>None</em><em>, </em><em>optional</em>) – The objects to reset the channels</li>
+<li><strong>attribute</strong> (<em>list</em><em>, </em><em>optional</em>) – The attribute to reset</li>
 </ul>
 </td>
 </tr>
@@ -731,6 +826,39 @@ Possible values : (“XYZ”, “XZY”, “YXZ”, “YZX”, “ZXY”, “ZYX
 </dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.attribute.set_default_value">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">set_default_value</code><span class="sig-paren">(</span><em>node</em>, <em>attribute</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.set_default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the default value to the attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em><em>, </em><em>PyNode</em>) – The object with the attribute to reset</li>
+<li><strong>attribute</strong> (<em>str</em>) – The attribute to reset</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.attribute.smart_reset">
+<code class="descclassname">mgear.maya.attribute.</code><code class="descname">smart_reset</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.smart_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the SRT or the selected channels</p>
+<p>Checks first if we have channels selected. If not, will try to reset SRT</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Dummy</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.attribute.unlockAttribute">
 <code class="descclassname">mgear.maya.attribute.</code><code class="descname">unlockAttribute</code><span class="sig-paren">(</span><em>node, attributes=[‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.attribute.unlockAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unlock attributes of a node.</p>
@@ -799,7 +927,7 @@ Possible values : (“XYZ”, “XZY”, “YXZ”, “YZX”, “ZXY”, “ZYX
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'2.3.0',
+            VERSION:'2.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

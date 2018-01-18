@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.shifter &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
+  <title>mgear.maya.shifter &mdash; mGear: Rigging Framework 2.4.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.4.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.shifter.guide" href="guide.html"/>
         <link rel="prev" title="mgear.maya.vector" href="../vector.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.3
+                2.4
               </div>
             
           
@@ -98,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../synopticModules.html">Synoptic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../string.html">mgear.string</a></li>
@@ -317,7 +318,7 @@ to create.</li>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.Rig.customStep">
-<code class="descname">customStep</code><span class="sig-paren">(</span><em>checker</em>, <em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.customStep" title="Permalink to this definition">¶</a></dt>
+<code class="descname">customStep</code><span class="sig-paren">(</span><em>customSteps=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.customStep" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -462,8 +463,8 @@ and taking the latest part.</p>
 <dl class="method">
 <dt id="mgear.maya.shifter.Rig.initialHierarchy">
 <code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.initialHierarchy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build the initial hierarchy of the rig.
-Create the rig model, the main properties,
+<dd><p>Build the initial hierarchy of the rig.</p>
+<p>Create the rig model, the main properties,
 and a couple of base organisation nulls.
 Get the global size of the rig.</p>
 </dd></dl>
@@ -475,7 +476,7 @@ Get the global size of the rig.</p>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.Rig.preCustomStep">
-<code class="descname">preCustomStep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.preCustomStep" title="Permalink to this definition">¶</a></dt>
+<code class="descname">preCustomStep</code><span class="sig-paren">(</span><em>selection</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.preCustomStep" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -483,6 +484,11 @@ Get the global size of the rig.</p>
 <code class="descname">processComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.processComponents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the components of the rig, following the creation steps.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.Rig.stepsList">
+<code class="descname">stepsList</code><span class="sig-paren">(</span><em>checker</em>, <em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.Rig.stepsList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -502,6 +508,20 @@ Get the global size of the rig.</p>
 <dt id="mgear.maya.shifter.importComponentGuide">
 <code class="descclassname">mgear.maya.shifter.</code><code class="descname">importComponentGuide</code><span class="sig-paren">(</span><em>comp_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.importComponentGuide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Import the Component guide</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.shifter.reloadComponents">
+<code class="descclassname">mgear.maya.shifter.</code><code class="descname">reloadComponents</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.reloadComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reload all componets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Dummy</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -550,7 +570,7 @@ Get the global size of the rig.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.3.0',
+            VERSION:'2.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.attribute &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
+  <title>mgear.maya.attribute &mdash; mGear: Rigging Framework 2.4.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.4.0 documentation" href="../index.html"/>
         <link rel="up" title="Base Modules" href="../baseModules.html"/>
         <link rel="next" title="mgear.maya.curve" href="mgear.maya.curve.html"/>
         <link rel="prev" title="mgear.maya.applyop" href="mgear.maya.applyop.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.3
+                2.4
               </div>
             
           
@@ -117,6 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
 </ul>
 </li>
@@ -220,8 +221,8 @@
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.addProxyAttribute" title="mgear.maya.attribute.addProxyAttribute"><code class="xref py py-obj docutils literal"><span class="pre">addProxyAttribute</span></code></a>(sourceAttrs,&nbsp;targets[,&nbsp;…])</td>
 <td>Add proxy paramenter to a list of target dagNode Duplicated channel policy, stablish the rule in case the channel already exist on the target.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">connectSet</span></code></td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.connectSet" title="mgear.maya.attribute.connectSet"><code class="xref py py-obj docutils literal"><span class="pre">connectSet</span></code></a>(source,&nbsp;target,&nbsp;testInstance)</td>
+<td>Connect or set attributes</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.getSelectedChannels" title="mgear.maya.attribute.getSelectedChannels"><code class="xref py py-obj docutils literal"><span class="pre">getSelectedChannels</span></code></a>([userDefine])</td>
 <td>Get the selected channels on the channel box</td>
@@ -229,8 +230,8 @@
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.getSelectedObjectChannels" title="mgear.maya.attribute.getSelectedObjectChannels"><code class="xref py py-obj docutils literal"><span class="pre">getSelectedObjectChannels</span></code></a>([oSel,&nbsp;…])</td>
 <td>Get the selected object channels.</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">get_default_value</span></code></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.get_default_value" title="mgear.maya.attribute.get_default_value"><code class="xref py py-obj docutils literal"><span class="pre">get_default_value</span></code></a>(node,&nbsp;attribute)</td>
+<td>Get the default attribute value</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.lockAttribute" title="mgear.maya.attribute.lockAttribute"><code class="xref py py-obj docutils literal"><span class="pre">lockAttribute</span></code></a>(node[,&nbsp;attributes])</td>
 <td>Lock attributes of a node.</td>
@@ -238,11 +239,11 @@
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.moveChannel" title="mgear.maya.attribute.moveChannel"><code class="xref py py-obj docutils literal"><span class="pre">moveChannel</span></code></a>(attr,&nbsp;sourceNode,&nbsp;targetNode[,&nbsp;…])</td>
 <td>Move channels  keeping the output connections.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">reset_SRT</span></code></td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.reset_SRT" title="mgear.maya.attribute.reset_SRT"><code class="xref py py-obj docutils literal"><span class="pre">reset_SRT</span></code></a>([objects,&nbsp;attributes])</td>
+<td>Reset Scale Rotation and translation attributes to default value</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">reset_selected_channels_value</span></code></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.reset_selected_channels_value" title="mgear.maya.attribute.reset_selected_channels_value"><code class="xref py py-obj docutils literal"><span class="pre">reset_selected_channels_value</span></code></a>([objects,&nbsp;…])</td>
+<td>Reset the the selected channels if not attribute is provided</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.setInvertMirror" title="mgear.maya.attribute.setInvertMirror"><code class="xref py py-obj docutils literal"><span class="pre">setInvertMirror</span></code></a>(node[,&nbsp;invList])</td>
 <td>Set invert mirror pose values</td>
@@ -256,11 +257,11 @@
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.setRotOrder" title="mgear.maya.attribute.setRotOrder"><code class="xref py py-obj docutils literal"><span class="pre">setRotOrder</span></code></a>(node[,&nbsp;s])</td>
 <td>Set the rotorder of the object.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">set_default_value</span></code></td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.set_default_value" title="mgear.maya.attribute.set_default_value"><code class="xref py py-obj docutils literal"><span class="pre">set_default_value</span></code></a>(node,&nbsp;attribute)</td>
+<td>Set the default value to the attribute</td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">smart_reset</span></code></td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.smart_reset" title="mgear.maya.attribute.smart_reset"><code class="xref py py-obj docutils literal"><span class="pre">smart_reset</span></code></a>(*args)</td>
+<td>Reset the SRT or the selected channels</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="../mgear/maya/attribute.html#mgear.maya.attribute.unlockAttribute" title="mgear.maya.attribute.unlockAttribute"><code class="xref py py-obj docutils literal"><span class="pre">unlockAttribute</span></code></a>(node[,&nbsp;attributes])</td>
 <td>Unlock attributes of a node.</td>
@@ -337,7 +338,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.3.0',
+            VERSION:'2.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

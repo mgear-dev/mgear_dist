@@ -1,0 +1,34 @@
+mgear\.maya\.animbits\.softTweaks
+=================================
+
+.. automodule:: mgear.maya.animbits.softTweaks
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      addToSoftMod
+      createSoftTweak
+      exportConfiguration
+      importConfigurationFromFile
+      openSoftTweakManager
+      removeSoftMod
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      softTweakManager
+      softTweakManagerUI
+   
+   
+
+   
+   
+   

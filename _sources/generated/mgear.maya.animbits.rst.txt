@@ -1,0 +1,16 @@
+mgear\.maya\.animbits
+=====================
+
+.. automodule:: mgear.maya.animbits
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

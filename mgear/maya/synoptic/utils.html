@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
+  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.4.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.4.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.synoptic.widgets" href="widgets.html"/>
         <link rel="prev" title="mgear.maya.synoptic" href="synoptic.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.3
+                2.4
               </div>
             
           
@@ -98,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../synopticModules.html">Synoptic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../string.html">mgear.string</a></li>
@@ -445,7 +446,16 @@
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.bakeSprings">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">bakeSprings</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.bakeSprings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Bake the automatic spring animation to animation curves</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>dagNode</em>) – The rig top node</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.bindPose">
@@ -510,8 +520,17 @@
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.clearSprings">
-<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">clearSprings</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.clearSprings" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">clearSprings</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.clearSprings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete baked animation from spring</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>dagNode</em>) – The rig top node</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.gatherMirrorData">
@@ -1052,7 +1071,7 @@ toggle</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.3.0',
+            VERSION:'2.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

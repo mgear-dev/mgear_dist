@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.shifter.component &mdash; mGear: Rigging Framework 2.3.0 documentation</title>
+  <title>mgear.maya.shifter.component &mdash; mGear: Rigging Framework 2.4.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.3.0 documentation" href="../../../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.4.0 documentation" href="../../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.shifter.component.guide" href="guide.html"/>
         <link rel="prev" title="mgear.maya.shifter.gui" href="../gui.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.3
+                2.4
               </div>
             
           
@@ -98,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../shifterModules.html">Shifter Rig Builder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../synopticModules.html">Synoptic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../../../modulesList.html">Modules flat List</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../../mgear.html">mgear</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../string.html">mgear.string</a></li>
@@ -350,7 +351,7 @@ controller</li>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.component.Main.addJoint">
-<code class="descname">addJoint</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em>, <em>newActiveJnt=None</em>, <em>UniScale=True</em>, <em>segComp=0</em>, <em>gearMulMatrix=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addJoint" title="Permalink to this definition">¶</a></dt>
+<code class="descname">addJoint</code><span class="sig-paren">(</span><em>obj</em>, <em>name</em>, <em>newActiveJnt=None</em>, <em>UniScale=False</em>, <em>segComp=0</em>, <em>gearMulMatrix=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.addJoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add joint as child of the active joint or under driver object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -453,6 +454,11 @@ Note that animatable and keyable are False per default.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="mgear.maya.shifter.component.Main.add_controller_tag">
+<code class="descname">add_controller_tag</code><span class="sig-paren">(</span><em>ctl</em>, <em>tagParent</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.add_controller_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="mgear.maya.shifter.component.Main.connect">
 <code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect the component</p>
@@ -462,7 +468,7 @@ connection.</p>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.component.Main.connectRef">
-<code class="descname">connectRef</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em>, <em>upVAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connectRef" title="Permalink to this definition">¶</a></dt>
+<code class="descname">connectRef</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em>, <em>upVAttr=None</em>, <em>init_refNames=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connectRef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect the cns_obj to a multiple object using parentConstraint.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -481,7 +487,7 @@ connection.</p>
 
 <dl class="method">
 <dt id="mgear.maya.shifter.component.Main.connectRef2">
-<code class="descname">connectRef2</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em>, <em>in_attr</em>, <em>init_ref=False</em>, <em>skipTranslate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connectRef2" title="Permalink to this definition">¶</a></dt>
+<code class="descname">connectRef2</code><span class="sig-paren">(</span><em>refArray</em>, <em>cns_obj</em>, <em>in_attr</em>, <em>init_ref=False</em>, <em>skipTranslate=False</em>, <em>init_refNames=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.connectRef2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect the cns_obj to a multiple object using parentConstraint.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -490,9 +496,11 @@ connection.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>refArray</strong> (<a class="reference internal" href="../../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) – List of driver objects divided by “,”.</li>
 <li><strong>cns_obj</strong> (<em>dagNode</em>) – The driven object.</li>
-<li><strong>upVAttr</strong> (<em>bool</em>) – Set if the ref Array is for IK or Up vector</li>
+<li><strong>in_attr</strong> (<em>attr</em>) – The attribute to connect the switch</li>
 <li><strong>init_ref</strong> (<em>list of dagNode</em>) – Set the initial default ref connections</li>
 <li><strong>skipTranslate</strong> (<em>bool</em>) – if True will skip the translation connections</li>
+<li><strong>init_refNames</strong> (<em>list of str</em><em>, </em><em>optional</em>) – Set initial default names
+for the initial default connections</li>
 </ul>
 </td>
 </tr>
@@ -695,6 +703,64 @@ skipping translation connection.</p>
 <dt id="mgear.maya.shifter.component.Main.getType">
 <code class="descname">getType</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.getType" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the type of the component</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.component.Main.get_alias_relation">
+<code class="descname">get_alias_relation</code><span class="sig-paren">(</span><em>name</em>, <em>comp_relative</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.get_alias_relation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the relational name alias from guide to rig.</p>
+<p>If not alias name has been set, this function will return the original
+guide reference name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Local name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relational object.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dagNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.component.Main.get_valid_alias_list">
+<code class="descname">get_valid_alias_list</code><span class="sig-paren">(</span><em>ref_list</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.get_valid_alias_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the alias list of valid components</p>
+<p>If the component doesn’t exist will skip it</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ref_list</strong> (<em>list</em>) – Initial references names list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Alias names list</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.shifter.component.Main.get_valid_ref_list">
+<code class="descname">get_valid_ref_list</code><span class="sig-paren">(</span><em>ref_list</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.shifter.component.Main.get_valid_ref_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the purged list of ref_list</p>
+<p>If the component doesn’t exist will skip it</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ref_list</strong> (<em>list</em>) – Initial references names list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Purged relatives list</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -918,7 +984,7 @@ This feature is available from 2016.5</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'2.3.0',
+            VERSION:'2.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
