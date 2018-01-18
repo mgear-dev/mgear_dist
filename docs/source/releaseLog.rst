@@ -4,34 +4,34 @@ Release Log
 2.4.0
 -----
 **New Features**
-	* Shifter: New Component: Lite FK chain [#115]
-	* Shifter: New Component: Spine_S_shape [#96]
-	* Shifter: New Component: Chain FK spline Component [#104]
 	* Animbits: SoftTweaks tool [#133]
+	* LINUX: Maya 2018 solvers
 	* Rigbits: Eye rigger tool [#127]
 	* Rigbits: Lips Rigger tool [#128]
-	* LINUX: Maya 2018 solvers
+	* Shifter: New Component: Chain FK spline Component [#104]
+	* Shifter: New Component: Lite FK chain [#115]
+	* Shifter: New Component: Spine_S_shape [#96]
 
 **Enhancements**
 	* Shifter: Add alias names for space references [#110]
+	* Shifter: Add visual crv connection for the upVector controls [#124]
 	* Shifter: arm and leg 2jnt: add optional controls x Joint [#114]
+	* Shifter: chain_FK_spline: add option to control visibility of controls [#136]
+	* Shifter: Hide controls on Playback rig setting [#131]
+	* Shifter: Improve parallel evaluation [#123]
+	* Shifter: Lite_chain and Chain_FK_spline. Option to override side negation [#139]
+	* Shifter: Neck_ik_01: add option to have only IK space reference [#132]
+	* Shifter: Review rollspline solver precision values [#138]
 	* Shifter: Set all controls shape to d1 curves [#118]
 	* Shifter: Set to False the default use of uniscale in joints [#117]
 	* Shifter: Update component with Proxy attributes [#111]
-	* Shifter: Add visual crv connection for the upVector controls [#124]
-	* Shifter: Hide controls on Playback rig setting [#131]
-	* Shifter: Neck_ik_01: add option to have only IK space reference [#132]
-	* Shifter: Improve parallel evaluation [#123]
-	* Shifter: chain_FK_spline: add option to control visibility of controls [#136]
-	* Shifter: Review rollspline solver precision values [#138]
-	* Shifter: Lite_chain and Chain_FK_spline. Option to override side negation [#139]
 
 **Bug Fix**
-	* Shifter: Maya 2018.2 flip in leg_2jnt_01 component [#125]
 	* Shifter: Bindpose bug with custom controllers grp [#134]
-	* Shifter: Extracted controls doesn't clean shape name [#135]
 	* Shifter: Component addJnt error if negative scaling [#141]
+	* Shifter: Extracted controls doesn't clean shape name [#135]
 	* Shifter: leg_2jnt_01 maxStretch setting is lost at build time [#140]
+	* Shifter: Maya 2018.2 flip in leg_2jnt_01 component [#125]
 
 2.3.0
 -----

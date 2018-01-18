@@ -18,6 +18,7 @@ Big Thanks! to all contributors (in alphabetical order):
 	- `Marcus Ottosson <https://github.com/mottosso>`_
 	- `Matsumoto-san <https://github.com/yamahigashi>`_
 	- `Miles Cheng <https://github.com/milesckt/>`_
+	- `Oda-san <https://github.com/Gotetz/>`_
 
 .. figure:: images/studioAKA_mGear_A.jpg
     :width: 800px
