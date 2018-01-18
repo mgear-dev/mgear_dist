@@ -5,7 +5,7 @@ from pymel.core import datatypes
 
 from mgear.maya.shifter import component
 
-from mgear.maya import node, fcurve, applyop, vector
+from mgear.maya import node, fcurve, applyop, vector, icon
 from mgear.maya import attribute, transform, primitive
 
 #############################################
@@ -124,6 +124,33 @@ class Component(component.Main):
         for x in self.fk_ctl:
             attribute.setInvertMirror(x, ["tx", "ty", "tz"])
 
+        # IK upv ---------------------------------
+        v = self.guide.apos[2] - self.guide.apos[0]
+        v = self.normal ^ v
+        v.normalize()
+        v *= self.size * .5
+        v += self.guide.apos[1]
+
+        self.upv_cns = primitive.addTransformFromPos(self.root,
+                                                     self.getName("upv_cns"),
+                                                     v)
+
+        self.upv_ctl = self.addCtl(self.upv_cns,
+                                   "upv_ctl",
+                                   transform.getTransform(self.upv_cns),
+                                   self.color_ik,
+                                   "diamond",
+                                   w=self.size * .12,
+                                   tp=self.parentCtlTag)
+
+        if self.settings["mirrorMid"]:
+            if self.negate:
+                self.upv_cns.rz.set(180)
+                self.upv_cns.sy.set(-1)
+        else:
+            attribute.setInvertMirror(self.upv_ctl, ["tx"])
+        attribute.setKeyableAttributes(self.upv_ctl, self.t_params)
+
         # IK Controlers -----------------------------------
 
         self.ik_cns = primitive.addTransformFromPos(
@@ -161,7 +188,7 @@ class Component(component.Main):
                                   w=self.size * .12,
                                   h=self.size * .12,
                                   d=self.size * .12,
-                                  tp=self.ikcns_ctl)
+                                  tp=self.upv_ctl)
 
         if self.settings["mirrorIK"]:
             if self.negate:
@@ -173,33 +200,6 @@ class Component(component.Main):
         self.ik_ctl_ref = primitive.addTransform(self.ik_ctl,
                                                  self.getName("ikCtl_ref"),
                                                  m)
-
-        # upv
-        v = self.guide.apos[2] - self.guide.apos[0]
-        v = self.normal ^ v
-        v.normalize()
-        v *= self.size * .5
-        v += self.guide.apos[1]
-
-        self.upv_cns = primitive.addTransformFromPos(self.root,
-                                                     self.getName("upv_cns"),
-                                                     v)
-
-        self.upv_ctl = self.addCtl(self.upv_cns,
-                                   "upv_ctl",
-                                   transform.getTransform(self.upv_cns),
-                                   self.color_ik,
-                                   "diamond",
-                                   w=self.size * .12,
-                                   tp=self.parentCtlTag)
-
-        if self.settings["mirrorMid"]:
-            if self.negate:
-                self.upv_cns.rz.set(180)
-                self.upv_cns.sy.set(-1)
-        else:
-            attribute.setInvertMirror(self.upv_ctl, ["tx"])
-        attribute.setKeyableAttributes(self.upv_ctl, self.t_params)
 
         # IK rotation controls
         if self.settings["ikTR"]:
@@ -276,6 +276,12 @@ class Component(component.Main):
                                    "sphere",
                                    w=self.size * .2,
                                    tp=self.parentCtlTag)
+
+        attribute.setKeyableAttributes(self.mid_ctl,
+                                       params=["tx", "ty", "tz",
+                                               "ro", "rx", "ry", "rz",
+                                               "sx"])
+
         if self.settings["mirrorMid"]:
             if self.negate:
                 self.mid_cns.rz.set(180)
@@ -339,13 +345,36 @@ class Component(component.Main):
         self.divisions = self.settings["div0"] + self.settings["div1"] + 3 + 2
 
         self.div_cns = []
+
+        if self.settings["extraTweak"]:
+            tagP = self.parentCtlTag
+            self.tweak_ctl = []
+
         for i in range(self.divisions):
 
             div_cns = primitive.addTransform(self.root,
                                              self.getName("div%s_loc" % i))
 
             self.div_cns.append(div_cns)
-            self.jnt_pos.append([div_cns, i])
+
+            if self.settings["extraTweak"]:
+                t = transform.getTransform(div_cns)
+                tweak_ctl = self.addCtl(div_cns,
+                                        "tweak%s_ctl" % i,
+                                        t,
+                                        self.color_fk,
+                                        "square",
+                                        w=self.size * .15,
+                                        d=self.size * .15,
+                                        ro=datatypes.Vector([0, 0, 1.5708]),
+                                        tp=tagP)
+                attribute.setKeyableAttributes(tweak_ctl)
+
+                tagP = tweak_ctl
+                self.tweak_ctl.append(tweak_ctl)
+                self.jnt_pos.append([tweak_ctl, i, None, False])
+            else:
+                self.jnt_pos.append([div_cns, i])
 
         # End reference ------------------------------------
         # To help the deformation on the wrist
@@ -389,6 +418,10 @@ class Component(component.Main):
             self.fk0_ctl,
             self.getName("upv_mth"),
             transform.getTransform(self.upv_ctl))
+
+        # add visual reference
+        self.line_ref = icon.connection_display_curve(
+            self.getName("visalRef"), [self.upv_ctl, self.mid_ctl])
 
     # =====================================================
     # ATTRIBUTES
@@ -459,27 +492,36 @@ class Component(component.Main):
                                             0,
                                             1)
 
+        if self.settings["extraTweak"]:
+            self.tweakVis_att = self.addAnimParam(
+                "Tweak_vis", "Tweak Vis", "bool", False)
+
         # Ref
         if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["ikrefarray"].split(","))
+
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_names)
 
         if self.settings["ikTR"]:
             ref_names = ["Auto", "ik_ctl"]
             if self.settings["ikrefarray"]:
-                ref_names = ref_names + self.settings["ikrefarray"].split(",")
+                ref_names = ref_names + self.get_valid_alias_list(
+                    self.settings["ikrefarray"].split(","))
+
             self.ikRotRef_att = self.addAnimEnumParam("ikRotRef",
                                                       "Ik Rot Ref",
                                                       0,
                                                       ref_names)
 
         if self.settings["upvrefarray"]:
-            ref_names = self.settings["upvrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["upvrefarray"].split(","))
             ref_names = ["Auto"] + ref_names
             if len(ref_names) > 1:
                 self.upvref_att = self.addAnimEnumParam("upvref",
@@ -487,7 +529,8 @@ class Component(component.Main):
                                                         0, ref_names)
 
         if self.settings["pinrefarray"]:
-            ref_names = self.settings["pinrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["pinrefarray"].split(","))
             ref_names = ["Auto"] + ref_names
             if len(ref_names) > 1:
                 self.pin_att = self.addAnimEnumParam("elbowref",
@@ -496,13 +539,17 @@ class Component(component.Main):
                                                      ref_names)
 
         if self.validProxyChannels:
+            attrs_list = [self.blend_att, self.roundness_att]
+            if self.settings["extraTweak"]:
+                attrs_list += [self.tweakVis_att]
             attribute.addProxyAttribute(
-                [self.blend_att, self.roundness_att],
+                attrs_list,
                 [self.fk0_ctl,
                     self.fk1_ctl,
                     self.fk2_ctl,
                     self.ik_ctl,
-                    self.upv_ctl])
+                    self.upv_ctl,
+                    self.mid_ctl])
             attribute.addProxyAttribute(self.roll_att,
                                         [self.ik_ctl, self.upv_ctl])
 
@@ -578,6 +625,8 @@ class Component(component.Main):
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
         for shp in self.ik_ctl.getShapes():
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
+        for shp in self.line_ref.getShapes():
+            pm.connectAttr(self.blend_att, shp.attr("visibility"))
         if self.settings["ikTR"]:
             for shp in self.ikRot_ctl.getShapes():
                 pm.connectAttr(self.blend_att, shp.attr("visibility"))
@@ -651,8 +700,7 @@ class Component(component.Main):
 
         pm.pointConstraint(self.mid_ctl_twst_ref,
                            self.tws1_npo, maintainOffset=False)
-        pm.scaleConstraint(self.mid_ctl_twst_ref,
-                           self.tws1_npo, maintainOffset=False)
+        pm.connectAttr(self.mid_ctl.scaleX, self.tws1_loc.scaleX)
         pm.orientConstraint(self.mid_ctl_twst_ref,
                             self.tws1_npo, maintainOffset=False)
 
@@ -702,6 +750,11 @@ class Component(component.Main):
                                        dm_node + ".outputScaleX")
         self.volDriver_att = div_node2 + ".outputX"
 
+        if self.settings["extraTweak"]:
+            for tweak_ctl in self.tweak_ctl:
+                for shp in tweak_ctl.getShapes():
+                    pm.connectAttr(self.tweakVis_att, shp.attr("visibility"))
+
         # Divisions ----------------------------------------
         # at 0 or 1 the division will follow exactly the rotation of the
         # controler.. and we wont have this nice tangent + roll
@@ -721,7 +774,7 @@ class Component(component.Main):
                     (i - self.settings["div0"] - 3.0) * .5 / \
                     (self.settings["div1"] + 1.0)
 
-            perc = max(.001, min(.990, perc))
+            perc = max(.0001, min(.990, perc))
 
             # Roll
             if self.negate:
@@ -774,6 +827,12 @@ class Component(component.Main):
         self.controlRelatives["wrist"] = self.fk2_ctl
         self.controlRelatives["eff"] = self.fk2_ctl
 
+        # here is really don't needed because the name is the same as the alias
+        self.aliasRelatives["root"] = "root"
+        self.aliasRelatives["elbow"] = "elbow"
+        self.aliasRelatives["wrist"] = "wrist"
+        self.aliasRelatives["eff"] = "hand"
+
     def addConnection(self):
         """Add more connection definition to the set"""
 
@@ -787,21 +846,23 @@ class Component(component.Main):
             self.connectRef(self.settings["ikrefarray"], self.ik_cns)
             self.connectRef(self.settings["upvrefarray"], self.upv_cns, True)
 
-            if self.settings["ikrefarray"]:
-                ikRotRefArray = "Auto,ik_ctl," + self.settings["ikrefarray"]
-            else:
-                ikRotRefArray = "Auto,ik_ctl"
-            self.connectRef2(ikRotRefArray,
+            init_refNames = ["lower_arm", "ik_ctl"]
+            self.connectRef2(self.settings["ikrefarray"],
                              self.ikRot_cns,
                              self.ikRotRef_att,
-                             [self.ikRot_npo, self.ik_ctl], True)
+                             [self.ikRot_npo, self.ik_ctl],
+                             True,
+                             init_refNames)
         else:
             self.connect_standardWithIkRef()
 
         if self.settings["pinrefarray"]:
-            self.connectRef2(
-                "Auto," + self.settings["pinrefarray"], self.mid_cns,
-                self.pin_att, [self.ctrn_loc], False)
+            self.connectRef2(self.settings["pinrefarray"],
+                             self.mid_cns,
+                             self.pin_att,
+                             [self.ctrn_loc],
+                             False,
+                             ["Auto"])
 
     def connect_shoulder_01(self):
         """ Custom connection to be use with shoulder 01 component"""

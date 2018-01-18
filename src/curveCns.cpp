@@ -36,14 +36,20 @@ Date:       2016 / 10 / 10
 // GLOBAL
 /////////////////////////////////////////////////
 MTypeId mgear_curveCns::id(0x0011FEC2);
-MObject mgear_curveCns::inputs; 
- 
+MObject mgear_curveCns::inputs;
+
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_curveCns::SchedulingType mgear_curveCns::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_curveCns::creator() { return new mgear_curveCns; }
- 
+
 // INIT =========================================
 MStatus mgear_curveCns::initialize()
 {
@@ -58,7 +64,7 @@ MStatus mgear_curveCns::initialize()
     mAttr.setArray(true);
 	stat = addAttribute( inputs );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	// CONNECTIONS
 	stat = attributeAffects( inputs, outputGeom );
 		if (!stat) { stat.perror("attributeAffects"); return stat;}
@@ -85,8 +91,7 @@ MStatus mgear_curveCns::deform( MDataBlock& data, MItGeometry& iter, const MMatr
 		}
 		iter.next();
 	}
- 
+
     return MS::kSuccess;
 }
- 
- 
+

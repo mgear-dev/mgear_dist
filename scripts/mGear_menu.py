@@ -8,12 +8,15 @@ import pymel.core as pm
 import mgear
 
 from mgear.maya import synoptic, skin, simpleRig, rigbits, attribute, shifter
+from mgear.maya.animbits import softTweaks
 from mgear.maya.rigbits import (
     postSpring,
     rope,
     proxySlicer,
     utils,
-    channelWrangler
+    channelWrangler,
+    eye_rigger,
+    lips_rigger
 )
 
 from mGear_guidesTemplates import (
@@ -169,6 +172,11 @@ def createMenu():
     pm.menuItem(divider=True)
     pm.menuItem(label="Channel Wrangler",
                 command=channelWrangler.openChannelWrangler)
+    pm.menuItem(divider=True)
+    pm.menuItem(label="FACIAL: Eye Rigger",
+                command=eye_rigger.showEyeRigUI)
+    pm.menuItem(label="FACIAL: Lips Rigger",
+                command=lips_rigger.showLipRigUI)
 
     # skinning tools
     pm.menuItem(parent="mGear", subMenu=True, tearOff=True, label="Skinning")
@@ -194,6 +202,8 @@ def createMenu():
     # Animation Tools
     pm.menuItem(parent="mGear", subMenu=True, tearOff=True, label="Animation")
     pm.menuItem(label="Synoptic", command=synoptic.open)
+    pm.menuItem(divider=True)
+    pm.menuItem(label="Soft Tweaks", command=softTweaks.openSoftTweakManager)
     pm.menuItem(divider=True)
     pm.menuItem(label="Import Mocap Skeleton Biped",
                 command=importSkeletonBiped)

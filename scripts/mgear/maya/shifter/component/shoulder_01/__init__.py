@@ -76,10 +76,11 @@ class Component(component.Main):
 
         # Ref
         if self.settings["refArray"]:
-            ref_names = self.settings["refArray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["refArray"].split(","))
             if len(ref_names) >= 1:
                 self.ref_att = self.addAnimEnumParam(
-                    "rotRef", "Ref", 0, self.settings["refArray"].split(","))
+                    "rotRef", "Ref", 0, ref_names)
 
     # =====================================================
     # OPERATORS
@@ -107,6 +108,9 @@ class Component(component.Main):
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["tip"] = 0
+
+        self.aliasRelatives["root"] = "ctl"
+        self.aliasRelatives["tip"] = "orbit"
 
     def connect_standard(self):
         self.parent.addChild(self.root)

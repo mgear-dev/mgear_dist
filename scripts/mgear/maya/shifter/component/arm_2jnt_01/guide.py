@@ -16,7 +16,7 @@ import settingsUI as sui
 AUTHOR = "Jeremie Passerin, Miquel Campos"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1, 3, 0]
+VERSION = [1, 4, 0]
 TYPE = "arm_2jnt_01"
 NAME = "arm"
 DESCRIPTION = "2 bones arm with Maya nodes for roll bones. With elbow Pin"
@@ -73,6 +73,7 @@ class Guide(guide.ComponentGuide):
         self.pIKTR = self.addParam("ikTR", "bool", False)
         self.pMirrorMid = self.addParam("mirrorMid", "bool", False)
         self.pMirrorIK = self.addParam("mirrorIK", "bool", False)
+        self.pExtraTweak = self.addParam("extraTweak", "bool", False)
 
         # Divisions
         self.pDiv0 = self.addParam("div0", "long", 2, 1, None)
@@ -152,6 +153,7 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         self.populateCheck(self.settingsTab.ikTR_checkBox, "ikTR")
         self.populateCheck(self.settingsTab.mirrorMid_checkBox, "mirrorMid")
         self.populateCheck(self.settingsTab.mirrorIK_checkBox, "mirrorIK")
+        self.populateCheck(self.settingsTab.extraTweak_checkBox, "extraTweak")
         self.settingsTab.div0_spinBox.setValue(self.root.attr("div0").get())
         self.settingsTab.div1_spinBox.setValue(self.root.attr("div1").get())
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
@@ -219,6 +221,10 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         self.settingsTab.mirrorMid_checkBox.stateChanged.connect(
             partial(self.updateCheck,
                     self.settingsTab.mirrorMid_checkBox, "mirrorMid"))
+
+        self.settingsTab.extraTweak_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.extraTweak_checkBox, "extraTweak"))
 
         self.settingsTab.mirrorIK_checkBox.stateChanged.connect(
             partial(self.updateCheck,

@@ -936,3 +936,33 @@ def connectSet(source, target, testInstance):
         pm.connectAttr(source, target)
     else:
         pm.setAttr(target, source)
+
+##########################################################
+# Utility Channels
+##########################################################
+
+
+def add_mirror_config_channels(ctl):
+    """Add channels to configure the mirror posing
+
+    Args:
+     ctl (dagNode): Control Object
+    """
+    addAttribute(
+        ctl, "invTx", "bool", 0, keyable=False, niceName="Invert Mirror TX")
+    addAttribute(
+        ctl, "invTy", "bool", 0, keyable=False, niceName="Invert Mirror TY")
+    addAttribute(
+        ctl, "invTz", "bool", 0, keyable=False, niceName="Invert Mirror TZ")
+    addAttribute(
+        ctl, "invRx", "bool", 0, keyable=False, niceName="Invert Mirror RX")
+    addAttribute(
+        ctl, "invRy", "bool", 0, keyable=False, niceName="Invert Mirror RY")
+    addAttribute(
+        ctl, "invRz", "bool", 0, keyable=False, niceName="Invert Mirror RZ")
+    addAttribute(
+        ctl, "invSx", "bool", 0, keyable=False, niceName="Invert Mirror SX")
+    addAttribute(
+        ctl, "invSy", "bool", 0, keyable=False, niceName="Invert Mirror SY")
+    addAttribute(
+        ctl, "invSz", "bool", 0, keyable=False, niceName="Invert Mirror SZ")

@@ -5,7 +5,7 @@ from pymel.core import datatypes
 
 from mgear.maya.shifter import component
 
-from mgear.maya import node, fcurve, applyop, vector
+from mgear.maya import node, fcurve, applyop, vector, icon
 from mgear.maya import attribute, transform, primitive
 
 #############################################
@@ -475,6 +475,10 @@ class Component(component.Main):
             transform.getTransform(self.legBones[3]))
         self.jnt_pos.append([self.end_ref, 'end'])
 
+        # add visual reference
+        self.line_ref = icon.connection_display_curve(
+            self.getName("visalRef"), [self.upv_ctl, self.knee_ctl])
+
     def addAttributes(self):
 
         self.blend_att = self.addAnimParam(
@@ -515,22 +519,34 @@ class Component(component.Main):
 
         # Ref
         if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["ikrefarray"].split(","))
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_names)
 
         if self.settings["upvrefarray"]:
-            ref_names = self.settings["upvrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["upvrefarray"].split(","))
             ref_names = ["Auto"] + ref_names
             if len(ref_names) > 1:
                 self.upvref_att = self.addAnimEnumParam("upvref",
                                                         "UpV Ref",
                                                         0,
                                                         ref_names)
+        if self.validProxyChannels:
+            attribute.addProxyAttribute(
+                [self.blend_att, self.roundness_att],
+                [self.fk0_ctl,
+                    self.fk1_ctl,
+                    self.fk2_ctl,
+                    self.ik_ctl,
+                    self.upv_ctl])
+            attribute.addProxyAttribute(self.roll_att,
+                                        [self.ik_ctl, self.upv_ctl])
 
         # Setup ------------------------------------------
         # Eval Fcurve
@@ -996,7 +1012,7 @@ class Component(component.Main):
             for shp in ctrl.getShapes():
                 pm.connectAttr(fkvis_node + ".outputX", shp.attr("visibility"))
         # ik
-        for ctrl in [self.ik_ctl, self.roll_ctl]:
+        for ctrl in [self.ik_ctl, self.roll_ctl, self.upv_ctl, self.line_ref]:
             for shp in ctrl.getShapes():
                 pm.connectAttr(self.blend_att, shp.attr("visibility"))
 
@@ -1028,6 +1044,8 @@ class Component(component.Main):
         self.jointRelatives["ankle"] = len(self.div_cns) - 1
         self.jointRelatives["foot"] = len(self.div_cns)
         self.jointRelatives["eff"] = len(self.div_cns)
+
+        self.aliasRelatives["eff"] = "tip"
 
     # standard connection definition.
     def connect_standard(self):

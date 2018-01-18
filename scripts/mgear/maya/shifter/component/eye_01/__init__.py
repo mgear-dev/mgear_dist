@@ -75,13 +75,14 @@ class Component(component.Main):
 
         # Ref
         if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["ikrefarray"].split(","))
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_names)
 
     # =====================================================
     # OPERATORS
@@ -124,6 +125,9 @@ class Component(component.Main):
 
         self.jointRelatives["root"] = 0
         self.jointRelatives["look"] = 1
+
+        self.aliasRelatives["root"] = "eye"
+        self.aliasRelatives["look"] = "eyeOver"
 
     def connect_standard(self):
         """standard connection definition for the component"""

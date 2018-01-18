@@ -176,13 +176,14 @@ class Component(component.Main):
 
             # Ref
             if self.settings["ikrefarray"]:
-                ref_names = self.settings["ikrefarray"].split(",")
+                ref_names = self.get_valid_alias_list(
+                    self.settings["ikrefarray"].split(","))
                 if len(ref_names) > 1:
                     self.ikref_att = self.addAnimEnumParam(
                         "ikref",
                         "Ik Ref",
                         0,
-                        self.settings["ikrefarray"].split(","))
+                        ref_names)
 
     # =====================================================
     # OPERATORS
@@ -286,9 +287,11 @@ class Component(component.Main):
             self.relatives["%s_loc" % i] = self.loc[i + 1]
             self.controlRelatives["%s_loc" % i] = self.fk_ctl[i + 1]
             self.jointRelatives["%s_loc" % i] = i + 1
+            self.aliasRelatives["%s_ctl" % i] = i + 1
         self.relatives["%s_loc" % (len(self.loc) - 1)] = self.loc[-1]
         self.controlRelatives["%s_loc" % (len(self.loc) - 1)] = self.fk_ctl[-1]
         self.jointRelatives["%s_loc" % (len(self.loc) - 1)] = len(self.loc) - 1
+        self.aliasRelatives["%s_loc" % (len(self.loc) - 1)] = len(self.loc) - 1
 
     # @param self
     def addConnection(self):

@@ -87,6 +87,7 @@ class Main(object):
         self.relatives = {}
         self.jointRelatives = {}  # joint relatives mapping for auto connection
         self.controlRelatives = {}
+        self.aliasRelatives = {}  # alias names for pretty names on combo box
 
         # --------------------------------------------------
         # Joint positions init
@@ -214,7 +215,12 @@ class Main(object):
         """
         return
 
-    def addJoint(self, obj, name, newActiveJnt=None, UniScale=True, segComp=0,
+    def addJoint(self,
+                 obj,
+                 name,
+                 newActiveJnt=None,
+                 UniScale=False,
+                 segComp=0,
                  gearMulMatrix=True):
         """Add joint as child of the active joint or under driver object.
 
@@ -242,6 +248,18 @@ class Main(object):
 
             jnt = primitive.addJoint(self.active_jnt, self.getName(
                 str(name) + "_jnt"), transform.getTransform(obj))
+            # TODO: Set the joint to have always positive scaling
+            # jnt.scale.set([1, 1, 1])
+
+            # Disconnect inversScale for better preformance
+            if isinstance(self.active_jnt, pm.nodetypes.Joint):
+                try:
+                    pm.disconnectAttr(self.active_jnt.scale, jnt.inverseScale)
+
+                except RuntimeError:
+                    # This handle the situation where we have in between joints
+                    # transformation due a negative scaling
+                    pm.ungroup(jnt.getParent())
             # All new jnts are the active by default
             self.active_jnt = jnt
 
@@ -334,6 +352,9 @@ class Main(object):
 
         return vector.getPlaneBiNormal(pos[0], pos[1], pos[2])
 
+    def add_controller_tag(self, ctl, tagParent):
+        node.add_controller_tag(ctl, tagParent)
+
     def addCtl(self,
                parent,
                name,
@@ -363,6 +384,9 @@ class Main(object):
             dagNode: The Control.
 
         """
+        if "degree" not in kwargs.keys():
+            kwargs["degree"] = 1
+
         fullName = self.getName(name)
         bufferName = fullName + "_controlBuffer"
         if bufferName in self.rig.guide.controllers.keys():
@@ -373,27 +397,11 @@ class Main(object):
                 pm.rename(shape, fullName + "Shape")
             icon.setcolor(ctl, color)
         else:
-            ctl = icon.create(parent, fullName, m, color, iconShape, **kwargs)
+            ctl = icon.create(
+                parent, fullName, m, color, iconShape, **kwargs)
 
         # create the attributes to handlde mirror and symetrical pose
-        attribute.addAttribute(ctl, "invTx", "bool", 0, keyable=False,
-                               niceName="Invert Mirror TX")
-        attribute.addAttribute(ctl, "invTy", "bool", 0, keyable=False,
-                               niceName="Invert Mirror TY")
-        attribute.addAttribute(ctl, "invTz", "bool", 0, keyable=False,
-                               niceName="Invert Mirror TZ")
-        attribute.addAttribute(ctl, "invRx", "bool", 0, keyable=False,
-                               niceName="Invert Mirror RX")
-        attribute.addAttribute(ctl, "invRy", "bool", 0, keyable=False,
-                               niceName="Invert Mirror RY")
-        attribute.addAttribute(ctl, "invRz", "bool", 0, keyable=False,
-                               niceName="Invert Mirror RZ")
-        attribute.addAttribute(ctl, "invSx", "bool", 0, keyable=False,
-                               niceName="Invert Mirror SX")
-        attribute.addAttribute(ctl, "invSy", "bool", 0, keyable=False,
-                               niceName="Invert Mirror SY")
-        attribute.addAttribute(ctl, "invSz", "bool", 0, keyable=False,
-                               niceName="Invert Mirror SZ")
+        attribute.add_mirror_config_channels(ctl)
 
         if self.settings["ctlGrp"]:
             ctlGrp = self.settings["ctlGrp"]
@@ -426,37 +434,8 @@ class Main(object):
 
             except TypeError:
                 pass
-            pm.controller(ctl)
 
-            if tp:
-                ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
-                tpTagNode = pm.PyNode(pm.controller(tp, q=True)[0])
-                tpTagNode.cycleWalkSibling.set(True)
-                pm.connectAttr(tpTagNode.prepopulate, ctt.prepopulate, f=True)
-                # The connectAttr to the children attribute is giving error
-                # i.e: pm.connectAttr(ctt.attr("parent"),
-                #                      tpTagNode.attr("children"), na=True)
-                # if using the next available option tag
-                # I was expecting to use ctt.setParent(tp) but doest't work as
-                # expected.
-                # After reading the documentation this method looks prety
-                # useless.
-                # Looks like is boolean and works based on selection :(
-
-                # this is a dirty loop workaround. Naaah!
-                i = 0
-                while True:
-                    try:
-                        pm.connectAttr(ctt.parent, tpTagNode.attr(
-                            "children[%s]" % str(i)))
-                        break
-                    except RuntimeError:
-                        i += 1
-                        if i > 100:
-                            pm.displayWarning(
-                                "The controller tag for %s has reached the "
-                                "limit index of 100 children" % ctl.name())
-                            break
+            self.add_controller_tag(ctl, tp)
 
         return ctl
 
@@ -724,6 +703,79 @@ class Main(object):
 
         return self.controlRelatives[name]
 
+    def get_alias_relation(self, name, comp_relative):
+        """Return the relational name alias from guide to rig.
+
+        If not alias name has been set, this function will return the original
+        guide reference name.
+
+        Args:
+            name (str): Local name of the guide object.
+
+        Returns:
+            dagNode: The relational object.
+
+        """
+        comp_name = self.rig.getComponentName(name)
+        rel_name = self.rig.getRelativeName(name)
+        if rel_name not in comp_relative.aliasRelatives.keys():
+            return name
+
+        return "{}_{}".format(comp_name,
+                              comp_relative.aliasRelatives[rel_name])
+
+    def get_valid_ref_list(self, ref_list):
+        """Returns the purged list of ref_list
+
+        If the component doesn't exist will skip it
+
+        Args:
+            ref_list (list): Initial references names list
+
+        Returns:
+            list: Purged relatives list
+        """
+        return self._get_valid_array_list(ref_list)[1]
+
+    def get_valid_alias_list(self, ref_list):
+        """Returns the alias list of valid components
+
+        If the component doesn't exist will skip it
+
+        Args:
+            ref_list (list): Initial references names list
+
+        Returns:
+            list: Alias names list
+        """
+        return self._get_valid_array_list(ref_list)[0]
+
+    def _get_valid_array_list(self, array_list):
+        """Returns the alias list of valid components and the purged array_list
+
+        If the component doesn't exist will skip it
+
+        Args:
+            ref_list (list): Initial references names list
+
+        Returns:
+            list of list: Alias names list and purged relatives list
+        """
+        alias_list = [[], []]
+        for rn in array_list:
+            comp_relative = self.rig.findComponent(rn)
+            if comp_relative:
+                o_name = self.get_alias_relation(rn, comp_relative)
+                alias_list[0].append(o_name)
+                alias_list[1].append(rn)
+            else:
+                pm.displayWarning("While connecting reference array {}"
+                                  " was not found. This will be skipped. But"
+                                  " you should check your guides "
+                                  "configuration".format(rn))
+
+        return alias_list
+
     def initControlTag(self):
         """Initialice the control tag parent.
 
@@ -767,10 +819,11 @@ class Main(object):
         if self.settings["connector"] not in self.connections.keys():
             mgear.log("Unable to connect object", mgear.sev_error)
             return False
-
-        self.connections[self.settings["connector"]]()
-
-        return True
+        try:
+            self.connections[self.settings["connector"]]()
+            return True
+        except AttributeError:
+            return False
 
     def connect_standard(self):
         """Standard Connection
@@ -804,7 +857,7 @@ class Main(object):
         refArray = self.settings["ikrefarray"]
 
         if refArray:
-            ref_names = refArray.split(",")
+            ref_names = self.get_valid_ref_list(refArray.split(","))
             if len(ref_names) == 1:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(self.ik_cns, ref)
@@ -845,7 +898,7 @@ class Main(object):
         refArray = self.settings["ikrefarray"]
 
         if refArray:
-            ref_names = refArray.split(",")
+            ref_names = self.get_valid_ref_list(refArray.split(","))
             if len(ref_names) == 1:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(self.ik_cns, ref)
@@ -862,19 +915,27 @@ class Main(object):
                 for i, attr in enumerate(cns_attr):
                     pm.setAttr(attr, 1.0)
 
-    def connectRef(self, refArray, cns_obj, upVAttr=None):
-        """
-        Connect the cns_obj to a multiple object using parentConstraint.
+    def connectRef(self, refArray, cns_obj, upVAttr=None, init_refNames=False):
+        """Connect the cns_obj to a multiple object using parentConstraint.
 
         Args:
             refArray (list of dagNode): List of driver objects
             cns_obj (dagNode): The driven object.
             upVAttr (bool): Set if the ref Array is for IK or Up vector
         """
-
         if refArray:
-            ref_names = refArray.split(",")
-            if len(ref_names) == 1:
+            if upVAttr and not init_refNames:
+                # we only can perform name validation if the init_refnames are
+                # provided in a separated list. This check ensures backwards
+                # copatibility
+                ref_names = refArray.split(",")
+            else:
+                ref_names = self.get_valid_ref_list(refArray.split(","))
+
+            if not ref_names:
+                # return if the not ref_names list
+                return
+            elif len(ref_names) == 1:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(cns_obj, ref)
             else:
@@ -887,38 +948,58 @@ class Main(object):
                 cns_attr = pm.parentConstraint(
                     cns_node, query=True, weightAliasList=True)
                 # check if the ref Array is for IK or Up vector
-                if upVAttr:
-                    oAttr = self.upvref_att
-                else:
-                    oAttr = self.ikref_att
+                try:
+                    if upVAttr:
+                        oAttr = self.upvref_att
+                    else:
+                        oAttr = self.ikref_att
 
-                for i, attr in enumerate(cns_attr):
-                    node_name = pm.createNode("condition")
-                    pm.connectAttr(oAttr, node_name + ".firstTerm")
-                    pm.setAttr(node_name + ".secondTerm", i)
-                    pm.setAttr(node_name + ".operation", 0)
-                    pm.setAttr(node_name + ".colorIfTrueR", 1)
-                    pm.setAttr(node_name + ".colorIfFalseR", 0)
-                    pm.connectAttr(node_name + ".outColorR", attr)
+                except AttributeError:
+                    oAttr = None
 
-    def connectRef2(self, refArray, cns_obj, in_attr, init_ref=False,
-                    skipTranslate=False):
+                if oAttr:
+                    for i, attr in enumerate(cns_attr):
+                        node_name = pm.createNode("condition")
+                        pm.connectAttr(oAttr, node_name + ".firstTerm")
+                        pm.setAttr(node_name + ".secondTerm", i)
+                        pm.setAttr(node_name + ".operation", 0)
+                        pm.setAttr(node_name + ".colorIfTrueR", 1)
+                        pm.setAttr(node_name + ".colorIfFalseR", 0)
+                        pm.connectAttr(node_name + ".outColorR", attr)
+
+    def connectRef2(self,
+                    refArray,
+                    cns_obj,
+                    in_attr,
+                    init_ref=False,
+                    skipTranslate=False,
+                    init_refNames=False):
         """Connect the cns_obj to a multiple object using parentConstraint.
 
         Args:
             refArray (string): List of driver objects divided by ",".
             cns_obj (dagNode): The driven object.
-            upVAttr (bool): Set if the ref Array is for IK or Up vector
+            in_attr (attr): The attribute to connect the switch
             init_ref (list of dagNode): Set the initial default ref connections
             skipTranslate (bool): if True will skip the translation connections
+            init_refNames (list of str, optional): Set initial default names
+                for the initial default connections
 
         """
         if refArray:
-            ref_names = refArray.split(",")
-            if len(ref_names) == 1:
+            if init_refNames:
+                # we only can perform name validation if the init_refnames are
+                # provided in a separated list. This check ensures backwards
+                # copatibility
+                ref_names = self.get_valid_ref_list(refArray.split(","))
+            else:
+                ref_names = refArray.split(",")
+            if len(ref_names) == 1 and not init_refNames:
                 ref = self.rig.findRelative(ref_names[0])
                 pm.parent(cns_obj, ref)
             else:
+                if init_refNames:
+                    ref_names = ref_names + init_refNames
                 ref = []
                 for ref_name in ref_names:
                     rrn = self.rig.findRelative(ref_name)
@@ -959,7 +1040,7 @@ class Main(object):
 
         """
         if refArray:
-            ref_names = refArray.split(",")
+            ref_names = self.get_valid_ref_list(refArray.split(","))
             if len(ref_names) >= 1:
                 ref = []
                 for ref_name in ref_names:
@@ -1072,7 +1153,7 @@ class Main(object):
             if len(jpo) == 4 and self.options["joint_rig"]:
                 uniScale = jpo[3]
             else:
-                uniScale = True
+                uniScale = False
             # handle the matrix node connection
             if len(jpo) == 5 and self.options["joint_rig"]:
                 gearMulMatrix = jpo[4]

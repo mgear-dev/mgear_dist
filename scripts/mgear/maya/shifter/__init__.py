@@ -245,6 +245,8 @@ class Rig(object):
             self.model, "comments", "string", str(self.options["comments"]))
         self.ctlVis_att = attribute.addAttribute(
             self.model, "ctl_vis", "bool", True)
+        self.ctlVisPlayback_att = attribute.addAttribute(
+            self.model, "ctl_vis_on_playback", "bool", True)
         self.jntVis_att = attribute.addAttribute(
             self.model, "jnt_vis", "bool", True)
 
@@ -266,6 +268,8 @@ class Rig(object):
 
         # Connect global visibility
         pm.connectAttr(self.ctlVis_att, self.global_ctl.attr("visibility"))
+        pm.connectAttr(self.ctlVisPlayback_att,
+                       self.global_ctl.attr("hideOnPlayback"))
         attribute.lockAttribute(self.global_ctl, ['v'])
 
         # --------------------------------------------------
@@ -318,10 +322,11 @@ class Rig(object):
         mgear.log("Finalize")
 
         # clean jnt_org --------------------------------------
-        mgear.log("Cleaning jnt org")
-        for jOrg in dag.findChildrenPartial(self.jnt_org, "org"):
-            if not jOrg.listRelatives(c=True):
-                pm.delete(jOrg)
+        if self.options["joint_rig"]:
+            mgear.log("Cleaning jnt org")
+            for jOrg in dag.findChildrenPartial(self.jnt_org, "org"):
+                if not jOrg.listRelatives(c=True):
+                    pm.delete(jOrg)
 
         # Groups ------------------------------------------
         mgear.log("Creating groups")
@@ -357,7 +362,8 @@ class Rig(object):
         # Bind pose ---------------------------------------
         # controls_grp = self.groups["controllers"]
         # pprint(controls_grp, stream=None, indent=1, width=100)
-        pm.select(self.groups["controllers"])
+        ctl_master_grp = pm.PyNode(self.model.name() + "_controllers_grp")
+        pm.select(ctl_master_grp, replace=True)
         node = pm.dagPose(save=True, selection=True)
         pm.connectAttr(node.message, self.model.rigPoses[0])
         print node
@@ -390,12 +396,16 @@ class Rig(object):
             dagNode: The Control.
 
         """
+        if "degree" not in kwargs.keys():
+            kwargs["degree"] = 1
+
         bufferName = name + "_controlBuffer"
         if bufferName in self.guide.controllers.keys():
             ctl_ref = self.guide.controllers[bufferName]
             ctl = primitive.addTransform(parent, name, m)
             for shape in ctl_ref.getShapes():
                 ctl.addChild(shape, shape=True, add=True)
+                pm.rename(shape, name + "Shape")
         else:
             ctl = icon.create(parent, name, m, color, iconShape, **kwargs)
 

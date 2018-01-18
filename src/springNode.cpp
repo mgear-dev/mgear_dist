@@ -56,10 +56,17 @@ MObject mgear_springNode::aSpringIntensity;
 mgear_springNode::mgear_springNode(){}
 mgear_springNode::~mgear_springNode(){}
 
+mgear_springNode::SchedulingType mgear_springNode::schedulingType() const
+{
+	return kParallel;
+}
+
 void* mgear_springNode::creator()
 {
 	return new mgear_springNode();
 }
+
+
 
 //INIT
 MStatus mgear_springNode::initialize()

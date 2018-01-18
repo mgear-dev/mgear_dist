@@ -603,12 +603,9 @@ class ComponentGuide(guide.Main):
             dagNode: The newly creted curve.
 
         """
-        crv = curve.addCnsCurve(
-            centers[0], self.getName(name), centers, degree)
-        crv.attr("overrideEnabled").set(1)
-        crv.attr("overrideDisplayType").set(1)
-
-        return crv
+        return icon.connection_display_curve(self.getName(name),
+                                             centers,
+                                             degree)
 
     # ====================================================
     # MISC

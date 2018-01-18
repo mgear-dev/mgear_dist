@@ -106,7 +106,12 @@ def createCTL(type="square", child=False, *args):
         pass
 
 
-def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
+def addJnt(obj=False,
+           parent=False,
+           noReplace=False,
+           grp=None,
+           jntName=None,
+           *args):
     """Create one joint for each selected object.
 
     Args:
@@ -138,10 +143,11 @@ def addJnt(obj=False, parent=False, noReplace=False, grp=None, *args):
                 oParent = obj
         else:
             oParent = parent
-        if noReplace:
-            jntName = "_".join(obj.name().split("_")) + "_jnt"
-        else:
-            jntName = "_".join(obj.name().split("_")[:-1]) + "_jnt"
+        if not jntName:
+            if noReplace:
+                jntName = "_".join(obj.name().split("_")) + "_jnt"
+            else:
+                jntName = "_".join(obj.name().split("_")[:-1]) + "_jnt"
         jnt = pm.createNode("joint", n=jntName)
 
         if grp:

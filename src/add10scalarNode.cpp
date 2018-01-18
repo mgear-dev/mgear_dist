@@ -61,6 +61,10 @@ mgear_add10scalarNode::~mgear_add10scalarNode()
 {
 }
 
+mgear_add10scalarNode::SchedulingType mgear_add10scalarNode::schedulingType() const
+{
+	return kParallel;
+}
 
 void* mgear_add10scalarNode::creator()
 {

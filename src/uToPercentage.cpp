@@ -51,6 +51,12 @@ mgear_uToPercentage::~mgear_uToPercentage() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_uToPercentage::SchedulingType mgear_uToPercentage::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_uToPercentage::creator()
 {
@@ -63,13 +69,13 @@ MStatus mgear_uToPercentage::initialize()
 	MFnTypedAttribute tAttr;
 	MFnNumericAttribute nAttr;
 	MStatus stat;
-	
+
     // Curve
     curve = tAttr.create("curve", "crv", MFnData::kNurbsCurve);
     stat = addAttribute( curve );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
 
-		
+
    // Sliders
     normalizedU = nAttr.create("normalizedU", "n", MFnNumericData::kBoolean, false);
 	nAttr.setStorable(true);
@@ -97,8 +103,8 @@ MStatus mgear_uToPercentage::initialize()
     nAttr.setKeyable(false);
     stat = addAttribute( percentage );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
-    // Connections 
+
+    // Connections
     stat = attributeAffects ( curve, percentage );
 		if (!stat) {stat.perror("attributeAffects"); return stat;}
     stat = attributeAffects ( steps, percentage );
@@ -108,7 +114,7 @@ MStatus mgear_uToPercentage::initialize()
     stat = attributeAffects ( normalizedU, percentage );
 		if (!stat) {stat.perror("attributeAffects"); return stat;}
 
-   
+
 
    return MS::kSuccess;
 }
@@ -122,7 +128,7 @@ MStatus mgear_uToPercentage::compute(const MPlug& plug, MDataBlock& data)
 
 	// Curve
    MObject crvObj = data.inputValue( curve ).asNurbsCurve();
-   
+
 	MFnNurbsCurve crv(crvObj);
 
 	// Sliders
@@ -150,7 +156,7 @@ MStatus mgear_uToPercentage::compute(const MPlug& plug, MDataBlock& data)
 		t_subpos[i] = MVector(pt);
 
 	}
-	
+
 	double u_length = 0;
 	double t_length = 0;
 	MVector v;
@@ -164,7 +170,7 @@ MStatus mgear_uToPercentage::compute(const MPlug& plug, MDataBlock& data)
 	}
 
 	double out_perc = (u_length / t_length) * 100;
-		
+
 	// Output
     MDataHandle h = data.outputValue( percentage );
     h.setDouble( out_perc );

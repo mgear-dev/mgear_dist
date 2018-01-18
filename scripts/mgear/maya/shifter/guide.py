@@ -587,7 +587,7 @@ class Rig(Main):
 
             comp_guide.draw(parent)
 
-    def update(self, sel):
+    def update(self, sel, force=False):
         """Update the guide if a parameter is missing"""
 
         if pm.attributeQuery("ismodel", node=sel, ex=True):
@@ -598,7 +598,7 @@ class Rig(Main):
 
         name = self.model.name()
         self.setFromHierarchy(self.model, True)
-        if self.valid:
+        if self.valid and not force:
             pm.displayInfo("The Guide is updated")
             return
 

@@ -62,6 +62,12 @@ mgear_squashStretch2::~mgear_squashStretch2() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_squashStretch2::SchedulingType mgear_squashStretch2::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_squashStretch2::creator()
 {
@@ -75,7 +81,7 @@ MStatus mgear_squashStretch2::initialize()
 	MFnEnumAttribute eAttr;
 	MStatus stat;
 
-    // Inputs 
+    // Inputs
     global_scale = nAttr.createPoint("global_scale", "gs" );
     global_scalex = nAttr.child(0);
     global_scaley = nAttr.child(1);
@@ -94,25 +100,25 @@ MStatus mgear_squashStretch2::initialize()
 	nAttr.setMin(0);
     stat = addAttribute( blend );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	driver = nAttr.create("driver", "d", MFnNumericData::kFloat, 3);
 	nAttr.setStorable(true);
 	nAttr.setKeyable(true);
     stat = addAttribute( driver );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	driver_min = nAttr.create("driver_min", "dmin", MFnNumericData::kFloat, 1);
 	nAttr.setStorable(true);
 	nAttr.setKeyable(true);
     stat = addAttribute( driver_min );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	driver_ctr = nAttr.create("driver_ctr", "dctr", MFnNumericData::kFloat, 3);
 	nAttr.setStorable(true);
 	nAttr.setKeyable(true);
     stat = addAttribute( driver_ctr );
 		if (!stat) {stat.perror("addAttribute"); return stat;}
-		
+
 	driver_max = nAttr.create("driver_max", "dmax", MFnNumericData::kFloat, 6);
 	nAttr.setStorable(true);
 	nAttr.setKeyable(true);
@@ -128,7 +134,7 @@ MStatus mgear_squashStretch2::initialize()
     eAttr.setReadable(true);
     eAttr.setKeyable(false);
     addAttribute( axis );
-	
+
 	squash = nAttr.create("squash", "sq", MFnNumericData::kFloat, .5);
 	nAttr.setStorable(true);
 	nAttr.setKeyable(true);
@@ -181,7 +187,7 @@ MStatus mgear_squashStretch2::compute(const MPlug& plug, MDataBlock& data)
     if (plug != output)
         return MS::kUnknownParameter;
 
-	// Inputs 
+	// Inputs
     MVector gscale = data.inputValue( global_scale ).asFloatVector();
 	double sx = gscale.x;
 	double sy = gscale.y;
@@ -196,7 +202,7 @@ MStatus mgear_squashStretch2::compute(const MPlug& plug, MDataBlock& data)
 	int in_axis = data.inputValue( axis ).asShort();
 	double in_sq = (double)data.inputValue( squash ).asFloat();
 	double in_st = (double)data.inputValue( stretch ).asFloat();
-	
+
 	// Process
     in_st *= clamp(std::max(in_driver - in_dctr, 0.0) / std::max(in_dmax - in_dctr, 0.0001), 0.0, 1.0);
     in_sq *= clamp(std::max(in_dctr - in_driver, 0.0) / std::max(in_dctr - in_dmin, 0.0001), 0.0, 1.0);
@@ -209,10 +215,10 @@ MStatus mgear_squashStretch2::compute(const MPlug& plug, MDataBlock& data)
 
     if (in_axis != 2)
         sz *= std::max( 0.0, 1.0 + in_sq + in_st );
-	
+
     MVector scl = MVector(sx, sy, sz);
     scl = linearInterpolate(gscale, scl, in_blend);
-	
+
 	// Output
     MDataHandle h = data.outputValue( output );
 	h.set3Float( (float)scl.x, (float)scl.y, (float)scl.z );

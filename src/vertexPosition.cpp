@@ -52,6 +52,12 @@ mgear_vertexPosition::~mgear_vertexPosition() {}
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_vertexPosition::SchedulingType mgear_vertexPosition::schedulingType() const
+{
+    return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_vertexPosition::creator()
 {

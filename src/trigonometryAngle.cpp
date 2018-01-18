@@ -41,7 +41,7 @@ MTypeId mgear_trigonometryAngle::id(0x0011FEEC);
 
 MObject mgear_trigonometryAngle::trigoOperation;
 MObject mgear_trigonometryAngle::angle;
-MObject mgear_trigonometryAngle::output; 
+MObject mgear_trigonometryAngle::output;
 
 mgear_trigonometryAngle::mgear_trigonometryAngle() {} // constructor
 mgear_trigonometryAngle::~mgear_trigonometryAngle() {} // destructor
@@ -49,6 +49,12 @@ mgear_trigonometryAngle::~mgear_trigonometryAngle() {} // destructor
 /////////////////////////////////////////////////
 // METHODS
 /////////////////////////////////////////////////
+
+mgear_trigonometryAngle::SchedulingType mgear_trigonometryAngle::schedulingType() const
+{
+	return kParallel;
+}
+
 // CREATOR ======================================
 void* mgear_trigonometryAngle::creator()
 {
@@ -62,7 +68,7 @@ MStatus mgear_trigonometryAngle::initialize()
    MFnEnumAttribute eAttr;
    MStatus stat;
    MFnUnitAttribute uAttr;
-   
+
     // Inputs
     trigoOperation = eAttr.create( "operation", "op", 0 );
     eAttr.addField("sine", 0);
@@ -75,14 +81,14 @@ MStatus mgear_trigonometryAngle::initialize()
 		if (!stat) {stat.perror("addAttribute"); return stat;}
 
 
-	MAngle angle_default( 0.0, MAngle::kDegrees );	
+	MAngle angle_default( 0.0, MAngle::kDegrees );
 	angle = uAttr.create("angle", "angle", angle_default);
 	uAttr.setKeyable(true);
 	addAttribute(angle);
-    
+
     // Outputs
 	// MAngle output( (double)0.0, MAngle::kDegrees );
-	// nAttr.create("output", "output", output);	
+	// nAttr.create("output", "output", output);
 	output = nAttr.create("output", "output", MFnNumericData::kDouble);
 	nAttr.setWritable(false);
 	// nAttr.setStorable(true);
@@ -110,7 +116,7 @@ MStatus mgear_trigonometryAngle::compute(const MPlug& plug, MDataBlock& data)
 	// Input
 	short   in_trigoOperation = data.inputValue( trigoOperation ).asShort();
 	MAngle in_angle = data.inputValue(angle, &returnStatus).asAngle();
-	
+
 
 	double val;
 	if (in_trigoOperation == 0)

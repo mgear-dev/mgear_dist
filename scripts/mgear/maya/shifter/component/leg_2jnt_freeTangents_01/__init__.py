@@ -5,7 +5,7 @@ from pymel.core import datatypes
 
 from mgear.maya.shifter import component
 
-from mgear.maya import node, fcurve, applyop, vector
+from mgear.maya import node, fcurve, applyop, vector, icon
 from mgear.maya import attribute, transform, primitive
 
 #############################################
@@ -565,6 +565,10 @@ class Component(component.Main):
             self.getName("upv_mth"),
             transform.getTransform(self.upv_ctl))
 
+        # add visual reference
+        self.line_ref = icon.connection_display_curve(
+            self.getName("visalRef"), [self.upv_ctl, self.mid_ctl])
+
     def addAttributes(self):
 
         # Anim -------------------------------------------
@@ -591,27 +595,41 @@ class Component(component.Main):
 
         # Ref
         if self.settings["ikrefarray"]:
-            ref_names = self.settings["ikrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["ikrefarray"].split(","))
             if len(ref_names) > 1:
                 self.ikref_att = self.addAnimEnumParam(
                     "ikref",
                     "Ik Ref",
                     0,
-                    self.settings["ikrefarray"].split(","))
+                    ref_names)
 
         ref_names = ["Auto", "ikFoot"]
         if self.settings["upvrefarray"]:
-            ref_names += self.settings["upvrefarray"].split(",")
+            ref_names += self.get_valid_alias_list(
+                self.settings["upvrefarray"].split(","))
         if len(ref_names) > 1:
             self.upvref_att = self.addAnimEnumParam(
                 "upvref", "UpV Ref", 0, ref_names)
 
         if self.settings["pinrefarray"]:
-            ref_names = self.settings["pinrefarray"].split(",")
+            ref_names = self.get_valid_alias_list(
+                self.settings["pinrefarray"].split(","))
             ref_names = ["Auto"] + ref_names
             if len(ref_names) > 1:
                 self.pin_att = self.addAnimEnumParam(
                     "kneeref", "Knee Ref", 0, ref_names)
+
+        if self.validProxyChannels:
+            attribute.addProxyAttribute(
+                [self.blend_att, self.roundness_att],
+                [self.fk0_ctl,
+                    self.fk1_ctl,
+                    self.fk2_ctl,
+                    self.ik_ctl,
+                    self.upv_ctl])
+            attribute.addProxyAttribute(self.roll_att,
+                                        [self.ik_ctl, self.upv_ctl])
 
         # Setup ------------------------------------------
         # Eval Fcurve
@@ -681,6 +699,8 @@ class Component(component.Main):
         for shp in self.ikcns_ctl.getShapes():
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
         for shp in self.ik_ctl.getShapes():
+            pm.connectAttr(self.blend_att, shp.attr("visibility"))
+        for shp in self.line_ref.getShapes():
             pm.connectAttr(self.blend_att, shp.attr("visibility"))
 
         # IK Solver -----------------------------------------
@@ -1015,6 +1035,8 @@ class Component(component.Main):
         self.jointRelatives["knee"] = self.settings["div0"] + 2
         self.jointRelatives["ankle"] = len(self.div_cns)
         self.jointRelatives["eff"] = len(self.div_cns)
+
+        self.aliasRelatives["eff"] = "foot"
 
     def connect_standard(self):
         self.parent.addChild(self.root)

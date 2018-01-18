@@ -208,6 +208,8 @@ class SelectButton(QtWidgets.QWidget):
 
     def enterEvent(self, event):
         self.over = True
+        QtWidgets.QToolTip.showText(QtGui.QCursor.pos(),
+                                    str(self.property("object")))
         self.repaint()
         self.update()
 
