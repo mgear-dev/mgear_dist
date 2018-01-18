@@ -248,10 +248,18 @@ class Main(object):
 
             jnt = primitive.addJoint(self.active_jnt, self.getName(
                 str(name) + "_jnt"), transform.getTransform(obj))
+            # TODO: Set the joint to have always positive scaling
+            # jnt.scale.set([1, 1, 1])
 
             # Disconnect inversScale for better preformance
             if isinstance(self.active_jnt, pm.nodetypes.Joint):
-                pm.disconnectAttr(self.active_jnt.scale, jnt.inverseScale)
+                try:
+                    pm.disconnectAttr(self.active_jnt.scale, jnt.inverseScale)
+
+                except RuntimeError:
+                    # This handle the situation where we have in between joints
+                    # transformation due a negative scaling
+                    pm.ungroup(jnt.getParent())
             # All new jnts are the active by default
             self.active_jnt = jnt
 
