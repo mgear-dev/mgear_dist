@@ -303,11 +303,26 @@ class Main(object):
             im = m.inverse()
 
             if gearMulMatrix:
-                applyop.gear_mulmatrix_op(mulmat_node.attr('output'),
-                                          im, jnt, 'r')
+                mul_nod = applyop.gear_mulmatrix_op(
+                    mulmat_node.attr('output'), im, jnt, 'r')
+                dm_node2 = mul_nod.output.listConnections()[0]
             else:
-                node.createMultMatrixNode(
+                mul_nod = node.createMultMatrixNode(
                     mulmat_node.attr('matrixSum'), im, jnt, 'r')
+                dm_node2 = mul_nod.matrixSum.listConnections()[0]
+
+            if jnt.attr("sz").get() < 0:
+                # if negative scaling we have to negate some axis for rotation
+                neg_rot_node = pm.createNode("multiplyDivide")
+                pm.setAttr(neg_rot_node + ".operation", 1)
+                pm.connectAttr(dm_node2.outputRotate,
+                               neg_rot_node + ".input1",
+                               f=True)
+                for v, axis in zip([-1, -1, 1], "XYZ"):
+                    pm.setAttr(neg_rot_node + ".input2" + axis, v)
+                pm.connectAttr(neg_rot_node + ".output",
+                               jnt + ".r",
+                               f=True)
 
         else:
             jnt = primitive.addJoint(obj, self.getName(

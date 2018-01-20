@@ -1,6 +1,11 @@
 Release Log
 ===========
 
+2.4.1
+-----
+**Bug Fix**
+	* Shifter: Rotation inverted on joints with negative scale [#142]
+
 2.4.0
 -----
 **New Features**
