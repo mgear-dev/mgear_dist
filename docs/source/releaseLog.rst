@@ -1,6 +1,11 @@
 Release Log
 ===========
 
+2.4.2
+-----
+**Bug Fix**
+	* Animbits: SoftTweak root lost relative position to parent [#143]
+
 2.4.1
 -----
 **Bug Fix**
