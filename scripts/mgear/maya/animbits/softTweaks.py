@@ -337,6 +337,9 @@ def _importConfiguration(configDict):
                 baseCtl.setMatrix(ctlBaseMatrix, objectSpace=True)
                 tweakCtl.setMatrix(ctlMatrix, objectSpace=True)
                 tweakCtl.falloff.set(smConfig["falloff"])
+                # we have to set the matrix again on the root because is stored
+                # in local space
+                baseCtl.getParent().setMatrix(rootMatrix, objectSpace=True)
 
 # import softTweaker configuration from file
 
