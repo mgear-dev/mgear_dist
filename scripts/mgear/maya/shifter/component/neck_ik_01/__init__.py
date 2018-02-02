@@ -25,11 +25,14 @@ class Component(component.Main):
         self.normal = self.guide.blades["blade"].z * -1
 
         # Ik Controlers ------------------------------------
-        t = transform.getTransformLookingAt(self.guide.pos["tan1"],
-                                            self.guide.pos["neck"],
-                                            self.normal,
-                                            "yx",
-                                            self.negate)
+        if self.settings["IKWorldOri"]:
+            t = datatypes.TransformationMatrix()
+        else:
+            t = transform.getTransformLookingAt(self.guide.pos["tan1"],
+                                                self.guide.pos["neck"],
+                                                self.normal,
+                                                "yx",
+                                                self.negate)
 
         t = transform.setMatrixPosition(t, self.guide.pos["neck"])
 

@@ -1,9 +1,7 @@
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
-
 class Ui_Form(object):
-
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(238, 538)
@@ -17,7 +15,7 @@ class Ui_Form(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.formLayout = QtWidgets.QFormLayout()
-        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName("formLayout")
         self.softness_label = QtWidgets.QLabel(self.groupBox)
         self.softness_label.setObjectName("softness_label")
@@ -89,6 +87,13 @@ class Ui_Form(object):
         self.tangentControls_label = QtWidgets.QLabel(self.groupBox)
         self.tangentControls_label.setObjectName("tangentControls_label")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.tangentControls_label)
+        self.IKWorldOri_checkBox = QtWidgets.QCheckBox(self.groupBox)
+        self.IKWorldOri_checkBox.setText("")
+        self.IKWorldOri_checkBox.setObjectName("IKWorldOri_checkBox")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.IKWorldOri_checkBox)
+        self.IKWorldOri_label = QtWidgets.QLabel(self.groupBox)
+        self.IKWorldOri_label.setObjectName("IKWorldOri_label")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.IKWorldOri_label)
         self.verticalLayout.addLayout(self.formLayout)
         self.squashStretchProfile_pushButton = QtWidgets.QPushButton(self.groupBox)
         self.squashStretchProfile_pushButton.setObjectName("squashStretchProfile_pushButton")
@@ -186,6 +191,8 @@ class Ui_Form(object):
         self.maxSquash_label.setText(gqt.fakeTranslate("Form", "Max Squash", None, -1))
         self.divisions_label.setText(gqt.fakeTranslate("Form", "Divisions", None, -1))
         self.tangentControls_label.setText(gqt.fakeTranslate("Form", "Tangent Controls", None, -1))
+        self.IKWorldOri_checkBox.setToolTip(gqt.fakeTranslate("Form", "If checked, the IK control will be aligned to the world space", None, -1))
+        self.IKWorldOri_label.setText(gqt.fakeTranslate("Form", "IK Ctl World Ori", None, -1))
         self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
         self.ikRefArray_groupBox.setTitle(gqt.fakeTranslate("Form", "IK Reference Array", None, -1))
         self.chickenStyle_label.setText(gqt.fakeTranslate("Form", "Chicken style IK", None, -1))
@@ -197,3 +204,4 @@ class Ui_Form(object):
         self.headRefArray_copyRef_pushButton.setText(gqt.fakeTranslate("Form", "Copy from IK Ref", None, -1))
         self.headRefArrayAdd_pushButton.setText(gqt.fakeTranslate("Form", "<<", None, -1))
         self.headRefArrayRemove_pushButton.setText(gqt.fakeTranslate("Form", ">>", None, -1))
+
