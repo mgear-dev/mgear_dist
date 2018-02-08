@@ -297,12 +297,14 @@ class Component(component.Main):
                                      d=self.size,
                                      tp=self.preiviousCtlTag)
 
-                attribute.setKeyableAttributes(self.fk_ctl)
-                attribute.setRotOrder(fk_ctl, "ZXY")
                 self.fk_ctl.append(fk_ctl)
                 self.preiviousCtlTag = fk_ctl
 
-            # setAttr(fk_npo+".inheritsTransform", False)
+            for x in self.fk_ctl:
+                attribute.setKeyableAttributes(x)
+                attribute.setRotOrder(x, "ZXY")
+                attribute.setInvertMirror(x, ["tx", "rz", "ry"])
+
             self.fk_npo.append(fk_npo)
             parentctl = fk_ctl
             scl_ref = primitive.addTransform(parentctl,
@@ -335,9 +337,6 @@ class Component(component.Main):
             self.twister.append(twister)
             self.ref_twist.append(ref_twist)
 
-            # TODO: update this part with the optiona FK controls update
-            for x in self.fk_ctl[:-1]:
-                attribute.setInvertMirror(x, ["tx", "rz", "ry"])
 
         # Connections (Hooks) ------------------------------
         self.cnx0 = primitive.addTransform(self.root, self.getName("0_cnx"))
@@ -538,8 +537,8 @@ class Component(component.Main):
             # compensate scale reference
             div_node = node.createDivNode([1, 1, 1],
                                           [rootWorld_node + ".outputScaleX",
-                                          rootWorld_node + ".outputScaleY",
-                                          rootWorld_node + ".outputScaleZ"])
+                                           rootWorld_node + ".outputScaleY",
+                                           rootWorld_node + ".outputScaleZ"])
 
             # Squash n Stretch
             op = applyop.gear_squashstretch2_op(self.scl_transforms[i],
