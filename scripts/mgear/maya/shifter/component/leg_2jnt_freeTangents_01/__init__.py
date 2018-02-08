@@ -578,8 +578,12 @@ class Component(component.Main):
             "roll", "Roll", "double", 0, -180, 180)
         self.scale_att = self.addAnimParam(
             "ikscale", "Scale", "double", 1, .001, 99)
-        self.maxstretch_att = self.addAnimParam(
-            "maxstretch", "Max Stretch", "double", 1.5, 1, 99)
+        self.maxstretch_att = self.addAnimParam("maxstretch",
+                                                "Max Stretch",
+                                                "double",
+                                                self.settings["maxstretch"],
+                                                1,
+                                                99)
         self.slide_att = self.addAnimParam(
             "slide", "Slide", "double", .5, 0, 1)
         self.softness_att = self.addAnimParam(
