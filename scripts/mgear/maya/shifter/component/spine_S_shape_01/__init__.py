@@ -36,12 +36,17 @@ class Component(component.Main):
                 j.drawStyle.set(2)
 
         # Ik Controlers ------------------------------------
-        t = transform.getTransformLookingAt(
-            self.guide.apos[0],
-            self.guide.apos[-1],
-            self.guide.blades["blade"].z * -1,
-            "yx",
-            self.negate)
+        # if self.settings["IKWorldOri"]:
+        if True:
+            t = datatypes.TransformationMatrix()
+            t = transform.setMatrixPosition(t, self.guide.apos[0])
+        else:
+            t = transform.getTransformLookingAt(
+                self.guide.apos[0],
+                self.guide.apos[-1],
+                self.guide.blades["blade"].z * -1,
+                "yx",
+                self.negate)
 
         self.ik0_npo = primitive.addTransform(
             self.root, self.getName("ik0_npo"), t)
