@@ -280,7 +280,7 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="autoRig_pushButton">
          <property name="text">
           <string>Auto Build</string>
          </property>

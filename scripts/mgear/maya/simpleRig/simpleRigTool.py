@@ -281,19 +281,20 @@ def _create_custom_pivot(name, side, icon, yZero, selection=None, parent=None):
             return
 
     volCenter, radio, bb = _get_branch_bbox_data(selection, yZero)
-    t = transform.getTransformFromPos(volCenter)
+    if volCenter:
+        t = transform.getTransformFromPos(volCenter)
 
-    ctl = _create_control(name,
-                          t,
-                          radio,
-                          parent,
-                          icon,
-                          side,
-                          indx=0,
-                          color=14,
-                          driven=selection)
+        ctl = _create_control(name,
+                              t,
+                              radio,
+                              parent,
+                              icon,
+                              side,
+                              indx=0,
+                              color=14,
+                              driven=selection)
 
-    return ctl
+        return ctl
 
 
 # Getters ===========================================
@@ -345,6 +346,9 @@ def _get_branch_bbox_data(selection=None, yZero=True, *args):
     absRadio = 0.5
     bbox_elements = []
 
+    if not isinstance(selection, list):
+        selection = [selection]
+
     for e in selection:
         bbox_elements.append(e)
         for c in _get_children(e):
@@ -352,26 +356,27 @@ def _get_branch_bbox_data(selection=None, yZero=True, *args):
                 bbox_elements.append(c)
 
     for e in bbox_elements:
-        bbCenter, bbRadio, bb = _get_bbox_data(e)
-        if not absBB:
-            absBB = bb
-        else:
-            absBB = [[min(bb[0][0], absBB[0][0]),
-                      max(bb[0][1], absBB[0][1])],
-                     [min(bb[1][0], absBB[1][0]),
-                      max(bb[1][1], absBB[1][1])],
-                     [min(bb[2][0], absBB[2][0]),
-                      max(bb[2][1], absBB[2][1])]]
-        # if absCenter:
-        #     absCenter = [0, 0, 0]
-        # else:
-        absCenter = [(axis[0] + axis[1]) / 2 for axis in absBB]
-        absRadio = max([absBB[0][1] - absBB[0][0],
-                        absBB[2][1] - absBB[2][0]]) / 1.7
+        if not _is_valid_ctl(e):
+            bbCenter, bbRadio, bb = _get_bbox_data(e)
+            if not absBB:
+                absBB = bb
+            else:
+                absBB = [[min(bb[0][0], absBB[0][0]),
+                          max(bb[0][1], absBB[0][1])],
+                         [min(bb[1][0], absBB[1][0]),
+                          max(bb[1][1], absBB[1][1])],
+                         [min(bb[2][0], absBB[2][0]),
+                          max(bb[2][1], absBB[2][1])]]
+            # if absCenter:
+            #     absCenter = [0, 0, 0]
+            # else:
+            absCenter = [(axis[0] + axis[1]) / 2 for axis in absBB]
+            absRadio = max([absBB[0][1] - absBB[0][0],
+                            absBB[2][1] - absBB[2][0]]) / 1.7
 
-        # set the cencter in the floor
-        if yZero:
-            absCenter[1] = absBB[1][0]
+            # set the cencter in the floor
+            if yZero:
+                absCenter[1] = absBB[1][0]
 
     return absCenter, absRadio, absBB
 
@@ -383,14 +388,37 @@ def _collect_configuration_from_rig():
     return
 
 
-def _collect_configuration_from_model():
+def _build_rig_from_model(dagNode, suffix="geoRoot"):
     # TODO: using suffix keyword from a given model collect the configuration.
-    return
+    suf = "_{}".format(string.removeInvalidCharacter(suffix))
+    pm.displayInfo("Searching elements using suffix: {}".format(suf))
+
+    parent_dict = {}
+    local_ctl = _create_simple_rig_root()
+    if local_ctl:
+        descendents = reversed(dagNode.listRelatives(allDescendents=True,
+                               type="transform"))
+        for d in descendents:
+            if d.name().endswith(suf):
+                name = d.name().replace(suf, "")
+                if d.getParent().name() in parent_dict:
+                    parent = parent_dict[d.getParent().name()]
+                else:
+                    parent = local_ctl
+                print d
+                ctl = _create_custom_pivot(name,
+                                           "C",
+                                           "circle",
+                                           True,
+                                           selection=d,
+                                           parent=parent)
+                parent_dict[d.name()] = ctl
 
 
 def _build_rig_from_configuration():
     # TODO: build the rig from a configuration
     # can be from scene configuration or from imported
+    # create rig root
     return
 
 
@@ -508,7 +536,7 @@ def _parent_pivot(pivot, parent):
 
 
 def _edit_pivot_position(ctl):
-    # TODO: set the pivot in editable mode
+    # set the pivot in editable mode
     # check that is in neutral pose
     if not _is_in_npo(ctl):
         pm.displayWarning("The control: {} should be in reset"
@@ -532,7 +560,7 @@ def _edit_pivot_position(ctl):
 
 
 def _consolidate_pivot_position(ctl):
-    # TODO: consolidate the pivot position after editing
+    # consolidate the pivot position after editing
 
     if ctl.attr("edit_mode").get():
         # unparent the  children
@@ -726,6 +754,7 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.srUIInst.remove_pushButton.clicked.connect(self.remove_from_ctl)
         self.srUIInst.editPivot_pushButton.clicked.connect(self.edit_pivot)
         self.srUIInst.setPivot_pushButton.clicked.connect(self.set_pivot)
+        self.srUIInst.autoRig_pushButton.clicked.connect(self.auto_rig)
 
         # Menus
         self.srUIInst.deletePivot_action.triggered.connect(self.delete_pivot)
@@ -784,12 +813,25 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         oSel = pm.selected()
         if oSel and len(oSel) == 1:
             _edit_pivot_position(oSel[0])
+        else:
+            pm.displayWarning("Please select one ctl")
 
     @utils.one_undo
     def set_pivot(self):
         oSel = pm.selected()
         if oSel and len(oSel) == 1:
             _consolidate_pivot_position(oSel[0])
+        else:
+            pm.displayWarning("Please select one ctl")
+
+    # @utils.one_undo
+    def auto_rig(self):
+        oSel = pm.selected()
+        if oSel and len(oSel) == 1:
+            suffix = self.srUIInst.autoBuild_lineEdit.text()
+            _build_rig_from_model(oSel[0], suffix)
+        else:
+            pm.displayWarning("Please select one ctl")
 
 
 def open(*args):

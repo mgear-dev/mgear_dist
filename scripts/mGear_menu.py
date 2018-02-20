@@ -8,7 +8,7 @@ import pymel.core as pm
 import mgear
 
 from mgear.maya import synoptic, skin, rigbits, attribute, shifter
-from mgear.maya.simpleRig import simpleRig_legacy
+from mgear.maya.simpleRig import simpleRigTool, simpleRig_legacy
 from mgear.maya.animbits import softTweaks
 from mgear.maya.rigbits import (
     postSpring,
@@ -77,6 +77,9 @@ def createMenu():
 
     # Simple rig
     pm.menuItem(parent="mGear", subMenu=True, tearOff=True, label="Simple Rig")
+    pm.menuItem(label="Simple Rig Tool", command=simpleRigTool.open)
+    pm.menuItem(divider=True)
+    pm.menuItem(subMenu=True, tearOff=True, label="simpleRig Legacy")
     pm.menuItem(label="Simple Rig Generate",
                 command=partial(simpleRig_legacy.simpleRig, "rig", False))
     pm.menuItem(divider=True)

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:/repo/mgear/scripts/mgear/maya/simpleRig/simpleRigUI.ui'
 #
-# Created: Mon Feb 19 11:17:17 2018
+# Created: Tue Feb 20 11:48:35 2018
 #      by: pyside2-uic  running on PySide2 2.0.0~alpha0
 #
 # WARNING! All changes made in this file will be lost!
@@ -148,9 +148,9 @@ class Ui_MainWindow(object):
         self.autoBuild_lineEdit.setObjectName("autoBuild_lineEdit")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.autoBuild_lineEdit)
         self.gridLayout_5.addLayout(self.formLayout, 0, 0, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(self.groupBox_5)
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout_5.addWidget(self.pushButton, 1, 0, 1, 1)
+        self.autoRig_pushButton = QtWidgets.QPushButton(self.groupBox_5)
+        self.autoRig_pushButton.setObjectName("autoRig_pushButton")
+        self.gridLayout_5.addWidget(self.autoRig_pushButton, 1, 0, 1, 1)
         self.gridLayout_6.addWidget(self.groupBox_5, 3, 0, 1, 1)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_6.addItem(spacerItem, 4, 0, 1, 1)
@@ -219,7 +219,7 @@ class Ui_MainWindow(object):
         self.groupBox_5.setTitle(QtWidgets.QApplication.translate("MainWindow", "Auto Rig", None, -1))
         self.suffix_label.setText(QtWidgets.QApplication.translate("MainWindow", "Suffix Rule", None, -1))
         self.autoBuild_lineEdit.setText(QtWidgets.QApplication.translate("MainWindow", "geoRoot", None, -1))
-        self.pushButton.setText(QtWidgets.QApplication.translate("MainWindow", "Auto Build", None, -1))
+        self.autoRig_pushButton.setText(QtWidgets.QApplication.translate("MainWindow", "Auto Build", None, -1))
         self.menuIO.setTitle(QtWidgets.QApplication.translate("MainWindow", "File", None, -1))
         self.menuConvert.setTitle(QtWidgets.QApplication.translate("MainWindow", "Convert", None, -1))
         self.menuDelete.setTitle(QtWidgets.QApplication.translate("MainWindow", "Delete", None, -1))
