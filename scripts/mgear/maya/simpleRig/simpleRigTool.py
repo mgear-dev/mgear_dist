@@ -174,6 +174,7 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
 
     attribute.addAttribute(rig, "is_rig", "bool", True, keyable=False)
     attribute.addAttribute(rig, "is_simple_rig", "bool", True, keyable=False)
+    attribute.addAttribute(rig, "geoUnselectable", "bool", True)
     attribute.addAttribute(rig, "rig_name", "string", rigName)
     attribute.addAttribute(rig, "user", "string", getpass.getuser())
     attribute.addAttribute(rig, "date", "string", str(datetime.datetime.now()))
@@ -201,6 +202,11 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
 
     t = transform.getTransformFromPos(volCenter)
 
+    # configure selectable geo
+    for e in selection:
+        pm.connectAttr(rig.geoUnselectable, e.attr("overrideEnabled"))
+        e.attr("overrideDisplayType").set(2)
+
     # Create sets
     # meshSet = pm.sets(meshList, n="CACHE_grp")
     ctlSet = pm.sets(ctlList, n="{}_controllers_grp".format(rigName))
@@ -208,7 +214,7 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
     compGroup = pm.sets(meshList, n="{}_componentsRoots_grp".format(rigName))
 
     rigSets = pm.sets([ctlSet, deformersSet, compGroup],
-                      n="rig_Sets_grp")
+                      n="rig_sets_grp")
 
     pm.connectAttr(rigSets.attr("message"),
                    "{}.rigGroups[0]".format(rigName))
@@ -417,7 +423,7 @@ def _build_rig_from_model(dagNode,
     pm.displayInfo("Searching elements using suffix: {}".format(suf))
 
     parent_dict = {}
-    local_ctl = _create_simple_rig_root(rigName)
+    local_ctl = _create_simple_rig_root(rigName, sets_config=sets_config)
     if local_ctl:
         descendents = reversed(dagNode.listRelatives(allDescendents=True,
                                                      type="transform"))
@@ -699,12 +705,10 @@ def _get_sets_grp(grpName="controllers_grp"):
 
     return controllersGrp
 
-# TODO: finish the adding t extra groups.
-
 
 def _extra_sets(sets_config):
     # sets_config = "animSets.basic.test,animSets.facial"
-    sets_grp = _get_sets_grp("Sets_grp")
+    sets_grp = _get_sets_grp("sets_grp")
     sets_list = sets_config.split(",")
     last_sets_list = []
     for s in sets_list:
