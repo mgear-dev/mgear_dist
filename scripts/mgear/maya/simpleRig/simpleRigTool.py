@@ -140,7 +140,11 @@ def _create_control(name,
 def _create_simple_rig_root(rigName=RIG_ROOT,
                             selection=None,
                             world_ctl=True,
-                            sets_config=None):
+                            sets_config=None,
+                            ctl_wcm=False,
+                            fix_radio=False,
+                            radio_val=100,
+                            gl_shape="square"):
     # create the simple rig root
     # have the attr: is_simple_rig and is_rig
     # should not create if there is a another simple rig root
@@ -162,6 +166,9 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
             return
 
     volCenter, radio, bb = _get_branch_bbox_data(selection)
+
+    if fix_radio:
+        radio = radio_val
 
     meshList = []
     ctlList = []
@@ -200,7 +207,10 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
     rig.addAttr("rigGroups", at='message', m=1)
     rig.addAttr("rigPoses", at='message', m=1)
 
-    t = transform.getTransformFromPos(volCenter)
+    if ctl_wcm:
+        t = datatypes.Matrix()
+    else:
+        t = transform.getTransformFromPos(volCenter)
 
     # configure selectable geo
     for e in selection:
@@ -229,9 +239,8 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
 
     # create world ctl
     if world_ctl:
-        m = datatypes.Matrix()
         world_ctl = _create_control("world",
-                                    m,
+                                    t,
                                     radio * 1.5,
                                     parent=rig,
                                     icon="circle",
@@ -249,7 +258,7 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                  t,
                                  radio * 1.1,
                                  parent=world_ctl,
-                                 icon="square",
+                                 icon=gl_shape,
                                  side="C",
                                  indx=0,
                                  color=17,
@@ -262,7 +271,7 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                 t,
                                 radio,
                                 parent=global_ctl,
-                                icon="square",
+                                icon=gl_shape,
                                 side="C",
                                 indx=0,
                                 color=17,
@@ -304,9 +313,19 @@ def _create_custom_pivot(name,
                               "PARENT is needed!")
             return
 
+    # handle the 3rd stat for yZero
+    # this state will trigger to put it in world center
+    wolrd_center = False
+    if yZero > 1:
+        yZero = True
+        wolrd_center = True
+
     volCenter, radio, bb = _get_branch_bbox_data(selection, yZero)
     if volCenter:
-        t = transform.getTransformFromPos(volCenter)
+        if wolrd_center:
+            t = datatypes.Matrix()
+        else:
+            t = transform.getTransformFromPos(volCenter)
 
         ctl = _create_control(name,
                               t,
@@ -417,13 +436,22 @@ def _collect_configuration_from_rig():
 def _build_rig_from_model(dagNode,
                           rigName=RIG_ROOT,
                           suffix="geoRoot",
-                          sets_config=None):
+                          sets_config=None,
+                          ctl_wcm=False,
+                          fix_radio=False,
+                          radio_val=100,
+                          gl_shape="square"):
     # using suffix keyword from a given model build a rig.
     suf = "_{}".format(string.removeInvalidCharacter(suffix))
     pm.displayInfo("Searching elements using suffix: {}".format(suf))
 
     parent_dict = {}
-    local_ctl = _create_simple_rig_root(rigName, sets_config=sets_config)
+    local_ctl = _create_simple_rig_root(rigName,
+                                        sets_config=sets_config,
+                                        ctl_wcm=ctl_wcm,
+                                        fix_radio=fix_radio,
+                                        radio_val=radio_val,
+                                        gl_shape=gl_shape)
     if local_ctl:
         descendents = reversed(dagNode.listRelatives(allDescendents=True,
                                                      type="transform"))
@@ -463,6 +491,11 @@ def import_configuration():
 
 
 # Convert to SHIFTER  ===========================================
+
+def _shifter_control_component():
+    # TODO: creates shifter control_01 component and sets the correct settings
+    return
+
 
 def convert_to_shifter_guide():
     # TODO: convert from configuration
@@ -603,7 +636,8 @@ def _consolidate_pivot_position(ctl):
         transform.matchWorldTransform(ctl, npo)
         pm.parent(ctl, npo)
         # reparent childrens
-        pm.parent(children, ctl)
+        if children:
+            pm.parent(children, ctl)
         # re-connect/update driven elements
         _update_driven(ctl)
         ctl.attr("edit_mode").set(False)
@@ -850,6 +884,7 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         # Menus
         self.srUIInst.deletePivot_action.triggered.connect(self.delete_pivot)
         self.srUIInst.deleteRig_action.triggered.connect(self.delete_rig)
+        self.srUIInst.autoBuild_action.triggered.connect(self.auto_rig)
 
         # Misc
         self.srUIInst.rootName_lineEdit.textChanged.connect(
@@ -857,7 +892,10 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.srUIInst.createCtl_lineEdit.textChanged.connect(
             self.ctlName_text_changed)
 
-    # Slots
+    # ==============================================
+    # Slots ========================================
+    # ==============================================
+
     def rootName_text_changed(self):
         name = _validate_name(self.srUIInst.rootName_lineEdit.text())
         self.srUIInst.rootName_lineEdit.setText(name)
@@ -869,7 +907,17 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
     def create_root(self):
         name = self.srUIInst.rootName_lineEdit.text()
         sets_config = self.srUIInst.extraSets_lineEdit.text()
-        _create_simple_rig_root(name, sets_config=sets_config)
+        ctl_wcm = self.srUIInst.worldCenter_checkBox.isChecked()
+        fix_radio = self.srUIInst.fixSize_checkBox.isChecked()
+        radio_val = self.srUIInst.fixSize_doubleSpinBox.value()
+        iconIdx = self.srUIInst.mainCtlShape_comboBox.currentIndex()
+        icon = ["square", "circle"][iconIdx]
+        _create_simple_rig_root(name,
+                                sets_config=sets_config,
+                                ctl_wcm=ctl_wcm,
+                                fix_radio=fix_radio,
+                                radio_val=radio_val,
+                                gl_shape=icon)
 
     def create_ctl(self):
         name = self.srUIInst.createCtl_lineEdit.text()
@@ -945,8 +993,19 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
             suffix = self.srUIInst.autoBuild_lineEdit.text()
             name = self.srUIInst.rootName_lineEdit.text()
             sets_config = self.srUIInst.extraSets_lineEdit.text()
-            print sets_config
-            _build_rig_from_model(oSel[0], name, suffix, sets_config)
+            ctl_wcm = self.srUIInst.worldCenter_checkBox.isChecked()
+            fix_radio = self.srUIInst.fixSize_checkBox.isChecked()
+            radio_val = self.srUIInst.fixSize_doubleSpinBox.value()
+            iconIdx = self.srUIInst.mainCtlShape_comboBox.currentIndex()
+            icon = ["square", "circle"][iconIdx]
+            _build_rig_from_model(oSel[0],
+                                  name,
+                                  suffix,
+                                  sets_config,
+                                  ctl_wcm=ctl_wcm,
+                                  fix_radio=fix_radio,
+                                  radio_val=radio_val,
+                                  gl_shape=icon)
         else:
             pm.displayWarning("Please select root of the model")
 

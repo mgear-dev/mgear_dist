@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>306</width>
+    <width>359</width>
     <height>526</height>
    </rect>
   </property>
@@ -323,11 +323,6 @@
        <zorder>createRoot_pushButton</zorder>
        <zorder>groupBox_5</zorder>
        <zorder>groupBox_2</zorder>
-       <zorder>verticalSpacer</zorder>
-       <zorder>groupBox_3</zorder>
-       <zorder>createRoot_pushButton</zorder>
-       <zorder>groupBox_5</zorder>
-       <zorder>groupBox_2</zorder>
       </widget>
       <widget class="QWidget" name="extraConfig_tab">
        <attribute name="title">
@@ -488,7 +483,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>306</width>
+     <width>359</width>
      <height>21</height>
     </rect>
    </property>
@@ -515,9 +510,16 @@
     <addaction name="separator"/>
     <addaction name="deleteRig_action"/>
    </widget>
+   <widget class="QMenu" name="menuAuto">
+    <property name="title">
+     <string>Auto</string>
+    </property>
+    <addaction name="autoBuild_action"/>
+   </widget>
    <addaction name="menuIO"/>
    <addaction name="menuConvert"/>
    <addaction name="menuDelete"/>
+   <addaction name="menuAuto"/>
   </widget>
   <action name="export_action">
    <property name="text">
@@ -547,6 +549,11 @@
   <action name="deletePivot_action">
    <property name="text">
     <string>Delete Pivot</string>
+   </property>
+  </action>
+  <action name="autoBuild_action">
+   <property name="text">
+    <string>Auto Build</string>
    </property>
   </action>
  </widget>
