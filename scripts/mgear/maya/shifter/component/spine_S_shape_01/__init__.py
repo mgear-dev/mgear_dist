@@ -36,8 +36,7 @@ class Component(component.Main):
                 j.drawStyle.set(2)
 
         # Ik Controlers ------------------------------------
-        # if self.settings["IKWorldOri"]:
-        if True:
+        if self.settings["IKWorldOri"]:
             t = datatypes.TransformationMatrix()
             t = transform.setMatrixPosition(t, self.guide.apos[0])
         else:
