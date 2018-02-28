@@ -542,7 +542,7 @@ def _build_rig_from_configuration():
 
 def export_configuration():
     # TODO: export configuration to json
-    config = _collect_configuration_from_rig()
+    _collect_configuration_from_rig()
 
 
 def import_configuration():
