@@ -1,5 +1,6 @@
 import datetime
 import getpass
+import json
 
 from mgear.vendor.Qt import QtCore, QtWidgets
 
@@ -429,7 +430,66 @@ def _get_branch_bbox_data(selection=None, yZero=True, *args):
 
 def _collect_configuration_from_rig():
     # TODO: collects the simple rig configuration in a dictionary
-    return
+    rig_conf_dict = {}
+    ctl_settings = {}
+    # get root and name
+    rig_root = _get_simple_rig_root()
+
+    # get controls list in hierarchycal order
+    descendents = reversed(rig_root.listRelatives(allDescendents=True,
+                                                  type="transform"))
+    ctl_list = [d for d in descendents if d.hasAttr("is_simple_rig_ctl")]
+    ctl_names_list = []
+    # get setting for each ctl
+    for c in ctl_list:
+
+        # settings
+        if not c.edit_mode.get() and _is_in_npo(c):
+            ctl_name = c.name()
+            ctl_names_list.append(ctl_name)
+
+            conf_icon = c.conf_icon.get()
+            conf_radio = c.conf_radio.get()
+            conf_color = c.conf_color.get()
+            ctl_side = ctl_name.split("_")[-2][0]
+            ctl_index = ctl_name.split("_")[-2][1:]
+            ctl_short_name = ctl_name.split("_")[0]
+            ctl_parent = c.getParent(2).name()
+            # ctl transform matrix
+            m = c.getMatrix(worldSpace=True)
+            ctl_transform = m.get()
+            # sets list
+            sets_list = [s.name() for s in c.listConnections(type="objectSet")]
+
+            # driven list
+            driven_list = [n.name() for n in _get_from_driven_attr(c)]
+
+        else:
+            pm.displayWarning("Configuration can not be collected for Ctl in "
+                              "edit pivot mode or not reset SRT "
+                              "Finish edit pivot for or reset "
+                              "SRT: {}".format(c))
+            return
+
+        conf_ctl_dict = {"conf_icon": conf_icon,
+                         "conf_radio": conf_radio,
+                         "conf_color": conf_color,
+                         "ctl_side": ctl_side,
+                         "ctl_index": ctl_index,
+                         "ctl_parent": ctl_parent,
+                         "ctl_transform": ctl_transform,
+                         "ctl_short_name": ctl_short_name,
+                         "driven_list": driven_list,
+                         "sets_list": sets_list}
+
+        ctl_settings[ctl_name] = conf_ctl_dict
+
+    rig_conf_dict["ctl_list"] = ctl_names_list
+    rig_conf_dict["ctl_settings"] = ctl_settings
+    data_string = json.dumps(rig_conf_dict, indent=4, sort_keys=True)
+
+    print data_string
+    return rig_conf_dict
 
 
 # @utils.one_undo
@@ -482,7 +542,7 @@ def _build_rig_from_configuration():
 
 def export_configuration():
     # TODO: export configuration to json
-    return
+    config = _collect_configuration_from_rig()
 
 
 def import_configuration():
@@ -885,6 +945,7 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.srUIInst.deletePivot_action.triggered.connect(self.delete_pivot)
         self.srUIInst.deleteRig_action.triggered.connect(self.delete_rig)
         self.srUIInst.autoBuild_action.triggered.connect(self.auto_rig)
+        self.srUIInst.export_action.triggered.connect(self.export_config)
 
         # Misc
         self.srUIInst.rootName_lineEdit.textChanged.connect(
@@ -1008,6 +1069,9 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
                                   gl_shape=icon)
         else:
             pm.displayWarning("Please select root of the model")
+
+    def export_config(self):
+        export_configuration()
 
 
 def open(*args):
