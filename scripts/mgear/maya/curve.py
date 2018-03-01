@@ -353,6 +353,10 @@ def collect_curve_data(objs=None):
     return curves_dict
 
 
+def create_curve_from_data(data):
+    return
+
+
 def update_curve_from_data(data):
     """Build the curves from a given curve data dict
 
@@ -456,6 +460,10 @@ def export_curve(filePath=None, objs=None):
     f.close()
 
 
+def update_curve_from_file(filePath=None, replaceShape=True):
+    return
+
+
 def import_curve(filePath=None, replaceShape=True):
     # import a curve data from json file
     # replaceShape == True. If the node exist will replace the shapes
@@ -473,4 +481,4 @@ def import_curve(filePath=None, replaceShape=True):
     if not isinstance(filePath, basestring):
         filePath = filePath[0]
     configDict = json.load(open(filePath))
-    build_curve_from_data(configDict, replaceShape)
+    update_curve_from_data(configDict, replaceShape)
