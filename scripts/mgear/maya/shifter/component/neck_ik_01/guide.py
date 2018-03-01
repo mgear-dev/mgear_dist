@@ -90,6 +90,7 @@ class Guide(guide.ComponentGuide):
         self.pDivision = self.addParam("division", "long", 5, 3)
         self.pTangentControls = self.addParam("tangentControls", "bool", False)
         self.pChickenStyleIk = self.addParam("chickenStyleIK", "bool", True)
+        self.pIKWorldOri = self.addParam("IKWorldOri", "bool", False)
 
         # FCurves
         self.pSt_profile = self.addFCurveParam(
@@ -176,6 +177,9 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         self.populateCheck(self.settingsTab.chickenStyleIK_checkBox,
                            "chickenStyleIK")
 
+        self.populateCheck(self.settingsTab.IKWorldOri_checkBox,
+                           "IKWorldOri")
+
         ikRefArrayItems = self.root.attr("ikrefarray").get().split(",")
         for item in ikRefArrayItems:
             self.settingsTab.ikRefArray_listWidget.addItem(item)
@@ -227,6 +231,11 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             partial(self.updateCheck,
                     self.settingsTab.chickenStyleIK_checkBox,
                     "chickenStyleIK"))
+
+        self.settingsTab.IKWorldOri_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.IKWorldOri_checkBox,
+                    "IKWorldOri"))
 
         self.settingsTab.squashStretchProfile_pushButton.clicked.connect(
             self.setProfile)

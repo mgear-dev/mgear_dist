@@ -1,36 +1,12 @@
-# MGEAR is under the terms of the MIT License
-
-# Copyright (c) 2016 Jeremie Passerin, Miquel Campos
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-# Author:     Jeremie Passerin      geerem@hotmail.com  www.jeremiepasserin.com
-# Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
-# Date:       2016 / 10 / 10
-
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
+
 class Ui_Form(object):
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(259, 227)
+        Form.resize(259, 265)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.groupBox = QtWidgets.QGroupBox(Form)
@@ -139,7 +115,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.division_spinBox.sizePolicy().hasHeightForWidth())
         self.division_spinBox.setSizePolicy(sizePolicy)
         self.division_spinBox.setMinimum(3)
-        self.division_spinBox.setProperty("value", 2)
+        self.division_spinBox.setProperty("value", 3)
         self.division_spinBox.setObjectName("division_spinBox")
         self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.division_spinBox)
         self.autoBend_checkBox = QtWidgets.QCheckBox(self.groupBox)
@@ -152,10 +128,17 @@ class Ui_Form(object):
         self.centralTangent_checkBox = QtWidgets.QCheckBox(self.groupBox)
         self.centralTangent_checkBox.setText("")
         self.centralTangent_checkBox.setObjectName("centralTangent_checkBox")
-        self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.centralTangent_checkBox)
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.centralTangent_checkBox)
         self.centralTangent_label = QtWidgets.QLabel(self.groupBox)
         self.centralTangent_label.setObjectName("centralTangent_label")
-        self.formLayout.setWidget(7, QtWidgets.QFormLayout.LabelRole, self.centralTangent_label)
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.centralTangent_label)
+        self.IKWorldOri_checkBox = QtWidgets.QCheckBox(self.groupBox)
+        self.IKWorldOri_checkBox.setText("")
+        self.IKWorldOri_checkBox.setObjectName("IKWorldOri_checkBox")
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.IKWorldOri_checkBox)
+        self.autoBend_label_2 = QtWidgets.QLabel(self.groupBox)
+        self.autoBend_label_2.setObjectName("autoBend_label_2")
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.LabelRole, self.autoBend_label_2)
         self.verticalLayout.addLayout(self.formLayout)
         self.squashStretchProfile_pushButton = QtWidgets.QPushButton(self.groupBox)
         self.squashStretchProfile_pushButton.setObjectName("squashStretchProfile_pushButton")
@@ -183,5 +166,6 @@ class Ui_Form(object):
         self.divisions_label.setText(gqt.fakeTranslate("Form", "Divisions", None, -1))
         self.autoBend_label.setText(gqt.fakeTranslate("Form", "Auto Bend Control", None, -1))
         self.centralTangent_label.setText(gqt.fakeTranslate("Form", "Central Tangent", None, -1))
+        self.IKWorldOri_checkBox.setToolTip(gqt.fakeTranslate("Form", "<html><head/><body><p>If checked the IK controls will be oriented to world space in XYZ</p></body></html>", None, -1))
+        self.autoBend_label_2.setText(gqt.fakeTranslate("Form", "IK CTL World Ori", None, -1))
         self.squashStretchProfile_pushButton.setText(gqt.fakeTranslate("Form", "Squash and Stretch Profile", None, -1))
-

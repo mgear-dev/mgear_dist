@@ -475,6 +475,52 @@ class Component(component.Main):
             transform.getTransform(self.legBones[3]))
         self.jnt_pos.append([self.end_ref, 'end'])
 
+        # match IK FK references
+        self.match_fk0_off = primitive.addTransform(
+            self.root,
+            self.getName("matchFk0_npo"),
+            transform.getTransform(self.fk_ctl[1]))
+
+        self.match_fk0 = primitive.addTransform(
+            self.match_fk0_off,
+            self.getName("fk0_mth"),
+            transform.getTransform(self.fk_ctl[0]))
+
+        self.match_fk1_off = primitive.addTransform(
+            self.root,
+            self.getName("matchFk1_npo"),
+            transform.getTransform(self.fk_ctl[2]))
+
+        self.match_fk1 = primitive.addTransform(
+            self.match_fk1_off,
+            self.getName("fk1_mth"),
+            transform.getTransform(self.fk_ctl[1]))
+
+        self.match_fk2_off = primitive.addTransform(
+            self.root,
+            self.getName("matchFk2_npo"),
+            transform.getTransform(self.fk_ctl[3]))
+
+        self.match_fk2 = primitive.addTransform(
+            self.match_fk2_off,
+            self.getName("fk2_mth"),
+            transform.getTransform(self.fk_ctl[2]))
+
+        self.match_fk3 = primitive.addTransform(
+            self.ik_ctl,
+            self.getName("fk3_mth"),
+            transform.getTransform(self.fk_ctl[3]))
+
+        self.match_ik = primitive.addTransform(
+            self.fk3_ctl,
+            self.getName("ik_mth"),
+            transform.getTransform(self.ik_ctl))
+
+        self.match_ikUpv = primitive.addTransform(
+            self.fk0_ctl,
+            self.getName("upv_mth"),
+            transform.getTransform(self.upv_ctl))
+
         # add visual reference
         self.line_ref = icon.connection_display_curve(
             self.getName("visalRef"), [self.upv_ctl, self.knee_ctl])
@@ -539,7 +585,9 @@ class Component(component.Main):
                                                         ref_names)
         if self.validProxyChannels:
             attribute.addProxyAttribute(
-                [self.blend_att, self.roundness_att],
+                [self.blend_att,
+                 self.roundnessAnkle_att,
+                 self.roundnessKnee_att],
                 [self.fk0_ctl,
                     self.fk1_ctl,
                     self.fk2_ctl,
@@ -1018,6 +1066,11 @@ class Component(component.Main):
 
         # setup leg o_node scale compensate
         pm.connectAttr(self.rig.global_ctl + ".scale", self.setup + ".scale")
+
+        # match IK/FK ref
+        pm.parentConstraint(self.legBones[0], self.match_fk0_off, mo=True)
+        pm.parentConstraint(self.legBones[1], self.match_fk1_off, mo=True)
+        pm.parentConstraint(self.legBones[2], self.match_fk2_off, mo=True)
 
         return
 

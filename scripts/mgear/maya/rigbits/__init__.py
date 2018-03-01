@@ -539,11 +539,11 @@ def addBlendedJoint(oSel=None,
         if isinstance(x, pm.nodetypes.Joint):
             parent = x.getParent()
             if name:
-                name = 'blend_' + name
+                bname = 'blend_' + name
             else:
-                name = 'blend_' + x.name()
+                bname = 'blend_' + x.name()
 
-            jnt = pm.createNode('joint', n=name, p=x)
+            jnt = pm.createNode('joint', n=bname, p=x)
             jnt_list.append(jnt)
             jnt.attr('radius').set(1.5)
             pm.parent(jnt, parent)

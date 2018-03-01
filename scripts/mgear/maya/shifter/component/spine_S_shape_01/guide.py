@@ -15,10 +15,11 @@ import settingsUI as sui
 AUTHOR = "Jeremie Passerin, Miquel Campos, Gotetz"
 URL = "www.jeremiepasserin.com, www.miquel-campos.com"
 EMAIL = "geerem@hotmail.com, hello@miquel-campos.com"
-VERSION = [1, 0, 0]
+VERSION = [1, 1, 0]
 TYPE = "spine_S_shape_01"
 NAME = "spine"
-DESCRIPTION = "S-shape spine component. The features are based on 'spine_ik_02' component"
+DESCRIPTION = "S-shape spine component. The features are based on " \
+              "'spine_ik_02' component"
 
 ##########################################################
 # CLASS
@@ -87,6 +88,7 @@ class Guide(guide.ComponentGuide):
         self.pDivision = self.addParam("division", "long", 5, 3)
         self.pAutoBend = self.addParam("autoBend", "bool", False)
         self.pCentralTangent = self.addParam("centralTangent", "bool", False)
+        self.pIKWorldOri = self.addParam("IKWorldOri", "bool", False)
 
         # FCurves
         self.pSt_profile = self.addFCurveParam(
@@ -171,7 +173,7 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
         self.settingsTab.division_spinBox.setValue(
             self.root.attr("division").get())
         self.populateCheck(self.settingsTab.autoBend_checkBox, "autoBend")
-
+        self.populateCheck(self.settingsTab.IKWorldOri_checkBox, "IKWorldOri")
         self.populateCheck(self.settingsTab.centralTangent_checkBox,
                            "centralTangent")
 
@@ -225,6 +227,10 @@ class componentSettings(MayaQWidgetDockableMixin, guide.componentMainSettings):
             partial(self.updateCheck,
                     self.settingsTab.autoBend_checkBox,
                     "autoBend"))
+        self.settingsTab.IKWorldOri_checkBox.stateChanged.connect(
+            partial(self.updateCheck,
+                    self.settingsTab.IKWorldOri_checkBox,
+                    "IKWorldOri"))
         self.settingsTab.centralTangent_checkBox.stateChanged.connect(
             partial(self.updateCheck,
                     self.settingsTab.centralTangent_checkBox,

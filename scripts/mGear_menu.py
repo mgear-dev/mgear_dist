@@ -7,7 +7,8 @@ import pymel.core as pm
 
 import mgear
 
-from mgear.maya import synoptic, skin, simpleRig, rigbits, attribute, shifter
+from mgear.maya import synoptic, skin, rigbits, attribute, shifter
+from mgear.maya.simpleRig import simpleRigTool, simpleRig_legacy
 from mgear.maya.animbits import softTweaks
 from mgear.maya.rigbits import (
     postSpring,
@@ -76,15 +77,20 @@ def createMenu():
 
     # Simple rig
     pm.menuItem(parent="mGear", subMenu=True, tearOff=True, label="Simple Rig")
+    pm.menuItem(label="Simple Rig Tool", command=simpleRigTool.open)
+    pm.menuItem(divider=True)
+    pm.menuItem(subMenu=True, tearOff=True, label="simpleRig Legacy")
     pm.menuItem(label="Simple Rig Generate",
-                command=partial(simpleRig.simpleRig, "rig", False))
+                command=partial(simpleRig_legacy.simpleRig, "rig", False))
     pm.menuItem(divider=True)
-    pm.menuItem(label="Create Root", command=simpleRig.createRoot)
+    pm.menuItem(label="Create Root", command=simpleRig_legacy.createRoot)
     pm.menuItem(divider=True)
-    pm.menuItem(label="Set User Pivot", command=simpleRig.setUserRigPivot)
-    pm.menuItem(label="Add To User Pivot", command=simpleRig.addToUserPivot)
+    pm.menuItem(label="Set User Pivot",
+                command=simpleRig_legacy.setUserRigPivot)
+    pm.menuItem(label="Add To User Pivot",
+                command=simpleRig_legacy.addToUserPivot)
     pm.menuItem(label="Select Objects In User Pivot",
-                command=simpleRig.selectObjectInUserRootPivot)
+                command=simpleRig_legacy.selectObjectInUserRootPivot)
     pm.setParent(mGearM, menu=True)
     pm.menuItem(divider=True)
 

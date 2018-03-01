@@ -1,18 +1,30 @@
 """Rigbits, SDK i/o
 
-exportSDKs(['drivenNodeA', 'drivenNodeB'], path/to/desired/output.json)
+exportSDKs(["drivenNodeA", "drivenNodeB"], "path/to/desired/output.json")
 importSDKs(path/to/desired/output.json)
 
 # MIRRORING -------
 # copy from source, say left, to target, right
-copySDKsToNode('jacketFlap_L1_fk0_sdk', 'neck_C0_0_jnt', 'jacketFlap_R1_fk0_sdk')
-# invert/mirror the attributes necessary for the other side, in this case it is the
-# following attributes
-mirrorSDKkeys('jacketFlap_R1_fk0_sdk', attributes=['rotateZ'], invertDriver=True, invertDriven=False)
-mirrorSDKkeys('jacketFlap_R1_fk0_sdk', attributes=['translateX', 'translateY'], invertDriver=True, invertDriven=True)
+copySDKsToNode("jacketFlap_L1_fk0_sdk",
+               "neck_C0_0_jnt",
+               "jacketFlap_R1_fk0_sdk")
+
+# invert/mirror the attributes necessary for the other side,
+# in this case it is the following attributes
+mirrorSDKkeys("jacketFlap_R1_fk0_sdk",
+              attributes=["rotateZ"],
+              invertDriver=True,
+              invertDriven=False)
+
+mirrorSDKkeys("jacketFlap_R1_fk0_sdk",
+              attributes=["translateX", "translateY"],
+              invertDriver=True,
+              invertDriven=True)
 
 # in this other instance, it was the same
-copySDKsToNode('jacketFlap_L0_fk0_sdk', 'neck_C0_0_jnt', 'jacketFlap_R0_fk0_sdk')
+copySDKsToNode("jacketFlap_L0_fk0_sdk",
+               "neck_C0_0_jnt",
+               "jacketFlap_R0_fk0_sdk")
 
 Attributes:
     SDK_ANIMCURVES_TYPE (list): sdk anim curves to support
@@ -40,7 +52,7 @@ def _importData(filePath):
         dict: contents of json file, expected dict
     """
     try:
-        with open(filePath, 'r') as f:
+        with open(filePath, "r") as f:
             data = json.load(f)
             return data
     except Exception as e:
@@ -55,7 +67,7 @@ def _exportData(data, filePath):
         filePath (string): path to output json file
     """
     try:
-        with open(filePath, 'w') as f:
+        with open(filePath, "w") as f:
             json.dump(data, f, sort_keys=False, indent=4)
     except Exception as e:
         print e
@@ -109,6 +121,7 @@ def getConnectedSDKs(node, curvesOfType=[]):
                                             plugs=True,
                                             connections=True,
                                             sourceFirst=True) or []
+
         retrievedSDKNodes.extend(animCurveNodes)
 
     return retrievedSDKNodes
@@ -143,19 +156,21 @@ def getSDKInfo(animNode):
     sdkInfo_dict["postInfinity"] = animNode.getAttr("postInfinity")
     sdkInfo_dict["weightedTangents"] = animNode.getAttr("weightedTangents")
 
-    sourceDriverAttr = pm.listConnections("{0}.input".format(animNode.nodeName()),
+    animNodeInputPlug = "{0}.input".format(animNode.nodeName())
+    sourceDriverAttr = pm.listConnections(animNodeInputPlug,
                                           source=True,
                                           plugs=True,
                                           scn=True)[0]
-    driverNode, driverAttr = sourceDriverAttr.split('.')
+    driverNode, driverAttr = sourceDriverAttr.split(".")
     sdkInfo_dict["driverNode"] = driverNode
     sdkInfo_dict["driverAttr"] = driverAttr
 
-    targetDrivenAttr = pm.listConnections("{0}.output".format(animNode.nodeName()),
+    animNodeOutputPlug = "{0}.output".format(animNode.nodeName())
+    targetDrivenAttr = pm.listConnections(animNodeOutputPlug,
                                           destination=True,
                                           plugs=True,
                                           scn=True)[0]
-    drivenNode, drivenAttr = targetDrivenAttr.split('.')
+    drivenNode, drivenAttr = targetDrivenAttr.split(".")
     sdkInfo_dict["drivenNode"] = drivenNode
     sdkInfo_dict["drivenAttr"] = drivenAttr
 
@@ -272,7 +287,7 @@ def invertKeyValues(newKeyNode, invertDriver=True, invertDriven=True):
     """
     sdkInfo_dict = getSDKInfo(newKeyNode)
     stripKeys(newKeyNode)
-    animKeys = sdkInfo_dict['keys']
+    animKeys = sdkInfo_dict["keys"]
     for index in range(0, len(animKeys)):
         frameValue = animKeys[index]
         if invertDriver and invertDriven:
@@ -302,9 +317,9 @@ def mirrorSDKkeys(node, attributes=[], invertDriver=True, invertDriven=True):
     Args:
         node (pynode): node being driven to have its sdk values inverted
         attributes (list, optional): attrs to be inverted
-        invertDriver (bool, optional): should the driver, 'time' values
+        invertDriver (bool, optional): should the driver, "time" values
         be inverted
-        invertDriven (bool, optional): should the driven, 'value' values
+        invertDriven (bool, optional): should the driven, "value" values
         be inverted
     """
     sourceSDKInfo = getConnectedSDKs(node)
@@ -335,9 +350,11 @@ def createSDKFromDict(sdkInfo_dict):
                    sdkInfo_dict["driverAttr"]),
                    "{0}.input".format(sdkNode), f=True)
 
-    pm.connectAttr(sdkNode.output, "{0}.{1}".format(sdkInfo_dict["drivenNode"],
-                                                    sdkInfo_dict["drivenAttr"]),
-                   f=True)
+    driverAttrPlug = "{0}.{1}".format(sdkInfo_dict["drivenNode"],
+                                      sdkInfo_dict["drivenAttr"])
+
+    pm.connectAttr(sdkNode.output, driverAttrPlug, f=True)
+
     animKeys = sdkInfo_dict["keys"]
     for index in range(0, len(animKeys)):
         frameValue = animKeys[index]

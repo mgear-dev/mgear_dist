@@ -418,7 +418,7 @@ class Component(component.Main):
         self.maxstretch_att = self.addAnimParam("maxstretch",
                                                 "Max Stretch",
                                                 "double",
-                                                self.settings["blend"],
+                                                self.settings["maxstretch"],
                                                 1,
                                                 99)
         self.slide_att = self.addAnimParam(

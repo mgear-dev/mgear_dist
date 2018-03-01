@@ -36,12 +36,16 @@ class Component(component.Main):
                 j.drawStyle.set(2)
 
         # Ik Controlers ------------------------------------
-        t = transform.getTransformLookingAt(
-            self.guide.apos[0],
-            self.guide.apos[-1],
-            self.guide.blades["blade"].z * -1,
-            "yx",
-            self.negate)
+        if self.settings["IKWorldOri"]:
+            t = datatypes.TransformationMatrix()
+            t = transform.setMatrixPosition(t, self.guide.apos[0])
+        else:
+            t = transform.getTransformLookingAt(
+                self.guide.apos[0],
+                self.guide.apos[-1],
+                self.guide.blades["blade"].z * -1,
+                "yx",
+                self.negate)
 
         self.ik0_npo = primitive.addTransform(
             self.root, self.getName("ik0_npo"), t)
@@ -308,30 +312,10 @@ class Component(component.Main):
                 t = transform.getTransform(parentctl)
                 m.inverse()
 
-                t *= m
-
-                # m = transform.setMatrixPosition(m, parentctl.getTranslation())
-                # m.setTranslation(parentctl.getTranslation)
-                # m = transform.setMatrixScale(m)
-
-                # m = transform.getSymmetricalTransform(transform.getTransform(parentctl), axis='xy')
-
-                # fk_npo = pm.PyNode(pm.createNode("transform", n=self.getName("fk%s_npo" % (i))))
-                # fk_npo.setMatrix(m, worldSpace=True)
-                #
-                # parentctl.addChild(fk_npo)
-
                 fk_npo = primitive.addTransform(
                     parentctl,
                     self.getName("fk%s_npo" % (i)),
-                    t
-                )
-
-                # fk_npo = primitive.addTransform(
-                #     parentctl,
-                #     self.getName("fk%s_npo" % (i)),
-                #     transform.getTransform(parentctl)
-                # )
+                    t)
 
                 fk_ctl = self.addCtl(
                     fk_npo,
@@ -342,22 +326,19 @@ class Component(component.Main):
                     w=self.size,
                     h=self.size * .05,
                     d=self.size,
-                    tp=self.preiviousCtlTag
-                )
+                    tp=self.preiviousCtlTag)
 
                 attribute.setKeyableAttributes(self.fk_ctl)
                 attribute.setRotOrder(fk_ctl, "ZXY")
                 self.fk_ctl.append(fk_ctl)
                 self.preiviousCtlTag = fk_ctl
 
-            # setAttr(fk_npo+".inheritsTransform", False)
             self.fk_npo.append(fk_npo)
             parentctl = fk_ctl
             scl_ref = primitive.addTransform(
                 parentctl,
                 self.getName("%s_scl_ref" % i),
-                transform.getTransform(parentctl)
-            )
+                transform.getTransform(parentctl))
 
             self.scl_transforms.append(scl_ref)
 
@@ -588,8 +569,8 @@ class Component(component.Main):
             # compensate scale reference
             div_node = node.createDivNode([1, 1, 1],
                                           [rootWorld_node + ".outputScaleX",
-                                          rootWorld_node + ".outputScaleY",
-                                          rootWorld_node + ".outputScaleZ"])
+                                           rootWorld_node + ".outputScaleY",
+                                           rootWorld_node + ".outputScaleZ"])
 
             # Squash n Stretch
             op = applyop.gear_squashstretch2_op(self.scl_transforms[i],
