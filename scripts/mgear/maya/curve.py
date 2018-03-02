@@ -28,6 +28,8 @@ def addCnsCurve(parent, name, centers, degree=1):
     Returns:
         dagNode: The newly created curve.
     """
+    # rebuild list to avoid input list modification
+    centers = centers[:]
     if degree == 3:
         if len(centers) == 2:
             centers.insert(0, centers[0])
