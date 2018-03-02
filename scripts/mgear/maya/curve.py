@@ -273,7 +273,15 @@ def findLenghtFromParam(crv, param):
 # ========================================
 
 def get_color(node):
-    return
+
+    shp = node.getShape()
+    if shp:
+        if shp.overrideRGBColors.get():
+            color = shp.overrideColorRGB.get()
+        else:
+            color = shp.overrideColor.get()
+
+    return color
 
 
 def set_color(node, color):
@@ -310,6 +318,7 @@ def collect_curve_data(objs=None):
     """Generate a dictionary descriving the curve data
 
     Suport multiple objects
+    TODO: store color information
 
     Args:
         objs (dagNode, optional): Curve object to store
@@ -328,14 +337,16 @@ def collect_curve_data(objs=None):
 
     for x in objs:
         curves_dict["curves_names"].append(x.name())
-        # if x.getParent():
-        #     crv_parent = x.getParent().name()
-        # else:
-        #     crv_parent = None
-        # m = x.getMatrix(worldSpace=True)
-        # crv_transform = m.get()
+        if x.getParent():
+            crv_parent = x.getParent().name()
+        else:
+            crv_parent = None
+        m = x.getMatrix(worldSpace=True)
+        crv_transform = m.get()
 
-        curveDict = {"shapes_names": []}
+        curveDict = {"shapes_names": [],
+                     "crv_parent": crv_parent,
+                     "crv_transform": crv_transform}
         shapesDict = {}
         for shape in x.getShapes():
             curveDict["shapes_names"].append(shape.name())
@@ -356,6 +367,7 @@ def collect_curve_data(objs=None):
 
 
 def create_curve_from_data(data):
+    # Create the curves instead fo updating the existing ones.
     return
 
 
@@ -370,7 +382,6 @@ def update_curve_from_data(data):
         rebuildHierarchy (bool, optional): Description
     """
 
-    # TODO: store color information
     for crv in data["curves_names"]:
         crv_dict = data[crv]
 
