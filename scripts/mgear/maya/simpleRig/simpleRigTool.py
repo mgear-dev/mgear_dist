@@ -9,7 +9,7 @@ from pymel.core import datatypes
 
 import mgear
 import mgear.maya.icon as ico
-from mgear.maya import transform, node, attribute, applyop, utils, pyqt
+from mgear.maya import transform, node, attribute, applyop, utils, pyqt, curve
 from mgear import string
 from . import simpleRigUI as srUI
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
@@ -451,6 +451,7 @@ def _collect_configuration_from_rig():
             conf_icon = c.conf_icon.get()
             conf_radio = c.conf_radio.get()
             conf_color = c.conf_color.get()
+            ctl_color = curve.get_color(c)
             ctl_side = ctl_name.split("_")[-2][0]
             ctl_index = ctl_name.split("_")[-2][1:]
             ctl_short_name = ctl_name.split("_")[0]
@@ -470,11 +471,14 @@ def _collect_configuration_from_rig():
                               "Finish edit pivot for or reset "
                               "SRT: {}".format(c))
             return
-
+        shps, shps_n = curve.collect_curve_shapes(c)
         conf_ctl_dict = {"conf_icon": conf_icon,
                          "conf_radio": conf_radio,
                          "conf_color": conf_color,
+                         "ctl_color": ctl_color,
                          "ctl_side": ctl_side,
+                         "ctl_shapes": shps,
+                         "ctl_shapes_names": shps_n,
                          "ctl_index": ctl_index,
                          "ctl_parent": ctl_parent,
                          "ctl_transform": ctl_transform,
