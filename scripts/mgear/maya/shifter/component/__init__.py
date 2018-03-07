@@ -367,9 +367,6 @@ class Main(object):
 
         return vector.getPlaneBiNormal(pos[0], pos[1], pos[2])
 
-    def add_controller_tag(self, ctl, tagParent):
-        node.add_controller_tag(ctl, tagParent)
-
     def addCtl(self,
                parent,
                name,
@@ -450,7 +447,7 @@ class Main(object):
             except TypeError:
                 pass
 
-            self.add_controller_tag(ctl, tp)
+            self.rig.add_controller_tag(ctl, tp)
 
         return ctl
 

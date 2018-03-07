@@ -13,7 +13,7 @@ import mgear
 import mgear.maya.utils
 from . import guide, component
 
-from mgear.maya import primitive, attribute, skin, dag, icon
+from mgear.maya import primitive, attribute, skin, dag, icon, node
 
 
 # check if we have loaded the necessary plugins
@@ -200,28 +200,6 @@ class Rig(object):
             None, self.options["rig_name"])
         attribute.lockAttribute(self.model)
 
-        # ------------------------- -------------------------
-        # Global Ctl
-        if self.options["worldCtl"]:
-            self.global_ctl = self.addCtl(self.model,
-                                          "world_ctl",
-                                          datatypes.Matrix(),
-                                          self.options["C_color_fk"],
-                                          "circle", w=10)
-        else:
-            self.global_ctl = self.addCtl(self.model,
-                                          "global_C0_ctl",
-                                          datatypes.Matrix(),
-                                          self.options["C_color_fk"],
-                                          "crossarrow",
-                                          w=10)
-        attribute.setRotOrder(self.global_ctl, "ZXY")
-
-        # --------------------------------------------------
-        # Setup in world Space
-        self.setupWS = primitive.addTransformFromPos(self.model, "setup")
-        attribute.lockAttribute(self.setupWS)
-
         # --------------------------------------------------
         # INFOS
         self.isRig_att = attribute.addAttribute(
@@ -265,6 +243,24 @@ class Rig(object):
 
         self.rigGroups = self.model.addAttr("rigGroups", at='message', m=1)
         self.rigPoses = self.model.addAttr("rigPoses", at='message', m=1)
+        self.rigCtlTags = self.model.addAttr("rigCtlTags", at='message', m=1)
+
+        # ------------------------- -------------------------
+        # Global Ctl
+        if self.options["worldCtl"]:
+            self.global_ctl = self.addCtl(self.model,
+                                          "world_ctl",
+                                          datatypes.Matrix(),
+                                          self.options["C_color_fk"],
+                                          "circle", w=10)
+        else:
+            self.global_ctl = self.addCtl(self.model,
+                                          "global_C0_ctl",
+                                          datatypes.Matrix(),
+                                          self.options["C_color_fk"],
+                                          "crossarrow",
+                                          w=10)
+        attribute.setRotOrder(self.global_ctl, "ZXY")
 
         # Connect global visibility
         pm.connectAttr(self.ctlVis_att, self.global_ctl.attr("visibility"))
@@ -272,6 +268,10 @@ class Rig(object):
                        self.global_ctl.attr("hideOnPlayback"))
         attribute.lockAttribute(self.global_ctl, ['v'])
 
+        # --------------------------------------------------
+        # Setup in world Space
+        self.setupWS = primitive.addTransformFromPos(self.model, "setup")
+        attribute.lockAttribute(self.setupWS)
         # --------------------------------------------------
         # Basic set of null
         if self.options["joint_rig"]:
@@ -364,9 +364,9 @@ class Rig(object):
         # pprint(controls_grp, stream=None, indent=1, width=100)
         ctl_master_grp = pm.PyNode(self.model.name() + "_controllers_grp")
         pm.select(ctl_master_grp, replace=True)
-        node = pm.dagPose(save=True, selection=True)
-        pm.connectAttr(node.message, self.model.rigPoses[0])
-        print node
+        dag_node = pm.dagPose(save=True, selection=True)
+        pm.connectAttr(dag_node.message, self.model.rigPoses[0])
+        print dag_node
 
         # Bind skin re-apply
         if self.options["importSkin"]:
@@ -418,6 +418,7 @@ class Rig(object):
         # set controller tag
         if versions.current() >= 201650:
             pm.controller(ctl)
+            self.add_controller_tag(ctl, None)
 
         return ctl
 
@@ -462,6 +463,12 @@ class Rig(object):
             if pg not in self.subGroups.keys():
                 self.subGroups[pg] = []
             self.subGroups[pg].extend(subGroups)
+
+    def add_controller_tag(self, ctl, tagParent):
+        ctt = node.add_controller_tag(ctl, tagParent)
+        ni = attribute.get_next_available_index(self.model.rigCtlTags)
+        pm.connectAttr(ctt.message,
+                       self.model.attr("rigCtlTags[{}]".format(str(ni))))
 
     def getLocalName(self, guideName):
         """This function return the local name, cutting the Maya fullname

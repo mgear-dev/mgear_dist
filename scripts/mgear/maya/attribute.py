@@ -937,6 +937,37 @@ def connectSet(source, target, testInstance):
     else:
         pm.setAttr(target, source)
 
+
+def get_next_available_index(attr):
+    """get the next available index from a multi attr
+    This function is a workaround because the connect attr flag next available
+    is not working.
+
+    The connectAttr to the children attribute is giving error
+        i.e: pm.connectAttr(ctt.attr("parent"),
+                             tpTagNode.attr("children"), na=True)
+        if using the next available option flag
+        I was expecting to use ctt.setParent(tagParent) but doest't work as
+        expected.
+        After reading the documentation this method looks prety
+        useless.
+        Looks like is boolean and works based on selection :(
+
+    Args:
+        attr (attr): Attr multi
+
+    Returns:
+        int: index
+    """
+
+    ne = attr.getNumElements()
+    if ne == attr.numConnectedElements():
+        return ne
+    else:
+        for e in range(ne):
+            if not attr.attr(attr.elements()[e]).listConnections():
+                return e
+
 ##########################################################
 # Utility Channels
 ##########################################################

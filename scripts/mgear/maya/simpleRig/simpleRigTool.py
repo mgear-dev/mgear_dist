@@ -65,13 +65,7 @@ def _get_from_driven_attr(dagNode):
 
 def _get_driven_attr_next_available_index(d_attr):
     # get the next available index for the drivenElements attr
-    ne = d_attr.getNumElements()
-    if ne == d_attr.numConnectedElements():
-        return ne
-    else:
-        for e in range(ne):
-            if not d_attr.attr(d_attr.elements()[e]).listConnections():
-                return e
+    return attribute.get_next_available_index(d_attr)
 
 
 # creators ===========================================
