@@ -1051,10 +1051,11 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         # Temporaly turn off cycle check to avoid misleading cycle message
         # on Maya 2016.  With Maya 2016.5 and 2017 the cycle warning doesn't
         # show up
-        if versions.current() < 201650:
+        # if versions.current() < 201650:
+        if True:
             pm.cycleCheck(e=False)
-            pm.displayWarning("Maya version older than: 2016.5: "
-                              "CycleCheck temporal turn OFF")
+            # pm.displayWarning("Maya version older than: 2016.5: "
+            #                   "CycleCheck temporal turn OFF")
 
         channels = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
         worldMatrixList = self.getWorldMatrices(startFrame,
@@ -1085,9 +1086,10 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
 
             pm.setKeyframe(key_dst_nodes, at=channels)
 
-        if versions.current() < 201650:
+        # if versions.current() < 201650:
+        if True:
             pm.cycleCheck(e=True)
-            pm.displayWarning("CycleCheck turned back ON")
+            # pm.displayWarning("CycleCheck turned back ON")
 
 # ================================================
 # Transfer space
