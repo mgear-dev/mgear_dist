@@ -259,18 +259,22 @@ class Component(component.Main):
 
         # foot IK
 
+        # "z-x",
+        t_align = transform.getTransformLookingAt(self.guide.apos[3],
+                                                  self.guide.apos[4],
+                                                  self.normal,
+                                                  "zx",
+                                                  False)
+
         if self.settings["ikOri"]:
-            t = transform.getTransformLookingAt(self.guide.pos["foot"],
-                                                self.guide.pos["eff"],
-                                                self.x_axis,
-                                                "zx",
-                                                False)
+            t = transform.getTransformFromPos(self.guide.pos["foot"])
+            # t = transform.getTransformLookingAt(self.guide.pos["foot"],
+            #                                     self.guide.pos["eff"],
+            #                                     self.x_axis,
+            #                                     "zx",
+            #                                     False)
         else:
-            t = transform.getTransformLookingAt(self.guide.apos[3],
-                                                self.guide.apos[4],
-                                                self.normal,
-                                                "z-x",
-                                                False)
+            t = t_align
 
         self.ik_cns = primitive.addTransform(
             self.root_ctl, self.getName("ik_cns"), t)
@@ -302,15 +306,15 @@ class Component(component.Main):
 
         # 2 bones ik layer
         self.ik2b_ikCtl_ref = primitive.addTransform(
-            self.ik_ctl, self.getName("ik2B_A_ref"), t)
+            self.ik_ctl, self.getName("ik2B_A_ref"), t_align)
         self.ik2b_bone_ref = primitive.addTransform(
-            self.chain3bones[3], self.getName("ik2B_B_ref"), t)
+            self.chain3bones[3], self.getName("ik2B_B_ref"), t_align)
         self.ik2b_blend = primitive.addTransform(
-            self.ik_ctl, self.getName("ik2B_blend"), t)
+            self.ik_ctl, self.getName("ik2B_blend"), t_align)
 
         self.roll_ctl = self.addCtl(self.ik2b_blend,
                                     "roll_ctl",
-                                    t,
+                                    t_align,
                                     self.color_ik,
                                     "crossarrow",
                                     w=self.length2 * .5 * self.n_factor,
