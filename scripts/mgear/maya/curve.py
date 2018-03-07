@@ -1,5 +1,7 @@
 """NurbsCurve creation functions"""
 
+# TODO: Finish documentation
+
 #############################################
 # GLOBAL
 #############################################
@@ -273,7 +275,14 @@ def findLenghtFromParam(crv, param):
 # ========================================
 
 def get_color(node):
+    """Get the color from shape node
 
+    Args:
+        node (TYPE): shape
+
+    Returns:
+        TYPE: Description
+    """
     shp = node.getShape()
     if shp:
         if shp.overrideRGBColors.get():
