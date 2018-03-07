@@ -1,15 +1,20 @@
-from functools import partial
 import re
 import traceback
+from math import pow, sqrt
+from functools import partial
 
-from pymel import versions
+
 import pymel.core as pm
+from pymel import versions
 
 import mgear
 
 from mgear.maya import pyqt, dag, transform, utils
 from mgear.vendor.Qt import QtCore, QtWidgets
 
+# ==============================================================================
+# constants
+# ==============================================================================
 
 SYNOPTIC_WIDGET_NAME = "synoptic_view"
 CTRL_GRP_SUFFIX = "_controllers_grp"
@@ -18,6 +23,17 @@ PLOT_GRP_SUFFIX = "_PLOT_grp"
 
 EXPR_LEFT_SIDE = re.compile("L(\d+)")
 EXPR_RIGHT_SIDE = re.compile("R(\d+)")
+
+
+# spine FK/IK matching, naming -------------------------------------------------
+TAN_TOKEN = "_tan_ctl"
+TAN0_TOKEN = "_tan0_ctl"
+TAN1_TOKEN = "_tan1_ctl"
+END_IK_TOKEN = "_ik0_ctl"
+START_IK_TOKEN = "_ik1_ctl"
+POS_IK_TOKEN = "_spinePosition_ctl"
+
+LOCATOR_SUFFIX = "_loc"
 
 
 ##################################################
@@ -65,6 +81,96 @@ def swapSideLabel(name):
 
     else:
         return name
+
+
+def getDistance(objA, objB):
+    """Get the distance between two nodes
+
+    Args:
+        objA (string): name of node
+        objB (string): name of node
+
+    Returns:
+        float: distance
+    """
+    gObjA = pm.xform(objA, q=True, t=True, ws=True)
+    gObjB = pm.xform(objB, q=True, t=True, ws=True)
+    distance = sqrt(pow(gObjA[0] - gObjB[0], 2) + pow(gObjA[1] - gObjB[1], 2) +
+                    pow(gObjA[2] - gObjB[2], 2))
+    return distance
+
+
+def getClosestNode(node, nodesToQuery):
+    """return the closest node, based on distance, from the list provided
+
+    Args:
+        node (string): name of node
+        nodesToQuery (list): of nodes to query
+
+    Returns:
+        string: name of the closest node
+    """
+    distance = None
+    closestNode = None
+    for index, nodeTQ in enumerate(nodesToQuery):
+        tmpDist = getDistance(node, nodeTQ)
+        if index is 0:
+            distance = tmpDist
+            closestNode = nodeTQ
+        if distance > tmpDist:
+            distance = tmpDist
+            closestNode = nodeTQ
+    return closestNode
+
+
+def resetAttr(node, attr, value=None):
+    """convenience function to reset nodes attrs
+
+    Args:
+        node (string): name of the node
+        attr (string): translate, rotate, any string attr
+        value (list, optional): of a value you want reset to
+    """
+    if value is None:
+        value = [0, 0, 0]
+        if attr == "scale":
+            value = [1, 1, 1]
+    try:
+        pm.setAttr('{0}.{1}'.format(node, attr), value[0], value[1], value[2])
+    except Exception:
+        pass
+
+
+def resetNodes(nodes):
+    """convenience function to reset a list of nodes
+
+    Args:
+        nodes (list): of nodes to be reset
+    """
+    for node in nodes:
+        resetAttr(node, "translate")
+        resetAttr(node, "rotate")
+        resetAttr(node, "scale")
+
+
+def createLocatorsInPosition(nodes):
+    """create locators in the position of list of nodes provided
+
+    Args:
+        nodes (list): of nodes to create locators for
+
+    Returns:
+        list: of a dict, and list of the order the locs were created
+    """
+    nodeToLocator_dict = {}
+    locatorOrder = []
+    for fk in nodes:
+        locator = pm.spaceLocator(n="{0}{1}".format(fk, LOCATOR_SUFFIX))
+        nodeToLocator_dict[fk] = locator
+        locatorOrder.append(locator)
+        pCon = pm.parentConstraint(fk, locator, mo=False)
+        pm.delete(pCon)
+    return nodeToLocator_dict, locatorOrder
 
 
 ##################################################
@@ -606,6 +712,98 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
 
         roll_att = uiNode.attr(ikfk_attr.replace("blend", "roll"))
         roll_att.set(0.0)
+
+
+# ==============================================================================
+# spine ik/fk matching/switching
+# ==============================================================================
+
+
+def spine_IKToFK(fkControls, ikControls):
+    """position the IK controls to match, as best they can, the fk controls.
+    Supports component: spine_S_shape_01, spine_ik_02
+
+    Args:
+        fkControls (list): list of fk controls, IN THE ORDER OF HIERARCHY,
+        ["spine_C0_fk0_ctl", ..., ..., "spine_C0_fk6_ctl"]
+        ikControls (list): all ik controls
+    """
+    fkToLocator_dict, locatorOrder = createLocatorsInPosition(fkControls)
+
+    resetNodes(ikControls)
+
+    nodesToDelete = []
+    for fk in fkControls:
+        fk_loc = fkToLocator_dict[fk]
+        parentCon = pm.parentConstraint(fk_loc, fk, mo=False)
+        nodesToDelete.append(parentCon)
+        nodesToDelete.append(fk_loc)
+
+    pm.delete(nodesToDelete)
+
+
+def spine_FKToIK(fkControls, ikControls):
+    """Match the IK controls to the FK. Known limitations: Does not compensate
+    for stretching. Does not support zig-zag, or complex fk to ik transfers.
+    Supports component: spine_S_shape_01, spine_ik_02
+
+    Args:
+        fkControls (list): of of nodes, IN THE ORDER OF HIERARCHY
+        ikControls (list): of of nodes
+    """
+    nodesToDelete = []
+    # place locators at the position of fk controls
+    fkToLocator_dict, locatorOrder = createLocatorsInPosition(fkControls)
+
+    # reset both fk, ik controls
+    resetNodes(ikControls)
+    resetNodes(fkControls)
+
+    # get the relative locator for the first and last ik control
+    firstLoc = locatorOrder[0]
+    lastLoc = locatorOrder[-1]
+    # get the ik controls sorted from the list provided
+    tan1Ctl = [ik for ik in ikControls if TAN1_TOKEN in ik][0]
+    tan0Ctl = [ik for ik in ikControls if TAN0_TOKEN in ik][0]
+
+    # get the ik controls sorted from the list provided
+    ik1Ctl = [ik for ik in ikControls if START_IK_TOKEN in ik][0]
+    ik0Ctl = [ik for ik in ikControls if END_IK_TOKEN in ik][0]
+    # optional controls
+    ikPosCtl = [ik for ik in ikControls if POS_IK_TOKEN in ik]
+    tanCtl = [ik for ik in ikControls if TAN_TOKEN in ik]
+    # while the nodes are reset, get the closest counterparts
+    if tanCtl:
+        closestFk2Tan = getClosestNode(tanCtl[0], fkControls)
+    closestFk2Tan1 = getClosestNode(tan1Ctl, fkControls)
+    closestFkLoc1 = "{0}{1}".format(closestFk2Tan1, LOCATOR_SUFFIX)
+
+    closestFk2Tan0 = getClosestNode(tan0Ctl, fkControls)
+    closestFkLoc0 = "{0}{1}".format(closestFk2Tan0, LOCATOR_SUFFIX)
+
+    # constrain the top and bottom of the ik controls
+    firstLoc_pCon = pm.parentConstraint(firstLoc, ik0Ctl, mo=False)
+    nodesToDelete.append(firstLoc_pCon)
+
+    lastLoc_pCon = pm.parentConstraint(lastLoc, ik1Ctl, mo=False)
+    nodesToDelete.append(lastLoc_pCon)
+    # contrain the tan controls
+    tanLoc0_pCon = pm.pointConstraint(closestFkLoc0, tan0Ctl, mo=False)
+    nodesToDelete.append(tanLoc0_pCon)
+    tanLoc1_pCon = pm.pointConstraint(closestFkLoc1, tan1Ctl, mo=False)
+    nodesToDelete.append(tanLoc1_pCon)
+    # optional controls if they exist
+    if ikPosCtl:
+        firstPosLoc_pCon = pm.pointConstraint(lastLoc, ikPosCtl[0], mo=False)
+        nodesToDelete.append(firstPosLoc_pCon)
+
+    if tanCtl:
+        closestFkLoc = "{0}{1}".format(closestFk2Tan, LOCATOR_SUFFIX)
+        tanLoc_pCon = pm.pointConstraint(closestFkLoc, tanCtl[0], mo=False)
+        nodesToDelete.append(tanLoc_pCon)
+    # delete all nodes created during this process
+    pm.delete(nodesToDelete, locatorOrder)
+
 
 ##################################################
 # POSE
