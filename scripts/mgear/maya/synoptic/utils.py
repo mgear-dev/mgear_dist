@@ -9,8 +9,8 @@ from pymel import versions
 
 import mgear
 
-from mgear.maya import pyqt, dag, transform, utils
 from mgear.vendor.Qt import QtCore, QtWidgets
+from mgear.maya import pyqt, dag, transform, utils, attribute, vector
 
 # ==============================================================================
 # constants
@@ -83,23 +83,6 @@ def swapSideLabel(name):
         return name
 
 
-def getDistance(objA, objB):
-    """Get the distance between two nodes
-
-    Args:
-        objA (string): name of node
-        objB (string): name of node
-
-    Returns:
-        float: distance
-    """
-    gObjA = pm.xform(objA, q=True, t=True, ws=True)
-    gObjB = pm.xform(objB, q=True, t=True, ws=True)
-    distance = sqrt(pow(gObjA[0] - gObjB[0], 2) + pow(gObjA[1] - gObjB[1], 2) +
-                    pow(gObjA[2] - gObjB[2], 2))
-    return distance
-
-
 def getClosestNode(node, nodesToQuery):
     """return the closest node, based on distance, from the list provided
 
@@ -112,45 +95,17 @@ def getClosestNode(node, nodesToQuery):
     """
     distance = None
     closestNode = None
+    node = pm.PyNode(node)
     for index, nodeTQ in enumerate(nodesToQuery):
-        tmpDist = getDistance(node, nodeTQ)
+        nodeTQ = pm.PyNode(nodeTQ)
+        tmpDist = vector.getDistance2(node, nodeTQ)
         if index is 0:
             distance = tmpDist
             closestNode = nodeTQ
         if distance > tmpDist:
             distance = tmpDist
             closestNode = nodeTQ
-    return closestNode
-
-
-def resetAttr(node, attr, value=None):
-    """convenience function to reset nodes attrs
-
-    Args:
-        node (string): name of the node
-        attr (string): translate, rotate, any string attr
-        value (list, optional): of a value you want reset to
-    """
-    if value is None:
-        value = [0, 0, 0]
-        if attr == "scale":
-            value = [1, 1, 1]
-    try:
-        pm.setAttr('{0}.{1}'.format(node, attr), value[0], value[1], value[2])
-    except Exception:
-        pass
-
-
-def resetNodes(nodes):
-    """convenience function to reset a list of nodes
-
-    Args:
-        nodes (list): of nodes to be reset
-    """
-    for node in nodes:
-        resetAttr(node, "translate")
-        resetAttr(node, "rotate")
-        resetAttr(node, "scale")
+    return closestNode.name()
 
 
 def createLocatorsInPosition(nodes):
@@ -730,7 +685,7 @@ def spine_IKToFK(fkControls, ikControls):
     """
     fkToLocator_dict, locatorOrder = createLocatorsInPosition(fkControls)
 
-    resetNodes(ikControls)
+    attribute.reset_SRT(ikControls)
 
     nodesToDelete = []
     for fk in fkControls:
@@ -756,8 +711,8 @@ def spine_FKToIK(fkControls, ikControls):
     fkToLocator_dict, locatorOrder = createLocatorsInPosition(fkControls)
 
     # reset both fk, ik controls
-    resetNodes(ikControls)
-    resetNodes(fkControls)
+    attribute.reset_SRT(ikControls)
+    attribute.reset_SRT(fkControls)
 
     # get the relative locator for the first and last ik control
     firstLoc = locatorOrder[0]
