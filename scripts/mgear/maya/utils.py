@@ -149,11 +149,9 @@ def viewport_off(func):
     def wrap(*args, **kwargs):
         # type: (*str, **str) -> None
 
-        # TODO: Temporal deactivation of the main logic due refresh issues in
-        # Maya 2018. More research is needed.
         # Turn $gMainPane Off:
-        # gMainPane = mel.eval('global string $gMainPane; $temp = $gMainPane;')
-        # cmds.paneLayout(gMainPane, edit=True, manage=False)
+        gMainPane = mel.eval('global string $gMainPane; $temp = $gMainPane;')
+        cmds.paneLayout(gMainPane, edit=True, manage=False)
 
         try:
             return func(*args, **kwargs)
@@ -161,8 +159,8 @@ def viewport_off(func):
         except Exception as e:
             raise e
 
-        # finally:
-        #     cmds.paneLayout(gMainPane, edit=True, manage=True)
+        finally:
+            cmds.paneLayout(gMainPane, edit=True, manage=True)
 
     return wrap
 
