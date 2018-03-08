@@ -447,9 +447,12 @@ class Main(object):
             except TypeError:
                 pass
 
-            self.rig.add_controller_tag(ctl, tp)
+            self.add_controller_tag(ctl, tp)
 
         return ctl
+
+    def add_controller_tag(self, ctl, tagParent):
+        self.rig.add_controller_tag(ctl, tagParent)
 
     def addToGroup(self, objects, names=["hidden"], parentGrp=None):
         """Add the object in a collection for later group creation.
