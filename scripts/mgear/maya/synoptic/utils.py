@@ -1,6 +1,5 @@
 import re
 import traceback
-from math import pow, sqrt
 from functools import partial
 
 
@@ -24,16 +23,13 @@ PLOT_GRP_SUFFIX = "_PLOT_grp"
 EXPR_LEFT_SIDE = re.compile("L(\d+)")
 EXPR_RIGHT_SIDE = re.compile("R(\d+)")
 
-
-# spine FK/IK matching, naming -------------------------------------------------
+# spine FK/IK matching, naming ------------------------------------------------
 TAN_TOKEN = "_tan_ctl"
 TAN0_TOKEN = "_tan0_ctl"
 TAN1_TOKEN = "_tan1_ctl"
-END_IK_TOKEN = "_ik0_ctl"
-START_IK_TOKEN = "_ik1_ctl"
+START_IK_TOKEN = "_ik0_ctl"
+END_IK_TOKEN = "_ik1_ctl"
 POS_IK_TOKEN = "_spinePosition_ctl"
-
-LOCATOR_SUFFIX = "_loc"
 
 
 ##################################################
@@ -108,24 +104,22 @@ def getClosestNode(node, nodesToQuery):
     return closestNode.name()
 
 
-def createLocatorsInPosition(nodes):
-    """create locators in the position of list of nodes provided
+def recordNodesMatrices(nodes, desiredTime):
+    """get the matrices of the nodes provided and return a dict of
+    node:matrix
 
     Args:
-        nodes (list): of nodes to create locators for
+        nodes (list): of nodes
 
     Returns:
-        list: of a dict, and list of the order the locs were created
+        dict: node:node matrix
     """
-    nodeToLocator_dict = {}
-    locatorOrder = []
+    nodeToMat_dict = {}
     for fk in nodes:
-        locator = pm.spaceLocator(n="{0}{1}".format(fk, LOCATOR_SUFFIX))
-        nodeToLocator_dict[fk] = locator
-        locatorOrder.append(locator)
-        pCon = pm.parentConstraint(fk, locator, mo=False)
-        pm.delete(pCon)
-    return nodeToLocator_dict, locatorOrder
+        fk = pm.PyNode(fk)
+        nodeToMat_dict[fk.name()] = fk.getAttr("worldMatrix", time=desiredTime)
+
+    return nodeToMat_dict
 
 
 ##################################################
@@ -674,7 +668,7 @@ def ikFkMatch(model, ikfk_attr, uiHost_name, fks, ik, upv, ikRot=None):
 # ==============================================================================
 
 
-def spine_IKToFK(fkControls, ikControls):
+def spine_IKToFK(fkControls, ikControls, matchMatrix_dict=None):
     """position the IK controls to match, as best they can, the fk controls.
     Supports component: spine_S_shape_01, spine_ik_02
 
@@ -683,21 +677,19 @@ def spine_IKToFK(fkControls, ikControls):
         ["spine_C0_fk0_ctl", ..., ..., "spine_C0_fk6_ctl"]
         ikControls (list): all ik controls
     """
-    fkToLocator_dict, locatorOrder = createLocatorsInPosition(fkControls)
+    if matchMatrix_dict is None:
+        currentTime = pm.currentTime(q=True)
+        matchMatrix_dict = recordNodesMatrices(fkControls,
+                                               desiredTime=currentTime)
 
     attribute.reset_SRT(ikControls)
 
-    nodesToDelete = []
     for fk in fkControls:
-        fk_loc = fkToLocator_dict[fk]
-        parentCon = pm.parentConstraint(fk_loc, fk, mo=False)
-        nodesToDelete.append(parentCon)
-        nodesToDelete.append(fk_loc)
-
-    pm.delete(nodesToDelete)
+        fk = pm.PyNode(fk)
+        fk.setMatrix(matchMatrix_dict[fk.name()], worldSpace=True)
 
 
-def spine_FKToIK(fkControls, ikControls):
+def spine_FKToIK(fkControls, ikControls, matchMatrix_dict=None):
     """Match the IK controls to the FK. Known limitations: Does not compensate
     for stretching. Does not support zig-zag, or complex fk to ik transfers.
     Supports component: spine_S_shape_01, spine_ik_02
@@ -706,58 +698,51 @@ def spine_FKToIK(fkControls, ikControls):
         fkControls (list): of of nodes, IN THE ORDER OF HIERARCHY
         ikControls (list): of of nodes
     """
-    nodesToDelete = []
-    # place locators at the position of fk controls
-    fkToLocator_dict, locatorOrder = createLocatorsInPosition(fkControls)
+    # record the position of controls prior to reseting
+    if matchMatrix_dict is None:
+        currentTime = pm.currentTime(q=True)
+        matchMatrix_dict = recordNodesMatrices(fkControls,
+                                               desiredTime=currentTime)
 
     # reset both fk, ik controls
     attribute.reset_SRT(ikControls)
     attribute.reset_SRT(fkControls)
 
-    # get the relative locator for the first and last ik control
-    firstLoc = locatorOrder[0]
-    lastLoc = locatorOrder[-1]
+    rootFk = fkControls[0]
+    endFk = fkControls[-1]
     # get the ik controls sorted from the list provided
-    tan1Ctl = [ik for ik in ikControls if TAN1_TOKEN in ik][0]
-    tan0Ctl = [ik for ik in ikControls if TAN0_TOKEN in ik][0]
+    tan1Ctl = [pm.PyNode(ik) for ik in ikControls if TAN1_TOKEN in ik][0]
+    tan0Ctl = [pm.PyNode(ik) for ik in ikControls if TAN0_TOKEN in ik][0]
 
     # get the ik controls sorted from the list provided
-    ik1Ctl = [ik for ik in ikControls if START_IK_TOKEN in ik][0]
-    ik0Ctl = [ik for ik in ikControls if END_IK_TOKEN in ik][0]
+    ik1Ctl = [pm.PyNode(ik) for ik in ikControls if END_IK_TOKEN in ik][0]
+    ik0Ctl = [pm.PyNode(ik) for ik in ikControls if START_IK_TOKEN in ik][0]
+
     # optional controls
-    ikPosCtl = [ik for ik in ikControls if POS_IK_TOKEN in ik]
-    tanCtl = [ik for ik in ikControls if TAN_TOKEN in ik]
+    ikPosCtl = [pm.PyNode(ik) for ik in ikControls if POS_IK_TOKEN in ik]
+    tanCtl = [pm.PyNode(ik) for ik in ikControls if TAN_TOKEN in ik]
+
     # while the nodes are reset, get the closest counterparts
     if tanCtl:
         closestFk2Tan = getClosestNode(tanCtl[0], fkControls)
+
     closestFk2Tan1 = getClosestNode(tan1Ctl, fkControls)
-    closestFkLoc1 = "{0}{1}".format(closestFk2Tan1, LOCATOR_SUFFIX)
-
     closestFk2Tan0 = getClosestNode(tan0Ctl, fkControls)
-    closestFkLoc0 = "{0}{1}".format(closestFk2Tan0, LOCATOR_SUFFIX)
 
-    # constrain the top and bottom of the ik controls
-    firstLoc_pCon = pm.parentConstraint(firstLoc, ik0Ctl, mo=False)
-    nodesToDelete.append(firstLoc_pCon)
-
-    lastLoc_pCon = pm.parentConstraint(lastLoc, ik1Ctl, mo=False)
-    nodesToDelete.append(lastLoc_pCon)
-    # contrain the tan controls
-    tanLoc0_pCon = pm.pointConstraint(closestFkLoc0, tan0Ctl, mo=False)
-    nodesToDelete.append(tanLoc0_pCon)
-    tanLoc1_pCon = pm.pointConstraint(closestFkLoc1, tan1Ctl, mo=False)
-    nodesToDelete.append(tanLoc1_pCon)
     # optional controls if they exist
     if ikPosCtl:
-        firstPosLoc_pCon = pm.pointConstraint(lastLoc, ikPosCtl[0], mo=False)
-        nodesToDelete.append(firstPosLoc_pCon)
+        ikPosCtl[0].setMatrix(matchMatrix_dict[endFk], worldSpace=True)
+
+    # constrain the top and bottom of the ik controls
+    ik0Ctl.setMatrix(matchMatrix_dict[rootFk], worldSpace=True)
+    ik1Ctl.setMatrix(matchMatrix_dict[endFk], worldSpace=True)
 
     if tanCtl:
-        closestFkLoc = "{0}{1}".format(closestFk2Tan, LOCATOR_SUFFIX)
-        tanLoc_pCon = pm.pointConstraint(closestFkLoc, tanCtl[0], mo=False)
-        nodesToDelete.append(tanLoc_pCon)
-    # delete all nodes created during this process
-    pm.delete(nodesToDelete, locatorOrder)
+        tanCtl[0].setMatrix(matchMatrix_dict[closestFk2Tan], worldSpace=True)
+
+    # contrain the tan controls
+    tan0Ctl.setMatrix(matchMatrix_dict[closestFk2Tan0], worldSpace=True)
+    tan1Ctl.setMatrix(matchMatrix_dict[closestFk2Tan1], worldSpace=True)
 
 
 ##################################################
@@ -1204,7 +1189,7 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
         # Temporaly turn off cycle check to avoid misleading cycle message
         # on Maya 2016.  With Maya 2016.5 and 2017 the cycle warning doesn't
         # show up
-        if versions.current() < 201650:
+        if versions.current() < 20180200:
             pm.cycleCheck(e=False)
             pm.displayWarning("Maya version older than: 2016.5: "
                               "CycleCheck temporal turn OFF")
@@ -1238,7 +1223,7 @@ class AbstractAnimationTransfer(QtWidgets.QDialog):
 
             pm.setKeyframe(key_dst_nodes, at=channels)
 
-        if versions.current() < 201650:
+        if versions.current() < 20180200:
             pm.cycleCheck(e=True)
             pm.displayWarning("CycleCheck turned back ON")
 
@@ -1644,3 +1629,165 @@ def bakeSprings(model):
             pm.currentTime(int(ct))
             pm.setKeyframe(springNodes, insertBlend=True, attribute='rotate')
             ct += 1
+
+
+class SpineIkFkTransfer(AbstractAnimationTransfer):
+
+    def __init__(self):
+        super(SpineIkFkTransfer, self).__init__()
+        self.fkControls = None
+        self.ikControls = None
+
+    def doItByUI(self):
+        """Gather UI settings to execute transfer
+        """
+        startFrame = self.startFrame_value.value()
+        endFrame = self.endFrame_value.value()
+        onlyKeyframes = self.onlyKeyframes_check.isChecked()
+
+        # based on user input, decide where to flatten animation
+        bakeToIk = self.comboBoxSpaces.currentIndex()
+
+        self.bakeAnimation(self.fkControls,
+                           self.ikControls,
+                           startFrame,
+                           endFrame,
+                           bakeToIk=bakeToIk,
+                           onlyKeyframes=onlyKeyframes)
+
+        # Refresh the viewport by toggling time, refresh/dgdirty do not work
+        pm.currentTime(startFrame)
+        pm.currentTime(endFrame)
+        # set the new space value in the synoptic combobox
+        if self.comboObj is not None:
+            self.comboObj.setCurrentIndex(self.comboBoxSpaces.currentIndex())
+
+        for c in pyqt.maya_main_window().children():
+            if isinstance(c, AbstractAnimationTransfer):
+                c.deleteLater()
+
+    def setCtrls(self, fkControls, ikControls):
+        """make provided controls accessible to the class, with namespaces
+
+        Args:
+            fkControls (list): of fk  controls
+            ikControls (list): of ik controls
+        """
+        ns = self.nameSpace
+        if not ns.endswith(':') and ns != "":
+            ns = "{0}:".format(ns)
+        self.fkControls = ["{0}{1}".format(ns, x) for x in fkControls]
+        self.ikControls = ["{0}{1}".format(ns, x) for x in ikControls]
+
+    @staticmethod
+    def showUI(topNode, uihost, fkControls, ikControls, *args):
+        """Called from the synaptic qpushbutton, with the spine control names
+
+        Args:
+            topNode (string): top node of the rig
+            uihost (TYPE): Description
+            fkControls (list): of fkControls
+            ikControls (list): of ikControls
+            *args: additional signal args, n/a
+        """
+        try:
+            for c in pyqt.maya_main_window().children():
+                if isinstance(c, IkFkTransfer):
+                    c.deleteLater()
+
+        except RuntimeError:
+            pass
+
+        # Create minimal UI object
+        ui = SpineIkFkTransfer()
+        ui.setModel(topNode)
+        ui.setUiHost(uihost)
+        ui.setCtrls(fkControls, ikControls)
+        ui.setComboObj(None)
+        ui.setComboBoxItemsFormList(["IK >> FK", "FK >> IK"])
+
+        # Delete the UI if errors occur to avoid causing winEvent
+        # and event errors (in Maya 2014)
+        try:
+            ui.createUI(pyqt.maya_main_window())
+            ui.setWindowTitle('Spine IKFK')
+            ui.show()
+
+        except Exception as e:
+            ui.deleteLater()
+            traceback.print_exc()
+            mgear.log(e, mgear.sev_error)
+
+    @utils.one_undo
+    @utils.viewport_off
+    def bakeAnimation(self,
+                      fkControls,
+                      ikControls,
+                      startFrame,
+                      endFrame,
+                      bakeToIk=True,
+                      onlyKeyframes=True):
+        """bake animation to desired destination. More adding animtion than
+        ik/fk transfer
+
+        Args:
+            fkControls (list): of fk controls
+            ikControls (list): of ik controls
+            startFrame (float): start frame
+            endFrame (float): end frame
+            bakeToIk (bool, optional): True, bake animation to ik, fk is false
+            onlyKeyframes (bool, optional): transfer animation on other
+            keyframes, if false, bake every frame
+        """
+        # Temporaly turn off cycle check to avoid misleading cycle message
+        # on Maya 2016.  With Maya 2016.5 and 2017 the cycle warning doesn't
+        # show up
+        if bakeToIk:
+            key_src_nodes = fkControls
+            transferFunc = spine_FKToIK
+            key_dst_nodes = ikControls
+        else:
+            key_src_nodes = ikControls
+            transferFunc = spine_IKToFK
+            key_dst_nodes = fkControls
+
+        # add all nodes, to get all of the keyframes
+        allAnimNodes = fkControls + ikControls
+        # remove duplicates
+        keyframeList = sorted(set(pm.keyframe(allAnimNodes,
+                                              at=["t", "r", "s"],
+                                              q=True)))
+
+        # when getAttr over time, it warns of a cycle
+        if versions.current() <= 20180200:
+            pm.cycleCheck(e=False)
+            print "Maya version older than: 2018.02"
+
+        # create a dict of every frame, and every node involved on that frame
+        matchMatrix_dict = {}
+        for i, x in enumerate(range(startFrame, endFrame + 1)):
+            if onlyKeyframes and x not in keyframeList:
+                continue
+            matchMatrix_dict[x] = recordNodesMatrices(fkControls, x)
+
+        channels = ["tx", "ty", "tz", "rx", "ry", "rz", "sx", "sy", "sz"]
+
+        # delete animation in the channel and destination ctrls
+        pm.cutKey(fkControls, at=channels, time=(startFrame, endFrame))
+        pm.cutKey(ikControls, at=channels, time=(startFrame, endFrame))
+
+        for frame, matchDict in matchMatrix_dict.iteritems():
+            pm.currentTime(frame)
+            transferFunc(fkControls,
+                         ikControls,
+                         matchMatrix_dict=matchDict)
+
+            pm.setKeyframe(key_dst_nodes, at=channels)
+        # If there are keys on the source node outside of the provided range
+        # this wont have an effect
+        attribute.reset_SRT(key_src_nodes)
+
+        # re enable cycle check
+        if versions.current() <= 20180200:
+            pm.cycleCheck(e=True)
+            print "CycleCheck turned back ON"
