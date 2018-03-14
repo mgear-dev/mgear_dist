@@ -122,6 +122,30 @@ class ikfkMatchButton(QtWidgets.QPushButton):
             return
 
 
+class SpineIkfkMatchButton(QtWidgets.QPushButton):
+
+    def __init__(self, *args, **kwargs):
+        # type: (*str, **str) -> None
+        super(SpineIkfkMatchButton, self).__init__(*args, **kwargs)
+        self.numFkControllers = None
+
+    def mousePressEvent(self, event):
+        # type: (QtCore.QEvent) -> None
+
+        uihost_name = str(self.property("Object"))
+        mouse_button = event.button()
+        model = utils.getModel(self)
+        fkControls = str(self.property("fkControls"))
+        ikControls = str(self.property("ikControls"))
+
+        if mouse_button == QtCore.Qt.LeftButton:
+            utils.SpineIkFkTransfer.showUI(model,
+                                           uihost_name,
+                                           fkControls,
+                                           ikControls)
+            return
+
+
 class selGroup(QtWidgets.QPushButton):
 
     def mousePressEvent(self, event):
