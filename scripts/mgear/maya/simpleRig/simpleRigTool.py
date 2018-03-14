@@ -139,7 +139,8 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                             ctl_wcm=False,
                             fix_radio=False,
                             radio_val=100,
-                            gl_shape="square"):
+                            gl_shape="square",
+                            w_shape="circle"):
     # create the simple rig root
     # have the attr: is_simple_rig and is_rig
     # should not create if there is a another simple rig root
@@ -238,7 +239,7 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                     t,
                                     radio * 1.5,
                                     parent=rig,
-                                    icon="circle",
+                                    icon=w_shape,
                                     side=None,
                                     indx=0,
                                     color=13,
@@ -498,7 +499,9 @@ def _build_rig_from_model(dagNode,
                           ctl_wcm=False,
                           fix_radio=False,
                           radio_val=100,
-                          gl_shape="square"):
+                          gl_shape="square",
+                          world_ctl=True,
+                          w_shape="circle"):
     # using suffix keyword from a given model build a rig.
     suf = "_{}".format(string.removeInvalidCharacter(suffix))
     pm.displayInfo("Searching elements using suffix: {}".format(suf))
@@ -509,7 +512,9 @@ def _build_rig_from_model(dagNode,
                                         ctl_wcm=ctl_wcm,
                                         fix_radio=fix_radio,
                                         radio_val=radio_val,
-                                        gl_shape=gl_shape)
+                                        gl_shape=gl_shape,
+                                        world_ctl=world_ctl,
+                                        w_shape=w_shape)
     if local_ctl:
         descendents = reversed(dagNode.listRelatives(allDescendents=True,
                                                      type="transform"))
@@ -971,12 +976,17 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         radio_val = self.srUIInst.fixSize_doubleSpinBox.value()
         iconIdx = self.srUIInst.mainCtlShape_comboBox.currentIndex()
         icon = ["square", "circle"][iconIdx]
+        w_ctl = self.srUIInst.worldCtl_checkBox.isChecked()
+        iconIdx = self.srUIInst.worldCtlShape_comboBox.currentIndex()
+        w_icon = ["circle", "sphere"][iconIdx]
         _create_simple_rig_root(name,
                                 sets_config=sets_config,
                                 ctl_wcm=ctl_wcm,
                                 fix_radio=fix_radio,
                                 radio_val=radio_val,
-                                gl_shape=icon)
+                                gl_shape=icon,
+                                world_ctl=w_ctl,
+                                w_shape=w_icon)
 
     def create_ctl(self):
         name = self.srUIInst.createCtl_lineEdit.text()
@@ -1057,6 +1067,9 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
             radio_val = self.srUIInst.fixSize_doubleSpinBox.value()
             iconIdx = self.srUIInst.mainCtlShape_comboBox.currentIndex()
             icon = ["square", "circle"][iconIdx]
+            w_ctl = self.srUIInst.worldCtl_checkBox.isChecked()
+            iconIdx = self.srUIInst.worldCtlShape_comboBox.currentIndex()
+            w_icon = ["circle", "sphere"][iconIdx]
             _build_rig_from_model(oSel[0],
                                   name,
                                   suffix,
@@ -1064,7 +1077,9 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
                                   ctl_wcm=ctl_wcm,
                                   fix_radio=fix_radio,
                                   radio_val=radio_val,
-                                  gl_shape=icon)
+                                  gl_shape=icon,
+                                  world_ctl=w_ctl,
+                                  w_shape=w_icon)
         else:
             pm.displayWarning("Please select root of the model")
 

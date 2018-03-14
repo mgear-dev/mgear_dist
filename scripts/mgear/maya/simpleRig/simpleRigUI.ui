@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="rig_tab">
        <attribute name="title">
@@ -358,6 +358,13 @@
            <string>Main Controls  (World, Local, Global)</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_8">
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="fixSize_checkBox">
+             <property name="text">
+              <string>Use fix size</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QCheckBox" name="worldCenter_checkBox">
              <property name="text">
@@ -370,37 +377,6 @@
               <bool>false</bool>
              </property>
             </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="fixSize_checkBox">
-             <property name="text">
-              <string>Use fix size</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <widget class="QLabel" name="label_4">
-               <property name="text">
-                <string>Fix Size</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QDoubleSpinBox" name="fixSize_doubleSpinBox">
-               <property name="maximum">
-                <double>9999.989999999999782</double>
-               </property>
-               <property name="singleStep">
-                <double>10.000000000000000</double>
-               </property>
-               <property name="value">
-                <double>100.000000000000000</double>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </item>
            <item row="3" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -432,6 +408,78 @@
               </widget>
              </item>
             </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Fix Size</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="fixSize_doubleSpinBox">
+               <property name="maximum">
+                <double>9999.989999999999782</double>
+               </property>
+               <property name="singleStep">
+                <double>10.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>100.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="6" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>World Ctl Shape</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="worldCtlShape_comboBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Circle</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Sphere</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="5" column="0">
+            <widget class="QCheckBox" name="worldCtl_checkBox">
+             <property name="text">
+              <string>Create World Ctl</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
