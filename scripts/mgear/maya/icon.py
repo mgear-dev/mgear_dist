@@ -1225,13 +1225,4 @@ def setcolor(node, color):
     # on Maya version.
     # version = mgear.maya.getMayaver()
 
-    if isinstance(color, int):
-
-        for shp in node.listRelatives(shapes=True):
-            shp.setAttr("overrideEnabled", True)
-            shp.setAttr("overrideColor", color)
-    else:
-        for shp in node.listRelatives(shapes=True):
-            shp.overrideEnabled.set(1)
-            shp.overrideRGBColors.set(1)
-            shp.overrideColorRGB.set(color[0], color[1], color[2])
+    curve.set_color(node, color)

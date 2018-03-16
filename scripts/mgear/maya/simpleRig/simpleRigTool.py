@@ -9,7 +9,7 @@ from pymel.core import datatypes
 
 import mgear
 import mgear.maya.icon as ico
-from mgear.maya import transform, node, attribute, applyop, utils, pyqt
+from mgear.maya import transform, node, attribute, applyop, utils, pyqt, curve
 from mgear import string
 from . import simpleRigUI as srUI
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
@@ -65,13 +65,7 @@ def _get_from_driven_attr(dagNode):
 
 def _get_driven_attr_next_available_index(d_attr):
     # get the next available index for the drivenElements attr
-    ne = d_attr.getNumElements()
-    if ne == d_attr.numConnectedElements():
-        return ne
-    else:
-        for e in range(ne):
-            if not d_attr.attr(d_attr.elements()[e]).listConnections():
-                return e
+    return attribute.get_next_available_index(d_attr)
 
 
 # creators ===========================================
@@ -145,7 +139,8 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                             ctl_wcm=False,
                             fix_radio=False,
                             radio_val=100,
-                            gl_shape="square"):
+                            gl_shape="square",
+                            w_shape="circle"):
     # create the simple rig root
     # have the attr: is_simple_rig and is_rig
     # should not create if there is a another simple rig root
@@ -244,7 +239,7 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                     t,
                                     radio * 1.5,
                                     parent=rig,
-                                    icon="circle",
+                                    icon=w_shape,
                                     side=None,
                                     indx=0,
                                     color=13,
@@ -451,6 +446,7 @@ def _collect_configuration_from_rig():
             conf_icon = c.conf_icon.get()
             conf_radio = c.conf_radio.get()
             conf_color = c.conf_color.get()
+            ctl_color = curve.get_color(c)
             ctl_side = ctl_name.split("_")[-2][0]
             ctl_index = ctl_name.split("_")[-2][1:]
             ctl_short_name = ctl_name.split("_")[0]
@@ -470,11 +466,14 @@ def _collect_configuration_from_rig():
                               "Finish edit pivot for or reset "
                               "SRT: {}".format(c))
             return
-
+        shps, shps_n = curve.collect_curve_shapes(c)
         conf_ctl_dict = {"conf_icon": conf_icon,
                          "conf_radio": conf_radio,
                          "conf_color": conf_color,
+                         "ctl_color": ctl_color,
                          "ctl_side": ctl_side,
+                         "ctl_shapes": shps,
+                         "ctl_shapes_names": shps_n,
                          "ctl_index": ctl_index,
                          "ctl_parent": ctl_parent,
                          "ctl_transform": ctl_transform,
@@ -500,7 +499,9 @@ def _build_rig_from_model(dagNode,
                           ctl_wcm=False,
                           fix_radio=False,
                           radio_val=100,
-                          gl_shape="square"):
+                          gl_shape="square",
+                          world_ctl=True,
+                          w_shape="circle"):
     # using suffix keyword from a given model build a rig.
     suf = "_{}".format(string.removeInvalidCharacter(suffix))
     pm.displayInfo("Searching elements using suffix: {}".format(suf))
@@ -511,7 +512,9 @@ def _build_rig_from_model(dagNode,
                                         ctl_wcm=ctl_wcm,
                                         fix_radio=fix_radio,
                                         radio_val=radio_val,
-                                        gl_shape=gl_shape)
+                                        gl_shape=gl_shape,
+                                        world_ctl=world_ctl,
+                                        w_shape=w_shape)
     if local_ctl:
         descendents = reversed(dagNode.listRelatives(allDescendents=True,
                                                      type="transform"))
@@ -973,12 +976,17 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         radio_val = self.srUIInst.fixSize_doubleSpinBox.value()
         iconIdx = self.srUIInst.mainCtlShape_comboBox.currentIndex()
         icon = ["square", "circle"][iconIdx]
+        w_ctl = self.srUIInst.worldCtl_checkBox.isChecked()
+        iconIdx = self.srUIInst.worldCtlShape_comboBox.currentIndex()
+        w_icon = ["circle", "sphere"][iconIdx]
         _create_simple_rig_root(name,
                                 sets_config=sets_config,
                                 ctl_wcm=ctl_wcm,
                                 fix_radio=fix_radio,
                                 radio_val=radio_val,
-                                gl_shape=icon)
+                                gl_shape=icon,
+                                world_ctl=w_ctl,
+                                w_shape=w_icon)
 
     def create_ctl(self):
         name = self.srUIInst.createCtl_lineEdit.text()
@@ -1059,6 +1067,9 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
             radio_val = self.srUIInst.fixSize_doubleSpinBox.value()
             iconIdx = self.srUIInst.mainCtlShape_comboBox.currentIndex()
             icon = ["square", "circle"][iconIdx]
+            w_ctl = self.srUIInst.worldCtl_checkBox.isChecked()
+            iconIdx = self.srUIInst.worldCtlShape_comboBox.currentIndex()
+            w_icon = ["circle", "sphere"][iconIdx]
             _build_rig_from_model(oSel[0],
                                   name,
                                   suffix,
@@ -1066,7 +1077,9 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
                                   ctl_wcm=ctl_wcm,
                                   fix_radio=fix_radio,
                                   radio_val=radio_val,
-                                  gl_shape=icon)
+                                  gl_shape=icon,
+                                  world_ctl=w_ctl,
+                                  w_shape=w_icon)
         else:
             pm.displayWarning("Please select root of the model")
 

@@ -1,10 +1,13 @@
 """NurbsCurve creation functions"""
 
+# TODO: Finish documentation
+
 #############################################
 # GLOBAL
 #############################################
 import pymel.core as pm
 from pymel.core import datatypes
+import json
 
 import maya.OpenMaya as om
 
@@ -27,6 +30,8 @@ def addCnsCurve(parent, name, centers, degree=1):
     Returns:
         dagNode: The newly created curve.
     """
+    # rebuild list to avoid input list modification
+    centers = centers[:]
     if degree == 3:
         if len(centers) == 2:
             centers.insert(0, centers[0])
@@ -265,3 +270,299 @@ def findLenghtFromParam(crv, param):
     uLength = node.attr("arcLength").get()
     pm.delete(node.getParent())
     return uLength
+
+
+# ========================================
+
+def get_color(node):
+    """Get the color from shape node
+
+    Args:
+        node (TYPE): shape
+
+    Returns:
+        TYPE: Description
+    """
+    shp = node.getShape()
+    if shp:
+        if shp.overrideRGBColors.get():
+            color = shp.overrideColorRGB.get()
+        else:
+            color = shp.overrideColor.get()
+
+    return color
+
+
+def set_color(node, color):
+    """Set the color in the Icons.
+
+    Arguments:
+        node(dagNode): The object
+        color (int or list of float): The color in index base or RGB.
+
+
+    """
+    # on Maya version.
+    # version = mgear.maya.getMayaver()
+
+    if isinstance(color, int):
+
+        for shp in node.listRelatives(shapes=True):
+            shp.setAttr("overrideEnabled", True)
+            shp.setAttr("overrideColor", color)
+    else:
+        for shp in node.listRelatives(shapes=True):
+            shp.overrideEnabled.set(1)
+            shp.overrideRGBColors.set(1)
+            shp.overrideColorRGB.set(color[0], color[1], color[2])
+
+
+# ========================================
+# Curves IO ==============================
+# ========================================
+
+def collect_curve_shapes(crv):
+    shapes_names = []
+    shapesDict = {}
+    for shape in crv.getShapes():
+        shapes_names.append(shape.name())
+        c_form = shape.form()
+        degree = shape.degree()
+        form = c_form.key
+        form_id = c_form.index
+        pnts = [[cv.x, cv.y, cv.z] for cv in shape.getCVs(space="object")]
+        shapesDict[shape.name()] = {"points": pnts,
+                                    "degree": degree,
+                                    "form": form,
+                                    "form_id": form_id}
+
+    return shapesDict, shapes_names
+
+
+def collect_curve_data(objs=None):
+    """Generate a dictionary descriving the curve data
+
+    Suport multiple objects
+
+    Args:
+        objs (dagNode, optional): Curve object to store
+        collect_trans (bool, optional): if false will skip the transformation
+            matrix
+
+    Returns:
+        dict: Curves data
+    """
+
+    if not objs:
+        objs = pm.selected()
+    if not isinstance(objs, list):
+        objs = [objs]
+
+    curves_dict = {}
+    curves_dict["curves_names"] = []
+
+    for x in objs:
+        curves_dict["curves_names"].append(x.name())
+        if x.getParent():
+            crv_parent = x.getParent().name()
+        else:
+            crv_parent = None
+
+        m = x.getMatrix(worldSpace=True)
+        crv_transform = m.get()
+
+        curveDict = {"shapes_names": [],
+                     "crv_parent": crv_parent,
+                     "crv_transform": crv_transform,
+                     "crv_color": get_color(x)}
+
+        shps, shps_n = collect_curve_shapes(x)
+        curveDict["shapes"] = shps
+        curveDict["shapes_names"] = shps_n
+        curves_dict[x.name()] = curveDict
+
+    return curves_dict
+
+
+def create_curve_from_data(data,
+                           replaceShape=False,
+                           rebuildHierarchy=False):
+    """Build the curves from a given curve data dict
+
+    Hierarchy rebuild after all curves are build to avoid lost parents
+
+    Args:
+        data (TYPE): Description
+        replaceShape (bool, optional): Description
+        rebuildHierarchy (bool, optional): Description
+    """
+
+    for crv in data["curves_names"]:
+        crv_dict = data[crv]
+
+        crv_transform = crv_dict["crv_transform"]
+        shp_dict = crv_dict["shapes"]
+        color = crv_dict["crv_color"]
+        if replaceShape:
+            first_shape = pm.ls(crv)
+            if not first_shape:
+                pm.displayWarning("Couldn't find: {}. Shape will be "
+                                  "skipped, since there is nothing to "
+                                  "replace".format(crv))
+                continue
+        else:
+            first_shape = None
+
+        if first_shape:
+            first_shape = first_shape[0]
+            # clean old shapes
+            pm.delete(first_shape.listRelatives(shapes=True))
+
+        for sh in crv_dict["shapes_names"]:
+            points = shp_dict[sh]["points"]
+            form = shp_dict[sh]["form"]
+            degree = shp_dict[sh]["degree"]
+            knots = range(len(points) + degree - 1)
+            if form != "open":
+                close = True
+                # points = points[:-degree]
+            else:
+                close = False
+            # we dont use replace in order to support multiple shapes
+            obj = pm.curve(name=sh.replace("Shape", ""),
+                           point=points,
+                           periodic=close,
+                           degree=degree,
+                           knot=knots)
+            set_color(obj, color)
+
+            # handle multiple shapes in the same transform
+            if not first_shape:
+                first_shape = obj
+                first_shape.setTransformation(crv_transform)
+            else:
+                for extra_shp in obj.listRelatives(shapes=True):
+                    first_shape.addChild(extra_shp, add=True, shape=True)
+                    pm.delete(obj)
+
+    # parenting
+    if rebuildHierarchy:
+        for crv in data["curves_names"]:
+            crv_dict = data[crv]
+            crv_parent = crv_dict["crv_parent"]
+            if crv_parent:
+                pm.parent(crv, crv_parent)
+
+
+def update_curve_from_data(data):
+    """update the curves from a given curve data dict
+
+    Args:
+        data (TYPE): Description
+    """
+
+    for crv in data["curves_names"]:
+        crv_dict = data[crv]
+
+        shp_dict = crv_dict["shapes"]
+        color = crv_dict["crv_color"]
+        first_shape = pm.ls(crv)
+        if not first_shape:
+            pm.displayWarning("Couldn't find: {}. Shape will be "
+                              "skipped, since there is nothing to "
+                              "replace".format(crv))
+            continue
+
+        if first_shape:
+            first_shape = first_shape[0]
+            # clean old shapes
+            pm.delete(first_shape.listRelatives(shapes=True))
+
+        for sh in crv_dict["shapes_names"]:
+            points = shp_dict[sh]["points"]
+            form = shp_dict[sh]["form"]
+            degree = shp_dict[sh]["degree"]
+            knots = range(len(points) + degree - 1)
+            if form != "open":
+                close = True
+            else:
+                close = False
+            # we dont use replace in order to support multiple shapes
+            obj = pm.curve(replace=False,
+                           name=sh,
+                           point=points,
+                           periodic=close,
+                           degree=degree,
+                           knot=knots)
+            set_color(obj, color)
+
+            for extra_shp in obj.listRelatives(shapes=True):
+                first_shape.addChild(extra_shp, add=True, shape=True)
+                pm.delete(obj)
+
+        # clean up shapes names
+        for sh in first_shape.getShapes():
+            pm.rename(sh, sh.name().replace("ShapeShape", "Shape"))
+
+
+def export_curve(filePath=None, objs=None):
+    """Export the curve data to a json file
+
+    Args:
+        filePath (None, optional): Description
+        objs (None, optional): Description
+
+    Returns:
+        TYPE: Description
+    """
+
+    if not filePath:
+        startDir = pm.workspace(q=True, rootDirectory=True)
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=0,
+            startingDirectory=startDir,
+            fileFilter='NURBS Curves .crv (*%s)' % ".crv")
+        if not filePath:
+            pm.displayWarning("Invalid file path")
+            return
+        if not isinstance(filePath, basestring):
+            filePath = filePath[0]
+
+    data = collect_curve_data(objs)
+    data_string = json.dumps(data, indent=4, sort_keys=True)
+    f = open(filePath, 'w')
+    f.write(data_string)
+    f.close()
+
+
+def _curve_from_file(filePath=None):
+    if not filePath:
+        startDir = pm.workspace(q=True, rootDirectory=True)
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=1,
+            startingDirectory=startDir,
+            fileFilter='NURBS Curves .crv (*%s)' % ".crv")
+
+    if not filePath:
+        pm.displayWarning("Invalid file path")
+        return
+    if not isinstance(filePath, basestring):
+        filePath = filePath[0]
+    configDict = json.load(open(filePath))
+
+    return configDict
+
+
+def import_curve(filePath=None,
+                 replaceShape=False,
+                 rebuildHierarchy=False):
+    create_curve_from_data(_curve_from_file(filePath),
+                           replaceShape,
+                           rebuildHierarchy)
+
+
+def update_curve_from_file(filePath=None):
+    # update a curve data from json file
+    update_curve_from_data(_curve_from_file(filePath))

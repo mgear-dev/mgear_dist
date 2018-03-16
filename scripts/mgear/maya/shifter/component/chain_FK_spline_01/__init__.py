@@ -161,7 +161,7 @@ class Component(component.Main):
         # Curves -------------------------------------------
         self.mst_crv = curve.addCnsCurve(self.root,
                                          self.getName("mst_crv"),
-                                         self.tweak_ctl,
+                                         self.tweak_ctl[:],
                                          3)
 
         self.upv_crv = curve.addCnsCurve(self.root,
