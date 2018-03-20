@@ -367,9 +367,6 @@ class Main(object):
 
         return vector.getPlaneBiNormal(pos[0], pos[1], pos[2])
 
-    def add_controller_tag(self, ctl, tagParent):
-        node.add_controller_tag(ctl, tagParent)
-
     def addCtl(self,
                parent,
                name,
@@ -453,6 +450,9 @@ class Main(object):
             self.add_controller_tag(ctl, tp)
 
         return ctl
+
+    def add_controller_tag(self, ctl, tagParent):
+        self.rig.add_controller_tag(ctl, tagParent)
 
     def addToGroup(self, objects, names=["hidden"], parentGrp=None):
         """Add the object in a collection for later group creation.

@@ -890,29 +890,9 @@ def add_controller_tag(ctl, tagParent=None):
         tpTagNode = pm.PyNode(pm.controller(tagParent, q=True)[0])
         tpTagNode.cycleWalkSibling.set(True)
         pm.connectAttr(tpTagNode.prepopulate, ctt.prepopulate, f=True)
-        # The connectAttr to the children attribute is giving error
-        # i.e: pm.connectAttr(ctt.attr("parent"),
-        #                      tpTagNode.attr("children"), na=True)
-        # if using the next available option tag
-        # I was expecting to use ctt.setParent(tagParent) but doest't work as
-        # expected.
-        # After reading the documentation this method looks prety
-        # useless.
-        # Looks like is boolean and works based on selection :(
 
-        # this is a dirty loop workaround. Naaah!
-        i = 0
-        while True:
-            try:
-                pm.connectAttr(ctt.parent, tpTagNode.attr(
-                    "children[%s]" % str(i)))
-                break
-            except RuntimeError:
-                i += 1
-                if i > 100:
-                    pm.displayWarning(
-                        "The controller tag for %s has reached the "
-                        "limit index of 100 children" % ctl.name())
-                    break
+        ni = attribute.get_next_available_index(tpTagNode.children)
+        pm.connectAttr(ctt.parent, tpTagNode.attr(
+                       "children[%s]" % str(ni)))
 
     return ctt
