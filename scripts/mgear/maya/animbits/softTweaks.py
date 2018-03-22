@@ -173,7 +173,8 @@ def _getAffectedObjects(softMods):
     for softMod in softMods:
         if isinstance(softMod, basestring):
             softMod = pm.PyNode(softMod)
-        affectedList = affectedList + softMod.getGeometry()
+        objs = [pm.PyNode(x).getParent().name() for x in softMod.getGeometry()]
+        affectedList = affectedList + objs
 
     return affectedList
 
@@ -250,7 +251,7 @@ def _buildConfigDict(softMods=[]):
         # fallof value
         softModConfig["falloff"] = ctl.falloff.get()
         # affected objects
-        print _getAffectedObjects(sm)
+        # print _getAffectedObjects(sm)
         softModConfig["affected"] = _getAffectedObjects(sm)
         # root parent
         if root.getParent():
