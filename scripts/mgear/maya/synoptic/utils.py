@@ -47,6 +47,9 @@ def isSideElement(name):
         node: str
     """
 
+    if "_L_" in name or "_R_" in name:
+        return True
+
     nameParts = stripNamespace(name).split("|")[-1]
 
     for part in nameParts.split("_"):
@@ -76,7 +79,12 @@ def swapSideLabel(name):
             return EXPR_RIGHT_SIDE.sub(r"L\1", name)
 
     else:
-        return name
+        if "_L_" in name:
+            return name.replace("_L_", "_R_")
+        elif "_R_" in name:
+            return name.replace("_R_", "_L_")
+        else:
+            return name
 
 
 def getClosestNode(node, nodesToQuery):
