@@ -887,12 +887,23 @@ def add_controller_tag(ctl, tagParent=None):
     pm.controller(ctl)
     ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
     if tagParent:
-        tpTagNode = pm.PyNode(pm.controller(tagParent, q=True)[0])
-        tpTagNode.cycleWalkSibling.set(True)
-        pm.connectAttr(tpTagNode.prepopulate, ctt.prepopulate, f=True)
-
-        ni = attribute.get_next_available_index(tpTagNode.children)
-        pm.connectAttr(ctt.parent, tpTagNode.attr(
-                       "children[%s]" % str(ni)))
+        controller_tag_connect(ctt, tagParent)
 
     return ctt
+
+def controller_tag_connect(ctt, tagParent):
+    """Summary
+
+    Args:
+        ctt (TYPE): Teh control tag
+        tagParent (TYPE): The object with the parent control tag
+    """
+
+    tpTagNode = pm.PyNode(pm.controller(tagParent, q=True)[0])
+    tpTagNode.cycleWalkSibling.set(True)
+    pm.connectAttr(tpTagNode.prepopulate, ctt.prepopulate, f=True)
+
+    ni = attribute.get_next_available_index(tpTagNode.children)
+    pm.disconnectAttr(ctt.parent)
+    pm.connectAttr(ctt.parent, tpTagNode.attr(
+                   "children[%s]" % str(ni)))
