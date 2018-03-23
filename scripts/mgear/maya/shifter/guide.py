@@ -544,12 +544,14 @@ class Rig(Main):
                     parent_type = parent_root.attr("comp_type").get()
                     parent_side = parent_root.attr("comp_side").get()
                     parent_uihost = parent_root.attr("ui_host").get()
+                    parent_ctlGrp = parent_root.attr("ctlGrp").get()
 
                     if parent_type in comp_guide.connectors:
                         comp_guide.setParamDefValue("connector", parent_type)
 
                     comp_guide.setParamDefValue("comp_side", parent_side)
                     comp_guide.setParamDefValue("ui_host", parent_uihost)
+                    comp_guide.setParamDefValue("ctlGrp", parent_ctlGrp)
 
                     break
 
