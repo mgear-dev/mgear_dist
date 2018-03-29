@@ -328,6 +328,7 @@ class Main(object):
             jnt = primitive.addJoint(obj, self.getName(
                 str(name) + "_jnt"), transform.getTransform(obj))
             pm.connectAttr(self.rig.jntVis_att, jnt.attr("visibility"))
+            attribute.lockAttribute(jnt)
 
         self.addToGroup(jnt, "deformers")
 
