@@ -466,9 +466,10 @@ class Rig(object):
 
     def add_controller_tag(self, ctl, tagParent):
         ctt = node.add_controller_tag(ctl, tagParent)
-        ni = attribute.get_next_available_index(self.model.rigCtlTags)
-        pm.connectAttr(ctt.message,
-                       self.model.attr("rigCtlTags[{}]".format(str(ni))))
+        if ctt:
+            ni = attribute.get_next_available_index(self.model.rigCtlTags)
+            pm.connectAttr(ctt.message,
+                           self.model.attr("rigCtlTags[{}]".format(str(ni))))
 
     def getLocalName(self, guideName):
         """This function return the local name, cutting the Maya fullname

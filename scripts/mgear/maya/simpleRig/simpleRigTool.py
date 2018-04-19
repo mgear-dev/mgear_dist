@@ -5,6 +5,7 @@ import json
 from mgear.vendor.Qt import QtCore, QtWidgets
 
 import pymel.core as pm
+from pymel import versions
 from pymel.core import datatypes
 
 import mgear
@@ -248,8 +249,9 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                     driven=None,
                                     sets_config=sets_config)
         # ctlList.append(world_ctl)
-        ctt = node.add_controller_tag(world_ctl, None)
-        _connect_tag_to_rig(rig, ctt)
+        if versions.current() >= 201650:
+            ctt = node.add_controller_tag(world_ctl, None)
+            _connect_tag_to_rig(rig, ctt)
     else:
         world_ctl = rig
 
@@ -265,8 +267,9 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                  driven=None,
                                  sets_config=sets_config)
     # ctlList.append(global_ctl)
-    ctt = node.add_controller_tag(global_ctl, ctt)
-    _connect_tag_to_rig(rig, ctt)
+    if versions.current() >= 201650:
+        ctt = node.add_controller_tag(global_ctl, ctt)
+        _connect_tag_to_rig(rig, ctt)
 
     # create local ctl
     local_ctl = _create_control("local",
@@ -280,9 +283,9 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                 driven=selection,
                                 sets_config=sets_config)
     # ctlList.append(local_ctl)
-    ctt = node.add_controller_tag(local_ctl, ctt)
-    _connect_tag_to_rig(rig, ctt)
-
+    if versions.current() >= 201650:
+        ctt = node.add_controller_tag(local_ctl, ctt)
+        _connect_tag_to_rig(rig, ctt)
 
     return local_ctl
 
@@ -343,10 +346,11 @@ def _create_custom_pivot(name,
                               driven=selection,
                               sets_config=sets_config)
 
-        #add ctl tag
-        parentTag = pm.PyNode(pm.controller(parent, q=True)[0])
-        ctt = node.add_controller_tag(ctl, parentTag)
-        _connect_tag_to_rig(ctl.getParent(-1), ctt)
+        # add ctl tag
+        if versions.current() >= 201650:
+            parentTag = pm.PyNode(pm.controller(parent, q=True)[0])
+            ctt = node.add_controller_tag(ctl, parentTag)
+            _connect_tag_to_rig(ctl.getParent(-1), ctt)
 
         return ctl
 
@@ -663,7 +667,7 @@ def _parent_pivot(pivot, parent):
                                   "elements".format(pivot))
             npo = pivot.getParent()
             pm.parent(npo, parent)
-            #re-connect controller tag
+            # re-connect controller tag
 
             pivotTag = pm.PyNode(pm.controller(pivot, q=True)[0])
             node.controller_tag_connect(pivotTag, parent)
@@ -765,11 +769,12 @@ def _delete_rig():
 
 # utils ===========================================
 
+
 def _connect_tag_to_rig(rig, ctt):
 
     ni = attribute.get_next_available_index(rig.rigCtlTags)
     pm.connectAttr(ctt.message,
-               rig.attr("rigCtlTags[{}]".format(str(ni))))
+                   rig.attr("rigCtlTags[{}]".format(str(ni))))
 
 
 def _validate_name(name):

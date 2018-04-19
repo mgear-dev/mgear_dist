@@ -2,6 +2,7 @@
 
 
 import pymel.core as pm
+from pymel import versions
 import pymel.core.datatypes as datatypes
 from . import attribute
 
@@ -884,12 +885,14 @@ def add_controller_tag(ctl, tagParent=None):
         ctl (dagNode): Controller to add the tar
         tagParent (dagNode): tag parent for the connection
     """
-    pm.controller(ctl)
-    ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
-    if tagParent:
-        controller_tag_connect(ctt, tagParent)
+    if versions.current() >= 201650:
+        pm.controller(ctl)
+        ctt = pm.PyNode(pm.controller(ctl, q=True)[0])
+        if tagParent:
+            controller_tag_connect(ctt, tagParent)
 
-    return ctt
+        return ctt
+
 
 def controller_tag_connect(ctt, tagParent):
     """Summary
