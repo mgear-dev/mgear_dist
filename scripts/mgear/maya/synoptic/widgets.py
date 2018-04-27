@@ -135,8 +135,8 @@ class SpineIkfkMatchButton(QtWidgets.QPushButton):
         uihost_name = str(self.property("Object"))
         mouse_button = event.button()
         model = utils.getModel(self)
-        fkControls = str(self.property("fkControls"))
-        ikControls = str(self.property("ikControls"))
+        fkControls = str(self.property("fkControls")).split(",")
+        ikControls = str(self.property("ikControls")).split(",")
 
         if mouse_button == QtCore.Qt.LeftButton:
             utils.SpineIkFkTransfer.showUI(model,
