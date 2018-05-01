@@ -1,25 +1,19 @@
 """
 Todo
 
-End of next week ------
-Test import/export
--line up pixels
-add control support
-    -string connection for name
-    -compound attr for poses values
-Multiple driven support for add button
-MenuBar options
-select rbf node from UI(right click)
--consolidate weightNode_io to pymel
+-Multiple driven support for add button
 -clean up code
 -add documentation
+-sync driver table
+-look into deleting attr post creation(not likely, rbf might fail)
+-newScene callback
 
 2.0 -------
 LOOK into coloring the pose and how close it is
 import replace name support (will work through json manually)
-rename setup from ui
 support live connections
 settings support for suffix, etc
+rename existing setup
 
 Original M.O
 -Needs to support live connections
@@ -43,9 +37,6 @@ from mgear.vendor.Qt import QtWidgets, QtCore, QtCompat
 import rbf_io
 import rbf_node
 import weightNode_io
-# reload(rbf_io)
-# reload(rbf_node)
-# reload(weightNode_io)
 
 # =============================================================================
 # Constants
@@ -253,13 +244,19 @@ class RBFSetupInput(QtWidgets.QDialog):
 
 class RBFManagerUI(QtWidgets.QMainWindow):
     """docstring for RBFManagerUI"""
+    mousePosition = QtCore.Signal(int, int)
+
     def __init__(self, parent=None):
         super(RBFManagerUI, self).__init__(parent=parent)
+        self.setMouseTracking(True)
+        self.genericWidgetHight = 24
+
         self.setWindowTitle(TOOL_TITLE)
         self.currentRBFSetupNodes = []
         self.allSetupsInfo = None
         self.setMenuBar(self.createMenuBar())
         self.setCentralWidget(self.createCentralWidget())
+        self.centralWidget().setMouseTracking(True)
         self.refreshRbfSetupList()
         self.connectSignals()
 
@@ -347,7 +344,8 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         rbfNode.setDriverNode(driverNode, driverAttrs)
         rbfNode.setDrivenNode(drivenNode, drivenAttrs, parent=True)
         if self.currentRBFSetupNodes:
-            print "Copying poses from  {} >> {}".format(self.currentRBFSetupNodes[0], rbfNode)
+            currentRbfs = self.currentRBFSetupNodes[0]
+            print "Copying poses from  {} >> {}".format(currentRbfs, rbfNode)
             self.currentRBFSetupNodes[0].copyPoses(rbfNode)
         else:
             self.populateDriverInfo(rbfNode, rbfNode.getNodeInfo())
@@ -482,13 +480,16 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         poses = weightInfo["poses"]
         self.__deleteAssociatedWidgets(self.driverPoseTableWidget)
         self.driverPoseTableWidget.clear()
-        self.driverPoseTableWidget.setColumnCount(len(weightInfo["driverAttrs"]))
-        self.driverPoseTableWidget.setHorizontalHeaderLabels(weightInfo["driverAttrs"])
+        columnLen = len(weightInfo["driverAttrs"])
+        self.driverPoseTableWidget.setColumnCount(columnLen)
+        headerNames = weightInfo["driverAttrs"]
+        self.driverPoseTableWidget.setHorizontalHeaderLabels(headerNames)
         poseInputLen = len(poses["poseInput"])
         self.driverPoseTableWidget.setRowCount(poseInputLen)
         if poseInputLen == 0:
             return
-        verticalLabels = ["Pose {}".format(index) for index in range(poseInputLen)]
+        verticalLabels = ["Pose {}".format(index) for index
+                          in range(poseInputLen)]
         self.driverPoseTableWidget.setVerticalHeaderLabels(verticalLabels)
         tmpWidgets = []
         for rowIndex, poseInput in enumerate(poses["poseInput"]):
@@ -543,7 +544,8 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         header = drivenWidgetComponents[3].verticalHeader()
         header.sectionClicked.connect(self.setConsistentHeaderSelection)
         header.sectionClicked.connect(self.recallDriverPose)
-        drivenWidgetComponents[3].itemSelectionChanged.connect(self.setEditDeletePoseEnabled)
+        selDelFunc = self.setEditDeletePoseEnabled
+        drivenWidgetComponents[3].itemSelectionChanged.connect(selDelFunc)
         drivenWidgetComponents[0].clicked.connect(selectNode)
         return drivenWidget
 
@@ -596,6 +598,9 @@ class RBFManagerUI(QtWidgets.QMainWindow):
             self.populateDrivenWidgetInfo(drivenWidget, weightInfo, rbfNode)
             self.rbfTabWidget.addTab(drivenWidget, rbfNode.name)
 
+    def editSize(self):
+        self.adjustSize()
+
     def displayRBFSetupInfo(self, index):
         rbfSelection = str(self.rbf_cbox.currentText())
         self.refresh(rbfSelection=False,
@@ -614,6 +619,7 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         self.populateDriverInfo(rbfNodes[0], weightInfo)
         self.lockDriverWidgets(lock=True)
         self.recreateDrivenTabs(self.allSetupsInfo[rbfSelection])
+        # self.editSize()
 
     def attrListMenu(self, attributeListWidget, driverLineEdit, QPos):
         """right click menu for queie qlistwidget
@@ -758,6 +764,28 @@ class RBFManagerUI(QtWidgets.QMainWindow):
             return
         rbf_io.exportRBFs(nodesToExport, filePath)
 
+    def hideMenuBar(self, x, y):
+        if x < 100 and y < 50:
+            self.menuBar().show()
+        else:
+            self.menuBar().hide()
+
+    def tabConextMenu(self, qPoint):
+        tabIndex = self.rbfTabWidget.tabBar().tabAt(qPoint)
+        if tabIndex == -1:
+            return
+        selWidget = self.rbfTabWidget.widget(tabIndex)
+        rbfNode = getattr(selWidget, "rbfNode")
+        tabMenu = QtWidgets.QMenu(self)
+        parentPosition = self.rbfTabWidget.mapToGlobal(QtCore.QPoint(0, 0))
+        menu_item_01 = tabMenu.addAction("Select {}".format(rbfNode))
+        menu_item_01.triggered.connect(partial(mc.select, rbfNode))
+        partialObj_selWdgt = partial(self.rbfTabWidget.setCurrentWidget,
+                                     selWidget)
+        menu_item_01.triggered.connect(partialObj_selWdgt)
+        tabMenu.move(parentPosition + qPoint)
+        tabMenu.show()
+
     def testFunctions(self, *args):
         print '1', args
 
@@ -772,22 +800,30 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         header = self.driverPoseTableWidget.verticalHeader()
         header.sectionClicked.connect(self.setConsistentHeaderSelection)
         header.sectionClicked.connect(self.recallDriverPose)
-        self.driverPoseTableWidget.itemSelectionChanged.connect(self.setEditDeletePoseEnabled)
+        selDelFunc = self.setEditDeletePoseEnabled
+        self.driverPoseTableWidget.itemSelectionChanged.connect(selDelFunc)
         self.addRbfButton.clicked.connect(self.addRBFToSetup)
 
         self.addPoseButton.clicked.connect(self.addPose)
         self.editPoseButton.clicked.connect(self.editPose)
         self.deletePoseButton.clicked.connect(self.deletePose)
-        self.setControlButton.clicked.connect(partial(self.setSetupDriverControl,
-                                                      self.controlLineEdit))
+        partialObj = partial(self.setSetupDriverControl, self.controlLineEdit)
+        self.setControlButton.clicked.connect(partialObj)
         self.setDriverButton.clicked.connect(partial(self.setNodeToField,
                                                      self.driverLineEdit))
-        self.driverLineEdit.textChanged.connect(partial(self.updateAttributeDisplay,
-                                                        self.driver_attributes_widget))
-        self.driver_attributes_widget.customContextMenuRequested.connect(partial(self.attrListMenu,
-                                                                                 self.driver_attributes_widget,
-                                                                                 self.driverLineEdit))
-        self.rbfTabWidget.tabBar().tabCloseRequested.connect(self.removeRBFFromSetup)
+        partialObj = partial(self.updateAttributeDisplay,
+                             self.driver_attributes_widget)
+        self.driverLineEdit.textChanged.connect(partialObj)
+        partialObj = partial(self.attrListMenu,
+                             self.driver_attributes_widget,
+                             self.driverLineEdit)
+        customMenu = self.driver_attributes_widget.customContextMenuRequested
+        customMenu.connect(partialObj)
+        tabBar = self.rbfTabWidget.tabBar()
+        tabBar.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        tabBar.customContextMenuRequested.connect(self.tabConextMenu)
+        tabBar.tabCloseRequested.connect(self.removeRBFFromSetup)
+        self.mousePosition.connect(self.hideMenuBar)
 
     # broken down widgets -----------------------------------------------------
     def createSetupSelectorWidget(self):
@@ -795,7 +831,9 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         rbfLabel = QtWidgets.QLabel("Select RBF Setup:")
         rbf_cbox = QtWidgets.QComboBox()
         rbf_refreshButton = QtWidgets.QPushButton("Refresh")
+        rbf_cbox.setFixedHeight(self.genericWidgetHight)
         rbf_refreshButton.setMaximumWidth(80)
+        rbf_refreshButton.setFixedHeight(self.genericWidgetHight - 1)
         setRBFLayout.addWidget(rbfLabel)
         setRBFLayout.addWidget(rbf_cbox, 1)
         setRBFLayout.addWidget(rbf_refreshButton)
@@ -804,9 +842,12 @@ class RBFManagerUI(QtWidgets.QMainWindow):
     def selectNodeWidget(self, label, buttonLabel="Select"):
         nodeLayout = QtWidgets.QHBoxLayout()
         nodeLabel = QtWidgets.QLabel(label)
+        nodeLabel.setFixedWidth(40)
         nodeLineEdit = ClickableLineEdit()
         nodeLineEdit.setReadOnly(True)
         nodeSelectButton = QtWidgets.QPushButton(buttonLabel)
+        nodeLineEdit.setFixedHeight(self.genericWidgetHight)
+        nodeSelectButton.setFixedHeight(self.genericWidgetHight)
         nodeLayout.addWidget(nodeLabel)
         nodeLayout.addWidget(nodeLineEdit, 1)
         nodeLayout.addWidget(nodeSelectButton)
@@ -866,10 +907,12 @@ class RBFManagerUI(QtWidgets.QMainWindow):
 
     def createDrivenAttributeWidget(self):
         drivenWidget = QtWidgets.QWidget()
-        driverMainLayout = QtWidgets.QHBoxLayout()
+        drivenMainLayout = QtWidgets.QHBoxLayout()
+        drivenMainLayout.setContentsMargins(0, 10, 0, 10)
+        drivenMainLayout.setSpacing(9)
         driverSetLayout = QtWidgets.QVBoxLayout()
-        driverMainLayout.addLayout(driverSetLayout)
-        drivenWidget.setLayout(driverMainLayout)
+        drivenMainLayout.addLayout(driverSetLayout)
+        drivenWidget.setLayout(drivenMainLayout)
         #  --------------------------------------------------------------------
         (driverLayout,
          driverLineEdit,
@@ -880,6 +923,7 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         (attributeLayout,
          attributeListWidget) = self.labelListWidget(label="Attributes",
                                                      horizontal=False)
+        attributeLayout.setSpacing(1)
         selType = QtWidgets.QAbstractItemView.ExtendedSelection
         attributeListWidget.setSelectionMode(selType)
         attributeListWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -896,7 +940,7 @@ class RBFManagerUI(QtWidgets.QMainWindow):
 
         driverSetLayout.addLayout(driverLayout, 0)
         driverSetLayout.addLayout(attributeLayout, 0)
-        driverMainLayout.addWidget(tableWidget, 1)
+        drivenMainLayout.addWidget(tableWidget, 1)
         return [driverLineEdit,
                 driverSelectButton,
                 attributeListWidget,
@@ -913,6 +957,7 @@ class RBFManagerUI(QtWidgets.QMainWindow):
 
     def createTabWidget(self):
         tabLayout = QtWidgets.QTabWidget()
+        tabLayout.setContentsMargins(0, 0, 0, 0)
         tabBar = TabBar()
         tabLayout.setTabBar(tabBar)
         tabBar.setTabsClosable(True)
@@ -921,8 +966,11 @@ class RBFManagerUI(QtWidgets.QMainWindow):
     def createOptionsButtonsWidget(self):
         optionsLayout = QtWidgets.QHBoxLayout()
         addPoseButton = QtWidgets.QPushButton("Add Pose")
+        addPoseButton.setFixedHeight(self.genericWidgetHight)
         EditPoseButton = QtWidgets.QPushButton("Edit Pose")
+        EditPoseButton.setFixedHeight(self.genericWidgetHight)
         deletePoseButton = QtWidgets.QPushButton("Delete Pose")
+        deletePoseButton.setFixedHeight(self.genericWidgetHight)
         optionsLayout.addWidget(addPoseButton)
         optionsLayout.addWidget(EditPoseButton)
         optionsLayout.addWidget(deletePoseButton)
@@ -933,11 +981,13 @@ class RBFManagerUI(QtWidgets.QMainWindow):
 
     def createMenuBar(self):
         mainMenuBar = QtWidgets.QMenuBar()
+        mainMenuBar.setContentsMargins(0, 0, 0, 0)
         file = mainMenuBar.addMenu("File")
         file.addAction("Export All", self.exportNodes)
         file.addAction("Export current setup", partial(self.exportNodes,
                                                        allSetups=False))
         file.addAction("Import RBFs", partial(self.importNodes))
+        mainMenuBar.hide()
         return mainMenuBar
 
     # main assebly ------------------------------------------------------------
@@ -961,16 +1011,17 @@ class RBFManagerUI(QtWidgets.QMainWindow):
          driverLayout) = self.createDriverAttributeWidget()
 
         self.addRbfButton = QtWidgets.QPushButton("New RBF")
+        self.addRbfButton.setFixedHeight(self.genericWidgetHight)
         self.addRbfButton.setStyleSheet("background-color: rgb(23, 158, 131)")
         driverLayout.addWidget(self.addRbfButton)
 
         self.driverPoseTableWidget = self.createTableWidget()
         driverDrivenLayout.addLayout(driverLayout, 0)
         driverDrivenLayout.addWidget(self.driverPoseTableWidget, 1)
-        centralWidgetLayout.addLayout(driverDrivenLayout)
+        centralWidgetLayout.addLayout(driverDrivenLayout, 1)
         #  --------------------------------------------------------------------
         self.rbfTabWidget = self.createTabWidget()
-        centralWidgetLayout.addWidget(self.rbfTabWidget)
+        centralWidgetLayout.addWidget(self.rbfTabWidget, 1)
         #  --------------------------------------------------------------------
         (optionsLayout,
          self.addPoseButton,
@@ -981,3 +1032,10 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         centralWidgetLayout.addWidget(HLine())
         centralWidgetLayout.addLayout(optionsLayout)
         return centralWidget
+
+    # overrides ---------------------------------------------------------------
+    def mouseMoveEvent(self, event):
+        if event.type() == QtCore.QEvent.MouseMove:
+            if event.buttons() == QtCore.Qt.NoButton:
+                pos = event.pos()
+                self.mousePosition.emit(pos.x(), pos.y())

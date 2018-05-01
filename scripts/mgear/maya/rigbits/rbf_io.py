@@ -1,3 +1,9 @@
+"""Handles the import and exporting of all supported RBF node types
+
+Attributes:
+    RBF_FILE_EXTENSION (str): extention of the serialized json data
+    RBF_MODULES (Dict): nodeType: module api, normalized to fit the rbfManager
+"""
 # python
 import json
 
@@ -6,19 +12,28 @@ import maya.cmds as mc
 
 # RBF setups
 import weightNode_io
-# reload(weightNode_io)
 # =============================================================================
 # Constants
 # =============================================================================
 RBF_FILE_EXTENSION = ".rbf"
 
+# Additional node support should be added here
 RBF_MODULES = {"weightDriver": weightNode_io}
 
 
-# ==============================================================================
+# =============================================================================
 # Data export
-# ==============================================================================
+# =============================================================================
 def fileDialog(startDir, mode=0):
+    """prompt dialog for either import/export from a UI
+
+    Args:
+        startDir (str): A directory to start from
+        mode (int, optional): import or export, 0/1
+
+    Returns:
+        str: path selected by user
+    """
     ext = RBF_FILE_EXTENSION
     fPath = mc.fileDialog2(dialogStyle=2,
                            fileMode=mode,
@@ -63,6 +78,14 @@ def __exportData(data, filePath):
 
 
 def importRBFs(filePath):
+    """import rbfs from file, using the assoiciated module type to recreate
+
+    Args:
+        filePath (str): filepath to json
+
+    Returns:
+        n/a: n/a
+    """
     data = __importData(filePath)
     if data is None:
         return
@@ -72,6 +95,12 @@ def importRBFs(filePath):
 
 
 def exportRBFs(nodes, filePath):
+    """exports the desired rbf nodes to the filepath provided
+
+    Args:
+        nodes (list): of rbfnodes
+        filePath (str): filepath to json
+    """
     rbfNode_Info = {}
     for n in nodes:
         rbfType = mc.nodeType(n)

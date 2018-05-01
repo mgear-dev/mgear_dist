@@ -1,7 +1,6 @@
+
 """
-CUSTOM_STEPS_DIR = os.environ.get('MGEAR_SHIFTER_CUSTOMSTEP_PATH', None)
-os.sys.path.append(CUSTOM_STEPS_DIR)
-from _library import weightNode_io
+import weightNode_io
 
 # Find all the weight Nodes
 weightDrivers = pm.ls(type="weightDriver")
@@ -10,29 +9,33 @@ weightDrivers = pm.ls(type="weightDriver")
 testPath = r"C:\Users\rafael\Documents\maya\scripts\testWeightNodes.json"
 
 # Export listed weightDrivers
-weightNode_io.exportWeightNodes(testPath, weightDrivers)
+weightNode_io.exportNodes(testPath, weightDrivers)
 
 # import all weight drivers from filePath
-weightNode_io.importWeightNodes(testPath)
-
+weightNode_io.importNodes(testPath)
 
 Attributes:
-    WNODE_DRIVERPOSE_ATTRS (TYPE): Description
-    WNODE_SHAPE_ATTRS (TYPE): Description
-    WNODE_TRANSFORM_ATTRS (TYPE): Description
+    CTL_SUFFIX (str): ctl suffix shared from rbf_io
+    DRIVEN_SUFFIX (str): suffix shared from rbf_io
+    ENVELOPE_ATTR (str): name of the attr that disables rbf node(non enum)
+    RBF_TYPE (str): maya/plugin node type
+    WD_SUFFIX (str): name of the suffix for this rbf node type
+    WNODE_DRIVERPOSE_ATTRS (dict): attrs and their type for querying/setting
+    WNODE_SHAPE_ATTRS (list): of attrs to query for re-setting on create
+    WNODE_TRANSFORM_ATTRS (list): of transform attrs to record
+
 """
-
-
+# python
 import copy
 import pprint
 
+# maya
 import maya.cmds as mc
 import pymel.core as pm
 
+# rbfSetup
 import rbf_io
 import rbf_node
-# reload(rbf_io)
-# reload(rbf_node)
 
 # ==============================================================================
 # Constants
@@ -40,6 +43,7 @@ import rbf_node
 
 CTL_SUFFIX = rbf_node.CTL_SUFFIX
 DRIVEN_SUFFIX = rbf_node.DRIVEN_SUFFIX
+TRANSFORM_SUFFIX = rbf_node.TRANSFORM_SUFFIX
 
 WNODE_DRIVERPOSE_ATTRS = {"poseMatrix": "matrix",
                           "poseParentMatrix": "matrix",
@@ -118,13 +122,30 @@ RBF_TYPE = "weightDriver"
 
 # Check for plugin
 def loadWeightPlugin(dependentFunc):
+    """ensure that plugin is always loaded prior to importing from json
+
+    Args:
+        dependentFunc (func): any function that needs to have plugin loaded
+
+    Returns:
+        func: pass through of function
+    """
     pm.loadPlugin("weightDriver.mll", qt=True)
     return dependentFunc
 
 
 def createRBF(name, transformName=None):
+    """Creates a rbf node of type weightDriver
+
+    Args:
+        name (str): name of node
+        transformName (str, optional): specify name of transform
+
+    Returns:
+        list: pymel: trasnform, weightDriverShape
+    """
     if transformName is None:
-        transformName = "{}_trfm".format(name)
+        transformName = "{}{}".format(name, TRANSFORM_SUFFIX)
     wd_ShapeNode = pm.createNode(RBF_TYPE, n=name)
     wd_transform = pm.listRelatives(wd_ShapeNode, p=True)[0]
     wd_transform = pm.rename(wd_transform, transformName)
@@ -133,10 +154,25 @@ def createRBF(name, transformName=None):
 
 
 def forceEvaluation(node):
+    """force evaluation of the weightDriver node
+    thank you Ingo
+
+    Args:
+        node (str): weightDriver to be recached
+    """
     pm.setAttr("{}.evaluate".format(node), 1)
 
 
 def getNodeConnections(node):
+    """get all connections on weightDriver node
+
+    Args:
+        node (str): weightDriver node
+
+    Returns:
+        list: of connections and attrs to recreate,
+        small list of supported nodes to be recreated
+    """
     connections = []
     attributesToRecreate = []
     nodePlugConnections = pm.listConnections(node,
@@ -151,6 +187,7 @@ def getNodeConnections(node):
         destPlug = connectPair[1].name()
         destAttrName = connectPair[1].attrName(longName=True)
         connections.append([srcPlug, destPlug])
+        # expand this list as we become more aware of the node
         if srcAttrName in ["solverGroupMessage"]:
             attributesToRecreate.append([srcPlug, "message"])
         if destAttrName in ["solverGroupMessage"]:
@@ -159,6 +196,14 @@ def getNodeConnections(node):
 
 
 def getRBFTransformInfo(node):
+    """get a dict of all the information to be serialized to/from json
+
+    Args:
+        node (str): name of weightDriverShape node
+
+    Returns:
+        dict: information to be recreated on import
+    """
     tmp_dict = {}
     parentName = None
     nodeTransform = pm.listRelatives(node, p=True)[0]
@@ -173,6 +218,15 @@ def getRBFTransformInfo(node):
 
 
 def getIndexValue(nodePlug, indices):
+    """return the values of a compound attr at the specified index
+
+    Args:
+        nodePlug (node.attr): name to compound attr
+        indices (int): of the attr to get
+
+    Returns:
+        list: of indecies
+    """
     allValues = []
     if indices:
         indices = range(indices[-1] + 1)
@@ -184,6 +238,19 @@ def getIndexValue(nodePlug, indices):
 
 
 def lengthenCompoundAttrs(node):
+    """In maya, if a compound attr has a value of 0,0,0 it will skip creating
+    the attribute. So to ensure that all indecies exist in the length of a
+    compound we get fake get each index, forcing a create of that attr.
+
+    # TODO Perhaps this can turned into a more useful function since we are
+    already querying info that will be needed later on.
+
+    Args:
+        node (str): weightDriver to perform insanity check
+
+    Returns:
+        n/a: n/a
+    """
     poseLen = mc.getAttr("{}.poses".format(node), mi=True)
     if poseLen is None:
         return
@@ -205,6 +272,14 @@ def lengthenCompoundAttrs(node):
 
 
 def getPoseInfo(node):
+    """Get dict of the pose info from the provided weightDriver node
+
+    Args:
+        node (str): name of weightDriver
+
+    Returns:
+        dict: of poseInput:list of values, poseValue:values
+    """
     lengthenCompoundAttrs(node)
     tmp_dict = {"poseInput": [],
                 "poseValue": []}
@@ -223,6 +298,15 @@ def getPoseInfo(node):
 
 
 def getDriverListInfo(node):
+    """used for when live connections are supported on the weightDriver
+    # TODO - Complete support
+
+    Args:
+        node (str): name of weightDriverNode
+
+    Returns:
+        dict: driver:poseValue
+    """
     driver_dict = {}
     numberOfDrivers = pm.getAttr("{}.driverList".format(node), mi=True) or []
     for dIndex in numberOfDrivers:
@@ -232,8 +316,6 @@ def getDriverListInfo(node):
         for pIndex in numberOfPoses:
             attrDriverPose = "{}[{}]".format(nameAttrDriver, pIndex)
             poseIndex = "pose[{}]".format(pIndex)
-            # tmp_dict = {key: pm.getAttr("{}.{}".format(attrDriverPose, key))
-            #             for key in WNODE_DRIVERPOSE_ATTRS.keys()}
             tmp_dict = {}
             for key in WNODE_DRIVERPOSE_ATTRS.keys():
                 attrValue = pm.getAttr("{}.{}".format(attrDriverPose, key))
@@ -246,6 +328,13 @@ def getDriverListInfo(node):
 
 
 def setDriverNode(node, driverNode, driverAttrs):
+    """set the node that will be driving the evaluation on our poses
+
+    Args:
+        node (str): name of weightDriver node
+        driverNode (str): name of driver node
+        driverAttrs (list): of attributes used to perform evaluations
+    """
     for index, dAttr in enumerate(driverAttrs):
         driverPlug = "{}.{}".format(driverNode, dAttr)
         nodePlug = "{}.input[{}]".format(node, index)
@@ -253,6 +342,14 @@ def setDriverNode(node, driverNode, driverAttrs):
 
 
 def getDriverNode(node):
+    """get nodes that are driving weightDriver node
+
+    Args:
+        node (str): weightDriver node
+
+    Returns:
+        list: of driver nodes
+    """
     drivers = list(set(pm.listConnections("{}.input".format(node),
                                           scn=True)))
     if node in drivers:
@@ -262,6 +359,13 @@ def getDriverNode(node):
 
 
 def setDrivenNode(node, drivenNode, drivenAttrs):
+    """set the node to be driven by the weightDriver
+
+    Args:
+        node (str): weightDriver node
+        drivenNode (str): name of node to be driven
+        drivenAttrs (list): of attributes to be driven by weightDriver
+    """
     for index, dAttr in enumerate(drivenAttrs):
         nodePlug = "{}.output[{}]".format(node, index)
         drivenPlug = "{}.{}".format(drivenNode, dAttr)
@@ -269,6 +373,14 @@ def setDrivenNode(node, drivenNode, drivenAttrs):
 
 
 def getDrivenNode(node):
+    """get driven nodes connected to weightDriver
+
+    Args:
+        node (str): weightDriver node
+
+    Returns:
+        list: of driven nodes
+    """
     driven = list(set(pm.listConnections("{}.output".format(node),
                                          scn=True)))
     if node in driven:
@@ -278,6 +390,16 @@ def getDrivenNode(node):
 
 
 def getAttrInOrder(node, attrWithIndex):
+    """get the connected attributes of the provided compound attr in order
+    of index - Sanity check
+
+    Args:
+        node (str): weightDriver node
+        attrWithIndex (str): name of compound attr with indicies to query
+
+    Returns:
+        list: of connected attrs in order
+    """
     attrsToReturn = []
     attrs = mc.getAttr("{}.{}".format(node, attrWithIndex), mi=True) or []
     for index in attrs:
@@ -291,6 +413,15 @@ def getAttrInOrder(node, attrWithIndex):
 
 
 def getDriverNodeAttributes(node):
+    """get the connected attributes of the provided compound attr in order
+    of index - Sanity check
+
+    Args:
+        node (str): weightDriver node
+
+    Returns:
+        list: of connected attrs in order
+    """
     attributesToReturn = []
     driveAttrs = getAttrInOrder(node, "input")
     attributesToReturn = [attr.attrName(longName=True) for attr in driveAttrs
@@ -299,6 +430,15 @@ def getDriverNodeAttributes(node):
 
 
 def getDrivenNodeAttributes(node):
+    """get the connected attributes of the provided compound attr in order
+    of index - Sanity check
+
+    Args:
+        node (str): weightDriver node
+
+    Returns:
+        list: of connected attrs in order
+    """
     attributesToReturn = []
     drivenAttrs = getAttrInOrder(node, "output")
     attributesToReturn = [attr.attrName(longName=True) for attr in drivenAttrs
@@ -307,6 +447,18 @@ def getDrivenNodeAttributes(node):
 
 
 def copyPoses(nodeA, nodeB, emptyPoseValues=True):
+    """Copy poses from nodeA to nodeB with the option to be blank or node
+    for syncing nodes
+
+    Args:
+        nodeA (str): name of weightedNode
+        nodeB (str): name of weightedNode
+        emptyPoseValues (bool, optional): should the copy just be the same
+        number of poses but blank output value
+
+    Returns:
+        n/a: n/a
+    """
     posesIndices = pm.getAttr("{}.poses".format(nodeA), mi=True) or [0]
     if len(posesIndices) == 1 and posesIndices[0] == 0:
         return
@@ -334,6 +486,15 @@ def copyPoses(nodeA, nodeB, emptyPoseValues=True):
 
 
 def getNodeInfo(node):
+    """get a dictionary of all the serialized information from the desired
+    weightDriver node for export/import/duplication
+
+    Args:
+        node (str): name of weightDriver node
+
+    Returns:
+        dict: collected node info
+    """
     node = pm.PyNode(node)
     weightNodeInfo_dict = {}
     for attr in WNODE_SHAPE_ATTRS:
@@ -364,14 +525,28 @@ def getNodeInfo(node):
 
 
 def setTransformNode(transformNode, transformInfo):
+    """set the transform node of a weightedDriver with the information from
+    dict
+
+    Args:
+        transformNode (str): name of transform nodes
+        transformInfo (dict): information to set on transform node
+    """
     parent = transformInfo.pop("parent", None)
     if parent is not None:
         pm.parent(transformNode, parent)
     for attr, value in transformInfo.iteritems():
-        transformNode.setAttr(attr, value)
+        # transformNode.setAttr(attr, value)
+        pm.setAttr("{}.{}".format(transformNode, attr), value)
 
 
 def deletePose(node, indexToPop):
+    """gather information on node, remove desired index and reapply
+
+    Args:
+        node (str): weightDriver
+        indexToPop (int): pose index to remove
+    """
     node = pm.PyNode(node)
     posesInfo = getPoseInfo(node)
     poseInput = posesInfo["poseInput"]
@@ -385,10 +560,17 @@ def deletePose(node, indexToPop):
 
 
 def addPose(node, poseInput, poseValue, posesIndex=None):
+    """add pose to the weightDriver node provided. Also used for editing an
+    existing pose, since you can specify the index. If non provided assume new
+
+    Args:
+        node (str): weightedDriver
+        poseInput (list): list of the poseInput values
+        poseValue (list): of poseValue values
+        posesIndex (int, optional): at desired index, if none assume latest/new
+    """
     if posesIndex is None:
         posesIndex = len(pm.getAttr("{}.poses".format(node), mi=True) or [])
-        # if posesIndex != 0:
-        #     posesIndex = posesIndex + 1
 
     for index, value in enumerate(poseInput):
         attrPlug = "{}.poses[{}].poseInput[{}]".format(node, posesIndex, index)
@@ -400,6 +582,12 @@ def addPose(node, poseInput, poseValue, posesIndex=None):
 
 
 def setPosesFromInfo(node, posesInfo):
+    """set a large number of poses from the dictionary provided
+
+    Args:
+        node (str): weightDriver
+        posesInfo (dict): of poseInput/PoseValue:values
+    """
     for attr, value in posesInfo.iteritems():
         if value == ():
             continue
@@ -414,6 +602,12 @@ def setPosesFromInfo(node, posesInfo):
 
 
 def setDriverListFromInfo(node, driverListInfo):
+    """set driverlist node with information from dict proivided
+
+    Args:
+        node (pynode): name of driver node
+        driverListInfo (dict): attr/value
+    """
     for attr, posesInfo in driverListInfo.iteritems():
         # attrDriver = "{}.pose".format(attr)
         numberOfPoses = len(posesInfo.keys())
@@ -433,10 +627,17 @@ def setDriverListFromInfo(node, driverListInfo):
 
 
 def setWeightNodeAttributes(node, weightNodeAttrInfo):
+    """set the attribute information on the weightDriver node provided from
+    the info dict
+
+    Args:
+        node (pynode): name of weightDrivers
+        weightNodeAttrInfo (dict): of attr:value
+    """
     failedAttrSets = []
     for attr, value in weightNodeAttrInfo.iteritems():
         try:
-            node.setAttr(attr, value)
+            pm.setAttr("{}.{}".format(node, attr), value)
         except Exception as e:
             failedAttrSets.append([attr, value, e])
     if failedAttrSets:
@@ -449,6 +650,12 @@ def createVectorDriver(driverInfo):
 
 
 def recreateAttributes(node, attributesToRecreate):
+    """add any attributes to the provided node from list
+
+    Args:
+        node (str): name of node
+        attributesToRecreate (list): of attrs to add
+    """
     for attrInfo in attributesToRecreate:
         attrPlug = attrInfo[0]
         attrType = attrInfo[1]
@@ -459,6 +666,11 @@ def recreateAttributes(node, attributesToRecreate):
 
 
 def recreateConnections(connectionsInfo):
+    """recreate connections from dict
+
+    Args:
+        connectionsInfo (dict): of nodes.attr plugs to try and recreate
+    """
     failedConnections = []
     for attrPair in connectionsInfo:
         try:
@@ -472,6 +684,14 @@ def recreateConnections(connectionsInfo):
 
 @loadWeightPlugin
 def crateRBFFromInfo(weightNodeInfo_dict):
+    """create an rbf node from the dictionary provided information
+
+    Args:
+        weightNodeInfo_dict (dict): of weightDriver information
+
+    Returns:
+        list: of all created weightDriver nodes
+    """
     createdNodes = []
     weightNodeInfo_dict = copy.deepcopy(weightNodeInfo_dict)
     for weightNodeName, weightInfo in weightNodeInfo_dict.iteritems():
@@ -510,6 +730,14 @@ def crateRBFFromInfo(weightNodeInfo_dict):
 
 
 def getNodesInfo(weightDriverNodes):
+    """convenience function to get a dict of all the provided nodes
+
+    Args:
+        weightDriverNodes (list): names of all weightDriver nodes
+
+    Returns:
+        dict: collected serialized informtiaon
+    """
     weightNodeInfo_dict = {}
     for wdNode in weightDriverNodes:
         wdNode = pm.PyNode(wdNode)
@@ -517,19 +745,37 @@ def getNodesInfo(weightDriverNodes):
     return weightNodeInfo_dict
 
 
-def exportWeightNodes(filePath, weightDriverNodes):
+def exportNodes(filePath, weightDriverNodes):
+    """export serialized node information to the specified filepath
+
+    Args:
+        filePath (str): path/to/file.ext
+        weightDriverNodes (list): of weightDriver nodes
+    """
     weightNodeInfo_dict = getNodesInfo(weightDriverNodes)
     rbf_io._exportData(weightNodeInfo_dict, filePath)
     print "Weight Driver Nodes successfully exported: {}".format(filePath)
 
 
-def importWeightNodes(filePath):
+def importNodes(filePath):
+    """create nodes from serialized data from the provided json filepath
+
+    Args:
+        filePath (str): path/to/file
+    """
     weightNodeInfo_dict = rbf_io._importData(filePath)
     crateRBFFromInfo(weightNodeInfo_dict)
 
 
 class RBFNode(rbf_node.RBFNode):
-    """docstring for RBFNode"""
+    """when subclassed everything that need be overrided is information
+    specific to the module rbf node.
+
+    Attributes:
+        name (str): name of the node that either exists or to be created
+        rbfType (str): nodeType to create node of supported type
+        transformNode (str): name of transform node
+    """
 
     def __init__(self, name):
         self.rbfType = RBF_TYPE
