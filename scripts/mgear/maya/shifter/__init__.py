@@ -169,6 +169,8 @@ class Rig(object):
         if customSteps:
             for step in customSteps:
                 if not self.stopBuild:
+                    if step.startswith("*"):
+                        continue
                     self.stopBuild = guide.helperSlots.runStep(
                         step.split("|")[-1][1:], self.customStepDic)
                 else:
