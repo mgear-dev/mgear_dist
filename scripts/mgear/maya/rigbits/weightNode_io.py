@@ -463,8 +463,8 @@ def copyPoses(nodeA, nodeB, emptyPoseValues=True):
     Returns:
         n/a: n/a
     """
-    posesIndices = pm.getAttr("{}.poses".format(nodeA), mi=True) or [0]
-    if len(posesIndices) == 1 and posesIndices[0] == 0:
+    posesIndices = pm.getAttr("{}.poses".format(nodeA), mi=True) or [None]
+    if len(posesIndices) == 1 and posesIndices[0] is None:
         return
     nodeA_poseInfo = getPoseInfo(nodeA)
     drivenAttrs = getDrivenNodeAttributes(nodeB)
@@ -687,7 +687,7 @@ def recreateConnections(connectionsInfo):
 
 
 @loadWeightPlugin
-def crateRBFFromInfo(weightNodeInfo_dict):
+def createRBFFromInfo(weightNodeInfo_dict):
     """create an rbf node from the dictionary provided information
 
     Args:
@@ -768,7 +768,7 @@ def importNodes(filePath):
         filePath (str): path/to/file
     """
     weightNodeInfo_dict = rbf_io._importData(filePath)
-    crateRBFFromInfo(weightNodeInfo_dict)
+    createRBFFromInfo(weightNodeInfo_dict)
 
 
 class RBFNode(rbf_node.RBFNode):

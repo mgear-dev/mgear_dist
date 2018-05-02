@@ -91,7 +91,7 @@ def importRBFs(filePath):
         return
     for k, v in data.iteritems():
         rbfModule = RBF_MODULES[v["rbfType"]]
-        rbfModule.crateRBFFromInfo({k: v})
+        rbfModule.createRBFFromInfo({k: v})
 
 
 def exportRBFs(nodes, filePath):
