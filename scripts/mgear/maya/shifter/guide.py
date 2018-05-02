@@ -18,7 +18,7 @@ from pymel.core import datatypes
 import mgear
 from .. import attribute, dag, vector, pyqt, skin
 from ... import string
-from ...vendor.Qt import QtCore, QtWidgets
+from ...vendor.Qt import QtCore, QtWidgets, QtGui
 
 from . import guideUI as guui
 from . import customStepUI as csui
@@ -934,6 +934,14 @@ class CustomStepTab(QtWidgets.QDialog, csui.Ui_Form):
 
 class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
     # valueChanged = QtCore.Signal(int)
+    greenBrush = QtGui.QBrush()
+    greenBrush.setColor('#179e83')
+    redBrush = QtGui.QBrush()
+    redBrush.setColor('#9b2d22')
+    whiteBrush = QtGui.QBrush()
+    whiteBrush.setColor('#ffffff')
+    orangeBrush = QtGui.QBrush()
+    orangeBrush.setColor('#e67e22')
 
     def __init__(self, parent=None):
         self.toolName = TYPE
@@ -1025,10 +1033,13 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
             self.customStepTab.preCustomStep_checkBox, "doPreCustomStep")
         for item in self.root.attr("preCustomStep").get().split(","):
             self.customStepTab.preCustomStep_listWidget.addItem(item)
-            self.populateCheck(
-                self.customStepTab.postCustomStep_checkBox, "doPostCustomStep")
+        self.refreshStatusColor(self.customStepTab.preCustomStep_listWidget)
+
+        self.populateCheck(
+            self.customStepTab.postCustomStep_checkBox, "doPostCustomStep")
         for item in self.root.attr("postCustomStep").get().split(","):
             self.customStepTab.postCustomStep_listWidget.addItem(item)
+        self.refreshStatusColor(self.customStepTab.postCustomStep_listWidget)
 
     def create_layout(self):
         """
@@ -1173,6 +1184,16 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
         csTap.postCustomStepEdit_pushButton.clicked.connect(
             partial(self.editFile,
                     csTap.postCustomStep_listWidget))
+
+        # right click menus
+        csTap.preCustomStep_listWidget.setContextMenuPolicy(
+            QtCore.Qt.CustomContextMenu)
+        csTap.preCustomStep_listWidget.customContextMenuRequested.connect(
+            self.preCustomStepMenu)
+        csTap.postCustomStep_listWidget.setContextMenuPolicy(
+            QtCore.Qt.CustomContextMenu)
+        csTap.postCustomStep_listWidget.customContextMenuRequested.connect(
+            self.postCustomStepMenu)
 
     def eventFilter(self, sender, event):
         if event.type() == QtCore.QEvent.ChildRemoved:
@@ -1563,6 +1584,97 @@ class CustomShifterStep(cstp.customShifterMainStep):
                 fileName = os.path.split(item)[1].split(".")[0]
                 stepWidget.addItem(fileName + " | " + item)
                 self.updateListAttr(stepWidget, stepAttr)
+
+    def _customStepMenu(self, cs_listWidget, stepAttr, QPos):
+        "right click context menu for custom step"
+        currentSelection = cs_listWidget.currentItem()
+        if currentSelection is None:
+            return
+        self.csMenu = QtWidgets.QMenu()
+        parentPosition = cs_listWidget.mapToGlobal(QtCore.QPoint(0, 0))
+        menu_item_01 = self.csMenu.addAction("Toggle Custom Step")
+        self.csMenu.addSeparator()
+        menu_item_02 = self.csMenu.addAction("Turn OFF Selected")
+        menu_item_03 = self.csMenu.addAction("Turn ON Selected")
+        self.csMenu.addSeparator()
+        menu_item_04 = self.csMenu.addAction("Turn OFF All")
+        menu_item_05 = self.csMenu.addAction("Turn ON All")
+
+        menu_item_01.triggered.connect(partial(self.toggleStatusCustomStep,
+                                               cs_listWidget,
+                                               stepAttr))
+        menu_item_02.triggered.connect(partial(self.setStatusCustomStep,
+                                               cs_listWidget,
+                                               stepAttr,
+                                               False))
+        menu_item_03.triggered.connect(partial(self.setStatusCustomStep,
+                                               cs_listWidget,
+                                               stepAttr,
+                                               True))
+        menu_item_04.triggered.connect(partial(self.setStatusCustomStep,
+                                               cs_listWidget,
+                                               stepAttr,
+                                               False,
+                                               False))
+        menu_item_05.triggered.connect(partial(self.setStatusCustomStep,
+                                               cs_listWidget,
+                                               stepAttr,
+                                               True,
+                                               False))
+
+        self.csMenu.move(parentPosition + QPos)
+        self.csMenu.show()
+
+    def preCustomStepMenu(self, QPos):
+        self._customStepMenu(self.customStepTab.preCustomStep_listWidget,
+                             "preCustomStep",
+                             QPos)
+
+    def postCustomStepMenu(self, QPos):
+        self._customStepMenu(self.customStepTab.postCustomStep_listWidget,
+                             "postCustomStep",
+                             QPos)
+
+    def toggleStatusCustomStep(self, cs_listWidget, stepAttr):
+        items = cs_listWidget.selectedItems()
+        for item in items:
+            if item.text().startswith("*"):
+                item.setText(item.text()[1:])
+                item.setForeground(self.whiteBrush)
+            else:
+                item.setText("*" + item.text())
+                item.setForeground(self.redBrush)
+
+        self.updateListAttr(cs_listWidget, stepAttr)
+
+    def setStatusCustomStep(
+            self, cs_listWidget, stepAttr, status=True, selected=True):
+        if selected:
+            items = cs_listWidget.selectedItems()
+        else:
+            items = self.getAllItems(cs_listWidget)
+        for item in items:
+            off = item.text().startswith("*")
+            if status and off:
+                item.setText(item.text()[1:])
+            elif not status and not off:
+                item.setText("*" + item.text())
+            self.setStatusColor(item)
+        self.updateListAttr(cs_listWidget, stepAttr)
+
+    def getAllItems(self, cs_listWidget):
+        return [cs_listWidget.item(i) for i in range(cs_listWidget.count())]
+
+    def setStatusColor(self, item):
+        if item.text().startswith("*"):
+            item.setForeground(self.redBrush)
+        else:
+            item.setForeground(self.whiteBrush)
+
+    def refreshStatusColor(self, cs_listWidget):
+        items = self.getAllItems(cs_listWidget)
+        for i in items:
+            self.setStatusColor(i)
 
 
 # Backwards compatibility aliases

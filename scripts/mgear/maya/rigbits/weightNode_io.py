@@ -682,7 +682,7 @@ def recreateConnections(connectionsInfo):
         pprint.pprint(failedConnections)
 
 
-@loadWeightPlugin
+# @loadWeightPlugin
 def crateRBFFromInfo(weightNodeInfo_dict):
     """create an rbf node from the dictionary provided information
 

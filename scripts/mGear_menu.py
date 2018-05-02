@@ -17,7 +17,8 @@ from mgear.maya.rigbits import (
     utils,
     channelWrangler,
     eye_rigger,
-    lips_rigger
+    lips_rigger,
+    rbf_manager_ui
 )
 
 from mGear_guidesTemplates import (
@@ -157,6 +158,8 @@ def createMenu():
     pm.menuItem(label="Duplicate symmetrical",
                 command=rigbits.duplicateSym)
     pm.menuItem(divider=True)
+    pm.menuItem(label="RBF Manager",
+                command=rbf_manager_ui.show)
     pm.menuItem(label="Space Jumper",
                 command=rigbits.spaceJump)
     pm.menuItem(label="Interpolated Transform",
