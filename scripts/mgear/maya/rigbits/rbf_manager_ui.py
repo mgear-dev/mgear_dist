@@ -133,7 +133,7 @@ def VLine():
     return seperatorLine
 
 
-def show():
+def show(*args):
     """To launch the ui and not get the same instance
 
     Returns:

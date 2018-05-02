@@ -1036,7 +1036,7 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
         self.refreshStatusColor(self.customStepTab.preCustomStep_listWidget)
 
         self.populateCheck(
-                self.customStepTab.postCustomStep_checkBox, "doPostCustomStep")
+            self.customStepTab.postCustomStep_checkBox, "doPostCustomStep")
         for item in self.root.attr("postCustomStep").get().split(","):
             self.customStepTab.postCustomStep_listWidget.addItem(item)
         self.refreshStatusColor(self.customStepTab.postCustomStep_listWidget)
@@ -1194,7 +1194,6 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
             QtCore.Qt.CustomContextMenu)
         csTap.postCustomStep_listWidget.customContextMenuRequested.connect(
             self.postCustomStepMenu)
-
 
     def eventFilter(self, sender, event):
         if event.type() == QtCore.QEvent.ChildRemoved:
@@ -1586,7 +1585,6 @@ class CustomShifterStep(cstp.customShifterMainStep):
                 stepWidget.addItem(fileName + " | " + item)
                 self.updateListAttr(stepWidget, stepAttr)
 
-
     def _customStepMenu(self, cs_listWidget, stepAttr, QPos):
         "right click context menu for custom step"
         currentSelection = cs_listWidget.currentItem()
@@ -1644,12 +1642,13 @@ class CustomShifterStep(cstp.customShifterMainStep):
                 item.setText(item.text()[1:])
                 item.setForeground(self.whiteBrush)
             else:
-                item.setText("*"+item.text())
+                item.setText("*" + item.text())
                 item.setForeground(self.redBrush)
 
         self.updateListAttr(cs_listWidget, stepAttr)
 
-    def setStatusCustomStep(self, cs_listWidget, stepAttr, status=True, selected=True):
+    def setStatusCustomStep(
+            self, cs_listWidget, stepAttr, status=True, selected=True):
         if selected:
             items = cs_listWidget.selectedItems()
         else:
@@ -1659,7 +1658,7 @@ class CustomShifterStep(cstp.customShifterMainStep):
             if status and off:
                 item.setText(item.text()[1:])
             elif not status and not off:
-                item.setText("*"+item.text())
+                item.setText("*" + item.text())
             self.setStatusColor(item)
         self.updateListAttr(cs_listWidget, stepAttr)
 
@@ -1676,8 +1675,6 @@ class CustomShifterStep(cstp.customShifterMainStep):
         items = self.getAllItems(cs_listWidget)
         for i in items:
             self.setStatusColor(i)
-
-
 
 
 # Backwards compatibility aliases
