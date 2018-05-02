@@ -24,24 +24,42 @@ Original M.O
 -keep in mind possible future RBF solvers
 -non compound, ty vs .t
 
+Attributes:
+    CTL_SUFFIX (str): suffix for anim controls
+    DRIVEN_SUFFIX (str): suffix for driven group nodes
+    EXTRA_MODULE_DICT (str): name of the dict which holds additional modules
+    MGEAR_EXTRA_ENVIRON (str): environment variable to query for paths
+    TOOL_NAME (str): name of UI
+    TOOL_TITLE (str): title as it appears in the ui
+    TOOL_VERSION (float): UI version
+
+Deleted Attributes:
+    RBF_MODULES (dict): of supported rbf modules
+
 """
+# python
 import os
+import imp
+import pprint
 from functools import partial
 
+# maya
 import maya.cmds as mc
 import maya.OpenMayaUI as mui
 
+# mgear
+import mgear.string as mString
 from mgear.maya import pyqt
 from mgear.vendor.Qt import QtWidgets, QtCore, QtCompat
+from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 
+# rbf
 import rbf_io
 import rbf_node
-import weightNode_io
 
 # =============================================================================
 # Constants
 # =============================================================================
-RBF_MODULES = {"weightDriver": weightNode_io}
 
 TOOL_NAME = "RBF Manager UI"
 TOOL_VERSION = .1
@@ -50,10 +68,15 @@ TOOL_TITLE = "{} v{}".format(TOOL_NAME, TOOL_VERSION)
 DRIVEN_SUFFIX = rbf_node.DRIVEN_SUFFIX
 CTL_SUFFIX = rbf_node.CTL_SUFFIX
 
+MGEAR_EXTRA_ENVIRON = "MGEAR_RBF_EXTRA"
+EXTRA_MODULE_DICT = "extraFunc_dict"
+
+MIRROR_SUFFIX = "_mr"
 
 # =============================================================================
 # general functions
 # =============================================================================
+
 
 def getPlugAttrs(nodes, keyable=False):
     plugAttrs = []
@@ -63,23 +86,53 @@ def getPlugAttrs(nodes, keyable=False):
     return plugAttrs
 
 
-def RBF(name, rbfType=None):
-    if mc.objExists(name) and mc.nodeType(name) in RBF_MODULES:
+def sortRBF(name, rbfType=None):
+    if mc.objExists(name) and mc.nodeType(name) in rbf_io.RBF_MODULES:
         rbfType = mc.nodeType(name)
-        return RBF_MODULES[rbfType].RBFNode(name)
+        return rbf_io.RBF_MODULES[rbfType].RBFNode(name)
     elif rbfType is not None:
-        return RBF_MODULES[rbfType].RBFNode(name)
+        return rbf_io.RBF_MODULES[rbfType].RBFNode(name)
+
+
+def getEnvironModules():
+    extraModulePath = os.environ.get(MGEAR_EXTRA_ENVIRON, None)
+    if extraModulePath is None or not os.path.exists(extraModulePath):
+        return None
+    exModule = imp.load_source(MGEAR_EXTRA_ENVIRON,
+                               os.path.abspath(extraModulePath))
+    additionalFuncDict = getattr(exModule, EXTRA_MODULE_DICT, None)
+    if additionalFuncDict is None:
+        mc.warning("'{}' not found in {}".format(EXTRA_MODULE_DICT,
+                                                 extraModulePath))
+        print "No additional menu items added to {}".format(TOOL_NAME)
+    return additionalFuncDict
 
 
 def selectNode(name):
+    """Convenience function, to ensure no errors when selecting nodes in UI
+
+    Args:
+        name (str): name of node to be selected
+    """
     if mc.objExists(name):
         mc.select(name)
+    else:
+        print name, "No longer exists for selection!"
 
 
 # =============================================================================
 # UI General Functions
 # =============================================================================
 def getMultipleAttrs(node, attributes):
+    """get multiple attrs and their values in a list, in order
+
+    Args:
+        node (str): name of node
+        attributes (list): of attrs to query
+
+    Returns:
+        list: of values
+    """
     valuesToReturn = []
     for attr in attributes:
         valuesToReturn.append(mc.getAttr("{}.{}".format(node, attr)))
@@ -87,6 +140,16 @@ def getMultipleAttrs(node, attributes):
 
 
 def getControlAttrWidget(nodeAttr, label=""):
+    """get a cmds.attrControlGrp wrapped in a qtWidget, still connected
+    to the specified attr
+
+    Args:
+        nodeAttr (str): node.attr, the target for the attrControlGrp
+        label (str, optional): name for the attr widget
+
+    Returns:
+        QtWidget: qwidget created from attrControlGrp
+    """
     mAttrFeild = mc.attrControlGrp(attribute=nodeAttr, label=label, po=True)
     ptr = mui.MQtUtil.findControl(mAttrFeild)
     controlWidget = QtCompat.wrapInstance(long(ptr), base=QtWidgets.QWidget)
@@ -104,22 +167,12 @@ def getControlAttrWidget(nodeAttr, label=""):
     return attrEdit[0]
 
 
-def getMayaIconPath(desiredIconName, suffix=".png"):
-    for path in getIconsSearchPaths():
-        potentialPath = os.path.join(os.path.abspath(path),
-                                     desiredIconName + suffix)
-        if os.path.exists(potentialPath):
-            return potentialPath
-    return None
-
-
-def getIconsSearchPaths():
-    iconPathString = os.getenv("XBMLANGPATH", "")
-    iconPaths = iconPathString.split(";")
-    return iconPaths
-
-
 def HLine():
+    """seporator line for widgets
+
+    Returns:
+        Qframe: line for seperating UI elements visually
+    """
     seperatorLine = QtWidgets.QFrame()
     seperatorLine.setFrameShape(QtWidgets.QFrame.HLine)
     seperatorLine.setFrameShadow(QtWidgets.QFrame.Sunken)
@@ -127,27 +180,44 @@ def HLine():
 
 
 def VLine():
+    """seporator line for widgets
+
+    Returns:
+        Qframe: line for seperating UI elements visually
+    """
     seperatorLine = QtWidgets.QFrame()
     seperatorLine.setFrameShape(QtWidgets.QFrame.VLine)
     seperatorLine.setFrameShadow(QtWidgets.QFrame.Sunken)
     return seperatorLine
 
 
-def show():
+def show(*args):
     """To launch the ui and not get the same instance
 
     Returns:
         DistributeUI: instance
+
+    Args:
+        *args: Description
     """
     global RBF_UI
     if 'RBF_UI' in globals():
         RBF_UI.close()
     RBF_UI = RBFManagerUI(parent=pyqt.maya_main_window())
-    RBF_UI.show()
+    RBF_UI.show(dockable=True)
     return RBF_UI
 
 
 def genericWarning(parent, warningText):
+    """generic prompt warning with the provided text
+
+    Args:
+        parent (QWidget): Qwidget to be parented under
+        warningText (str): information to display to the user
+
+    Returns:
+        QtCore.Response: of what the user chose. For warnings
+    """
     selWarning = QtWidgets.QMessageBox(parent)
     selWarning.setText(warningText)
     results = selWarning.exec_()
@@ -155,6 +225,16 @@ def genericWarning(parent, warningText):
 
 
 def promptAcceptance(parent, descriptionA, descriptionB):
+    """Warn user, asking for permission
+
+    Args:
+        parent (QWidget): to be parented under
+        descriptionA (str): info
+        descriptionB (str): further info
+
+    Returns:
+        QtCore.Response: accept, deline, reject
+    """
     msgBox = QtWidgets.QMessageBox(parent)
     msgBox.setText(descriptionA)
     msgBox.setInformativeText(descriptionB)
@@ -166,7 +246,13 @@ def promptAcceptance(parent, descriptionA, descriptionB):
 
 
 class ClickableLineEdit(QtWidgets.QLineEdit):
-    # signal when the text entry is left clicked
+
+    """subclass to allow for clickable lineEdit, as a button
+
+    Attributes:
+        clicked (QtCore.Signal): emitted when clicked
+    """
+
     clicked = QtCore.Signal(str)
 
     def mousePressEvent(self, event):
@@ -177,20 +263,39 @@ class ClickableLineEdit(QtWidgets.QLineEdit):
 
 
 class TabBar(QtWidgets.QTabBar):
-    """docstring for TabBar"""
+    """Subclass to get a taller tab widget, for readability
+    """
+
     def __init__(self):
         super(TabBar, self).__init__()
 
     def tabSizeHint(self, index):
         width = QtWidgets.QTabBar.tabSizeHint(self, index).width()
-        # width = self.tabSizeHint(index).width()
         return QtCore.QSize(width, 25)
 
 
 class RBFSetupInput(QtWidgets.QDialog):
-    """docstring for RBFSetupInput"""
+
+    """Allow the user to select which attrs will drive the rbf nodes in a setup
+
+    Attributes:
+        drivenListWidget (QListWidget): widget to display attrs to drive setup
+        okButton (QPushButton): BUTTON
+        result (list): of selected attrs from listWidget
+        setupField (bool)): Should the setup lineEdit widget be displayed
+        setupLineEdit (QLineEdit): name selected by user
+    """
+
     def __init__(self, listValues, setupField=True, parent=None):
+        """setup the UI widgets
+
+        Args:
+            listValues (list): attrs to be displayed on the list
+            setupField (bool, optional): should the setup line edit be shown
+            parent (QWidget, optional): widget to parent this to
+        """
         super(RBFSetupInput, self).__init__(parent=parent)
+        self.setWindowTitle(TOOL_TITLE)
         mainLayout = QtWidgets.QVBoxLayout()
         self.setLayout(mainLayout)
         self.setupField = setupField
@@ -199,6 +304,7 @@ class RBFSetupInput(QtWidgets.QDialog):
         setupLayout = QtWidgets.QHBoxLayout()
         setupLabel = QtWidgets.QLabel("Specify Setup Name")
         self.setupLineEdit = QtWidgets.QLineEdit()
+        self.setupLineEdit.setPlaceholderText("<name>_<side><int> // skirt_L0")
         setupLayout.addWidget(setupLabel)
         setupLayout.addWidget(self.setupLineEdit)
         if setupField:
@@ -206,12 +312,12 @@ class RBFSetupInput(QtWidgets.QDialog):
         #  --------------------------------------------------------------------
         drivenLayout = QtWidgets.QVBoxLayout()
         drivenLabel = QtWidgets.QLabel("Select Driven Attributes")
-        self.drivenList = QtWidgets.QListWidget()
+        self.drivenListWidget = QtWidgets.QListWidget()
         selType = QtWidgets.QAbstractItemView.ExtendedSelection
-        self.drivenList.setSelectionMode(selType)
-        self.drivenList.addItems(listValues)
+        self.drivenListWidget.setSelectionMode(selType)
+        self.drivenListWidget.addItems(listValues)
         drivenLayout.addWidget(drivenLabel)
-        drivenLayout.addWidget(self.drivenList)
+        drivenLayout.addWidget(self.drivenListWidget)
         mainLayout.addLayout(drivenLayout)
         #  --------------------------------------------------------------------
         # buttonLayout = QtWidgets.QHBoxLayout()
@@ -220,11 +326,16 @@ class RBFSetupInput(QtWidgets.QDialog):
         mainLayout.addWidget(self.okButton)
 
     def onOK(self):
+        """collect information from the displayed widgets, userinput, return
+
+        Returns:
+            list: of user input provided from user
+        """
         setupName = self.setupLineEdit.text()
         if setupName == "" and self.setupField:
             genericWarning(self, "Enter Setup Name")
             return
-        selectedAttrs = self.drivenList.selectedItems()
+        selectedAttrs = self.drivenListWidget.selectedItems()
         if not selectedAttrs:
             genericWarning(self, "Select at least one attribute")
             return
@@ -242,23 +353,23 @@ class RBFSetupInput(QtWidgets.QDialog):
         return self.result
 
 
-class RBFManagerUI(QtWidgets.QMainWindow):
+class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
     """docstring for RBFManagerUI"""
     mousePosition = QtCore.Signal(int, int)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, hideMenuBar=False):
         super(RBFManagerUI, self).__init__(parent=parent)
-        self.setMouseTracking(True)
         self.genericWidgetHight = 24
-
         self.setWindowTitle(TOOL_TITLE)
         self.currentRBFSetupNodes = []
         self.allSetupsInfo = None
-        self.setMenuBar(self.createMenuBar())
+        self.setMenuBar(self.createMenuBar(hideMenuBar=hideMenuBar))
         self.setCentralWidget(self.createCentralWidget())
         self.centralWidget().setMouseTracking(True)
         self.refreshRbfSetupList()
         self.connectSignals()
+        # added because the dockableMixin makes the ui appear small
+        self.adjustSize()
 
     # general functions -------------------------------------------------------
     def getSelectedSetup(self):
@@ -326,11 +437,10 @@ class RBFManagerUI(QtWidgets.QMainWindow):
             genericWarning(self, "Select Node to be driven!")
             return
         drivenNode = drivenNode[0]
-        if mc.nodeType(drivenNode) == "transform":
-            drivenNode = rbf_node.addDrivenGroup(drivenNode)
 
         availableAttrs = getPlugAttrs([drivenNode], keyable=True)
         setupName, rbfType = self.getSelectedSetup()
+        # if a setup has already been named or starting new
         if setupName is None:
             setupName, drivenAttrs = self.getUserSetupInfo(availableAttrs)
         else:
@@ -338,7 +448,9 @@ class RBFManagerUI(QtWidgets.QMainWindow):
                                                          setupField=False)
         if not drivenAttrs:
             return
-        rbfNode = RBF(drivenNode, rbfType=rbfType)
+        if mc.nodeType(drivenNode) == "transform":
+            drivenNode = rbf_node.addDrivenGroup(drivenNode)
+        rbfNode = sortRBF(drivenNode, rbfType=rbfType)
         rbfNode.setSetupName(setupName)
         rbfNode.setDriverControlAttr(driverControl)
         rbfNode.setDriverNode(driverNode, driverAttrs)
@@ -424,7 +536,7 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         self.allSetupsInfo = {}
         tmp_dict = rbf_node.getRbfSceneSetupsInfo(includeEmpty=includeEmpty)
         for setupName, nodes in tmp_dict.iteritems():
-            self.allSetupsInfo[setupName] = [RBF(n) for n in nodes]
+            self.allSetupsInfo[setupName] = [sortRBF(n) for n in nodes]
 
     def setNodeToField(self, lineEdit, multi=False):
         selected = mc.ls(sl=True)
@@ -764,6 +876,62 @@ class RBFManagerUI(QtWidgets.QMainWindow):
             return
         rbf_io.exportRBFs(nodesToExport, filePath)
 
+    def gatherMirroredInfo(self, rbfNodes):
+        mirrorWeightInfo = {}
+        for rbfNode in rbfNodes:
+            weightInfo = rbfNode.getNodeInfo()
+            # connections -----------------------------------------------------
+            mrConnections = []
+            for pairs in weightInfo["connections"]:
+                mrConnections.append([mString.convertRLName(pairs[0]),
+                                     mString.convertRLName(pairs[1])])
+            weightInfo["connections"] = mrConnections
+            # drivenControlName -----------------------------------------------
+            mrDrvnCtl = mString.convertRLName(weightInfo["drivenControlName"])
+            weightInfo["drivenControlName"] = mrDrvnCtl
+            # drivenNode ------------------------------------------------------
+            weightInfo["drivenNode"] = [mString.convertRLName(n) for n
+                                        in weightInfo["drivenNode"]]
+            # driverControl ---------------------------------------------------
+            mrDrvrCtl = mString.convertRLName(weightInfo["driverControl"])
+            weightInfo["driverControl"] = mrDrvrCtl
+            # driverNode ------------------------------------------------------
+            weightInfo["driverNode"] = [mString.convertRLName(n) for n
+                                        in weightInfo["driverNode"]]
+            # setupName -------------------------------------------------------
+            mrSetupName = mString.convertRLName(weightInfo["setupName"])
+            if mrSetupName == weightInfo["setupName"]:
+                mrSetupName = "{}{}".format(mrSetupName, MIRROR_SUFFIX)
+            weightInfo["setupName"] = mrSetupName
+            # transformNode ---------------------------------------------------
+                # name
+                # parent
+            tmp = weightInfo["transformNode"]["name"]
+            mrTransformName = mString.convertRLName(tmp)
+            weightInfo["transformNode"]["name"] = mrTransformName
+
+            tmp = weightInfo["transformNode"]["parent"]
+            if tmp is None:
+                mrTransformPar = None
+            else:
+                mrTransformPar = mString.convertRLName(tmp)
+            weightInfo["transformNode"]["parent"] = mrTransformPar
+            # name ------------------------------------------------------------
+            mirrorWeightInfo[mString.convertRLName(rbfNode.name)] = weightInfo
+
+    def mirrorSetup(self):
+        if not self.currentRBFSetupNodes or True:
+            print "Mirroring - WIP!"
+            return
+        mirrorWeightInfo = self.gatherMirroredInfo(self.currentRBFSetupNodes)
+        mrRbfType = self.currentRBFSetupNodes[0].rbfType
+        poseIndices = len(self.currentRBFSetupNodes[0].getPoseInfo()["poseInput"])
+        rbfModule = rbf_io.RBF_MODULES[mrRbfType]
+        createdNodes = rbfModule.createRBFFromInfo(mirrorWeightInfo)
+        for mrNode in createdNodes:
+            mrRbfNode = sortRBF(mrNode)
+
+
     def hideMenuBar(self, x, y):
         if x < 100 and y < 50:
             self.menuBar().show()
@@ -823,7 +991,6 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         tabBar.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         tabBar.customContextMenuRequested.connect(self.tabConextMenu)
         tabBar.tabCloseRequested.connect(self.removeRBFFromSetup)
-        self.mousePosition.connect(self.hideMenuBar)
 
     # broken down widgets -----------------------------------------------------
     def createSetupSelectorWidget(self):
@@ -979,7 +1146,7 @@ class RBFManagerUI(QtWidgets.QMainWindow):
                 EditPoseButton,
                 deletePoseButton)
 
-    def createMenuBar(self):
+    def createMenuBar(self, hideMenuBar=False):
         mainMenuBar = QtWidgets.QMenuBar()
         mainMenuBar.setContentsMargins(0, 0, 0, 0)
         file = mainMenuBar.addMenu("File")
@@ -987,7 +1154,21 @@ class RBFManagerUI(QtWidgets.QMainWindow):
         file.addAction("Export current setup", partial(self.exportNodes,
                                                        allSetups=False))
         file.addAction("Import RBFs", partial(self.importNodes))
-        mainMenuBar.hide()
+        # mirror --------------------------------------------------------------
+        mirrorMenu = mainMenuBar.addMenu("Mirror")
+        mirrorMenu.addAction("Mirror Setup", self.mirrorSetup)
+
+        # show override -------------------------------------------------------
+        additionalFuncDict = getEnvironModules()
+        if additionalFuncDict:
+            showOverridesMenu = mainMenuBar.addMenu("Show Overrides")
+            for k, v in additionalFuncDict.iteritems():
+                showOverridesMenu.addAction(k, v)
+
+        if hideMenuBar:
+            mainMenuBar.hide()
+            self.setMouseTracking(True)
+            self.mousePosition.connect(self.hideMenuBar)
         return mainMenuBar
 
     # main assebly ------------------------------------------------------------

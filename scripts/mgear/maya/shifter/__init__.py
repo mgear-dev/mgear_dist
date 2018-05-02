@@ -118,7 +118,11 @@ class Rig(object):
                 mgear.sev_error)
             return
 
-        self.preCustomStep(selection)
+        # check if is partial build or full guide build
+        ismodel = False
+        if selection[0].hasAttr("ismodel"):
+            self.preCustomStep(selection)
+            ismodel = True
 
         if not self.stopBuild:
             mgear.log("\n" + "= GUIDE VALIDATION " + "=" * 46)
@@ -130,7 +134,8 @@ class Rig(object):
             # Build
             mgear.log("\n" + "= BUILDING RIG " + "=" * 46)
             self.build()
-            self.postCustomStep()
+            if ismodel:
+                self.postCustomStep()
 
             endTime = datetime.datetime.now()
             finalTime = endTime - startTime
@@ -164,6 +169,8 @@ class Rig(object):
         if customSteps:
             for step in customSteps:
                 if not self.stopBuild:
+                    if step.startswith("*"):
+                        continue
                     self.stopBuild = guide.helperSlots.runStep(
                         step.split("|")[-1][1:], self.customStepDic)
                 else:
