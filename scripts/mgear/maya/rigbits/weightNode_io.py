@@ -130,7 +130,11 @@ def loadWeightPlugin(dependentFunc):
     Returns:
         func: pass through of function
     """
-    pm.loadPlugin("weightDriver.mll", qt=True)
+    try:
+        pm.loadPlugin("weightDriver.mll", qt=True)
+    except RuntimeError:
+        pm.displayWarning("RBF Manager couldn't found any valid RBF solver.")
+
     return dependentFunc
 
 
@@ -682,7 +686,7 @@ def recreateConnections(connectionsInfo):
         pprint.pprint(failedConnections)
 
 
-# @loadWeightPlugin
+@loadWeightPlugin
 def crateRBFFromInfo(weightNodeInfo_dict):
     """create an rbf node from the dictionary provided information
 
