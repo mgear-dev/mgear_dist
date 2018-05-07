@@ -1,12 +1,3 @@
-"""I do not know where this will end up, so the example is vague.
-import widget
-reload(widget)
-
-sCw = toggleGeoVisibilityWidget.ToggleGeoVisibility()
-This will set the formation and trigger a refresh
-sCw.setInfomation("lucifer_base:root")
-sCw.show()
-"""
 from functools import partial
 
 import maya.cmds as mc
@@ -143,7 +134,8 @@ class ToggleGeoVisibility(QtWidgets.QWidget):
         self.modelControls = []
         self.gui()
         self.connectSignals()
-        self.refresh()
+        # self.setInfomation()
+        # self.refresh()
 
     def colorItemBasedOnAttr(self, item):
         """Color the widgetitem based on the state of the visibility control
@@ -172,15 +164,17 @@ class ToggleGeoVisibility(QtWidgets.QWidget):
             item = self.resultWidget.item(row)
             self.colorItemBasedOnAttr(item)
 
-    def setInfomation(self, model):
+    def setInfomation(self):
         """set the model on the widget and refresh/update info
 
         Args:
             model (string): name of the model
         """
-        self.model = model
-        self.nameSpace = utils.getNamespace(self.model)
-        self.refresh()
+        # self.model = model
+        print utils.getModel(self)
+        self.model = utils.getModel(self).name()
+        self.nameSpace = utils.getNamespace(utils.getModel(self))
+        # self.refresh()
 
     def connectSignals(self):
         """connect widgets/signals to the functions
@@ -246,10 +240,11 @@ class ToggleGeoVisibility(QtWidgets.QWidget):
          for token in allTokens]
         self.hideResults(searchResults)
 
-    def setNodeInfoForQuery(self, rootNode=GEO_RENDER_NODE, nodesToGet="all"):
+    def setNodeInfoForQuery(self, nodesToGet="all"):
         """Query the controls set in the scene from the scene.
         TODO: Open this up to select multiple areas for query
         """
+        rootNode = str(self.property("geo_root"))
         meshNodes = []
         node = self.getNodeWithNameSpace(rootNode)
         if mc.objExists(node):
@@ -324,6 +319,7 @@ class ToggleGeoVisibility(QtWidgets.QWidget):
     def refresh(self):
         """refresh the ui
         """
+        self.setInfomation()
         self.showVisibleButton.setChecked(False)
         self.showHiddenButton.setChecked(False)
         self.searchLineEdit.clear()

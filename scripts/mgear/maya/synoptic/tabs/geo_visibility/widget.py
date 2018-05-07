@@ -1,7 +1,9 @@
 import mgear.maya.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
+
 class Ui_baker(object):
+
     def setupUi(self, baker):
         baker.setObjectName("baker")
         baker.resize(325, 840)
@@ -10,7 +12,7 @@ class Ui_baker(object):
         self.gridLayout.setObjectName("gridLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.widget = ControlListerUI(baker)
+        self.widget = ToggleGeoVisibility(baker)
         self.widget.setObjectName("widget")
         self.verticalLayout.addWidget(self.widget)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -22,5 +24,6 @@ class Ui_baker(object):
 
     def retranslateUi(self, baker):
         baker.setWindowTitle(gqt.fakeTranslate("baker", "Form", None, -1))
+        self.widget.setProperty("geo_root", gqt.fakeTranslate("baker", "geo_root", None, -1))
 
-from mgear.maya.synoptic.searchControlsWidget import ControlListerUI
+from mgear.maya.synoptic.toggleGeoVisibilityWidget import ToggleGeoVisibility

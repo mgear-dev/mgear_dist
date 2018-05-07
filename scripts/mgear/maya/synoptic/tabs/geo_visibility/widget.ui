@@ -23,7 +23,11 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="ControlListerUI" name="widget" native="true"/>
+      <widget class="ToggleGeoVisibility" name="widget" native="true">
+       <property name="geo_root" stdset="0">
+        <string>geo_root</string>
+       </property>
+      </widget>
      </item>
      <item>
       <spacer name="verticalSpacer">
@@ -44,9 +48,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ControlListerUI</class>
+   <class>ToggleGeoVisibility</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.searchControlsWidget</header>
+   <header>mgear.maya.synoptic.toggleGeoVisibilityWidget</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
