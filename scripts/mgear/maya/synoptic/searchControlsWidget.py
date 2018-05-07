@@ -1,18 +1,12 @@
-"""I do not know where this will end up, so the example is vague.
-import widget
-reload(widget)
-
-# supports namespace
-rigTopNode = "root"
-
-h = widget.ControlListerUI(rigTopNode)
-h.show()
-"""
 import maya.cmds as mc
 
+# from . import utils
+# import mgear.maya.pyqt as gqt
+# QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+
 from . import utils
-import mgear.maya.pyqt as gqt
-QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
+
+from mgear.vendor.Qt import QtWidgets
 
 
 def getControlsFromSets(desiredSet, listToPopulate):
@@ -72,6 +66,7 @@ def getTokens(userInput):
 
 class ControlListerUI(QtWidgets.QWidget):
     """widget for listing all controls under a namespace"""
+
     def __init__(self, parent=None):
         super(ControlListerUI, self).__init__(parent)
         # self.parent = parent
@@ -146,7 +141,6 @@ class ControlListerUI(QtWidgets.QWidget):
         """
         self.resultWidget.clearSelection()
         self.resultWidget.selectAll()
-
 
     def specificSelection(self, *args):
         """When something is selected on the results widget, select it in maya
