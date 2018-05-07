@@ -250,6 +250,11 @@ def getConnectedRBFToggleNode(node, toggleAttr):
     return driverControl
 
 
+def setToggleRBFAttr(node, value, toggleAttr):
+    attrPlug = "{}.{}".format(node, toggleAttr)
+    mc.setAttr(attrPlug, value)
+
+
 def createDriverControlAttr(node):
     """create the string attr where information will be stored for query
     associated driver anim control
@@ -628,8 +633,14 @@ class RBFNode(object):
         Returns:
             TYPE: Description
         """
-        driverControl = getConnectedRBFToggleNode(self.name,
-                                                  self.getRBFToggleAttr())
+        driverControl = self.getConnectedRBFToggleNode()
         if not driverControl:
             return
         deleteRBFToggleAttr(driverControl)
+
+    def setToggleRBFAttr(self, value):
+        driverControl = self.getConnectedRBFToggleNode()
+        setToggleRBFAttr(driverControl, value, RBF_SCALE_ATTR)
+
+    def getConnectedRBFToggleNode(self):
+        return getConnectedRBFToggleNode(self.name, self.getRBFToggleAttr())
