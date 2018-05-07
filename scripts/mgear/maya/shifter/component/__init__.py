@@ -324,6 +324,9 @@ class Main(object):
                                jnt + ".r",
                                f=True)
 
+            # set not keyable
+            attribute.setNotKeyableAttributes(jnt)
+
         else:
             jnt = primitive.addJoint(obj, self.getName(
                 str(name) + "_jnt"), transform.getTransform(obj))
