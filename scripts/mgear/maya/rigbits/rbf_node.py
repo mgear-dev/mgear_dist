@@ -139,7 +139,7 @@ def decompMatrix(node, matrix):
     mTransformMtx = OpenMaya.MTransformationMatrix(matrix)
 
     # Translation Values
-    trans = mTransformMtx.translation(OpenMaya.MSpace.kObject)
+    trans = mTransformMtx.getTranslation(OpenMaya.MSpace.kPostTransform)
 
     # Euler rotation value in radians
     eulerRot = mTransformMtx.eulerRotation()
@@ -157,7 +157,7 @@ def decompMatrix(node, matrix):
     scaleUtil = OpenMaya.MScriptUtil()
     scaleUtil.createFromList([0, 0, 0], 3)
     scaleVec = scaleUtil.asDoublePtr()
-    mTransformMtx.getScale(scaleVec, OpenMaya.MSpace.kObject)
+    mTransformMtx.getScale(scaleVec, OpenMaya.MSpace.kPostTransform)
     scale = [OpenMaya.MScriptUtil.getDoubleArrayItem(scaleVec, i)
              for i in range(0, 3)]
 
