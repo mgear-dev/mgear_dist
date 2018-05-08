@@ -101,7 +101,10 @@ def getPlugAttrs(nodes, keyable=False):
     """
     plugAttrs = []
     for node in nodes:
-        attrs = mc.listAttr(node, se=True, u=False, k=keyable)
+        # TEMP, LISTING ALL. HOTFIX. REQUEST
+        attrs = mc.listAttr(node, se=True, u=False, cb=False)
+        if attrs is None:
+            continue
         [plugAttrs.append("{}.{}".format(node, a)) for a in attrs]
     return plugAttrs
 
@@ -467,6 +470,33 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         else:
             return None, None
 
+    def __deleteSetup(self):
+        decision = promptAcceptance(self,
+                                    "Delete current Setup?",
+                                    "This will delete all RBF nodes in setup.")
+        if decision in [QtWidgets.QMessageBox.Discard,
+                        QtWidgets.QMessageBox.Cancel]:
+            return
+        self.deleteSetup()
+
+    def deleteSetup(self, setupName=None):
+        """Delete all the nodes within a setup.
+
+        Args:
+            setupName (None, optional): Description
+        """
+        setupType = None
+        if setupName is None:
+            setupName, setupType = self.getSelectedSetup()
+        nodesToDelete = self.allSetupsInfo.get(setupName, [])
+        for rbfNode in nodesToDelete:
+            drivenNode = rbfNode.getDrivenNode()
+            rbfNode.deleteRBFToggleAttr()
+            if drivenNode:
+                rbf_node.removeDrivenGroup(drivenNode[0])
+            mc.delete(rbfNode.transformNode)
+        self.refresh()
+
     def removeRBFFromSetup(self, drivenWidgetIndex):
         """remove RBF tab from setup. Delete driven group, attrs and clean up
 
@@ -524,8 +554,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
             genericWarning(self, "Select Node to be driven!")
             return
         drivenNode = drivenNode[0]
-
-        availableAttrs = getPlugAttrs([drivenNode], keyable=True)
+        availableAttrs = getPlugAttrs([drivenNode], keyable=False)
         setupName, rbfType = self.getSelectedSetup()
         # if a setup has already been named or starting new
         if setupName is None:
@@ -961,7 +990,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
             return
         self.attrMenu = QtWidgets.QMenu()
         parentPosition = attributeListWidget.mapToGlobal(QtCore.QPoint(0, 0))
-        menu_item_01 = self.attrMenu.addAction("Only display keyable")
+        menu_item_01 = self.attrMenu.addAction("Only Show ChannelBox")
         menu_item_01.triggered.connect(partial(self.updateAttributeDisplay,
                                                attributeListWidget,
                                                str(driverLineEdit.text()),
@@ -1413,6 +1442,8 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         file.addAction("Export current setup", partial(self.exportNodes,
                                                        allSetups=False))
         file.addAction("Import RBFs", partial(self.importNodes))
+        file.addSeparator()
+        file.addAction("Delete Current Setup", self.__deleteSetup)
         # mirror --------------------------------------------------------------
         mirrorMenu = mainMenuBar.addMenu("Mirror")
         mirrorMenu.addAction("Mirror Setup", self.mirrorSetup)
