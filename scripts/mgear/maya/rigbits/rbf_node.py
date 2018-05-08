@@ -66,6 +66,22 @@ RBF_SCALE_ATTR = "RBF_Multiplier"
 # =============================================================================
 # general functions
 # =============================================================================
+def getMultipleAttrs(node, attributes):
+    """get multiple attrs and their values in a list, in order
+
+    Args:
+        node (str): name of node
+        attributes (list): of attrs to query
+
+    Returns:
+        list: of values
+    """
+    valuesToReturn = []
+    for attr in attributes:
+        valuesToReturn.append(mc.getAttr("{}.{}".format(node, attr)))
+    return valuesToReturn
+
+
 def addDrivenGroup(node):
     """add driven group, pad, above the provided node for direct connection
 
@@ -639,8 +655,42 @@ class RBFNode(object):
         deleteRBFToggleAttr(driverControl)
 
     def setToggleRBFAttr(self, value):
+        """Toggle rbfattr on or off (any value provided)
+
+        Args:
+            value (TYPE): Description
+        """
         driverControl = self.getConnectedRBFToggleNode()
         setToggleRBFAttr(driverControl, value, RBF_SCALE_ATTR)
 
     def getConnectedRBFToggleNode(self):
+        """return the node connected to the RBFNodes toggle attr
+
+        Returns:
+            str: name of node
+        """
         return getConnectedRBFToggleNode(self.name, self.getRBFToggleAttr())
+
+    def syncPoseIndices(self, srcNode):
+        raise NotImplementedError()
+
+    def applyDefaultPose(self, posesIndex=0):
+        """apply default pose, WARNING. Applying default on more than one index
+        will result in rbf decomp error.
+
+        Args:
+            posesIndex (int, optional): index to default values
+        """
+        driverNode = self.getDriverNode()[0]
+        driverAttrs = self.getDriverNodeAttributes()
+        poseInputs = getMultipleAttrs(driverNode, driverAttrs)
+        drivenAttrs = self.getDrivenNodeAttributes()
+        newPoseValues = []
+        for attr in drivenAttrs:
+            if attr in SCALE_ATTRS:
+                newPoseValues.append(1.0)
+            else:
+                newPoseValues.append(0.0)
+        self.addPose(poseInput=poseInputs,
+                     poseValue=newPoseValues,
+                     posesIndex=posesIndex)

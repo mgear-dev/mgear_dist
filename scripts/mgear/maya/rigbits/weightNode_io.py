@@ -452,7 +452,7 @@ def getDrivenNodeAttributes(node):
 
 def copyPoses(nodeA, nodeB, emptyPoseValues=True):
     """Copy poses from nodeA to nodeB with the option to be blank or node
-    for syncing nodes
+    for syncing nodes OF EQUAL LENGTH IN POSE INFO
 
     Args:
         nodeA (str): name of weightedNode
@@ -483,10 +483,35 @@ def copyPoses(nodeA, nodeB, emptyPoseValues=True):
                 if attr == "poseInput":
                     valueToSet = pIndexValue
                 elif attr == "poseValue" and emptyPoseValues:
-                    valueToSet = 0.0
+                    if drivenAttrs[index] in rbf_node.SCALE_ATTRS:
+                        valueToSet = 1.0
+                    else:
+                        valueToSet = 0.0
                 if index > nodeBdrivenIndex:
                     continue
                 pm.setAttr(pathToAttr, valueToSet)
+
+
+def syncPoseIndices(srcNode, destNode):
+    src_poseInfo = getPoseInfo(srcNode)
+    destDrivenAttrs = getDrivenNodeAttributes(destNode)
+    for poseIndex, piValues in enumerate(src_poseInfo["poseInput"]):
+        for index, piValue in enumerate(piValues):
+            pathToAttr = "{}.poses[{}].poseInput[{}]".format(destNode,
+                                                             poseIndex,
+                                                             index)
+            pm.setAttr(pathToAttr, piValue)
+
+    for poseIndex, piValues in enumerate(src_poseInfo["poseValue"]):
+        for index, piValAttr in enumerate(destDrivenAttrs):
+            pathToAttr = "{}.poses[{}].poseValue[{}]".format(destNode,
+                                                             poseIndex,
+                                                             index)
+            if piValAttr in rbf_node.SCALE_ATTRS:
+                valueToSet = 1.0
+            else:
+                valueToSet = 0.0
+            pm.setAttr(pathToAttr, valueToSet)
 
 
 def getNodeInfo(node):
@@ -863,3 +888,6 @@ class RBFNode(rbf_node.RBFNode):
 
     def getRBFToggleAttr(self):
         return ENVELOPE_ATTR
+
+    def syncPoseIndices(self, srcNode):
+        syncPoseIndices(srcNode, self.name)
