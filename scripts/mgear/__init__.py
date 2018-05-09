@@ -16,7 +16,7 @@ sev_verbose = 16
 sev_comment = 32
 
 # gear version
-VERSION = [2, 5, 12]
+VERSION = [2, 5, 13]
 
 ##########################################################
 # METHODS
