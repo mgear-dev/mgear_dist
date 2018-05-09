@@ -7,10 +7,10 @@ from . import widget
 ##################################################
 
 
-class SynopticTab(MainSynopticTab, widget.Ui_baker):
+class SynopticTab(MainSynopticTab, widget.Ui_visibility):
 
-    description = "Control_List"
-    name = "Control_List"
+    description = "visibility"
+    name = "visibility"
 
     # ============================================
     # INIT

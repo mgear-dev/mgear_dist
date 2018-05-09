@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>baker</class>
- <widget class="QWidget" name="baker">
+ <class>visibility</class>
+ <widget class="QWidget" name="visibility">
   <property name="geometry">
    <rect>
     <x>0</x>
