@@ -28,7 +28,8 @@ import pymel.core as pm
 import maya.OpenMaya as OpenMaya
 
 # mgear
-from mgear.maya import transform
+from mgear.maya import transform, attribute, synoptic
+
 
 # =============================================================================
 # constants
@@ -82,6 +83,16 @@ def getMultipleAttrs(node, attributes):
     return valuesToReturn
 
 
+def copyInverseMirrorAttrs(srcNode, dstNode):
+    srcNode = pm.PyNode(srcNode)
+    dstNode = pm.PyNode(dstNode)
+    attrsToInv = synoptic.utils.listAttrForMirror(srcNode)
+    for attr in attrsToInv:
+        inAttr = synoptic.utils.getInvertCheckButtonAttrName(attr)
+        val = mc.getAttr("{}.{}".format(srcNode, inAttr))
+        mc.setAttr("{}.{}".format(dstNode, inAttr), val)
+
+
 def addDrivenGroup(node):
     """add driven group, pad, above the provided node for direct connection
 
@@ -99,6 +110,9 @@ def addDrivenGroup(node):
     else:
         drivenName = "{}{}".format(node, DRIVEN_SUFFIX)
     drivenName = mc.group(name=drivenName, p=parentOfTarget[0], em=True)
+    attribute.add_mirror_config_channels(pm.PyNode(drivenName))
+    if node.endswith(CTL_SUFFIX):
+        copyInverseMirrorAttrs(node, drivenName)
     mc.parent(node, drivenName)
     return drivenName
 

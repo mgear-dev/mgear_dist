@@ -1263,6 +1263,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         [v.setToggleRBFAttr(1) for v in mrRbfNodes]
         setupName, rbfType = self.getSelectedSetup()
         self.refreshRbfSetupList(setToSelection=setupName)
+        mc.select(cl=True)
 
     def hideMenuBar(self, x, y):
         if x < 100 and y < 50:
