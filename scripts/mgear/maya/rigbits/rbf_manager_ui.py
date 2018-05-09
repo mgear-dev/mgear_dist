@@ -89,7 +89,7 @@ def testFunctions(*args):
     print '1', args
 
 
-def getPlugAttrs(nodes, keyable=False):
+def getPlugAttrs(nodes, attrType="all"):
     """Get a list of attributes to display to the user
 
     Args:
@@ -101,8 +101,12 @@ def getPlugAttrs(nodes, keyable=False):
     """
     plugAttrs = []
     for node in nodes:
-        # TEMP, LISTING ALL. HOTFIX. REQUEST
-        attrs = mc.listAttr(node, se=True, u=False, cb=False)
+        if attrType == "all":
+            attrs = mc.listAttr(node, se=True, u=False)
+        elif attrType == "cb":
+            attrs = mc.listAttr(node, se=True, u=False, cb=True)
+        elif attrType == "keyable":
+            attrs = mc.listAttr(node, se=True, u=False, keyable=True)
         if attrs is None:
             continue
         [plugAttrs.append("{}.{}".format(node, a)) for a in attrs]
@@ -340,9 +344,11 @@ class RBFSetupInput(QtWidgets.QDialog):
         drivenLayout = QtWidgets.QVBoxLayout()
         drivenLabel = QtWidgets.QLabel("Select Driven Attributes")
         self.drivenListWidget = QtWidgets.QListWidget()
+        self.drivenListWidget.setToolTip("Right Click for sorting!")
         selType = QtWidgets.QAbstractItemView.ExtendedSelection
         self.drivenListWidget.setSelectionMode(selType)
         self.drivenListWidget.addItems(listValues)
+        self.drivenListWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         drivenLayout.addWidget(drivenLabel)
         drivenLayout.addWidget(self.drivenListWidget)
         mainLayout.addLayout(drivenLayout)
@@ -449,7 +455,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
             drivenNodes.extend(rbfNode.getDrivenNode)
         return drivenNodes
 
-    def getUserSetupInfo(self, drivenAttrs, setupField=True):
+    def getUserSetupInfo(self, drivenNode, drivenAttrs, setupField=True):
         """prompt the user for information needed to create setup or add
         rbf node to existing setup
 
@@ -461,10 +467,16 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         Returns:
             list: list of selected attrs, name specified
         """
-        userInput = RBFSetupInput(drivenAttrs,
-                                  setupField=setupField,
-                                  parent=self)
-        results = userInput.exec_()
+        userInputWdgt = RBFSetupInput(drivenAttrs,
+                                      setupField=setupField,
+                                      parent=self)
+        partialObj = partial(self.attrListMenu,
+                             userInputWdgt.drivenListWidget,
+                             "",
+                             nodeToQuery=drivenNode)
+        customMenu = userInputWdgt.drivenListWidget.customContextMenuRequested
+        customMenu.connect(partialObj)
+        results = userInputWdgt.exec_()
         if results:
             return results[0], results[1]
         else:
@@ -520,7 +532,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         drivenWidget.deleteLater()
         drivenNode = rbfNode.getDrivenNode()
         rbfNode.deleteRBFToggleAttr()
-        if drivenNode:
+        if drivenNode and drivenNode[0].endswith(rbf_node.DRIVEN_SUFFIX):
             rbf_node.removeDrivenGroup(drivenNode[0])
         mc.delete(rbfNode.transformNode)
         self.currentRBFSetupNodes.remove(rbfNode)
@@ -554,24 +566,34 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
             genericWarning(self, "Select Node to be driven!")
             return
         drivenNode = drivenNode[0]
-        availableAttrs = getPlugAttrs([drivenNode], keyable=False)
+        drivenNodeType = mc.nodeType(drivenNode)
+        # smart display all when needed
+        if drivenNodeType in ["transform", "joint"]:
+            attrType = "keyable"
+        else:
+            attrType = "all"
+        availableAttrs = getPlugAttrs([drivenNode], attrType=attrType)
         setupName, rbfType = self.getSelectedSetup()
         # if a setup has already been named or starting new
         if setupName is None:
-            setupName, drivenAttrs = self.getUserSetupInfo(availableAttrs)
+            setupName, drivenAttrs = self.getUserSetupInfo(drivenNode,
+                                                           availableAttrs)
         else:
-            tmpName, drivenAttrs = self.getUserSetupInfo(availableAttrs,
+            tmpName, drivenAttrs = self.getUserSetupInfo(drivenNode,
+                                                         availableAttrs,
                                                          setupField=False)
         if not drivenAttrs:
             return
+        parentNode = False
         if mc.nodeType(drivenNode) == "transform":
+            parentNode = True
             drivenNode = rbf_node.addDrivenGroup(drivenNode)
         # create RBFNode instance, apply settings
         rbfNode = sortRBF(drivenNode, rbfType=rbfType)
         rbfNode.setSetupName(setupName)
         rbfNode.setDriverControlAttr(driverControl)
         rbfNode.setDriverNode(driverNode, driverAttrs)
-        rbfNode.setDrivenNode(drivenNode, drivenAttrs, parent=True)
+        rbfNode.setDrivenNode(drivenNode, drivenAttrs, parent=parentNode)
         # Check if there any preexisting nodes in setup, if so copy pose index
         if self.currentRBFSetupNodes:
             currentRbfs = self.currentRBFSetupNodes[0]
@@ -724,11 +746,18 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         if scrollToItems:
             listWidget.scrollToItem(scrollToItems[0])
 
+    def setAttributeDisplay(self, attrListWidget, driverName, displayAttrs):
+        nodeAttrsToDisplay = ["{}.{}".format(driverName, attr)
+                              for attr in displayAttrs]
+        attrListWidget.clear()
+        attrListWidget.addItems(sorted(nodeAttrsToDisplay))
+        self.highlightListEntries(attrListWidget, displayAttrs)
+
     def updateAttributeDisplay(self,
                                attrListWidget,
                                driverNames,
                                highlight=[],
-                               keyable=True):
+                               attrType="all"):
         """update the provided listwidget with the attrs collected from the
         list of nodes provided
 
@@ -746,7 +775,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
             return
         elif type(driverNames) != list:
             driverNames = [driverNames]
-        nodeAttrsToDisplay = getPlugAttrs(driverNames, keyable=keyable)
+        nodeAttrsToDisplay = getPlugAttrs(driverNames, attrType=attrType)
         attrListWidget.clear()
         attrListWidget.addItems(sorted(nodeAttrsToDisplay))
         if highlight:
@@ -856,9 +885,12 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         driverControl = weightInfo["driverControl"]
         # populate control here
         self.controlLineEdit.setText(driverControl)
-        self.updateAttributeDisplay(self.driver_attributes_widget,
-                                    [driverNode],
-                                    highlight=weightInfo["driverAttrs"])
+        # self.updateAttributeDisplay(self.driver_attributes_widget,
+        #                             [driverNode],
+        #                             highlight=weightInfo["driverAttrs"])
+        self.setAttributeDisplay(self.driver_attributes_widget,
+                                 driverNode,
+                                 weightInfo["driverAttrs"])
         self.setDriverTable(rbfNode, weightInfo)
 
     def _associateRBFnodeAndWidget(self, tabDrivenWidget, rbfNode):
@@ -920,9 +952,12 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         else:
             return
         drivenWidget.drivenLineEdit.setText(str(driverNode))
-        self.updateAttributeDisplay(drivenWidget.attributeListWidget,
-                                    [weightInfo["drivenNode"][0]],
-                                    highlight=weightInfo["drivenAttrs"])
+        # self.updateAttributeDisplay(drivenWidget.attributeListWidget,
+        #                             [weightInfo["drivenNode"][0]],
+        #                             highlight=weightInfo["drivenAttrs"])
+        self.setAttributeDisplay(drivenWidget.attributeListWidget,
+                                 weightInfo["drivenNode"][0],
+                                 weightInfo["drivenAttrs"])
         self.setDrivenTable(drivenWidget, rbfNode, weightInfo)
 
     def addNewTab(self, rbfNode):
@@ -976,7 +1011,11 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
                          drivenSelection=True,
                          currentRBFSetupNodes=True)
 
-    def attrListMenu(self, attributeListWidget, driverLineEdit, QPos):
+    def attrListMenu(self,
+                     attributeListWidget,
+                     driverLineEdit,
+                     QPos,
+                     nodeToQuery=None):
         """right click menu for queie qlistwidget
 
         Args:
@@ -986,20 +1025,30 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         Returns:
             n/a: n/a
         """
-        if attributeListWidget.count() == 0:
-            return
+        if nodeToQuery is None:
+            nodeToQuery = str(driverLineEdit.text())
         self.attrMenu = QtWidgets.QMenu()
         parentPosition = attributeListWidget.mapToGlobal(QtCore.QPoint(0, 0))
-        menu_item_01 = self.attrMenu.addAction("Only Show ChannelBox")
+        menu_item_01 = self.attrMenu.addAction("Display Keyable")
+        menu_item_01.setToolTip("Show Keyable Attributes")
         menu_item_01.triggered.connect(partial(self.updateAttributeDisplay,
                                                attributeListWidget,
-                                               str(driverLineEdit.text()),
-                                               keyable=True))
-        menu_item_02 = self.attrMenu.addAction("Display All")
+                                               nodeToQuery,
+                                               attrType="keyable"))
+        menu2Label = "Display ChannelBox (Non Keyable)"
+        menu_item_02 = self.attrMenu.addAction(menu2Label)
+        menu2tip = "Show attributes in ChannelBox that are not keyable."
+        menu_item_02.setToolTip(menu2tip)
         menu_item_02.triggered.connect(partial(self.updateAttributeDisplay,
                                                attributeListWidget,
-                                               str(driverLineEdit.text()),
-                                               keyable=False))
+                                               nodeToQuery,
+                                               attrType="cb"))
+        menu_item_03 = self.attrMenu.addAction("Display All")
+        menu_item_03.setToolTip("GIVE ME ALL!")
+        menu_item_03.triggered.connect(partial(self.updateAttributeDisplay,
+                                               attributeListWidget,
+                                               nodeToQuery,
+                                               attrType="all"))
         self.attrMenu.move(parentPosition + QPos)
         self.attrMenu.show()
 
