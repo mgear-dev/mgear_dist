@@ -97,7 +97,7 @@ def addDrivenGroup(node):
     if node.endswith(CTL_SUFFIX):
         drivenName = node.replace(CTL_SUFFIX, DRIVEN_SUFFIX)
     else:
-        drivenName = "{}{}".format(DRIVEN_SUFFIX)
+        drivenName = "{}{}".format(node, DRIVEN_SUFFIX)
     drivenName = mc.group(name=drivenName, p=parentOfTarget[0], em=True)
     mc.parent(node, drivenName)
     return drivenName
