@@ -6,7 +6,7 @@ Attributes:
     DRIVEN_SUFFIX (str): suffix to be applied to driven group
     DRIVER_CTL_ATTR_NAME (str): name of the attribute to store driver control
     DRIVER_POSEINPUT_ATTR (str): name of attr to store control driver(holder)
-    DRIVER_POSES_ATTR (str): name of attr to store control
+    DRIVER_POSES_INFO_ATTR (str): name of attr to store control
     GENERIC_SUFFIX (str): generic suffix if one not provided by support module
     RBF_SCALE_ATTR (str): name of attr applied to driven control
     RBF_SETUP_ATTR (str): name of attr to store setup name for group of rbf
@@ -20,6 +20,7 @@ TODO - refactor as more supported rbf node types are added
 
 """
 # python
+import ast
 import math
 
 # maya
@@ -58,8 +59,8 @@ SUPPORTED_RBF_NODES = ("weightDriver",)
 GENERIC_SUFFIX = "_RBF"
 
 DRIVER_CTL_ATTR_NAME = "driverControlName"
-DRIVER_POSES_ATTR = "driverPoses"
-DRIVER_POSEINPUT_ATTR = "poseInput"
+DRIVER_POSES_INFO_ATTR = "driverPosesInfo"
+# DRIVER_POSEINPUT_ATTR = "poseInput"
 
 RBF_SCALE_ATTR = "RBF_Multiplier"
 
@@ -285,6 +286,55 @@ def setToggleRBFAttr(node, value, toggleAttr):
     mc.setAttr(attrPlug, value)
 
 
+def createDriverControlPoseAttr(node):
+    try:
+        mc.addAttr(node, ln=DRIVER_POSES_INFO_ATTR, dt="string")
+    except RuntimeError:
+        pass
+
+
+def setDriverControlPoseAttr(node, poseInfo):
+    if not mc.attributeQuery(DRIVER_POSES_INFO_ATTR, n=node, ex=True):
+        createDriverControlPoseAttr(node)
+    mc.setAttr("{}.{}".format(node, DRIVER_POSES_INFO_ATTR),
+               str(poseInfo),
+               type="string")
+
+
+def getDriverControlPoseAttr(node):
+    try:
+        poseInfo = mc.getAttr("{}.{}".format(node, DRIVER_POSES_INFO_ATTR))
+        return ast.literal_eval(poseInfo)
+    except ValueError:
+        return {}
+
+
+def updateDriverControlPoseAttr(node, driverControl, poseIndex):
+    # TODO future recording of all attrs goes here
+    poseInfo = getDriverControlPoseAttr(node)
+    attrsToUpdate = TRANSLATE_ATTRS + ROTATE_ATTRS + SCALE_ATTRS
+    attrsToUpdate = list(set(attrsToUpdate + poseInfo.keys()))
+    for attr in attrsToUpdate:
+        attrPoseIndices = poseInfo.get(attr, [])
+        lengthOfList = len(attrPoseIndices) - 1
+        newVal = mc.getAttr("{}.{}".format(driverControl, attr))
+        if not attrPoseIndices or lengthOfList < poseIndex:
+            attrPoseIndices.insert(poseIndex, newVal)
+        elif lengthOfList >= poseIndex:
+            attrPoseIndices[poseIndex] = newVal
+
+        poseInfo[attr] = attrPoseIndices
+    setDriverControlPoseAttr(node, poseInfo)
+
+
+def recallDriverControlPose(driverControl, poseInfo, index):
+    for attr, values in poseInfo.iteritems():
+        try:
+            mc.setAttr("{}.{}".format(driverControl, attr), values[index])
+        except Exception:
+            pass
+
+
 def createDriverControlAttr(node):
     """create the string attr where information will be stored for query
     associated driver anim control
@@ -505,6 +555,9 @@ class RBFNode(object):
             posesIndex (int, optional): at desired index, if none assume
             latest/new
         """
+        if posesIndex is None:
+            posesIndex = len(self.getPoseInfo()["poseInput"])
+        self.updateDriverControlPoseAttr(posesIndex)
         raise NotImplementedError()
 
     def deletePose(self, indexToPop):
@@ -598,6 +651,17 @@ class RBFNode(object):
         """
         NotImplementedError()
 
+    def setDriverControlPoseAttr(self, poseInfo):
+        setDriverControlPoseAttr(self.name, poseInfo)
+
+    def getDriverControlPoseAttr(self):
+        driverPoseInfoAttr = getDriverControlPoseAttr(self.name)
+        return driverPoseInfoAttr
+
+    def updateDriverControlPoseAttr(self, posesIndex):
+        driverControl = self.getDriverControlAttr()
+        updateDriverControlPoseAttr(self.name, driverControl, posesIndex)
+
     def setDriverControlAttr(self, controlName):
         setDriverControlAttr(self.name, controlName)
 
@@ -608,7 +672,9 @@ class RBFNode(object):
         return driverControl
 
     def recallDriverPose(self, poseIndex):
-        NotImplementedError()
+        driverControl = self.getDriverControlAttr()
+        poseInfo = getDriverControlPoseAttr(self.name)
+        recallDriverControlPose(driverControl, poseInfo, poseIndex)
 
     def getPoseValues(self, resetDriven=True):
         """get all pose values from rbf node
