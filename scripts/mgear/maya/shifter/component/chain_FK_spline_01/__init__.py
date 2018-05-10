@@ -224,6 +224,13 @@ class Component(component.Main):
                                            "FK vis",
                                            "bool",
                                            True)
+        if self.settings["keepLength"]:
+            self.length_ratio_att = self.addAnimParam("length_ratio",
+                                                      "Length Ratio",
+                                                      "double",
+                                                      1,
+                                                      0.0001,
+                                                      10)
 
     # =====================================================
     # OPERATORS
@@ -240,10 +247,12 @@ class Component(component.Main):
         if self.settings["keepLength"]:
             arclen_node = pm.arclen(self.mst_crv, ch=True)
             alAttr = pm.getAttr(arclen_node + ".arcLength")
+            ration_node = node.createMulNode(self.length_ratio_att,
+                                             alAttr)
 
             pm.addAttr(self.mst_crv, ln="length_ratio", k=True, w=True)
             node.createDivNode(arclen_node.arcLength,
-                               alAttr,
+                               ration_node.outputX,
                                self.mst_crv.length_ratio)
 
             div_node_scl = node.createDivNode(self.mst_crv.length_ratio,
