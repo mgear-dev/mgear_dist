@@ -550,6 +550,8 @@ def getNodeInfo(node):
                                                            ENVELOPE_ATTR)
     weightNodeInfo_dict["drivenControlName"] = drivenControlName
     weightNodeInfo_dict["rbfType"] = RBF_TYPE
+    driverPosesInfo = rbf_node.getDriverControlPoseAttr(node.name())
+    weightNodeInfo_dict[rbf_node.DRIVER_POSES_INFO_ATTR] = driverPosesInfo
     return weightNodeInfo_dict
 
 
@@ -740,6 +742,8 @@ def createRBFFromInfo(weightNodeInfo_dict):
         setupName = weightInfo.pop("setupName", "")
         drivenControlName = weightInfo.pop("drivenControlName", "")
         driverControl = weightInfo.pop("driverControl", "")
+        driverControlPoseInfo = weightInfo.pop(rbf_node.DRIVER_POSES_INFO_ATTR,
+                                               {})
         transformNode, node = createRBF(weightNodeName,
                                         transformName=transformName)
         rbf_node.setSetupName(node.name(), setupName)
@@ -753,6 +757,7 @@ def createRBFFromInfo(weightNodeInfo_dict):
         setPosesFromInfo(node, posesInfo)
         setDriverListFromInfo(node, driverListInfo)
         createVectorDriver(driverInfo)
+        rbf_node.setDriverControlPoseAttr(node.name(), driverControlPoseInfo)
         recreateConnections(connectionsInfo)
         createdNodes.append(node.name())
     return createdNodes
@@ -829,6 +834,9 @@ class RBFNode(rbf_node.RBFNode):
         lengthenCompoundAttrs(self.name)
 
     def addPose(self, poseInput, poseValue, posesIndex=None):
+        if posesIndex is None:
+            posesIndex = len(self.getPoseInfo()["poseInput"])
+        self.updateDriverControlPoseAttr(posesIndex)
         addPose(self.name,
                 poseInput,
                 poseValue,
@@ -869,19 +877,9 @@ class RBFNode(rbf_node.RBFNode):
                                           self.getRBFToggleAttr())
 
     def copyPoses(self, nodeB):
+        poseInfo = self.getDriverControlPoseAttr()
+        nodeB.setDriverControlPoseAttr(poseInfo)
         copyPoses(self.name, nodeB)
-
-    def recallDriverPose(self, poseIndex):
-        driverControl = self.getDriverControlAttr()
-        driverAttrs = self.getDriverNodeAttributes()
-        poseInfo = self.getPoseInfo()
-        poseInput = poseInfo["poseInput"][poseIndex]
-        for index, pValue in enumerate(poseInput):
-            attrPlug = "{}.{}".format(driverControl, driverAttrs[index])
-            try:
-                mc.setAttr(attrPlug, pValue)
-            except Exception:
-                pass
 
     def forceEvaluation(self):
         forceEvaluation(self.transformNode)
@@ -890,4 +888,6 @@ class RBFNode(rbf_node.RBFNode):
         return ENVELOPE_ATTR
 
     def syncPoseIndices(self, srcNode):
+        poseInfo = srcNode.getDriverControlPoseAttr()
+        self.setDriverControlPoseAttr(poseInfo)
         syncPoseIndices(srcNode, self.name)

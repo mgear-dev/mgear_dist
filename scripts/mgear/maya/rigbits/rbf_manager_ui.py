@@ -4,7 +4,6 @@ Todo
 -Multiple driven support for add button
 -clean up code
 -add documentation
--sync driver table
 -look into deleting attr post creation(not likely, rbf might fail)
 -newScene callback
 
@@ -40,7 +39,6 @@ Deleted Attributes:
 # python
 import os
 import imp
-import pprint
 from functools import partial
 
 # maya
@@ -611,6 +609,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         self.populateDrivenWidgetInfo(tabDrivenWidget, weightInfo, rbfNode)
         self.refreshRbfSetupList(setToSelection=setupName)
         self.lockDriverWidgets()
+        mc.select(driverControl)
 
     def refreshAllTables(self):
         """Convenience function to refresh all the tables on all the tabs
@@ -813,7 +812,13 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         else:
             setattr(widget, attrName, [])
 
-    def syncDriverTableCells(self, attrEdit, rbfAttrPlug, *args):
+    def syncDriverTableCells(self,
+                             attrEdit,
+                             rbfAttrPlug,
+                             poseIndex,
+                             valueIndex,
+                             attributeName,
+                             *args):
         """When you edit the driver table, it will update all the sibling
         rbf nodes in the setup.
 
@@ -822,14 +827,13 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
             rbfAttrPlug (str): node.attr the cell represents
             *args: signal throws additional args
         """
+        # MAYBE YOU CAN GET POSEINFO, MANIPULATE, RESET WITh POSEINDEX/VALUEINDEX
         attr = rbfAttrPlug.partition(".")[2]
         value = attrEdit.text()
         for rbfNode in self.currentRBFSetupNodes:
             attrPlug = "{}.{}".format(rbfNode, attr)
-            try:
-                mc.setAttr(attrPlug, value)
-            except Exception:
-                pass
+            mc.setAttr(attrPlug, float(value))
+            rbfNode.forceEvaluation()
 
     def setDriverTable(self, rbfNode, weightInfo):
         poses = weightInfo["poses"]
@@ -860,11 +864,14 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
                                                             label="")
                 func = partial(self.syncDriverTableCells,
                                attrEdit,
-                               rbfAttrPlug)
+                               rbfAttrPlug,
+                               rowIndex,
+                               columnIndex,
+                               headerNames[columnIndex])
                 self.driverPoseTableWidget.setCellWidget(rowIndex,
                                                          columnIndex,
                                                          attrEdit)
-                attrEdit.textEdited.connect(func)
+                attrEdit.returnPressed.connect(func)
                 tmpWidgets.append(attrEdit)
                 mayaUiItems.append(mAttrFeild)
         setattr(self.driverPoseTableWidget, "associated", tmpWidgets)
@@ -1147,10 +1154,12 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         if filePath is None:
             return
         rbf_io.importRBFs(filePath)
+        mc.select(cl=True)
         self.refresh(rbfSelection=True,
                      driverSelection=True,
                      drivenSelection=True,
                      currentRBFSetupNodes=True)
+        print "RBF setups imported: {}".format(filePath)
 
     def exportNodes(self, allSetups=True):
         # TODO WHEN NEW RBF NODE TYPES ARE ADDED, THIS WILL NEED TO BE RETOOLED
