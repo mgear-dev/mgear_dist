@@ -973,27 +973,63 @@ def get_next_available_index(attr):
 ##########################################################
 
 
-def add_mirror_config_channels(ctl):
+def add_mirror_config_channels(ctl, conf=[0, 0, 0, 0, 0, 0, 0, 0, 0]):
     """Add channels to configure the mirror posing
 
     Args:
      ctl (dagNode): Control Object
     """
-    addAttribute(
-        ctl, "invTx", "bool", 0, keyable=False, niceName="Invert Mirror TX")
-    addAttribute(
-        ctl, "invTy", "bool", 0, keyable=False, niceName="Invert Mirror TY")
-    addAttribute(
-        ctl, "invTz", "bool", 0, keyable=False, niceName="Invert Mirror TZ")
-    addAttribute(
-        ctl, "invRx", "bool", 0, keyable=False, niceName="Invert Mirror RX")
-    addAttribute(
-        ctl, "invRy", "bool", 0, keyable=False, niceName="Invert Mirror RY")
-    addAttribute(
-        ctl, "invRz", "bool", 0, keyable=False, niceName="Invert Mirror RZ")
-    addAttribute(
-        ctl, "invSx", "bool", 0, keyable=False, niceName="Invert Mirror SX")
-    addAttribute(
-        ctl, "invSy", "bool", 0, keyable=False, niceName="Invert Mirror SY")
-    addAttribute(
-        ctl, "invSz", "bool", 0, keyable=False, niceName="Invert Mirror SZ")
+    addAttribute(ctl,
+                 "invTx",
+                 "bool",
+                 conf[0],
+                 keyable=False,
+                 niceName="Invert Mirror TX")
+    addAttribute(ctl,
+                 "invTy",
+                 "bool",
+                 conf[1],
+                 keyable=False,
+                 niceName="Invert Mirror TY")
+    addAttribute(ctl,
+                 "invTz",
+                 "bool",
+                 conf[2],
+                 keyable=False,
+                 niceName="Invert Mirror TZ")
+    addAttribute(ctl,
+                 "invRx",
+                 "bool",
+                 conf[3],
+                 keyable=False,
+                 niceName="Invert Mirror RX")
+    addAttribute(ctl,
+                 "invRy",
+                 "bool",
+                 conf[4],
+                 keyable=False,
+                 niceName="Invert Mirror RY")
+    addAttribute(ctl,
+                 "invRz",
+                 "bool",
+                 conf[5],
+                 keyable=False,
+                 niceName="Invert Mirror RZ")
+    addAttribute(ctl,
+                 "invSx",
+                 "bool",
+                 conf[6],
+                 keyable=False,
+                 niceName="Invert Mirror SX")
+    addAttribute(ctl,
+                 "invSy",
+                 "bool",
+                 conf[7],
+                 keyable=False,
+                 niceName="Invert Mirror SY")
+    addAttribute(ctl,
+                 "invSz",
+                 "bool",
+                 conf[8],
+                 keyable=False,
+                 niceName="Invert Mirror SZ")

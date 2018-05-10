@@ -29,6 +29,15 @@ class Component(component.Main):
             self.negate = False
             self.n_factor = 1
 
+        if self.settings["overrideNegate"]:
+            self.mirror_conf = [0, 0, 1,
+                                1, 1, 0,
+                                0, 0, 0]
+        else:
+            self.mirror_conf = [0, 0, 0,
+                                0, 0, 0,
+                                0, 0, 0]
+
         # FK controllers ------------------------------------
         self.fk_npo = []
         self.fk_ctl = []
@@ -62,7 +71,8 @@ class Component(component.Main):
                 h=self.size * .1,
                 d=self.size * .1,
                 po=datatypes.Vector(dist * .5 * self.n_factor, 0, 0),
-                tp=self.previusTag)
+                tp=self.previusTag,
+                mirrorConf=self.mirror_conf)
 
             self.fk_npo.append(fk_npo)
             self.fk_ctl.append(fk_ctl)
