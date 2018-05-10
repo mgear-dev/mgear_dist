@@ -90,8 +90,11 @@ def copyInverseMirrorAttrs(srcNode, dstNode):
     attrsToInv = synoptic.utils.listAttrForMirror(srcNode)
     for attr in attrsToInv:
         inAttr = synoptic.utils.getInvertCheckButtonAttrName(attr)
-        val = mc.getAttr("{}.{}".format(srcNode, inAttr))
-        mc.setAttr("{}.{}".format(dstNode, inAttr), val)
+        try:
+            val = mc.getAttr("{}.{}".format(srcNode, inAttr))
+            mc.setAttr("{}.{}".format(dstNode, inAttr), val)
+        except ValueError:
+            continue
 
 
 def addDrivenGroup(node):
