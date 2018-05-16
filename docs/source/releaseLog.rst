@@ -1,1 +1,1 @@
-.. include:: ../../releaseLog.md
+.. include:: ../../releaseLog.rst
