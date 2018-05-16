@@ -208,6 +208,7 @@ def createAutoSoftTweak(size=1.0,
     else:
         pm.displayWarning("Selection should be at less 2 object. The "
                           " deformed object and the parent control")
+        return
     ctl_parent = pm.selected()[-1]
     grps = [s.name() for s in ctl_parent.listConnections(type="objectSet")]
     if ctl_parent.name().endswith("_ctl"):
