@@ -324,6 +324,9 @@ class Main(object):
                                jnt + ".r",
                                f=True)
 
+            # set not keyable
+            attribute.setNotKeyableAttributes(jnt)
+
         else:
             jnt = primitive.addJoint(obj, self.getName(
                 str(name) + "_jnt"), transform.getTransform(obj))
@@ -376,7 +379,8 @@ class Main(object):
                iconShape,
                tp=None,
                lp=True,
-               **kwargs):
+               mirrorConf=[0, 0, 0, 0, 0, 0, 0, 0, 0],
+               ** kwargs):
         """
         Create the control and apply the shape, if this is alrealdy stored
         in the guide controllers grp.
@@ -414,7 +418,7 @@ class Main(object):
                 parent, fullName, m, color, iconShape, **kwargs)
 
         # create the attributes to handlde mirror and symetrical pose
-        attribute.add_mirror_config_channels(ctl)
+        attribute.add_mirror_config_channels(ctl, mirrorConf)
 
         if self.settings["ctlGrp"]:
             ctlGrp = self.settings["ctlGrp"]

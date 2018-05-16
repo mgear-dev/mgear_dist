@@ -10,7 +10,7 @@ from pymel.core import datatypes
 
 import mgear
 import mgear.maya.icon as ico
-from mgear.maya import transform, node, attribute, applyop, utils, pyqt, curve
+from mgear.maya import transform, node, attribute, applyop, pyqt, curve
 from mgear import string
 from . import simpleRigUI as srUI
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
@@ -18,8 +18,6 @@ from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 
 CTL_TAG_ATTR = "is_simple_rig_ctl"
 RIG_ROOT = "rig"
-
-# TODO: add control tags
 
 
 # driven attr ===========================================
@@ -132,44 +130,7 @@ def _create_control(name,
     return ctl
 
 
-# @utils.one_undo
-def _create_simple_rig_root(rigName=RIG_ROOT,
-                            selection=None,
-                            world_ctl=True,
-                            sets_config=None,
-                            ctl_wcm=False,
-                            fix_radio=False,
-                            radio_val=100,
-                            gl_shape="square",
-                            w_shape="circle"):
-    # create the simple rig root
-    # have the attr: is_simple_rig and is_rig
-    # should not create if there is a another simple rig root
-    # should have synoptic attr. (synoptic configuration in UI)
-    # use World_ctl should be optional
-
-    # check if there is another rig root in the scene
-    rig_models = _get_simple_rig_root()
-    if rig_models:
-        pm.displayWarning("Simple rig root already exist in the "
-                          "scene: {}".format(str(rig_models)))
-        return
-
-    if not selection:
-        if pm.selected():
-            selection = pm.selected()
-        else:
-            pm.displayWarning("Selection is needed to create the root")
-            return
-
-    volCenter, radio, bb = _get_branch_bbox_data(selection)
-
-    if fix_radio:
-        radio = radio_val
-
-    meshList = []
-    ctlList = []
-
+def _create_base_structure(rigName):
     # Create base structure
     rig = pm.createNode('transform', n=rigName)
     # geo = pm.createNode('transform', n="geo", p=rig)
@@ -205,18 +166,10 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
     rig.addAttr("rigPoses", at='message', m=1)
     rig.addAttr("rigCtlTags", at='message', m=1)
 
-    if ctl_wcm:
-        t = datatypes.Matrix()
-    else:
-        t = transform.getTransformFromPos(volCenter)
-
-    # configure selectable geo
-    for e in selection:
-        pm.connectAttr(rig.geoUnselectable, e.attr("overrideEnabled"))
-        e.attr("overrideDisplayType").set(2)
-
     # Create sets
-    # meshSet = pm.sets(meshList, n="CACHE_grp")
+    meshList = []
+    ctlList = []
+
     ctlSet = pm.sets(ctlList, n="{}_controllers_grp".format(rigName))
     deformersSet = pm.sets(meshList, n="{}_deformers_grp".format(rigName))
     compGroup = pm.sets(meshList, n="{}_componentsRoots_grp".format(rigName))
@@ -226,14 +179,62 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
 
     pm.connectAttr(rigSets.attr("message"),
                    "{}.rigGroups[0]".format(rigName))
-    # pm.connectAttr(meshSet.attr("message"),
-    #                "{}.rigGroups[1]".format(rigName))
     pm.connectAttr(ctlSet.attr("message"),
                    "{}.rigGroups[2]".format(rigName))
     pm.connectAttr(deformersSet.attr("message"),
                    "{}.rigGroups[3]".format(rigName))
     pm.connectAttr(compGroup.attr("message"),
                    "{}.rigGroups[4]".format(rigName))
+
+    return rig
+
+
+# @utils.one_undo
+def _create_simple_rig_root(rigName=RIG_ROOT,
+                            selection=None,
+                            world_ctl=True,
+                            sets_config=None,
+                            ctl_wcm=False,
+                            fix_radio=False,
+                            radio_val=100,
+                            gl_shape="square",
+                            w_shape="circle"):
+    # create the simple rig root
+    # have the attr: is_simple_rig and is_rig
+    # should not create if there is a another simple rig root
+    # should have synoptic attr. (synoptic configuration in UI)
+    # use World_ctl should be optional
+
+    # check if there is another rig root in the scene
+    rig_models = _get_simple_rig_root()
+    if rig_models:
+        pm.displayWarning("Simple rig root already exist in the "
+                          "scene: {}".format(str(rig_models)))
+        return
+
+    if not selection:
+        if pm.selected():
+            selection = pm.selected()
+        else:
+            pm.displayWarning("Selection is needed to create the root")
+            return
+
+    volCenter, radio, bb = _get_branch_bbox_data(selection)
+
+    if fix_radio:
+        radio = radio_val
+
+    rig = _create_base_structure(rigName)
+
+    if ctl_wcm:
+        t = datatypes.Matrix()
+    else:
+        t = transform.getTransformFromPos(volCenter)
+
+    # configure selectable geo
+    for e in selection:
+        pm.connectAttr(rig.geoUnselectable, e.attr("overrideEnabled"))
+        e.attr("overrideDisplayType").set(2)
 
     ctt = None
     # create world ctl
@@ -248,7 +249,6 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                     color=13,
                                     driven=None,
                                     sets_config=sets_config)
-        # ctlList.append(world_ctl)
         if versions.current() >= 201650:
             ctt = node.add_controller_tag(world_ctl, None)
             _connect_tag_to_rig(rig, ctt)
@@ -266,7 +266,6 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                  color=17,
                                  driven=None,
                                  sets_config=sets_config)
-    # ctlList.append(global_ctl)
     if versions.current() >= 201650:
         ctt = node.add_controller_tag(global_ctl, ctt)
         _connect_tag_to_rig(rig, ctt)
@@ -282,7 +281,6 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
                                 color=17,
                                 driven=selection,
                                 sets_config=sets_config)
-    # ctlList.append(local_ctl)
     if versions.current() >= 201650:
         ctt = node.add_controller_tag(local_ctl, ctt)
         _connect_tag_to_rig(rig, ctt)
@@ -394,7 +392,8 @@ def _get_bbox_data(obj=None, yZero=True, *args):
             volCenter[1] = bb[1][0]
         radio = max([bb[0][1] - bb[0][0], bb[2][1] - bb[2][0]]) / 1.7
 
-    return volCenter, radio, bb
+        return volCenter, radio, bb
+    return volCenter, None, None
 
 
 def _get_branch_bbox_data(selection=None, yZero=True, *args):
@@ -465,14 +464,20 @@ def _collect_configuration_from_rig():
             conf_radio = c.conf_radio.get()
             conf_color = c.conf_color.get()
             ctl_color = curve.get_color(c)
-            ctl_side = ctl_name.split("_")[-2][0]
-            ctl_index = ctl_name.split("_")[-2][1:]
+            if len(ctl_name.split("_")) == 2:
+                ctl_side = None
+                ctl_index = 0
+            else:
+                ctl_side = ctl_name.split("_")[-2][0]
+                ctl_index = ctl_name.split("_")[-2][1:]
             ctl_short_name = ctl_name.split("_")[0]
             ctl_parent = c.getParent(2).name()
             # ctl transform matrix
             m = c.getMatrix(worldSpace=True)
             ctl_transform = m.get()
             # sets list
+            # TODO: Sets are not stored correctly. Needs to stare stacked sets
+            # ie: animSets.basic
             sets_list = [s.name() for s in c.listConnections(type="objectSet")]
 
             # driven list
@@ -484,14 +489,13 @@ def _collect_configuration_from_rig():
                               "Finish edit pivot for or reset "
                               "SRT: {}".format(c))
             return
-        shps, shps_n = curve.collect_curve_shapes(c)
+        shps = curve.collect_curve_data(c)
         conf_ctl_dict = {"conf_icon": conf_icon,
                          "conf_radio": conf_radio,
                          "conf_color": conf_color,
                          "ctl_color": ctl_color,
                          "ctl_side": ctl_side,
                          "ctl_shapes": shps,
-                         "ctl_shapes_names": shps_n,
                          "ctl_index": ctl_index,
                          "ctl_parent": ctl_parent,
                          "ctl_transform": ctl_transform,
@@ -503,9 +507,8 @@ def _collect_configuration_from_rig():
 
     rig_conf_dict["ctl_list"] = ctl_names_list
     rig_conf_dict["ctl_settings"] = ctl_settings
-    data_string = json.dumps(rig_conf_dict, indent=4, sort_keys=True)
+    rig_conf_dict["root_name"] = rig_root.name()
 
-    print data_string
     return rig_conf_dict
 
 
@@ -554,21 +557,70 @@ def _build_rig_from_model(dagNode,
                 parent_dict[d.name()] = ctl
 
 
-def _build_rig_from_configuration():
+def _build_rig_from_configuration(configDict):
     # TODO: build the rig from a configuration
     # can be from scene configuration or from imported
     # create rig root
-    return
+    _create_base_structure(configDict["root_name"])
+    for c in configDict["ctl_list"]:
+        ctl_conf = configDict["ctl_settings"][c]
+        driven = []
+        for drv in ctl_conf["driven_list"]:
+            obj = pm.ls(drv)
+            if obj:
+                driven.append(obj[0])
+            else:
+                pm.displayWarning("Driven object {}: "
+                                  "Can't be found.".format(drv))
+        t = datatypes.Matrix(ctl_conf["ctl_transform"])
+        _create_control(ctl_conf["ctl_short_name"],
+                        t,
+                        ctl_conf["conf_radio"],
+                        ctl_conf["ctl_parent"],
+                        ctl_conf["conf_icon"],
+                        ctl_conf["ctl_side"],
+                        indx=ctl_conf["ctl_index"],
+                        color=ctl_conf["ctl_color"],
+                        driven=driven,
+                        sets_config=",".join(ctl_conf["sets_list"]))
+        curve.update_curve_from_data(ctl_conf["ctl_shapes"])
 
 
-def export_configuration():
+def export_configuration(filePath=None):
     # TODO: export configuration to json
-    _collect_configuration_from_rig()
+    rig_conf_dict = _collect_configuration_from_rig()
+    data_string = json.dumps(rig_conf_dict, indent=4, sort_keys=True)
+    if not filePath:
+        startDir = pm.workspace(q=True, rootDirectory=True)
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=0,
+            startingDirectory=startDir,
+            fileFilter='Simple Rig Configuration .src (*%s)' % ".src")
+    if not filePath:
+        return
+    if not isinstance(filePath, basestring):
+        filePath = filePath[0]
+    f = open(filePath, 'w')
+    f.write(data_string)
+    f.close()
 
 
-def import_configuration():
+def import_configuration(filePath=None):
     # TODO: import configuration
-    return
+    if not filePath:
+        startDir = pm.workspace(q=True, rootDirectory=True)
+        filePath = pm.fileDialog2(
+            dialogStyle=2,
+            fileMode=1,
+            startingDirectory=startDir,
+            fileFilter='Simple Rig Configuration .src (*%s)' % ".src")
+    if not filePath:
+        return
+    if not isinstance(filePath, basestring):
+        filePath = filePath[0]
+    configDict = json.load(open(filePath))
+    _build_rig_from_configuration(configDict)
 
 
 # Convert to SHIFTER  ===========================================
@@ -979,6 +1031,7 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.srUIInst.deleteRig_action.triggered.connect(self.delete_rig)
         self.srUIInst.autoBuild_action.triggered.connect(self.auto_rig)
         self.srUIInst.export_action.triggered.connect(self.export_config)
+        self.srUIInst.import_action.triggered.connect(self.import_config)
 
         # Misc
         self.srUIInst.rootName_lineEdit.textChanged.connect(
@@ -1116,12 +1169,15 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
     def export_config(self):
         export_configuration()
 
+    def import_config(self):
+        import_configuration()
 
-def open(*args):
+
+def openSimpleRigUI(*args):
     pyqt.showDialog(simpleRigTool)
 ####################################
 
 
 if __name__ == "__main__":
 
-    open()
+    openSimpleRigUI()

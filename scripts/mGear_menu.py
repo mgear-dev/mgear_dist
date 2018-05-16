@@ -78,7 +78,7 @@ def createMenu():
 
     # Simple rig
     pm.menuItem(parent="mGear", subMenu=True, tearOff=True, label="Simple Rig")
-    pm.menuItem(label="Simple Rig Tool", command=simpleRigTool.open)
+    pm.menuItem(label="Simple Rig Tool", command=simpleRigTool.openSimpleRigUI)
     pm.menuItem(divider=True)
     pm.menuItem(subMenu=True, tearOff=True, label="simpleRig Legacy")
     pm.menuItem(label="Simple Rig Generate",

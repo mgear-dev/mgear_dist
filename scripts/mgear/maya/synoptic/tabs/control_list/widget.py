@@ -1,13 +1,5 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'D:/repo/mgear/scripts/mgear/maya/synoptic/tabs/control_list/widget.ui'
-#
-# Created: Tue Mar 13 17:28:23 2018
-#      by: pyside2-uic  running on PySide2 2.0.0~alpha0
-#
-# WARNING! All changes made in this file will be lost!
-
-from PySide2 import QtCore, QtGui, QtWidgets
+import mgear.maya.pyqt as gqt
+QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 class Ui_baker(object):
     def setupUi(self, baker):
@@ -29,6 +21,6 @@ class Ui_baker(object):
         QtCore.QMetaObject.connectSlotsByName(baker)
 
     def retranslateUi(self, baker):
-        baker.setWindowTitle(QtWidgets.QApplication.translate("baker", "Form", None, -1))
+        baker.setWindowTitle(gqt.fakeTranslate("baker", "Form", None, -1))
 
 from mgear.maya.synoptic.searchControlsWidget import ControlListerUI

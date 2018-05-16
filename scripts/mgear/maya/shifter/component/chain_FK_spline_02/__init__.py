@@ -194,6 +194,10 @@ class Component(component.Main):
         else:
             self.def_number = len(self.guide.apos)
 
+        if self.settings["extraTweak"]:
+            tagP = self.parentCtlTag
+            self.extratweak_ctl = []
+
         for i in range(self.def_number):
             # References
             div_cns = primitive.addTransform(self.root,
@@ -208,7 +212,25 @@ class Component(component.Main):
             pm.setAttr(upv_cns + ".inheritsTransform", False)
             self.upv_cns.append(upv_cns)
 
-            self.jnt_pos.append([div_cns, i])
+            # self.jnt_pos.append([div_cns, i])
+            if self.settings["extraTweak"]:
+                t = transform.getTransform(div_cns)
+                tweak_ctl = self.addCtl(div_cns,
+                                        "extraTweak%s_ctl" % i,
+                                        t,
+                                        self.color_fk,
+                                        "square",
+                                        w=self.size * .08,
+                                        d=self.size * .08,
+                                        ro=datatypes.Vector([0, 0, 1.5708]),
+                                        tp=tagP)
+                attribute.setKeyableAttributes(tweak_ctl)
+
+                tagP = tweak_ctl
+                self.extratweak_ctl.append(tweak_ctl)
+                self.jnt_pos.append([tweak_ctl, i, None, False])
+            else:
+                self.jnt_pos.append([div_cns, i])
 
     # =====================================================
     # ATTRIBUTES
@@ -231,6 +253,9 @@ class Component(component.Main):
                                                       1,
                                                       0.0001,
                                                       10)
+        if self.settings["extraTweak"]:
+            self.tweakVis_att = self.addAnimParam(
+                "Tweak_vis", "Tweak Vis", "bool", False)
 
     # =====================================================
     # OPERATORS
@@ -311,6 +336,12 @@ class Component(component.Main):
         for ctl in self.fk_ctl:
             for shp in ctl.getShapes():
                 pm.connectAttr(self.fkVis_att, shp.attr("visibility"))
+
+        if self.settings["extraTweak"]:
+            for tweak_ctl in self.extratweak_ctl:
+                for shp in tweak_ctl.getShapes():
+                    pm.connectAttr(self.tweakVis_att, shp.attr("visibility"))
+
     # =====================================================
     # CONNECTOR
     # =====================================================

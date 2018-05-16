@@ -940,6 +940,8 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
     redBrush.setColor('#9b2d22')
     whiteBrush = QtGui.QBrush()
     whiteBrush.setColor('#ffffff')
+    whiteDownBrush = QtGui.QBrush()
+    whiteDownBrush.setColor('#E2E2E2')
     orangeBrush = QtGui.QBrush()
     orangeBrush.setColor('#e67e22')
 
@@ -1194,6 +1196,12 @@ class GuideSettings(MayaQWidgetDockableMixin, QtWidgets.QDialog, HelperSlots):
             QtCore.Qt.CustomContextMenu)
         csTap.postCustomStep_listWidget.customContextMenuRequested.connect(
             self.postCustomStepMenu)
+
+        # search hightlight
+        csTap.preSearch_lineEdit.textChanged.connect(
+            self.preHighlightSearch)
+        csTap.postSearch_lineEdit.textChanged.connect(
+            self.postHighlightSearch)
 
     def eventFilter(self, sender, event):
         if event.type() == QtCore.QEvent.ChildRemoved:
@@ -1640,7 +1648,7 @@ class CustomShifterStep(cstp.customShifterMainStep):
         for item in items:
             if item.text().startswith("*"):
                 item.setText(item.text()[1:])
-                item.setForeground(self.whiteBrush)
+                item.setForeground(self.whiteDownBrush)
             else:
                 item.setText("*" + item.text())
                 item.setForeground(self.redBrush)
@@ -1669,12 +1677,31 @@ class CustomShifterStep(cstp.customShifterMainStep):
         if item.text().startswith("*"):
             item.setForeground(self.redBrush)
         else:
-            item.setForeground(self.whiteBrush)
+            item.setForeground(self.whiteDownBrush)
 
     def refreshStatusColor(self, cs_listWidget):
         items = self.getAllItems(cs_listWidget)
         for i in items:
             self.setStatusColor(i)
+
+    # Highligter filter
+    def _highlightSearch(self, cs_listWidget, searchText):
+        items = self.getAllItems(cs_listWidget)
+        for i in items:
+            if searchText and searchText.lower() in i.text().lower():
+                i.setBackground(QtGui.QColor(128, 128, 128, 255))
+            else:
+                i.setBackground(QtGui.QColor(255, 255, 255, 0))
+
+    def preHighlightSearch(self):
+        searchText = self.customStepTab.preSearch_lineEdit.text()
+        self._highlightSearch(self.customStepTab.preCustomStep_listWidget,
+                              searchText)
+
+    def postHighlightSearch(self):
+        searchText = self.customStepTab.postSearch_lineEdit.text()
+        self._highlightSearch(self.customStepTab.postCustomStep_listWidget,
+                              searchText)
 
 
 # Backwards compatibility aliases
