@@ -3,8 +3,44 @@ Release Log
 
 2.5.17
 -----
+**New Features**
+	* mGear: IO curves [#76]
+	* Rigbits: RBF Manager [#183]
+	* Rigbits: set driven key module [#160]
+	* Simple Rig: 2.0 [#163]
+	* Synoptic: Control lister Tab [#99]
+	* Synoptic: geometry visibility manager Tab [#130]
+	* Synoptic: Spine IK <--> FK animation transfer [#169]
+
+**Enhancements**
+	* Animbits: SoftTweak tool update [#167]
+	* mGear: skin: copy skin [#168]
+	* Shifter: chain_FK_spline_01: keep length multiplayer channel [#199]
+	* Shifter: chain_FK_spline_02: add extra Tweak option [#202]
+	* Shifter: component ctrlGrp should be inherit from parent component [#181]
+	* Shifter: Component Lite chain and chain FK spline mirror auto pose configuration if override negate axis direction in R [#198]
+	* Shifter: Component Lite chain and chain FK spline mirror auto pose configuration if override negate axis direction in R [#198]
+	* Shifter: Control_01: lock sizeRef axis [#156]
+	* Shifter: Custom Step List: Highlight Background quicksearch [#203]
+	* Shifter: Lock joint channels if "separated joint structure" is unchek [#182]
+	* Shifter: Make not keyable the joints channel if jnt_org is checked [#188]
+	* Shifter: neck_ik: add option to orient IK to world space [#159]
+	* Shifter: Partial build skip custom steps [#154]
+	* Shifter: spine_S_Shape: add option to orient IK to world space [#164]
+	* Shifter: Turn on/off custom steps [#189]
+
 **Bug Fix**
+	* mGear:  curve.addCnsCurve: modify the center list in some situations [#172]
+	* Rigbits: Blended Gimmick joints bad naming with multy selection [#153]
+	* Shifter: 3jnt leg roundness att for knee and ankle [#144]
 	* Shifter: add_controller_tag. Fail on Maya old versions [#187]
+	* Shifter: Component: spine_IK_02: Last FK control don't have correct attr [#161]
+	* Shifter: Controller tag lost if export selection the rig [#175]
+	* Shifter: leg_2jnt and leg _2jnt_freetangents not taking max stretch default setting [#162]
+	* Shifter: Spine S Shape: bad build with offset on fk controls [#146]
+	* Synoptic: IK/FK transfer doesn't save keyframes on blend channel [#180]
+	* Synoptic: IK<->FK transfer strange refresh [#173]
+
 
 2.4.2
 -----
