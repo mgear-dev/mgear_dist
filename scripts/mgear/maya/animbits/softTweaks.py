@@ -83,7 +83,7 @@ def _createSoftTweakControls(name,
 
         if grps:
             if not isinstance(grps, list):
-                grps = list(grps)
+                grps = [grps]
             for grp in grps:
                 try:
                     # try if exist
