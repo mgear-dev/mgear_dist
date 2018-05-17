@@ -10,7 +10,8 @@ from pymel.core import datatypes
 
 import mgear
 import mgear.maya.icon as ico
-from mgear.maya import transform, node, attribute, applyop, pyqt, curve
+from mgear.maya import transform, node, attribute, applyop, pyqt, utils, curve
+from mgear.maya import shifter
 from mgear import string
 from . import simpleRigUI as srUI
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
@@ -108,6 +109,7 @@ def _create_control(name,
                      d=radio * 2)
 
     attribute.addAttribute(ctl, "conf_icon", "string", icon)
+    attribute.addAttribute(ctl, "conf_sets", "string", sets_config)
     attribute.addAttribute(ctl, "conf_radio", "float", radio, keyable=False)
     attribute.addAttribute(ctl, "conf_color", "long", color, keyable=False)
     attribute.addAttribute(ctl, CTL_TAG_ATTR, "bool", True, keyable=False)
@@ -424,9 +426,7 @@ def _get_branch_bbox_data(selection=None, yZero=True, *args):
                           max(bb[1][1], absBB[1][1])],
                          [min(bb[2][0], absBB[2][0]),
                           max(bb[2][1], absBB[2][1])]]
-            # if absCenter:
-            #     absCenter = [0, 0, 0]
-            # else:
+
             absCenter = [(axis[0] + axis[1]) / 2 for axis in absBB]
             absRadio = max([absBB[0][1] - absBB[0][0],
                             absBB[2][1] - absBB[2][0]]) / 1.7
@@ -461,6 +461,11 @@ def _collect_configuration_from_rig():
             ctl_names_list.append(ctl_name)
 
             conf_icon = c.conf_icon.get()
+            # back compatible:
+            if c.hasAttr("conf_sets"):
+                conf_sets = c.conf_sets.get()
+            else:
+                conf_sets = ""
             conf_radio = c.conf_radio.get()
             conf_color = c.conf_color.get()
             ctl_color = curve.get_color(c)
@@ -472,13 +477,8 @@ def _collect_configuration_from_rig():
                 ctl_index = ctl_name.split("_")[-2][1:]
             ctl_short_name = ctl_name.split("_")[0]
             ctl_parent = c.getParent(2).name()
-            # ctl transform matrix
             m = c.getMatrix(worldSpace=True)
             ctl_transform = m.get()
-            # sets list
-            # TODO: Sets are not stored correctly. Needs to stare stacked sets
-            # ie: animSets.basic
-            sets_list = [s.name() for s in c.listConnections(type="objectSet")]
 
             # driven list
             driven_list = [n.name() for n in _get_from_driven_attr(c)]
@@ -488,7 +488,7 @@ def _collect_configuration_from_rig():
                               "edit pivot mode or not reset SRT "
                               "Finish edit pivot for or reset "
                               "SRT: {}".format(c))
-            return
+            return None
         shps = curve.collect_curve_data(c)
         conf_ctl_dict = {"conf_icon": conf_icon,
                          "conf_radio": conf_radio,
@@ -501,7 +501,7 @@ def _collect_configuration_from_rig():
                          "ctl_transform": ctl_transform,
                          "ctl_short_name": ctl_short_name,
                          "driven_list": driven_list,
-                         "sets_list": sets_list}
+                         "sets_list": conf_sets}
 
         ctl_settings[ctl_name] = conf_ctl_dict
 
@@ -625,22 +625,143 @@ def import_configuration(filePath=None):
 
 # Convert to SHIFTER  ===========================================
 
-def _shifter_control_component():
+def _shifter_init_guide(name, worldCtl=False):
+    guide = shifter.guide.Rig()
+    guide.initialHierarchy()
+    model = guide.model
+    # set there attribute for guide root
+    model.rig_name.set(name)
+    model.worldCtl.set(worldCtl)
+
+    return guide
+
+
+def _shifter_control_component(name,
+                               side,
+                               indx,
+                               t,
+                               guide,
+                               parent=None,
+                               grps=""):
     # TODO: creates shifter control_01 component and sets the correct settings
-    return
+
+    comp_guide = guide.getComponentGuide("control_01")
+    if parent is None:
+        parent = guide.model
+    if not isinstance(parent, str):
+        parent = pm.PyNode(parent)
+
+    comp_guide.draw(parent)
+    comp_guide.rename(comp_guide.root, name, side, indx)
+    root = comp_guide.root
+    # set the attributes for component
+    root.setMatrix(t, worldSpace=True)
+    root.neutralRotation.set(False)
+    root.joint.set(True)
+    root.ctlGrp.set(grps)
+
+    return root
 
 
 def convert_to_shifter_guide():
     # TODO: convert from configuration
     # convert the configuration to a shifter guide.
     # extractig the ctl shapes
-    return
+
+    # get configuration dict
+    configDict = _collect_configuration_from_rig()
+
+    if configDict:
+
+        # Create the guide
+        root_name = configDict["root_name"]
+        if "world_ctl" in configDict["ctl_list"]:
+            worldCtl = True
+            # we asume the world_ctl is always the first in the list
+            configDict["ctl_list"] = configDict["ctl_list"][1:]
+        else:
+            worldCtl = False
+        guide = _shifter_init_guide(root_name, worldCtl)
+
+        # dic to store the parent relation from the original rig to the guide
+        parentRelation = {}
+        if worldCtl:
+            parentRelation["world_ctl"] = guide.model
+        else:
+            first_ctl = configDict["ctl_list"][0]
+            p = configDict["ctl_settings"][first_ctl]["ctl_parent"]
+            parentRelation[p] = guide.model
+        # create components
+        for c in configDict["ctl_list"]:
+            ctl_conf = configDict["ctl_settings"][c]
+            t = datatypes.Matrix(ctl_conf["ctl_transform"])
+            # we need to parse the grps list in order to extract the first grp
+            # without sub groups. Shifter doesn't support this feature yet
+            grps = ctl_conf["sets_list"]
+            grps = [g.split(".")[-1] for g in grps.split(",")][0]
+            root = _shifter_control_component(
+                ctl_conf["ctl_short_name"],
+                ctl_conf["ctl_side"],
+                int(ctl_conf["ctl_index"]),
+                t,
+                guide,
+                parent=parentRelation[ctl_conf["ctl_parent"]],
+                grps=grps)
+            parentRelation[c] = root
+
+        return guide, configDict
+    else:
+        return None, None
 
 
+# @utils.one_undo
 def convert_to_shifter_rig():
     # TODO: will create the guide and build the rig from configuration
     # skinning automatic base on driven attr
-    return
+
+    simple_rig_root = _get_simple_rig_root()
+    if simple_rig_root:
+        guide, configDict = convert_to_shifter_guide()
+        if guide:
+            # ensure the objects are removed from the original rig
+            for c in configDict["ctl_list"]:
+                ctl_conf = configDict["ctl_settings"][c]
+                for d in ctl_conf["driven_list"]:
+                    driven = pm.ls(d)
+                    if driven and driven[0].getParent(-1).hasAttr(
+                            "is_simple_rig"):
+                        pm.displayWarning("{}: cut for old rig hierarchy"
+                                          "to avoid delete it when delete "
+                                          "the old rig!!")
+                        pm.parent(driven, w=True)
+
+            # delete original rig
+            pm.delete(simple_rig_root)
+
+            # build guide
+            pm.select(guide.model)
+            rig = shifter.Rig()
+            rig.buildFromSelection()
+
+            # skin driven to new rig and  apply control shapes
+            for c in configDict["ctl_list"]:
+                ctl_conf = configDict["ctl_settings"][c]
+                for d in ctl_conf["driven_list"]:
+                    driven = pm.ls(d)
+                    jnt = pm.ls(c.replace("ctl", "0_jnt"))
+                    if driven and jnt:
+                        pm.skinCluster(jnt[0],
+                                       driven[0],
+                                       tsb=True,
+                                       nw=2,
+                                       n='{}_skinCluster'.format(d))
+                        # pm.parent(driven, rig.model)
+
+                curve.update_curve_from_data(ctl_conf["ctl_shapes"])
+        else:
+            pm.displayWarning("The guide can not be extracted. Check log!")
+    else:
+        pm.displayWarning("No simple root to conver!")
 
 
 # Edit ===========================================
@@ -1032,6 +1153,11 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
         self.srUIInst.autoBuild_action.triggered.connect(self.auto_rig)
         self.srUIInst.export_action.triggered.connect(self.export_config)
         self.srUIInst.import_action.triggered.connect(self.import_config)
+        # Shifter
+        self.srUIInst.convertToShifterRig_action.triggered.connect(
+            self.shifter_rig)
+        self.srUIInst.createShifterGuide_action.triggered.connect(
+            self.shifter_guide)
 
         # Misc
         self.srUIInst.rootName_lineEdit.textChanged.connect(
@@ -1042,6 +1168,12 @@ class simpleRigTool(MayaQWidgetDockableMixin, QtWidgets.QDialog):
     # ==============================================
     # Slots ========================================
     # ==============================================
+
+    def shifter_rig(self):
+        convert_to_shifter_rig()
+
+    def shifter_guide(self):
+        convert_to_shifter_guide()
 
     def rootName_text_changed(self):
         name = _validate_name(self.srUIInst.rootName_lineEdit.text())
