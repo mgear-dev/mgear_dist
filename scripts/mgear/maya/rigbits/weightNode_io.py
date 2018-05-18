@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 """
 import weightNode_io
 
@@ -23,6 +23,9 @@ Attributes:
     WNODE_DRIVERPOSE_ATTRS (dict): attrs and their type for querying/setting
     WNODE_SHAPE_ATTRS (list): of attrs to query for re-setting on create
     WNODE_TRANSFORM_ATTRS (list): of transform attrs to record
+
+__author__ = "Rafael Villar"
+__email__ = "rav@ravrigs.com"
 
 """
 # python
@@ -64,7 +67,6 @@ WNODE_TRANSFORM_ATTRS = ["tx",
                          "v"]
 
 WNODE_SHAPE_ATTRS = ['visibility',
-                     # 'instObjGroups',
                      'type',
                      'direction',
                      'invert',
@@ -79,22 +81,10 @@ WNODE_SHAPE_ATTRS = ['visibility',
                      'translateMax',
                      'interpolation',
                      'iconSize',
-                     # 'blendCurve',
-                     # 'blendCurve.blendCurve_Position',
-                     # 'blendCurve.blendCurve_FloatValue',
-                     # 'blendCurve.blendCurve_Interp',
                      'drawCone',
                      'drawCenterCone',
                      'drawWeight',
                      'outWeight',
-                     # 'readerMatrix',
-                     # 'driverMatrix',
-                     # 'input',
-                     # 'restInput',
-                     # 'poses',
-                     # 'poses.poseInput',
-                     # 'poses.poseValue',
-                     # 'output',
                      'twistAxis',
                      'opposite',
                      'rbfMode',
@@ -493,6 +483,14 @@ def copyPoses(nodeA, nodeB, emptyPoseValues=True):
 
 
 def syncPoseIndices(srcNode, destNode):
+    """Syncs the pose indices between the srcNode and destNode.
+    The input values will be copied from the srcNode, the poseValues will
+    be defaulted to 0 or 1(if scaleAttr)
+
+    Args:
+        srcNode (str): weightedDriver
+        destNode (str): weightedDriver
+    """
     src_poseInfo = getPoseInfo(srcNode)
     destDrivenAttrs = getDrivenNodeAttributes(destNode)
     for poseIndex, piValues in enumerate(src_poseInfo["poseInput"]):
