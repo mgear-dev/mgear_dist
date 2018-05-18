@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """rbf node to normalize the calls across any number of supported
 rbf node types. First supported "weightDriver"/ingo clemens/Brave Rabit
 
@@ -16,7 +17,10 @@ Attributes:
     TRANSFORM_SUFFIX (str): suffix of transform nodes for rbf nodes
     TRANSLATE_ATTRS (list): convenience list of transform attrs
 
-TODO - refactor as more supported rbf node types are added
+Notes - refactor as more supported rbf node types are added
+
+__author__ = "Rafael Villar"
+__email__ = "rav@ravrigs.com"
 
 """
 # python
@@ -85,6 +89,14 @@ def getMultipleAttrs(node, attributes):
 
 
 def copyInverseMirrorAttrs(srcNode, dstNode):
+    """within mGear the concept of inverseAttrs, so that transforms can be
+    accurately mirrored, exists and this copys the relavent attrs from src
+    to dest
+
+    Args:
+        srcNode (str, pynode): source node
+        dstNode (str, pynode): destination to copy attrs to
+    """
     srcNode = pm.PyNode(srcNode)
     dstNode = pm.PyNode(dstNode)
     attrsToInv = synoptic.utils.listAttrForMirror(srcNode)
@@ -196,12 +208,14 @@ def resetDrivenNodes(node):
     transform.resetTransform(pm.PyNode(node))
 
 
-def getDrivenMatrix(node):
+def getDrivenMatrix(node, absoluteWorld=True):
     """check if there is a control node for the provided node(driven)
     if so, collect the matrix information for both
 
     Args:
         node (pynode): driven group/driven node
+        absoluteWorld (bool, optional): get the world matrix or defaulted mat
+        if the control is zeroed out.
 
     Returns:
         MMatrix: of total position including the control
@@ -213,9 +227,11 @@ def getDrivenMatrix(node):
         controlNode = pm.PyNode(controlNode)
         nodeInverParMat = node.getAttr("parentInverseMatrix")
         controlMat = controlNode.getMatrix(worldSpace=True)
+        controlMat_local = controlNode.getMatrix(objectSpace=True)
         defaultMat = OpenMaya.MMatrix()
-        if controlMat == defaultMat:
+        if controlMat_local == defaultMat and not absoluteWorld:
             totalMatrix = defaultMat
+            print "Pose recorded in worldSpace."
         else:
             totalMatrix = controlMat * nodeInverParMat
     else:
@@ -285,11 +301,23 @@ def getConnectedRBFToggleNode(node, toggleAttr):
 
 
 def setToggleRBFAttr(node, value, toggleAttr):
+    """Toggle rbfattr on or off (any value provided)
+
+    Args:
+        node (str): name of node with the attr to toggle rbf on/off
+        value (int, bool): on/off
+        toggleAttr (str): name of the attr to set
+    """
     attrPlug = "{}.{}".format(node, toggleAttr)
     mc.setAttr(attrPlug, value)
 
 
 def createDriverControlPoseAttr(node):
+    """ensure the driverControlPoseAttr exists on the (RBF)node provided
+
+    Args:
+        node (str): name of the supported RBFNode
+    """
     try:
         mc.addAttr(node, ln=DRIVER_POSES_INFO_ATTR, dt="string")
     except RuntimeError:
@@ -297,6 +325,12 @@ def createDriverControlPoseAttr(node):
 
 
 def setDriverControlPoseAttr(node, poseInfo):
+    """set the driverControlPoseAttr with the poseInfo provided, as string
+
+    Args:
+        node (str): name of rbf node to set it on
+        poseInfo (dict): of pose information
+    """
     if not mc.attributeQuery(DRIVER_POSES_INFO_ATTR, n=node, ex=True):
         createDriverControlPoseAttr(node)
     mc.setAttr("{}.{}".format(node, DRIVER_POSES_INFO_ATTR),
@@ -305,6 +339,15 @@ def setDriverControlPoseAttr(node, poseInfo):
 
 
 def getDriverControlPoseAttr(node):
+    """record the dict, stored as a str, holding driver control
+    pose information.
+
+    Args:
+        node (str): name of the RBFNode supported node to query
+
+    Returns:
+        dict: of attr:[value at index]
+    """
     try:
         poseInfo = mc.getAttr("{}.{}".format(node, DRIVER_POSES_INFO_ATTR))
         return ast.literal_eval(poseInfo)
@@ -313,6 +356,13 @@ def getDriverControlPoseAttr(node):
 
 
 def updateDriverControlPoseAttr(node, driverControl, poseIndex):
+    """get the ControlPoseDict add any additionally recorded values to and set
+
+    Args:
+        node (str): name of the RBFNode supported node
+        driverControl (str): name of the control to queary attr info from
+        poseIndex (int): to add the collected pose information to
+    """
     # TODO future recording of all attrs goes here
     poseInfo = getDriverControlPoseAttr(node)
     attrsToUpdate = TRANSLATE_ATTRS + ROTATE_ATTRS + SCALE_ATTRS
@@ -331,8 +381,17 @@ def updateDriverControlPoseAttr(node, driverControl, poseIndex):
 
 
 def recallDriverControlPose(driverControl, poseInfo, index):
+    """set the driverControl to the index requested. Set as many attrs as is
+    provided in the poseInfo
+
+    Args:
+        driverControl (str): control to set poseAttr infomation on
+        poseInfo (dict): of poses
+        index (int): poseInfo[attrName]:[index]
+    """
     for attr, values in poseInfo.iteritems():
         try:
+            # not to be bothered with locked, hidden, connected attrs
             mc.setAttr("{}.{}".format(driverControl, attr), values[index])
         except Exception:
             pass
@@ -367,7 +426,7 @@ def getDriverControlAttr(node):
 
 
 def setDriverControlAttr(node, controlName):
-    """set attr with the driver animControl string
+    """ create and set attr with the driver animControl string
 
     Args:
         node (str): name of rbfnode
@@ -607,9 +666,19 @@ class RBFNode(object):
         raise NotImplementedError()
 
     def getSetupName(self):
+        """get the name of the setup that the RBFNode belongs to
+
+        Returns:
+            str: skirt_L0, shoulder_R0
+        """
         return getSetupName(self.name)
 
     def setSetupName(self, setupName):
+        """set the name of the setup for the RBFNode
+
+        Args:
+            setupName (str): desired name
+        """
         setSetupName(str(self.name), setupName)
 
     def setDriverNode(self, driverNode, driverAttrs):
@@ -655,31 +724,62 @@ class RBFNode(object):
         NotImplementedError()
 
     def setDriverControlPoseAttr(self, poseInfo):
+        """set the poseInfo as a string to the DriverControlPoseAttr
+
+        Args:
+            poseInfo (dict): of pose information to set, as a str
+        """
         setDriverControlPoseAttr(self.name, poseInfo)
 
     def getDriverControlPoseAttr(self):
+        """retrieve poseInfo from the driverControlPoseAttr as a dict
+
+        Returns:
+            dict: of pose information
+        """
         driverPoseInfoAttr = getDriverControlPoseAttr(self.name)
         return driverPoseInfoAttr
 
     def updateDriverControlPoseAttr(self, posesIndex):
+        """update the driverControlPoseAttr at the specified index
+
+        Args:
+            posesIndex (int): update the pose information at the index
+        """
         driverControl = self.getDriverControlAttr()
         updateDriverControlPoseAttr(self.name, driverControl, posesIndex)
 
     def setDriverControlAttr(self, controlName):
+        """ create and set attr with the driver animControl string
+
+        Args:
+            controlName (str): name of animControl(usually)
+        """
         setDriverControlAttr(self.name, controlName)
 
     def getDriverControlAttr(self):
+        """get the driverControlAttr
+
+        Returns:
+            str: the name of the control set within the attr
+        """
         driverControl = getDriverControlAttr(self.name)
         if driverControl == "":
             driverControl = self.getDriverNode()[0]
         return driverControl
 
     def recallDriverPose(self, poseIndex):
+        """recall the pose on the controlDriver with information at the
+        specified index
+
+        Args:
+            poseIndex (int): desired index, matches pose index on rbfNode
+        """
         driverControl = self.getDriverControlAttr()
         poseInfo = getDriverControlPoseAttr(self.name)
         recallDriverControlPose(driverControl, poseInfo, poseIndex)
 
-    def getPoseValues(self, resetDriven=True):
+    def getPoseValues(self, resetDriven=True, absoluteWorld=True):
         """get all pose values from rbf node
 
         Args:
@@ -694,7 +794,8 @@ class RBFNode(object):
         (trans,
          rotate,
          scale) = decompMatrix(drivenNode,
-                               getDrivenMatrix(drivenNode))
+                               getDrivenMatrix(drivenNode,
+                                               absoluteWorld=absoluteWorld))
         for attr in drivenAttrs:
             if attr in TRANSLATE_ATTRS:
                 index = TRANSLATE_ATTRS.index(attr)
