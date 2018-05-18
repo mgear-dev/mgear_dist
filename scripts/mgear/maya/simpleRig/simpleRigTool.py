@@ -582,7 +582,7 @@ def _build_rig_from_configuration(configDict):
                         indx=ctl_conf["ctl_index"],
                         color=ctl_conf["ctl_color"],
                         driven=driven,
-                        sets_config=",".join(ctl_conf["sets_list"]))
+                        sets_config=ctl_conf["sets_list"])
         curve.update_curve_from_data(ctl_conf["ctl_shapes"])
 
 
