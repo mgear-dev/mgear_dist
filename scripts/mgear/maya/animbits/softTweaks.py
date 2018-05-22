@@ -17,7 +17,7 @@ import pymel.core as pm
 from pymel.core import datatypes
 
 from mgear import string
-from mgear.maya import pyqt, attribute, icon, node, primitive, applyop
+from mgear.maya import pyqt, attribute, icon, node, primitive, applyop, skin
 import mgear.maya.animbits.softTweakWindowUI as stUI
 
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
@@ -151,6 +151,49 @@ def _createSoftModTweak(baseCtl,
     pm.connectAttr(baseCtl.getParent().attr("message"), sm[0].attr("ctlRoot"))
     pm.connectAttr(baseCtl.attr("message"), sm[0].attr("ctlBase"))
     pm.connectAttr(tweakCtl.attr("message"), sm[0].attr("ctlTweak"))
+
+    # This connection allow the softTweak to work if we apply the  skin
+    # precision fix.
+    # TODO: By default only apply to a non asset tweaks.
+    if skin.getSkinCluster(targets[0]) and not is_asset:
+
+        skin_cls = skin.getSkinCluster(targets[0])
+        cnxs = skin_cls.matrix[0].listConnections()
+        if (cnxs and cnxs[0].type() == "mgear_mulMatrix" and
+                not sm[0].hasAttr("_fixedSkinFix")):
+
+            # tag the softmod as fixed
+            attribute.addAttribute(sm[0], "_fixedSkinFix", "bool")
+
+            # original connections
+            matrix_cnx = sm[0].matrix.listConnections(p=True)[0]
+            preMatrix_cnx = sm[0].preMatrix.listConnections(p=True)[0]
+            wgtMatrix_cnx = sm[0].weightedMatrix.listConnections(p=True)[0]
+            postMatrix_cnx = sm[0].postMatrix.listConnections(p=True)[0]
+
+            # pre existing node operators
+            mulMtx_node = wgtMatrix_cnx.node()
+            dcMtx_node = sm[0].falloffCenter.listConnections(p=True)[0].node()
+
+            # geo offset connnections
+            geo_root = targets[0].getParent()
+            gr_W = geo_root.worldMatrix[0]
+            gr_WI = geo_root.worldInverseMatrix[0]
+
+            # new offset operators
+            mmm1 = applyop.gear_mulmatrix_op(preMatrix_cnx, gr_WI)
+            mmm2 = applyop.gear_mulmatrix_op(matrix_cnx, gr_WI)
+            mmm3 = applyop.gear_mulmatrix_op(gr_W, postMatrix_cnx)
+
+            # re-wire connections
+            pm.connectAttr(mmm1.output, dcMtx_node.inputMatrix, f=True)
+            pm.connectAttr(mmm1.output, sm[0].preMatrix, f=True)
+
+            pm.connectAttr(mmm2.output, sm[0].matrix, f=True)
+            pm.connectAttr(mmm2.output, mulMtx_node.matrixA, f=True)
+
+            pm.connectAttr(mmm3.output, mulMtx_node.matrixB, f=True)
+            pm.connectAttr(mmm3.output, sm[0].postMatrix, f=True)
 
     return sm[0]
 
