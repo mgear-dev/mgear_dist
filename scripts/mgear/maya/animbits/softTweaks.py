@@ -195,6 +195,8 @@ def _createSoftModTweak(baseCtl,
             pm.connectAttr(mmm3.output, mulMtx_node.matrixB, f=True)
             pm.connectAttr(mmm3.output, sm[0].postMatrix, f=True)
 
+            _neutra_geomMatrix(sm[0])
+
     return sm[0]
 
 
@@ -287,9 +289,8 @@ def _getAffectedObjects(softMods):
 
     return affectedList
 
+
 # get plugget object
-
-
 def _getPluggetObj(softMods, plug):
     ctlRoots = []
     if not isinstance(softMods, list):
@@ -299,6 +300,17 @@ def _getPluggetObj(softMods, plug):
             softMod = pm.PyNode(softMod)
         ctlRoots.append(softMod.attr(plug).listConnections(p=True)[0].node())
     return ctlRoots
+
+
+def _neutra_geomMatrix(softmod):
+    # ensure the geomMatrix is neutral
+    # this will fix the softTweak if it is apply in other position
+    # that is not bindpose
+    at = softmod.geomMatrix
+    m = datatypes.Matrix()
+    targets = _getAffectedObjects(softmod)
+    for i in xrange(len(targets)):
+        at.attr("geomMatrix[{}]".format(str(i))).set(m)
 
 
 # add or remove obj from softmod
@@ -319,6 +331,8 @@ def _addRemoveSoftMode(softMods, targets=[], add=True):
                 pm.sets(softSet[0], add=targets)
             else:
                 pm.sets(softSet[0], rm=targets)
+
+        _neutra_geomMatrix(softMod)
 
 
 # add to softmod
