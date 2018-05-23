@@ -139,6 +139,11 @@ class Rig(object):
 
             endTime = datetime.datetime.now()
             finalTime = endTime - startTime
+            pm.flushUndo()
+            pm.displayInfo("Undo history have been flushed to avoid "
+                           "possible crash after rig is build. \n"
+                           "More info: "
+                           "https://github.com/miquelcampos/mgear/issues/72")
             mgear.log("\n" + "= SHIFTER BUILD RIG DONE {} [ {} ] {}".format(
                 "=" * 16,
                 finalTime,
