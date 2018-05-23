@@ -14,4 +14,4 @@ Originally mGear was design and develope by Jeremie Passerin, since 2013 [Miquel
 - [mGear Goggle group](https://groups.google.com/forum/#!forum/mgearusergroup)
 - [mGear Youtube channel](https://www.youtube.com/c/mgearriggingframework)
 
-### Latest release: [2.5.18](https://gumroad.com/l/mgear)
+### Latest release: [2.5.21](https://gumroad.com/l/mgear)

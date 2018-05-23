@@ -1,7 +1,7 @@
 Release Log
 ===========
 
-2.5.17
+2.5.21
 -----
 **New Features**
 	* mGear: IO curves [#76]
@@ -36,10 +36,14 @@ Release Log
 	* Shifter: add_controller_tag. Fail on Maya old versions [#187]
 	* Shifter: Component: spine_IK_02: Last FK control don't have correct attr [#161]
 	* Shifter: Controller tag lost if export selection the rig [#175]
+	* Shifter: Joint connection: Maya evaluation Bug [#210]
 	* Shifter: leg_2jnt and leg _2jnt_freetangents not taking max stretch default setting [#162]
 	* Shifter: Spine S Shape: bad build with offset on fk controls [#146]
 	* Synoptic: IK/FK transfer doesn't save keyframes on blend channel [#180]
 	* Synoptic: IK<->FK transfer strange refresh [#173]
+
+**Known Issues**
+	* Shifter: Undo Build from selection crash maya. Now flush Undo to avoid possible crash [#74]
 
 
 2.4.2
