@@ -33,7 +33,8 @@ import pymel.core as pm
 import maya.OpenMaya as OpenMaya
 
 # mgear
-from mgear.maya import transform, attribute, synoptic
+from mgear.maya import transform, attribute
+from mgear.maya.synoptic import utils
 
 
 # =============================================================================
@@ -99,9 +100,9 @@ def copyInverseMirrorAttrs(srcNode, dstNode):
     """
     srcNode = pm.PyNode(srcNode)
     dstNode = pm.PyNode(dstNode)
-    attrsToInv = synoptic.utils.listAttrForMirror(srcNode)
+    attrsToInv = utils.listAttrForMirror(srcNode)
     for attr in attrsToInv:
-        inAttr = synoptic.utils.getInvertCheckButtonAttrName(attr)
+        inAttr = utils.getInvertCheckButtonAttrName(attr)
         try:
             val = mc.getAttr("{}.{}".format(srcNode, inAttr))
             mc.setAttr("{}.{}".format(dstNode, inAttr), val)

@@ -71,7 +71,7 @@ import maya.OpenMayaUI as mui
 # mgear
 from mgear.maya import pyqt
 import mgear.string as mString
-from mgear.maya import synoptic
+from mgear.maya.synoptic import utils
 from mgear.vendor.Qt import QtWidgets, QtCore, QtCompat
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 
@@ -1399,7 +1399,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
             mrConnections = []
             for pairs in weightInfo["connections"]:
                 mrConnections.append([mString.convertRLName(pairs[0]),
-                                     mString.convertRLName(pairs[1])])
+                                      mString.convertRLName(pairs[1])])
             weightInfo["connections"] = mrConnections
             # drivenControlName -----------------------------------------------
             mrDrvnCtl = mString.convertRLName(weightInfo["drivenControlName"])
@@ -1472,9 +1472,9 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         mrRbfType = aRbfNode.rbfType
         poseIndices = len(aRbfNode.getPoseInfo()["poseInput"])
         rbfModule = rbf_io.RBF_MODULES[mrRbfType]
-        createdNodes = rbfModule.createRBFFromInfo(mirrorWeightInfo)
+        rbfModule.createRBFFromInfo(mirrorWeightInfo)
         setupTargetInfo_dict = self.getMirroredSetupTargetsInfo()
-        nameSpace = synoptic.utils.getNamespace(aRbfNode.name)
+        nameSpace = utils.getNamespace(aRbfNode.name)
         mrRbfNodes = [v[1] for k, v in setupTargetInfo_dict.iteritems()]
         [v.setToggleRBFAttr(0) for v in mrRbfNodes]
         mrDriverNode = mrRbfNodes[0].getDriverNode()[0]
@@ -1483,13 +1483,13 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         driverControl = pm.PyNode(driverControl)
         for index in range(poseIndices):
             aRbfNode.recallDriverPose(index)
-            synoptic.utils.mirrorPose(flip=False, nodes=[driverControl])
+            utils.mirrorPose(flip=False, nodes=[driverControl])
             mrData = []
             for srcNode, dstValues in setupTargetInfo_dict.iteritems():
-                mrData.extend(synoptic.utils.calculateMirrorData(srcNode,
-                                                                 dstValues[0]))
+                mrData.extend(utils.calculateMirrorData(srcNode,
+                                                        dstValues[0]))
             for entry in mrData:
-                synoptic.utils.applyMirror(nameSpace, entry)
+                utils.applyMirror(nameSpace, entry)
 
             poseInputs = rbf_node.getMultipleAttrs(mrDriverNode, mrDriverAttrs)
             for mrRbfNode in mrRbfNodes:
