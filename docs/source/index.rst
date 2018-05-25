@@ -15,6 +15,9 @@ Welcome to mGear: Rigging Framework for Autodesk Maya
 
     mGear
 
+`mGear website <http://www.mgear-framework.com/>`_
+`Join mGear Community Forum <http://forum.mgear-framework.com/>`_
+
 **Contents:**
 
 .. toctree::
