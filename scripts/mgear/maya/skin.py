@@ -438,7 +438,7 @@ def skinCopy(sourceMesh=None, targetMesh=None, *args):
             skinCluster = pm.skinCluster(oDef,
                                          targetMesh,
                                          tsb=True,
-                                         nw=2,
+                                         nw=1,
                                          n=targetMesh.name() + "_SkinCluster")
             pm.copySkinWeights(ss=ss.stripNamespace(),
                                ds=skinCluster.name(),

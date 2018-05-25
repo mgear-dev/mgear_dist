@@ -23,14 +23,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-=================	========================	============================================================
-Authors:			Email:						Web:
-=================	========================	============================================================
-Jeremie Passerin	geerem@hotmail.com			`www.jeremiepasserin.com <http://www.jeremiepasserin.com>`_
-Miquel Campos 		hello@miquel-campos.com		`www.miquel-campos.com <http://www.miquel-campos.com>`_
-=================	========================	============================================================
+=================		============================================================
+Authors:				Web:
+=================		============================================================
+Jeremie Passerin		`www.jeremiepasserin.com <http://www.jeremiepasserin.com>`_
+Miquel Campos 			`www.miquel-campos.com <http://www.miquel-campos.com>`_
+=================		============================================================
 
-Date: 2016 / 10 / 10
+
 
 
 

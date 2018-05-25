@@ -4,7 +4,7 @@ from functools import partial
 import pymel.core as pm
 
 from mgear.maya.shifter.component import guide
-from mgear.maya import transform, pyqt
+from mgear.maya import transform, pyqt, attribute
 from mgear.vendor.Qt import QtWidgets, QtCore
 
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
@@ -57,8 +57,8 @@ class Guide(guide.ComponentGuide):
         self.root = self.addRoot()
         vTemp = transform.getOffsetPosition(self.root, [0, 0, 1])
         self.sizeRef = self.addLoc("sizeRef", self.root, vTemp)
-        # self.sizeRef.visibility.set(False)
         pm.delete(self.sizeRef.getShapes())
+        attribute.lockAttribute(self.sizeRef)
 
     # =====================================================
     # Add more parameter to the parameter definition list.

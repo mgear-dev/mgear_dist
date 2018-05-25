@@ -335,6 +335,37 @@ class Main(object):
 
         self.addToGroup(jnt, "deformers")
 
+        # This is a workaround due the evaluation problem with compound attr
+        # TODO: This workaround, should be removed onces the evaluation issue
+        # is fixed
+        # github issue: Shifter: Joint connection: Maya evaluation Bug #210
+        dm = jnt.r.listConnections(p=True, type="decomposeMatrix")
+        if dm:
+            at = dm[0]
+            dm_node = at.node()
+            pm.disconnectAttr(at, jnt.r)
+            pm.connectAttr(dm_node.outputRotateX, jnt.rx)
+            pm.connectAttr(dm_node.outputRotateY, jnt.ry)
+            pm.connectAttr(dm_node.outputRotateZ, jnt.rz)
+
+        dm = jnt.t.listConnections(p=True, type="decomposeMatrix")
+        if dm:
+            at = dm[0]
+            dm_node = at.node()
+            pm.disconnectAttr(at, jnt.t)
+            pm.connectAttr(dm_node.outputTranslateX, jnt.tx)
+            pm.connectAttr(dm_node.outputTranslateY, jnt.ty)
+            pm.connectAttr(dm_node.outputTranslateZ, jnt.tz)
+
+        dm = jnt.s.listConnections(p=True, type="decomposeMatrix")
+        if dm:
+            at = dm[0]
+            dm_node = at.node()
+            pm.disconnectAttr(at, jnt.s)
+            pm.connectAttr(dm_node.outputScaleX, jnt.sx)
+            pm.connectAttr(dm_node.outputScaleY, jnt.sy)
+            pm.connectAttr(dm_node.outputScaleZ, jnt.sz)
+
         return jnt
 
     def getNormalFromPos(self, pos):
