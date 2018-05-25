@@ -65,6 +65,7 @@ from functools import partial
 # maya
 import maya.cmds as mc
 import pymel.core as pm
+import maya.OpenMaya as om
 import maya.OpenMayaUI as mui
 
 # mgear
@@ -239,7 +240,7 @@ def VLine():
     return seperatorLine
 
 
-def show(*args):
+def show(dockable=True, newSceneCallBack=True, *args):
     """To launch the ui and not get the same instance
 
     Returns:
@@ -254,7 +255,8 @@ def show(*args):
             RBF_UI.close()
         except TypeError:
             pass
-    RBF_UI = RBFManagerUI(parent=pyqt.maya_main_window())
+    RBF_UI = RBFManagerUI(parent=pyqt.maya_main_window(),
+                          newSceneCallBack=newSceneCallBack)
     RBF_UI.show(dockable=True)
     return RBF_UI
 
@@ -436,9 +438,10 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
 
     mousePosition = QtCore.Signal(int, int)
 
-    def __init__(self, parent=None, hideMenuBar=False):
+    def __init__(self, parent=None, hideMenuBar=False, newSceneCallBack=True):
         super(RBFManagerUI, self).__init__(parent=parent)
         # UI info -------------------------------------------------------------
+        self.callBackID = None
         self.setWindowTitle(TOOL_TITLE)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
         self.genericWidgetHight = 24
@@ -453,6 +456,41 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         self.connectSignals()
         # added because the dockableMixin makes the ui appear small
         self.adjustSize()
+        if newSceneCallBack:
+            self.newSceneCallBack()
+
+    def callBackFunc(self, *args):
+        """super safe function for trying to refresh the UI, should anything
+        fail.
+
+        Args:
+            *args: Description
+        """
+        try:
+            self.refresh()
+        except Exception:
+            pass
+
+    def removeSceneCallback(self):
+        """remove the callback associated witht he UI, quietly fail.
+        """
+        try:
+            om.MSceneMessage.removeCallback(self.callBackID)
+        except Exception as e:
+            print "CallBack removal failure:"
+            print e
+
+    def newSceneCallBack(self):
+        """create a new scene callback to refresh the UI when scene changes.
+        """
+        callBackType = om.MSceneMessage.kSceneUpdate
+        try:
+            func = self.callBackFunc
+            obj = om.MSceneMessage.addCallback(callBackType, func)
+            self.callBackID = obj
+        except Exception as e:
+            print e
+            self.callBackID = None
 
     # general functions -------------------------------------------------------
     def getSelectedSetup(self):
@@ -1190,7 +1228,8 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
                 rbfSelection=True,
                 driverSelection=True,
                 drivenSelection=True,
-                currentRBFSetupNodes=True):
+                currentRBFSetupNodes=True,
+                *args):
         """Refreshes the UI
 
         Args:
@@ -1515,6 +1554,7 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
             toggleState (bool): default True
         """
         self.absWorld = toggleState
+        print "Recording poses in world space set to: {}".format(toggleState)
 
     # signal management -------------------------------------------------------
     def connectSignals(self):
@@ -1883,4 +1923,6 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         """
         self.__deleteAssociatedWidgetsMaya(self.driverPoseTableWidget)
         self.__deleteAssociatedWidgets(self.driverPoseTableWidget)
+        if self.callBackID is not None:
+            self.removeSceneCallback()
         super(RBFManagerUI, self).closeEvent(evnt)
