@@ -229,9 +229,10 @@ def getDrivenMatrix(node, absoluteWorld=True):
         controlMat = controlNode.getMatrix(worldSpace=True)
         controlMat_local = controlNode.getMatrix(objectSpace=True)
         defaultMat = OpenMaya.MMatrix()
-        if controlMat_local == defaultMat and not absoluteWorld:
+
+        if defaultMat.isEquivalent(controlMat_local) and not absoluteWorld:
             totalMatrix = defaultMat
-            print "Pose recorded in worldSpace."
+            print "Pose recorded in local."
         else:
             totalMatrix = controlMat * nodeInverParMat
     else:
