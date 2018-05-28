@@ -497,6 +497,7 @@ def _get_bbox_data(obj=None, yZero=True, *args):
     if not obj:
         obj = pm.selected()[0]
     shapes = pm.listRelatives(obj, ad=True, s=True)
+    shapes = [shp for shp in shapes if shp.type() == "mesh"]
     if shapes:
         bb = pm.polyEvaluate(shapes, b=True)
         volCenter = [(axis[0] + axis[1]) / 2 for axis in bb]
@@ -536,23 +537,24 @@ def _get_branch_bbox_data(selection=None, yZero=True, *args):
     for e in bbox_elements:
         if not _is_valid_ctl(e):
             bbCenter, bbRadio, bb = _get_bbox_data(e)
-            if not absBB:
-                absBB = bb
-            else:
-                absBB = [[min(bb[0][0], absBB[0][0]),
-                          max(bb[0][1], absBB[0][1])],
-                         [min(bb[1][0], absBB[1][0]),
-                          max(bb[1][1], absBB[1][1])],
-                         [min(bb[2][0], absBB[2][0]),
-                          max(bb[2][1], absBB[2][1])]]
+            if bbCenter:
+                if not absBB:
+                    absBB = bb
+                else:
+                    absBB = [[min(bb[0][0], absBB[0][0]),
+                              max(bb[0][1], absBB[0][1])],
+                             [min(bb[1][0], absBB[1][0]),
+                              max(bb[1][1], absBB[1][1])],
+                             [min(bb[2][0], absBB[2][0]),
+                              max(bb[2][1], absBB[2][1])]]
 
-            absCenter = [(axis[0] + axis[1]) / 2 for axis in absBB]
-            absRadio = max([absBB[0][1] - absBB[0][0],
-                            absBB[2][1] - absBB[2][0]]) / 1.7
+                absCenter = [(axis[0] + axis[1]) / 2 for axis in absBB]
+                absRadio = max([absBB[0][1] - absBB[0][0],
+                                absBB[2][1] - absBB[2][0]]) / 1.7
 
-            # set the cencter in the floor
-            if yZero:
-                absCenter[1] = absBB[1][0]
+                # set the cencter in the floor
+                if yZero:
+                    absCenter[1] = absBB[1][0]
 
     return absCenter, absRadio, absBB
 
