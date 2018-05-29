@@ -15,4 +15,4 @@ Originally mGear was design and develope by Jeremie Passerin, since 2013 [Miquel
 - [Release Log](https://miquelcampos.github.io/mgear/releaseLog.html)
 - For the official release, with compiled solvers: [Gumroad](https://gumroad.com/l/mgear)
 
-### Latest release: [2.5.22](https://gumroad.com/l/mgear)
+### Latest release: [2.5.23](https://gumroad.com/l/mgear)
