@@ -248,7 +248,7 @@ def _create_base_structure(rigName):
     return rig
 
 
-# @utils.one_undo
+@utils.one_undo
 def _create_simple_rig_root(rigName=RIG_ROOT,
                             selection=None,
                             world_ctl=True,
@@ -367,7 +367,7 @@ def _create_simple_rig_root(rigName=RIG_ROOT,
     return local_ctl
 
 
-# @utils.one_undo
+@utils.one_undo
 def _create_custom_pivot(name,
                          side,
                          icon,
@@ -1137,7 +1137,7 @@ def _consolidate_pivot_position(ctl):
         pm.displayWarning("The control: {} Is NOT in"
                           " Edit pivot Mode".format(ctl.name()))
 
-
+@utils.one_undo
 def _delete_rig():
     """Delete the rig
 
