@@ -1,7 +1,7 @@
 Release Log
 ===========
 
-2.5.22
+2.5.24
 -----
 **New Features**
 	* mGear: IO curves [#76]
