@@ -905,7 +905,6 @@ def convert_to_shifter_rig():
     skinning automatic base on driven attr
     """
 
-
     simple_rig_root = _get_simple_rig_root()
     if simple_rig_root:
         guide, configDict = convert_to_shifter_guide()
@@ -937,12 +936,16 @@ def convert_to_shifter_rig():
                     driven = pm.ls(d)
                     jnt = pm.ls(c.replace("ctl", "0_jnt"))
                     if driven and jnt:
-                        pm.skinCluster(jnt[0],
-                                       driven[0],
-                                       tsb=True,
-                                       nw=2,
-                                       n='{}_skinCluster'.format(d))
-                        # pm.parent(driven, rig.model)
+                        try:
+                            pm.skinCluster(jnt[0],
+                                           driven[0],
+                                           tsb=True,
+                                           nw=2,
+                                           n='{}_skinCluster'.format(d))
+                        except RuntimeError:
+                            pm.displayWarning("Automatic skinning, can't be "
+                                              "created for"
+                                              " {}. Skipped.".format(d))
 
                 curve.update_curve_from_data(ctl_conf["ctl_shapes"])
         else:
@@ -1136,6 +1139,7 @@ def _consolidate_pivot_position(ctl):
     else:
         pm.displayWarning("The control: {} Is NOT in"
                           " Edit pivot Mode".format(ctl.name()))
+
 
 @utils.one_undo
 def _delete_rig():
