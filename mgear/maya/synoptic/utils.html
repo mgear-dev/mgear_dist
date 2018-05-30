@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.4.2 documentation</title>
+  <title>mgear.maya.synoptic.utils &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.4.2 documentation" href="../../../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="../../../index.html"/>
         <link rel="up" title="Modules flat List" href="../../../modulesList.html"/>
         <link rel="next" title="mgear.maya.synoptic.widgets" href="widgets.html"/>
         <link rel="prev" title="mgear.maya.synoptic" href="synoptic.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.4
+                2.5
               </div>
             
           
@@ -425,6 +425,85 @@
 
 </dd></dl>
 
+<dl class="class">
+<dt id="mgear.maya.synoptic.utils.SpineIkFkTransfer">
+<em class="property">class </em><code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">SpineIkFkTransfer</code><a class="headerlink" href="#mgear.maya.synoptic.utils.SpineIkFkTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.maya.synoptic.utils.SpineIkFkTransfer.bakeAnimation">
+<code class="descname">bakeAnimation</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.SpineIkFkTransfer.bakeAnimation" title="Permalink to this definition">¶</a></dt>
+<dd><p>bake animation to desired destination. More adding animtion than
+ik/fk transfer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fkControls</strong> (<em>list</em>) – of fk controls</li>
+<li><strong>ikControls</strong> (<em>list</em>) – of ik controls</li>
+<li><strong>startFrame</strong> (<em>float</em>) – start frame</li>
+<li><strong>endFrame</strong> (<em>float</em>) – end frame</li>
+<li><strong>bakeToIk</strong> (<em>bool</em><em>, </em><em>optional</em>) – True, bake animation to ik, fk is false</li>
+<li><strong>onlyKeyframes</strong> (<em>bool</em><em>, </em><em>optional</em>) – transfer animation on other</li>
+<li><strong>if false</strong><strong>, </strong><strong>bake every frame</strong> (<em>keyframes</em><em>,</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.SpineIkFkTransfer.doItByUI">
+<code class="descname">doItByUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.SpineIkFkTransfer.doItByUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather UI settings to execute transfer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.synoptic.utils.SpineIkFkTransfer.setCtrls">
+<code class="descname">setCtrls</code><span class="sig-paren">(</span><em>fkControls</em>, <em>ikControls</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.SpineIkFkTransfer.setCtrls" title="Permalink to this definition">¶</a></dt>
+<dd><p>make provided controls accessible to the class, with namespaces</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fkControls</strong> (<em>list</em>) – of fk  controls</li>
+<li><strong>ikControls</strong> (<em>list</em>) – of ik controls</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.maya.synoptic.utils.SpineIkFkTransfer.showUI">
+<em class="property">static </em><code class="descname">showUI</code><span class="sig-paren">(</span><em>topNode</em>, <em>uihost</em>, <em>fkControls</em>, <em>ikControls</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.SpineIkFkTransfer.showUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called from the synaptic qpushbutton, with the spine control names</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>topNode</strong> (<a class="reference internal" href="../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) – top node of the rig</li>
+<li><strong>uihost</strong> (<em>TYPE</em>) – Description</li>
+<li><strong>fkControls</strong> (<em>list</em>) – of fkControls</li>
+<li><strong>ikControls</strong> (<em>list</em>) – of ikControls</li>
+<li><strong>*args</strong> – additional signal args, n/a</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.maya.synoptic.utils.SpineIkFkTransfer.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.maya.synoptic.utils.SpineIkFkTransfer.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="function">
 <dt id="mgear.maya.synoptic.utils.applyMirror">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">applyMirror</code><span class="sig-paren">(</span><em>nameSpace</em>, <em>mirrorEntry</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.applyMirror" title="Permalink to this definition">¶</a></dt>
@@ -551,6 +630,30 @@
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[dict[str]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.getClosestNode">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">getClosestNode</code><span class="sig-paren">(</span><em>node</em>, <em>nodesToQuery</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.getClosestNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the closest node, based on distance, from the list provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<a class="reference internal" href="../../string.html#module-mgear.string" title="mgear.string"><em>string</em></a>) – name of node</li>
+<li><strong>nodesToQuery</strong> (<em>list</em>) – of nodes to query</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">name of the closest node</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="../../string.html#module-mgear.string" title="mgear.string">string</a></p>
 </td>
 </tr>
 </tbody>
@@ -909,6 +1012,25 @@ i.e: human legs or arms</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.synoptic.utils.recordNodesMatrices">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">recordNodesMatrices</code><span class="sig-paren">(</span><em>nodes</em>, <em>desiredTime</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.recordNodesMatrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the matrices of the nodes provided and return a dict of
+node:matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nodes</strong> (<em>list</em>) – of nodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">node:node matrix</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.synoptic.utils.resetSelTrans">
 <code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">resetSelTrans</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.resetSelTrans" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset the transfom values (SRT) for the selected objects</p>
@@ -963,6 +1085,46 @@ i.e: human legs or arms</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.spine_FKToIK">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">spine_FKToIK</code><span class="sig-paren">(</span><em>fkControls</em>, <em>ikControls</em>, <em>matchMatrix_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spine_FKToIK" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match the IK controls to the FK. Known limitations: Does not compensate
+for stretching. Does not support zig-zag, or complex fk to ik transfers.
+Supports component: spine_S_shape_01, spine_ik_02</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fkControls</strong> (<em>list</em>) – of of nodes, IN THE ORDER OF HIERARCHY</li>
+<li><strong>ikControls</strong> (<em>list</em>) – of of nodes</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.maya.synoptic.utils.spine_IKToFK">
+<code class="descclassname">mgear.maya.synoptic.utils.</code><code class="descname">spine_IKToFK</code><span class="sig-paren">(</span><em>fkControls</em>, <em>ikControls</em>, <em>matchMatrix_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.synoptic.utils.spine_IKToFK" title="Permalink to this definition">¶</a></dt>
+<dd><p>position the IK controls to match, as best they can, the fk controls.
+Supports component: spine_S_shape_01, spine_ik_02</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fkControls</strong> (<em>list</em>) – list of fk controls, IN THE ORDER OF HIERARCHY,</li>
+<li><strong>..</strong><strong>, </strong><strong>..</strong><strong>, </strong><strong>&quot;spine_C0_fk6_ctl&quot;</strong><strong>]</strong> (<em>[</em><em>&quot;spine_C0_fk0_ctl&quot;</em><em>,</em>) – </li>
+<li><strong>ikControls</strong> (<em>list</em>) – all ik controls</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -1071,7 +1233,7 @@ toggle</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.4.2',
+            VERSION:'2.5.24',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

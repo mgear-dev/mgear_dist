@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.animbits.softTweaks &mdash; mGear: Rigging Framework 2.4.2 documentation</title>
+  <title>mgear.maya.animbits.softTweaks &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.4.2 documentation" href="../../../index.html"/> 
+    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="../../../index.html"/> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                2.4
+                2.5
               </div>
             
           
@@ -173,8 +173,13 @@ The credit of the idea goes to Vasil Shotarov, thanks!
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="mgear.maya.animbits.softTweaks.createAutoSoftTweak">
+<code class="descclassname">mgear.maya.animbits.softTweaks.</code><code class="descname">createAutoSoftTweak</code><span class="sig-paren">(</span><em>size=1.0</em>, <em>nameExt=’softMod’</em>, <em>is_asset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.animbits.softTweaks.createAutoSoftTweak" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="mgear.maya.animbits.softTweaks.createSoftTweak">
-<code class="descclassname">mgear.maya.animbits.softTweaks.</code><code class="descname">createSoftTweak</code><span class="sig-paren">(</span><em>name</em>, <em>targets=[]</em>, <em>parent=None</em>, <em>t=None</em>, <em>grp=None</em>, <em>size=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.animbits.softTweaks.createSoftTweak" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.maya.animbits.softTweaks.</code><code class="descname">createSoftTweak</code><span class="sig-paren">(</span><em>name</em>, <em>targets=[]</em>, <em>parent=None</em>, <em>t=None</em>, <em>grp=None</em>, <em>size=0.5</em>, <em>nameExt=’softMod’</em>, <em>is_asset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.animbits.softTweaks.createSoftTweak" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -203,6 +208,11 @@ The credit of the idea goes to Vasil Shotarov, thanks!
 <dd><dl class="method">
 <dt id="mgear.maya.animbits.softTweaks.softTweakManager.addObj">
 <code class="descname">addObj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.animbits.softTweaks.softTweakManager.addObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.animbits.softTweaks.softTweakManager.autoTweak">
+<code class="descname">autoTweak</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.animbits.softTweaks.softTweakManager.autoTweak" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -238,6 +248,16 @@ The credit of the idea goes to Vasil Shotarov, thanks!
 <dl class="method">
 <dt id="mgear.maya.animbits.softTweaks.softTweakManager.importConfiguration">
 <code class="descname">importConfiguration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.animbits.softTweaks.softTweakManager.importConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.animbits.softTweaks.softTweakManager.nameExt_text_changed">
+<code class="descname">nameExt_text_changed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.animbits.softTweaks.softTweakManager.nameExt_text_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.maya.animbits.softTweaks.softTweakManager.name_text_changed">
+<code class="descname">name_text_changed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.maya.animbits.softTweaks.softTweakManager.name_text_changed" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -349,7 +369,7 @@ The credit of the idea goes to Vasil Shotarov, thanks!
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'2.4.2',
+            VERSION:'2.5.24',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

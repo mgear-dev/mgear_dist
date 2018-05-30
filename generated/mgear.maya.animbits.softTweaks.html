@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.maya.animbits.softTweaks &mdash; mGear: Rigging Framework 2.4.2 documentation</title>
+  <title>mgear.maya.animbits.softTweaks &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.4.2 documentation" href="../index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="../index.html"/>
         <link rel="up" title="Animbits" href="../animbitsModules.html"/>
         <link rel="next" title="Modules flat List" href="../modulesList.html"/>
         <link rel="prev" title="mgear.maya.animbits" href="mgear.maya.animbits.html"/> 
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.4
+                2.5
               </div>
             
           
@@ -200,19 +200,22 @@ The credit of the idea goes to Vasil Shotarov, thanks!
 <tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.addToSoftMod" title="mgear.maya.animbits.softTweaks.addToSoftMod"><code class="xref py py-obj docutils literal"><span class="pre">addToSoftMod</span></code></a>(softMods[,&nbsp;targets])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.createSoftTweak" title="mgear.maya.animbits.softTweaks.createSoftTweak"><code class="xref py py-obj docutils literal"><span class="pre">createSoftTweak</span></code></a>(name[,&nbsp;targets,&nbsp;parent,&nbsp;t,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.createAutoSoftTweak" title="mgear.maya.animbits.softTweaks.createAutoSoftTweak"><code class="xref py py-obj docutils literal"><span class="pre">createAutoSoftTweak</span></code></a>([size,&nbsp;nameExt,&nbsp;is_asset])</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.exportConfiguration" title="mgear.maya.animbits.softTweaks.exportConfiguration"><code class="xref py py-obj docutils literal"><span class="pre">exportConfiguration</span></code></a>(softMods)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.createSoftTweak" title="mgear.maya.animbits.softTweaks.createSoftTweak"><code class="xref py py-obj docutils literal"><span class="pre">createSoftTweak</span></code></a>(name[,&nbsp;targets,&nbsp;parent,&nbsp;t,&nbsp;…])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.importConfigurationFromFile" title="mgear.maya.animbits.softTweaks.importConfigurationFromFile"><code class="xref py py-obj docutils literal"><span class="pre">importConfigurationFromFile</span></code></a>([filePath])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.exportConfiguration" title="mgear.maya.animbits.softTweaks.exportConfiguration"><code class="xref py py-obj docutils literal"><span class="pre">exportConfiguration</span></code></a>(softMods)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.openSoftTweakManager" title="mgear.maya.animbits.softTweaks.openSoftTweakManager"><code class="xref py py-obj docutils literal"><span class="pre">openSoftTweakManager</span></code></a>(*args)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.importConfigurationFromFile" title="mgear.maya.animbits.softTweaks.importConfigurationFromFile"><code class="xref py py-obj docutils literal"><span class="pre">importConfigurationFromFile</span></code></a>([filePath])</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.removeSoftMod" title="mgear.maya.animbits.softTweaks.removeSoftMod"><code class="xref py py-obj docutils literal"><span class="pre">removeSoftMod</span></code></a>(softMods[,&nbsp;targets])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.openSoftTweakManager" title="mgear.maya.animbits.softTweaks.openSoftTweakManager"><code class="xref py py-obj docutils literal"><span class="pre">openSoftTweakManager</span></code></a>(*args)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/maya/animbits/softTweaks.html#mgear.maya.animbits.softTweaks.removeSoftMod" title="mgear.maya.animbits.softTweaks.removeSoftMod"><code class="xref py py-obj docutils literal"><span class="pre">removeSoftMod</span></code></a>(softMods[,&nbsp;targets])</td>
 <td></td>
 </tr>
 </tbody>
@@ -278,7 +281,7 @@ The credit of the idea goes to Vasil Shotarov, thanks!
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'2.4.2',
+            VERSION:'2.5.24',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -10,6 +10,7 @@ mgear\.maya\.animbits\.softTweaks
    .. autosummary::
    
       addToSoftMod
+      createAutoSoftTweak
       createSoftTweak
       exportConfiguration
       importConfigurationFromFile
