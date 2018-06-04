@@ -1,13 +1,13 @@
-//Maya ASCII 2016R2 scene
+//Maya ASCII 2016 scene
 //Name: quadruped.ma
 //Last modified: Wed, May 30, 2018 04:46:41 PM
 //Codeset: 932
-requires maya "2016R2";
+requires maya "2016";
 requires -nodeType "mgear_curveCns" "mgear_solvers" "2.1.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2016";
-fileInfo "version" "2016 Extension 2 SP2";
+fileInfo "version" "2016";
 fileInfo "cutIdentifier" "201608220310-1001477-2";
 fileInfo "osv" "Microsoft Windows 8 Business Edition, 64-bit  (Build 9200)\n";
 createNode transform -s -n "persp";
@@ -9907,10 +9907,6 @@ createNode lightLinker -s -n "lightLinker1";
 	rename -uid "6A949668-42D7-635F-DCF6-CDB5E01725C4";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
-createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "681F0AF3-4C77-00E5-7B52-2C9598A65B6D";
-createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "0861DEB9-4AA0-094C-7EA5-EFA3EE84AB76";
 createNode displayLayerManager -n "layerManager";
 	rename -uid "FF0C38F0-48D2-FE0B-95CB-0D981FFF1D7C";
 createNode displayLayer -n "defaultLayer";
