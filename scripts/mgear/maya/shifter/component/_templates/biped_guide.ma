@@ -1,13 +1,13 @@
-//Maya ASCII 2016R2 scene
+//Maya ASCII 2016 scene
 //Name: biped_guide.ma
 //Last modified: Wed, May 30, 2018 04:46:21 PM
 //Codeset: 932
-requires maya "2016R2";
+requires maya "2016";
 requires -nodeType "mgear_curveCns" "mgear_solvers" "2.1.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
 fileInfo "product" "Maya 2016";
-fileInfo "version" "2016 Extension 2 SP2";
+fileInfo "version" "2016";
 fileInfo "cutIdentifier" "201608220310-1001477-2";
 fileInfo "osv" "Microsoft Windows 8 Business Edition, 64-bit  (Build 9200)\n";
 createNode transform -s -n "persp";
@@ -15807,10 +15807,6 @@ createNode lightLinker -s -n "lightLinker1";
 	rename -uid "6294E593-4946-0761-E673-C9AFE7858C73";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
-createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "48CA00EE-47AB-8BDA-2708-07A1BBB59189";
-createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "E5DCB690-486D-1F39-44A4-EBACB95F2C1E";
 createNode displayLayerManager -n "layerManager";
 	rename -uid "4F0E36E0-4E5A-F6BC-18F7-82BFC5E1D95B";
 createNode displayLayer -n "defaultLayer";
