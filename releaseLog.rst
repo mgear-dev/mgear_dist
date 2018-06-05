@@ -1,7 +1,7 @@
 Release Log
 ===========
 
-2.5.21
+2.5.24
 -----
 **New Features**
 	* mGear: IO curves [#76]
@@ -39,6 +39,7 @@ Release Log
 	* Shifter: Joint connection: Maya evaluation Bug [#210]
 	* Shifter: leg_2jnt and leg _2jnt_freetangents not taking max stretch default setting [#162]
 	* Shifter: Spine S Shape: bad build with offset on fk controls [#146]
+	* Simple Rig: BBox computation fails with lights [#212]
 	* Synoptic: IK/FK transfer doesn't save keyframes on blend channel [#180]
 	* Synoptic: IK<->FK transfer strange refresh [#173]
 

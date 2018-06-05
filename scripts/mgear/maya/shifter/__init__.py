@@ -235,8 +235,9 @@ class Rig(object):
             self.model, "comments", "string", str(self.options["comments"]))
         self.ctlVis_att = attribute.addAttribute(
             self.model, "ctl_vis", "bool", True)
-        self.ctlVisPlayback_att = attribute.addAttribute(
-            self.model, "ctl_vis_on_playback", "bool", True)
+        if versions.current() >= 201650:
+            self.ctlVisPlayback_att = attribute.addAttribute(
+                self.model, "ctl_vis_on_playback", "bool", True)
         self.jntVis_att = attribute.addAttribute(
             self.model, "jnt_vis", "bool", True)
 
@@ -276,8 +277,9 @@ class Rig(object):
 
         # Connect global visibility
         pm.connectAttr(self.ctlVis_att, self.global_ctl.attr("visibility"))
-        pm.connectAttr(self.ctlVisPlayback_att,
-                       self.global_ctl.attr("hideOnPlayback"))
+        if versions.current() >= 201650:
+            pm.connectAttr(self.ctlVisPlayback_att,
+                           self.global_ctl.attr("hideOnPlayback"))
         attribute.lockAttribute(self.global_ctl, ['v'])
 
         # --------------------------------------------------
