@@ -674,7 +674,8 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         self.populateDrivenWidgetInfo(tabDrivenWidget, weightInfo, rbfNode)
         self.refreshRbfSetupList(setToSelection=setupName)
         self.lockDriverWidgets()
-        mc.select(driverControl)
+        if driverControl:
+            mc.select(driverControl)
 
     def refreshAllTables(self):
         """Convenience function to refresh all the tables on all the tabs
@@ -1810,7 +1811,6 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         mainMenuBar = QtWidgets.QMenuBar()
         mainMenuBar.setContentsMargins(0, 0, 0, 0)
         file = mainMenuBar.addMenu("File")
-        file.setToolTipsVisible(True)
         menu1 = file.addAction("Re-evaluate Nodes", self.reevalluateAllNodes)
         menu1.setToolTip("Force all RBF nodes to re-revaluate.")
         file.addAction("Export All", self.exportNodes)
@@ -1821,13 +1821,11 @@ class RBFManagerUI(MayaQWidgetDockableMixin, QtWidgets.QMainWindow):
         file.addAction("Delete Current Setup", self.__deleteSetup)
         # mirror --------------------------------------------------------------
         mirrorMenu = mainMenuBar.addMenu("Mirror")
-        mirrorMenu.setToolTipsVisible(True)
         mirrorMenu1 = mirrorMenu.addAction("Mirror Setup", self.mirrorSetup)
         mirrorMenu1.setToolTip("This will create a new setup.")
 
         # settings ------------------------------------------------------------
         settingsMenu = mainMenuBar.addMenu("Settings")
-        settingsMenu.setToolTipsVisible(True)
         menuLabel = "Add poses in worldSpace"
         worldSpaceMenuItem = settingsMenu.addAction(menuLabel)
         worldSpaceMenuItem.toggled.connect(self.toggleGetPoseType)
