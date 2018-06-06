@@ -13,6 +13,7 @@
 - [Marcus Ottosson](https://github.com/mottosso)
 - [Matsumoto-san](https://github.com/yamahigashi)
 - [Miles Cheng](https://github.com/milesckt/)
+- [Nate Allison](https://github.com/juggernate)
 - [Oda-san](https://github.com/Gotetz/)
 
 
