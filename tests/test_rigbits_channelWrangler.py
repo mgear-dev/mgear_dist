@@ -1,13 +1,12 @@
-from maya import cmds
 import pymel.core as pm
-
-from mgear.maya.rigbits import channelWrangler
-from mgear.maya import attribute
-
+from maya import cmds
 from nose.tools import (
     assert_is_none,
     with_setup,
 )
+
+from mgear.core import attribute
+from scripts.mgear.rigbits import channelWrangler
 
 self = type("self", (object,), {})
 self.config = {

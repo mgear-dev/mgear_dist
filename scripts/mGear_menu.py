@@ -1,17 +1,10 @@
 import os
-import sys
 import subprocess
+import sys
 from functools import partial
 
 import pymel.core as pm
-
-import mgear
-
-from mgear.maya import synoptic, skin, rigbits, attribute, shifter
-from mgear.maya.simpleRig import simpleRigTool, simpleRig_legacy
-from mgear.maya.animbits import softTweaks
-from mgear.maya.rigbits import (
-    postSpring,
+from mgear.rigbits import (
     rope,
     proxySlicer,
     utils,
@@ -21,6 +14,7 @@ from mgear.maya.rigbits import (
     rbf_manager_ui
 )
 
+import mgear
 from mGear_guidesTemplates import (
     guideUI,
     buildFromSelection,
@@ -33,6 +27,11 @@ from mGear_mocapTools import (
     characterizeBiped,
     bakeMocap,
 )
+from mgear.core import skin, rigbits, attribute
+from mgear import synoptic, shifter
+from mgear.animbits import softTweaks
+from mgear.rigbits import postSpring
+from mgear.simpleRig import simpleRigTool
 
 
 def openFile(file, *args):
@@ -79,19 +78,6 @@ def createMenu():
     # Simple rig
     pm.menuItem(parent="mGear", subMenu=True, tearOff=True, label="Simple Rig")
     pm.menuItem(label="Simple Rig Tool", command=simpleRigTool.openSimpleRigUI)
-    pm.menuItem(divider=True)
-    pm.menuItem(subMenu=True, tearOff=True, label="simpleRig Legacy")
-    pm.menuItem(label="Simple Rig Generate",
-                command=partial(simpleRig_legacy.simpleRig, "rig", False))
-    pm.menuItem(divider=True)
-    pm.menuItem(label="Create Root", command=simpleRig_legacy.createRoot)
-    pm.menuItem(divider=True)
-    pm.menuItem(label="Set User Pivot",
-                command=simpleRig_legacy.setUserRigPivot)
-    pm.menuItem(label="Add To User Pivot",
-                command=simpleRig_legacy.addToUserPivot)
-    pm.menuItem(label="Select Objects In User Pivot",
-                command=simpleRig_legacy.selectObjectInUserRootPivot)
     pm.setParent(mGearM, menu=True)
     pm.menuItem(divider=True)
 
@@ -247,7 +233,7 @@ def createMenu():
                     openFile,
                     "http://forum.mgear-framework.com/"))
     pm.menuItem(divider=True)
-    pm.menuItem(label="About", command=mgear.maya.aboutMgear)
+    pm.menuItem(label="About", command=mgear.core.aboutMgear)
 
 
 # Backwards compatibiltiy

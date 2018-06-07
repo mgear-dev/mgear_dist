@@ -74,7 +74,7 @@ Where possible, relatively reference the root mgear package.
 **Wrong**
 
 ```python
-from mgear.maya import rigbits
+from mgear.core import rigbits
 ```
 
 **Right**
@@ -92,7 +92,7 @@ This enables mgear to be bundled together with another library, e.g. `from .vend
 Where possible, avoid the use of `import ... as ...`.
 
 ```python
-from mgear.maya import rigbits as rb
+from mgear.core import rigbits as rb
 ```
 
 This makes it more difficult to understand where a particular call is coming from, when read by someone who didn't initially make that import.

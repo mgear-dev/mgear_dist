@@ -1,6 +1,6 @@
-mgear.maya.shifter
+mgear.shifter
 ==================
 
-.. automodule:: mgear.maya.shifter
+.. automodule:: mgear.shifter
 	:members:
 	:undoc-members:

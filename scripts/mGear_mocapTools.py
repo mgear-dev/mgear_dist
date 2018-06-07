@@ -2,9 +2,9 @@ import os
 
 import pymel.core as pm
 
-import mgear.maya.transform as tra
-import mgear.maya.shifter.component as comp
-import mgear.maya.attribute as att
+import mgear.core.attribute as att
+import mgear.core.transform as tra
+import mgear.shifter.component as comp
 
 skelFK = [
     u"mGear_Mocap_interface_" + joint

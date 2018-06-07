@@ -1,7 +1,7 @@
-mgear.maya.shifter.gui
+mgear.shifter.gui
 ======================
 
 
-.. automodule:: mgear.maya.shifter.gui
+.. automodule:: mgear.shifter.gui
 	:members:
 	:undoc-members:

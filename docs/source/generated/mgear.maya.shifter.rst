@@ -1,7 +1,7 @@
 mgear\.maya\.shifter
 ====================
 
-.. automodule:: mgear.maya.shifter
+.. automodule:: mgear.shifter
 
    
    

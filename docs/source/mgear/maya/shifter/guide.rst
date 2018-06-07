@@ -1,7 +1,7 @@
-mgear.maya.shifter.guide
+mgear.shifter.guide
 ========================
 
 
-.. automodule:: mgear.maya.shifter.guide
+.. automodule:: mgear.shifter.guide
 	:members:
 	:undoc-members:
