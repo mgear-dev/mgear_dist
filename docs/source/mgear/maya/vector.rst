@@ -1,7 +1,7 @@
-mgear.maya.vector
+mgear.core.vector
 ==================
 
 
-.. automodule:: mgear.maya.vector
+.. automodule:: mgear.core.vector
    	:members:
 	:undoc-members:

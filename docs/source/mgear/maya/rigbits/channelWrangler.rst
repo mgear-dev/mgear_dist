@@ -1,6 +1,6 @@
-mgear.maya.rigbits.channelWrangler
+mgear.core.rigbits.channelWrangler
 ==================================
 
-.. automodule:: mgear.maya.rigbits.channelWrangler
+.. automodule:: mgear.core.rigbits.channelWrangler
 	:members:
 	:undoc-members:

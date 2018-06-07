@@ -1,7 +1,7 @@
 mgear\.maya\.curve
 ==================
 
-.. automodule:: mgear.maya.curve
+.. automodule:: mgear.core.curve
 
    
    

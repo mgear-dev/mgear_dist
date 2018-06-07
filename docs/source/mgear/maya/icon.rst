@@ -1,7 +1,7 @@
-mgear.maya.icon
+mgear.core.icon
 ==================
 
 
-.. automodule:: mgear.maya.icon
+.. automodule:: mgear.core.icon
    	:members:
 	:undoc-members:

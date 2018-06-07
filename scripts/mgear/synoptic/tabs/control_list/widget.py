@@ -1,4 +1,4 @@
-import mgear.maya.pyqt as gqt
+import mgear.core.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 class Ui_baker(object):
@@ -23,4 +23,4 @@ class Ui_baker(object):
     def retranslateUi(self, baker):
         baker.setWindowTitle(gqt.fakeTranslate("baker", "Form", None, -1))
 
-from mgear.maya.synoptic.searchControlsWidget import ControlListerUI
+from mgear.synoptic.searchControlsWidget import ControlListerUI

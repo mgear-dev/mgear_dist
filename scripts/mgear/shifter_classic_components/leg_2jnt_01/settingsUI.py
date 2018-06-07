@@ -1,4 +1,4 @@
-import mgear.maya.pyqt as gqt
+import mgear.core.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 class Ui_Form(object):

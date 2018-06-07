@@ -1,7 +1,7 @@
-mgear.maya.utils
+mgear.core.utils
 ==================
 
 
-.. automodule:: mgear.maya.utils
+.. automodule:: mgear.core.utils
    	:members:
 	:undoc-members:

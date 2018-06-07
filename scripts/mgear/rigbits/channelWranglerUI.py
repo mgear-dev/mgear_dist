@@ -201,4 +201,4 @@ class Ui_Form(object):
         self.proxyPolicy_comboBox.setItemText(0, pyqt.fakeTranslate("Form", "Index", None, -1))
         self.proxyPolicy_comboBox.setItemText(1, pyqt.fakeTranslate("Form", "Full Name", None, -1))
 
-from scripts.mgear.rigbits import TableWidgetDragRowsChannelWrangler
+from mgear.rigbits.widgets import TableWidgetDragRowsChannelWrangler

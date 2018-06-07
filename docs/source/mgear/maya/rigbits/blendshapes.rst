@@ -1,6 +1,6 @@
-mgear.maya.rigbits.blendShapes
+mgear.core.rigbits.blendShapes
 ==============================
 
-.. automodule:: mgear.maya.rigbits.blendShapes
+.. automodule:: mgear.core.rigbits.blendShapes
 	:members:
 	:undoc-members:

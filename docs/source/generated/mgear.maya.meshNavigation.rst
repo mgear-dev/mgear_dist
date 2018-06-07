@@ -1,7 +1,7 @@
 mgear\.maya\.meshNavigation
 ===========================
 
-.. automodule:: mgear.maya.meshNavigation
+.. automodule:: mgear.core.meshNavigation
 
    
    

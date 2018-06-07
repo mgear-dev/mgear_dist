@@ -1,8 +1,8 @@
-mgear.maya.attribute
+mgear.core.attribute
 =====================
 
 
-.. automodule:: mgear.maya.attribute
+.. automodule:: mgear.core.attribute
    	:members:
 	:undoc-members:
 

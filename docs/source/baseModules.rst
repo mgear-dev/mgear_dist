@@ -6,19 +6,19 @@ Base Modules
 
    mgear
    mgear.string
-   mgear.maya
-   mgear.maya.applyop
-   mgear.maya.attribute
-   mgear.maya.curve
-   mgear.maya.dag
-   mgear.maya.fcurve
-   mgear.maya.icon
-   mgear.maya.log
-   mgear.maya.meshNavigation
-   mgear.maya.node
-   mgear.maya.primitive
-   mgear.maya.skin
-   mgear.maya.transform
-   mgear.maya.utils
-   mgear.maya.vector
+   mgear.core
+   mgear.core.applyop
+   mgear.core.attribute
+   mgear.core.curve
+   mgear.core.dag
+   mgear.core.fcurve
+   mgear.core.icon
+   mgear.core.log
+   mgear.core.meshNavigation
+   mgear.core.node
+   mgear.core.primitive
+   mgear.core.skin
+   mgear.core.transform
+   mgear.core.utils
+   mgear.core.vector
 

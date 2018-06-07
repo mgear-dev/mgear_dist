@@ -6,7 +6,7 @@ from nose.tools import (
 )
 
 from mgear.core import attribute
-from scripts.mgear.rigbits import channelWrangler
+from mgear.rigbits import channelWrangler
 
 self = type("self", (object,), {})
 self.config = {

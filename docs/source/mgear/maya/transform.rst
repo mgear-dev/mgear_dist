@@ -1,7 +1,7 @@
-mgear.maya.transform
+mgear.core.transform
 ====================
 
 
-.. automodule:: mgear.maya.transform
+.. automodule:: mgear.core.transform
    	:members:
 	:undoc-members:

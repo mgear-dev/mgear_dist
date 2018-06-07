@@ -4,7 +4,7 @@ import json
 import traceback
 from functools import partial
 
-import mgear.maya.pyqt as gqt
+import mgear.core.pyqt as gqt
 import pymel.core as pm
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from mgear.core import meshNavigation, curve, applyop, node, primitive, icon

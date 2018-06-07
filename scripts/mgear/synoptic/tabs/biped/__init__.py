@@ -1,6 +1,6 @@
 import os
 
-from mgear.maya.synoptic.tabs import MainSynopticTab
+from mgear.synoptic.tabs import MainSynopticTab
 from mgear.vendor.Qt import QtWidgets
 
 from . import widget

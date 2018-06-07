@@ -24,7 +24,7 @@
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
 
-import mgear.maya.pyqt as gqt
+import mgear.core.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
@@ -337,4 +337,4 @@ class Ui_baker(object):
         self.bake.setText(gqt.fakeTranslate("baker", "Bake Springs", None, -1))
         self.clearBake.setText(gqt.fakeTranslate("baker", "Clear Baked Springs", None, -1))
 
-from mgear.maya.synoptic.widgets import clearSprings, bakeSprings
+from mgear.synoptic.widgets import clearSprings, bakeSprings

@@ -1,7 +1,7 @@
-mgear.maya.applyop
+mgear.core.applyop
 ==================
 
 
-.. automodule:: mgear.maya.applyop
+.. automodule:: mgear.core.applyop
    	:members:
 	:undoc-members:

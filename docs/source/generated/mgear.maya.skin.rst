@@ -1,7 +1,7 @@
 mgear\.maya\.skin
 =================
 
-.. automodule:: mgear.maya.skin
+.. automodule:: mgear.core.skin
 
    
    

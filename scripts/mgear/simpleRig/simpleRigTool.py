@@ -3,7 +3,7 @@ import getpass
 import json
 
 import mgear
-import mgear.maya.icon as ico
+import mgear.core.icon as ico
 import pymel.core as pm
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from mgear import shifter

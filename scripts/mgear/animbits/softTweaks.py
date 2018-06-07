@@ -13,14 +13,14 @@ http://bindpose.com/help-animators-fix-intersections-softmod-deformer/
 
 import json
 
-import mgear.maya.animbits.softTweakWindowUI as stUI
+import mgear.animbits.softTweakWindowUI as stUI
 import pymel.core as pm
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 from mgear.core import pyqt, attribute, icon, node, primitive, applyop, skin
 from mgear.vendor.Qt import QtCore, QtWidgets, QtGui
 from pymel.core import datatypes
 
-from scripts.mgear.core import string
+from mgear.core import string
 
 
 #########################################

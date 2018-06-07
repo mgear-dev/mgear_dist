@@ -1,7 +1,7 @@
-mgear.maya.skin
+mgear.core.skin
 ==================
 
 
-.. automodule:: mgear.maya.skin
+.. automodule:: mgear.core.skin
    	:members:
 	:undoc-members:

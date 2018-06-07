@@ -1,7 +1,7 @@
 from maya import cmds
 import pymel.core as pm
 
-import mgear.maya.attribute as att
+import mgear.core.attribute as att
 
 from nose.tools import (
     assert_false,

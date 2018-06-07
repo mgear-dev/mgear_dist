@@ -1,7 +1,7 @@
-mgear.maya.synoptic.widgets
+mgear.synoptic.widgets
 ===========================
 
 
-.. automodule:: mgear.maya.synoptic.widgets
+.. automodule:: mgear.synoptic.widgets
 	:members:
 	:undoc-members:

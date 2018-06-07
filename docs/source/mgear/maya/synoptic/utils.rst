@@ -1,6 +1,6 @@
-mgear.maya.synoptic.utils
+mgear.synoptic.utils
 =========================
 
-.. automodule:: mgear.maya.synoptic.utils
+.. automodule:: mgear.synoptic.utils
 	:members:
 	:undoc-members:

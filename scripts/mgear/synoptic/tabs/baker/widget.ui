@@ -911,12 +911,12 @@
   <customwidget>
    <class>bakeSprings</class>
    <extends>QPushButton</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
   </customwidget>
   <customwidget>
    <class>clearSprings</class>
    <extends>QPushButton</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -1,6 +1,6 @@
-mgear.maya.rigbits.proxySlicer
+mgear.core.rigbits.proxySlicer
 ==============================
 
-.. automodule:: mgear.maya.rigbits.proxySlicer
+.. automodule:: mgear.core.rigbits.proxySlicer
 	:members:
 	:undoc-members:

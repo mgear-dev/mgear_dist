@@ -1,4 +1,4 @@
-import mgear.maya.pyqt as gqt
+import mgear.core.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
@@ -20986,4 +20986,4 @@ class Ui_biped_body(object):
         self.IKFK_spine.setProperty("fkControls", gqt.fakeTranslate("biped_body", "spine_C0_fk0_ctl,spine_C0_fk1_ctl,spine_C0_fk2_ctl,spine_C0_fk3_ctl,spine_C0_fk4_ctl", None, -1))
         self.IKFK_spine.setProperty("ikControls", gqt.fakeTranslate("biped_body", "spine_C0_ik0_ctl,spine_C0_ik1_ctl,spine_C0_spinePosition_ctl,spine_C0_tan0_ctl,spine_C0_tan_ctl,spine_C0_tan1_ctl", None, -1))
 
-from mgear.maya.synoptic.widgets import SelectBtn_RIkCircle, SelectBtn_yellowCircle, SelectBtn_blueCircle, QuickSelButton, SelectBtn_RIkBox, SelectBtn_LFkBox, SelectBtn_RFkBox, resetBindPose, SelectBtn_redCircle, SelectBtn_greenBox, SelectBtn_greenCircle, SelectBtn_yellowOutlineBox, SelectBtn_yellowBox, ikfkMatchButton, FlipPoseButton, SelectBtn_darkGreenBox, SpineIkfkMatchButton, toggleCombo, MirrorPoseButton, resetTransform
+from mgear.synoptic.widgets import SelectBtn_RIkCircle, SelectBtn_yellowCircle, SelectBtn_blueCircle, QuickSelButton, SelectBtn_RIkBox, SelectBtn_LFkBox, SelectBtn_RFkBox, resetBindPose, SelectBtn_redCircle, SelectBtn_greenBox, SelectBtn_greenCircle, SelectBtn_yellowOutlineBox, SelectBtn_yellowBox, ikfkMatchButton, FlipPoseButton, SelectBtn_darkGreenBox, SpineIkfkMatchButton, toggleCombo, MirrorPoseButton, resetTransform

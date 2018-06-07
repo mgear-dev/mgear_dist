@@ -1,7 +1,7 @@
 mgear\.maya\.attribute
 ======================
 
-.. automodule:: mgear.maya.attribute
+.. automodule:: mgear.core.attribute
 
    
    

@@ -6,7 +6,8 @@
 import pymel.core as pm
 import maya.OpenMaya as om
 import pymel.util as pmu
-from pymel.core import datatypes, curve, attribute
+from pymel.core import datatypes
+from mgear.core import curve, attribute
 
 import mgear
 

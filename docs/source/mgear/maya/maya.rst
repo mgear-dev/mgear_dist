@@ -1,6 +1,6 @@
-mgear.maya
+mgear.core
 ==========
 
-.. automodule:: mgear.maya
+.. automodule:: mgear.core
 	:members:
 	:undoc-members:

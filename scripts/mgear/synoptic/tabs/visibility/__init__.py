@@ -1,4 +1,4 @@
-from mgear.maya.synoptic.tabs import MainSynopticTab
+from mgear.synoptic.tabs import MainSynopticTab
 
 from . import widget
 

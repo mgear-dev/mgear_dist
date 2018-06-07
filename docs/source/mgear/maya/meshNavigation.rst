@@ -1,7 +1,7 @@
-mgear.maya.meshNavigation
+mgear.core.meshNavigation
 =========================
 
 
-.. automodule:: mgear.maya.meshNavigation
+.. automodule:: mgear.core.meshNavigation
    	:members:
 	:undoc-members:

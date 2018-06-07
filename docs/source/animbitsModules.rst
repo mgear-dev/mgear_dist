@@ -20,7 +20,7 @@ Modules
 .. autosummary::
    :toctree: generated
 
-   mgear.maya.animbits
-   mgear.maya.animbits.softTweaks
+   mgear.core.animbits
+   mgear.core.animbits.softTweaks
 
 

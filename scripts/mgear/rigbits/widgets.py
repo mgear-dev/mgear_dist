@@ -1,6 +1,6 @@
 """Rigbits  widgets"""
 
-from mgear import widgets
+from mgear.core import widgets
 from mgear.vendor.Qt import QtWidgets
 
 

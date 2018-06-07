@@ -1,7 +1,7 @@
 mgear\.maya\.synoptic\.utils
 ============================
 
-.. automodule:: mgear.maya.synoptic.utils
+.. automodule:: mgear.synoptic.utils
 
    
    

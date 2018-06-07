@@ -36740,92 +36740,92 @@
   <customwidget>
    <class>QuickSelButton</class>
    <extends>QPushButton</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
   </customwidget>
   <customwidget>
    <class>SelectBtn_RFkBox</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_LFkBox</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_RIkBox</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_yellowBox</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_RIkCircle</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>MirrorPoseButton</class>
    <extends>QPushButton</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
   </customwidget>
   <customwidget>
    <class>FlipPoseButton</class>
    <extends>QPushButton</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
   </customwidget>
   <customwidget>
    <class>resetBindPose</class>
    <extends>QPushButton</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
   </customwidget>
   <customwidget>
    <class>resetTransform</class>
    <extends>QPushButton</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
   </customwidget>
   <customwidget>
    <class>SelectBtn_greenCircle</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_darkGreenBox</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_redCircle</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_greenBox</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_yellowCircle</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SelectBtn_blueCircle</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.widgets</header>
+   <header>mgear.synoptic.widgets</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

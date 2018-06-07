@@ -1,4 +1,4 @@
-import mgear.maya.pyqt as gqt
+import mgear.core.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 
@@ -26,4 +26,4 @@ class Ui_visibility(object):
         visibility.setWindowTitle(gqt.fakeTranslate("visibility", "Form", None, -1))
         self.widget.setProperty("geo_root", gqt.fakeTranslate("visibility", "geo_root", None, -1))
 
-from mgear.maya.synoptic.toggleGeoVisibilityWidget import ToggleGeoVisibility
+from mgear.synoptic.toggleGeoVisibilityWidget import ToggleGeoVisibility

@@ -36,9 +36,9 @@ def importTab(tabName):
     Returns:
         module: Synoptic tab module
     """
-    import mgear.maya.synoptic as syn
+    import mgear.synoptic as syn
     dirs = syn.SYNOPTIC_DIRECTORIES
-    defFmt = "mgear.core.synoptic.tabs.{}"
+    defFmt = "mgear.synoptic.tabs.{}"
     customFmt = "{0}"
 
     module = mgear.core.utils.importFromStandardOrCustomDirectories(
@@ -325,7 +325,7 @@ class SynopticTabWrapper(QtWidgets.QWidget):
         # type: () -> (MainSynopticTab, bool)
 
         # avoiding cyclic import, declaration here not top of code
-        from mgear.maya.synoptic.tabs import MainSynopticTab
+        from mgear.synoptic.tabs import MainSynopticTab
         for kid in self.children():
             if isinstance(kid, MainSynopticTab):
                 return kid, True

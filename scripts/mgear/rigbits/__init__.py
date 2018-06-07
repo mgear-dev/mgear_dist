@@ -4,9 +4,8 @@ from pymel import util as pmu
 
 
 import mgear
-import mgear.string
 from mgear.core import icon, applyop, node, transform
-from mgear.core import primitive, meshNavigation
+from mgear.core import primitive, meshNavigation, string
 
 
 def addNPO(objs=None, *args):

@@ -14,6 +14,8 @@ import mgear.core.utils
 from . import guide, component
 
 from mgear.core import primitive, attribute, skin, dag, icon, node
+from mgear import shifter_classic_components
+
 
 
 # check if we have loaded the necessary plugins
@@ -37,7 +39,7 @@ def getComponentDirectories():
     """Get the components directory"""
     return mgear.core.utils.gatherCustomModuleDirectories(
         SHIFTER_COMPONENT_ENV_KEY,
-        os.path.join(os.path.dirname(__file__), "component"))
+        os.path.join(os.path.dirname(shifter_classic_components.__file__)))
 
 
 def importComponentGuide(comp_type):

@@ -206,7 +206,7 @@ class Guide_UI(object):
             pyqt.showDialog(guide.componentSettings)
 
         elif guide_root:
-            module_name = "mgear.core.shifter.guide"
+            module_name = "mgear.shifter.guide"
             guide = __import__(module_name, globals(), locals(), ["*"], -1)
             pyqt.showDialog(guide.guideSettings)
 

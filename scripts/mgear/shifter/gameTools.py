@@ -4,7 +4,7 @@ from functools import partial
 import traceback
 import os.path
 
-import mgear.maya.utils as mutils
+import mgear.core.utils as mutils
 from mgear import string
 
 import mgear.shifter.gameToolsUI as gtUI

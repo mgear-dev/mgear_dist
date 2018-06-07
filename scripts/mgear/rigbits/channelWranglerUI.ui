@@ -342,7 +342,7 @@
   <customwidget>
    <class>TableWidgetDragRowsChannelWrangler</class>
    <extends>QTableWidget</extends>
-   <header>mgear.maya.rigbits.widgets</header>
+   <header>mgear.core.rigbits.widgets</header>
   </customwidget>
  </customwidgets>
  <resources/>

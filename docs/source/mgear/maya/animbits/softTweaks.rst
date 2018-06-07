@@ -1,6 +1,6 @@
-mgear.maya.animbits.softTweaks
+mgear.core.animbits.softTweaks
 ==============================
 
-.. automodule:: mgear.maya.animbits.softTweaks
+.. automodule:: mgear.core.animbits.softTweaks
 	:members:
 	:undoc-members:

@@ -46,7 +46,7 @@
   <customwidget>
    <class>ControlListerUI</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.searchControlsWidget</header>
+   <header>mgear.synoptic.searchControlsWidget</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

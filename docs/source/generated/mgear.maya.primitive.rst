@@ -1,7 +1,7 @@
 mgear\.maya\.primitive
 ======================
 
-.. automodule:: mgear.maya.primitive
+.. automodule:: mgear.core.primitive
 
    
    

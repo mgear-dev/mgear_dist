@@ -1,7 +1,7 @@
 mgear\.maya\.log
 ================
 
-.. automodule:: mgear.maya.log
+.. automodule:: mgear.core.log
 
    
    

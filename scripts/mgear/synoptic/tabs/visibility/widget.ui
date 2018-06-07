@@ -50,7 +50,7 @@
   <customwidget>
    <class>ToggleGeoVisibility</class>
    <extends>QWidget</extends>
-   <header>mgear.maya.synoptic.toggleGeoVisibilityWidget</header>
+   <header>mgear.synoptic.toggleGeoVisibilityWidget</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

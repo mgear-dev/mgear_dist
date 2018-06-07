@@ -1,7 +1,7 @@
 mgear\.maya\.utils
 ==================
 
-.. automodule:: mgear.maya.utils
+.. automodule:: mgear.core.utils
 
    
    

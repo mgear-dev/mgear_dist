@@ -1,6 +1,6 @@
-mgear.maya.rigbits.rope
+mgear.core.rigbits.rope
 =======================
 
-.. automodule:: mgear.maya.rigbits.rope
+.. automodule:: mgear.core.rigbits.rope
 	:members:
 	:undoc-members:

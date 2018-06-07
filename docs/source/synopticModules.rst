@@ -23,6 +23,6 @@ Modules
 .. autosummary::
    :toctree: generated
 
-   mgear.maya.synoptic
-   mgear.maya.synoptic.utils
-   mgear.maya.synoptic.widgets
+   mgear.synoptic
+   mgear.synoptic.utils
+   mgear.synoptic.widgets

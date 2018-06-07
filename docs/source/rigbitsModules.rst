@@ -20,17 +20,17 @@ Modules
 .. autosummary::
    :toctree: generated
 
-   mgear.maya.rigbits
-   mgear.maya.rigbits.blendShapes
-   mgear.maya.rigbits.channelWrangler
-   mgear.maya.rigbits.cycleTweaks
-   mgear.maya.rigbits.eye_rigger
-   mgear.maya.rigbits.ghost
-   mgear.maya.rigbits.lips_rigger
-   mgear.maya.rigbits.postSpring
-   mgear.maya.rigbits.proxySlicer
-   mgear.maya.rigbits.rivet
-   mgear.maya.rigbits.rope
-   mgear.maya.rigbits.tweaks
-   mgear.maya.rigbits.utils
+   mgear.core.rigbits
+   mgear.core.rigbits.blendShapes
+   mgear.core.rigbits.channelWrangler
+   mgear.core.rigbits.cycleTweaks
+   mgear.core.rigbits.eye_rigger
+   mgear.core.rigbits.ghost
+   mgear.core.rigbits.lips_rigger
+   mgear.core.rigbits.postSpring
+   mgear.core.rigbits.proxySlicer
+   mgear.core.rigbits.rivet
+   mgear.core.rigbits.rope
+   mgear.core.rigbits.tweaks
+   mgear.core.rigbits.utils
 

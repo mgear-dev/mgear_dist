@@ -1,7 +1,7 @@
-mgear.maya.primitive
+mgear.core.primitive
 =====================
 
 
-.. automodule:: mgear.maya.primitive
+.. automodule:: mgear.core.primitive
    	:members:
 	:undoc-members:

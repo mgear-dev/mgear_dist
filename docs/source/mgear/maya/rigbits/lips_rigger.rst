@@ -1,6 +1,6 @@
-mgear.maya.rigbits.lips_rigger
+mgear.core.rigbits.lips_rigger
 =============================
 
-.. automodule:: mgear.maya.rigbits.lips_rigger
+.. automodule:: mgear.core.rigbits.lips_rigger
 	:members:
 	:undoc-members:

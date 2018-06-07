@@ -3,7 +3,7 @@ import os
 import pymel.core as pm
 from mgear.shifter import gui
 
-from scripts.mgear.shifter import component
+from mgear.shifter import component
 
 
 def guideUI(*args):
@@ -20,7 +20,7 @@ def buildFromSelection(*args):
 def updateGuide(*args):
     """Update the guide rig"""
     if pm.selected():
-        rgGuide = scripts.mgear.shifter.guide.Rig()
+        rgGuide = mgear.shifter.guide.Rig()
         rgGuide.update(pm.selected()[0])
     else:
         pm.displayWarning("Please select the guide top node")

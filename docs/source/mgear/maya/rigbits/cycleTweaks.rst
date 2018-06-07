@@ -1,6 +1,6 @@
-mgear.maya.rigbits.cycleTweaks
+mgear.core.rigbits.cycleTweaks
 ==============================
 
-.. automodule:: mgear.maya.rigbits.cycleTweaks
+.. automodule:: mgear.core.rigbits.cycleTweaks
 	:members:
 	:undoc-members:

@@ -27,8 +27,8 @@ from mGear_mocapTools import (
     characterizeBiped,
     bakeMocap,
 )
-from mgear.core import skin, rigbits, attribute
-from mgear import synoptic, shifter
+from mgear.core import skin, attribute
+from mgear import synoptic, shifter, rigbits
 from mgear.animbits import softTweaks
 from mgear.rigbits import postSpring
 from mgear.simpleRig import simpleRigTool

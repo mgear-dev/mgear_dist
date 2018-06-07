@@ -70,7 +70,7 @@ import maya.OpenMayaUI as mui
 
 # mgear
 from mgear.core import pyqt
-import mgear.string as mString
+import mgear.core.string as mString
 from mgear.synoptic import utils
 from mgear.vendor.Qt import QtWidgets, QtCore, QtCompat
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin

@@ -1,7 +1,7 @@
-mgear.maya.node
+mgear.core.node
 ==================
 
 
-.. automodule:: mgear.maya.node
+.. automodule:: mgear.core.node
    	:members:
 	:undoc-members:

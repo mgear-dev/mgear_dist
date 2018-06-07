@@ -24,7 +24,7 @@
 # Author:     Miquel Campos         hello@miquel-campos.com  www.miquel-campos.com
 # Date:       2016 / 10 / 10
 
-import mgear.maya.pyqt as gqt
+import mgear.core.pyqt as gqt
 QtGui, QtCore, QtWidgets, wrapInstance = gqt.qt_import()
 
 class Ui_biped_body(object):
@@ -12298,4 +12298,4 @@ class Ui_biped_body(object):
         self.eye_L0_ik_ctl.setStatusTip(gqt.fakeTranslate("biped_body", "eye_L0_ik_ctl", None, -1))
         self.eye_R0_ik_ctl_2.setStatusTip(gqt.fakeTranslate("biped_body", "eye_R0_ik_ctl", None, -1))
 
-from mgear.maya.synoptic.widgets import SelectBtn_RIkCircle, SelectBtn_yellowCircle, QuickSelButton, SelectBtn_RIkBox, SelectBtn_LFkBox, SelectBtn_RFkBox, resetBindPose, SelectBtn_redCircle, SelectBtn_greenBox, SelectBtn_blueCircle, SelectBtn_yellowBox, FlipPoseButton, SelectBtn_darkGreenBox, SelectBtn_greenCircle, MirrorPoseButton, resetTransform
+from mgear.synoptic.widgets import SelectBtn_RIkCircle, SelectBtn_yellowCircle, QuickSelButton, SelectBtn_RIkBox, SelectBtn_LFkBox, SelectBtn_RFkBox, resetBindPose, SelectBtn_redCircle, SelectBtn_greenBox, SelectBtn_blueCircle, SelectBtn_yellowBox, FlipPoseButton, SelectBtn_darkGreenBox, SelectBtn_greenCircle, MirrorPoseButton, resetTransform

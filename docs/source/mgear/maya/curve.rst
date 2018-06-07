@@ -1,7 +1,7 @@
-mgear.maya.curve
+mgear.core.curve
 ==================
 
 
-.. automodule:: mgear.maya.curve
+.. automodule:: mgear.core.curve
    	:members:
 	:undoc-members:

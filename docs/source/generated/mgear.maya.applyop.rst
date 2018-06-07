@@ -1,7 +1,7 @@
 mgear\.maya\.applyop
 ====================
 
-.. automodule:: mgear.maya.applyop
+.. automodule:: mgear.core.applyop
 
    
    

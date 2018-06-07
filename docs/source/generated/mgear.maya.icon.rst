@@ -1,7 +1,7 @@
 mgear\.maya\.icon
 =================
 
-.. automodule:: mgear.maya.icon
+.. automodule:: mgear.core.icon
 
    
    

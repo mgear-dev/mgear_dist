@@ -1,7 +1,7 @@
 mgear\.maya\.node
 =================
 
-.. automodule:: mgear.maya.node
+.. automodule:: mgear.core.node
 
    
    

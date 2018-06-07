@@ -1,7 +1,7 @@
 mgear\.maya\.transform
 ======================
 
-.. automodule:: mgear.maya.transform
+.. automodule:: mgear.core.transform
 
    
    

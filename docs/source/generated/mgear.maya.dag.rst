@@ -1,7 +1,7 @@
 mgear\.maya\.dag
 ================
 
-.. automodule:: mgear.maya.dag
+.. automodule:: mgear.core.dag
 
    
    

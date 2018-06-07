@@ -1,6 +1,6 @@
-mgear.maya.rigbits.ghost
+mgear.core.rigbits.ghost
 ========================
 
-.. automodule:: mgear.maya.rigbits.ghost
+.. automodule:: mgear.core.rigbits.ghost
 	:members:
 	:undoc-members:
