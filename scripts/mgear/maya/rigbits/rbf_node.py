@@ -141,14 +141,15 @@ def removeDrivenGroup(node):
         node (str): name of node to check
     """
     parentOfTarget = mc.listRelatives(node, p=True) or None
-    childrenNode = mc.listRelatives(node, type="transform")
+    childrenNode = mc.listRelatives(node, type="transform") or []
 
     for child in childrenNode:
         if parentOfTarget is None:
             mc.parent(child, w=True)
         else:
             mc.parent(child, parentOfTarget[0])
-    mc.delete(node)
+    if node.endswith(DRIVEN_SUFFIX):
+        mc.delete(node)
 
 
 def decompMatrix(node, matrix):
