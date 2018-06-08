@@ -27,51 +27,52 @@ NoClean(mgearinit + mgearmod)
 
 defines = []
 if sys.platform == "win32":
-   defines.append("NOMINMAX")
+    defines.append("NOMINMAX")
+
 
 def CVWrapSetup(env):
-   if sys.platform == "win32":
-      env.Append(CCFLAGS=["/arch:AVX"])
-   else:
-      env.Append(CCFLAGS=["-mavx"])
+    if sys.platform == "win32":
+        env.Append(CCFLAGS=["/arch:AVX"])
+    else:
+        env.Append(CCFLAGS=["-mavx"])
 
 targets = [
-   {
-      "name": "mgear_core",
-      "type": "install",
-      "desc": "mgear core python modules",
-      "install": {"scripts": excons.glob("scripts/*.py"),
-                  "scripts/mgear": mgearpy + mgearinit,
-                  "scripts/mgear/vendor": qtpy,
-                  "tests": excons.glob("tests/*.py"),
-                  "": mgearmod}
-   },
-   {
-      "name": "mgear_solvers",
-      "type": "dynamicmodule",
-      "desc": "mgear solvers plugin",
-      "prefix": outprefix,
-      "bldprefix": maya.Version(),
-      "ext": maya.PluginExt(),
-      "defs": defines,
-      "incdirs": ["src"],
-      "srcs": excons.glob("src/*.cpp"),
-      "custom": [maya.Require]
-   },
-   {
-      "name": "cvwrap",
-      "type": "dynamicmodule",
-      "desc": "wrap deformer plugin",
-      "prefix": outprefix,
-      "bldprefix": maya.Version(),
-      "ext": maya.PluginExt(),
-      "defs": defines,
-      "incdirs": ["src"],
-      "srcs": excons.glob("cvwrap/src/*.cpp"),
-      "custom": [maya.Require, CVWrapSetup],
-      "libs": ([] if maya.Version(asString=False) < 201600 else ["clew"]),
-      "install": {"scripts": excons.glob("cvwrap/scripts/*")}
-   }
+    {
+        "name": "mgear_core",
+        "type": "install",
+        "desc": "mgear core python modules",
+        "install": {"scripts": excons.glob("scripts/*.py"),
+                    "scripts/mgear": mgearpy + mgearinit,
+                    "scripts/mgear/vendor": qtpy,
+                    "tests": excons.glob("tests/*.py"),
+                    "": mgearmod}
+    },
+    {
+        "name": "mgear_solvers",
+        "type": "dynamicmodule",
+        "desc": "mgear solvers plugin",
+        "prefix": outprefix,
+        "bldprefix": maya.Version(),
+        "ext": maya.PluginExt(),
+        "defs": defines,
+        "incdirs": ["src"],
+        "srcs": excons.glob("src/*.cpp"),
+        "custom": [maya.Require]
+    },
+    {
+        "name": "cvwrap",
+        "type": "dynamicmodule",
+        "desc": "wrap deformer plugin",
+        "prefix": outprefix,
+        "bldprefix": maya.Version(),
+        "ext": maya.PluginExt(),
+        "defs": defines,
+        "incdirs": ["src"],
+        "srcs": excons.glob("cvwrap/src/*.cpp"),
+        "custom": [maya.Require, CVWrapSetup],
+        "libs": ([] if maya.Version(asString=False) < 201600 else ["clew"]),
+        "install": {"scripts": excons.glob("cvwrap/scripts/*")}
+    }
 ]
 
 excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cvwrap)")
