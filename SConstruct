@@ -94,7 +94,7 @@ targets = [
     }
 ]
 
-excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cvwrap)")
+excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cvwrap, grim_IK)")
 
 td = excons.DeclareTargets(env, targets)
 
