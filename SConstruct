@@ -44,8 +44,6 @@ targets = [
         "install": {"scripts": excons.glob("scripts/*.py"),
                     "scripts/mgear": mgearpy + mgearinit,
                     "scripts/mgear/vendor": qtpy,
-                    "tests":
-                        excons.glob("tests/*.py"),
                     "scripts/mgear/core": excons.glob("mgear_core/core/*"),
                     "scripts/mgear/animbits": excons.glob("animbits/animbits/*"),
                     "scripts/mgear/rigbits": excons.glob("rigbits/rigbits/*"),
@@ -63,8 +61,8 @@ targets = [
         "bldprefix": maya.Version(),
         "ext": maya.PluginExt(),
         "defs": defines,
-        "incdirs": ["src"],
-        "srcs": excons.glob("src/*.cpp"),
+        "incdirs": ["mgear_solvers/src"],
+        "srcs": excons.glob("mgear_solvers/src/*.cpp"),
         "custom": [maya.Require]
     },
     {
