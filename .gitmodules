@@ -31,3 +31,6 @@
 [submodule "mgear_solvers"]
 	path = mgear_solvers
 	url = git@github.com:mgear-dev/mgear_solvers.git
+[submodule "grim_IK"]
+	path = grim_IK
+	url = git@github.com:mgear-dev/grim_IK.git

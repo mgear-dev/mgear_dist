@@ -78,6 +78,19 @@ targets = [
         "custom": [maya.Require, CVWrapSetup],
         "libs": ([] if maya.Version(asString=False) < 201600 else ["clew"]),
         "install": {"scripts": excons.glob("cvwrap/scripts/*")}
+    },
+    {
+        "name": "grim_IK",
+        "type": "dynamicmodule",
+        "desc": "grim IK solver",
+        "prefix": outprefix,
+        "bldprefix": maya.Version(),
+        "ext": maya.PluginExt(),
+        "defs": defines,
+        "incdirs": ["grim_IK"],
+        "srcs": excons.glob("grim_IK/*.cpp"),
+        "custom": [maya.Require],
+        "libs": ([] if maya.Version(asString=False) < 201600 else ["clew"])
     }
 ]
 
@@ -85,7 +98,7 @@ excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cv
 
 td = excons.DeclareTargets(env, targets)
 
-env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"]])
+env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"], td["grim_IK"]])
 
 td["python"] = filter(lambda x: os.path.splitext(str(x))[1] != ".mel", Glob(outdir + "/scripts/*"))
 td["scripts"] = Glob(outdir + "/scripts/*.mel")
@@ -94,6 +107,7 @@ pluginsdir = "/plug-ins/%s/%s" % (maya.Version(nice=True), excons.EcosystemPlatf
 
 ecodirs = {"mgear_solvers": pluginsdir,
            "cvwrap": pluginsdir,
+           "grim_IK": pluginsdir,
            "python": "/python",
            "scripts": "/scripts"}
 
