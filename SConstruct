@@ -44,7 +44,15 @@ targets = [
         "install": {"scripts": excons.glob("scripts/*.py"),
                     "scripts/mgear": mgearpy + mgearinit,
                     "scripts/mgear/vendor": qtpy,
-                    "tests": excons.glob("tests/*.py"),
+                    "tests":
+                        excons.glob("tests/*.py"),
+                    "scripts/mgear/core": excons.glob("mgear_core/core/*"),
+                    "scripts/mgear/animbits": excons.glob("animbits/animbits/*"),
+                    "scripts/mgear/rigbits": excons.glob("rigbits/rigbits/*"),
+                    "scripts/mgear/simpleRig": excons.glob("simpleRig/simpleRig/*"),
+                    "scripts/mgear/synoptic": excons.glob("synoptic/synoptic/*"),
+                    "scripts/mgear/shifter": excons.glob("shifter/shifter/*"),
+                    "scripts/mgear/shifter_classic_components": excons.glob("shifter_classic_components/shifter_classic_components/*"),
                     "": mgearmod}
     },
     {
