@@ -18,9 +18,12 @@ sev_comment = 32
 # gear version
 VERSION = @MGEAR_VERSION@
 
-##########################################################
-# METHODS
-##########################################################
+self = sys.modules[__name__]
+self.menu_id = None
+
+
+def install():
+    self.menu_id = menu.create()
 
 
 def logInfos():

@@ -3,6 +3,8 @@
 import os
 import sys
 import exceptions
+from . import menu
+
 
 # Debug mode for the logger
 logDebug = False
@@ -18,9 +20,12 @@ sev_comment = 32
 # gear version
 VERSION = [3, 0, 0]
 
-##########################################################
-# METHODS
-##########################################################
+self = sys.modules[__name__]
+self.menu_id = None
+
+
+def install():
+    self.menu_id = menu.create()
 
 
 def logInfos():
