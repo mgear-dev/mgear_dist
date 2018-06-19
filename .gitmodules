@@ -34,3 +34,6 @@
 [submodule "grim_IK"]
 	path = grim_IK
 	url = git@github.com:mgear-dev/grim_IK.git
+[submodule "maya-math-nodes"]
+	path = maya-math-nodes
+	url = git@github.com:mgear-dev/maya-math-nodes.git

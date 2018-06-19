@@ -30,6 +30,11 @@ if sys.platform == "win32":
     defines.append("NOMINMAX")
 
 
+def maya_math_nodes_setup(env):
+    env.Append(CPPDEFINES = [('NODE_NAME_PREFIX', '\"\\\"math_\\\"\"')])
+
+
+
 def CVWrapSetup(env):
     if sys.platform == "win32":
         env.Append(CCFLAGS=["/arch:AVX"])
@@ -80,6 +85,18 @@ targets = [
         "install": {"scripts": excons.glob("cvwrap/scripts/*")}
     },
     {
+        "name": "maya-math-nodes",
+        "type": "dynamicmodule",
+        "desc": "math nodes plugin",
+        "prefix": outprefix,
+        "bldprefix": maya.Version(),
+        "ext": maya.PluginExt(),
+        "defs": defines,
+        "incdirs": ["src"],
+        "srcs": excons.glob("maya-math-nodes/src/*.cpp"),
+        "custom": [maya.Require, maya_math_nodes_setup]
+    },
+    {
         "name": "grim_IK",
         "type": "dynamicmodule",
         "desc": "grim IK solver",
@@ -89,16 +106,15 @@ targets = [
         "defs": defines,
         "incdirs": ["grim_IK"],
         "srcs": excons.glob("grim_IK/*.cpp"),
-        "custom": [maya.Require],
-        "libs": ([] if maya.Version(asString=False) < 201600 else ["clew"])
+        "custom": [maya.Require]
     }
 ]
 
-excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cvwrap, grim_IK)")
+excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cvwrap, grim_IK, maya-math-nodes)")
 
 td = excons.DeclareTargets(env, targets)
 
-env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"], td["grim_IK"]])
+env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"], td["grim_IK"], td["maya-math-nodes"]])
 
 td["python"] = filter(lambda x: os.path.splitext(str(x))[1] != ".mel", Glob(outdir + "/scripts/*"))
 td["scripts"] = Glob(outdir + "/scripts/*.mel")
@@ -108,6 +124,7 @@ pluginsdir = "/plug-ins/%s/%s" % (maya.Version(nice=True), excons.EcosystemPlatf
 ecodirs = {"mgear_solvers": pluginsdir,
            "cvwrap": pluginsdir,
            "grim_IK": pluginsdir,
+           "maya-math-nodes": pluginsdir,
            "python": "/python",
            "scripts": "/scripts"}
 
