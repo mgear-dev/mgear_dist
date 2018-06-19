@@ -2,7 +2,7 @@ License
 =============
 MGEAR is under the terms of the MIT License
 
-Copyright (c) 2016 Jeremie Passerin, Miquel Campos
+Copyright (c) 2011-2018 Jeremie Passerin, Miquel Campos - 2018 The mGear-Dev Organization
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,12 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-=================		============================================================
-Authors:				Web:
-=================		============================================================
-Jeremie Passerin		`www.jeremiepasserin.com <http://www.jeremiepasserin.com>`_
-Miquel Campos 			`www.miquel-campos.com <http://www.miquel-campos.com>`_
-=================		============================================================
+
 
 
 

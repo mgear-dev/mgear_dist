@@ -6,31 +6,36 @@ Just a complete list of all modules.
 
 .. toctree::
 
-  mgear/mgear
-  mgear/string
-  mgear/maya/maya
-  mgear/maya/applyop
-  mgear/maya/attribute
-  mgear/maya/curve
-  mgear/maya/dag
-  mgear/maya/fcurve
-  mgear/maya/icon
-  mgear/maya/log
-  mgear/maya/meshNavigation
-  mgear/maya/node
-  mgear/maya/primitive
-  mgear/maya/skin
-  mgear/maya/transform
-  mgear/maya/utils
-  mgear/maya/vector
+  mgear/core/core
+  mgear/core/applyop
+  mgear/core/attribute
+  mgear/core/curve
+  mgear/core/dag
+  mgear/core/fcurve
+  mgear/core/icon
+  mgear/core/log
+  mgear/core/menu
+  mgear/core/meshNavigation
+  mgear/core/node
+  mgear/core/pickWalk
+  mgear/core/primitive
+  mgear/core/skin
+  mgear/core/string
+  mgear/core/transform
+  mgear/core/utils
+  mgear/core/vector
+  mgear/core/widgets
 
-  mgear/maya/shifter/shifter
-  mgear/maya/shifter/guide
-  mgear/maya/shifter/gui
-  mgear/maya/shifter/component/component
-  mgear/maya/shifter/component/guide
+  mgear/shifter/shifter
+  mgear/shifter/guide
+  mgear/shifter/menu
+  mgear/shifter/gui
+  mgear/shifter/component/component
+  mgear/shifter/component/guide
 
+  mgear/synoptic/synoptic
+  mgear/synoptic/utils
+  mgear/synoptic/widgets
 
-  mgear/maya/synoptic/synoptic
-  mgear/maya/synoptic/utils
-  mgear/maya/synoptic/widgets
+  mgear/simpleRig/menu
+  mgear/simpleRig/simpleRigTool

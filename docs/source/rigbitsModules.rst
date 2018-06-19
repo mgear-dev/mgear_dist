@@ -20,17 +20,24 @@ Modules
 .. autosummary::
    :toctree: generated
 
-   mgear.core.rigbits
-   mgear.core.rigbits.blendShapes
-   mgear.core.rigbits.channelWrangler
-   mgear.core.rigbits.cycleTweaks
-   mgear.core.rigbits.eye_rigger
-   mgear.core.rigbits.ghost
-   mgear.core.rigbits.lips_rigger
-   mgear.core.rigbits.postSpring
-   mgear.core.rigbits.proxySlicer
-   mgear.core.rigbits.rivet
-   mgear.core.rigbits.rope
-   mgear.core.rigbits.tweaks
-   mgear.core.rigbits.utils
+   mgear.rigbits
+   mgear.rigbits.blendShapes
+   mgear.rigbits.channelWrangler
+   mgear.rigbits.cycleTweaks
+   mgear.rigbits.eye_rigger
+   mgear.rigbits.ghost
+   mgear.rigbits.lips_rigger
+   mgear.rigbits.menu
+   mgear.rigbits.postSpring
+   mgear.rigbits.proxySlicer
+   mgear.rigbits.rbf_io
+   mgear.rigbits.rbf_manager_ui
+   mgear.rigbits.rbf_node
+   mgear.rigbits.rivet
+   mgear.rigbits.rope
+   mgear.rigbits.sdk_io
+   mgear.rigbits.tweaks
+   mgear.rigbits.utils
+   mgear.rigbits.weightNode_io
+   mgear.rigbits.widgets
 

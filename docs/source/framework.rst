@@ -4,11 +4,12 @@ Framework
 .. toctree::
 	:maxdepth: 2
 
-	baseModules
-	shifterModules
-	synopticModules
-	rigbitsModules
 	animbitsModules
+	baseModules
+	rigbitsModules
+	shifterModules
+	simpleRigModules
+	synopticModules
 
 .. toctree::
 	:maxdepth: 0

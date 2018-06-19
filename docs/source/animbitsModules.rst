@@ -20,7 +20,8 @@ Modules
 .. autosummary::
    :toctree: generated
 
-   mgear.core.animbits
-   mgear.core.animbits.softTweaks
+   mgear.animbits
+   mgear.animbits.menu
+   mgear.animbits.softTweaks
 
 

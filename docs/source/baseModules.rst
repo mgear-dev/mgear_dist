@@ -5,7 +5,6 @@ Base Modules
    :toctree: generated
 
    mgear
-   mgear.string
    mgear.core
    mgear.core.applyop
    mgear.core.attribute
@@ -14,11 +13,16 @@ Base Modules
    mgear.core.fcurve
    mgear.core.icon
    mgear.core.log
+   mgear.core.menu
    mgear.core.meshNavigation
    mgear.core.node
+   mgear.core.pickWalk
    mgear.core.primitive
+   mgear.core.pyqt
    mgear.core.skin
+   mgear.core.string
    mgear.core.transform
    mgear.core.utils
    mgear.core.vector
+   mgear.core.widgets
 

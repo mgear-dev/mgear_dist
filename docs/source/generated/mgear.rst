@@ -11,6 +11,7 @@ mgear
    
       getInfos
       getVersion
+      install
       log
       logInfos
       reloadModule
