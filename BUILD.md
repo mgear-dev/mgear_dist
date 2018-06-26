@@ -24,8 +24,10 @@ A C++ compiler: (*)
 1. Clone the repository and initialize it
 
 ```
-$ git clone https://github.com/miquelcampos/mgear.git
+$ git clone git@github.com:mgear-dev/mgear_dist.git
+$ cd mgear_dist
 $ git submodule update --init
+$ git submodule foreach --recursive git checkout master
 ```
 
 2. Checkout the desired branch or tag
@@ -35,8 +37,8 @@ $ git submodule update --init
 - **RB-x.x** : latest version in x.x series (i.e. 2.2.5 in RB-2.2)
 
 ```
-$ git checkout develop
-$ git submodule update
+$ git submodule foreach --recursive git checkout develop
+$ git submodule foreach git pull origin develop
 ```
 
 3. Compile
