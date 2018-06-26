@@ -29,7 +29,7 @@ Originally mGear was design and develope by Jeremie Passerin and Miquel Campos. 
 ### Latest release: [3.0.0](https://github.com/mgear-dev/mgear_dist/releases)
 
 
-### How to start your local git repository to deploy
+### How to start your local git repository to build ([more instructions](https://github.com/mgear-dev/mgear_dist/blob/master/BUILD.md))
 ```
 git clone git@github.com:mgear-dev/mgear_dist.git
 cd mgear_dist
