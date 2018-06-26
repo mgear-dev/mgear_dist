@@ -37,7 +37,7 @@ git submodule update --init
 git submodule foreach --recursive git checkout master
 
 ```
-# Also to sync to the latest commit in every submodule
+**Also to sync to the latest commit in every submodule**
 ```
 git submodule foreach git pull origin master
 ```
