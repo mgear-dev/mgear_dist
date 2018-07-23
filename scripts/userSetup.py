@@ -29,6 +29,10 @@ def mGear_menu_loader():
     mgear.animbits.menu.install()
 
     # Install Synoptic Menu
+    import mgear.crank.menu
+    mgear.crank.menu.install()
+
+    # Install Synoptic Menu
     import mgear.synoptic.menu
     mgear.synoptic.menu.install()
 
