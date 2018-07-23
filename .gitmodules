@@ -37,3 +37,6 @@
 [submodule "maya-math-nodes"]
 	path = maya-math-nodes
 	url = git@github.com:mgear-dev/maya-math-nodes.git
+[submodule "crank"]
+	path = crank
+	url = git@github.com:mgear-dev/crank.git

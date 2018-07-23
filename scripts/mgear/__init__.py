@@ -5,7 +5,6 @@ import sys
 import exceptions
 from . import menu
 
-
 # Debug mode for the logger
 logDebug = False
 
