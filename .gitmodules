@@ -40,3 +40,6 @@
 [submodule "crank"]
 	path = crank
 	url = git@github.com:mgear-dev/crank.git
+[submodule "flex"]
+	path = flex
+	url = git@github.com:mgear-dev/flex.git
