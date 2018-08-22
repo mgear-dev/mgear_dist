@@ -36,6 +36,10 @@ def mGear_menu_loader():
     import mgear.synoptic.menu
     mgear.synoptic.menu.install()
 
+    # Install Flex Menu
+    import mgear.flex.menu
+    mgear.flex.menu.install()
+
     # Install Utilities Menu
     import mgear.menu
     m = mgear.menu.install_utils_menu()
