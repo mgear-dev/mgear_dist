@@ -1,4 +1,7 @@
-from maya import utils
+
+# imports
+from maya import cmds
+from pymel import mayautils
 
 
 def mGear_menu_loader():
@@ -50,4 +53,5 @@ def mGear_menu_loader():
     mgear.menu.install_help_menu()
 
 
-utils.executeDeferred(mGear_menu_loader)
+if not cmds.about(batch=True):
+    mayautils.executeDeferred(mGear_menu_loader)
