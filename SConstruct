@@ -31,7 +31,7 @@ if sys.platform == "win32":
 
 
 def maya_math_nodes_setup(env):
-    env.Append(CPPDEFINES = [('NODE_NAME_PREFIX', '\"\\\"math_\\\"\"')])
+    env.Append(CPPDEFINES=[('NODE_NAME_PREFIX', '\"\\\"math_\\\"\"')])
     env.Append(CCFLAGS=["-Os"])
 
 
@@ -50,11 +50,13 @@ targets = [
                     "scripts/mgear": mgearpy + mgearinit,
                     "scripts/mgear/vendor": qtpy,
                     "scripts/mgear/core": excons.glob("mgear_core/core/*"),
+                    "scripts/mgear/crank": excons.glob("crank/crank/*"),
                     "scripts/mgear/animbits": excons.glob("animbits/animbits/*"),
                     "scripts/mgear/rigbits": excons.glob("rigbits/rigbits/*"),
                     "scripts/mgear/simpleRig": excons.glob("simpleRig/simpleRig/*"),
                     "scripts/mgear/synoptic": excons.glob("synoptic/synoptic/*"),
                     "scripts/mgear/shifter": excons.glob("shifter/shifter/*"),
+                    "scripts/mgear/flex": excons.glob("flex/python/flex/*"),
                     "scripts/mgear/shifter_classic_components": excons.glob("shifter_classic_components/shifter_classic_components/*"),
                     "": mgearmod}
     },

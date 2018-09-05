@@ -1,4 +1,7 @@
-from maya import utils
+
+# imports
+from maya import cmds
+from pymel import mayautils
 
 
 def mGear_menu_loader():
@@ -29,8 +32,16 @@ def mGear_menu_loader():
     mgear.animbits.menu.install()
 
     # Install Synoptic Menu
+    import mgear.crank.menu
+    mgear.crank.menu.install()
+
+    # Install Synoptic Menu
     import mgear.synoptic.menu
     mgear.synoptic.menu.install()
+
+    # Install Flex Menu
+    import mgear.flex.menu
+    mgear.flex.menu.install()
 
     # Install Utilities Menu
     import mgear.menu
@@ -42,4 +53,5 @@ def mGear_menu_loader():
     mgear.menu.install_help_menu()
 
 
-utils.executeDeferred(mGear_menu_loader)
+if not cmds.about(batch=True):
+    mayautils.executeDeferred(mGear_menu_loader)
