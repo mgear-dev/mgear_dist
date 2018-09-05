@@ -4,6 +4,9 @@ Release Log
 2.5.24
 -----
 **New Features**
+	* mGear: IO curves [crank#1]
+	* mGear: IO curves [shifter_components#2]
+	* mGear: IO curves [core#243]
 	* mGear: IO curves [#76]
 	* Rigbits: RBF Manager [#183]
 	* Rigbits: set driven key module [#160]
