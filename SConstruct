@@ -56,6 +56,7 @@ targets = [
                     "scripts/mgear/simpleRig": excons.glob("simpleRig/simpleRig/*"),
                     "scripts/mgear/synoptic": excons.glob("synoptic/synoptic/*"),
                     "scripts/mgear/shifter": excons.glob("shifter/shifter/*"),
+                    "scripts/mgear/flex": excons.glob("flex/python/flex/*"),
                     "scripts/mgear/shifter_classic_components": excons.glob("shifter_classic_components/shifter_classic_components/*"),
                     "": mgearmod}
     },
