@@ -52,14 +52,9 @@ Mainly used for legs and arms. The solver encapsulate many functions that will b
 
 Some of the features are, soft IK, reverse IK, squash, stretch, independent bone length, slide and roll.
 
-|pic1| |pic2|
-
-.. |pic1| image:: images/solvers/mgear_ikfk2Bone_attr.png
-    :align: center
+.. image:: images/solvers/mgear_ikfk2Bone_attr.png
     :width: 45%
-
-.. |pic2| image:: images/solvers/mgear_ikfk2Bone_attr2.png
-    :align: center
+.. image:: images/solvers/mgear_ikfk2Bone_attr2.png
     :width: 45%
 
 * **Blend:** IK fk blend
