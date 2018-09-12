@@ -26,6 +26,7 @@ Welcome to mGear: Rigging Framework for Autodesk Maya
    overview
    framework
    solvers
+   animbitsUserDocumentation
    shifterUserDocumentation
    synopticUserDocumentation
    videoTutorials
