@@ -1,18 +1,7 @@
-Custom Solvers/Nodes
+Custom Solvers/Deformers
 ==========================
 
-mGear custom C++ Solvers/Nodes Documentation
-
-*	`mgear_add10Scalar`_
-*	`mgear_curveCns`_
-*	`mgear_ikfk2Bone`_
-
-
-
-
-
-
-
+mGear custom C++ Solvers/Deformers Documentation
 
 
 mgear_add10Scalar
@@ -229,3 +218,126 @@ Each mgear_rollSplineKine node, outputs only one point in the U value of the cur
 
 * **Absolute:** Change the way that the subdivision are distributed in the curve.
 * **Output:** Output transform Matrix.
+
+
+mgear_slideCurve
+-----------------
+
+.. image:: images/solvers/mgear_slideCurve_node.png
+    :align: center
+    :scale: 95%
+
+Deform a curve, sliding it on top of other. i.e: It is used in the Shifter spine component.
+Use this function to apply the deformer: mgear.core.applyop.gear_curveslide2_op
+
+.. image:: images/solvers/mgear_slideCurve_attr.png
+    :align: center
+    :scale: 95%
+
+* **Master Crv:** Input Curve.
+* **Master Mat:** Master curve matrix.
+* **Slave Length:** Slave curve length.
+* **Master Length:** Master curve length.
+* **Position:** Slave curve position.
+* **Max stretch:** Maximum stretch of the slave curve.
+* **Max squash:** Maximum squash of the slave curve.
+* **Softness:** Soft clamping for squash and stretch.
+
+
+mgear_spinePointAt
+-------------------
+
+.. image:: images/solvers/mgear_spinePointAt_node.png
+    :align: center
+    :scale: 95%
+
+Point at an axis direction base in 2 input rotations. Note: This solver was design to handle the spine twist, but currently is not used in any component.
+
+.. image:: images/solvers/mgear_spinePointAt_attr.png
+    :align: center
+    :scale: 95%
+
+* **Rot A:** Input rotation A.
+* **Rot B:** Input rotation B.
+* **Axe:** Aim axis.
+* **Blend:** Blend value between the 2 rotations
+
+mgear_springNode
+-------------------
+
+.. image:: images/solvers/mgear_springNode_node.png
+    :align: center
+    :scale: 95%
+
+Spring dynamic solver based in goal position.
+
+.. image:: images/solvers/mgear_springNode_attr.png
+    :align: center
+    :scale: 95%
+
+* **Goal:** Position goal.
+* **Time:** Current time input.
+* **Stiffness:** Stiffness value.
+* **Damping:** Damping value.
+* **Intensity:** Intensity value.
+
+
+mgear_squashStretch_attr
+-------------------
+
+.. image:: images/solvers/mgear_squashStretch_node.png
+    :align: center
+    :scale: 95%
+
+Squash and stretch solver.
+
+.. image:: images/solvers/mgear_squashStretch_attr.png
+    :align: center
+    :scale: 95%
+
+* **Global Scale:** Global scale reference.
+* **Blend:** Blend to deal down the squash and stretch effect.
+* **Driver:** Driver rest value.
+* **Driver Min:** Driver minimum value where the squash and stretch effect will be calculated.
+* **Driver ctr:** Driver control value.
+* **Driver Max:** Driver maximum value where the squash and stretch effect will be calculated.
+* **Axis:** Axis along the squash and stretch value will be calculated.
+* **Squash:** Multiplication value for the squash direction.
+* **Stretch:** Multiplication value for the stretch direction.
+
+
+mgear_trigonometyAngle
+----------------------
+
+.. image:: images/solvers/mgear_trigonometyAngle_node.png
+    :align: center
+    :scale: 95%
+
+Sine and cosine trigonometry node
+
+.. image:: images/solvers/mgear_trigonometyAngle_attr.png
+    :align: center
+    :scale: 95%
+
+* **Operation:** Sine or Cosine.
+* **Angle:** Input angle.
+
+
+mgear_vertexPosition
+----------------------
+
+.. image:: images/solvers/mgear_vertexPosition_node.png
+    :align: center
+    :scale: 95%
+
+Get the world position of a given vertex
+
+.. image:: images/solvers/mgear_vertexPosition_attr.png
+    :align: center
+    :scale: 95%
+
+* **Input Shape:** Input mesh shape.
+* **Vertex:** Vertex index number to track.
+* **Output:** Output position.
+* **Driven parent invert Matrix:** Driven parent invert matrix.
+
