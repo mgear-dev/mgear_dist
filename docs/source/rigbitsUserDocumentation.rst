@@ -111,7 +111,37 @@ Also handle some renaming. i.e: from _L to _R
 RBF Manager
 ===========
 
+A tool to manage a number of RBF type nodes under a user defined setup(name)
 
+Steps -
+    set Driver
+    set Control for driver(optional, recommended)
+    select attributes to driver RBF nodes
+    Select Node to be driven in scene(Animation control, transform)
+    Name newly created setup
+    select attributes to be driven by the setup
+    add any additional driven nodes
+    position driver(via the control)
+    position the driven node(s)
+    select add pose
+
+Add notes -
+Please ensure the driver node is NOT in the same position more than once. This
+will cause the RBFNode to fail while calculating. This can be fixed by deleting
+any two poses with the same input values.
+
+Edit Notes -
+Edit a pose by selecting "pose #" in the table. (which recalls recorded pose)
+reposition any controls involved in the setup
+select "Edit Pose"
+
+Delete notes -
+select desired "pose #"
+select "Delete Pose"
+
+Mirror notes -
+setups/Controls will succefully mirror if they have had their inverseAttrs
+configured previously.
 
 Space Jumper
 ==============
