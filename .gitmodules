@@ -1,6 +1,6 @@
 [submodule "excons"]
 	path = excons
-	url = https://github.com/gatgui/excons.git
+	url = https://github.com/mgear-dev/excons.git
 [submodule "cvwrap"]
 	path = cvwrap
 	url = https://github.com/miquelcampos/cvwrap.git
