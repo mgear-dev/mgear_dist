@@ -61,15 +61,6 @@ scripts: ../../../../scripts
 + MAYAVERSION:2017 PLATFORM:mac   mGear 3.0 ./platforms/2017/osx/x64
 scripts: ../../../../scripts
 
-+ MAYAVERSION:2018 PLATFORM:win64 mGear 3.0 ./platforms/2018/windows/x64
-scripts: ../../../../scripts
-
-+ MAYAVERSION:2018 PLATFORM:linux mGear 3.0 ./platforms/2018/linux/x64
-scripts: ../../../../scripts
-
-+ MAYAVERSION:2018 PLATFORM:mac   mGear 3.0 ./platforms/2018/osx/x64
-scripts: ../../../../scripts
-
 + MAYAVERSION:2019 PLATFORM:win64 mGear 3.0 ./platforms/2019/windows/x64
 scripts: ../../../../scripts
 

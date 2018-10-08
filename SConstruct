@@ -33,6 +33,7 @@ if sys.platform == "win32":
 def maya_math_nodes_setup(env):
     env.Append(CPPDEFINES=[('NODE_NAME_PREFIX', '\"\\\"math_\\\"\"')])
     env.Append(CCFLAGS=["-Os"])
+    env.Append(CPPFLAGS=" -DPROJECT_VERSION=\"\\\"1.4.0\\\"\"")
 
 
 def CVWrapSetup(env):
