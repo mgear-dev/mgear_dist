@@ -7,27 +7,6 @@
 [submodule "Qtdotpy"]
 	path = Qtdotpy
 	url = https://github.com/mottosso/Qt.py
-[submodule "animbits"]
-	path = animbits
-	url = git@github.com:mgear-dev/animbits.git
-[submodule "mgear_core"]
-	path = mgear_core
-	url = git@github.com:mgear-dev/mgear_core.git
-[submodule "rigbits"]
-	path = rigbits
-	url = git@github.com:mgear-dev/rigbits.git
-[submodule "shifter"]
-	path = shifter
-	url = git@github.com:mgear-dev/shifter.git
-[submodule "shifter_classic_components"]
-	path = shifter_classic_components
-	url = git@github.com:mgear-dev/shifter_classic_components.git
-[submodule "simpleRig"]
-	path = simpleRig
-	url = git@github.com:mgear-dev/simpleRig.git
-[submodule "synoptic"]
-	path = synoptic
-	url = git@github.com:mgear-dev/synoptic.git
 [submodule "mgear_solvers"]
 	path = mgear_solvers
 	url = git@github.com:mgear-dev/mgear_solvers.git
@@ -37,9 +16,3 @@
 [submodule "maya-math-nodes"]
 	path = maya-math-nodes
 	url = git@github.com:mgear-dev/maya-math-nodes.git
-[submodule "crank"]
-	path = crank
-	url = git@github.com:mgear-dev/crank.git
-[submodule "flex"]
-	path = flex
-	url = git@github.com:mgear-dev/flex.git
