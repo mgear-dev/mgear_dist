@@ -1,45 +1,45 @@
 [submodule "excons"]
 	path = excons
 	url = https://github.com/mgear-dev/excons.git
-[submodule "cvwrap"]
-	path = cvwrap
-	url = https://github.com/miquelcampos/cvwrap.git
 [submodule "Qtdotpy"]
 	path = Qtdotpy
 	url = https://github.com/mottosso/Qt.py
-[submodule "animbits"]
-	path = animbits
+[submodule "framework/animbits"]
+	path = framework/animbits
 	url = git@github.com:mgear-dev/animbits.git
-[submodule "mgear_core"]
-	path = mgear_core
-	url = git@github.com:mgear-dev/mgear_core.git
-[submodule "rigbits"]
-	path = rigbits
-	url = git@github.com:mgear-dev/rigbits.git
-[submodule "shifter"]
-	path = shifter
-	url = git@github.com:mgear-dev/shifter.git
-[submodule "shifter_classic_components"]
-	path = shifter_classic_components
-	url = git@github.com:mgear-dev/shifter_classic_components.git
-[submodule "simpleRig"]
-	path = simpleRig
-	url = git@github.com:mgear-dev/simpleRig.git
-[submodule "synoptic"]
-	path = synoptic
-	url = git@github.com:mgear-dev/synoptic.git
-[submodule "mgear_solvers"]
-	path = mgear_solvers
-	url = git@github.com:mgear-dev/mgear_solvers.git
-[submodule "grim_IK"]
-	path = grim_IK
-	url = git@github.com:mgear-dev/grim_IK.git
-[submodule "maya-math-nodes"]
-	path = maya-math-nodes
-	url = git@github.com:mgear-dev/maya-math-nodes.git
-[submodule "crank"]
-	path = crank
-	url = git@github.com:mgear-dev/crank.git
-[submodule "flex"]
-	path = flex
+[submodule "framework/flex"]
+	path = framework/flex
 	url = git@github.com:mgear-dev/flex.git
+[submodule "framework/mgear_core"]
+	path = framework/mgear_core
+	url = git@github.com:mgear-dev/mgear_core.git
+[submodule "framework/rigbits"]
+	path = framework/rigbits
+	url = git@github.com:mgear-dev/rigbits.git
+[submodule "framework/shifter"]
+	path = framework/shifter
+	url = git@github.com:mgear-dev/shifter.git
+[submodule "framework/shifter_classic_components"]
+	path = framework/shifter_classic_components
+	url = git@github.com:mgear-dev/shifter_classic_components.git
+[submodule "framework/simpleRig"]
+	path = framework/simpleRig
+	url = git@github.com:mgear-dev/simpleRig.git
+[submodule "framework/synoptic"]
+	path = framework/synoptic
+	url = git@github.com:mgear-dev/synoptic.git
+[submodule "plugins/maya-math-nodes"]
+	path = plugins/maya-math-nodes
+	url = git@github.com:mgear-dev/maya-math-nodes.git
+[submodule "plugins/mgear_solvers"]
+	path = plugins/mgear_solvers
+	url = git@github.com:mgear-dev/mgear_solvers.git
+[submodule "plugins/grim_IK"]
+	path = plugins/grim_IK
+	url = git@github.com:mgear-dev/grim_IK.git
+[submodule "plugins/cvwrap"]
+	path = plugins/cvwrap
+	url = git@github.com:mgear-dev/cvwrap.git
+[submodule "framework/crank"]
+	path = framework/crank
+	url = git@github.com:mgear-dev/crank.git
