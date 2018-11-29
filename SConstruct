@@ -54,7 +54,7 @@ targets = [
                     "scripts/mgear/vendor/": excons.glob("framework/scripts/mgear/vendor/*.py"),
                     "scripts/mgear/vendor": qtpy,
                     "scripts/mgear/core": excons.glob("framework/mgear_core/scripts/mgear/core/*"),
-                    "scripts/mgear/crank": excons.glob("framework/cranck/scripts/mgear/crank/*"),
+                    "scripts/mgear/crank": excons.glob("framework/crank/scripts/mgear/crank/*"),
                     "scripts/mgear/animbits": excons.glob("framework/animbits/scripts/mgear/animbits/*"),
                     "scripts/mgear/rigbits": excons.glob("framework/rigbits/scripts/mgear/rigbits/*"),
                     "scripts/mgear/simpleRig": excons.glob("framework/simpleRig/scripts/mgear/simpleRig/*"),

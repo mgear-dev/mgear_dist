@@ -43,3 +43,6 @@
 [submodule "plugins/cvwrap"]
 	path = plugins/cvwrap
 	url = git@github.com:mgear-dev/cvwrap.git
+[submodule "framework/crank"]
+	path = framework/crank
+	url = git@github.com:mgear-dev/crank.git
