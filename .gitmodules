@@ -7,9 +7,6 @@
 [submodule "framework/animbits"]
 	path = framework/animbits
 	url = git@github.com:mgear-dev/animbits.git
-[submodule "framework/cranck"]
-	path = framework/cranck
-	url = git@github.com:mgear-dev/crank.git
 [submodule "framework/flex"]
 	path = framework/flex
 	url = git@github.com:mgear-dev/flex.git
