@@ -36,6 +36,13 @@ def maya_math_nodes_setup(env):
     env.Append(CPPFLAGS=" -DPROJECT_VERSION=\"\\\"1.4.0\\\"\"")
 
 
+def CVWrapSetup(env):
+    if sys.platform == "win32":
+        env.Append(CCFLAGS=["/arch:AVX"])
+    else:
+        env.Append(CCFLAGS=["-mavx"])
+
+
 targets = [
     {
         "name": "mgear_core",
@@ -45,17 +52,31 @@ targets = [
                     "scripts/mgear": mgearpy + mgearinit,
                     "scripts/mgear/": excons.glob("framework/scripts/mgear/menu.py"),
                     "scripts/mgear/vendor/": excons.glob("framework/scripts/mgear/vendor/*.py"),
-                    "scripts/mgear/vendor": qtpy, 
-                    "scripts/mgear/core": excons.glob("framework/mgear_core/core/*"),
-                    "scripts/mgear/crank": excons.glob("framework/crank/crank/*"),
-                    "scripts/mgear/animbits": excons.glob("framework/animbits/animbits/*"),
-                    "scripts/mgear/rigbits": excons.glob("framework/rigbits/rigbits/*"),
-                    "scripts/mgear/simpleRig": excons.glob("framework/simpleRig/simpleRig/*"),
-                    "scripts/mgear/synoptic": excons.glob("framework/synoptic/synoptic/*"),
-                    "scripts/mgear/shifter": excons.glob("framework/shifter/shifter/*"),
-                    "scripts/mgear/flex": excons.glob("framework/flex/python/flex/*"),
-                    "scripts/mgear/shifter_classic_components": excons.glob("framework/shifter_classic_components/shifter_classic_components/*"),
+                    "scripts/mgear/vendor": qtpy,
+                    "scripts/mgear/core": excons.glob("framework/mgear_core/python/mgear/core/*"),
+                    "scripts/mgear/crank": excons.glob("framework/cranck/python/mgear/crank/*"),
+                    "scripts/mgear/animbits": excons.glob("framework/animbits/python/mgear/animbits/*"),
+                    "scripts/mgear/rigbits": excons.glob("framework/rigbits/python/mgear/rigbits/*"),
+                    "scripts/mgear/simpleRig": excons.glob("framework/simpleRig/python/mgear/simpleRig/*"),
+                    "scripts/mgear/synoptic": excons.glob("framework/synoptic/python/mgear/synoptic/*"),
+                    "scripts/mgear/shifter": excons.glob("framework/shifter/python/mgear/shifter/*"),
+                    "scripts/mgear/flex": excons.glob("framework/flex/python/mgear/flex/*"),
+                    "scripts/mgear/shifter_classic_components": excons.glob("framework/shifter_classic_components/python/mgear/shifter_classic_components/*"),
                     "": mgearmod}
+    },
+    {
+        "name": "cvwrap",
+        "type": "dynamicmodule",
+        "desc": "wrap deformer plugin",
+        "prefix": outprefix,
+        "bldprefix": maya.Version(),
+        "ext": maya.PluginExt(),
+        "defs": defines,
+        "incdirs": ["src"],
+        "srcs": excons.glob("plugins/cvwrap/src/*.cpp"),
+        "custom": [maya.Require, CVWrapSetup],
+        "libs": ([] if maya.Version(asString=False) < 201600 else ["clew"]),
+        "install": {"scripts": excons.glob("plugins/cvwrap/scripts/*")}
     },
     {
         "name": "mgear_solvers",
@@ -99,7 +120,7 @@ excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cv
 
 td = excons.DeclareTargets(env, targets)
 
-env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["grim_IK"], td["maya-math-nodes"]])
+env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"], td["grim_IK"], td["maya-math-nodes"]])
 
 td["python"] = filter(lambda x: os.path.splitext(str(x))[1] != ".mel", Glob(outdir + "scripts/*"))
 td["scripts"] = Glob(outdir + "scripts/*.mel")
@@ -107,6 +128,7 @@ td["scripts"] = Glob(outdir + "scripts/*.mel")
 pluginsdir = "/plug-ins/%s/%s" % (maya.Version(nice=True), excons.EcosystemPlatform())
 
 ecodirs = {"mgear_solvers": pluginsdir,
+           "cvwrap": pluginsdir,
            "grim_IK": pluginsdir,
            "maya-math-nodes": pluginsdir,
            "python": "/python",
