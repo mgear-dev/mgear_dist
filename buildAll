@@ -5,4 +5,4 @@ scons -j8 no-cache=1 with-maya=2015
 scons -j8 no-cache=1 with-maya=2016 with-mayadevkit=/usr/autodesk/maya2016/devkitBase
 scons -j8 no-cache=1 with-maya=2017 with-mayadevkit=/usr/autodesk/maya2017/devkitBase
 scons -j8 no-cache=1 with-maya=2018 with-mayadevkit=/usr/autodesk/maya2018/devkitBase
-
+scons -j8 no-cache=1 with-maya=2019 with-mayadevkit=/usr/autodesk/maya2019/devkitBase
