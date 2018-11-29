@@ -40,3 +40,6 @@
 [submodule "plugins/grim_IK"]
 	path = plugins/grim_IK
 	url = git@github.com:mgear-dev/grim_IK.git
+[submodule "plugins/cvwrap"]
+	path = plugins/cvwrap
+	url = git@github.com:mgear-dev/cvwrap.git
