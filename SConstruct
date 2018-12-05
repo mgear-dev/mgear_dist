@@ -23,6 +23,7 @@ mgearinit = gen("framework/scripts/mgear/__init__.py", "framework/scripts/mgear/
 mgearmod = gen("mGear.mod", "mGear.mod.in")
 mgearpy = filter(lambda x: not os.path.basename(x).startswith("__init__.py"), excons.glob("scripts/mgear/*"))
 qtpy = ["Qtdotpy/Qt.py"]
+qjason = ["vendor/QJsonModel/qjsonmodel.py"]
 NoClean(mgearinit + mgearmod)
 
 defines = []
@@ -53,6 +54,7 @@ targets = [
                     "scripts/mgear/": excons.glob("framework/scripts/mgear/menu.py"),
                     "scripts/mgear/vendor/": excons.glob("framework/scripts/mgear/vendor/*.py"),
                     "scripts/mgear/vendor": qtpy,
+                    "scripts/mgear/vendor": qjason,
                     "scripts/mgear/core": excons.glob("framework/mgear_core/scripts/mgear/core/*"),
                     "scripts/mgear/crank": excons.glob("framework/crank/scripts/mgear/crank/*"),
                     "scripts/mgear/animbits": excons.glob("framework/animbits/scripts/mgear/animbits/*"),
