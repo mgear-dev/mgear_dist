@@ -43,3 +43,6 @@
 [submodule "framework/crank"]
 	path = framework/crank
 	url = git@github.com:mgear-dev/crank.git
+[submodule "vendor/QJsonModel"]
+	path = vendor/QJsonModel
+	url = git@github.com:mgear-dev/QJsonModel.git
