@@ -4,35 +4,39 @@ Release Log
 3.0.1
 -----
 **New Features**
-	* Shifter: New Guide manager
-	* Shifter: Guide serialization to json
-	* Shifter: Serialized Guide Explorer
 	* Shifter: Build Rig from file [shifter#20]
-	* Shifter: Serialized Diff Tool
-	* Shifter: Guide Relative placement [shifter#14]
 	* Shifter: Game Tools,  for decouple deform and control rig [shifter#6]
+	* Shifter: Guide Relative placement [shifter#14]
+	* Shifter: Guide serialization to json
+	* Shifter: New Guide manager
+	* Shifter: Serialized Diff Tool
+	* Shifter: Serialized Guide Explorer
+	* Shifter_classic_components: New Component: Chain FK spline with variable IK controls [shifter_classic_components#26]
+	* Shifter_classic_components: New Component: shoulder_02 [shifter_classic_components#25]
+	* Shifter_classic_components: New Component: Tangent_spline_01 [shifter_classic_components#28]
+	* Shifter_classic_components: New Component: Whip chain [shifter_classic_components#27]
 
 
 **Enhancements**
-	* Shifter_classic_components: arm_2jnt_01 and leg_2jnt_01: Make optional the extra support joint in the articulations [shifter_classic_components#3]
-	* Shifter_classic_components: Add UniScale option for games compatible  [shifter_classic_components#9]
-	* Shifter: FCurveParamDef should store the samples from getFCurveValues in value of paramDef [shifter#26]
+	* Animbits: softTweak: make UI dockable [animbits#8]
+	* Crank: Make UI dockable [crank#3]
+	* Crank: Shot Sculpting tool, General update initial Goals [crank#1]
 	* mGear_core: attribute: FCurveParamDef should store the samples from getFCurveValues [mgear_core#12]
 	* mGear_core: attribute: ParamDef: Dict serialisation [mgear_core#11]
 	* mGear_core: pyQt: showDialog option to make windows dockable [mgear_core#6]
-	* Animbits: softTweak: make UI dockable [animbits#8]
-	* Crank: Shot Sculpting tool, General update initial Goals [crank#1]
-	* Crank: Make UI dockable [crank#3]
+	* Shifter: FCurveParamDef should store the samples from getFCurveValues in value of paramDef [shifter#26]
 	* Shifter: update menu with new functionalities [shifter#37]
+	* Shifter_classic_components: Add UniScale option for games compatible  [shifter_classic_components#9]
+	* Shifter_classic_components: arm_2jnt_01 and leg_2jnt_01: Make optional the extra support joint in the articulations [shifter_classic_components#3]
 
 **API Changes**
 	* mgear_dist: Modularisation of mgear [mgear_dist#11]
 
 **Bug Fix**
-	* mGear_core: curve: importing curve while rebuild hierarchy will fail if the parent object don't have unique name [mgear_core#18]
 	* mGear_core: curve: create_curve_from_data_by_name should not take the name from the first shape [mgear_core#17]
-	* Rigbits: Replace Shape Command doesn't handle if the target object have input connections in the shape [Rigbits#12]
+	* mGear_core: curve: importing curve while rebuild hierarchy will fail if the parent object don't have unique name [mgear_core#18]
 	* Rigbits: Duplicate symmetry bad import string [Rigbits#13]
+	* Rigbits: Replace Shape Command doesn't handle if the target object have input connections in the shape [Rigbits#12]
 
 
 2.6.1
