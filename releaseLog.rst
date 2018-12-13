@@ -37,6 +37,7 @@ Release Log
 	* mGear_core: curve: importing curve while rebuild hierarchy will fail if the parent object don't have unique name [mgear_core#18]
 	* Rigbits: Duplicate symmetry bad import string [Rigbits#13]
 	* Rigbits: Replace Shape Command doesn't handle if the target object have input connections in the shape [Rigbits#12]
+	* SimpleRig: re-import configuration dont link unselectable geometry [simpleRig#1]
 
 
 2.6.1
