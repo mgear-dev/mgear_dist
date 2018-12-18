@@ -1,7 +1,7 @@
 Release Log
 ===========
 
-3.0.1
+3.0.2
 -----
 **New Features**
 	* Shifter: Build Rig from file [shifter#20]
@@ -12,6 +12,7 @@ Release Log
 	* Shifter: Serialized Diff Tool
 	* Shifter: Serialized Guide Explorer
 	* Shifter_classic_components: New Component: Chain FK spline with variable IK controls [shifter_classic_components#26]
+	* Shifter_classic_components: New Component: Chain IK spline with variable FK controls [shifter_classic_components#30]
 	* Shifter_classic_components: New Component: shoulder_02 [shifter_classic_components#25]
 	* Shifter_classic_components: New Component: Tangent_spline_01 [shifter_classic_components#28]
 	* Shifter_classic_components: New Component: Whip chain [shifter_classic_components#27]
@@ -24,8 +25,10 @@ Release Log
 	* mGear_core: attribute: FCurveParamDef should store the samples from getFCurveValues [mgear_core#12]
 	* mGear_core: attribute: ParamDef: Dict serialisation [mgear_core#11]
 	* mGear_core: pyQt: showDialog option to make windows dockable [mgear_core#6]
+	* mGear_core: Skin module: Review it and update use Json insted pickle [mgear_core#20]
 	* Shifter: FCurveParamDef should store the samples from getFCurveValues in value of paramDef [shifter#26]
 	* Shifter: update menu with new functionalities [shifter#37]
+	* Shifter: Update modal position menu to QT modern version [shifter#46]
 	* Shifter_classic_components: Add UniScale option for games compatible  [shifter_classic_components#9]
 	* Shifter_classic_components: arm_2jnt_01 and leg_2jnt_01: Make optional the extra support joint in the articulations [shifter_classic_components#3]
 
@@ -33,10 +36,13 @@ Release Log
 	* mgear_dist: Modularisation of mgear [mgear_dist#11]
 
 **Bug Fix**
+	* mGear_core: Attribute: channelWrangler apply config from script fails due to attributeError [mgear_core#21]
 	* mGear_core: curve: create_curve_from_data_by_name should not take the name from the first shape [mgear_core#17]
 	* mGear_core: curve: importing curve while rebuild hierarchy will fail if the parent object don't have unique name [mgear_core#18]
 	* Rigbits: Duplicate symmetry bad import string [Rigbits#13]
 	* Rigbits: Replace Shape Command doesn't handle if the target object have input connections in the shape [Rigbits#12]
+	* Shifter: Component connector: standard fallback [shifter#27]
+	* Shifter: Component space references: add checker for space references names [shifter#16]
 	* SimpleRig: re-import configuration dont link unselectable geometry [simpleRig#1]
 
 
