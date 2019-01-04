@@ -31,6 +31,7 @@ Release Log
 	* Shifter: Update modal position menu to QT modern version [shifter#46]
 	* Shifter_classic_components: Add UniScale option for games compatible  [shifter_classic_components#9]
 	* Shifter_classic_components: arm_2jnt_01 and leg_2jnt_01: Make optional the extra support joint in the articulations [shifter_classic_components#3]
+	* Shifter: Custom step list. Visual cue for shared custom step [shifter#51]
 
 **API Changes**
 	* mgear_dist: Modularisation of mgear [mgear_dist#11]
