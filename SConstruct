@@ -3,7 +3,7 @@ import sys
 import excons
 import excons.config
 import excons.tools.maya as maya
-
+import excons.tools.gl as gl
 
 maya.SetupMscver()
 env = excons.MakeBaseEnv()
@@ -113,6 +113,19 @@ targets = [
         "incdirs": ["plugins/grim_IK"],
         "srcs": excons.glob("plugins/grim_IK/*.cpp"),
         "custom": [maya.Require]
+    },
+    {
+        "name": "weightDriver",
+        "type": "dynamicmodule",
+        "desc": "weightDriver node",
+        "prefix": outprefix,
+        "bldprefix": maya.Version(),
+        "ext": maya.PluginExt(),
+        "defs": defines,
+        "incdirs": ["plugins/weightDriver"],
+        "srcs": excons.glob("plugins/weightDriver/source/*.cpp"),
+        "custom": [maya.Require, gl.Require],
+        "install": {"scripts": excons.glob("plugins/weightDriver/modules/weightDriver/scripts/*")}
     }
 ]
 
@@ -120,7 +133,7 @@ excons.AddHelpTargets(mgear="mgear maya framework (mgear_core, mgear_solvers, cv
 
 td = excons.DeclareTargets(env, targets)
 
-env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"], td["grim_IK"], td["maya-math-nodes"]])
+env.Alias("mgear", [td["mgear_core"], td["mgear_solvers"], td["cvwrap"], td["grim_IK"], td["maya-math-nodes"], td["weightDriver"]])
 
 td["python"] = filter(lambda x: os.path.splitext(str(x))[1] != ".mel", Glob(outdir + "scripts/*"))
 td["scripts"] = Glob(outdir + "scripts/*.mel")
@@ -131,6 +144,7 @@ ecodirs = {"mgear_solvers": pluginsdir,
            "cvwrap": pluginsdir,
            "grim_IK": pluginsdir,
            "maya-math-nodes": pluginsdir,
+           "weightDriver": pluginsdir,
            "python": "/python",
            "scripts": "/scripts"}
 
