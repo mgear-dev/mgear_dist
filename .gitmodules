@@ -46,3 +46,6 @@
 [submodule "vendor/QJsonModel"]
 	path = vendor/QJsonModel
 	url = git@github.com:mgear-dev/QJsonModel.git
+[submodule "plugins/weightDriver"]
+	path = plugins/weightDriver
+	url = git@github.com:mgear-dev/weightDriver.git
