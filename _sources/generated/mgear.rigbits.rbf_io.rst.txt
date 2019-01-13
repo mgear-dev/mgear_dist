@@ -1,0 +1,24 @@
+mgear\.rigbits\.rbf\_io
+=======================
+
+.. automodule:: mgear.rigbits.rbf_io
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      exportRBFs
+      fileDialog
+      importRBFs
+   
+   
+
+   
+   
+   
+
+   
+   
+   

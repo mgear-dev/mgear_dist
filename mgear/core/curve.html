@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.core.curve &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.core.dag" href="dag.html"/>
+        <link rel="prev" title="mgear.core.attribute" href="attribute.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="core.html">mgear.core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attribute.html">mgear.core.attribute</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.core.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html">mgear.core.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icon.html">mgear.core.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">mgear.core.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node.html">mgear.core.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skin.html">mgear.core.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transform.html">mgear.core.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.core.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">mgear.core.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html">mgear.core.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/shifter.html">mgear.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/guide.html">mgear.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/gui.html">mgear.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/synoptic.html">mgear.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/utils.html">mgear.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/widgets.html">mgear.synoptic.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../simpleRig/simpleRigTool.html">mgear.simpleRig.simpleRigTool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+        
+      <li>mgear.core.curve</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/core/curve.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.core.curve">
+<span id="mgear-core-curve"></span><h1>mgear.core.curve<a class="headerlink" href="#module-mgear.core.curve" title="Permalink to this headline">¶</a></h1>
+<p>NurbsCurve creation functions</p>
+<dl class="function">
+<dt id="mgear.core.curve.addCnsCurve">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">addCnsCurve</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>centers</em>, <em>degree=1</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.addCnsCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a curve attached to given centers. One point per center</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent object.</li>
+<li><strong>name</strong> (<em>str</em>) – Name</li>
+<li><strong>centers</strong> (<em>list of dagNode</em>) – Object that will drive the curve.</li>
+<li><strong>degree</strong> (<em>int</em>) – 1 for linear curve, 3 for Cubic.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created curve.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.addCurve">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">addCurve</code><span class="sig-paren">(</span><em>parent, name, points, close=False, degree=3, m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]])</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.addCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a NurbsCurve with a single subcurve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent object.</li>
+<li><strong>name</strong> (<em>str</em>) – Name</li>
+<li><strong>positions</strong> (<em>list of float</em>) – points of the curve in a one dimension array
+[point0X, point0Y, point0Z, 1, point1X, point1Y, point1Z, 1, …].</li>
+<li><strong>close</strong> (<em>bool</em>) – True to close the curve.</li>
+<li><strong>degree</strong> (<em>bool</em>) – 1 for linear curve, 3 for Cubic.</li>
+<li><strong>m</strong> (<em>matrix</em>) – Global transform.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created curve.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.collect_curve_data">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">collect_curve_data</code><span class="sig-paren">(</span><em>objs, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.collect_curve_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a dictionary descriving the curve data</p>
+<p>Suport multiple objects</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objs</strong> (<em>dagNode</em>) – Curve object to store</li>
+<li><strong>collect_trans</strong> (<em>bool</em><em>, </em><em>optional</em>) – if false will skip the transformation
+matrix</li>
+<li><strong>rplStr</strong> (<em>list</em><em>, </em><em>optional</em>) – String to replace in names. This allow to
+change the curve names before store it.
+[old Name to replace, new name to set]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Curves data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.collect_curve_shapes">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">collect_curve_shapes</code><span class="sig-paren">(</span><em>crv, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.collect_curve_shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collect curve shapes data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>crv</strong> (<em>dagNode</em>) – Curve object to collect the curve shapes data</li>
+<li><strong>rplStr</strong> (<em>list</em><em>, </em><em>optional</em>) – String to replace in names. This allow to
+change the curve names before store it.
+[old Name to replace, new name to set]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Curve shapes dictionary and curve shapes names</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict, list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.collect_selected_curve_data">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">collect_selected_curve_data</code><span class="sig-paren">(</span><em>objs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.collect_selected_curve_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a dictionary descriving the curve data from selected objs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>objs</strong> (<em>None</em><em>, </em><em>optional</em>) – Optionally a list of object can be provided</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.createCurveFromCurve">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">createCurveFromCurve</code><span class="sig-paren">(</span><em>srcCrv</em>, <em>name</em>, <em>nbPoints</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.createCurveFromCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a curve from a curve</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>srcCrv</strong> (<a class="reference internal" href="#module-mgear.core.curve" title="mgear.core.curve"><em>curve</em></a>) – The source curve.</li>
+<li><strong>name</strong> (<em>str</em>) – The new curve name.</li>
+<li><strong>nbPoints</strong> (<em>int</em>) – Number of control points for the new curve.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent of the new curve.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created curve.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.createCurveFromOrderedEdges">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">createCurveFromOrderedEdges</code><span class="sig-paren">(</span><em>edgeLoop</em>, <em>startVertex</em>, <em>name</em>, <em>parent=None</em>, <em>degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.createCurveFromOrderedEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a curve for a edgeloop ordering the list from starting vertex</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>edgeLoop</strong> (<em>list</em>) – List of edges</li>
+<li><strong>startVertex</strong> (<em>vertex</em>) – Starting vertex</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the new curve.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent of the new curve.</li>
+<li><strong>degree</strong> (<em>int</em>) – Degree of the new curve.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created curve.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.createCuveFromEdges">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">createCuveFromEdges</code><span class="sig-paren">(</span><em>edgeList</em>, <em>name</em>, <em>parent=None</em>, <em>degree=3</em>, <em>sortingAxis=’x’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.createCuveFromEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create curve from a edge list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>edgeList</strong> (<em>list</em>) – List of edges.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the new curve.</li>
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent of the new curve.</li>
+<li><strong>degree</strong> (<em>int</em>) – Degree of the new curve.</li>
+<li><strong>sortingAxis</strong> (<em>str</em>) – Sorting axis x, y or z</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created curve.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.create_curve_from_data">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">create_curve_from_data</code><span class="sig-paren">(</span><em>data, replaceShape=False, rebuildHierarchy=False, rplStr=[”, ”], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.create_curve_from_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the curves from a given curve data dict</p>
+<p>Hierarchy rebuild after all curves are build to avoid lost parents</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>dict</em>) – serialized curve data</li>
+<li><strong>replaceShape</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, will replace the shape on
+existing objects</li>
+<li><strong>rebuildHierarchy</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, will regenerate the
+hierarchy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.create_curve_from_data_by_name">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">create_curve_from_data_by_name</code><span class="sig-paren">(</span><em>crv, data, replaceShape=False, rebuildHierarchy=False, rplStr=[”, ”], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.create_curve_from_data_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build one curve from a given curve data dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>crv</strong> (<em>str</em>) – name of the crv to create</li>
+<li><strong>data</strong> (<em>dict</em>) – serialized curve data</li>
+<li><strong>replaceShape</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, will replace the shape on
+existing objects</li>
+<li><strong>rebuildHierarchy</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, will regenerate the
+hierarchy</li>
+<li><strong>rplStr</strong> (<em>list</em><em>, </em><em>optional</em>) – String to replace in names. This allow to
+change the curve names before store it.
+[old Name to replace, new name to set]</li>
+<li><strong>model</strong> (<em>dagNode</em><em>, </em><em>optional</em>) – Model top node to help find the correct
+parent, if  several objects with the same name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.crv_parenting">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">crv_parenting</code><span class="sig-paren">(</span><em>data, crv, rplStr=[”, ”], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.crv_parenting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent the new created curves</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>dict</em>) – serialized curve data</li>
+<li><strong>crv</strong> (<em>str</em>) – name of the curve to parent</li>
+<li><strong>rplStr</strong> (<em>list</em><em>, </em><em>optional</em>) – String to replace in names. This allow to
+change the curve names before store it.
+[old Name to replace, new name to set]</li>
+<li><strong>model</strong> (<em>dagNode</em><em>, </em><em>optional</em>) – Model top node to help find the correct
+parent, if  several objects with the same name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.export_curve">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">export_curve</code><span class="sig-paren">(</span><em>filePath=None</em>, <em>objs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.export_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the curve data to a json file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filePath</strong> (<em>None</em><em>, </em><em>optional</em>) – Description</li>
+<li><strong>objs</strong> (<em>None</em><em>, </em><em>optional</em>) – Description</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Description</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">TYPE</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.findLenghtFromParam">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">findLenghtFromParam</code><span class="sig-paren">(</span><em>crv</em>, <em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.findLenghtFromParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find lengtht from a curve parameter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>param</strong> (<em>float</em>) – The parameter to get the legth</li>
+<li><strong>crv</strong> (<a class="reference internal" href="#module-mgear.core.curve" title="mgear.core.curve"><em>curve</em></a>) – The source curve.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Curve uLength</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">oParam</span><span class="p">,</span> <span class="n">oLength</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">getCurveParamAtPosition</span><span class="p">(</span><span class="n">upRope</span><span class="p">,</span> <span class="n">cv</span><span class="p">)</span>
+<span class="n">uLength</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">findLenghtFromParam</span><span class="p">(</span><span class="n">upRope</span><span class="p">,</span> <span class="n">oParam</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">uLength</span> <span class="o">/</span> <span class="n">oLength</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.getCurveParamAtPosition">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">getCurveParamAtPosition</code><span class="sig-paren">(</span><em>crv</em>, <em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.getCurveParamAtPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get curve parameter from a position</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>position</strong> (<em>list of float</em>) – Represents the position in worldSpace
+exp: [1.4, 3.55, 42.6]</li>
+<li><strong>crv</strong> (<a class="reference internal" href="#module-mgear.core.curve" title="mgear.core.curve"><em>curve</em></a>) – The  source curve to get the parameter.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">paramenter and curve length</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.get_color">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">get_color</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.get_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the color from shape node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>TYPE</em>) – shape</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Description</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">TYPE</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.import_curve">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">import_curve</code><span class="sig-paren">(</span><em>filePath=None, replaceShape=False, rebuildHierarchy=False, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.import_curve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.set_color">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">set_color</code><span class="sig-paren">(</span><em>node</em>, <em>color</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.set_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the color in the Icons.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The object</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.update_curve_from_data">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">update_curve_from_data</code><span class="sig-paren">(</span><em>data, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.update_curve_from_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>update the curves from a given curve data dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>dict</em>) – serialized curve data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.curve.update_curve_from_file">
+<code class="descclassname">mgear.core.curve.</code><code class="descname">update_curve_from_file</code><span class="sig-paren">(</span><em>filePath=None, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.update_curve_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dag.html" class="btn btn-neutral float-right" title="mgear.core.dag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="attribute.html" class="btn btn-neutral" title="mgear.core.attribute" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

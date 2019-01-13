@@ -1,0 +1,41 @@
+mgear\.rigbits\.rbf\_manager\_ui
+================================
+
+.. automodule:: mgear.rigbits.rbf_manager_ui
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      HLine
+      VLine
+      genericWarning
+      getControlAttrWidget
+      getEnvironModules
+      getPlugAttrs
+      promptAcceptance
+      selectNode
+      show
+      sortRBF
+      testFunctions
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ClickableLineEdit
+      RBFManagerUI
+      RBFSetupInput
+      TabBar
+   
+   
+
+   
+   
+   

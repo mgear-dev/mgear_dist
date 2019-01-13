@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.synoptic.widgets &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
+        <link rel="up" title="Synoptic" href="../synopticModules.html"/>
+        <link rel="next" title="Modules flat List" href="../modulesList.html"/>
+        <link rel="prev" title="mgear.synoptic.utils" href="mgear.synoptic.utils.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../synopticModules.html">Synoptic</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../synopticModules.html#introduction">Introduction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../synopticModules.html#modules">Modules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="mgear.synoptic.html">mgear.synoptic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.synoptic.utils.html">mgear.synoptic.utils</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">mgear.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../synopticModules.html">Synoptic</a> &raquo;</li>
+        
+      <li>mgear.synoptic.widgets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated/mgear.synoptic.widgets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.synoptic.widgets">
+<span id="mgear-synoptic-widgets"></span><h1>mgear.synoptic.widgets<a class="headerlink" href="#module-mgear.synoptic.widgets" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.FlipPoseButton" title="mgear.synoptic.widgets.FlipPoseButton"><code class="xref py py-obj docutils literal"><span class="pre">FlipPoseButton</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.MirrorPoseButton" title="mgear.synoptic.widgets.MirrorPoseButton"><code class="xref py py-obj docutils literal"><span class="pre">MirrorPoseButton</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.QuickSelButton" title="mgear.synoptic.widgets.QuickSelButton"><code class="xref py py-obj docutils literal"><span class="pre">QuickSelButton</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_Box" title="mgear.synoptic.widgets.SelectBtn_Box"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_Box</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CFk" title="mgear.synoptic.widgets.SelectBtn_CFk"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CFk</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CFkBox" title="mgear.synoptic.widgets.SelectBtn_CFkBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CFkBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CFkCircle" title="mgear.synoptic.widgets.SelectBtn_CFkCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CFkCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CFkOutlineBox" title="mgear.synoptic.widgets.SelectBtn_CFkOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CFkOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CFkOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_CFkOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CFkOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CIk" title="mgear.synoptic.widgets.SelectBtn_CIk"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CIk</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CIkBox" title="mgear.synoptic.widgets.SelectBtn_CIkBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CIkBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CIkCircle" title="mgear.synoptic.widgets.SelectBtn_CIkCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CIkCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CIkOutlineBox" title="mgear.synoptic.widgets.SelectBtn_CIkOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CIkOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_CIkOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_CIkOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_CIkOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_Circle" title="mgear.synoptic.widgets.SelectBtn_Circle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_Circle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LFk" title="mgear.synoptic.widgets.SelectBtn_LFk"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LFk</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LFkBox" title="mgear.synoptic.widgets.SelectBtn_LFkBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LFkBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LFkCircle" title="mgear.synoptic.widgets.SelectBtn_LFkCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LFkCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LFkOutlineBox" title="mgear.synoptic.widgets.SelectBtn_LFkOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LFkOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LFkOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_LFkOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LFkOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LFkTriangleLeft" title="mgear.synoptic.widgets.SelectBtn_LFkTriangleLeft"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LFkTriangleLeft</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LIk" title="mgear.synoptic.widgets.SelectBtn_LIk"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LIk</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LIkBox" title="mgear.synoptic.widgets.SelectBtn_LIkBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LIkBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LIkCircle" title="mgear.synoptic.widgets.SelectBtn_LIkCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LIkCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LIkOutlineBox" title="mgear.synoptic.widgets.SelectBtn_LIkOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LIkOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LIkOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_LIkOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LIkOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_LIkTriangleLeft" title="mgear.synoptic.widgets.SelectBtn_LIkTriangleLeft"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_LIkTriangleLeft</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_OutlineBox" title="mgear.synoptic.widgets.SelectBtn_OutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_OutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_OutlineCircle" title="mgear.synoptic.widgets.SelectBtn_OutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_OutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_OutlineTriangleLeft" title="mgear.synoptic.widgets.SelectBtn_OutlineTriangleLeft"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_OutlineTriangleLeft</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_OutlineTriangleRight" title="mgear.synoptic.widgets.SelectBtn_OutlineTriangleRight"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_OutlineTriangleRight</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RFk" title="mgear.synoptic.widgets.SelectBtn_RFk"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RFk</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RFkBox" title="mgear.synoptic.widgets.SelectBtn_RFkBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RFkBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RFkCircle" title="mgear.synoptic.widgets.SelectBtn_RFkCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RFkCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RFkOutlineBox" title="mgear.synoptic.widgets.SelectBtn_RFkOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RFkOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RFkOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_RFkOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RFkOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RFkTriangleRight" title="mgear.synoptic.widgets.SelectBtn_RFkTriangleRight"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RFkTriangleRight</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RIk" title="mgear.synoptic.widgets.SelectBtn_RIk"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RIk</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RIkBox" title="mgear.synoptic.widgets.SelectBtn_RIkBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RIkBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RIkCircle" title="mgear.synoptic.widgets.SelectBtn_RIkCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RIkCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RIkOutlineBox" title="mgear.synoptic.widgets.SelectBtn_RIkOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RIkOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RIkOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_RIkOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RIkOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_RIkTriangleRight" title="mgear.synoptic.widgets.SelectBtn_RIkTriangleRight"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_RIkTriangleRight</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_StyleSheet" title="mgear.synoptic.widgets.SelectBtn_StyleSheet"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_StyleSheet</span></code></a>([parent])</td>
+<td>This class allows you to charge a QFrame widget on your picker that will maintain the StyleSheet compatibility coming form your UI file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_StyleSheet_Draw" title="mgear.synoptic.widgets.SelectBtn_StyleSheet_Draw"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_StyleSheet_Draw</span></code></a>([parent])</td>
+<td>This class allows you to charge a QFrame widget on your picker that will maintain the StyleSheet compatibility coming form your UI file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_TriangleLeft" title="mgear.synoptic.widgets.SelectBtn_TriangleLeft"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_TriangleLeft</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_TriangleRight" title="mgear.synoptic.widgets.SelectBtn_TriangleRight"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_TriangleRight</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_blueBox" title="mgear.synoptic.widgets.SelectBtn_blueBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_blueBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_blueCircle" title="mgear.synoptic.widgets.SelectBtn_blueCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_blueCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_blueOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_blueOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_blueOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_darkGreen" title="mgear.synoptic.widgets.SelectBtn_darkGreen"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_darkGreen</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_darkGreenBox" title="mgear.synoptic.widgets.SelectBtn_darkGreenBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_darkGreenBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_darkGreenOutlineBox" title="mgear.synoptic.widgets.SelectBtn_darkGreenOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_darkGreenOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_green" title="mgear.synoptic.widgets.SelectBtn_green"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_green</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_greenBox" title="mgear.synoptic.widgets.SelectBtn_greenBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_greenBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_greenCircle" title="mgear.synoptic.widgets.SelectBtn_greenCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_greenCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_greenOutlineBox" title="mgear.synoptic.widgets.SelectBtn_greenOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_greenOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_greenOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_greenOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_greenOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_greenTriangleLeft" title="mgear.synoptic.widgets.SelectBtn_greenTriangleLeft"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_greenTriangleLeft</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_greenTriangleRight" title="mgear.synoptic.widgets.SelectBtn_greenTriangleRight"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_greenTriangleRight</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_redBox" title="mgear.synoptic.widgets.SelectBtn_redBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_redBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_redCircle" title="mgear.synoptic.widgets.SelectBtn_redCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_redCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_redOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_redOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_redOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_yellow" title="mgear.synoptic.widgets.SelectBtn_yellow"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_yellow</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_yellowBox" title="mgear.synoptic.widgets.SelectBtn_yellowBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_yellowBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_yellowCircle" title="mgear.synoptic.widgets.SelectBtn_yellowCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_yellowCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_yellowOutlineBox" title="mgear.synoptic.widgets.SelectBtn_yellowOutlineBox"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_yellowOutlineBox</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_yellowOutlineCircle" title="mgear.synoptic.widgets.SelectBtn_yellowOutlineCircle"><code class="xref py py-obj docutils literal"><span class="pre">SelectBtn_yellowOutlineCircle</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectButton" title="mgear.synoptic.widgets.SelectButton"><code class="xref py py-obj docutils literal"><span class="pre">SelectButton</span></code></a>([parent])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectButtonStyleSheet" title="mgear.synoptic.widgets.SelectButtonStyleSheet"><code class="xref py py-obj docutils literal"><span class="pre">SelectButtonStyleSheet</span></code></a>([parent])</td>
+<td>This class allows you to charge a QFrame widget on your picker that will maintain the StyleSheet compatibility coming form your UI file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SpineIkfkMatchButton" title="mgear.synoptic.widgets.SpineIkfkMatchButton"><code class="xref py py-obj docutils literal"><span class="pre">SpineIkfkMatchButton</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.bakeSprings" title="mgear.synoptic.widgets.bakeSprings"><code class="xref py py-obj docutils literal"><span class="pre">bakeSprings</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.clearSprings" title="mgear.synoptic.widgets.clearSprings"><code class="xref py py-obj docutils literal"><span class="pre">clearSprings</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.ikfkMatchButton" title="mgear.synoptic.widgets.ikfkMatchButton"><code class="xref py py-obj docutils literal"><span class="pre">ikfkMatchButton</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.keyGroup" title="mgear.synoptic.widgets.keyGroup"><code class="xref py py-obj docutils literal"><span class="pre">keyGroup</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.klass" title="mgear.synoptic.widgets.klass"><code class="xref py py-obj docutils literal"><span class="pre">klass</span></code></a></td>
+<td>alias of <a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.SelectBtn_redCircle" title="mgear.synoptic.widgets.SelectBtn_redCircle"><code class="xref py py-class docutils literal"><span class="pre">SelectBtn_redCircle</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.resetBindPose" title="mgear.synoptic.widgets.resetBindPose"><code class="xref py py-obj docutils literal"><span class="pre">resetBindPose</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.resetTransform" title="mgear.synoptic.widgets.resetTransform"><code class="xref py py-obj docutils literal"><span class="pre">resetTransform</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.selGroup" title="mgear.synoptic.widgets.selGroup"><code class="xref py py-obj docutils literal"><span class="pre">selGroup</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.toggleAttrButton" title="mgear.synoptic.widgets.toggleAttrButton"><code class="xref py py-obj docutils literal"><span class="pre">toggleAttrButton</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/widgets.html#mgear.synoptic.widgets.toggleCombo" title="mgear.synoptic.widgets.toggleCombo"><code class="xref py py-obj docutils literal"><span class="pre">toggleCombo</span></code></a>([parent])</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../modulesList.html" class="btn btn-neutral float-right" title="Modules flat List" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mgear.synoptic.utils.html" class="btn btn-neutral" title="mgear.synoptic.utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

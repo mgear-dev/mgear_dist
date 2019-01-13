@@ -1,0 +1,30 @@
+mgear\.rigbits\.eye\_rigger
+===========================
+
+.. automodule:: mgear.rigbits.eye_rigger
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      eyeRig
+      eyesFromfile
+      showEyeRigUI
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      eyeRigUI
+   
+   
+
+   
+   
+   

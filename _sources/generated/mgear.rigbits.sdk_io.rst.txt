@@ -1,0 +1,36 @@
+mgear\.rigbits\.sdk\_io
+=======================
+
+.. automodule:: mgear.rigbits.sdk_io
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      copySDKsToNode
+      createSDKFromDict
+      exportSDKs
+      getAllSDKInfoFromNode
+      getBlendNodes
+      getConnectedSDKs
+      getMultiDriverSDKs
+      getPynodes
+      getSDKDestination
+      getSDKInfo
+      importSDKs
+      invertKeyValues
+      mirrorSDKkeys
+      removeSDKs
+      stripKeys
+   
+   
+
+   
+   
+   
+
+   
+   
+   

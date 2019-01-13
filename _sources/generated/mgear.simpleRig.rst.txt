@@ -1,0 +1,16 @@
+mgear\.simpleRig
+================
+
+.. automodule:: mgear.simpleRig
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

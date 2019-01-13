@@ -1,0 +1,23 @@
+mgear\.rigbits\.utils
+=====================
+
+.. automodule:: mgear.rigbits.utils
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      createHotkeys
+      createRunTimeCommand
+   
+   
+
+   
+   
+   
+
+   
+   
+   

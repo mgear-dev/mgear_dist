@@ -1,0 +1,23 @@
+mgear\.core\.menu
+=================
+
+.. automodule:: mgear.core.menu
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      install_skinning_menu
+      install_utils_menu
+   
+   
+
+   
+   
+   
+
+   
+   
+   

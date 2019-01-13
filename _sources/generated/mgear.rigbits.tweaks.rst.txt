@@ -1,0 +1,28 @@
+mgear\.rigbits\.tweaks
+======================
+
+.. automodule:: mgear.rigbits.tweaks
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      createJntTweak
+      createMirrorRivetTweak
+      createRivetTweak
+      createRivetTweakFromList
+      createRivetTweakLayer
+      doritosMagic
+      resetJntLocalSRT
+   
+   
+
+   
+   
+   
+
+   
+   
+   

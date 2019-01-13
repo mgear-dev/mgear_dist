@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to mGear: Rigging Framework for Autodesk Maya &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
+  <title>Welcome to mGear: Rigging Framework for Autodesk Maya &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="#"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="#"/>
         <link rel="next" title="Overview" href="overview.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                2.5
+                3.0
               </div>
             
           
@@ -92,8 +92,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
@@ -176,19 +177,39 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="baseModules.html">Base Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shifterModules.html">Shifter Rig Builder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="synopticModules.html">Synoptic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synopticModules.html">Synoptic</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mgearTools/mgearRiggingTools.html">mGear Rigging Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mgearTools/mgearUtils.html">mGear utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-add10scalar">mgear_add10Scalar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-curvecns">mgear_curveCns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-ikfk2bone">mgear_ikfk2Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-intmatrix">mgear_intMatrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-inverserotorder">mgear_inverseRotOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-linearinterpolate3dvector">mgear_linearInterpolate3Dvector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-mulmatrix">mgear_mulMatrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-percentagetou">mgear_percentageToU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-raycastposition">mgear_rayCastPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-rollsplinekine">mgear_rollSplineKine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-slidecurve">mgear_slideCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-spinepointat">mgear_spinePointAt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-springnode">mgear_springNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-squashstretch-attr">mgear_squashStretch_attr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-trigonometyangle">mgear_trigonometyAngle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="solvers.html#mgear-vertexposition">mgear_vertexPosition</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="animbitsUserDocumentation.html#soft-tweaks">Soft Tweaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="animbitsUserDocumentation.html#smart-reset-attribute-srt">Smart reset Attribute/SRT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
@@ -206,18 +227,20 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="releaseLog.html">Release Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id1">2.5.24</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id2">2.4.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id3">2.4.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id4">2.4.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id5">2.3.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id6">2.2.4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id7">2.2.3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id8">2.2.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id9">2.2.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id10">2.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id11">2.1.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id12">2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id1">3.0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id2">2.6.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id3">2.5.24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id4">2.4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id5">2.4.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id6">2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id7">2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id8">2.2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id9">2.2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id10">2.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id11">2.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id12">2.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id13">2.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releaseLog.html#id14">2.0</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -253,7 +276,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
 
     </p>
   </div>
@@ -275,7 +298,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.5.24',
+            VERSION:'3.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

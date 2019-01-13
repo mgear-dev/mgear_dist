@@ -1,0 +1,1218 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.shifter.guide &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.shifter.gui" href="gui.html"/>
+        <link rel="prev" title="mgear.shifter" href="shifter.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/core.html">mgear.core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/attribute.html">mgear.core.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/curve.html">mgear.core.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/dag.html">mgear.core.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/icon.html">mgear.core.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/log.html">mgear.core.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/node.html">mgear.core.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/skin.html">mgear.core.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/transform.html">mgear.core.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/utils.html">mgear.core.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/vector.html">mgear.core.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/widgets.html">mgear.core.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shifter.html">mgear.shifter</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html">mgear.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/synoptic.html">mgear.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/utils.html">mgear.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/widgets.html">mgear.synoptic.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../simpleRig/simpleRigTool.html">mgear.simpleRig.simpleRigTool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+        
+      <li>mgear.shifter.guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/shifter/guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.shifter.guide">
+<span id="mgear-shifter-guide"></span><h1>mgear.shifter.guide<a class="headerlink" href="#module-mgear.shifter.guide" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mgear.shifter.guide.CustomStepTab">
+<em class="property">class </em><code class="descclassname">mgear.shifter.guide.</code><code class="descname">CustomStepTab</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.CustomStepTab" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.shifter.guide.CustomStepTab.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.shifter.guide.CustomStepTab.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.shifter.guide.GuideSettings">
+<em class="property">class </em><code class="descclassname">mgear.shifter.guide.</code><code class="descname">GuideSettings</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.addCustomStep">
+<code class="descname">addCustomStep</code><span class="sig-paren">(</span><em>pre=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.addCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new custom step</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pre</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true adds the steps to the pre step list</li>
+<li><strong>*args</strong> – Maya’s Dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.create_connections">
+<code class="descname">create_connections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.create_connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the slots connections to the controls functions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.create_controls">
+<code class="descname">create_controls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.create_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the controls for the component base</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.create_layout">
+<code class="descname">create_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.create_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the layout for the component base settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.duplicateCustomStep">
+<code class="descname">duplicateCustomStep</code><span class="sig-paren">(</span><em>pre=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.duplicateCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicate the selected step</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pre</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true adds the steps to the pre step list</li>
+<li><strong>*args</strong> – Maya’s Dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.eventFilter">
+<code class="descname">eventFilter</code><span class="sig-paren">(</span><em>sender</em>, <em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.eventFilter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.exportCustomStep">
+<code class="descname">exportCustomStep</code><span class="sig-paren">(</span><em>pre=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.exportCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export custom steps to a json file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pre</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true takes the steps from the
+pre step list</li>
+<li><strong>*args</strong> – Maya’s Dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.getAllItems">
+<code class="descname">getAllItems</code><span class="sig-paren">(</span><em>cs_listWidget</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.getAllItems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.GuideSettings.greenBrush">
+<code class="descname">greenBrush</code><em class="property"> = &lt;PySide2.QtGui.QBrush(QColor(ARGB 1, 0.0901961, 0.619608, 0.513725),NoBrush) &gt;</em><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.greenBrush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.importCustomStep">
+<code class="descname">importCustomStep</code><span class="sig-paren">(</span><em>pre=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.importCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import custom steps from a json file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pre</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true import to pre steps list</li>
+<li><strong>*args</strong> – Maya’s Dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.newCustomStep">
+<code class="descname">newCustomStep</code><span class="sig-paren">(</span><em>pre=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.newCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new custom step</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pre</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true adds the steps to the pre step list</li>
+<li><strong>*args</strong> – Maya’s Dummy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.GuideSettings.orangeBrush">
+<code class="descname">orangeBrush</code><em class="property"> = &lt;PySide2.QtGui.QBrush(QColor(ARGB 1, 0.901961, 0.494118, 0.133333),NoBrush) &gt;</em><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.orangeBrush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.populateAvailableSynopticTabs">
+<code class="descname">populateAvailableSynopticTabs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.populateAvailableSynopticTabs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.populate_controls">
+<code class="descname">populate_controls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.populate_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate the controls values
+from the custom attributes of the component.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.postCustomStepMenu">
+<code class="descname">postCustomStepMenu</code><span class="sig-paren">(</span><em>QPos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.postCustomStepMenu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.postHighlightSearch">
+<code class="descname">postHighlightSearch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.postHighlightSearch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.preCustomStepMenu">
+<code class="descname">preCustomStepMenu</code><span class="sig-paren">(</span><em>QPos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.preCustomStepMenu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.preHighlightSearch">
+<code class="descname">preHighlightSearch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.preHighlightSearch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.GuideSettings.redBrush">
+<code class="descname">redBrush</code><em class="property"> = &lt;PySide2.QtGui.QBrush(QColor(ARGB 1, 0.607843, 0.176471, 0.133333),NoBrush) &gt;</em><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.redBrush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.refreshStatusColor">
+<code class="descname">refreshStatusColor</code><span class="sig-paren">(</span><em>cs_listWidget</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.refreshStatusColor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.setStatusColor">
+<code class="descname">setStatusColor</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.setStatusColor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.setStatusCustomStep">
+<code class="descname">setStatusCustomStep</code><span class="sig-paren">(</span><em>cs_listWidget</em>, <em>stepAttr</em>, <em>status=True</em>, <em>selected=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.setStatusCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.setup_SettingWindow">
+<code class="descname">setup_SettingWindow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.setup_SettingWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.skinLoad">
+<code class="descname">skinLoad</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.skinLoad" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.GuideSettings.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.toggleStatusCustomStep">
+<code class="descname">toggleStatusCustomStep</code><span class="sig-paren">(</span><em>cs_listWidget</em>, <em>stepAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.toggleStatusCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.GuideSettings.whiteBrush">
+<code class="descname">whiteBrush</code><em class="property"> = &lt;PySide2.QtGui.QBrush(QColor(ARGB 1, 1, 1, 1),NoBrush) &gt;</em><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.whiteBrush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.GuideSettings.whiteDownBrush">
+<code class="descname">whiteDownBrush</code><em class="property"> = &lt;PySide2.QtGui.QBrush(QColor(ARGB 1, 0.886275, 0.886275, 0.886275),NoBrush) &gt;</em><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.whiteDownBrush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.shifter.guide.GuideSettingsTab">
+<em class="property">class </em><code class="descclassname">mgear.shifter.guide.</code><code class="descname">GuideSettingsTab</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettingsTab" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="mgear.shifter.guide.GuideSettingsTab.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.shifter.guide.GuideSettingsTab.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.shifter.guide.HelperSlots">
+<em class="property">class </em><code class="descclassname">mgear.shifter.guide.</code><code class="descname">HelperSlots</code><a class="headerlink" href="#mgear.shifter.guide.HelperSlots" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.addItem2listWidget">
+<code class="descname">addItem2listWidget</code><span class="sig-paren">(</span><em>listWidget</em>, <em>targetAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.addItem2listWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.close_settings">
+<code class="descname">close_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.close_settings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.copyFromListWidget">
+<code class="descname">copyFromListWidget</code><span class="sig-paren">(</span><em>sourceListWidget</em>, <em>targetListWidget</em>, <em>targetAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.copyFromListWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.editFile">
+<code class="descname">editFile</code><span class="sig-paren">(</span><em>widgetList</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.editFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="mgear.shifter.guide.HelperSlots.get_steps_dict">
+<em class="property">classmethod </em><code class="descname">get_steps_dict</code><span class="sig-paren">(</span><em>itemsList</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.get_steps_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.moveFromListWidget2ListWidget">
+<code class="descname">moveFromListWidget2ListWidget</code><span class="sig-paren">(</span><em>sourceListWidget</em>, <em>targetListWidget</em>, <em>targetAttrListWidget</em>, <em>targetAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.moveFromListWidget2ListWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.populateCheck">
+<code class="descname">populateCheck</code><span class="sig-paren">(</span><em>targetWidget</em>, <em>sourceAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.populateCheck" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.removeSelectedFromListWidget">
+<code class="descname">removeSelectedFromListWidget</code><span class="sig-paren">(</span><em>listWidget</em>, <em>targetAttr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.removeSelectedFromListWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.runManualStep">
+<code class="descname">runManualStep</code><span class="sig-paren">(</span><em>widgetList</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.runManualStep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="mgear.shifter.guide.HelperSlots.runStep">
+<em class="property">classmethod </em><code class="descname">runStep</code><span class="sig-paren">(</span><em>stepPath</em>, <em>customStepDic</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.runStep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.setProfile">
+<code class="descname">setProfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.setProfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateCheck">
+<code class="descname">updateCheck</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateCheck" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateComboBox">
+<code class="descname">updateComboBox</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateComboBox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateComponentName">
+<code class="descname">updateComponentName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateComponentName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateConnector">
+<code class="descname">updateConnector</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>itemsList</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateConnector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateControlShape">
+<code class="descname">updateControlShape</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>ctlList</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateControlShape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateHostUI">
+<code class="descname">updateHostUI</code><span class="sig-paren">(</span><em>lEdit</em>, <em>targetAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateHostUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateLineEdit">
+<code class="descname">updateLineEdit</code><span class="sig-paren">(</span><em>lEdit</em>, <em>targetAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateLineEdit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateListAttr">
+<code class="descname">updateListAttr</code><span class="sig-paren">(</span><em>sourceListWidget</em>, <em>targetAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateListAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the string attribute with values separated by commas</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateSlider">
+<code class="descname">updateSlider</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateSlider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.updateSpinBox">
+<code class="descname">updateSpinBox</code><span class="sig-paren">(</span><em>sourceWidget</em>, <em>targetAttr</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.updateSpinBox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.shifter.guide.Main">
+<em class="property">class </em><code class="descclassname">mgear.shifter.guide.</code><code class="descname">Main</code><a class="headerlink" href="#mgear.shifter.guide.Main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main guide class</p>
+<p>Provide the methods to add parameters, set parameter values,
+create property…</p>
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Main.paramNames">
+<code class="descname">paramNames</code><a class="headerlink" href="#mgear.shifter.guide.Main.paramNames" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – List of parameter name cause it’s actually important</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">to keep them sorted.</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Main.paramDefs">
+<code class="descname">paramDefs</code><a class="headerlink" href="#mgear.shifter.guide.Main.paramDefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Dictionary of parameter definition.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Main.values">
+<code class="descname">values</code><a class="headerlink" href="#mgear.shifter.guide.Main.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Dictionary of options values.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Main.valid">
+<code class="descname">valid</code><a class="headerlink" href="#mgear.shifter.guide.Main.valid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> – We will check a few things and make sure the guide we are
+loading is up to date. If parameters or object are missing a
+warning message will be display and the guide should be updated.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.addColorParam">
+<code class="descname">addColorParam</code><span class="sig-paren">(</span><em>scriptName</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.addColorParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add color paramenter to the paramenter definition Dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) – The name of the color parameter.</li>
+<li><strong>value</strong> (<em>Variant</em>) – The default color value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly create paramenter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">paramDef</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.addEnumParam">
+<code class="descname">addEnumParam</code><span class="sig-paren">(</span><em>scriptName</em>, <em>enum</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.addEnumParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add FCurve paramenter to the paramenter definition Dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) – Attribute fullName</li>
+<li><strong>enum</strong> (<em>list of str</em>) – The list of elements in the enumerate control.</li>
+<li><strong>value</strong> (<em>int</em>) – The default value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly create paramenter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">paramDef</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.addFCurveParam">
+<code class="descname">addFCurveParam</code><span class="sig-paren">(</span><em>scriptName</em>, <em>keys</em>, <em>interpolation=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.addFCurveParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add FCurve paramenter to the paramenter definition Dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) – Attribute fullName.</li>
+<li><strong>keys</strong> (<em>list</em>) – The keyframes to define the function curve.</li>
+<li><strong>interpolation</strong> (<em>int</em>) – the curve interpolation.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly create paramenter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">paramDef</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.addParam">
+<code class="descname">addParam</code><span class="sig-paren">(</span><em>scriptName</em>, <em>valueType</em>, <em>value</em>, <em>minimum=None</em>, <em>maximum=None</em>, <em>keyable=False</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em>, <em>niceName=None</em>, <em>shortName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.addParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add paramenter to the paramenter definition Dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) – Parameter scriptname.</li>
+<li><strong>valueType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’,
+‘long’, etc..</li>
+<li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – Default parameter value.</li>
+<li><strong>niceName</strong> (<em>str</em>) – Parameter niceName.</li>
+<li><strong>shortName</strong> (<em>str</em>) – Parameter shortName.</li>
+<li><strong>minimum</strong> (<em>float</em><em> or </em><em>int</em>) – mininum value.</li>
+<li><strong>maximum</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value.</li>
+<li><strong>keyable</strong> (<em>boo</em>) – If true is keyable</li>
+<li><strong>readable</strong> (<em>boo</em>) – If true is readable</li>
+<li><strong>storable</strong> (<em>boo</em>) – If true is storable</li>
+<li><strong>writable</strong> (<em>boo</em>) – If true is writable</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly create paramenter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">paramDef</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.addPropertyParamenters">
+<code class="descname">addPropertyParamenters</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.addPropertyParamenters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add attributes from the parameter definition list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parent</strong> (<em>dagNode</em>) – The object to add the attributes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">parent with the attributes.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dagNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.get_param_values">
+<code class="descname">get_param_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.get_param_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.setParamDefValue">
+<code class="descname">setParamDefValue</code><span class="sig-paren">(</span><em>scriptName</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.setParamDefValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of parameter with matching scriptname.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) – Scriptname of the parameter to edit.</li>
+<li><strong>value</strong> (<em>variant</em>) – New value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">False if the parameter wasn’t found.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.setParamDefValuesFromDict">
+<code class="descname">setParamDefValuesFromDict</code><span class="sig-paren">(</span><em>values_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.setParamDefValuesFromDict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Main.setParamDefValuesFromProperty">
+<code class="descname">setParamDefValuesFromProperty</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Main.setParamDefValuesFromProperty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameter definition values from the attributes of an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The object with the attributes.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.MainGuide">
+<code class="descclassname">mgear.shifter.guide.</code><code class="descname">MainGuide</code><a class="headerlink" href="#mgear.shifter.guide.MainGuide" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.Main" title="mgear.shifter.guide.Main"><code class="xref py py-class docutils literal"><span class="pre">Main</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.shifter.guide.Rig">
+<em class="property">class </em><code class="descclassname">mgear.shifter.guide.</code><code class="descname">Rig</code><a class="headerlink" href="#mgear.shifter.guide.Rig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rig guide class.</p>
+<p>This is the class for complete rig guide definition.</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>It contains the component guide in correct hierarchy order and the</dt>
+<dd>options to generate the rig.</dd>
+</dl>
+</li>
+<li>Provide the methods to add more component, import/export guide.</li>
+</ul>
+</div></blockquote>
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Rig.paramNames">
+<code class="descname">paramNames</code><a class="headerlink" href="#mgear.shifter.guide.Rig.paramNames" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – List of parameter name cause it’s actually important
+to keep them sorted.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Rig.paramDefs">
+<code class="descname">paramDefs</code><a class="headerlink" href="#mgear.shifter.guide.Rig.paramDefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Dictionary of parameter definition.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Rig.values">
+<code class="descname">values</code><a class="headerlink" href="#mgear.shifter.guide.Rig.values" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Dictionary of options values.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Rig.valid">
+<code class="descname">valid</code><a class="headerlink" href="#mgear.shifter.guide.Rig.valid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> – We will check a few things and make sure the guide we are
+loading is up to date. If parameters or object are missing a
+warning message will be display and the guide should be updated.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Rig.controllers">
+<code class="descname">controllers</code><a class="headerlink" href="#mgear.shifter.guide.Rig.controllers" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Dictionary of controllers.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Rig.components">
+<code class="descname">components</code><a class="headerlink" href="#mgear.shifter.guide.Rig.components" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Dictionary of component. Keys are the component
+fullname (ie. ‘arm_L0’)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Rig.componentsIndex">
+<code class="descname">componentsIndex</code><a class="headerlink" href="#mgear.shifter.guide.Rig.componentsIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – List of component name sorted by order
+creation (hierarchy order)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.Rig.parents">
+<code class="descname">parents</code><a class="headerlink" href="#mgear.shifter.guide.Rig.parents" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – List of the parent of each component, in same order
+as self.components</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.addOptionsValues">
+<code class="descname">addOptionsValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.addOptionsValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather or change some options values according to some others.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For the moment only gets the rig size to adapt size of object to
+the scale of the character</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.addParameters">
+<code class="descname">addParameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.addParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameters for rig options.</p>
+<p>Add more parameter to the parameter definition list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.drawNewComponent">
+<code class="descname">drawNewComponent</code><span class="sig-paren">(</span><em>parent</em>, <em>comp_type</em>, <em>showUI=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.drawNewComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new component to the guide.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>parent</strong> (<em>dagNode</em>) – Parent of this new component guide.</li>
+<li><strong>compType</strong> (<em>str</em>) – Type of component to add.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.drawUpdate">
+<code class="descname">drawUpdate</code><span class="sig-paren">(</span><em>oldRoot</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.drawUpdate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.draw_guide">
+<code class="descname">draw_guide</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.draw_guide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a new guide from  the guide object.
+Usually the information of the guide have been set from a configuration
+Dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>partial</strong> (<em>str</em><em> or </em><em>list of str</em><em>, </em><em>optional</em>) – If Partial starting
+component is defined, will try to add the guide to a selected
+guide part of an existing guide.</li>
+<li><strong>initParent</strong> (<em>dagNode</em><em>, </em><em>optional</em>) – Initial parent. If None, will
+create a new initial heirarchy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>shifter.log_window()
+rig = shifter.Rig()
+rig.guide.set_from_dict(conf_dict)
+# draw complete guide
+rig.guide.draw_guide()
+# add to existing guide
+# rig.guide.draw_guide(None, pm.selected()[0])
+# draw partial guide
+# rig.guide.draw_guide([“arm_R0”, “leg_L0”])
+# draw partial guide adding to existing guide
+# rig.guide.draw_guide([“arm_R0”, “leg_L0”], pm.selected()[0])</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">TYPE</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.duplicate">
+<code class="descname">duplicate</code><span class="sig-paren">(</span><em>root</em>, <em>symmetrize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.duplicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicate the guide hierarchy</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Indeed this method is not duplicating.
+What it is doing is parse the compoment guide,
+and creating an new one base on the current selection.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Don’t use the default Maya’s duplicate tool to duplicate a
+Shifter’s guide.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> (<em>dagNode</em>) – The guide root to duplicate.</li>
+<li><strong>symmetrize</strong> (<em>bool</em>) – If True, duplicate symmetrical in X axis.</li>
+<li><strong>guide have to be &quot;Left&quot;</strong><strong> or </strong><strong>&quot;Right&quot;.</strong> (<em>The</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.findComponentRecursive">
+<code class="descname">findComponentRecursive</code><span class="sig-paren">(</span><em>node</em>, <em>branch=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.findComponentRecursive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds components by recursive search.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) – Object frome where start the search.</li>
+<li><strong>branch</strong> (<em>bool</em>) – If True search recursive all the children.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.getComponentGuide">
+<code class="descname">getComponentGuide</code><span class="sig-paren">(</span><em>comp_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.getComponentGuide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the componet guide python object</p>
+<p>ie. Finds the guide.py of the component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>comp_type</strong> (<em>str</em>) – The component type.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The component guide instance class.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.get_guide_template_dict">
+<code class="descname">get_guide_template_dict</code><span class="sig-paren">(</span><em>meta=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.get_guide_template_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the guide temaplate configuration dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>meta</strong> (<em>dict</em><em>, </em><em>optional</em>) – Arbitraty metadata dictionary. This can</li>
+<li><strong>use to store any custom information in a dictionary format.</strong> (<em>be</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">guide configuration dictionary</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.initialHierarchy">
+<code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.initialHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the initial rig guide hierarchy (model, options…)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.setFromHierarchy">
+<code class="descname">setFromHierarchy</code><span class="sig-paren">(</span><em>root</em>, <em>branch=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.setFromHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the guide from given hierarchy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> (<em>dagNode</em>) – The root of the hierarchy to parse.</li>
+<li><strong>branch</strong> (<em>bool</em>) – True to parse children components.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.setFromSelection">
+<code class="descname">setFromSelection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.setFromSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the guide hierarchy from selection.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.set_from_dict">
+<code class="descname">set_from_dict</code><span class="sig-paren">(</span><em>guide_template_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.set_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>sel</em>, <em>force=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the guide if a parameter is missing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.Rig.updateProperties">
+<code class="descname">updateProperties</code><span class="sig-paren">(</span><em>root</em>, <em>newName</em>, <em>newSide</em>, <em>newIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.updateProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the Properties of the component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> (<em>dagNode</em>) – Root of the component.</li>
+<li><strong>newName</strong> (<em>str</em>) – New name of the component</li>
+<li><strong>newSide</strong> (<em>str</em>) – New side of the component</li>
+<li><strong>newIndex</strong> (<em>str</em>) – New index of the component</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.RigGuide">
+<code class="descclassname">mgear.shifter.guide.</code><code class="descname">RigGuide</code><a class="headerlink" href="#mgear.shifter.guide.RigGuide" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.Rig" title="mgear.shifter.guide.Rig"><code class="xref py py-class docutils literal"><span class="pre">Rig</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.customStepTab">
+<code class="descclassname">mgear.shifter.guide.</code><code class="descname">customStepTab</code><a class="headerlink" href="#mgear.shifter.guide.customStepTab" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.CustomStepTab" title="mgear.shifter.guide.CustomStepTab"><code class="xref py py-class docutils literal"><span class="pre">CustomStepTab</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.guideSettings">
+<code class="descclassname">mgear.shifter.guide.</code><code class="descname">guideSettings</code><a class="headerlink" href="#mgear.shifter.guide.guideSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.GuideSettings" title="mgear.shifter.guide.GuideSettings"><code class="xref py py-class docutils literal"><span class="pre">GuideSettings</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.guideSettingsTab">
+<code class="descclassname">mgear.shifter.guide.</code><code class="descname">guideSettingsTab</code><a class="headerlink" href="#mgear.shifter.guide.guideSettingsTab" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.GuideSettingsTab" title="mgear.shifter.guide.GuideSettingsTab"><code class="xref py py-class docutils literal"><span class="pre">GuideSettingsTab</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.guide.helperSlots">
+<code class="descclassname">mgear.shifter.guide.</code><code class="descname">helperSlots</code><a class="headerlink" href="#mgear.shifter.guide.helperSlots" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.HelperSlots" title="mgear.shifter.guide.HelperSlots"><code class="xref py py-class docutils literal"><span class="pre">HelperSlots</span></code></a></p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gui.html" class="btn btn-neutral float-right" title="mgear.shifter.gui" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="shifter.html" class="btn btn-neutral" title="mgear.shifter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

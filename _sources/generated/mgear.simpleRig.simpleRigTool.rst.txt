@@ -1,0 +1,34 @@
+mgear\.simpleRig\.simpleRigTool
+===============================
+
+.. automodule:: mgear.simpleRig.simpleRigTool
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      connect_selectable
+      convert_to_shifter_guide
+      convert_to_shifter_rig
+      export_configuration
+      import_configuration
+      openSimpleRigUI
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      simpleRigTool
+      simpleRigUI
+   
+   
+
+   
+   
+   

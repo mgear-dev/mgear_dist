@@ -1,0 +1,27 @@
+mgear\.rigbits\.menu
+====================
+
+.. automodule:: mgear.rigbits.menu
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      cCtl_sub
+      connect_submenu
+      gimmick_submenu
+      install
+      install_utils_menu
+      pCtl_sub
+   
+   
+
+   
+   
+   
+
+   
+   
+   

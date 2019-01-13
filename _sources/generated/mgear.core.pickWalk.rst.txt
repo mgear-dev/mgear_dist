@@ -1,0 +1,38 @@
+mgear\.core\.pickWalk
+=====================
+
+.. automodule:: mgear.core.pickWalk
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      cleanOrphaneControllerTags
+      controllerWalkDown
+      controllerWalkLeft
+      controllerWalkRight
+      controllerWalkUp
+      getMirror
+      getWalkTag
+      reorderControllerChildrenTags
+      transformWalkDown
+      transformWalkLeft
+      transformWalkRight
+      transformWalkUp
+      walkDown
+      walkLeft
+      walkMirror
+      walkRight
+      walkUp
+   
+   
+
+   
+   
+   
+
+   
+   
+   

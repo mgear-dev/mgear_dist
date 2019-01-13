@@ -1,0 +1,22 @@
+mgear\.shifter\.gui
+===================
+
+.. automodule:: mgear.shifter.gui
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Guide_UI
+   
+   
+
+   
+   
+   

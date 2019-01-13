@@ -5,7 +5,7 @@ FAQ
 What is mGear?
 ***************
 
-	mGear is a rigging framework for Autodesk Maya. mGear provides a set of convenient modules, tools and 	c++ solvers to streamline the development of rigging and animation tools.
+	mGear is a rigging and animation framework for Autodesk Maya. mGear provides a set of convenient modules, tools and c++ solvers to streamline the development of rigging and animation tools.
 
 Is mGear a modular rigging system?
 ****************************************
@@ -15,7 +15,7 @@ Is mGear a modular rigging system?
 Is mGear providing animation tools?
 ****************************************
 
-	For the moment mGear only provides the “synoptic” view as a tool specially designed for the animators. Although mGear rigs should be compatible with any other Autodesk Maya animation tool. Like MGtools, poseLib or studioLibrary.
+	Yes. Synoptic, Crank and softTweaks are animation tools. And we have more in the kitchen.
 
 Will be always free and open source?
 **************************************
@@ -60,4 +60,4 @@ Why should I add mGear to my pipeline?
 Who is currently developing mGear?
 ****************************************
 
-	Miquel Campos is the curret main developer.
+	The mGear Development Team. Please check the website or github for more information.

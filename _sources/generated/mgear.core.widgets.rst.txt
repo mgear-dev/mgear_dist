@@ -1,0 +1,29 @@
+mgear\.core\.widgets
+====================
+
+.. automodule:: mgear.core.widgets
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      selectFromScreenApi
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DragQListView
+      TableWidgetDragRows
+   
+   
+
+   
+   
+   

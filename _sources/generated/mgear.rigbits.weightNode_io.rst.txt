@@ -1,0 +1,59 @@
+mgear\.rigbits\.weightNode\_io
+==============================
+
+.. automodule:: mgear.rigbits.weightNode_io
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      addPose
+      copyPoses
+      createRBF
+      createRBFFromInfo
+      createVectorDriver
+      deletePose
+      exportNodes
+      forceEvaluation
+      getAttrInOrder
+      getDrivenNode
+      getDrivenNodeAttributes
+      getDriverListInfo
+      getDriverNode
+      getDriverNodeAttributes
+      getIndexValue
+      getNodeConnections
+      getNodeInfo
+      getNodesInfo
+      getPoseInfo
+      getRBFTransformInfo
+      importNodes
+      lengthenCompoundAttrs
+      loadWeightPlugin
+      recreateAttributes
+      recreateConnections
+      setDrivenNode
+      setDriverListFromInfo
+      setDriverNode
+      setPosesFromInfo
+      setTransformNode
+      setWeightNodeAttributes
+      syncPoseIndices
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      RBFNode
+   
+   
+
+   
+   
+   

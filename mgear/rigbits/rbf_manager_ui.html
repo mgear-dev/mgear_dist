@@ -1,0 +1,1755 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.rigbits.rbf_manager_ui &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mgear.rigbits.rbf_manager_ui</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/rigbits/rbf_manager_ui.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.rigbits.rbf_manager_ui">
+<span id="mgear-rigbits-rbf-manager-ui"></span><h1>mgear.rigbits.rbf_manager_ui<a class="headerlink" href="#module-mgear.rigbits.rbf_manager_ui" title="Permalink to this headline">¶</a></h1>
+<p>A tool to manage a number of rbf type nodes under a user defined setup(name)</p>
+<dl class="docutils">
+<dt>Steps -</dt>
+<dd>set Driver
+set Control for driver(optional, recommended)
+select attributes to driver RBF nodes
+Select Node to be driven in scene(Animation control, transform)
+Name newly created setup
+select attributes to be driven by the setup
+add any additional driven nodes
+position driver(via the control)
+position the driven node(s)
+select add pose</dd>
+</dl>
+<p>Add notes -
+Please ensure the driver node is NOT in the same position more than once. This
+will cause the RBFNode to fail while calculating. This can be fixed by deleting
+any two poses with the same input values.</p>
+<p>Edit Notes -
+Edit a pose by selecting “pose #” in the table. (which recalls recorded pose)
+reposition any controls involved in the setup
+select “Edit Pose”</p>
+<p>Delete notes -
+select desired “pose #”
+select “Delete Pose”</p>
+<p>Mirror notes -
+setups/Controls will succefully mirror if they have had their inverseAttrs
+configured previously.</p>
+<p>2.0 ——-
+LOOK into coloring the pose and how close it is
+import replace name support (will work through json manually)
+support live connections
+settings support for suffix, etc
+rename existing setup
+newScene callback</p>
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.CTL_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">CTL_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.CTL_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – suffix for anim controls</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.DRIVEN_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">DRIVEN_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.DRIVEN_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – suffix for driven group nodes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.EXTRA_MODULE_DICT">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">EXTRA_MODULE_DICT</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.EXTRA_MODULE_DICT" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of the dict which holds additional modules</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.MGEAR_EXTRA_ENVIRON">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">MGEAR_EXTRA_ENVIRON</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.MGEAR_EXTRA_ENVIRON" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – environment variable to query for paths</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.TOOL_NAME">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">TOOL_NAME</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.TOOL_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of UI</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.TOOL_TITLE">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">TOOL_TITLE</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.TOOL_TITLE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – title as it appears in the ui</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.__version__">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">__version__</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.__version__" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – UI version</p>
+</dd></dl>
+
+<dl class="docutils">
+<dt>Deleted Attributes:</dt>
+<dd>RBF_MODULES (dict): of supported rbf modules</dd>
+</dl>
+<p>__author__ = “Rafael Villar”
+__email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravrigs&#46;com">rav<span>&#64;</span>ravrigs<span>&#46;</span>com</a>”
+__credits__ = [“Miquel Campos”, “Ingo Clemens”]</p>
+<dl class="class">
+<dt id="mgear.rigbits.rbf_manager_ui.ClickableLineEdit">
+<em class="property">class </em><code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">ClickableLineEdit</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.ClickableLineEdit" title="Permalink to this definition">¶</a></dt>
+<dd><p>subclass to allow for clickable lineEdit, as a button</p>
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.ClickableLineEdit.clicked">
+<code class="descname">clicked</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.ClickableLineEdit.clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QtCore.Signal</em> – emitted when clicked</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">clicked</code><em class="property"> = &lt;PySide2.QtCore.Signal object&gt;</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.ClickableLineEdit.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.ClickableLineEdit.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.ClickableLineEdit.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.ClickableLineEdit.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.HLine">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">HLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.HLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>seporator line for widgets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">line for seperating UI elements visually</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Qframe</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI">
+<em class="property">class </em><code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">RBFManagerUI</code><span class="sig-paren">(</span><em>parent=None</em>, <em>hideMenuBar=False</em>, <em>newSceneCallBack=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>A manager for creating, mirroring, importing/exporting poses created
+for RBF type nodes.</p>
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.absWorld">
+<code class="descname">absWorld</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.absWorld" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> – Type of pose info look up, world vs local</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.addRbfButton">
+<code class="descname">addRbfButton</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.addRbfButton" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QPushButton</em> – button for adding RBFs to setup</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.allSetupsInfo">
+<code class="descname">allSetupsInfo</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.allSetupsInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – setupName:[of all the RBFNodes in scene]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.attrMenu">
+<code class="descname">attrMenu</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.attrMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>TYPE</em> – Description</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.currentRBFSetupNodes">
+<code class="descname">currentRBFSetupNodes</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.currentRBFSetupNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – currently selected setup nodes(userSelect)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.driverPoseTableWidget">
+<code class="descname">driverPoseTableWidget</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.driverPoseTableWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QTableWidget</em> – poseInfo for the driver node</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.genericWidgetHight">
+<code class="descname">genericWidgetHight</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.genericWidgetHight" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> – convenience to adjust height of all buttons</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.mousePosition">
+<code class="descname">mousePosition</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.mousePosition" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QPose</em> – if tracking mouse position on UI</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.rbfTabWidget">
+<code class="descname">rbfTabWidget</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.rbfTabWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QTabWidget</em> – where the driven table node info is</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.displayed">
+<code class="descname">displayed</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.displayed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.addNewTab">
+<code class="descname">addNewTab</code><span class="sig-paren">(</span><em>rbfNode</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.addNewTab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new tab in the setup</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rbfNode</strong> (<a class="reference internal" href="weightNode_io.html#mgear.rigbits.weightNode_io.RBFNode" title="mgear.rigbits.weightNode_io.RBFNode"><em>RBFNode</em></a>) – to pull information from</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">created widget</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">QWidget</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.addPose">
+<code class="descname">addPose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.addPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add pose to rbf nodes in setup. Additional index on all nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">TYPE</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.addRBFToSetup">
+<code class="descname">addRBFToSetup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.addRBFToSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>query the user in case of a new setup or adding additional RBFs to
+existing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">TYPE</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.addRemoveButtonWidget">
+<code class="descname">addRemoveButtonWidget</code><span class="sig-paren">(</span><em>label1</em>, <em>label2</em>, <em>horizontal=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.addRemoveButtonWidget" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.attrListMenu">
+<code class="descname">attrListMenu</code><span class="sig-paren">(</span><em>attributeListWidget</em>, <em>driverLineEdit</em>, <em>QPos</em>, <em>nodeToQuery=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.attrListMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>right click menu for queie qlistwidget</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attributeListWidget</strong> (<em>QListWidget</em>) – widget to display menu over</li>
+<li><strong>driverLineEdit</strong> (<em>QLineEdit</em>) – widget to query the attrs from</li>
+<li><strong>QPos</strong> (<em>QtCore.QPos</em>) – due to the signal, used</li>
+<li><strong>nodeToQuery</strong> (<em>None</em><em>, </em><em>optional</em>) – To display attrs from this nodes</li>
+<li><strong>menu placement</strong> (<em>for</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>No Longer Returned:</dt>
+<dd>n/a: n/a</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.callBackFunc">
+<code class="descname">callBackFunc</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.callBackFunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>super safe function for trying to refresh the UI, should anything
+fail.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.clearDrivenTabs">
+<code class="descname">clearDrivenTabs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.clearDrivenTabs" title="Permalink to this definition">¶</a></dt>
+<dd><p>force deletion on tab widgets</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.closeEvent">
+<code class="descname">closeEvent</code><span class="sig-paren">(</span><em>evnt</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.closeEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>on UI close, ensure that all attrControlgrps are destroyed in case
+the user is just reopening the UI. Properly severs ties to the attrs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>evnt</strong> (<em>Qt.QEvent</em>) – Close event called</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.connectSignals">
+<code class="descname">connectSignals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.connectSignals" title="Permalink to this definition">¶</a></dt>
+<dd><p>connect all the signals in the UI
+Exceptions being MenuBar and Table header signals</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createAndTagDrivenWidget">
+<code class="descname">createAndTagDrivenWidget</code><span class="sig-paren">(</span><em>weightInfo</em>, <em>lockWidgets=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createAndTagDrivenWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>create and associate a widget, populated with the information
+provided by the weightInfo</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>weightInfo</strong> (<em>dict</em>) – information to populate the widgets with</li>
+<li><strong>lockWidgets</strong> (<em>bool</em><em>, </em><em>optional</em>) – should they be locked from editing</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">parent widget that houses all the information to display</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">QWidget</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createCentralWidget">
+<code class="descname">createCentralWidget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createCentralWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>main UI assembly</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">main UI to be parented to as the centralWidget</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">QtWidget</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createDrivenAttributeWidget">
+<code class="descname">createDrivenAttributeWidget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createDrivenAttributeWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>the widget that displays the driven information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[of widgets]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createDriverAttributeWidget">
+<code class="descname">createDriverAttributeWidget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createDriverAttributeWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>widget where the user inputs information for the setups</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[of widgets]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createMenuBar">
+<code class="descname">createMenuBar</code><span class="sig-paren">(</span><em>hideMenuBar=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createMenuBar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the UI menubar, with option to hide based on mouse input</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hideMenuBar</strong> (<em>bool</em><em>, </em><em>optional</em>) – should it autoHide</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">for parenting</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">QMenuBar</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createOptionsButtonsWidget">
+<code class="descname">createOptionsButtonsWidget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createOptionsButtonsWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>add, edit, delete buttons for modifying rbf setups.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[QPushButtons]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createSetupSelectorWidget">
+<code class="descname">createSetupSelectorWidget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createSetupSelectorWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>create the top portion of the weidget, select setup + refresh</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">QLayout, QCombobox, QPushButton</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createTabWidget">
+<code class="descname">createTabWidget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createTabWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tab widget to add driven widgets too. Custom TabBar so the tab is
+easier to select</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">QTabWidget</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.createTableWidget">
+<code class="descname">createTableWidget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.createTableWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>create table widget used to display poses, set tooltips and colum</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">QTableWidget</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">QTableWidget</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.deletePose">
+<code class="descname">deletePose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.deletePose" title="Permalink to this definition">¶</a></dt>
+<dd><p>delete a pose from the UI and all the RBFNodes in the setup.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">n/a</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.deleteSetup">
+<code class="descname">deleteSetup</code><span class="sig-paren">(</span><em>setupName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.deleteSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete all the nodes within a setup.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>setupName</strong> (<em>None</em><em>, </em><em>optional</em>) – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.displayRBFSetupInfo">
+<code class="descname">displayRBFSetupInfo</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.displayRBFSetupInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the rbfnodes within the desired setups</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – signal information</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.editPose">
+<code class="descname">editPose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.editPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>edit an existing pose. Specify the index</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">TYPE</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.exportNodes">
+<code class="descname">exportNodes</code><span class="sig-paren">(</span><em>allSetups=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.exportNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>export all nodes or nodes from current setup</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>allSetups</strong> (<em>bool</em><em>, </em><em>optional</em>) – If all or setup</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nada</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.gatherMirroredInfo">
+<code class="descname">gatherMirroredInfo</code><span class="sig-paren">(</span><em>rbfNodes</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.gatherMirroredInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>gather all the info from the provided nodes and string replace
+side information for its mirror. Using mGear standard
+naming convections</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rbfNodes</strong> (<em>list</em>) – [of RBFNodes]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">with all the info mirrored</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.getDrivenNodesFromSetup">
+<code class="descname">getDrivenNodesFromSetup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.getDrivenNodesFromSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>based on the user selected setup, get the associated RBF nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">driven rbfnodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.getMirroredSetupTargetsInfo">
+<code class="descname">getMirroredSetupTargetsInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.getMirroredSetupTargetsInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>convenience function to get all the mirrored info for the new side</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">mirrored dict information</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.getRBFNodesInfo">
+<code class="descname">getRBFNodesInfo</code><span class="sig-paren">(</span><em>rbfNodes</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.getRBFNodesInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a dictionary of all the RBFInfo(referred to as
+weightNodeInfo a lot) for export</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rbfNodes</strong> (<em>list</em>) – [of RBFNodes]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of all the rbfNodes provided</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.getSelectedSetup">
+<code class="descname">getSelectedSetup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.getSelectedSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the string name of the selected setup from user and type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name, nodeType</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str, str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.getUserSetupInfo">
+<code class="descname">getUserSetupInfo</code><span class="sig-paren">(</span><em>drivenNode</em>, <em>drivenAttrs</em>, <em>setupField=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.getUserSetupInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>prompt the user for information needed to create setup or add
+rbf node to existing setup</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>drivenAttrs</strong> (<em>list</em>) – of attrs to display to user to select from</li>
+<li><strong>setupField</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the user be asked to input</li>
+<li><strong>name for setup</strong> (<em>a</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of selected attrs, name specified</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.hideMenuBar">
+<code class="descname">hideMenuBar</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.hideMenuBar" title="Permalink to this definition">¶</a></dt>
+<dd><p>rules to hide/show the menubar when hide is enabled</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>int</em>) – coord X of the mouse</li>
+<li><strong>y</strong> (<em>int</em>) – coord Y of the mouse</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.highlightListEntries">
+<code class="descname">highlightListEntries</code><span class="sig-paren">(</span><em>listWidget</em>, <em>toHighlight</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.highlightListEntries" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the items in a listWidget to be highlighted if they are in list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>listWidget</strong> (<em>QListWidget</em>) – list to highlight items on</li>
+<li><strong>toHighlight</strong> (<em>list</em>) – of things to highlight</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.importNodes">
+<code class="descname">importNodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.importNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>import a setup(s) from file select by user</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">nada</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.labelListWidget">
+<code class="descname">labelListWidget</code><span class="sig-paren">(</span><em>label</em>, <em>horizontal=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.labelListWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>create the listAttribute that users can select their driver/driven
+attributes for the setup</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>label</strong> (<em>str</em>) – to display above the listWidget</li>
+<li><strong>horizontal</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the label be above or infront</li>
+<li><strong>the listWidget</strong> (<em>of</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">QLayout, QListWidget</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.lockDriverWidgets">
+<code class="descname">lockDriverWidgets</code><span class="sig-paren">(</span><em>lock=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.lockDriverWidgets" title="Permalink to this definition">¶</a></dt>
+<dd><p>toggle the ability to edit widgets after they have been set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lock</strong> (<em>bool</em><em>, </em><em>optional</em>) – should it be locked</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.mirrorSetup">
+<code class="descname">mirrorSetup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.mirrorSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>gather all info on current setup, mirror the info, use the creation
+func from that rbf module type to create the nodes in the setup with
+mirrored information.</p>
+<p>THE ONLY nodes created will be the ones created during normal
+“add pose” creation. Assumption is that all nodes that need drive,
+driven by the setup exist.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">nada</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.mouseMoveEvent">
+<code class="descname">mouseMoveEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.mouseMoveEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>used for tracking the mouse position over the UI, in this case for
+menu hiding/show</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<em>Qt.QEvent</em>) – events to filter</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">mousePosition</code><em class="property"> = &lt;PySide2.QtCore.Signal object&gt;</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.newSceneCallBack">
+<code class="descname">newSceneCallBack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.newSceneCallBack" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a new scene callback to refresh the UI when scene changes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.populateDrivenWidgetInfo">
+<code class="descname">populateDrivenWidgetInfo</code><span class="sig-paren">(</span><em>drivenWidget</em>, <em>weightInfo</em>, <em>rbfNode</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.populateDrivenWidgetInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the information from the weightInfo to the widgets child of
+drivenWidget</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>drivenWidget</strong> (<em>QWidget</em>) – parent widget</li>
+<li><strong>weightInfo</strong> (<em>dict</em>) – of information to display</li>
+<li><strong>rbfNode</strong> (<a class="reference internal" href="weightNode_io.html#mgear.rigbits.weightNode_io.RBFNode" title="mgear.rigbits.weightNode_io.RBFNode"><em>RBFNode</em></a>) – instance of the RBFNode</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">n/a</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">n/a</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.populateDriverInfo">
+<code class="descname">populateDriverInfo</code><span class="sig-paren">(</span><em>rbfNode</em>, <em>weightInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.populateDriverInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>populate the driver widget, driver, control, driving attrs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rbfNode</strong> (<a class="reference internal" href="weightNode_io.html#mgear.rigbits.weightNode_io.RBFNode" title="mgear.rigbits.weightNode_io.RBFNode"><em>RBFNode</em></a>) – node for query</li>
+<li><strong>weightInfo</strong> (<em>dict</em>) – to pull information from, since we have it</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.recallDriverPose">
+<code class="descname">recallDriverPose</code><span class="sig-paren">(</span><em>indexSelected</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.recallDriverPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>recall a pose recorded from one of the RBFNodes in currentSelection
+it should not matter when RBFNode in setup is selected as they
+should all be in sync</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>indexSelected</strong> (<em>int</em>) – index of the pose to recall</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nada</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.recreateDrivenTabs">
+<code class="descname">recreateDrivenTabs</code><span class="sig-paren">(</span><em>rbfNodes</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.recreateDrivenTabs" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove tabs and create ones for each node in rbfNodes provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rbfNodes</strong> (<em>list</em>) – [of RBFNodes]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.reevalluateAllNodes">
+<code class="descname">reevalluateAllNodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.reevalluateAllNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>for evaluation on all nodes in any setup. In case of manual editing</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><em>rbfSelection=True</em>, <em>driverSelection=True</em>, <em>drivenSelection=True</em>, <em>currentRBFSetupNodes=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the UI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rbfSelection</strong> (<em>bool</em><em>, </em><em>optional</em>) – desired section to refresh</li>
+<li><strong>driverSelection</strong> (<em>bool</em><em>, </em><em>optional</em>) – desired section to refresh</li>
+<li><strong>drivenSelection</strong> (<em>bool</em><em>, </em><em>optional</em>) – desired section to refresh</li>
+<li><strong>currentRBFSetupNodes</strong> (<em>bool</em><em>, </em><em>optional</em>) – desired section to refresh</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.refreshAllTables">
+<code class="descname">refreshAllTables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.refreshAllTables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function to refresh all the tables on all the tabs
+with latest information.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.refreshRbfSetupList">
+<code class="descname">refreshRbfSetupList</code><span class="sig-paren">(</span><em>setToSelection=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.refreshRbfSetupList" title="Permalink to this definition">¶</a></dt>
+<dd><p>refresh the list of setups the user may select from</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>setToSelection</strong> (<em>bool</em><em>, </em><em>optional</em>) – after refresh, set to desired</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.removeRBFFromSetup">
+<code class="descname">removeRBFFromSetup</code><span class="sig-paren">(</span><em>drivenWidgetIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.removeRBFFromSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove RBF tab from setup. Delete driven group, attrs and clean up</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>drivenWidgetIndex</strong> (<em>QWidget</em>) – parent widget that houses the contents</li>
+<li><strong>info of the rbf node</strong> (<em>and</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">n/a</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">n/a</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.removeSceneCallback">
+<code class="descname">removeSceneCallback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.removeSceneCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove the callback associated witht he UI, quietly fail.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.selectNodeWidget">
+<code class="descname">selectNodeWidget</code><span class="sig-paren">(</span><em>label</em>, <em>buttonLabel=’Select’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.selectNodeWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a lout with label, lineEdit, QPushbutton for user input</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.setAttributeDisplay">
+<code class="descname">setAttributeDisplay</code><span class="sig-paren">(</span><em>attrListWidget</em>, <em>driverName</em>, <em>displayAttrs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.setAttributeDisplay" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.setConsistentHeaderSelection">
+<code class="descname">setConsistentHeaderSelection</code><span class="sig-paren">(</span><em>headerIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.setConsistentHeaderSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>when a pose is selected in one table, ensure the selection in all
+other tables, to avoid visual confusion</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>headerIndex</strong> (<em>int</em>) – desired header to highlight</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.setDrivenTable">
+<code class="descname">setDrivenTable</code><span class="sig-paren">(</span><em>drivenWidget</em>, <em>rbfNode</em>, <em>weightInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.setDrivenTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the widgets with information from the weightInfo for dispaly</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>drivenWidget</strong> (<em>QWidget</em>) – parent widget, the tab to populate</li>
+<li><strong>rbfNode</strong> (<a class="reference internal" href="weightNode_io.html#mgear.rigbits.weightNode_io.RBFNode" title="mgear.rigbits.weightNode_io.RBFNode"><em>RBFNode</em></a>) – node associated with widget</li>
+<li><strong>weightInfo</strong> (<em>dict</em>) – of information to display</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.setDriverControlOnSetup">
+<code class="descname">setDriverControlOnSetup</code><span class="sig-paren">(</span><em>controlName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.setDriverControlOnSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>make sure to set the driverControlAttr when the user supplies one</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>controlName</strong> (<em>str</em>) – name of the control to set in an attr</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.setDriverTable">
+<code class="descname">setDriverTable</code><span class="sig-paren">(</span><em>rbfNode</em>, <em>weightInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.setDriverTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the driverTable widget with the information from the weightInfo</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rbfNode</strong> (<a class="reference internal" href="weightNode_io.html#mgear.rigbits.weightNode_io.RBFNode" title="mgear.rigbits.weightNode_io.RBFNode"><em>RBFNode</em></a>) – node to query additional info from</li>
+<li><strong>weightInfo</strong> (<em>dict</em>) – to pull information from</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">n/a</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">n/a</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.setEditDeletePoseEnabled">
+<code class="descname">setEditDeletePoseEnabled</code><span class="sig-paren">(</span><em>enable=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.setEditDeletePoseEnabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>toggle buttons that can or cannot be selected</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>enable</strong> (<em>bool</em><em>, </em><em>optional</em>) – to disable vs not</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.setNodeToField">
+<code class="descname">setNodeToField</code><span class="sig-paren">(</span><em>lineEdit</em>, <em>multi=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.setNodeToField" title="Permalink to this definition">¶</a></dt>
+<dd><p>take the currently selected node and set its name to the lineedit
+provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lineEdit</strong> (<em>QLineEdit</em>) – widget to set the name to</li>
+<li><strong>multi</strong> (<em>bool</em><em>, </em><em>optional</em>) – should multiple nodes be supported</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">str set to the lineedit</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.setSetupDriverControl">
+<code class="descname">setSetupDriverControl</code><span class="sig-paren">(</span><em>lineEditWidget</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.setSetupDriverControl" title="Permalink to this definition">¶</a></dt>
+<dd><p>should the user wish to set a different driverControl pose setup
+creation, prompt them prior to proceeding</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lineEditWidget</strong> (<em>QLineEdit</em>) – to query for the name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nada</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.syncDriverTableCells">
+<code class="descname">syncDriverTableCells</code><span class="sig-paren">(</span><em>attrEdit</em>, <em>rbfAttrPlug</em>, <em>poseIndex</em>, <em>valueIndex</em>, <em>attributeName</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.syncDriverTableCells" title="Permalink to this definition">¶</a></dt>
+<dd><p>When you edit the driver table, it will update all the sibling
+rbf nodes in the setup.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attrEdit</strong> (<em>QLineEdit</em>) – cell that was edited in the driver table</li>
+<li><strong>rbfAttrPlug</strong> (<em>str</em>) – node.attr the cell represents</li>
+<li><strong>*args</strong> – signal throws additional args</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.tabConextMenu">
+<code class="descname">tabConextMenu</code><span class="sig-paren">(</span><em>qPoint</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.tabConextMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a pop up menu over the tabs when right clicked</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>qPoint</strong> (<em>int</em>) – the mouse position when menu requested</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">diddly</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.toggleGetPoseType">
+<code class="descname">toggleGetPoseType</code><span class="sig-paren">(</span><em>toggleState</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.toggleGetPoseType" title="Permalink to this definition">¶</a></dt>
+<dd><p>records whether the user wants poses recorded in worldSpace or check
+local space</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>toggleState</strong> (<em>bool</em>) – default True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.updateAllSetupsInfo">
+<code class="descname">updateAllSetupsInfo</code><span class="sig-paren">(</span><em>includeEmpty=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.updateAllSetupsInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>refresh the instance dictionary of all the setps in the scene.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>includeEmpty</strong> (<em>bool</em><em>, </em><em>optional</em>) – there could be rbf nodes with no</li>
+<li><strong>names.</strong> (<em>setup</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.updateAttributeDisplay">
+<code class="descname">updateAttributeDisplay</code><span class="sig-paren">(</span><em>attrListWidget</em>, <em>driverNames</em>, <em>highlight=[]</em>, <em>attrType=’all’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.updateAttributeDisplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>update the provided listwidget with the attrs collected from the
+list of nodes provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>attrListWidget</strong> (<em>QListWidget</em>) – widget to update</li>
+<li><strong>driverNames</strong> (<em>list</em>) – of nodes to query for attrs to display</li>
+<li><strong>highlight</strong> (<em>list</em><em>, </em><em>optional</em>) – of item entries to highlight</li>
+<li><strong>keyable</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the displayed attrs be keyable</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">n/a</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">n/a</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput">
+<em class="property">class </em><code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">RBFSetupInput</code><span class="sig-paren">(</span><em>listValues</em>, <em>setupField=True</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow the user to select which attrs will drive the rbf nodes in a setup</p>
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.drivenListWidget">
+<code class="descname">drivenListWidget</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.drivenListWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QListWidget</em> – widget to display attrs to drive setup</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.okButton">
+<code class="descname">okButton</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.okButton" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QPushButton</em> – BUTTON</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.result">
+<code class="descname">result</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.result" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – of selected attrs from listWidget</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.setupField">
+<code class="descname">setupField</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.setupField" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>bool</em> – Should the setup lineEdit widget be displayed</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.setupLineEdit">
+<code class="descname">setupLineEdit</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.setupLineEdit" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QLineEdit</em> – name selected by user</p>
+</dd></dl>
+
+<p>setup the UI widgets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>listValues</strong> (<em>list</em>) – attrs to be displayed on the list</li>
+<li><strong>setupField</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the setup line edit be shown</li>
+<li><strong>parent</strong> (<em>QWidget</em><em>, </em><em>optional</em>) – widget to parent this to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.exec_">
+<code class="descname">exec_</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.exec_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[str, [of selected attrs]]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.getValue">
+<code class="descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.getValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>convenience to get result</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">TYPE</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.onOK">
+<code class="descname">onOK</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.onOK" title="Permalink to this definition">¶</a></dt>
+<dd><p>collect information from the displayed widgets, userinput, return</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of user input provided from user</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFSetupInput.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFSetupInput.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.rigbits.rbf_manager_ui.TabBar">
+<em class="property">class </em><code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">TabBar</code><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.TabBar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclass to get a taller tab widget, for readability</p>
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_manager_ui.TabBar.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.TabBar.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.TabBar.tabSizeHint">
+<code class="descname">tabSizeHint</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.TabBar.tabSizeHint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.VLine">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">VLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.VLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>seporator line for widgets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">line for seperating UI elements visually</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Qframe</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.genericWarning">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">genericWarning</code><span class="sig-paren">(</span><em>parent</em>, <em>warningText</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.genericWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>generic prompt warning with the provided text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>QWidget</em>) – Qwidget to be parented under</li>
+<li><strong>warningText</strong> (<em>str</em>) – information to display to the user</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">of what the user chose. For warnings</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">QtCore.Response</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.getControlAttrWidget">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">getControlAttrWidget</code><span class="sig-paren">(</span><em>nodeAttr</em>, <em>label=”</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.getControlAttrWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a cmds.attrControlGrp wrapped in a qtWidget, still connected
+to the specified attr</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nodeAttr</strong> (<em>str</em>) – node.attr, the target for the attrControlGrp</li>
+<li><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – name for the attr widget</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">qwidget created from attrControlGrp</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">QtWidget</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.getEnvironModules">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">getEnvironModules</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.getEnvironModules" title="Permalink to this definition">¶</a></dt>
+<dd><p>if there are any environment variables set that load additional
+modules for the UI, query and return dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">displayName:funcObject</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.getPlugAttrs">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">getPlugAttrs</code><span class="sig-paren">(</span><em>nodes</em>, <em>attrType=’all’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.getPlugAttrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of attributes to display to the user</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nodes</strong> (<em>str</em>) – name of node to attr query</li>
+<li><strong>keyable</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the list only be kayable attrs</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of attrplugs</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.promptAcceptance">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">promptAcceptance</code><span class="sig-paren">(</span><em>parent</em>, <em>descriptionA</em>, <em>descriptionB</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.promptAcceptance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Warn user, asking for permission</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>QWidget</em>) – to be parented under</li>
+<li><strong>descriptionA</strong> (<em>str</em>) – info</li>
+<li><strong>descriptionB</strong> (<em>str</em>) – further info</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">accept, deline, reject</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">QtCore.Response</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.selectNode">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">selectNode</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.selectNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function, to ensure no errors when selecting nodes in UI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – name of node to be selected</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.show">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">show</code><span class="sig-paren">(</span><em>dockable=True</em>, <em>newSceneCallBack=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>To launch the ui and not get the same instance</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">instance</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">DistributeUI</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.sortRBF">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">sortRBF</code><span class="sig-paren">(</span><em>name</em>, <em>rbfType=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.sortRBF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get node wrapped in RBFNode class based on the type of node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – name of the RBFNode in scene</li>
+<li><strong>rbfType</strong> (<em>str</em><em>, </em><em>optional</em>) – type of RBF to get instance from</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">instance of RBFNode</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="weightNode_io.html#mgear.rigbits.weightNode_io.RBFNode" title="mgear.rigbits.weightNode_io.RBFNode">RBFNode</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_manager_ui.testFunctions">
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">testFunctions</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.testFunctions" title="Permalink to this definition">¶</a></dt>
+<dd><p>test function for connecting signals during debug</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

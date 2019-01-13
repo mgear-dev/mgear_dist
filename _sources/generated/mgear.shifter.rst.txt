@@ -1,0 +1,32 @@
+mgear\.shifter
+==============
+
+.. automodule:: mgear.shifter
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      getComponentDirectories
+      importComponent
+      importComponentGuide
+      log_window
+      reloadComponents
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Rig
+   
+   
+
+   
+   
+   

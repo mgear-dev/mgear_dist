@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Rigbits &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
+  <title>Rigbits &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
   
 
   
@@ -35,10 +35,10 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
         <link rel="up" title="Framework" href="framework.html"/>
-        <link rel="next" title="mgear.maya.rigbits" href="generated/mgear.maya.rigbits.html"/>
-        <link rel="prev" title="mgear.maya.synoptic.widgets" href="generated/mgear.maya.synoptic.widgets.html"/> 
+        <link rel="next" title="mgear.rigbits" href="generated/mgear.rigbits.html"/>
+        <link rel="prev" title="mgear.core.widgets" href="generated/mgear.core.widgets.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.5
+                3.0
               </div>
             
           
@@ -94,35 +94,44 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="baseModules.html">Base Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shifterModules.html">Shifter Rig Builder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="synopticModules.html">Synoptic</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Rigbits</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.html">mgear.maya.rigbits</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.blendShapes.html">mgear.maya.rigbits.blendShapes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.channelWrangler.html">mgear.maya.rigbits.channelWrangler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.cycleTweaks.html">mgear.maya.rigbits.cycleTweaks</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.eye_rigger.html">mgear.maya.rigbits.eye_rigger</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.ghost.html">mgear.maya.rigbits.ghost</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.lips_rigger.html">mgear.maya.rigbits.lips_rigger</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.postSpring.html">mgear.maya.rigbits.postSpring</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.proxySlicer.html">mgear.maya.rigbits.proxySlicer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.rivet.html">mgear.maya.rigbits.rivet</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.rope.html">mgear.maya.rigbits.rope</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.tweaks.html">mgear.maya.rigbits.tweaks</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.rigbits.utils.html">mgear.maya.rigbits.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.html">mgear.rigbits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.blendShapes.html">mgear.rigbits.blendShapes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.channelWrangler.html">mgear.rigbits.channelWrangler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.cycleTweaks.html">mgear.rigbits.cycleTweaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.eye_rigger.html">mgear.rigbits.eye_rigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.ghost.html">mgear.rigbits.ghost</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.lips_rigger.html">mgear.rigbits.lips_rigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.menu.html">mgear.rigbits.menu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.postSpring.html">mgear.rigbits.postSpring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.proxySlicer.html">mgear.rigbits.proxySlicer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.rbf_io.html">mgear.rigbits.rbf_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.rbf_manager_ui.html">mgear.rigbits.rbf_manager_ui</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.rbf_node.html">mgear.rigbits.rbf_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.rivet.html">mgear.rigbits.rivet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.rope.html">mgear.rigbits.rope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.sdk_io.html">mgear.rigbits.sdk_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.tweaks.html">mgear.rigbits.tweaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.utils.html">mgear.rigbits.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.weightNode_io.html">mgear.rigbits.weightNode_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.rigbits.widgets.html">mgear.rigbits.widgets</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synopticModules.html">Synoptic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modulesList.html">Modules flat List</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
@@ -213,44 +222,65 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/rigbits/rigbits.html#module-mgear.maya.rigbits" title="mgear.maya.rigbits"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/rigbits.html#module-mgear.rigbits" title="mgear.rigbits"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="mgear/maya/rigbits/blendshapes.html#module-mgear.maya.rigbits.blendShapes" title="mgear.maya.rigbits.blendShapes"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.blendShapes</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/blendshapes.html#module-mgear.rigbits.blendShapes" title="mgear.rigbits.blendShapes"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.blendShapes</span></code></a></td>
 <td>Rigbits blendshapes utilities and tools</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/rigbits/channelWrangler.html#module-mgear.maya.rigbits.channelWrangler" title="mgear.maya.rigbits.channelWrangler"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.channelWrangler</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/channelWrangler.html#module-mgear.rigbits.channelWrangler" title="mgear.rigbits.channelWrangler"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.channelWrangler</span></code></a></td>
 <td>Channel wrangler tool, to manage user channel</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="mgear/maya/rigbits/cycleTweaks.html#module-mgear.maya.rigbits.cycleTweaks" title="mgear.maya.rigbits.cycleTweaks"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.cycleTweaks</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/cycleTweaks.html#module-mgear.rigbits.cycleTweaks" title="mgear.rigbits.cycleTweaks"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.cycleTweaks</span></code></a></td>
 <td>Cycle Tweaks module</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/rigbits/eye_rigger.html#module-mgear.maya.rigbits.eye_rigger" title="mgear.maya.rigbits.eye_rigger"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.eye_rigger</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/eye_rigger.html#module-mgear.rigbits.eye_rigger" title="mgear.rigbits.eye_rigger"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.eye_rigger</span></code></a></td>
 <td>Rigbits eye rigger tool</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="mgear/maya/rigbits/ghost.html#module-mgear.maya.rigbits.ghost" title="mgear.maya.rigbits.ghost"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.ghost</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/ghost.html#module-mgear.rigbits.ghost" title="mgear.rigbits.ghost"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.ghost</span></code></a></td>
 <td>Rigbits Ghost module</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/rigbits/lips_rigger.html#module-mgear.maya.rigbits.lips_rigger" title="mgear.maya.rigbits.lips_rigger"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.lips_rigger</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/lips_rigger.html#module-mgear.rigbits.lips_rigger" title="mgear.rigbits.lips_rigger"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.lips_rigger</span></code></a></td>
 <td>Rigbits lips rigger tool</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="mgear/maya/rigbits/postSpring.html#module-mgear.maya.rigbits.postSpring" title="mgear.maya.rigbits.postSpring"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.postSpring</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/mgear.rigbits.menu.html#module-mgear.rigbits.menu" title="mgear.rigbits.menu"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.menu</span></code></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/postSpring.html#module-mgear.rigbits.postSpring" title="mgear.rigbits.postSpring"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.postSpring</span></code></a></td>
 <td>Post Spring tool</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/rigbits/proxySlicer.html#module-mgear.maya.rigbits.proxySlicer" title="mgear.maya.rigbits.proxySlicer"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.proxySlicer</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/proxySlicer.html#module-mgear.rigbits.proxySlicer" title="mgear.rigbits.proxySlicer"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.proxySlicer</span></code></a></td>
 <td>Rigbits proxy mesh slicer</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="mgear/maya/rigbits/rivet.html#module-mgear.maya.rigbits.rivet" title="mgear.maya.rigbits.rivet"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.rivet</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/rbf_io.html#module-mgear.rigbits.rbf_io" title="mgear.rigbits.rbf_io"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.rbf_io</span></code></a></td>
+<td>Handles the import and exporting of all supported RBF node types</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/rbf_manager_ui.html#module-mgear.rigbits.rbf_manager_ui" title="mgear.rigbits.rbf_manager_ui"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.rbf_manager_ui</span></code></a></td>
+<td>A tool to manage a number of rbf type nodes under a user defined setup(name)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/rbf_node.html#module-mgear.rigbits.rbf_node" title="mgear.rigbits.rbf_node"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.rbf_node</span></code></a></td>
+<td>rbf node to normalize the calls across any number of supported</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/rivet.html#module-mgear.rigbits.rivet" title="mgear.rigbits.rivet"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.rivet</span></code></a></td>
 <td>Rigbits rivet creator</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/rigbits/rope.html#module-mgear.maya.rigbits.rope" title="mgear.maya.rigbits.rope"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.rope</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/rope.html#module-mgear.rigbits.rope" title="mgear.rigbits.rope"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.rope</span></code></a></td>
 <td>Rigbits Rope rig creator</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="mgear/maya/rigbits/tweaks.html#module-mgear.maya.rigbits.tweaks" title="mgear.maya.rigbits.tweaks"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.tweaks</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/sdk_io.html#module-mgear.rigbits.sdk_io" title="mgear.rigbits.sdk_io"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.sdk_io</span></code></a></td>
+<td>Rigbits, SDK i/o</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/tweaks.html#module-mgear.rigbits.tweaks" title="mgear.rigbits.tweaks"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.tweaks</span></code></a></td>
 <td>Rigbits tweaks rig module</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/rigbits/utils.html#module-mgear.maya.rigbits.utils" title="mgear.maya.rigbits.utils"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.rigbits.utils</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/utils.html#module-mgear.rigbits.utils" title="mgear.rigbits.utils"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.utils</span></code></a></td>
 <td>Rigbits utilitie tools</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/rigbits/weightNode_io.html#module-mgear.rigbits.weightNode_io" title="mgear.rigbits.weightNode_io"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.weightNode_io</span></code></a></td>
+<td>import weightNode_io</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="mgear/rigbits/widgets.html#module-mgear.rigbits.widgets" title="mgear.rigbits.widgets"><code class="xref py py-obj docutils literal"><span class="pre">mgear.rigbits.widgets</span></code></a></td>
+<td>Rigbits  widgets</td>
 </tr>
 </tbody>
 </table>
@@ -267,10 +297,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="generated/mgear.maya.rigbits.html" class="btn btn-neutral float-right" title="mgear.maya.rigbits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="generated/mgear.rigbits.html" class="btn btn-neutral float-right" title="mgear.rigbits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="generated/mgear.maya.synoptic.widgets.html" class="btn btn-neutral" title="mgear.maya.synoptic.widgets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="generated/mgear.core.widgets.html" class="btn btn-neutral" title="mgear.core.widgets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -279,7 +309,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
 
     </p>
   </div>
@@ -301,7 +331,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.5.24',
+            VERSION:'3.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

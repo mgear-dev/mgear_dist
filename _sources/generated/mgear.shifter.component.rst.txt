@@ -1,0 +1,23 @@
+mgear\.shifter\.component
+=========================
+
+.. automodule:: mgear.shifter.component
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Main
+      MainComponent
+   
+   
+
+   
+   
+   

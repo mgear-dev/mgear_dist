@@ -1,0 +1,30 @@
+mgear\.rigbits\.channelWrangler
+===============================
+
+.. automodule:: mgear.rigbits.channelWrangler
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      applyChannelConfig
+      openChannelWrangler
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      channelWrangler
+      cwUI
+   
+   
+
+   
+   
+   

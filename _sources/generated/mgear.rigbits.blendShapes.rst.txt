@@ -1,0 +1,23 @@
+mgear\.rigbits\.blendShapes
+===========================
+
+.. automodule:: mgear.rigbits.blendShapes
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      connectWithBlendshape
+      getBlendShape
+   
+   
+
+   
+   
+   
+
+   
+   
+   

@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.rigbits.rbf_node &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
+        <link rel="up" title="Rigbits" href="../rigbitsModules.html"/>
+        <link rel="next" title="mgear.rigbits.rivet" href="mgear.rigbits.rivet.html"/>
+        <link rel="prev" title="mgear.rigbits.rbf_manager_ui" href="mgear.rigbits.rbf_manager_ui.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../rigbitsModules.html#introduction">Introduction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../rigbitsModules.html#modules">Modules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.html">mgear.rigbits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.blendShapes.html">mgear.rigbits.blendShapes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.channelWrangler.html">mgear.rigbits.channelWrangler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.cycleTweaks.html">mgear.rigbits.cycleTweaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.eye_rigger.html">mgear.rigbits.eye_rigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.ghost.html">mgear.rigbits.ghost</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.lips_rigger.html">mgear.rigbits.lips_rigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.menu.html">mgear.rigbits.menu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.postSpring.html">mgear.rigbits.postSpring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.proxySlicer.html">mgear.rigbits.proxySlicer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rbf_io.html">mgear.rigbits.rbf_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rbf_manager_ui.html">mgear.rigbits.rbf_manager_ui</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">mgear.rigbits.rbf_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rivet.html">mgear.rigbits.rivet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rope.html">mgear.rigbits.rope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.sdk_io.html">mgear.rigbits.sdk_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.tweaks.html">mgear.rigbits.tweaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.utils.html">mgear.rigbits.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.weightNode_io.html">mgear.rigbits.weightNode_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.widgets.html">mgear.rigbits.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../rigbitsModules.html">Rigbits</a> &raquo;</li>
+        
+      <li>mgear.rigbits.rbf_node</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated/mgear.rigbits.rbf_node.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.rigbits.rbf_node">
+<span id="mgear-rigbits-rbf-node"></span><h1>mgear.rigbits.rbf_node<a class="headerlink" href="#module-mgear.rigbits.rbf_node" title="Permalink to this headline">¶</a></h1>
+<p>rbf node to normalize the calls across any number of supported
+rbf node types. First supported “weightDriver”/ingo clemens/Brave Rabit</p>
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.CTL_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">CTL_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_node.CTL_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of the control suffixe</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.DRIVEN_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">DRIVEN_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_node.DRIVEN_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – suffix to be applied to driven group</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.DRIVER_CTL_ATTR_NAME">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">DRIVER_CTL_ATTR_NAME</code><a class="headerlink" href="#mgear.rigbits.rbf_node.DRIVER_CTL_ATTR_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of the attribute to store driver control</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.DRIVER_POSEINPUT_ATTR">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">DRIVER_POSEINPUT_ATTR</code><a class="headerlink" href="#mgear.rigbits.rbf_node.DRIVER_POSEINPUT_ATTR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of attr to store control driver(holder)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.DRIVER_POSES_INFO_ATTR">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">DRIVER_POSES_INFO_ATTR</code><a class="headerlink" href="#mgear.rigbits.rbf_node.DRIVER_POSES_INFO_ATTR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of attr to store control</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.GENERIC_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">GENERIC_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_node.GENERIC_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – generic suffix if one not provided by support module</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.RBF_SCALE_ATTR">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">RBF_SCALE_ATTR</code><a class="headerlink" href="#mgear.rigbits.rbf_node.RBF_SCALE_ATTR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of attr applied to driven control</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.RBF_SETUP_ATTR">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">RBF_SETUP_ATTR</code><a class="headerlink" href="#mgear.rigbits.rbf_node.RBF_SETUP_ATTR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of attr to store setup name for group of rbf</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.ROTATE_ATTRS">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">ROTATE_ATTRS</code><a class="headerlink" href="#mgear.rigbits.rbf_node.ROTATE_ATTRS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – convenience list of transform attrs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.SCALE_ATTRS">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">SCALE_ATTRS</code><a class="headerlink" href="#mgear.rigbits.rbf_node.SCALE_ATTRS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – convenience list of transform attrs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.SUPPORTED_RBF_NODES">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">SUPPORTED_RBF_NODES</code><a class="headerlink" href="#mgear.rigbits.rbf_node.SUPPORTED_RBF_NODES" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>tuple</em> – currently supported rbf node types</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.TRANSFORM_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">TRANSFORM_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_node.TRANSFORM_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – suffix of transform nodes for rbf nodes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.TRANSLATE_ATTRS">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">TRANSLATE_ATTRS</code><a class="headerlink" href="#mgear.rigbits.rbf_node.TRANSLATE_ATTRS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – convenience list of transform attrs</p>
+</dd></dl>
+
+<p>Notes - refactor as more supported rbf node types are added</p>
+<p>__author__ = “Rafael Villar”
+__email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravrigs&#46;com">rav<span>&#64;</span>ravrigs<span>&#46;</span>com</a>”</p>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.addDrivenGroup" title="mgear.rigbits.rbf_node.addDrivenGroup"><code class="xref py py-obj docutils literal"><span class="pre">addDrivenGroup</span></code></a>(node)</td>
+<td>add driven group, pad, above the provided node for direct connection</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.connectRBFToggleAttr" title="mgear.rigbits.rbf_node.connectRBFToggleAttr"><code class="xref py py-obj docutils literal"><span class="pre">connectRBFToggleAttr</span></code></a>(node,&nbsp;rbfNode,&nbsp;…)</td>
+<td>connect the “envelope” attr with its corresponding rbfNode</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.copyInverseMirrorAttrs" title="mgear.rigbits.rbf_node.copyInverseMirrorAttrs"><code class="xref py py-obj docutils literal"><span class="pre">copyInverseMirrorAttrs</span></code></a>(srcNode,&nbsp;dstNode)</td>
+<td>within mGear the concept of inverseAttrs, so that transforms can be</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.createDriverControlAttr" title="mgear.rigbits.rbf_node.createDriverControlAttr"><code class="xref py py-obj docutils literal"><span class="pre">createDriverControlAttr</span></code></a>(node)</td>
+<td>create the string attr where information will be stored for query</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.createDriverControlPoseAttr" title="mgear.rigbits.rbf_node.createDriverControlPoseAttr"><code class="xref py py-obj docutils literal"><span class="pre">createDriverControlPoseAttr</span></code></a>(node)</td>
+<td>ensure the driverControlPoseAttr exists on the (RBF)node provided</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.createRBFToggleAttr" title="mgear.rigbits.rbf_node.createRBFToggleAttr"><code class="xref py py-obj docutils literal"><span class="pre">createRBFToggleAttr</span></code></a>(node)</td>
+<td>creates a node to toggle the rbf pose that drives the node</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.decompMatrix" title="mgear.rigbits.rbf_node.decompMatrix"><code class="xref py py-obj docutils literal"><span class="pre">decompMatrix</span></code></a>(node,&nbsp;matrix)</td>
+<td>Decomposes a MMatrix in new api.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.deleteRBFToggleAttr" title="mgear.rigbits.rbf_node.deleteRBFToggleAttr"><code class="xref py py-obj docutils literal"><span class="pre">deleteRBFToggleAttr</span></code></a>(node)</td>
+<td>remove the toggle attribute from the node</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getConnectedRBFToggleNode" title="mgear.rigbits.rbf_node.getConnectedRBFToggleNode"><code class="xref py py-obj docutils literal"><span class="pre">getConnectedRBFToggleNode</span></code></a>(node,&nbsp;toggleAttr)</td>
+<td>get the node connected to the rbf(node)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getDrivenMatrix" title="mgear.rigbits.rbf_node.getDrivenMatrix"><code class="xref py py-obj docutils literal"><span class="pre">getDrivenMatrix</span></code></a>(node[,&nbsp;absoluteWorld])</td>
+<td>check if there is a control node for the provided node(driven)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getDriverControlAttr" title="mgear.rigbits.rbf_node.getDriverControlAttr"><code class="xref py py-obj docutils literal"><span class="pre">getDriverControlAttr</span></code></a>(node)</td>
+<td>get the stored information from control attr</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getDriverControlPoseAttr" title="mgear.rigbits.rbf_node.getDriverControlPoseAttr"><code class="xref py py-obj docutils literal"><span class="pre">getDriverControlPoseAttr</span></code></a>(node)</td>
+<td>record the dict, stored as a str, holding driver control</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getMultipleAttrs" title="mgear.rigbits.rbf_node.getMultipleAttrs"><code class="xref py py-obj docutils literal"><span class="pre">getMultipleAttrs</span></code></a>(node,&nbsp;attributes)</td>
+<td>get multiple attrs and their values in a list, in order</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getRbfSceneSetupsInfo" title="mgear.rigbits.rbf_node.getRbfSceneSetupsInfo"><code class="xref py py-obj docutils literal"><span class="pre">getRbfSceneSetupsInfo</span></code></a>([includeEmpty])</td>
+<td>gather scene rbf nodes with setups in dict</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getSceneRBFNodes" title="mgear.rigbits.rbf_node.getSceneRBFNodes"><code class="xref py py-obj docutils literal"><span class="pre">getSceneRBFNodes</span></code></a>()</td>
+<td>get all rbf nodes in the scene of supported type</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getSceneSetupNodes" title="mgear.rigbits.rbf_node.getSceneSetupNodes"><code class="xref py py-obj docutils literal"><span class="pre">getSceneSetupNodes</span></code></a>()</td>
+<td>get rbf nodes with setups attributes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.getSetupName" title="mgear.rigbits.rbf_node.getSetupName"><code class="xref py py-obj docutils literal"><span class="pre">getSetupName</span></code></a>(node)</td>
+<td>get setup name from specified rbf node</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.recallDriverControlPose" title="mgear.rigbits.rbf_node.recallDriverControlPose"><code class="xref py py-obj docutils literal"><span class="pre">recallDriverControlPose</span></code></a>(driverControl,&nbsp;…)</td>
+<td>set the driverControl to the index requested. Set as many attrs as is</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.removeDrivenGroup" title="mgear.rigbits.rbf_node.removeDrivenGroup"><code class="xref py py-obj docutils literal"><span class="pre">removeDrivenGroup</span></code></a>(node)</td>
+<td>remove driven group above desired node</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.resetDrivenNodes" title="mgear.rigbits.rbf_node.resetDrivenNodes"><code class="xref py py-obj docutils literal"><span class="pre">resetDrivenNodes</span></code></a>(node)</td>
+<td>use mgear convenience function to reset all available transform nodes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.setDriverControlAttr" title="mgear.rigbits.rbf_node.setDriverControlAttr"><code class="xref py py-obj docutils literal"><span class="pre">setDriverControlAttr</span></code></a>(node,&nbsp;controlName)</td>
+<td>create and set attr with the driver animControl string</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.setDriverControlPoseAttr" title="mgear.rigbits.rbf_node.setDriverControlPoseAttr"><code class="xref py py-obj docutils literal"><span class="pre">setDriverControlPoseAttr</span></code></a>(node,&nbsp;poseInfo)</td>
+<td>set the driverControlPoseAttr with the poseInfo provided, as string</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.setSetupName" title="mgear.rigbits.rbf_node.setSetupName"><code class="xref py py-obj docutils literal"><span class="pre">setSetupName</span></code></a>(node,&nbsp;setupName)</td>
+<td>set setup name on the specified node</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.setToggleRBFAttr" title="mgear.rigbits.rbf_node.setToggleRBFAttr"><code class="xref py py-obj docutils literal"><span class="pre">setToggleRBFAttr</span></code></a>(node,&nbsp;value,&nbsp;toggleAttr)</td>
+<td>Toggle rbfattr on or off (any value provided)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.updateDriverControlPoseAttr" title="mgear.rigbits.rbf_node.updateDriverControlPoseAttr"><code class="xref py py-obj docutils literal"><span class="pre">updateDriverControlPoseAttr</span></code></a>(node,&nbsp;…)</td>
+<td>get the ControlPoseDict add any additionally recorded values to and set</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/rbf_node.html#mgear.rigbits.rbf_node.RBFNode" title="mgear.rigbits.rbf_node.RBFNode"><code class="xref py py-obj docutils literal"><span class="pre">RBFNode</span></code></a>(name)</td>
+<td>A class to normalize the function between different types of rbf nodes that essentially perform the same task.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mgear.rigbits.rivet.html" class="btn btn-neutral float-right" title="mgear.rigbits.rivet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mgear.rigbits.rbf_manager_ui.html" class="btn btn-neutral" title="mgear.rigbits.rbf_manager_ui" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

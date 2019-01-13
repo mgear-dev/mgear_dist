@@ -1,0 +1,623 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.shifter &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.shifter.guide" href="guide.html"/>
+        <link rel="prev" title="mgear.core.widgets" href="../core/widgets.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/core.html">mgear.core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/attribute.html">mgear.core.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/curve.html">mgear.core.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/dag.html">mgear.core.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/icon.html">mgear.core.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/log.html">mgear.core.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/node.html">mgear.core.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/skin.html">mgear.core.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/transform.html">mgear.core.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/utils.html">mgear.core.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/vector.html">mgear.core.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/widgets.html">mgear.core.widgets</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.html">mgear.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html">mgear.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/synoptic.html">mgear.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/utils.html">mgear.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/widgets.html">mgear.synoptic.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../simpleRig/simpleRigTool.html">mgear.simpleRig.simpleRigTool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+        
+      <li>mgear.shifter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/shifter/shifter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.shifter">
+<span id="mgear-shifter"></span><h1>mgear.shifter<a class="headerlink" href="#module-mgear.shifter" title="Permalink to this headline">¶</a></h1>
+<p>Shifters Rig Main class.</p>
+<dl class="class">
+<dt id="mgear.shifter.Rig">
+<em class="property">class </em><code class="descclassname">mgear.shifter.</code><code class="descname">Rig</code><a class="headerlink" href="#mgear.shifter.Rig" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main rig class.</p>
+<dl class="attribute">
+<dt id="mgear.shifter.Rig.guide">
+<code class="descname">guide</code><a class="headerlink" href="#mgear.shifter.Rig.guide" title="Permalink to this definition">¶</a></dt>
+<dd><p>guide.Rig() initialization.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.Rig.groups">
+<code class="descname">groups</code><a class="headerlink" href="#mgear.shifter.Rig.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> – Rig groups (Maya sets)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.Rig.components">
+<code class="descname">components</code><a class="headerlink" href="#mgear.shifter.Rig.components" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dic</em> – Dictionary for the rig components.
+Keys are the component fullname (ie. ‘arm_L0’)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.shifter.Rig.componentsIndex">
+<code class="descname">componentsIndex</code><a class="headerlink" href="#mgear.shifter.Rig.componentsIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – Components index list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.addCtl">
+<code class="descname">addCtl</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>m</em>, <em>color</em>, <em>iconShape</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.addCtl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the control and apply the shape, if this is alrealdy stored
+in the guide controllers grp.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) – The control parent</li>
+<li><strong>name</strong> (<em>str</em>) – The control name.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The transfromation matrix for the control.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color for the control in index
+or RGB.</li>
+<li><strong>iconShape</strong> (<em>str</em>) – The controls default shape.</li>
+<li><strong>kwargs</strong> (<em>variant</em>) – Other arguments for the iconShape type variations</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The Control.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.addToGroup">
+<code class="descname">addToGroup</code><span class="sig-paren">(</span><em>objects, names=[‘hidden’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.addToGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the object in a collection for later group creation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>dagNode</em><em> or </em><em>list of dagNode</em>) – Object to put in the group.</li>
+<li><strong>names</strong> (<em>str</em><em> or </em><em>list of str</em>) – Names of the groups to create.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.addToSubGroup">
+<code class="descname">addToSubGroup</code><span class="sig-paren">(</span><em>subGroups, parentGroups=[‘hidden’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.addToSubGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the object in a collection for later SubGroup creation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>subGroups</strong> (<em>dagNode</em><em> or </em><em>list of dagNode</em>) – Groups (core set) to add
+as a Subgroup.</li>
+<li><strong>namparentGroupses</strong> (<em>str</em><em> or </em><em>list of str</em>) – Names of the parent groups
+to create.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.add_controller_tag">
+<code class="descname">add_controller_tag</code><span class="sig-paren">(</span><em>ctl</em>, <em>tagParent</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.add_controller_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.build">
+<code class="descname">build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the rig.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.buildFromDict">
+<code class="descname">buildFromDict</code><span class="sig-paren">(</span><em>conf_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.buildFromDict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.buildFromSelection">
+<code class="descname">buildFromSelection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.buildFromSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the rig from selected guides.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.customStep">
+<code class="descname">customStep</code><span class="sig-paren">(</span><em>customSteps=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.customStep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.finalize">
+<code class="descname">finalize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finalize the rig.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.findComponent">
+<code class="descname">findComponent</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.findComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the component from a guide Name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) – Name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The component</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../core/transform.html#module-mgear.core.transform" title="mgear.core.transform">transform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.findControlRelative">
+<code class="descname">findControlRelative</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.findControlRelative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the control objects in the rig matching the guide object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) – Name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relative control object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../core/transform.html#module-mgear.core.transform" title="mgear.core.transform">transform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.findRelative">
+<code class="descname">findRelative</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.findRelative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the objects in the rig matching the guide object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) – Name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relative object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../core/transform.html#module-mgear.core.transform" title="mgear.core.transform">transform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.findUIHost">
+<code class="descname">findUIHost</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.findUIHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the UI host of the compoent</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) – Name of the guide object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relative object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../core/transform.html#module-mgear.core.transform" title="mgear.core.transform">transform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.from_dict_custom_step">
+<code class="descname">from_dict_custom_step</code><span class="sig-paren">(</span><em>conf_dict</em>, <em>pre=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.from_dict_custom_step" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.getComponentName">
+<code class="descname">getComponentName</code><span class="sig-paren">(</span><em>guideName</em>, <em>local=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.getComponentName" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return the component name</p>
+<blockquote>
+<div>ie. “arm_C0_root” return “arm_C0”</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) – The guide name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The compnent Name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.getLocalName">
+<code class="descname">getLocalName</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.getLocalName" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return the local name, cutting the Maya fullname
+and taking the latest part.</p>
+<blockquote>
+<div>ie. “parentA|parentB|arm_C0_root” will return “arm_C0_root”</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) – The guide name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The local Name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.getRelativeName">
+<code class="descname">getRelativeName</code><span class="sig-paren">(</span><em>guideName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.getRelativeName" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function return the name of the relative in the guide</p>
+<blockquote>
+<div>ie. “arm_C0_root” return “root”</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>guideName</strong> (<em>str</em>) – The guide name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The relative Name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.initialHierarchy">
+<code class="descname">initialHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.initialHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the initial hierarchy of the rig.</p>
+<p>Create the rig model, the main properties,
+and a couple of base organisation nulls.
+Get the global size of the rig.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.postCustomStep">
+<code class="descname">postCustomStep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.postCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.preCustomStep">
+<code class="descname">preCustomStep</code><span class="sig-paren">(</span><em>selection</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.preCustomStep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.processComponents">
+<code class="descname">processComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.processComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the components of the rig, following the creation steps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.Rig.stepsList">
+<code class="descname">stepsList</code><span class="sig-paren">(</span><em>checker</em>, <em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.Rig.stepsList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.shifter.getComponentDirectories">
+<code class="descclassname">mgear.shifter.</code><code class="descname">getComponentDirectories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.getComponentDirectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the components directory</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.shifter.importComponent">
+<code class="descclassname">mgear.shifter.</code><code class="descname">importComponent</code><span class="sig-paren">(</span><em>comp_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.importComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import the Component</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.shifter.importComponentGuide">
+<code class="descclassname">mgear.shifter.</code><code class="descname">importComponentGuide</code><span class="sig-paren">(</span><em>comp_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.importComponentGuide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import the Component guide</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.shifter.log_window">
+<code class="descclassname">mgear.shifter.</code><code class="descname">log_window</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.log_window" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.shifter.reloadComponents">
+<code class="descclassname">mgear.shifter.</code><code class="descname">reloadComponents</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.reloadComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reload all componets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Dummy</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="guide.html" class="btn btn-neutral float-right" title="mgear.shifter.guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../core/widgets.html" class="btn btn-neutral" title="mgear.core.widgets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

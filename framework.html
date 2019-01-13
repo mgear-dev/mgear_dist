@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Framework &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
+  <title>Framework &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="index.html"/>
-        <link rel="next" title="Base Modules" href="baseModules.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
+        <link rel="next" title="Animbits" href="animbitsModules.html"/>
         <link rel="prev" title="Overview" href="overview.html"/> 
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                2.5
+                3.0
               </div>
             
           
@@ -93,16 +93,18 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Framework</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="baseModules.html">Base Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shifterModules.html">Shifter Rig Builder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="synopticModules.html">Synoptic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synopticModules.html">Synoptic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modulesList.html">Modules flat List</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
@@ -176,34 +178,33 @@
 <h1>Framework<a class="headerlink" href="#framework" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="animbitsModules.html">Animbits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="animbitsModules.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="animbitsModules.html#modules">Modules</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="baseModules.html">Base Modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/mgear.html">mgear</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.string.html">mgear.string</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.html">mgear.maya</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.applyop.html">mgear.maya.applyop</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.attribute.html">mgear.maya.attribute</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.curve.html">mgear.maya.curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.dag.html">mgear.maya.dag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.fcurve.html">mgear.maya.fcurve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.icon.html">mgear.maya.icon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.log.html">mgear.maya.log</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.meshNavigation.html">mgear.maya.meshNavigation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.node.html">mgear.maya.node</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.primitive.html">mgear.maya.primitive</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.skin.html">mgear.maya.skin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.transform.html">mgear.maya.transform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.utils.html">mgear.maya.utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/mgear.maya.vector.html">mgear.maya.vector</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="shifterModules.html">Shifter Rig Builder</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="shifterModules.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shifterModules.html#modules">Modules</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="synopticModules.html">Synoptic</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="synopticModules.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="synopticModules.html#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.html">mgear.core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.attribute.html">mgear.core.attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.curve.html">mgear.core.curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.dag.html">mgear.core.dag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.icon.html">mgear.core.icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.log.html">mgear.core.log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.menu.html">mgear.core.menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.node.html">mgear.core.node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.pyqt.html">mgear.core.pyqt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.skin.html">mgear.core.skin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.string.html">mgear.core.string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.transform.html">mgear.core.transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.utils.html">mgear.core.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.vector.html">mgear.core.vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/mgear.core.widgets.html">mgear.core.widgets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rigbitsModules.html">Rigbits</a><ul>
@@ -211,9 +212,19 @@
 <li class="toctree-l2"><a class="reference internal" href="rigbitsModules.html#modules">Modules</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="animbitsModules.html">Animbits</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="animbitsModules.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="animbitsModules.html#modules">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterModules.html">Shifter Rig Builder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shifterModules.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shifterModules.html#modules">Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="simpleRigModules.html">Simple Rig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="simpleRigModules.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simpleRigModules.html#modules">Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="synopticModules.html">Synoptic</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="synopticModules.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synopticModules.html#modules">Modules</a></li>
 </ul>
 </li>
 </ul>
@@ -232,7 +243,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="baseModules.html" class="btn btn-neutral float-right" title="Base Modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="animbitsModules.html" class="btn btn-neutral float-right" title="Animbits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="overview.html" class="btn btn-neutral" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -244,7 +255,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
 
     </p>
   </div>
@@ -266,7 +277,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.5.24',
+            VERSION:'3.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

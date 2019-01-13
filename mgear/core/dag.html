@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.core.dag &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.core.fcurve" href="fcurve.html"/>
+        <link rel="prev" title="mgear.core.curve" href="curve.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="core.html">mgear.core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attribute.html">mgear.core.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="curve.html">mgear.core.curve</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.core.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icon.html">mgear.core.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">mgear.core.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node.html">mgear.core.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skin.html">mgear.core.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transform.html">mgear.core.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.core.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">mgear.core.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html">mgear.core.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/shifter.html">mgear.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/guide.html">mgear.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/gui.html">mgear.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/synoptic.html">mgear.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/utils.html">mgear.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/widgets.html">mgear.synoptic.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../simpleRig/simpleRigTool.html">mgear.simpleRig.simpleRigTool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+        
+      <li>mgear.core.dag</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/core/dag.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.core.dag">
+<span id="mgear-core-dag"></span><h1>mgear.core.dag<a class="headerlink" href="#module-mgear.core.dag" title="Permalink to this headline">¶</a></h1>
+<p>Nvigate the DAG hierarchy</p>
+<dl class="function">
+<dt id="mgear.core.dag.findChild">
+<code class="descclassname">mgear.core.dag.</code><code class="descname">findChild</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.dag.findChild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first child of input node, with a matching name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The input node to search</li>
+<li><strong>name</strong> (<em>str</em>) – The name to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The first child</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">parent</span> <span class="o">=</span> <span class="n">dag</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+<span class="go">                            mgear.string.convertRLName(</span>
+<span class="go">                                comp_guide.root.name()))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.dag.findChildren">
+<code class="descclassname">mgear.core.dag.</code><code class="descname">findChildren</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.dag.findChildren" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all the children  of input node, with a matching name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The input node to search</li>
+<li><strong>name</strong> (<em>str</em>) – The name to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The children dagNodes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.dag.findChildrenPartial">
+<code class="descclassname">mgear.core.dag.</code><code class="descname">findChildrenPartial</code><span class="sig-paren">(</span><em>node</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.dag.findChildrenPartial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the children of input node, with a partial matching name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The input node to search</li>
+<li><strong>name</strong> (<em>str</em>) – The name to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The children dagNodes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.dag.findComponentChildren">
+<code class="descclassname">mgear.core.dag.</code><code class="descname">findComponentChildren</code><span class="sig-paren">(</span><em>node</em>, <em>name</em>, <em>sideIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.dag.findComponentChildren" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the component children of input component root.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is specific to work with shifter guides naming conventions</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The input node to search</li>
+<li><strong>name</strong> (<em>str</em>) – The name to search</li>
+<li><strong>sideIndex</strong> (<em>str</em>) – the side</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The children dagNodes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">objList</span> <span class="o">=</span>  <span class="n">dag</span><span class="o">.</span><span class="n">findComponentChildren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span>
+<span class="go">                                         oldName,</span>
+<span class="go">                                         oldSideIndex)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.dag.findComponentChildren2">
+<code class="descclassname">mgear.core.dag.</code><code class="descname">findComponentChildren2</code><span class="sig-paren">(</span><em>node</em>, <em>name</em>, <em>sideIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.dag.findComponentChildren2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the component children of input component root.</p>
+<p>This function is using Maya cmds instead of PyMel</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is specific to work with shifter guides naming conventions</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The input node to search</li>
+<li><strong>name</strong> (<em>str</em>) – The name to search</li>
+<li><strong>sideIndex</strong> (<em>str</em>) – the side</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The children dagNodes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">objList</span> <span class="o">=</span>  <span class="n">dag</span><span class="o">.</span><span class="n">findComponentChildren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span>
+<span class="go">                                         oldName,</span>
+<span class="go">                                         oldSideIndex)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.dag.getShapes">
+<code class="descclassname">mgear.core.dag.</code><code class="descname">getShapes</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.dag.getShapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the shape of the dagNode</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The input node to search the shape</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The shapes of the node</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.dag.getTopParent">
+<code class="descclassname">mgear.core.dag.</code><code class="descname">getTopParent</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.dag.getTopParent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first parent of the hierarchy.</p>
+<p>usually the ‘Model’ in Softimage terminology</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The input node to search.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The top parent of the input node</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dagNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fcurve.html" class="btn btn-neutral float-right" title="mgear.core.fcurve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="curve.html" class="btn btn-neutral" title="mgear.core.curve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

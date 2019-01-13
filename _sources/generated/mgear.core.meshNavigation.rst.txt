@@ -1,0 +1,31 @@
+mgear\.core\.meshNavigation
+===========================
+
+.. automodule:: mgear.core.meshNavigation
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      bBoxData
+      bboxCenter
+      edgeRangeInLoopFromMid
+      find_mirror_edge
+      getClosestPolygonFromTransform
+      getClosestVertexFromTransform
+      getConcentricVertexLoop
+      getExtremeVertexFromLoop
+      getVertexRowsFromLoops
+      get_closes_edge_index
+   
+   
+
+   
+   
+   
+
+   
+   
+   

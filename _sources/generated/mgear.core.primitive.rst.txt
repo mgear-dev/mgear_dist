@@ -1,0 +1,30 @@
+mgear\.core\.primitive
+======================
+
+.. automodule:: mgear.core.primitive
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add2DChain
+      add2DChain2
+      addIkHandle
+      addJoint
+      addJointFromPos
+      addLocator
+      addLocatorFromPos
+      addTransform
+      addTransformFromPos
+   
+   
+
+   
+   
+   
+
+   
+   
+   

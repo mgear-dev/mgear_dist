@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Shifter Rig Builder &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
+  <title>Shifter Rig Builder &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
   
 
   
@@ -35,10 +35,10 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
         <link rel="up" title="Framework" href="framework.html"/>
-        <link rel="next" title="mgear.maya.shifter" href="generated/mgear.maya.shifter.html"/>
-        <link rel="prev" title="mgear.maya.vector" href="generated/mgear.maya.vector.html"/> 
+        <link rel="next" title="mgear.shifter" href="generated/mgear.shifter.html"/>
+        <link rel="prev" title="mgear.rigbits.widgets" href="generated/mgear.rigbits.widgets.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                2.5
+                3.0
               </div>
             
           
@@ -94,27 +94,29 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rigbitsModules.html">Rigbits</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Shifter Rig Builder</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.shifter.html">mgear.maya.shifter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.shifter.guide.html">mgear.maya.shifter.guide</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.shifter.gui.html">mgear.maya.shifter.gui</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.shifter.component.html">mgear.maya.shifter.component</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/mgear.maya.shifter.component.guide.html">mgear.maya.shifter.component.guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.shifter.html">mgear.shifter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.shifter.guide.html">mgear.shifter.guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.shifter.gui.html">mgear.shifter.gui</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.shifter.component.html">mgear.shifter.component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/mgear.shifter.component.guide.html">mgear.shifter.component.guide</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="simpleRigModules.html">Simple Rig</a></li>
 <li class="toctree-l2"><a class="reference internal" href="synopticModules.html">Synoptic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rigbitsModules.html">Rigbits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modulesList.html">Modules flat List</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
@@ -207,19 +209,19 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/shifter/shifter.html#module-mgear.maya.shifter" title="mgear.maya.shifter"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.shifter</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/shifter/shifter.html#module-mgear.shifter" title="mgear.shifter"><code class="xref py py-obj docutils literal"><span class="pre">mgear.shifter</span></code></a></td>
 <td>Shifters Rig Main class.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="mgear/maya/shifter/guide.html#module-mgear.maya.shifter.guide" title="mgear.maya.shifter.guide"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.shifter.guide</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="mgear/shifter/guide.html#module-mgear.shifter.guide" title="mgear.shifter.guide"><code class="xref py py-obj docutils literal"><span class="pre">mgear.shifter.guide</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/shifter/gui.html#module-mgear.maya.shifter.gui" title="mgear.maya.shifter.gui"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.shifter.gui</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="mgear/shifter/gui.html#module-mgear.shifter.gui" title="mgear.shifter.gui"><code class="xref py py-obj docutils literal"><span class="pre">mgear.shifter.gui</span></code></a></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="mgear/maya/shifter/component/component.html#module-mgear.maya.shifter.component" title="mgear.maya.shifter.component"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.shifter.component</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="generated/mgear.shifter.component.html#module-mgear.shifter.component" title="mgear.shifter.component"><code class="xref py py-obj docutils literal"><span class="pre">mgear.shifter.component</span></code></a></td>
 <td>Shifter component rig class.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="mgear/maya/shifter/component/guide.html#module-mgear.maya.shifter.component.guide" title="mgear.maya.shifter.component.guide"><code class="xref py py-obj docutils literal"><span class="pre">mgear.maya.shifter.component.guide</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="generated/mgear.shifter.component.guide.html#module-mgear.shifter.component.guide" title="mgear.shifter.component.guide"><code class="xref py py-obj docutils literal"><span class="pre">mgear.shifter.component.guide</span></code></a></td>
 <td>Shifter’s Component guide class.</td>
 </tr>
 </tbody>
@@ -237,10 +239,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="generated/mgear.maya.shifter.html" class="btn btn-neutral float-right" title="mgear.maya.shifter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="generated/mgear.shifter.html" class="btn btn-neutral float-right" title="mgear.shifter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="generated/mgear.maya.vector.html" class="btn btn-neutral" title="mgear.maya.vector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="generated/mgear.rigbits.widgets.html" class="btn btn-neutral" title="mgear.rigbits.widgets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -249,7 +251,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
 
     </p>
   </div>
@@ -271,7 +273,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.5.24',
+            VERSION:'3.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

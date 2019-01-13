@@ -1,0 +1,34 @@
+mgear\.core\.vector
+===================
+
+.. automodule:: mgear.core.vector
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      getDistance
+      getDistance2
+      getPlaneBiNormal
+      getPlaneNormal
+      getTransposedVector
+      linearlyInterpolate
+      rotateAlongAxis
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Blade
+   
+   
+
+   
+   
+   

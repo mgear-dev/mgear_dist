@@ -1,0 +1,35 @@
+mgear\.animbits\.softTweaks
+===========================
+
+.. automodule:: mgear.animbits.softTweaks
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      addToSoftMod
+      createAutoSoftTweak
+      createSoftTweak
+      exportConfiguration
+      importConfigurationFromFile
+      openSoftTweakManager
+      removeSoftMod
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      softTweakManager
+      softTweakManagerUI
+   
+   
+
+   
+   
+   

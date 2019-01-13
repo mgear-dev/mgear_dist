@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.rigbits.sdk_io &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
+        <link rel="up" title="Rigbits" href="../rigbitsModules.html"/>
+        <link rel="next" title="mgear.rigbits.tweaks" href="mgear.rigbits.tweaks.html"/>
+        <link rel="prev" title="mgear.rigbits.rope" href="mgear.rigbits.rope.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../rigbitsModules.html#introduction">Introduction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../rigbitsModules.html#modules">Modules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.html">mgear.rigbits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.blendShapes.html">mgear.rigbits.blendShapes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.channelWrangler.html">mgear.rigbits.channelWrangler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.cycleTweaks.html">mgear.rigbits.cycleTweaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.eye_rigger.html">mgear.rigbits.eye_rigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.ghost.html">mgear.rigbits.ghost</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.lips_rigger.html">mgear.rigbits.lips_rigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.menu.html">mgear.rigbits.menu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.postSpring.html">mgear.rigbits.postSpring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.proxySlicer.html">mgear.rigbits.proxySlicer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rbf_io.html">mgear.rigbits.rbf_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rbf_manager_ui.html">mgear.rigbits.rbf_manager_ui</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rbf_node.html">mgear.rigbits.rbf_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rivet.html">mgear.rigbits.rivet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.rope.html">mgear.rigbits.rope</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">mgear.rigbits.sdk_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.tweaks.html">mgear.rigbits.tweaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.utils.html">mgear.rigbits.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.weightNode_io.html">mgear.rigbits.weightNode_io</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.rigbits.widgets.html">mgear.rigbits.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../rigbitsModules.html">Rigbits</a> &raquo;</li>
+        
+      <li>mgear.rigbits.sdk_io</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated/mgear.rigbits.sdk_io.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.rigbits.sdk_io">
+<span id="mgear-rigbits-sdk-io"></span><h1>mgear.rigbits.sdk_io<a class="headerlink" href="#module-mgear.rigbits.sdk_io" title="Permalink to this headline">¶</a></h1>
+<p>Rigbits, SDK i/o</p>
+<p>exportSDKs([“drivenNodeA”, “drivenNodeB”], “path/to/desired/output.json”)
+importSDKs(path/to/desired/output.json)</p>
+<p># MIRRORING ——-
+# copy from source, say left, to target, right
+copySDKsToNode(“jacketFlap_L1_fk0_sdk”,</p>
+<blockquote>
+<div>“neck_C0_0_jnt”,
+“jacketFlap_R1_fk0_sdk”)</div></blockquote>
+<p># invert/mirror the attributes necessary for the other side,
+# in this case it is the following attributes
+mirrorSDKkeys(“jacketFlap_R1_fk0_sdk”,</p>
+<blockquote>
+<div>attributes=[“rotateZ”],
+invertDriver=True,
+invertDriven=False)</div></blockquote>
+<dl class="docutils">
+<dt>mirrorSDKkeys(“jacketFlap_R1_fk0_sdk”,</dt>
+<dd>attributes=[“translateX”, “translateY”],
+invertDriver=True,
+invertDriven=True)</dd>
+</dl>
+<p># in this other instance, it was the same
+copySDKsToNode(“jacketFlap_L0_fk0_sdk”,</p>
+<blockquote>
+<div>“neck_C0_0_jnt”,
+“jacketFlap_R0_fk0_sdk”)</div></blockquote>
+<dl class="attribute">
+<dt id="mgear.rigbits.sdk_io.SDK_ANIMCURVES_TYPE">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">SDK_ANIMCURVES_TYPE</code><a class="headerlink" href="#mgear.rigbits.sdk_io.SDK_ANIMCURVES_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – sdk anim curves to support</p>
+</dd></dl>
+
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.copySDKsToNode" title="mgear.rigbits.sdk_io.copySDKsToNode"><code class="xref py py-obj docutils literal"><span class="pre">copySDKsToNode</span></code></a>(sourceDriven,&nbsp;targetDriver,&nbsp;…)</td>
+<td>Duplicates sdk nodes from the source drive, to any designated target</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.createSDKFromDict" title="mgear.rigbits.sdk_io.createSDKFromDict"><code class="xref py py-obj docutils literal"><span class="pre">createSDKFromDict</span></code></a>(sdkInfo_dict)</td>
+<td>Create a sdk node from the provided info dict</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.exportSDKs" title="mgear.rigbits.sdk_io.exportSDKs"><code class="xref py py-obj docutils literal"><span class="pre">exportSDKs</span></code></a>(nodes,&nbsp;filePath)</td>
+<td>exports the sdk information based on the provided nodes to a json file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.getAllSDKInfoFromNode" title="mgear.rigbits.sdk_io.getAllSDKInfoFromNode"><code class="xref py py-obj docutils literal"><span class="pre">getAllSDKInfoFromNode</span></code></a>(node)</td>
+<td>returns a dict for all of the connected sdk/animCurve on</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.getBlendNodes" title="mgear.rigbits.sdk_io.getBlendNodes"><code class="xref py py-obj docutils literal"><span class="pre">getBlendNodes</span></code></a>(attrPlug)</td>
+<td>Check the attrPlug (node.attr) provided for any existing connections</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.getConnectedSDKs" title="mgear.rigbits.sdk_io.getConnectedSDKs"><code class="xref py py-obj docutils literal"><span class="pre">getConnectedSDKs</span></code></a>(driven[,&nbsp;curvesOfType])</td>
+<td>get all the sdk, animcurve, nodes/plugs connected to the provided node.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.getMultiDriverSDKs" title="mgear.rigbits.sdk_io.getMultiDriverSDKs"><code class="xref py py-obj docutils literal"><span class="pre">getMultiDriverSDKs</span></code></a>(driven)</td>
+<td>get the sdk nodes that are added through a blendweighted node</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.getPynodes" title="mgear.rigbits.sdk_io.getPynodes"><code class="xref py py-obj docutils literal"><span class="pre">getPynodes</span></code></a>(nodes)</td>
+<td>Conevenience function to allow uses to pass in strings, but convert to pynodes if not already.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.getSDKDestination" title="mgear.rigbits.sdk_io.getSDKDestination"><code class="xref py py-obj docutils literal"><span class="pre">getSDKDestination</span></code></a>(animNodeOutputPlug)</td>
+<td>Get the final destination of the sdk node, skips blendweighted and conversion node to get the transform node.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.getSDKInfo" title="mgear.rigbits.sdk_io.getSDKInfo"><code class="xref py py-obj docutils literal"><span class="pre">getSDKInfo</span></code></a>(animNode)</td>
+<td>get all the information from an sdk/animCurve in a dictioanry</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.importSDKs" title="mgear.rigbits.sdk_io.importSDKs"><code class="xref py py-obj docutils literal"><span class="pre">importSDKs</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>create sdk nodes from json file, connected to drivers and driven</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.invertKeyValues" title="mgear.rigbits.sdk_io.invertKeyValues"><code class="xref py py-obj docutils literal"><span class="pre">invertKeyValues</span></code></a>(newKeyNode[,&nbsp;invertDriver,&nbsp;…])</td>
+<td>Mirror keyframe node procedure, in case you need to flip your SDK’s.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.mirrorSDKkeys" title="mgear.rigbits.sdk_io.mirrorSDKkeys"><code class="xref py py-obj docutils literal"><span class="pre">mirrorSDKkeys</span></code></a>(node[,&nbsp;attributes,&nbsp;…])</td>
+<td>mirror/invert the values on the specified node and attrs, get the sdks</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.removeSDKs" title="mgear.rigbits.sdk_io.removeSDKs"><code class="xref py py-obj docutils literal"><span class="pre">removeSDKs</span></code></a>(node[,&nbsp;attributes])</td>
+<td>Convenience function to remove, delete, all sdk nodes associated with</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/sdk_io.html#mgear.rigbits.sdk_io.stripKeys" title="mgear.rigbits.sdk_io.stripKeys"><code class="xref py py-obj docutils literal"><span class="pre">stripKeys</span></code></a>(animNode)</td>
+<td>remove animation keys from the provided sdk node</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mgear.rigbits.tweaks.html" class="btn btn-neutral float-right" title="mgear.rigbits.tweaks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mgear.rigbits.rope.html" class="btn btn-neutral" title="mgear.rigbits.rope" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

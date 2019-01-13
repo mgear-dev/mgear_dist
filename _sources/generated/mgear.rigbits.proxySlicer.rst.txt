@@ -1,0 +1,22 @@
+mgear\.rigbits\.proxySlicer
+===========================
+
+.. automodule:: mgear.rigbits.proxySlicer
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      slice
+   
+   
+
+   
+   
+   
+
+   
+   
+   

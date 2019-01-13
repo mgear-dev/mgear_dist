@@ -1,0 +1,25 @@
+mgear\.core\.string
+===================
+
+.. automodule:: mgear.core.string
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      convertRLName
+      normalize
+      removeInvalidCharacter
+      replaceSharpWithPadding
+   
+   
+
+   
+   
+   
+
+   
+   
+   

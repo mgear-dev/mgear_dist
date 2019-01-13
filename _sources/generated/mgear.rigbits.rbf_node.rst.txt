@@ -1,0 +1,52 @@
+mgear\.rigbits\.rbf\_node
+=========================
+
+.. automodule:: mgear.rigbits.rbf_node
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      addDrivenGroup
+      connectRBFToggleAttr
+      copyInverseMirrorAttrs
+      createDriverControlAttr
+      createDriverControlPoseAttr
+      createRBFToggleAttr
+      decompMatrix
+      deleteRBFToggleAttr
+      getConnectedRBFToggleNode
+      getDrivenMatrix
+      getDriverControlAttr
+      getDriverControlPoseAttr
+      getMultipleAttrs
+      getRbfSceneSetupsInfo
+      getSceneRBFNodes
+      getSceneSetupNodes
+      getSetupName
+      recallDriverControlPose
+      removeDrivenGroup
+      resetDrivenNodes
+      setDriverControlAttr
+      setDriverControlPoseAttr
+      setSetupName
+      setToggleRBFAttr
+      updateDriverControlPoseAttr
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      RBFNode
+   
+   
+
+   
+   
+   

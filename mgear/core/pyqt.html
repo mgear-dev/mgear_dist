@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.core.pyqt &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mgear.core.pyqt</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/core/pyqt.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.core.pyqt">
+<span id="mgear-core-pyqt"></span><h1>mgear.core.pyqt<a class="headerlink" href="#module-mgear.core.pyqt" title="Permalink to this headline">¶</a></h1>
+<p>pyQt/pySide widgets and helper functions for mGear</p>
+<dl class="function">
+<dt id="mgear.core.pyqt.deleteInstances">
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">deleteInstances</code><span class="sig-paren">(</span><em>dialog</em>, <em>checkinstance</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.pyqt.deleteInstances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete any instance of a given dialog</p>
+<p>Delete any instance of a given dialog and if the dialog is
+instance of checkinstance.</p>
+<dl class="attribute">
+<dt id="mgear.core.pyqt.dialog">
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">dialog</code><a class="headerlink" href="#mgear.core.pyqt.dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QDialog</em> – The dialog to delete.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.core.pyqt.checkinstance">
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">checkinstance</code><a class="headerlink" href="#mgear.core.pyqt.checkinstance" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>QDialog</em> – The instance to check the type of dialog.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.pyqt.fakeTranslate">
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">fakeTranslate</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.pyqt.fakeTranslate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fake Translation</p>
+<p>fake QApplication.translate. This function helps to bypass the
+incompativility for the Unicode utf8  deprecated in pyside2</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.pyqt.maya_main_window">
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">maya_main_window</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.pyqt.maya_main_window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Maya’s main window</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">main window.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">QMainWindow</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.pyqt.qt_import">
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">qt_import</code><span class="sig-paren">(</span><em>shi=False</em>, <em>cui=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.pyqt.qt_import" title="Permalink to this definition">¶</a></dt>
+<dd><p>import pyside/pyQt</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">QtGui, QtCore, QtWidgets, wrapInstance</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">multi</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.pyqt.showDialog">
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">showDialog</code><span class="sig-paren">(</span><em>dialog</em>, <em>dInst=True</em>, <em>dockable=False</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.pyqt.showDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the defined dialog window</p>
+<dl class="attribute">
+<dt>
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">dialog</code></dt>
+<dd><p><em>QDialog</em> – The window to show.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.pyqt.ui2py">
+<code class="descclassname">mgear.core.pyqt.</code><code class="descname">ui2py</code><span class="sig-paren">(</span><em>filePath=None</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.pyqt.ui2py" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert qtDesigner .ui files to .py</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

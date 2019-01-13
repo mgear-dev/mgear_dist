@@ -1,0 +1,22 @@
+mgear\.core\.fcurve
+===================
+
+.. automodule:: mgear.core.fcurve
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      getFCurveValues
+   
+   
+
+   
+   
+   
+
+   
+   
+   

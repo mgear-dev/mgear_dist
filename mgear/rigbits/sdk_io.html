@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.rigbits.sdk_io &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mgear.rigbits.sdk_io</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/rigbits/sdk_io.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.rigbits.sdk_io">
+<span id="mgear-rigbits-sdk-io"></span><h1>mgear.rigbits.sdk_io<a class="headerlink" href="#module-mgear.rigbits.sdk_io" title="Permalink to this headline">¶</a></h1>
+<p>Rigbits, SDK i/o</p>
+<p>exportSDKs([“drivenNodeA”, “drivenNodeB”], “path/to/desired/output.json”)
+importSDKs(path/to/desired/output.json)</p>
+<p># MIRRORING ——-
+# copy from source, say left, to target, right
+copySDKsToNode(“jacketFlap_L1_fk0_sdk”,</p>
+<blockquote>
+<div>“neck_C0_0_jnt”,
+“jacketFlap_R1_fk0_sdk”)</div></blockquote>
+<p># invert/mirror the attributes necessary for the other side,
+# in this case it is the following attributes
+mirrorSDKkeys(“jacketFlap_R1_fk0_sdk”,</p>
+<blockquote>
+<div>attributes=[“rotateZ”],
+invertDriver=True,
+invertDriven=False)</div></blockquote>
+<dl class="docutils">
+<dt>mirrorSDKkeys(“jacketFlap_R1_fk0_sdk”,</dt>
+<dd>attributes=[“translateX”, “translateY”],
+invertDriver=True,
+invertDriven=True)</dd>
+</dl>
+<p># in this other instance, it was the same
+copySDKsToNode(“jacketFlap_L0_fk0_sdk”,</p>
+<blockquote>
+<div>“neck_C0_0_jnt”,
+“jacketFlap_R0_fk0_sdk”)</div></blockquote>
+<dl class="attribute">
+<dt id="mgear.rigbits.sdk_io.SDK_ANIMCURVES_TYPE">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">SDK_ANIMCURVES_TYPE</code><a class="headerlink" href="#mgear.rigbits.sdk_io.SDK_ANIMCURVES_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – sdk anim curves to support</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.copySDKsToNode">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">copySDKsToNode</code><span class="sig-paren">(</span><em>sourceDriven</em>, <em>targetDriver</em>, <em>targetDriven</em>, <em>sourceAttributes=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.copySDKsToNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates sdk nodes from the source drive, to any designated target
+driver/driven</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sourceDriven</strong> (<em>pynode</em>) – source to copy from</li>
+<li><strong>targetDriver</strong> (<em>pynode</em>) – to drive the new sdk node</li>
+<li><strong>targetDriven</strong> (<em>pynode</em>) – node to be driven</li>
+<li><strong>sourceAttributes</strong> (<em>list</em><em>, </em><em>optional</em>) – of attrs to copy, if none provided</li>
+<li><strong>all</strong> (<em>assume</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">n/a</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">TYPE</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.createSDKFromDict">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">createSDKFromDict</code><span class="sig-paren">(</span><em>sdkInfo_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.createSDKFromDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a sdk node from the provided info dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sdkInfo_dict</strong> (<em>dict</em>) – dict of node information to create</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">created sdk node</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PyNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.exportSDKs">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">exportSDKs</code><span class="sig-paren">(</span><em>nodes</em>, <em>filePath</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.exportSDKs" title="Permalink to this definition">¶</a></dt>
+<dd><p>exports the sdk information based on the provided nodes to a json file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nodes</strong> (<em>list</em>) – of nodes to export</li>
+<li><strong>filePath</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – full filepath to export jsons to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.getAllSDKInfoFromNode">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getAllSDKInfoFromNode</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getAllSDKInfoFromNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a dict for all of the connected sdk/animCurve on
+the provided node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>pynode</em>) – name of node to the be searched</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of all of the sdk nodes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.getBlendNodes">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getBlendNodes</code><span class="sig-paren">(</span><em>attrPlug</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getBlendNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the attrPlug (node.attr) provided for any existing connections
+if blendWeighted exists, return the appropriate input[#], if sdk, create
+a blendweighted and connect sdk, return input[#]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attrPlug</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – node.attr</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">node.attr of the blendweighted node that was just created or
+existing</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string">string</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.getConnectedSDKs">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getConnectedSDKs</code><span class="sig-paren">(</span><em>driven</em>, <em>curvesOfType=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getConnectedSDKs" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all the sdk, animcurve, nodes/plugs connected to the provided node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>str</em><em>, </em><em>pynode</em>) – name of node, or pynode</li>
+<li><strong>curvesOfType</strong> (<em>list</em><em>, </em><em>optional</em>) – animCurve nodes of type if none provided</li>
+<li><strong>fall back on module defined supported set.</strong> (<em>will</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">of sdk nodes, paired with the node/attr they effect</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.getMultiDriverSDKs">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getMultiDriverSDKs</code><span class="sig-paren">(</span><em>driven</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getMultiDriverSDKs" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the sdk nodes that are added through a blendweighted node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>driven</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – name of the driven node</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of sdk nodes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.getPynodes">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getPynodes</code><span class="sig-paren">(</span><em>nodes</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getPynodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conevenience function to allow uses to pass in strings, but convert to
+pynodes if not already.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nodes</strong> (<em>list</em>) – string names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of pynodes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.getSDKDestination">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getSDKDestination</code><span class="sig-paren">(</span><em>animNodeOutputPlug</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getSDKDestination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the final destination of the sdk node, skips blendweighted
+and conversion node to get the transform node.
+TODO: Open this up to provided type destination</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>animNodeOutputPlug</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – animationNode.output</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">name of the node, and attr</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.getSDKInfo">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getSDKInfo</code><span class="sig-paren">(</span><em>animNode</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getSDKInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all the information from an sdk/animCurve in a dictioanry
+for exporting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>animNode</strong> (<em>pynode</em>) – name of node, pynode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dictionary of all the attrs to be exported</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.importSDKs">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">importSDKs</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.importSDKs" title="Permalink to this definition">¶</a></dt>
+<dd><p>create sdk nodes from json file, connected to drivers and driven</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filePath</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – path to json file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.invertKeyValues">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">invertKeyValues</code><span class="sig-paren">(</span><em>newKeyNode</em>, <em>invertDriver=True</em>, <em>invertDriven=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.invertKeyValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror keyframe node procedure, in case you need to flip your SDK’s.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>newKeyNode</strong> (<em>PyNode</em>) – sdk node to invert values on</li>
+<li><strong>invertDriver</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the drivers values be inverted</li>
+<li><strong>invertDriven</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the drivens values be inverted</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.mirrorSDKkeys">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">mirrorSDKkeys</code><span class="sig-paren">(</span><em>node</em>, <em>attributes=[]</em>, <em>invertDriver=True</em>, <em>invertDriven=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.mirrorSDKkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>mirror/invert the values on the specified node and attrs, get the sdks
+and invert those values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>pynode</em>) – node being driven to have its sdk values inverted</li>
+<li><strong>attributes</strong> (<em>list</em><em>, </em><em>optional</em>) – attrs to be inverted</li>
+<li><strong>invertDriver</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the driver, “time” values</li>
+<li><strong>inverted</strong> (<em>be</em>) – </li>
+<li><strong>invertDriven</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the driven, “value” values</li>
+<li><strong>inverted</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.removeSDKs">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">removeSDKs</code><span class="sig-paren">(</span><em>node</em>, <em>attributes=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.removeSDKs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function to remove, delete, all sdk nodes associated with
+the provided node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>pynode</em>) – name of the node</li>
+<li><strong>attributes</strong> (<em>list</em><em>, </em><em>optional</em>) – list of attributes to remove sdks from</li>
+<li><strong>none provided</strong><strong>, </strong><strong>assume all</strong> (<em>if</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.sdk_io.stripKeys">
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">stripKeys</code><span class="sig-paren">(</span><em>animNode</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.stripKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove animation keys from the provided sdk node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>animNode</strong> (<em>pynode</em>) – sdk/anim node</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

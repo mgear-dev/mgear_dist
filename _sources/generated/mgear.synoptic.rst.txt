@@ -1,0 +1,30 @@
+mgear\.synoptic
+===============
+
+.. automodule:: mgear.synoptic
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      importTab
+      open
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Synoptic
+      SynopticTabWrapper
+   
+   
+
+   
+   
+   

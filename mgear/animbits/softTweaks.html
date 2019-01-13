@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.animbits.softTweaks &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mgear.animbits.softTweaks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/animbits/softTweaks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.animbits.softTweaks">
+<span id="mgear-animbits-softtweaks"></span><h1>mgear.animbits.softTweaks<a class="headerlink" href="#module-mgear.animbits.softTweaks" title="Permalink to this headline">¶</a></h1>
+<p>SoftTweak is a dynamic position tweak using softmod deformer
+The credit of the idea goes to Vasil Shotarov, thanks!
+<a class="reference external" href="http://bindpose.com/help-animators-fix-intersections-softmod-deformer/">http://bindpose.com/help-animators-fix-intersections-softmod-deformer/</a></p>
+<dl class="function">
+<dt id="mgear.animbits.softTweaks.addToSoftMod">
+<code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">addToSoftMod</code><span class="sig-paren">(</span><em>softMods</em>, <em>targets=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.addToSoftMod" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.animbits.softTweaks.createAutoSoftTweak">
+<code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">createAutoSoftTweak</code><span class="sig-paren">(</span><em>size=1.0</em>, <em>nameExt=’softMod’</em>, <em>is_asset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.createAutoSoftTweak" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.animbits.softTweaks.createSoftTweak">
+<code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">createSoftTweak</code><span class="sig-paren">(</span><em>name</em>, <em>targets=[]</em>, <em>parent=None</em>, <em>t=None</em>, <em>grp=None</em>, <em>size=0.5</em>, <em>nameExt=’softMod’</em>, <em>is_asset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.createSoftTweak" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.animbits.softTweaks.exportConfiguration">
+<code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">exportConfiguration</code><span class="sig-paren">(</span><em>softMods</em>, <em>filePath=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.exportConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.animbits.softTweaks.importConfigurationFromFile">
+<code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">importConfigurationFromFile</code><span class="sig-paren">(</span><em>filePath=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.importConfigurationFromFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.animbits.softTweaks.openSoftTweakManager">
+<code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">openSoftTweakManager</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.openSoftTweakManager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.animbits.softTweaks.removeSoftMod">
+<code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">removeSoftMod</code><span class="sig-paren">(</span><em>softMods</em>, <em>targets=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.removeSoftMod" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="mgear.animbits.softTweaks.softTweakManager">
+<em class="property">class </em><code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">softTweakManager</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.addObj">
+<code class="descname">addObj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.addObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.autoTweak">
+<code class="descname">autoTweak</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.autoTweak" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.create_connections">
+<code class="descname">create_connections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.create_connections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.create_layout">
+<code class="descname">create_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.create_layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.deleteTweak">
+<code class="descname">deleteTweak</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.deleteTweak" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.exportAll">
+<code class="descname">exportAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.exportAll" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.exportSelection">
+<code class="descname">exportSelection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.exportSelection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.filterChanged">
+<code class="descname">filterChanged</code><span class="sig-paren">(</span><em>filter</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.filterChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.importConfiguration">
+<code class="descname">importConfiguration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.importConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.keyPressEvent">
+<code class="descname">keyPressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.keyPressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.nameExt_text_changed">
+<code class="descname">nameExt_text_changed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.nameExt_text_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.name_text_changed">
+<code class="descname">name_text_changed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.name_text_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.newTweak">
+<code class="descname">newTweak</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.newTweak" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.refreshList">
+<code class="descname">refreshList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.refreshList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.removeObj">
+<code class="descname">removeObj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.removeObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.selectBaseCtl">
+<code class="descname">selectBaseCtl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.selectBaseCtl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.selectCtl">
+<code class="descname">selectCtl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.selectCtl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.selectectAffected">
+<code class="descname">selectectAffected</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.selectectAffected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.setCtlGrp">
+<code class="descname">setCtlGrp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.setCtlGrp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.setSourceModel">
+<code class="descname">setSourceModel</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.setSourceModel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.setTweakParent">
+<code class="descname">setTweakParent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.setTweakParent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManager.setup_softTweakManagerrWindow">
+<code class="descname">setup_softTweakManagerrWindow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.setup_softTweakManagerrWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.animbits.softTweaks.softTweakManager.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.animbits.softTweaks.softTweakManager.valueChanged">
+<code class="descname">valueChanged</code><em class="property"> = &lt;PySide2.QtCore.Signal object&gt;</em><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManager.valueChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.animbits.softTweaks.softTweakManagerUI">
+<em class="property">class </em><code class="descclassname">mgear.animbits.softTweaks.</code><code class="descname">softTweakManagerUI</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManagerUI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.animbits.softTweaks.softTweakManagerUI.keyPressEvent">
+<code class="descname">keyPressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManagerUI.keyPressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.animbits.softTweaks.softTweakManagerUI.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.animbits.softTweaks.softTweakManagerUI.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

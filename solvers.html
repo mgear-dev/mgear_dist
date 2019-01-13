@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Custom Solvers/Nodes &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
+  <title>Custom Solvers/Deformers &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
   
 
   
@@ -35,9 +35,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="index.html"/>
-        <link rel="next" title="Tools" href="tools.html"/>
-        <link rel="prev" title="mgear.maya.synoptic.widgets" href="mgear/maya/synoptic/widgets.html"/> 
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
+        <link rel="next" title="Animbits User Documentation" href="animbitsUserDocumentation.html"/>
+        <link rel="prev" title="mgear.simpleRig.simpleRigTool" href="mgear/simpleRig/simpleRigTool.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                2.5
+                3.0
               </div>
             
           
@@ -93,8 +93,27 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Custom Solvers/Nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Custom Solvers/Deformers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-add10scalar">mgear_add10Scalar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-curvecns">mgear_curveCns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-ikfk2bone">mgear_ikfk2Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-intmatrix">mgear_intMatrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-inverserotorder">mgear_inverseRotOrder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-linearinterpolate3dvector">mgear_linearInterpolate3Dvector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-mulmatrix">mgear_mulMatrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-percentagetou">mgear_percentageToU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-raycastposition">mgear_rayCastPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-rollsplinekine">mgear_rollSplineKine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-slidecurve">mgear_slideCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-spinepointat">mgear_spinePointAt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-springnode">mgear_springNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-squashstretch-attr">mgear_squashStretch_attr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-trigonometyangle">mgear_trigonometyAngle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mgear-vertexposition">mgear_vertexPosition</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
@@ -145,7 +164,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Custom Solvers/Nodes</li>
+      <li>Custom Solvers/Deformers</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -164,11 +183,236 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="custom-solvers-nodes">
-<h1>Custom Solvers/Nodes<a class="headerlink" href="#custom-solvers-nodes" title="Permalink to this headline">¶</a></h1>
-<p>mGear custom C++ Solvers/Nodes Documentation</p>
-<p>WIP section: Please visit:
-<a class="reference external" href="https://www.youtube.com/c/mgearriggingframework/">mGear Youtube channel</a></p>
+  <div class="section" id="custom-solvers-deformers">
+<h1>Custom Solvers/Deformers<a class="headerlink" href="#custom-solvers-deformers" title="Permalink to this headline">¶</a></h1>
+<p>mGear custom C++ Solvers/Deformers Documentation</p>
+<div class="section" id="mgear-add10scalar">
+<h2>mgear_add10Scalar<a class="headerlink" href="#mgear-add10scalar" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_add10Scalar_node.png"><img alt="_images/mgear_add10Scalar_node.png" class="align-center" src="_images/mgear_add10Scalar_node.png" style="width: 223.25px; height: 437.0px;" /></a>
+<p>Add 10 scalar values. This node is deprecated. Only kept for backwards compatibility reasons.</p>
+<a class="reference internal image-reference" href="_images/mgear_add10Scalar_attr.png"><img alt="_images/mgear_add10Scalar_attr.png" class="align-center" src="_images/mgear_add10Scalar_attr.png" style="width: 414.2px; height: 408.5px;" /></a>
+</div>
+<div class="section" id="mgear-curvecns">
+<h2>mgear_curveCns<a class="headerlink" href="#mgear-curvecns" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_curveCns_node.png"><img alt="_images/mgear_curveCns_node.png" class="align-center" src="_images/mgear_curveCns_node.png" style="width: 738.15px; height: 326.8px;" /></a>
+<p>Generate a curve based on the input positions.
+This is used in the Shifter guides to create the visual connections with the guide locations.</p>
+</div>
+<div class="section" id="mgear-ikfk2bone">
+<h2>mgear_ikfk2Bone<a class="headerlink" href="#mgear-ikfk2bone" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_ikfk2Bone_node.png"><img alt="_images/mgear_ikfk2Bone_node.png" class="align-center" src="_images/mgear_ikfk2Bone_node.png" style="width: 1005.1px; height: 606.1px;" /></a>
+<p>IK FK 2 bones chain solver.</p>
+<p>Mainly used for legs and arms. The solver encapsulate many functions that will be very complex and expensive to evaluate using vanilla Maya nodes and other techniques like expressions.</p>
+<p>Some of the features are, soft IK, reverse IK, squash, stretch, independent bone length, slide and roll.</p>
+<a class="reference internal image-reference" href="_images/mgear_ikfk2Bone_attr.png"><img alt="_images/mgear_ikfk2Bone_attr.png" src="_images/mgear_ikfk2Bone_attr.png" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/mgear_ikfk2Bone_attr2.png"><img alt="_images/mgear_ikfk2Bone_attr2.png" src="_images/mgear_ikfk2Bone_attr2.png" style="width: 45%;" /></a>
+<ul class="simple">
+<li><strong>Blend:</strong> IK fk blend</li>
+<li><strong>Length A:</strong>  Rest length of the bone A (Arm)</li>
+<li><strong>Length B:</strong>  Rest length of the bone B (Forearm)</li>
+<li><strong>Negate:</strong>   Negate the solver direction (i.e: the right side arm negates the direction)</li>
+<li><strong>Scale A:</strong>  Length multiplier for the arm.</li>
+<li><strong>Scale B:</strong>  Length multiplier for the forearm.</li>
+<li><strong>Roll:</strong>     Roll value. This value is complementarity to the Up Vector control.</li>
+<li><strong>Max stretch:</strong>  Maximum stretching value for the IK behavior. Value 1 will represent the original size and not scale.</li>
+<li><strong>Slide:</strong>  Slide the elbow position between the lengths of the arm and forearm. Value of .5 represents the middle point, whatever the proportions ratio is between the arm and forearm.</li>
+<li><strong>Reverse:</strong>  Reverse the IK solver direction. (i.e: human leg vs Chicken leg)</li>
+<li><strong>root:</strong>  Matrix. Root of the component world matrix</li>
+<li><strong>ikref:</strong>  Matrix. IK control world matrix</li>
+<li><strong>upv:</strong>  Matrix. Up vector control world matrix</li>
+<li><strong>FK0:</strong>  Matrix. FK arm control world matrix</li>
+<li><strong>FK1:</strong>  Matrix. FK forearm control world matrix</li>
+<li><strong>FK2:</strong>  Matrix. FK hand control world matrix</li>
+<li><strong>in A parent:</strong>  Matrix. Output bone A parent matrix (arm)</li>
+<li><strong>in B parent:</strong>  Matrix. Output bone A parent matrix (forearm)</li>
+<li><strong>in Center parent:</strong>  Matrix. Output elbow parent matrix</li>
+<li><strong>in Eff parent:</strong>  Matrix. Output effector parent matrix (hand)</li>
+<li><strong>out A:</strong>  Matrix. Output world matrix for bone A (arm)</li>
+<li><strong>out B:</strong>  Matrix. Output world matrix for bone B (forearm)</li>
+<li><strong>out Center:</strong>  Matrix. Output world matrix for elbow</li>
+<li><strong>out Eff:</strong>  Matrix. Output world matrix for effector (hand)</li>
+</ul>
+</div>
+<div class="section" id="mgear-intmatrix">
+<h2>mgear_intMatrix<a class="headerlink" href="#mgear-intmatrix" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_intMatrix_node.png"><img alt="_images/mgear_intMatrix_node.png" class="align-center" src="_images/mgear_intMatrix_node.png" style="width: 1071.6px; height: 446.5px;" /></a>
+<p>Interpolate between 2 input matrix using a blend value. The rotation is calculated in quaternion.</p>
+<a class="reference internal image-reference" href="_images/mgear_intMatrix_attr.png"><img alt="_images/mgear_intMatrix_attr.png" class="align-center" src="_images/mgear_intMatrix_attr.png" style="width: 423.7px; height: 479.75px;" /></a>
+<ul class="simple">
+<li><strong>Blend:</strong>    Blend between the 2 input matrix</li>
+<li><strong>Matrix A:</strong> Input Matrix</li>
+<li><strong>Matrix B:</strong> Input Matrix</li>
+<li><strong>Output:</strong> Output Matrix</li>
+</ul>
+</div>
+<div class="section" id="mgear-inverserotorder">
+<h2>mgear_inverseRotOrder<a class="headerlink" href="#mgear-inverserotorder" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_inverseRotOrder_node.png"><img alt="_images/mgear_inverseRotOrder_node.png" class="align-center" src="_images/mgear_inverseRotOrder_node.png" style="width: 250.8px; height: 274.55px;" /></a>
+<p>Invert the rotation order. For example and input of “XYZ” will output ZYX.
+This is very useful when you need to negate an animated rotation order to avoid gimbal.</p>
+<a class="reference internal image-reference" href="_images/mgear_inverseRotOrder_attr.png"><img alt="_images/mgear_inverseRotOrder_attr.png" class="align-center" src="_images/mgear_inverseRotOrder_attr.png" style="width: 419.9px; height: 350.55px;" /></a>
+<ul class="simple">
+<li><strong>Rot Order:</strong>    Rotation order to invert</li>
+</ul>
+</div>
+<div class="section" id="mgear-linearinterpolate3dvector">
+<h2>mgear_linearInterpolate3Dvector<a class="headerlink" href="#mgear-linearinterpolate3dvector" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_linearInterpolate3Dvector_node.png"><img alt="_images/mgear_linearInterpolate3Dvector_node.png" class="align-center" src="_images/mgear_linearInterpolate3Dvector_node.png" style="width: 393.3px; height: 524.4px;" /></a>
+<p>Interpolate between 2 input vector using a blend value.
+i.e: the XYZ position of 2 transforms.</p>
+<a class="reference internal image-reference" href="_images/mgear_linearInterpolate3Dvector_attr.png"><img alt="_images/mgear_linearInterpolate3Dvector_attr.png" class="align-center" src="_images/mgear_linearInterpolate3Dvector_attr.png" style="width: 429.4px; height: 268.85px;" /></a>
+<ul class="simple">
+<li><strong>Blend:</strong>    Blend between the 2 input matrix</li>
+<li><strong>Vector A:</strong> Input Vector</li>
+<li><strong>Vector B:</strong> Input Vector</li>
+<li><strong>Out Vector:</strong> Output Vector</li>
+</ul>
+</div>
+<div class="section" id="mgear-mulmatrix">
+<h2>mgear_mulMatrix<a class="headerlink" href="#mgear-mulmatrix" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_mulMatrix_node.png"><img alt="_images/mgear_mulMatrix_node.png" class="align-center" src="_images/mgear_mulMatrix_node.png" style="width: 213.75px; height: 190.95px;" /></a>
+<p>Multiply 2 input matrix. The only advantage between this node and the default one, is that with this you can visualize the values in the attribute editor.
+With the default Maya’s multMatrix node the values are not visible, this make very difficult debugging rigs in some situations.
+For the rest are exactly the same and interchangeable. In terms of performance there is not noticeable difference.</p>
+<a class="reference internal image-reference" href="_images/mgear_mulMatrix_attr.png"><img alt="_images/mgear_mulMatrix_attr.png" class="align-center" src="_images/mgear_mulMatrix_attr.png" style="width: 415.15px; height: 493.05px;" /></a>
+<ul class="simple">
+<li><strong>Matrix A:</strong> Input Matrix</li>
+<li><strong>Matrix B:</strong> Input Matrix</li>
+<li><strong>Output:</strong> Output Matrix</li>
+</ul>
+</div>
+<div class="section" id="mgear-percentagetou">
+<h2>mgear_percentageToU<a class="headerlink" href="#mgear-percentagetou" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_percentageToU_node.png"><img alt="_images/mgear_percentageToU_node.png" class="align-center" src="_images/mgear_percentageToU_node.png" style="width: 194.75px; height: 215.65px;" /></a>
+<p>Converts a percentage values to a curve U value.</p>
+<a class="reference internal image-reference" href="_images/mgear_percentageToU_attr.png"><img alt="_images/mgear_percentageToU_attr.png" class="align-center" src="_images/mgear_percentageToU_attr.png" style="width: 417.05px; height: 270.75px;" /></a>
+<ul class="simple">
+<li><strong>Curve:</strong> Input curve.</li>
+<li><strong>Normalized U:</strong> If active will normalize U value between 0 and 1.</li>
+<li><strong>Percentage:</strong> Percentage value.</li>
+<li><strong>Steps:</strong> Interpolation steps.</li>
+</ul>
+</div>
+<div class="section" id="mgear-raycastposition">
+<h2>mgear_rayCastPosition<a class="headerlink" href="#mgear-raycastposition" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_rayCastPosition_node.png"><img alt="_images/mgear_rayCastPosition_node.png" class="align-center" src="_images/mgear_rayCastPosition_node.png" style="width: 179.55px; height: 164.35px;" /></a>
+<p>Raycast the contact position using a vector from 2 position inputs
+The operation is set using Matrix, but usually we will use it only to get the position.</p>
+<a class="reference internal image-reference" href="_images/mgear_rayCastPosition_attr.png"><img alt="_images/mgear_rayCastPosition_attr.png" class="align-center" src="_images/mgear_rayCastPosition_attr.png" style="width: 417.05px; height: 453.15px;" /></a>
+<ul class="simple">
+<li><strong>Mesh Input:</strong> Contact Mesh.</li>
+<li><strong>Ray Source:</strong> Matrix. starting position for the vector</li>
+<li><strong>Ray Direction:</strong> Matrix. Aim position for the vector</li>
+<li><strong>Output:</strong> Output Matrix with the position on the Contact Mesh</li>
+</ul>
+</div>
+<div class="section" id="mgear-rollsplinekine">
+<h2>mgear_rollSplineKine<a class="headerlink" href="#mgear-rollsplinekine" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_rollSplineKine_node.png"><img alt="_images/mgear_rollSplineKine_node.png" class="align-center" src="_images/mgear_rollSplineKine_node.png" style="width: 183.35px; height: 207.1px;" /></a>
+<p>Roll Spline kinematic is a Bezier curve style with roll support.
+This solver is used in several Shifter components. Mainly arms and legs.
+This will be the equivalent of or similar to a ribbon setup, with the advantage of been much more lightweight at evaluation time.
+Every input transform (world matrix plug) represents a point in the Bezier curve. And the scale in X axis of each transform represents the length of the Bezier tangents.
+The main limitation is that the 2 tangents are always of the same length for each point.
+In order to workaround this you can use 2 transforms in the same position. One representing each tangent, so the scale can be control independently.
+Each mgear_rollSplineKine node, outputs only one point in the U value of the curve.</p>
+<a class="reference internal image-reference" href="_images/mgear_rollSplineKine_attr.png"><img alt="_images/mgear_rollSplineKine_attr.png" class="align-center" src="_images/mgear_rollSplineKine_attr.png" style="width: 410.4px; height: 544.35px;" /></a>
+<ul class="simple">
+<li><strong>Ctl Input:</strong> Array of Matrix. Input control points parent matrix.</li>
+<li><strong>inputs:</strong> Array of Matrix. Transform controls world matrix</li>
+<li><strong>inputs Roll:</strong> Array of Rotations. Transform controls rotation.</li>
+<li><strong>Output Parent:</strong> Output transform parent Matrix.</li>
+<li><strong>U:</strong> U percentage position represented from 0 to 1. NOTE: Usually the value should be always between 0.0001 and 0.999. The most extreme values are not taking in consideration the tangency for the output transform.</li>
+<li><strong>Resample:</strong> Resample the output curve.</li>
+<li><strong>Subdiv:</strong> Number of subdivision in the curve. Higher values will create a smoother curve but slower evaluation. Small values will create a more stepped curve, this can cause artifacts when sliding a transform on the U value. NOTE: Also, can have a little discordance between the same component in the left and right side. Due inversion of the direction. Usually the solution is simple as increase the subdivision.</li>
+</ul>
+<a class="reference internal image-reference" href="_images/mgear_rollSplineKine_subdivision.png"><img alt="_images/mgear_rollSplineKine_subdivision.png" class="align-center" src="_images/mgear_rollSplineKine_subdivision.png" style="width: 450.0px; height: 218.0px;" /></a>
+<ul class="simple">
+<li><strong>Absolute:</strong> Change the way that the subdivision are distributed in the curve.</li>
+<li><strong>Output:</strong> Output transform Matrix.</li>
+</ul>
+</div>
+<div class="section" id="mgear-slidecurve">
+<h2>mgear_slideCurve<a class="headerlink" href="#mgear-slidecurve" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_slideCurve_node.png"><img alt="_images/mgear_slideCurve_node.png" class="align-center" src="_images/mgear_slideCurve_node.png" style="width: 209.95px; height: 285.0px;" /></a>
+<p>Deform a curve, sliding it on top of other. i.e: It is used in the Shifter spine component.
+Use this function to apply the deformer: mgear.core.applyop.gear_curveslide2_op</p>
+<a class="reference internal image-reference" href="_images/mgear_slideCurve_attr.png"><img alt="_images/mgear_slideCurve_attr.png" class="align-center" src="_images/mgear_slideCurve_attr.png" style="width: 425.6px; height: 463.6px;" /></a>
+<ul class="simple">
+<li><strong>Master Crv:</strong> Input Curve.</li>
+<li><strong>Master Mat:</strong> Master curve matrix.</li>
+<li><strong>Slave Length:</strong> Slave curve length.</li>
+<li><strong>Master Length:</strong> Master curve length.</li>
+<li><strong>Position:</strong> Slave curve position.</li>
+<li><strong>Max stretch:</strong> Maximum stretch of the slave curve.</li>
+<li><strong>Max squash:</strong> Maximum squash of the slave curve.</li>
+<li><strong>Softness:</strong> Soft clamping for squash and stretch.</li>
+</ul>
+</div>
+<div class="section" id="mgear-spinepointat">
+<h2>mgear_spinePointAt<a class="headerlink" href="#mgear-spinepointat" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_spinePointAt_node.png"><img alt="_images/mgear_spinePointAt_node.png" class="align-center" src="_images/mgear_spinePointAt_node.png" style="width: 175.75px; height: 266.95px;" /></a>
+<p>Point at an axis direction base in 2 input rotations. Note: This solver was design to handle the spine twist, but currently is not used in any component.</p>
+<a class="reference internal image-reference" href="_images/mgear_spinePointAt_attr.png"><img alt="_images/mgear_spinePointAt_attr.png" class="align-center" src="_images/mgear_spinePointAt_attr.png" style="width: 427.5px; height: 315.4px;" /></a>
+<ul class="simple">
+<li><strong>Rot A:</strong> Input rotation A.</li>
+<li><strong>Rot B:</strong> Input rotation B.</li>
+<li><strong>Axe:</strong> Aim axis.</li>
+<li><strong>Blend:</strong> Blend value between the 2 rotations</li>
+</ul>
+</div>
+<div class="section" id="mgear-springnode">
+<h2>mgear_springNode<a class="headerlink" href="#mgear-springnode" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_springNode_node.png"><img alt="_images/mgear_springNode_node.png" class="align-center" src="_images/mgear_springNode_node.png" style="width: 185.25px; height: 304.0px;" /></a>
+<p>Spring dynamic solver based in goal position.</p>
+<a class="reference internal image-reference" href="_images/mgear_springNode_attr.png"><img alt="_images/mgear_springNode_attr.png" class="align-center" src="_images/mgear_springNode_attr.png" style="width: 426.55px; height: 278.35px;" /></a>
+<ul class="simple">
+<li><strong>Goal:</strong> Position goal.</li>
+<li><strong>Time:</strong> Current time input.</li>
+<li><strong>Stiffness:</strong> Stiffness value.</li>
+<li><strong>Damping:</strong> Damping value.</li>
+<li><strong>Intensity:</strong> Intensity value.</li>
+</ul>
+</div>
+<div class="section" id="mgear-squashstretch-attr">
+<h2>mgear_squashStretch_attr<a class="headerlink" href="#mgear-squashstretch-attr" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_squashStretch_node.png"><img alt="_images/mgear_squashStretch_node.png" class="align-center" src="_images/mgear_squashStretch_node.png" style="width: 183.35px; height: 239.4px;" /></a>
+<p>Squash and stretch solver.</p>
+<a class="reference internal image-reference" href="_images/mgear_squashStretch_attr.png"><img alt="_images/mgear_squashStretch_attr.png" class="align-center" src="_images/mgear_squashStretch_attr.png" style="width: 418.0px; height: 372.4px;" /></a>
+<ul class="simple">
+<li><strong>Global Scale:</strong> Global scale reference.</li>
+<li><strong>Blend:</strong> Blend to deal down the squash and stretch effect.</li>
+<li><strong>Driver:</strong> Driver rest value.</li>
+<li><strong>Driver Min:</strong> Driver minimum value where the squash and stretch effect will be calculated.</li>
+<li><strong>Driver ctr:</strong> Driver control value.</li>
+<li><strong>Driver Max:</strong> Driver maximum value where the squash and stretch effect will be calculated.</li>
+<li><strong>Axis:</strong> Axis along the squash and stretch value will be calculated.</li>
+<li><strong>Squash:</strong> Multiplication value for the squash direction.</li>
+<li><strong>Stretch:</strong> Multiplication value for the stretch direction.</li>
+</ul>
+</div>
+<div class="section" id="mgear-trigonometyangle">
+<h2>mgear_trigonometyAngle<a class="headerlink" href="#mgear-trigonometyangle" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_trigonometyAngle_node.png"><img alt="_images/mgear_trigonometyAngle_node.png" class="align-center" src="_images/mgear_trigonometyAngle_node.png" style="width: 172.9px; height: 155.8px;" /></a>
+<p>Sine and cosine trigonometry node</p>
+<a class="reference internal image-reference" href="_images/mgear_trigonometyAngle_attr.png"><img alt="_images/mgear_trigonometyAngle_attr.png" class="align-center" src="_images/mgear_trigonometyAngle_attr.png" style="width: 435.1px; height: 224.2px;" /></a>
+<ul class="simple">
+<li><strong>Operation:</strong> Sine or Cosine.</li>
+<li><strong>Angle:</strong> Input angle.</li>
+</ul>
+</div>
+<div class="section" id="mgear-vertexposition">
+<h2>mgear_vertexPosition<a class="headerlink" href="#mgear-vertexposition" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/mgear_vertexPosition_node.png"><img alt="_images/mgear_vertexPosition_node.png" class="align-center" src="_images/mgear_vertexPosition_node.png" style="width: 323.95px; height: 333.45px;" /></a>
+<p>Get the world position of a given vertex</p>
+<a class="reference internal image-reference" href="_images/mgear_vertexPosition_attr.png"><img alt="_images/mgear_vertexPosition_attr.png" class="align-center" src="_images/mgear_vertexPosition_attr.png" style="width: 428.45px; height: 357.2px;" /></a>
+<ul class="simple">
+<li><strong>Input Shape:</strong> Input mesh shape.</li>
+<li><strong>Vertex:</strong> Vertex index number to track.</li>
+<li><strong>Output:</strong> Output position.</li>
+<li><strong>Driven parent invert Matrix:</strong> Driven parent invert matrix.</li>
+</ul>
+</div>
 </div>
 
 
@@ -181,10 +425,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tools.html" class="btn btn-neutral float-right" title="Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="animbitsUserDocumentation.html" class="btn btn-neutral float-right" title="Animbits User Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mgear/maya/synoptic/widgets.html" class="btn btn-neutral" title="mgear.maya.synoptic.widgets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mgear/simpleRig/simpleRigTool.html" class="btn btn-neutral" title="mgear.simpleRig.simpleRigTool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -193,7 +437,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
 
     </p>
   </div>
@@ -215,7 +459,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.5.24',
+            VERSION:'3.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

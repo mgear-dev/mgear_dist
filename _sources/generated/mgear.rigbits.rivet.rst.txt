@@ -1,0 +1,22 @@
+mgear\.rigbits\.rivet
+=====================
+
+.. automodule:: mgear.rigbits.rivet
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      rivet
+   
+   
+
+   
+   
+   

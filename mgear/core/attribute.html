@@ -1,0 +1,1034 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.core.attribute &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.core.curve" href="curve.html"/>
+        <link rel="prev" title="mgear.core.applyop" href="applyop.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="core.html">mgear.core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.core.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="curve.html">mgear.core.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html">mgear.core.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icon.html">mgear.core.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">mgear.core.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node.html">mgear.core.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skin.html">mgear.core.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transform.html">mgear.core.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.core.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vector.html">mgear.core.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html">mgear.core.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/shifter.html">mgear.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/guide.html">mgear.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/gui.html">mgear.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/synoptic.html">mgear.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/utils.html">mgear.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synoptic/widgets.html">mgear.synoptic.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../simpleRig/simpleRigTool.html">mgear.simpleRig.simpleRigTool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+        
+      <li>mgear.core.attribute</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/core/attribute.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.core.attribute">
+<span id="mgear-core-attribute"></span><h1>mgear.core.attribute<a class="headerlink" href="#module-mgear.core.attribute" title="Permalink to this headline">¶</a></h1>
+<p>Attribute creation functions</p>
+<dl class="class">
+<dt id="mgear.core.attribute.FCurveParamDef">
+<em class="property">class </em><code class="descclassname">mgear.core.attribute.</code><code class="descname">FCurveParamDef</code><span class="sig-paren">(</span><em>scriptName</em>, <em>keys=None</em>, <em>interpolation=0</em>, <em>extrapolation=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.FCurveParamDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an Fcurve parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scriptName</strong> (<em>str</em>) – Attribute fullName.</li>
+<li><strong>keys</strong> (<em>list</em>) – The keyframes to define the function curve.</li>
+<li><strong>interpolation</strong> (<em>int</em>) – the curve interpolation.</li>
+<li><strong>extrapolation</strong> (<em>int</em>) – the curve extrapolation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="mgear.core.attribute.FCurveParamDef.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.FCurveParamDef.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to property using the parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The node to add the attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.core.attribute.FCurveParamDef.get_as_dict">
+<code class="descname">get_as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.FCurveParamDef.get_as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.core.attribute.FCurveParamDef.set_from_dict">
+<code class="descname">set_from_dict</code><span class="sig-paren">(</span><em>param_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.FCurveParamDef.set_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.core.attribute.ParamDef">
+<em class="property">class </em><code class="descclassname">mgear.core.attribute.</code><code class="descname">ParamDef</code><span class="sig-paren">(</span><em>read as Parameter Definition</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.ParamDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encapsulate the attribute creation arguments in a handy object.
+Also include a creation method.</p>
+<p class="rubric">Example</p>
+<p>This can be use later to create attr or export the description to xml
+or json file</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Arguments:</dt>
+<dd>scriptName (str): Attribute fullName
+paranDef (dic): The stored param definition</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="mgear.core.attribute.ParamDef.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.ParamDef.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to property using the parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The node to add the attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.core.attribute.ParamDef.get_as_dict">
+<code class="descname">get_as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.ParamDef.get_as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.core.attribute.ParamDef.set_from_dict">
+<code class="descname">set_from_dict</code><span class="sig-paren">(</span><em>param_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.ParamDef.set_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.core.attribute.ParamDef2">
+<em class="property">class </em><code class="descclassname">mgear.core.attribute.</code><code class="descname">ParamDef2</code><span class="sig-paren">(</span><em>scriptName</em>, <em>valueType</em>, <em>value</em>, <em>niceName=None</em>, <em>shortName=None</em>, <em>minimum=None</em>, <em>maximum=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.ParamDef2" title="Permalink to this definition">¶</a></dt>
+<dd><p>ParamDef2 inherit from ParamDef</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>scriptName</strong> (<em>str</em>) – Parameter scriptname.</li>
+<li><strong>valueType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’,
+‘long’, etc..</li>
+<li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – Default parameter value.</li>
+<li><strong>niceName</strong> (<em>str</em>) – Parameter niceName.</li>
+<li><strong>shortName</strong> (<em>str</em>) – Parameter shortName.</li>
+<li><strong>minimum</strong> (<em>float</em><em> or </em><em>int</em>) – mininum value.</li>
+<li><strong>maximum</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value.</li>
+<li><strong>keyable</strong> (<em>boo</em>) – If true is keyable</li>
+<li><strong>readable</strong> (<em>boo</em>) – If true is readable</li>
+<li><strong>storable</strong> (<em>boo</em>) – If true is storable</li>
+<li><strong>writable</strong> (<em>boo</em>) – If true is writable</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The stored parameter definition.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#mgear.core.attribute.ParamDef" title="mgear.core.attribute.ParamDef">ParamDef</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.addAttribute">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">addAttribute</code><span class="sig-paren">(</span><em>node</em>, <em>longName</em>, <em>attributeType</em>, <em>value=None</em>, <em>niceName=None</em>, <em>shortName=None</em>, <em>minValue=None</em>, <em>maxValue=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em>, <em>channelBox=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.addAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add attribute to a node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>attributeType</strong> (<em>str</em>) – The Attribute Type. Exp: ‘string’, ‘bool’,
+‘long’, etc..</li>
+<li><strong>value</strong> (<em>float</em><em> or </em><em>int</em>) – The default value.</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) – The attribute short name. (optional)</li>
+<li><strong>minValue</strong> (<em>float</em><em> or </em><em>int</em>) – minimum value. (optional)</li>
+<li><strong>maxValue</strong> (<em>float</em><em> or </em><em>int</em>) – maximum value. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
+<li><strong>channelBox</strong> (<em>bool</em>) – Set if the attribute is in the channelBox or not,
+when the attribute is not keyable. (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The long name of the new attribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.addColorAttribute">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">addColorAttribute</code><span class="sig-paren">(</span><em>node</em>, <em>longName</em>, <em>value=False</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em>, <em>niceName=None</em>, <em>shortName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.addColorAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a color attribute to a node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>value</strong> (<em>list of flotat</em>) – The default value in a list for RGB.
+exp [1.0, 0.99, 0.13].</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) – The attribute short name. (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The long name of the new attribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.addEnumAttribute">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">addEnumAttribute</code><span class="sig-paren">(</span><em>node</em>, <em>longName</em>, <em>value</em>, <em>enum</em>, <em>niceName=None</em>, <em>shortName=None</em>, <em>keyable=True</em>, <em>readable=True</em>, <em>storable=True</em>, <em>writable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.addEnumAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an enumerate attribute to a node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The object to add the new attribute.</li>
+<li><strong>longName</strong> (<em>str</em>) – The attribute name.</li>
+<li><strong>value</strong> (<em>int</em>) – The default value.</li>
+<li><strong>enum</strong> (<em>list of str</em>) – The list of elements in the enumerate control</li>
+<li><strong>niceName</strong> (<em>str</em>) – The attribute nice name. (optional)</li>
+<li><strong>shortName</strong> (<em>str</em>) – The attribute short name. (optional)</li>
+<li><strong>keyable</strong> (<em>bool</em>) – Set if the attribute is keyable or not. (optional)</li>
+<li><strong>readable</strong> (<em>bool</em>) – Set if the attribute is readable or not. (optional)</li>
+<li><strong>storable</strong> (<em>bool</em>) – Set if the attribute is storable or not. (optional)</li>
+<li><strong>writable</strong> (<em>bool</em>) – Set if the attribute is writable or not. (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The long name of the new attribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.addFCurve">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">addFCurve</code><span class="sig-paren">(</span><em>node</em>, <em>name=’fcurve’</em>, <em>keys=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.addFCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>FCurve attribute</p>
+<p>Just a animCurveUU node connected to an attribute</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This Method is deprecated.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The object to add the new fcurve attribute</li>
+<li><strong>name</strong> (<em>str</em>) – The attribute name</li>
+<li><strong>key</strong> (<em>list</em>) – list of keyframes and values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Fcurve and attribute name</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.addProxyAttribute">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">addProxyAttribute</code><span class="sig-paren">(</span><em>sourceAttrs</em>, <em>targets</em>, <em>duplicatedPolicy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.addProxyAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add proxy paramenter to a list of target dagNode
+Duplicated channel policy, stablish the rule in case the channel already
+exist on the target.</p>
+<p>Duplicate policy options</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>index</td>
+<td>This policy will add an index to avoid clashing channel
+names</td>
+</tr>
+<tr class="row-even"><td>fullName</td>
+<td>This policy will add the name of the source object to
+the channel</td>
+</tr>
+<tr class="row-odd"><td>merge</td>
+<td>This policy will merge the channels</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceAttrs</strong> (<em>attr</em><em> or </em><em>list of attr</em>) – The parameters to be connected as
+proxy</li>
+<li><strong>targets</strong> (<em>dagNode</em><em> or </em><em>list of dagNode</em>) – The list of dagNode to add the
+proxy paramenter</li>
+<li><strong>duplicatedPolicy</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a><em>, </em><em>optional</em>) – Set the duplicated channel policy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.add_mirror_config_channels">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">add_mirror_config_channels</code><span class="sig-paren">(</span><em>ctl, conf=[0, 0, 0, 0, 0, 0, 0, 0, 0]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.add_mirror_config_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add channels to configure the mirror posing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ctl</strong> (<em>dagNode</em>) – Control Object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.core.attribute.colorParamDef">
+<em class="property">class </em><code class="descclassname">mgear.core.attribute.</code><code class="descname">colorParamDef</code><span class="sig-paren">(</span><em>scriptName</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.colorParamDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Color parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scriptName</strong> (<em>str</em>) – Attribute fullName</li>
+<li><strong>value</strong> (<em>list of float</em>) – The default value in a list for RGB.
+exp [1.0, 0.99, 0.13].</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="mgear.core.attribute.colorParamDef.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.colorParamDef.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to property using the parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The node to add the attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.core.attribute.colorParamDef.get_as_dict">
+<code class="descname">get_as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.colorParamDef.get_as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.core.attribute.colorParamDef.set_from_dict">
+<code class="descname">set_from_dict</code><span class="sig-paren">(</span><em>param_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.colorParamDef.set_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.connectSet">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">connectSet</code><span class="sig-paren">(</span><em>source</em>, <em>target</em>, <em>testInstance</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.connectSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect or set attributes</p>
+<p>Connects or set attributes depending if is instance of a instance check</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>source</strong> (<em>str</em><em> or </em><em>Attr</em>) – Striname of the attribute or PyNode attribute</li>
+<li><strong>target</strong> (<em>str</em><em> or </em><em>Attr</em>) – Striname of the attribute or PyNode attribute</li>
+<li><strong>testInstance</strong> (<em>tuple</em>) – Tuple of types to check</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.core.attribute.enumParamDef">
+<em class="property">class </em><code class="descclassname">mgear.core.attribute.</code><code class="descname">enumParamDef</code><span class="sig-paren">(</span><em>scriptName</em>, <em>enum</em>, <em>value=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.enumParamDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an enumarator parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scriptName</strong> (<em>str</em>) – Attribute fullName</li>
+<li><strong>enum</strong> (<em>list of str</em>) – The list of elements in the enumerate control.</li>
+<li><strong>value</strong> (<em>int</em>) – The default value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="mgear.core.attribute.enumParamDef.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.enumParamDef.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a parameter to property using the parameter definition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The node to add the attribute</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.core.attribute.enumParamDef.get_as_dict">
+<code class="descname">get_as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.enumParamDef.get_as_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.core.attribute.enumParamDef.set_from_dict">
+<code class="descname">set_from_dict</code><span class="sig-paren">(</span><em>param_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.enumParamDef.set_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.getSelectedChannels">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">getSelectedChannels</code><span class="sig-paren">(</span><em>userDefine=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.getSelectedChannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the selected channels on the channel box</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>userDefine</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, will return only the user
+defined channels. Other channels will be skipped.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The list of selected channels names</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.getSelectedObjectChannels">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">getSelectedObjectChannels</code><span class="sig-paren">(</span><em>oSel=None</em>, <em>userDefine=False</em>, <em>animatable=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.getSelectedObjectChannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the selected object channels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>oSel</strong> (<em>None</em><em>, </em><em>optional</em>) – The  pynode with channels to get</li>
+<li><strong>userDefine</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, will return only the user
+defined channels. Other channels will be skipped.</li>
+<li><strong>animatable</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, only animatable parameters
+will be return</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The list of the selected object channels names</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.get_default_value">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">get_default_value</code><span class="sig-paren">(</span><em>node</em>, <em>attribute</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.get_default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default attribute value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>str</em><em>, </em><em>PyNode</em>) – The object with the attribute</li>
+<li><strong>attribute</strong> (<em>str</em>) – The attribute to get the value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The attribute value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">variant</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.get_next_available_index">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">get_next_available_index</code><span class="sig-paren">(</span><em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.get_next_available_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the next available index from a multi attr
+This function is a workaround because the connect attr flag next available
+is not working.</p>
+<dl class="docutils">
+<dt>The connectAttr to the children attribute is giving error</dt>
+<dd><dl class="first docutils">
+<dt>i.e: pm.connectAttr(ctt.attr(“parent”),</dt>
+<dd>tpTagNode.attr(“children”), na=True)</dd>
+</dl>
+<p class="last">if using the next available option flag
+I was expecting to use ctt.setParent(tagParent) but doest’t work as
+expected.
+After reading the documentation this method looks prety
+useless.
+Looks like is boolean and works based on selection :(</p>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attr</strong> (<em>attr</em>) – Attr multi</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">index</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.lockAttribute">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">lockAttribute</code><span class="sig-paren">(</span><em>node, attributes=[‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.lockAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lock attributes of a node.</p>
+<p>By defaul will lock the rotation, scale and translation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The node with the attributes to lock.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) – The list of the attributes to lock.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">att</span><span class="o">.</span><span class="n">lockAttribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_ctl</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;sx&quot;</span><span class="p">,</span> <span class="s2">&quot;sy&quot;</span><span class="p">,</span> <span class="s2">&quot;sz&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.moveChannel">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">moveChannel</code><span class="sig-paren">(</span><em>attr</em>, <em>sourceNode</em>, <em>targetNode</em>, <em>duplicatedPolicy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.moveChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move channels  keeping the output connections.
+Duplicated channel policy, stablish the rule in case the channel already
+exist on the target.</p>
+<p>NOTE: For the moment move channel only supports type double and enum</p>
+<p>Duplicate policy options</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>index</td>
+<td>This policy will add an index to avoid clashing channel
+names</td>
+</tr>
+<tr class="row-even"><td>fullName</td>
+<td>This policy will add the name of the source object to
+the channel</td>
+</tr>
+<tr class="row-odd"><td>merge</td>
+<td>This policy will merge the channels</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>attr</strong> (<em>str</em>) – Name of the channel to move</li>
+<li><strong>sourceNode</strong> (<em>PyNoe</em><em> or </em><em>str</em>) – The source node with the channel</li>
+<li><strong>targetNode</strong> (<em>PyNoe</em><em> or </em><em>str</em>) – The target node for the channel</li>
+<li><strong>duplicatedPolicy</strong> (<em>None</em><em>, </em><em>str</em>) – Set the duplicated channel policy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.reset_SRT">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">reset_SRT</code><span class="sig-paren">(</span><em>objects=None, attributes=[‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.reset_SRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset Scale Rotation and translation attributes to default value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>None</em><em>, </em><em>optional</em>) – The objects to reset the channels</li>
+<li><strong>attribute</strong> (<em>list</em>) – The attribute to reset</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.reset_selected_channels_value">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">reset_selected_channels_value</code><span class="sig-paren">(</span><em>objects=None</em>, <em>attributes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.reset_selected_channels_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the the selected channels if not attribute is provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>None</em><em>, </em><em>optional</em>) – The objects to reset the channels</li>
+<li><strong>attribute</strong> (<em>list</em><em>, </em><em>optional</em>) – The attribute to reset</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.setInvertMirror">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">setInvertMirror</code><span class="sig-paren">(</span><em>node</em>, <em>invList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.setInvertMirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set invert mirror pose values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>dagNode</em>) – The object to set invert mirror Values</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.setKeyableAttributes">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">setKeyableAttributes</code><span class="sig-paren">(</span><em>nodes, params=[‘tx’, ‘ty’, ‘tz’, ‘ro’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.setKeyableAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set keyable attributes of a node.</p>
+<p>By defaul will set keyable the rotation, scale and translation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The node with the attributes to set keyable.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) – <p>The list of the attributes to set keyable.
+Attrs not in the list will be locked
+if None, [“tx”, “ty”, “tz”, “rorder”, “rx”, “ry”, “rz”, “sx”, “sy”,</p>
+<blockquote>
+<div>”sz”] is used</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.setNotKeyableAttributes">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">setNotKeyableAttributes</code><span class="sig-paren">(</span><em>nodes, attributes=[‘tx’, ‘ty’, ‘tz’, ‘ro’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.setNotKeyableAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set not keyable attributes of a node.</p>
+<p>By defaul will set not keyable the rotation, scale and translation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The node with the attributes to set keyable.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) – The list of the attributes to set not keyable</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.setRotOrder">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">setRotOrder</code><span class="sig-paren">(</span><em>node</em>, <em>s=’XYZ’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.setRotOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the rotorder of the object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The object to set the rot order on.</li>
+<li><strong>s</strong> (<em>str</em>) – Value of the rotorder.
+Possible values : (“XYZ”, “XZY”, “YXZ”, “YZX”, “ZXY”, “ZYX”)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.set_default_value">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">set_default_value</code><span class="sig-paren">(</span><em>node</em>, <em>attribute</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.set_default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the default value to the attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em><em>, </em><em>PyNode</em>) – The object with the attribute to reset</li>
+<li><strong>attribute</strong> (<em>str</em>) – The attribute to reset</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.smart_reset">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">smart_reset</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.smart_reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the SRT or the selected channels</p>
+<p>Checks first if we have channels selected. If not, will try to reset SRT</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Dummy</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.attribute.unlockAttribute">
+<code class="descclassname">mgear.core.attribute.</code><code class="descname">unlockAttribute</code><span class="sig-paren">(</span><em>node, attributes=[‘tx’, ‘ty’, ‘tz’, ‘rx’, ‘ry’, ‘rz’, ‘sx’, ‘sy’, ‘sz’, ‘v’]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.attribute.unlockAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unlock attributes of a node.</p>
+<p>By defaul will unlock the rotation, scale and translation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>dagNode</em>) – The node with the attributes to unlock.</li>
+<li><strong>attributes</strong> (<em>list of str</em>) – The list of the attributes to unlock.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">att</span><span class="o">.</span><span class="n">unlockAttribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_ctl</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;sx&quot;</span><span class="p">,</span> <span class="s2">&quot;sy&quot;</span><span class="p">,</span> <span class="s2">&quot;sz&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="curve.html" class="btn btn-neutral float-right" title="mgear.core.curve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="applyop.html" class="btn btn-neutral" title="mgear.core.applyop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

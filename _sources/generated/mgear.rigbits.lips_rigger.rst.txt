@@ -1,0 +1,30 @@
+mgear\.rigbits\.lips\_rigger
+============================
+
+.. automodule:: mgear.rigbits.lips_rigger
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      lipsFromfile
+      lipsRig
+      showLipRigUI
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      lipRigUI
+   
+   
+
+   
+   
+   

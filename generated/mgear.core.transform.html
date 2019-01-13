@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.core.transform &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
+        <link rel="up" title="Base Modules" href="../baseModules.html"/>
+        <link rel="next" title="mgear.core.utils" href="mgear.core.utils.html"/>
+        <link rel="prev" title="mgear.core.string" href="mgear.core.string.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mgear.html">mgear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.html">mgear.core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.attribute.html">mgear.core.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.curve.html">mgear.core.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.dag.html">mgear.core.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.icon.html">mgear.core.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.log.html">mgear.core.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.menu.html">mgear.core.menu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.node.html">mgear.core.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.pyqt.html">mgear.core.pyqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.skin.html">mgear.core.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.string.html">mgear.core.string</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.core.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.utils.html">mgear.core.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.vector.html">mgear.core.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mgear.core.widgets.html">mgear.core.widgets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../baseModules.html">Base Modules</a> &raquo;</li>
+        
+      <li>mgear.core.transform</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated/mgear.core.transform.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.core.transform">
+<span id="mgear-core-transform"></span><h1>mgear.core.transform<a class="headerlink" href="#module-mgear.core.transform" title="Permalink to this headline">¶</a></h1>
+<p>Functions to work with matrix and transformations</p>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.convert2TransformMatrix" title="mgear.core.transform.convert2TransformMatrix"><code class="xref py py-obj docutils literal"><span class="pre">convert2TransformMatrix</span></code></a>(tm)</td>
+<td>Convert a transformation Matrix</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getChainTransform" title="mgear.core.transform.getChainTransform"><code class="xref py py-obj docutils literal"><span class="pre">getChainTransform</span></code></a>(positions,&nbsp;normal[,&nbsp;negate])</td>
+<td>Get a tranformation list from a positions list and normal.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getChainTransform2" title="mgear.core.transform.getChainTransform2"><code class="xref py py-obj docutils literal"><span class="pre">getChainTransform2</span></code></a>(positions,&nbsp;normal[,&nbsp;negate])</td>
+<td>Get a tranformation list from a positions list and normal.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getFilteredTransform" title="mgear.core.transform.getFilteredTransform"><code class="xref py py-obj docutils literal"><span class="pre">getFilteredTransform</span></code></a>(m[,&nbsp;translation,&nbsp;…])</td>
+<td>Retrieve a transformation filtered.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getInterpolateTransformMatrix" title="mgear.core.transform.getInterpolateTransformMatrix"><code class="xref py py-obj docutils literal"><span class="pre">getInterpolateTransformMatrix</span></code></a>(t1,&nbsp;t2[,&nbsp;blend])</td>
+<td>Interpolate 2 matrix.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getOffsetPosition" title="mgear.core.transform.getOffsetPosition"><code class="xref py py-obj docutils literal"><span class="pre">getOffsetPosition</span></code></a>(node[,&nbsp;offset])</td>
+<td>Get an offset position from dagNode</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getPositionFromMatrix" title="mgear.core.transform.getPositionFromMatrix"><code class="xref py py-obj docutils literal"><span class="pre">getPositionFromMatrix</span></code></a>(in_m)</td>
+<td>Get the position values from matrix</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getRotationFromAxis" title="mgear.core.transform.getRotationFromAxis"><code class="xref py py-obj docutils literal"><span class="pre">getRotationFromAxis</span></code></a>(in_a,&nbsp;in_b[,&nbsp;axis,&nbsp;negate])</td>
+<td>Get the matrix rotation from a given axis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getSymmetricalTransform" title="mgear.core.transform.getSymmetricalTransform"><code class="xref py py-obj docutils literal"><span class="pre">getSymmetricalTransform</span></code></a>(t[,&nbsp;axis,&nbsp;fNegScale])</td>
+<td>Get the symmetrical tranformation</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getTransform" title="mgear.core.transform.getTransform"><code class="xref py py-obj docutils literal"><span class="pre">getTransform</span></code></a>(node)</td>
+<td>Return the transformation matrix of the dagNode in worldSpace.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getTransformFromPos" title="mgear.core.transform.getTransformFromPos"><code class="xref py py-obj docutils literal"><span class="pre">getTransformFromPos</span></code></a>(pos)</td>
+<td>Create a transformation Matrix from a given position.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getTransformLookingAt" title="mgear.core.transform.getTransformLookingAt"><code class="xref py py-obj docutils literal"><span class="pre">getTransformLookingAt</span></code></a>(pos,&nbsp;lookat,&nbsp;normal[,&nbsp;…])</td>
+<td>Return a transformation mstrix using vector positions.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.getTranslation" title="mgear.core.transform.getTranslation"><code class="xref py py-obj docutils literal"><span class="pre">getTranslation</span></code></a>(node)</td>
+<td>Return the position of the dagNode in worldSpace.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.matchWorldTransform" title="mgear.core.transform.matchWorldTransform"><code class="xref py py-obj docutils literal"><span class="pre">matchWorldTransform</span></code></a>(source,&nbsp;target)</td>
+<td>Match 2 dagNode transformations in world space.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.quaternionDotProd" title="mgear.core.transform.quaternionDotProd"><code class="xref py py-obj docutils literal"><span class="pre">quaternionDotProd</span></code></a>(q1,&nbsp;q2)</td>
+<td>Get the dot product of 2 quaternion.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.quaternionSlerp" title="mgear.core.transform.quaternionSlerp"><code class="xref py py-obj docutils literal"><span class="pre">quaternionSlerp</span></code></a>(q1,&nbsp;q2,&nbsp;blend)</td>
+<td>Get an interpolate quaternion based in slerp function.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.resetTransform" title="mgear.core.transform.resetTransform"><code class="xref py py-obj docutils literal"><span class="pre">resetTransform</span></code></a>(node[,&nbsp;t,&nbsp;r,&nbsp;s])</td>
+<td>Reset the scale, rotation and translation for a given dagNode.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.setMatrixPosition" title="mgear.core.transform.setMatrixPosition"><code class="xref py py-obj docutils literal"><span class="pre">setMatrixPosition</span></code></a>(in_m,&nbsp;pos)</td>
+<td>Set the position for a given matrix</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.setMatrixRotation" title="mgear.core.transform.setMatrixRotation"><code class="xref py py-obj docutils literal"><span class="pre">setMatrixRotation</span></code></a>(m,&nbsp;rot)</td>
+<td>Set the rotation for a given matrix</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/transform.html#mgear.core.transform.setMatrixScale" title="mgear.core.transform.setMatrixScale"><code class="xref py py-obj docutils literal"><span class="pre">setMatrixScale</span></code></a>(m[,&nbsp;scl])</td>
+<td>Set the scale for a given matrix</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mgear.core.utils.html" class="btn btn-neutral float-right" title="mgear.core.utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mgear.core.string.html" class="btn btn-neutral" title="mgear.core.string" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

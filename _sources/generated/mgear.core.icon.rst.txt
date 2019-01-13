@@ -1,0 +1,43 @@
+mgear\.core\.icon
+=================
+
+.. automodule:: mgear.core.icon
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      arrow
+      axis
+      circle
+      compas
+      connection_display_curve
+      create
+      cross
+      crossarrow
+      cube
+      cubewithpeak
+      cylinder
+      diamond
+      flower
+      getPointArrayWithOffset
+      guideBladeIcon
+      guideLocatorIcon
+      guideRootIcon
+      null
+      pyramid
+      setcolor
+      sphere
+      square
+   
+   
+
+   
+   
+   
+
+   
+   
+   

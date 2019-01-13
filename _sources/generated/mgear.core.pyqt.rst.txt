@@ -1,0 +1,27 @@
+mgear\.core\.pyqt
+=================
+
+.. automodule:: mgear.core.pyqt
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      deleteInstances
+      fakeTranslate
+      maya_main_window
+      qt_import
+      showDialog
+      ui2py
+   
+   
+
+   
+   
+   
+
+   
+   
+   

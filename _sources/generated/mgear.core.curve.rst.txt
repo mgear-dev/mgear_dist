@@ -1,0 +1,40 @@
+mgear\.core\.curve
+==================
+
+.. automodule:: mgear.core.curve
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      addCnsCurve
+      addCurve
+      collect_curve_data
+      collect_curve_shapes
+      collect_selected_curve_data
+      createCurveFromCurve
+      createCurveFromOrderedEdges
+      createCuveFromEdges
+      create_curve_from_data
+      create_curve_from_data_by_name
+      crv_parenting
+      export_curve
+      findLenghtFromParam
+      getCurveParamAtPosition
+      get_color
+      import_curve
+      set_color
+      update_curve_from_data
+      update_curve_from_file
+   
+   
+
+   
+   
+   
+
+   
+   
+   

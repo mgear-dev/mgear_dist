@@ -1,0 +1,24 @@
+mgear\.rigbits\.ghost
+=====================
+
+.. automodule:: mgear.rigbits.ghost
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      createDoritoGhostCtl
+      createGhostCtl
+      ghostSlider
+   
+   
+
+   
+   
+   
+
+   
+   
+   

@@ -1,0 +1,22 @@
+mgear\.animbits\.menu
+=====================
+
+.. automodule:: mgear.animbits.menu
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      install
+   
+   
+
+   
+   
+   
+
+   
+   
+   

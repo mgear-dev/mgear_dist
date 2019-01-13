@@ -1,0 +1,53 @@
+mgear\.core\.attribute
+======================
+
+.. automodule:: mgear.core.attribute
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      addAttribute
+      addColorAttribute
+      addEnumAttribute
+      addFCurve
+      addProxyAttribute
+      add_mirror_config_channels
+      connectSet
+      getSelectedChannels
+      getSelectedObjectChannels
+      get_default_value
+      get_next_available_index
+      lockAttribute
+      moveChannel
+      reset_SRT
+      reset_selected_channels_value
+      setInvertMirror
+      setKeyableAttributes
+      setNotKeyableAttributes
+      setRotOrder
+      set_default_value
+      smart_reset
+      unlockAttribute
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FCurveParamDef
+      ParamDef
+      ParamDef2
+      colorParamDef
+      enumParamDef
+   
+   
+
+   
+   
+   

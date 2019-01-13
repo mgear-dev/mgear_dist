@@ -23,10 +23,10 @@ Modules
 .. autosummary::
    :toctree: generated
 
-   mgear.maya.shifter
-   mgear.maya.shifter.guide
-   mgear.maya.shifter.gui
-   mgear.maya.shifter.component
-   mgear.maya.shifter.component.guide
+   mgear.shifter
+   mgear.shifter.guide
+   mgear.shifter.gui
+   mgear.shifter.component
+   mgear.shifter.component.guide
 
 

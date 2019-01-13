@@ -1,0 +1,22 @@
+mgear\.simpleRig\.menu
+======================
+
+.. automodule:: mgear.simpleRig.menu
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      install
+   
+   
+
+   
+   
+   
+
+   
+   
+   

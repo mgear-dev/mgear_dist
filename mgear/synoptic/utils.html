@@ -1,0 +1,1266 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.synoptic.utils &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.synoptic.widgets" href="widgets.html"/>
+        <link rel="prev" title="mgear.synoptic" href="synoptic.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/core.html">mgear.core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/attribute.html">mgear.core.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/curve.html">mgear.core.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/dag.html">mgear.core.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/icon.html">mgear.core.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/log.html">mgear.core.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/node.html">mgear.core.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/skin.html">mgear.core.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/transform.html">mgear.core.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/utils.html">mgear.core.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/vector.html">mgear.core.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/widgets.html">mgear.core.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/shifter.html">mgear.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/guide.html">mgear.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/gui.html">mgear.shifter.gui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="synoptic.html">mgear.synoptic</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html">mgear.synoptic.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../simpleRig/simpleRigTool.html">mgear.simpleRig.simpleRigTool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+        
+      <li>mgear.synoptic.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/synoptic/utils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.synoptic.utils">
+<span id="mgear-synoptic-utils"></span><h1>mgear.synoptic.utils<a class="headerlink" href="#module-mgear.synoptic.utils" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer">
+<em class="property">class </em><code class="descclassname">mgear.synoptic.utils.</code><code class="descname">AbstractAnimationTransfer</code><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract animation transfer class</p>
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.bakeAnimation">
+<code class="descname">bakeAnimation</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.bakeAnimation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.createUI">
+<code class="descname">createUI</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.createUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.create_connections">
+<code class="descname">create_connections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.create_connections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.create_controls">
+<code class="descname">create_controls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.create_controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.create_layout">
+<code class="descname">create_layout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.create_layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.doItByUI">
+<code class="descname">doItByUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.doItByUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.getHostName">
+<code class="descname">getHostName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.getHostName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.getWorldMatrices">
+<code class="descname">getWorldMatrices</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>val_src_nodes</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.getWorldMatrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns matrice List[frame][controller number].</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.populateRange">
+<code class="descname">populateRange</code><span class="sig-paren">(</span><em>timeSlider=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.populateRange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.setComboBoxItemsFormComboObj">
+<code class="descname">setComboBoxItemsFormComboObj</code><span class="sig-paren">(</span><em>combo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.setComboBoxItemsFormComboObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.setComboBoxItemsFormList">
+<code class="descname">setComboBoxItemsFormList</code><span class="sig-paren">(</span><em>comboList</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.setComboBoxItemsFormList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.setComboObj">
+<code class="descname">setComboObj</code><span class="sig-paren">(</span><em>combo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.setComboObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.setGroupBoxTitle">
+<code class="descname">setGroupBoxTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.setGroupBoxTitle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.setModel">
+<code class="descname">setModel</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.setModel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.setSwitchedAttrShortName">
+<code class="descname">setSwitchedAttrShortName</code><span class="sig-paren">(</span><em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.setSwitchedAttrShortName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.setUiHost">
+<code class="descname">setUiHost</code><span class="sig-paren">(</span><em>uihost</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.setUiHost" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.transfer">
+<code class="descname">transfer</code><span class="sig-paren">(</span><em>startFrame</em>, <em>endFrame</em>, <em>onlyKeyframes</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.transfer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.utils.AbstractAnimationTransfer.valueChanged">
+<code class="descname">valueChanged</code><em class="property"> = &lt;PySide2.QtCore.Signal object&gt;</em><a class="headerlink" href="#mgear.synoptic.utils.AbstractAnimationTransfer.valueChanged" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.synoptic.utils.IkFkTransfer">
+<em class="property">class </em><code class="descclassname">mgear.synoptic.utils.</code><code class="descname">IkFkTransfer</code><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.synoptic.utils.IkFkTransfer.changeAttrToBoundValue">
+<code class="descname">changeAttrToBoundValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.changeAttrToBoundValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.IkFkTransfer.doItByUI">
+<code class="descname">doItByUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.doItByUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.synoptic.utils.IkFkTransfer.execute">
+<em class="property">static </em><code class="descname">execute</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uihost</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot=None</em>, <em>startFrame=None</em>, <em>endFrame=None</em>, <em>onlyKeyframes=None</em>, <em>switchTo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>transfer without displaying UI</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.IkFkTransfer.getChangeAttrName">
+<code class="descname">getChangeAttrName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.getChangeAttrName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.IkFkTransfer.getChangeRollAttrName">
+<code class="descname">getChangeRollAttrName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.getChangeRollAttrName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.IkFkTransfer.getValueFromUI">
+<code class="descname">getValueFromUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.getValueFromUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.IkFkTransfer.setCtrls">
+<code class="descname">setCtrls</code><span class="sig-paren">(</span><em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.setCtrls" title="Permalink to this definition">¶</a></dt>
+<dd><p>gather core PyNode represented each controllers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.IkFkTransfer.setGroupBoxTitle">
+<code class="descname">setGroupBoxTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.setGroupBoxTitle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.synoptic.utils.IkFkTransfer.showUI">
+<em class="property">static </em><code class="descname">showUI</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uihost</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.showUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.utils.IkFkTransfer.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.synoptic.utils.IkFkTransfer.toFK">
+<em class="property">static </em><code class="descname">toFK</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uihost</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.toFK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.synoptic.utils.IkFkTransfer.toIK">
+<em class="property">static </em><code class="descname">toIK</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uihost</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.toIK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.IkFkTransfer.transfer">
+<code class="descname">transfer</code><span class="sig-paren">(</span><em>startFrame</em>, <em>endFrame</em>, <em>onlyKeyframes</em>, <em>ikRot</em>, <em>switchTo=None</em>, <em>*args</em>, <em>**kargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.IkFkTransfer.transfer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer">
+<em class="property">class </em><code class="descclassname">mgear.synoptic.utils.</code><code class="descname">ParentSpaceTransfer</code><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer.changeAttrToBoundValue">
+<code class="descname">changeAttrToBoundValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer.changeAttrToBoundValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer.getChangeAttrName">
+<code class="descname">getChangeAttrName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer.getChangeAttrName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer.getValue">
+<code class="descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer.getValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer.setCtrls">
+<code class="descname">setCtrls</code><span class="sig-paren">(</span><em>srcName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer.setCtrls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer.setGroupBoxTitle">
+<code class="descname">setGroupBoxTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer.setGroupBoxTitle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer.showUI">
+<em class="property">static </em><code class="descname">showUI</code><span class="sig-paren">(</span><em>combo</em>, <em>model</em>, <em>uihost</em>, <em>switchedAttrShortName</em>, <em>ctrl_name</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer.showUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.ParentSpaceTransfer.transfer">
+<code class="descname">transfer</code><span class="sig-paren">(</span><em>startFrame</em>, <em>endFrame</em>, <em>onlyKeyframes</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.ParentSpaceTransfer.transfer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.synoptic.utils.SpineIkFkTransfer">
+<em class="property">class </em><code class="descclassname">mgear.synoptic.utils.</code><code class="descname">SpineIkFkTransfer</code><a class="headerlink" href="#mgear.synoptic.utils.SpineIkFkTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="mgear.synoptic.utils.SpineIkFkTransfer.bakeAnimation">
+<code class="descname">bakeAnimation</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.SpineIkFkTransfer.bakeAnimation" title="Permalink to this definition">¶</a></dt>
+<dd><p>bake animation to desired destination. More adding animtion than
+ik/fk transfer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fkControls</strong> (<em>list</em>) – of fk controls</li>
+<li><strong>ikControls</strong> (<em>list</em>) – of ik controls</li>
+<li><strong>startFrame</strong> (<em>float</em>) – start frame</li>
+<li><strong>endFrame</strong> (<em>float</em>) – end frame</li>
+<li><strong>bakeToIk</strong> (<em>bool</em><em>, </em><em>optional</em>) – True, bake animation to ik, fk is false</li>
+<li><strong>onlyKeyframes</strong> (<em>bool</em><em>, </em><em>optional</em>) – transfer animation on other</li>
+<li><strong>if false</strong><strong>, </strong><strong>bake every frame</strong> (<em>keyframes</em><em>,</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.SpineIkFkTransfer.doItByUI">
+<code class="descname">doItByUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.SpineIkFkTransfer.doItByUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather UI settings to execute transfer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.utils.SpineIkFkTransfer.setCtrls">
+<code class="descname">setCtrls</code><span class="sig-paren">(</span><em>fkControls</em>, <em>ikControls</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.SpineIkFkTransfer.setCtrls" title="Permalink to this definition">¶</a></dt>
+<dd><p>make provided controls accessible to the class, with namespaces</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fkControls</strong> (<em>list</em>) – of fk  controls</li>
+<li><strong>ikControls</strong> (<em>list</em>) – of ik controls</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="mgear.synoptic.utils.SpineIkFkTransfer.showUI">
+<em class="property">static </em><code class="descname">showUI</code><span class="sig-paren">(</span><em>topNode</em>, <em>uihost</em>, <em>fkControls</em>, <em>ikControls</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.SpineIkFkTransfer.showUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called from the synaptic qpushbutton, with the spine control names</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>topNode</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – top node of the rig</li>
+<li><strong>uihost</strong> (<em>TYPE</em>) – Description</li>
+<li><strong>fkControls</strong> (<em>list</em>) – of fkControls</li>
+<li><strong>ikControls</strong> (<em>list</em>) – of ikControls</li>
+<li><strong>*args</strong> – additional signal args, n/a</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.utils.SpineIkFkTransfer.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.synoptic.utils.SpineIkFkTransfer.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.applyMirror">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">applyMirror</code><span class="sig-paren">(</span><em>nameSpace</em>, <em>mirrorEntry</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.applyMirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply mirro pose</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nameSpace</strong> (<em>str</em>) – Namespace</li>
+<li><strong>mirrorEntry</strong> (<em>list</em>) – List witht the mirror entry template</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.bakeSprings">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">bakeSprings</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.bakeSprings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bake the automatic spring animation to animation curves</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>dagNode</em>) – The rig top node</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.bindPose">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">bindPose</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.bindPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore the reset position of the rig</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>TYPE</em>) – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.calculateMirrorData">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">calculateMirrorData</code><span class="sig-paren">(</span><em>srcNode</em>, <em>targetNode</em>, <em>flip=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.calculateMirrorData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the mirror data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>srcNode</strong> (<em>str</em>) – The source Node</li>
+<li><strong>targetNode</strong> (<em>[</em><em>dict</em><em>[</em><em>str</em><em>]</em><em>]</em>) – Target node</li>
+<li><strong>flip</strong> (<em>bool</em><em>, </em><em>optional</em>) – flip option</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">node, “attr”: at, “val”: flipVal}]</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[{“target”</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.changeSpace">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">changeSpace</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em>, <em>cnsIndex</em>, <em>ctl_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.changeSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the space of a control</p>
+<p>i.e: A control with ik reference array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>object_name</strong> (<em>str</em>) – Object Name</li>
+<li><strong>combo_attr</strong> (<em>str</em>) – Combo attribute name</li>
+<li><strong>cnsIndex</strong> (<em>int</em>) – Combo index to change</li>
+<li><strong>ctl_name</strong> (<em>str</em>) – Control name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.clearSprings">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">clearSprings</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.clearSprings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete baked animation from spring</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>dagNode</em>) – The rig top node</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.gatherMirrorData">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">gatherMirrorData</code><span class="sig-paren">(</span><em>nameSpace</em>, <em>node</em>, <em>flip</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.gatherMirrorData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data to mirror</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nameSpace</strong> (<em>str</em>) – Namespace</li>
+<li><strong>node</strong> (<em>PyNode</em>) – No</li>
+<li><strong>flip</strong> (<em>TYPE</em>) – flip option</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The mirror data</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[dict[str]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getClosestNode">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getClosestNode</code><span class="sig-paren">(</span><em>node</em>, <em>nodesToQuery</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getClosestNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the closest node, based on distance, from the list provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – name of node</li>
+<li><strong>nodesToQuery</strong> (<em>list</em>) – of nodes to query</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">name of the closest node</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string">string</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getComboIndex">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getComboIndex</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getComboIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index from a  combo attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>object_name</strong> (<em>str</em>) – Control name</li>
+<li><strong>combo_attr</strong> (<em>str</em>) – Combo attribute name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Current index in the combo attribute</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getComboKeys">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getComboKeys</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>combo_attr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getComboKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the keys from a combo attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>object_name</strong> (<em>str</em>) – Control name</li>
+<li><strong>combo_attr</strong> (<em>str</em>) – Combo attribute name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Keys names from the combo attribute.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getControlers">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getControlers</code><span class="sig-paren">(</span><em>model</em>, <em>gSuffix=’_controllers_grp’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getControlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get thr controlers from the set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig root</li>
+<li><strong>gSuffix</strong> (<em>str</em><em>, </em><em>optional</em>) – set suffix</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The members of the group</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getInvertCheckButtonAttrName">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getInvertCheckButtonAttrName</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getInvertCheckButtonAttrName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the invert check butto attribute name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>str</strong> (<em>str</em>) – The attribute name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The checked attribute name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getModel">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getModel</code><span class="sig-paren">(</span><em>widget</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the model Name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>widget</strong> (<em>QWidget</em>) – Synoptic widget</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The rig model name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PyNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getNamespace">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getNamespace</code><span class="sig-paren">(</span><em>modelName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getNamespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name space from rig root</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>modelName</strong> (<em>str</em>) – Rig top node name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Namespace</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getNode">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getNode</code><span class="sig-paren">(</span><em>nodeName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a PyNode from the string name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nodeName</strong> (<em>str</em>) – Node name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The node. or None if the object can’t be found</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">PyNode or None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.getSynopticWidget">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">getSynopticWidget</code><span class="sig-paren">(</span><em>widget</em>, <em>max_iter=20</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.getSynopticWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the widget where the synoptic panel is attach</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>widget</strong> (<em>QWidget</em>) – The widget to get the parent</li>
+<li><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – Iteration limit to find the paretn widget</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The Parent widget</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">widget</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.ikFkMatch">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">ikFkMatch</code><span class="sig-paren">(</span><em>model</em>, <em>ikfk_attr</em>, <em>uiHost_name</em>, <em>fks</em>, <em>ik</em>, <em>upv</em>, <em>ikRot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.ikFkMatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switch IK/FK with matching functionality</p>
+<p>This function is meant to work with 2 joint limbs.
+i.e: human legs or arms</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top transform node</li>
+<li><strong>ikfk_attr</strong> (<em>str</em>) – Blend ik fk attribute name</li>
+<li><strong>uiHost_name</strong> (<em>str</em>) – Ui host name</li>
+<li><strong>fks</strong> (<em>[</em><em>str</em><em>]</em>) – List of fk controls names</li>
+<li><strong>ik</strong> (<em>str</em>) – Ik control name</li>
+<li><strong>upv</strong> (<em>str</em>) – Up vector control name</li>
+<li><strong>ikRot</strong> (<em>None</em><em>, </em><em>str</em>) – optional. Name of the Ik Rotation control</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.isSideElement">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">isSideElement</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.isSideElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns is name(str) side element?</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Deleted Parameters:</dt>
+<dd>node: str</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.keyAll">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">keyAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.keyAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyframe all the controls inside the controls group</p>
+<p>Note: We use the workd “group” to refer to a set in Maya</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>PyNode</em>) – Rig top node</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.keyGroup">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">keyGroup</code><span class="sig-paren">(</span><em>model</em>, <em>groupSuffix</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.keyGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyframe all the members of a given group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>groupSuffix</strong> (<em>str</em>) – The group preffix</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.keyObj">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">keyObj</code><span class="sig-paren">(</span><em>model</em>, <em>object_names</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.keyObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the keyframe in the controls pass by a list in obj_names variable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>Str</em>) – Name of the namespace that will define de the model</li>
+<li><strong>object_names</strong> (<em>Str</em>) – names of the controls, without the name space</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.keySel">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">keySel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.keySel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key selected controls</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.listAttrForMirror">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">listAttrForMirror</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.listAttrForMirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>List attributes to invert the value for mirror posing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>PyNode</em>) – The Node with the attributes to invert</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Attributes to invert</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.mirrorPose">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">mirrorPose</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.mirrorPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Summary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>flip</strong> (<em>bool</em><em>, </em><em>optiona</em>) – Set the function behaviout to flip</li>
+<li><strong>nodes</strong> (<em>None</em><em>,  </em><em>[</em><em>PyNode</em><em>]</em>) – Controls to mirro/flip the pose</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.mirrorPoseOld">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">mirrorPoseOld</code><span class="sig-paren">(</span><em>flip=False</em>, <em>nodes=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.mirrorPoseOld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated: Mirror pose</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>flip</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True will flip the pose</li>
+<li><strong>nodes</strong> (<em>bool</em><em>, </em><em>optional</em>) – Nodes to mirror or flip transformation</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.quickSel">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">quickSel</code><span class="sig-paren">(</span><em>model</em>, <em>channel</em>, <em>mouse_button</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.quickSel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the object stored on the quick selection attributes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – The rig top node</li>
+<li><strong>channel</strong> (<em>str</em>) – The quick selection channel name</li>
+<li><strong>mouse_button</strong> (<em>QtSignal</em>) – Clicked mouse button</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.recordNodesMatrices">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">recordNodesMatrices</code><span class="sig-paren">(</span><em>nodes</em>, <em>desiredTime</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.recordNodesMatrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the matrices of the nodes provided and return a dict of
+node:matrix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nodes</strong> (<em>list</em>) – of nodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">node:node matrix</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.resetSelTrans">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">resetSelTrans</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.resetSelTrans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the transfom values (SRT) for the selected objects</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.selAll">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">selAll</code><span class="sig-paren">(</span><em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.selAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select all controlers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>PyNode</em>) – Rig top node</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.selGroup">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">selGroup</code><span class="sig-paren">(</span><em>model</em>, <em>groupSuffix</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.selGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the members of a given set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>groupSuffix</strong> (<em>str</em>) – Set suffix name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.selectObj">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">selectObj</code><span class="sig-paren">(</span><em>model</em>, <em>object_names</em>, <em>mouse_button</em>, <em>key_modifier</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.selectObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>PyNode</em>) – The rig top node</li>
+<li><strong>object_names</strong> (<em>list</em>) – The names of the objects to select</li>
+<li><strong>mouse_button</strong> (<em>QtSignal</em>) – Clicked mouse button signal</li>
+<li><strong>key_modifier</strong> (<em>QtSignal</em>) – Modifier button signal</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.spine_FKToIK">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">spine_FKToIK</code><span class="sig-paren">(</span><em>fkControls</em>, <em>ikControls</em>, <em>matchMatrix_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.spine_FKToIK" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match the IK controls to the FK. Known limitations: Does not compensate
+for stretching. Does not support zig-zag, or complex fk to ik transfers.
+Supports component: spine_S_shape_01, spine_ik_02</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fkControls</strong> (<em>list</em>) – of of nodes, IN THE ORDER OF HIERARCHY</li>
+<li><strong>ikControls</strong> (<em>list</em>) – of of nodes</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.spine_IKToFK">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">spine_IKToFK</code><span class="sig-paren">(</span><em>fkControls</em>, <em>ikControls</em>, <em>matchMatrix_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.spine_IKToFK" title="Permalink to this definition">¶</a></dt>
+<dd><p>position the IK controls to match, as best they can, the fk controls.
+Supports component: spine_S_shape_01, spine_ik_02</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fkControls</strong> (<em>list</em>) – list of fk controls, IN THE ORDER OF HIERARCHY,</li>
+<li><strong>..</strong><strong>, </strong><strong>..</strong><strong>, </strong><strong>&quot;spine_C0_fk6_ctl&quot;</strong><strong>]</strong> (<em>[</em><em>&quot;spine_C0_fk0_ctl&quot;</em><em>,</em>) – </li>
+<li><strong>ikControls</strong> (<em>list</em>) – all ik controls</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.stripNamespace">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">stripNamespace</code><span class="sig-paren">(</span><em>nodeName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.stripNamespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strip all the namespaces from a given name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nodeName</strong> (<em>str</em>) – Node name to strip the namespaces</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Node name without namespace</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.swapSideLabel">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">swapSideLabel</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.swapSideLabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns fliped name</p>
+<p>Returns fliped name that replaced side label left to right or
+right to left</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name to swap the side</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.utils.toggleAttr">
+<code class="descclassname">mgear.synoptic.utils.</code><code class="descname">toggleAttr</code><span class="sig-paren">(</span><em>model</em>, <em>object_name</em>, <em>attr_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.utils.toggleAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggle a boolean attribute</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>PyNode</em>) – Rig top node</li>
+<li><strong>object_name</strong> (<em>str</em>) – The name of the control containing the attribute to
+toggle</li>
+<li><strong>attr_name</strong> (<em>str</em>) – The attribute to toggle</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="widgets.html" class="btn btn-neutral float-right" title="mgear.synoptic.widgets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="synoptic.html" class="btn btn-neutral" title="mgear.synoptic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

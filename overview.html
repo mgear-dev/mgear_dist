@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview &mdash; mGear: Rigging Framework 2.5.24 documentation</title>
+  <title>Overview &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 2.5.24 documentation" href="index.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
         <link rel="next" title="Framework" href="framework.html"/>
         <link rel="prev" title="Welcome to mGear: Rigging Framework for Autodesk Maya" href="index.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                2.5
+                3.0
               </div>
             
           
@@ -93,8 +93,9 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
-<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Nodes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
@@ -167,31 +168,9 @@
   <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <p>mGear is a rigging and animation framework for Autodesk Maya. mGear provides a set of convenient modules, tools and c++ solvers to streamline the development of rigging and animation tools.</p>
-<p>Originally mGear was design and develope by <a class="reference external" href="http://www.jeremiepasserin.com/blog/">Jeremie Passerin</a> , since 2013 <a class="reference external" href="http://www.miquel-campos.com/">Miquel Campos</a> continued the project and evolved to the current design.</p>
-<blockquote>
-<div><p>“Miquel did an amazing job making mGear a solid Production tool. I am delighted to see it running smoothly in Maya. Softimage User will be delighted to find their favorite Rig Builder in Maya. Maya user will be amazed how MGear is solid and flexible. Gear has been used in production all around the world since 2010 and changed the life of many riggers and animators, I have no doubt that mGear will have the same success. Do I need to mention it’s free and open source ?”</p>
-<blockquote>
-<div><strong>Jeremie Passerin</strong></div></blockquote>
-</div></blockquote>
+<p>Originally mGear was design and develope by <a class="reference external" href="http://www.jeremiepasserin.com/blog/">Jeremie Passerin</a> , since 2013 <a class="reference external" href="http://www.miquel-campos.com/">Miquel Campos</a> continued the project and evolved to the current design. From 2018 mGear is developed by the <a class="reference external" href="https://github.com/mgear-dev/">mGear Dev team</a></p>
 <p><a class="reference external" href="http://forum.mgear-framework.com/">Join mGear Community Forum</a></p>
-<dl class="docutils">
-<dt>Big Thanks! to all contributors (in alphabetical order):</dt>
-<dd><ul class="first last simple">
-<li><a class="reference external" href="https://github.com/akiwoRM/">Akagi-san</a></li>
-<li><a class="reference external" href="https://github.com/gatgui/">Gaetan Guidet</a></li>
-<li><a class="reference external" href="https://github.com/liorbenhorin/">Lior Ben Horin</a></li>
-<li><a class="reference external" href="https://github.com/mottosso">Marcus Ottosson</a></li>
-<li><a class="reference external" href="https://github.com/yamahigashi">Matsumoto-san</a></li>
-<li><a class="reference external" href="https://github.com/milesckt/">Miles Cheng</a></li>
-<li><a class="reference external" href="https://github.com/Gotetz/">Oda-san</a></li>
-<li><a class="reference external" href="https://github.com/RafaelVillar/">Rafael Villar</a></li>
-</ul>
-</dd>
-</dl>
-<div class="align-center figure" id="id3">
-<a class="reference internal image-reference" href="_images/studioAKA_mGear_A.jpg"><img alt="alternate text" src="_images/studioAKA_mGear_A.jpg" style="width: 800px; height: 475px;" /></a>
-<p class="caption"><span class="caption-text">mGear have been used at Studio AKA for San Pellegrino ‘Dining By Starlight’. Rigged by Adam Avery</span></p>
-</div>
+<p><a class="reference external" href="https://github.com/mgear-dev/mgear_dist/blob/master/AUTHORS.md">Big Thanks! to all contributors</a></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <dl class="last docutils">
@@ -203,15 +182,14 @@
 </dd>
 </dl>
 </div>
+<div class="align-center figure" id="id2">
+<a class="reference internal image-reference" href="_images/studioAKA_mGear_A.jpg"><img alt="alternate text" src="_images/studioAKA_mGear_A.jpg" style="width: 800px; height: 475px;" /></a>
+<p class="caption"><span class="caption-text">mGear have been used at Studio AKA for San Pellegrino ‘Dining By Starlight’. Rigged by Adam Avery</span></p>
+</div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>I can’t promise any kind of support and this tool is provided “AS IS”. Please read the LICENSE for more information.</p>
-<p class="last">However, I am committed to continue developing mGear. So please, do not hesitate contact me if you found any bug or possible improvement.</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">I would like to clarify that mGear is a personal project developed by Jeremie Passerin and myself. My current employer is not related by any means with mGear.
-Please read the license for more information.</p>
+<p class="last">However, I am committed to continue developing mGear. So please, do not hesitate contact us if you found any bug or possible improvement.</p>
 </div>
 </div>
 
@@ -237,7 +215,7 @@ Please read the license for more information.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Jeremie Passerin, Miquel Campos.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
 
     </p>
   </div>
@@ -259,7 +237,7 @@ Please read the license for more information.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'2.5.24',
+            VERSION:'3.0.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

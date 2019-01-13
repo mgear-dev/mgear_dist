@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.synoptic &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
+        <link rel="next" title="mgear.synoptic.utils" href="utils.html"/>
+        <link rel="prev" title="mgear.shifter.gui" href="../shifter/gui.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synopticModules.html">Synoptic</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../modulesList.html">Modules flat List</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../core/core.html">mgear.core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/applyop.html">mgear.core.applyop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/attribute.html">mgear.core.attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/curve.html">mgear.core.curve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/dag.html">mgear.core.dag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/fcurve.html">mgear.core.fcurve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/icon.html">mgear.core.icon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/log.html">mgear.core.log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/meshNavigation.html">mgear.core.meshNavigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/node.html">mgear.core.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/pickWalk.html">mgear.core.pickWalk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/primitive.html">mgear.core.primitive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/skin.html">mgear.core.skin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/string.html">mgear.string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/transform.html">mgear.core.transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/utils.html">mgear.core.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/vector.html">mgear.core.vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/widgets.html">mgear.core.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/shifter.html">mgear.shifter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/guide.html">mgear.shifter.guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../shifter/gui.html">mgear.shifter.gui</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mgear.synoptic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">mgear.synoptic.utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html">mgear.synoptic.widgets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../simpleRig/simpleRigTool.html">mgear.simpleRig.simpleRigTool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../../modulesList.html">Modules flat List</a> &raquo;</li>
+        
+      <li>mgear.synoptic</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/synoptic/synoptic.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.synoptic">
+<span id="mgear-synoptic"></span><h1>mgear.synoptic<a class="headerlink" href="#module-mgear.synoptic" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="mgear.synoptic.Synoptic">
+<em class="property">class </em><code class="descclassname">mgear.synoptic.</code><code class="descname">Synoptic</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.Synoptic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synoptic Main class</p>
+<dl class="method">
+<dt id="mgear.synoptic.Synoptic.closeEvent">
+<code class="descname">closeEvent</code><span class="sig-paren">(</span><em>evnt</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.Synoptic.closeEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>oon close, kill all callbacks</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>evnt</strong> (<em>Qt.QEvent</em>) – Close event called</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.Synoptic.create_widgets">
+<code class="descname">create_widgets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.Synoptic.create_widgets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.Synoptic.default_height">
+<code class="descname">default_height</code><em class="property"> = 790</em><a class="headerlink" href="#mgear.synoptic.Synoptic.default_height" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.Synoptic.default_width">
+<code class="descname">default_width</code><em class="property"> = 325</em><a class="headerlink" href="#mgear.synoptic.Synoptic.default_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.Synoptic.margin">
+<code class="descname">margin</code><em class="property"> = 30</em><a class="headerlink" href="#mgear.synoptic.Synoptic.margin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.Synoptic.setupUi">
+<code class="descname">setupUi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.Synoptic.setupUi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.Synoptic.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.synoptic.Synoptic.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.Synoptic.updateModelList">
+<code class="descname">updateModelList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.Synoptic.updateModelList" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.Synoptic.updateTabs">
+<code class="descname">updateTabs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.Synoptic.updateTabs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.Synoptic.wrapTabContents">
+<code class="descname">wrapTabContents</code><span class="sig-paren">(</span><em>synoptic_tab</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.Synoptic.wrapTabContents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mgear.synoptic.SynopticTabWrapper">
+<em class="property">class </em><code class="descclassname">mgear.synoptic.</code><code class="descname">SynopticTabWrapper</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for handling mouse rubberband Selection</p>
+<p>Class for handling mouse rubberband within spacer and synoptic tab that
+is children of.</p>
+<dl class="method">
+<dt id="mgear.synoptic.SynopticTabWrapper.calculateOffset">
+<code class="descname">calculateOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper.calculateOffset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.SynopticTabWrapper.mouseMoveEvent">
+<code class="descname">mouseMoveEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper.mouseMoveEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.SynopticTabWrapper.mousePressEvent">
+<code class="descname">mousePressEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper.mousePressEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.SynopticTabWrapper.mouseReleaseEvent">
+<code class="descname">mouseReleaseEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper.mouseReleaseEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.SynopticTabWrapper.offsetEvent">
+<code class="descname">offsetEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper.offsetEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.SynopticTabWrapper.searchMainSynopticTab">
+<code class="descname">searchMainSynopticTab</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper.searchMainSynopticTab" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.synoptic.SynopticTabWrapper.setSpacerLeft">
+<code class="descname">setSpacerLeft</code><span class="sig-paren">(</span><em>spacer</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper.setSpacerLeft" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.synoptic.SynopticTabWrapper.staticMetaObject">
+<code class="descname">staticMetaObject</code><em class="property"> = &lt;PySide2.QtCore.QMetaObject object&gt;</em><a class="headerlink" href="#mgear.synoptic.SynopticTabWrapper.staticMetaObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.importTab">
+<code class="descclassname">mgear.synoptic.</code><code class="descname">importTab</code><span class="sig-paren">(</span><em>tabName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.importTab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Synoptic Tab</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tabName</strong> (<em>Str</em>) – Synoptic tab name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Synoptic tab module</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">module</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.synoptic.open">
+<code class="descclassname">mgear.synoptic.</code><code class="descname">open</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.synoptic.open" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="utils.html" class="btn btn-neutral float-right" title="mgear.synoptic.utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../shifter/gui.html" class="btn btn-neutral" title="mgear.shifter.gui" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

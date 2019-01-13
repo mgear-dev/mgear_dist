@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Crank User Documentation &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
+        <link rel="next" title="Shifter User Documentation" href="shifterUserDocumentation.html"/>
+        <link rel="prev" title="Animbits User Documentation" href="animbitsUserDocumentation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Crank User Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/crankUserDocumentation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="crank-user-documentation">
+<h1>Crank User Documentation<a class="headerlink" href="#crank-user-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Crank is a shot sculpting tool specially designed to handle several object and the same time. This tools can be used for general deformation correction, cloth simulation correction or animation exaggeration.</p>
+<a class="reference internal image-reference" href="_images/crank_sample_01.png"><img alt="_images/crank_sample_01.png" class="align-center" src="_images/crank_sample_01.png" style="width: 1084.9px; height: 564.3px;" /></a>
+<p>Crank uses only default Maya nodes and blendshape nodes. So not extra plugins are required to open as shot sculpted scene.</p>
+<p>Sculpting can be apply to rigged meshes (local or referenced) or to cached animations (Alembic)</p>
+<p>In order to deform an object. First we should create a “Crank Layer”.
+The layer can contain one or more objects. Also, an object can be included in more than one layer.</p>
+<p>Crank Layers are represented in the scene with a regular Maya’s transform node. This node contains a series of custom attributes and connections to handle and store the shot sculpting information and animation.</p>
+<a class="reference internal image-reference" href="_images/crank_layer.png"><img alt="_images/crank_layer.png" class="align-center" src="_images/crank_layer.png" style="width: 770.45px; height: 305.9px;" /></a>
+<p>Several layers can be edit at the same time. But be careful if the same object is in several of this layers.</p>
+<p>The blendshape nodes are created at the end of the chain and the deltas are set to use tangent space.</p>
+<p>This should give the most stable result when the same sculpt is hold in several frames. However in areas where the geometry have collapse a lot (i.e: the internal part of the elbow when the arm is flexed), can result in a unstable interpolation if the sculpt is hold more than one frame.
+Used in combination with Deltamush can mitigate some of the possible issues</p>
+<a class="reference internal image-reference" href="_images/crank_GUI.png"><img alt="_images/crank_GUI.png" class="align-center" src="_images/crank_GUI.png" style="width: 251.75px; height: 454.1px;" /></a>
+<p><strong>GUI:</strong></p>
+<ul class="simple">
+<li><strong>Create Layer:</strong> Create a new layer from the selected objects.</li>
+<li><strong>Refresh:</strong> Refresh layers list.</li>
+<li><strong>Search Filter:</strong> Quick search filter of the Crank Layer list.</li>
+<li><dl class="first docutils">
+<dt><strong>Layers List:</strong> Crank Layers list.</dt>
+<dd><ul class="first last">
+<li>LMB click will select the layer.</li>
+<li>RMB click show the context menu.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<a class="reference internal image-reference" href="_images/autokey.png"><img alt="_images/autokey.png" class="align-center" src="_images/autokey.png" style="width: 1193.2px; height: 402.8px;" /></a>
+<ul class="simple">
+<li><strong>Auto Keyframe:</strong> If checked, crank will auto keyframe a range of frames, based on the. Starting from value 0</li>
+<li><strong>Ease In:</strong> Ease In frames.</li>
+<li><strong>Pre Hold:</strong> Pre hold frames before current frame. This are the frames where the value of the sculpt blendshape will be 1.</li>
+<li><strong>Post Hold:</strong> Post hold frames after the current frame. This are the frames where the value of the sculpt blendshape will be 1.</li>
+<li><strong>Ease Out:</strong> Ease In frames.</li>
+<li><strong>Add Sculpt Frame:</strong> Add a new sculpt frame for the selected layers. If there is more than one sculpt for each frame it will and a version index. This can be useful to tackle different areas in the same layer.</li>
+<li><strong>Add Sculpt Frame:</strong> Edit the selected sculpt frame. In order to edit the frame should be first highlighted in the layer channel box. Only one frame can be edited at the same time.</li>
+</ul>
+<p><strong>Context Menu:</strong></p>
+<a class="reference internal image-reference" href="_images/context_menu.png"><img alt="_images/context_menu.png" class="align-center" src="_images/context_menu.png" style="width: 190.0px; height: 106.4px;" /></a>
+<ul>
+<li><p class="first"><strong>Select Members:</strong> Select the objects affected by the layer.</p>
+</li>
+<li><p class="first"><strong>Selected Layer Edit OFF:</strong> Turn off the editing status of the selected layers</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When we add a new sculpt or edit a sculpt frame. The blendshape target of each affected object is set to “Edit” status. To avoid any issue if we forget to set it OFF, a callback is initialized to turn off this edit status if we move the current frame in the timeline.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>All Layers Edit OFF:</strong> Turn off the editing status of all layers. This is can be also achieved by changing the current frame in the timeline.</p>
+</li>
+</ul>
+<a class="reference internal image-reference" href="_images/random_color.png"><img alt="_images/random_color.png" class="align-center" src="_images/random_color.png" style="width: 638.4px; height: 605.15px;" /></a>
+<ul class="simple">
+<li><strong>Random Color + Isolate:</strong> Create a render layer with random color for better visualization. This works based on shading groups, not individual objects.</li>
+<li><strong>Clear Random Color:</strong> Delete the random color render layer.</li>
+</ul>
+<p><strong>WARNING:</strong> Currently is not possible to edit (add or remove objects) from a Crank Layer. Also any deleting option have been implemented. in order to deactivate the effect just set the Envelope value of the layer to 0.</p>
+<a class="reference internal image-reference" href="_images/crank_layer_cb.png"><img alt="_images/crank_layer_cb.png" class="align-center" src="_images/crank_layer_cb.png" style="width: 211.85px; height: 84.55px;" /></a>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shifterUserDocumentation.html" class="btn btn-neutral float-right" title="Shifter User Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="animbitsUserDocumentation.html" class="btn btn-neutral" title="Animbits User Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

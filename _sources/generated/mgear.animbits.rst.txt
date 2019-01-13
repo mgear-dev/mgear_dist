@@ -1,0 +1,16 @@
+mgear\.animbits
+===============
+
+.. automodule:: mgear.animbits
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

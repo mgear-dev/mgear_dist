@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Animbits User Documentation &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
+        <link rel="next" title="Crank User Documentation" href="crankUserDocumentation.html"/>
+        <link rel="prev" title="Custom Solvers/Deformers" href="solvers.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Animbits User Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#soft-tweaks">Soft Tweaks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#softtweak-manager-gui">SoftTweak Manager GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#smart-reset-attribute-srt">Smart reset Attribute/SRT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Animbits User Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/animbitsUserDocumentation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="animbits-user-documentation">
+<h1>Animbits User Documentation<a class="headerlink" href="#animbits-user-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Tools for animators.</p>
+<a class="reference internal image-reference" href="_images/animbits_menu.png"><img alt="_images/animbits_menu.png" class="align-center" src="_images/animbits_menu.png" style="width: 262.2px; height: 86.45px;" /></a>
+<div class="section" id="soft-tweaks">
+<h2>Soft Tweaks<a class="headerlink" href="#soft-tweaks" title="Permalink to this headline">¶</a></h2>
+<p>This tool create and manage SoftTweaks (ST for short) and also provide as simple API to import and export configurations, so is possible to integrate with your pipeline and animation publishing system.</p>
+<img alt="_images/softtweak.gif" class="align-center" src="_images/softtweak.gif" />
+<p>SoftTweak is a dynamic position tweak using softmod deformer
+The credit of the idea goes to <a class="reference external" href="http://bindpose.com/help-animators-fix-intersections-softmod-deformer/">Vasil Shotarov</a> , thanks!</p>
+<p>The SoftTweak have 2 controls. The Base represents the bind position where the ST will not have any effect. The main control will trigger the deformation when is not in the reset position..</p>
+<a class="reference internal image-reference" href="_images/softtweak_ctl.png"><img alt="_images/softtweak_ctl.png" class="align-center" src="_images/softtweak_ctl.png" style="width: 451.25px; height: 213.75px;" /></a>
+<p>In the ST main control we can find a falloff channel to control the area of deformation</p>
+<a class="reference internal image-reference" href="_images/softtweak_falloff.png"><img alt="_images/softtweak_falloff.png" class="align-center" src="_images/softtweak_falloff.png" style="width: 253.65px; height: 202.35px;" /></a>
+<div class="section" id="softtweak-manager-gui">
+<h3>SoftTweak Manager GUI<a class="headerlink" href="#softtweak-manager-gui" title="Permalink to this headline">¶</a></h3>
+<p>By default the SoftTweak is design to be used by shot and not part of a rig. However if is needed to publish a rig with some SoftTweaks there is an option to flag (is_asset_softTweak) the SoftTweak as asset tweak. So the tool will make a distinction between the ones that need to be publish with the shot and the ones that are included in the asset.</p>
+<a class="reference internal image-reference" href="_images/softtweak_manager.png"><img alt="_images/softtweak_manager.png" class="align-center" src="_images/softtweak_manager.png" style="width: 498.75px; height: 742.9px;" /></a>
+<p><strong>File Menu:</strong></p>
+<ul class="simple">
+<li><strong>Export Selected:</strong> Exports selected ST from the list</li>
+<li><strong>Export All:</strong> Exports all the ST from the list. If search filter is used, will not affect the export. But export will make a distinction between regular SoftTweak and  asset SoftTweak</li>
+<li><strong>Import:</strong> Import ST configuration from a file.</li>
+</ul>
+<p><strong>GUI:</strong></p>
+<ul>
+<li><p class="first"><strong>Search Filter:</strong> (1) Quick search filter of the SoftTweak list.</p>
+</li>
+<li><p class="first"><strong>SoftTweaks List:</strong> (2) ST selection list.</p>
+</li>
+<li><p class="first"><strong>Create Auto Tweak:</strong> Create a tweak based on the current selection.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Select the objects to apply the ST</li>
+<li>Last element selected should be a control. This will be the parent of the ST. Also the ST will take the Name and the group(set) from the parent</li>
+<li>Click Crete Auto Tweak</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Name:</strong> Name of the new ST.</p>
+</li>
+<li><p class="first"><strong>Ctl grp:</strong> Group of controls to add the new ST controls.</p>
+</li>
+<li><p class="first"><strong>Parent:</strong> Parent of the new ST.</p>
+</li>
+<li><p class="first"><strong>Ctl Size:</strong> Parent of the new ST.</p>
+</li>
+<li><p class="first"><strong>New Tweak:</strong> Create a new ST.</p>
+</li>
+<li><p class="first"><strong>Delete Tweak:</strong> Delete the tweaks selected in the ST list.</p>
+</li>
+<li><p class="first"><strong>Add Object to Selected Tweak:</strong> Add selected objects to the tweaks selected in the ST list.</p>
+</li>
+<li><p class="first"><strong>Remove Object from Selected Tweak:</strong> Remove selected objects from the tweaks selected in the ST list.</p>
+</li>
+<li><p class="first"><strong>Select Ctl:</strong> Select the control from the tweaks selected in the ST list.</p>
+</li>
+<li><p class="first"><strong>Select Base Ctl:</strong> Select the Base control from the tweaks selected in the ST list.</p>
+</li>
+<li><p class="first"><strong>Select Affected Objects:</strong> Select the object affected by the the tweaks selected in the ST list.</p>
+</li>
+<li><p class="first"><strong>is_asset_softTweak:</strong> Tag the new created ST as an asset ST. This will also change the ST selection list to show the asset ST.</p>
+</li>
+<li><p class="first"><strong>Use Custom Extension:</strong> The new ST will have a custom suffix.</p>
+</li>
+<li><p class="first"><strong>Suffix Name:</strong> (3) Suffix name for the new ST.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="api">
+<h3>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># To import a softTweak configuration from script editor or Shifter Custom Step:</span>
+
+<span class="kn">from</span> <span class="nn">mgear.animbits</span> <span class="kn">import</span> <span class="n">softTweaks</span> <span class="k">as</span> <span class="n">st</span>
+<span class="n">st</span><span class="o">.</span><span class="n">importConfigurationFromFile</span><span class="p">(</span><span class="n">filePath</span><span class="o">=</span> <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="o">.</span><span class="n">smt</span> <span class="n">configuration</span> <span class="nb">file</span><span class="p">)</span>
+
+<span class="c1"># to export configuration</span>
+<span class="c1"># list the softtweaks in the scene</span>
+<span class="n">softtweaks</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">_listSoftModTweaks</span><span class="p">(</span><span class="n">is_asset</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="c1"># export</span>
+<span class="n">st</span><span class="o">.</span><span class="n">exportConfiguration</span><span class="p">(</span><span class="n">softtweaks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="smart-reset-attribute-srt">
+<h2>Smart reset Attribute/SRT<a class="headerlink" href="#smart-reset-attribute-srt" title="Permalink to this headline">¶</a></h2>
+<p>This command will reset the SRT (Scale, rotation and Translation of any selected object). If an attribute is higlighted in the Channel Box, will reset the channel instead.</p>
+<p><strong>TIP:</strong> Set a hotkey for this command using mGear Hotkey creator in utilities menu.</p>
+<a class="reference internal image-reference" href="_images/smartReset_hotkey.png"><img alt="_images/smartReset_hotkey.png" class="align-center" src="_images/smartReset_hotkey.png" style="width: 663.1px; height: 142.5px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="crankUserDocumentation.html" class="btn btn-neutral float-right" title="Crank User Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="solvers.html" class="btn btn-neutral" title="Custom Solvers/Deformers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

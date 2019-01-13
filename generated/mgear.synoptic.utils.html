@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.synoptic.utils &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
+        <link rel="up" title="Synoptic" href="../synopticModules.html"/>
+        <link rel="next" title="mgear.synoptic.widgets" href="mgear.synoptic.widgets.html"/>
+        <link rel="prev" title="mgear.synoptic" href="mgear.synoptic.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../baseModules.html">Base Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rigbitsModules.html">Rigbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shifterModules.html">Shifter Rig Builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simpleRigModules.html">Simple Rig</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../synopticModules.html">Synoptic</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../synopticModules.html#introduction">Introduction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../synopticModules.html#modules">Modules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="mgear.synoptic.html">mgear.synoptic</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">mgear.synoptic.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mgear.synoptic.widgets.html">mgear.synoptic.widgets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../modulesList.html">Modules flat List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../framework.html">Framework</a> &raquo;</li>
+        
+          <li><a href="../synopticModules.html">Synoptic</a> &raquo;</li>
+        
+      <li>mgear.synoptic.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated/mgear.synoptic.utils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.synoptic.utils">
+<span id="mgear-synoptic-utils"></span><h1>mgear.synoptic.utils<a class="headerlink" href="#module-mgear.synoptic.utils" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.applyMirror" title="mgear.synoptic.utils.applyMirror"><code class="xref py py-obj docutils literal"><span class="pre">applyMirror</span></code></a>(nameSpace,&nbsp;mirrorEntry)</td>
+<td>Apply mirro pose</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.bakeSprings" title="mgear.synoptic.utils.bakeSprings"><code class="xref py py-obj docutils literal"><span class="pre">bakeSprings</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Bake the automatic spring animation to animation curves</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.bindPose" title="mgear.synoptic.utils.bindPose"><code class="xref py py-obj docutils literal"><span class="pre">bindPose</span></code></a>(model)</td>
+<td>Restore the reset position of the rig</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.calculateMirrorData" title="mgear.synoptic.utils.calculateMirrorData"><code class="xref py py-obj docutils literal"><span class="pre">calculateMirrorData</span></code></a>(srcNode,&nbsp;targetNode[,&nbsp;flip])</td>
+<td>Calculate the mirror data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.changeSpace" title="mgear.synoptic.utils.changeSpace"><code class="xref py py-obj docutils literal"><span class="pre">changeSpace</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr,&nbsp;…)</td>
+<td>Change the space of a control</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.clearSprings" title="mgear.synoptic.utils.clearSprings"><code class="xref py py-obj docutils literal"><span class="pre">clearSprings</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Delete baked animation from spring</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.gatherMirrorData" title="mgear.synoptic.utils.gatherMirrorData"><code class="xref py py-obj docutils literal"><span class="pre">gatherMirrorData</span></code></a>(nameSpace,&nbsp;node,&nbsp;flip)</td>
+<td>Get the data to mirror</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getClosestNode" title="mgear.synoptic.utils.getClosestNode"><code class="xref py py-obj docutils literal"><span class="pre">getClosestNode</span></code></a>(node,&nbsp;nodesToQuery)</td>
+<td>return the closest node, based on distance, from the list provided</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getComboIndex" title="mgear.synoptic.utils.getComboIndex"><code class="xref py py-obj docutils literal"><span class="pre">getComboIndex</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr)</td>
+<td>Get the index from a  combo attribute</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getComboKeys" title="mgear.synoptic.utils.getComboKeys"><code class="xref py py-obj docutils literal"><span class="pre">getComboKeys</span></code></a>(model,&nbsp;object_name,&nbsp;combo_attr)</td>
+<td>Get the keys from a combo attribute</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getControlers" title="mgear.synoptic.utils.getControlers"><code class="xref py py-obj docutils literal"><span class="pre">getControlers</span></code></a>(model[,&nbsp;gSuffix])</td>
+<td>Get thr controlers from the set</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getInvertCheckButtonAttrName" title="mgear.synoptic.utils.getInvertCheckButtonAttrName"><code class="xref py py-obj docutils literal"><span class="pre">getInvertCheckButtonAttrName</span></code></a>(str)</td>
+<td>Get the invert check butto attribute name</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getModel" title="mgear.synoptic.utils.getModel"><code class="xref py py-obj docutils literal"><span class="pre">getModel</span></code></a>(widget)</td>
+<td>Get the model Name</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getNamespace" title="mgear.synoptic.utils.getNamespace"><code class="xref py py-obj docutils literal"><span class="pre">getNamespace</span></code></a>(modelName)</td>
+<td>Get the name space from rig root</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getNode" title="mgear.synoptic.utils.getNode"><code class="xref py py-obj docutils literal"><span class="pre">getNode</span></code></a>(nodeName)</td>
+<td>Get a PyNode from the string name</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.getSynopticWidget" title="mgear.synoptic.utils.getSynopticWidget"><code class="xref py py-obj docutils literal"><span class="pre">getSynopticWidget</span></code></a>(widget[,&nbsp;max_iter])</td>
+<td>Return the widget where the synoptic panel is attach</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.ikFkMatch" title="mgear.synoptic.utils.ikFkMatch"><code class="xref py py-obj docutils literal"><span class="pre">ikFkMatch</span></code></a>(model,&nbsp;ikfk_attr,&nbsp;uiHost_name,&nbsp;…)</td>
+<td>Switch IK/FK with matching functionality</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.isSideElement" title="mgear.synoptic.utils.isSideElement"><code class="xref py py-obj docutils literal"><span class="pre">isSideElement</span></code></a>(name)</td>
+<td>Returns is name(str) side element?</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.keyAll" title="mgear.synoptic.utils.keyAll"><code class="xref py py-obj docutils literal"><span class="pre">keyAll</span></code></a>(model)</td>
+<td>Keyframe all the controls inside the controls group</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.keyGroup" title="mgear.synoptic.utils.keyGroup"><code class="xref py py-obj docutils literal"><span class="pre">keyGroup</span></code></a>(model,&nbsp;groupSuffix)</td>
+<td>Keyframe all the members of a given group</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.keyObj" title="mgear.synoptic.utils.keyObj"><code class="xref py py-obj docutils literal"><span class="pre">keyObj</span></code></a>(model,&nbsp;object_names)</td>
+<td>Set the keyframe in the controls pass by a list in obj_names variable</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.keySel" title="mgear.synoptic.utils.keySel"><code class="xref py py-obj docutils literal"><span class="pre">keySel</span></code></a>()</td>
+<td>Key selected controls</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.listAttrForMirror" title="mgear.synoptic.utils.listAttrForMirror"><code class="xref py py-obj docutils literal"><span class="pre">listAttrForMirror</span></code></a>(node)</td>
+<td>List attributes to invert the value for mirror posing</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.mirrorPose" title="mgear.synoptic.utils.mirrorPose"><code class="xref py py-obj docutils literal"><span class="pre">mirrorPose</span></code></a>([flip,&nbsp;nodes])</td>
+<td>Summary</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.mirrorPoseOld" title="mgear.synoptic.utils.mirrorPoseOld"><code class="xref py py-obj docutils literal"><span class="pre">mirrorPoseOld</span></code></a>([flip,&nbsp;nodes])</td>
+<td>Deprecated: Mirror pose</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.quickSel" title="mgear.synoptic.utils.quickSel"><code class="xref py py-obj docutils literal"><span class="pre">quickSel</span></code></a>(model,&nbsp;channel,&nbsp;mouse_button)</td>
+<td>Select the object stored on the quick selection attributes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.recordNodesMatrices" title="mgear.synoptic.utils.recordNodesMatrices"><code class="xref py py-obj docutils literal"><span class="pre">recordNodesMatrices</span></code></a>(nodes,&nbsp;desiredTime)</td>
+<td>get the matrices of the nodes provided and return a dict of</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.resetSelTrans" title="mgear.synoptic.utils.resetSelTrans"><code class="xref py py-obj docutils literal"><span class="pre">resetSelTrans</span></code></a>()</td>
+<td>Reset the transfom values (SRT) for the selected objects</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.selAll" title="mgear.synoptic.utils.selAll"><code class="xref py py-obj docutils literal"><span class="pre">selAll</span></code></a>(model)</td>
+<td>Select all controlers</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.selGroup" title="mgear.synoptic.utils.selGroup"><code class="xref py py-obj docutils literal"><span class="pre">selGroup</span></code></a>(model,&nbsp;groupSuffix)</td>
+<td>Select the members of a given set</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.selectObj" title="mgear.synoptic.utils.selectObj"><code class="xref py py-obj docutils literal"><span class="pre">selectObj</span></code></a>(model,&nbsp;object_names,&nbsp;mouse_button,&nbsp;…)</td>
+<td>Select an object</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.spine_FKToIK" title="mgear.synoptic.utils.spine_FKToIK"><code class="xref py py-obj docutils literal"><span class="pre">spine_FKToIK</span></code></a>(fkControls,&nbsp;ikControls[,&nbsp;…])</td>
+<td>Match the IK controls to the FK.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.spine_IKToFK" title="mgear.synoptic.utils.spine_IKToFK"><code class="xref py py-obj docutils literal"><span class="pre">spine_IKToFK</span></code></a>(fkControls,&nbsp;ikControls[,&nbsp;…])</td>
+<td>position the IK controls to match, as best they can, the fk controls.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.stripNamespace" title="mgear.synoptic.utils.stripNamespace"><code class="xref py py-obj docutils literal"><span class="pre">stripNamespace</span></code></a>(nodeName)</td>
+<td>Strip all the namespaces from a given name</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.swapSideLabel" title="mgear.synoptic.utils.swapSideLabel"><code class="xref py py-obj docutils literal"><span class="pre">swapSideLabel</span></code></a>(name)</td>
+<td>Returns fliped name</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.toggleAttr" title="mgear.synoptic.utils.toggleAttr"><code class="xref py py-obj docutils literal"><span class="pre">toggleAttr</span></code></a>(model,&nbsp;object_name,&nbsp;attr_name)</td>
+<td>Toggle a boolean attribute</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.AbstractAnimationTransfer" title="mgear.synoptic.utils.AbstractAnimationTransfer"><code class="xref py py-obj docutils literal"><span class="pre">AbstractAnimationTransfer</span></code></a>()</td>
+<td>Abstract animation transfer class</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.IkFkTransfer" title="mgear.synoptic.utils.IkFkTransfer"><code class="xref py py-obj docutils literal"><span class="pre">IkFkTransfer</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.ParentSpaceTransfer" title="mgear.synoptic.utils.ParentSpaceTransfer"><code class="xref py py-obj docutils literal"><span class="pre">ParentSpaceTransfer</span></code></a>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/synoptic/utils.html#mgear.synoptic.utils.SpineIkFkTransfer" title="mgear.synoptic.utils.SpineIkFkTransfer"><code class="xref py py-obj docutils literal"><span class="pre">SpineIkFkTransfer</span></code></a>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mgear.synoptic.widgets.html" class="btn btn-neutral float-right" title="mgear.synoptic.widgets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mgear.synoptic.html" class="btn btn-neutral" title="mgear.synoptic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1340 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mgear.rigbits.rbf_node &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>mgear.rigbits.rbf_node</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mgear/rigbits/rbf_node.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mgear.rigbits.rbf_node">
+<span id="mgear-rigbits-rbf-node"></span><h1>mgear.rigbits.rbf_node<a class="headerlink" href="#module-mgear.rigbits.rbf_node" title="Permalink to this headline">¶</a></h1>
+<p>rbf node to normalize the calls across any number of supported
+rbf node types. First supported “weightDriver”/ingo clemens/Brave Rabit</p>
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.CTL_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">CTL_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_node.CTL_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of the control suffixe</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.DRIVEN_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">DRIVEN_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_node.DRIVEN_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – suffix to be applied to driven group</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.DRIVER_CTL_ATTR_NAME">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">DRIVER_CTL_ATTR_NAME</code><a class="headerlink" href="#mgear.rigbits.rbf_node.DRIVER_CTL_ATTR_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of the attribute to store driver control</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.DRIVER_POSEINPUT_ATTR">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">DRIVER_POSEINPUT_ATTR</code><a class="headerlink" href="#mgear.rigbits.rbf_node.DRIVER_POSEINPUT_ATTR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of attr to store control driver(holder)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.DRIVER_POSES_INFO_ATTR">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">DRIVER_POSES_INFO_ATTR</code><a class="headerlink" href="#mgear.rigbits.rbf_node.DRIVER_POSES_INFO_ATTR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of attr to store control</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.GENERIC_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">GENERIC_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_node.GENERIC_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – generic suffix if one not provided by support module</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.RBF_SCALE_ATTR">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">RBF_SCALE_ATTR</code><a class="headerlink" href="#mgear.rigbits.rbf_node.RBF_SCALE_ATTR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of attr applied to driven control</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.RBF_SETUP_ATTR">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">RBF_SETUP_ATTR</code><a class="headerlink" href="#mgear.rigbits.rbf_node.RBF_SETUP_ATTR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of attr to store setup name for group of rbf</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.ROTATE_ATTRS">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">ROTATE_ATTRS</code><a class="headerlink" href="#mgear.rigbits.rbf_node.ROTATE_ATTRS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – convenience list of transform attrs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.SCALE_ATTRS">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">SCALE_ATTRS</code><a class="headerlink" href="#mgear.rigbits.rbf_node.SCALE_ATTRS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – convenience list of transform attrs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.SUPPORTED_RBF_NODES">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">SUPPORTED_RBF_NODES</code><a class="headerlink" href="#mgear.rigbits.rbf_node.SUPPORTED_RBF_NODES" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>tuple</em> – currently supported rbf node types</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.TRANSFORM_SUFFIX">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">TRANSFORM_SUFFIX</code><a class="headerlink" href="#mgear.rigbits.rbf_node.TRANSFORM_SUFFIX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – suffix of transform nodes for rbf nodes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.TRANSLATE_ATTRS">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">TRANSLATE_ATTRS</code><a class="headerlink" href="#mgear.rigbits.rbf_node.TRANSLATE_ATTRS" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list</em> – convenience list of transform attrs</p>
+</dd></dl>
+
+<p>Notes - refactor as more supported rbf node types are added</p>
+<p>__author__ = “Rafael Villar”
+__email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravrigs&#46;com">rav<span>&#64;</span>ravrigs<span>&#46;</span>com</a>”</p>
+<dl class="class">
+<dt id="mgear.rigbits.rbf_node.RBFNode">
+<em class="property">class </em><code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">RBFNode</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to normalize the function between different types of rbf nodes
+that essentially perform the same task. Look to weightNode_io for examples
+of normalized function calls to specific nodeType information with this
+class.</p>
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.RBFNode.name">
+<code class="descname">name</code><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of the node that either exists or to be created</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.RBFNode.rbfType">
+<code class="descname">rbfType</code><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.rbfType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – nodeType to create node of supported type</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mgear.rigbits.rbf_node.RBFNode.transformNode">
+<code class="descname">transformNode</code><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.transformNode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> – name of transform node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>overwritten so that the RBFNode instance can be treated as a pymal
+node. Convenience</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name of rbfNode node correctly formated</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>overwritten so that the RBFNode instance can be treated as a pymal
+node. Convenience</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name of rbfNode node correctly formated</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.__unicode__">
+<code class="descname">__unicode__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.__unicode__" title="Permalink to this definition">¶</a></dt>
+<dd><p>overwritten so that the RBFNode instance can be treated as a pymal
+node. Convenience</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name of rbfNode node correctly formated</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.addPose">
+<code class="descname">addPose</code><span class="sig-paren">(</span><em>poseInput</em>, <em>poseValue</em>, <em>posesIndex=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.addPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>add pose to the weightDriver node provided. Also used for editing
+an existing pose, since you can specify the index. If non provided
+assume new</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – weightedDriver</li>
+<li><strong>poseInput</strong> (<em>list</em>) – list of the poseInput values</li>
+<li><strong>poseValue</strong> (<em>list</em>) – of poseValue values</li>
+<li><strong>posesIndex</strong> (<em>int</em><em>, </em><em>optional</em>) – at desired index, if none assume</li>
+<li><strong>latest/new</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.applyDefaultPose">
+<code class="descname">applyDefaultPose</code><span class="sig-paren">(</span><em>posesIndex=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.applyDefaultPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>apply default pose, WARNING. Applying default on more than one index
+will result in rbf decomp error.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>posesIndex</strong> (<em>int</em><em>, </em><em>optional</em>) – index to default values</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.copyPoses">
+<code class="descname">copyPoses</code><span class="sig-paren">(</span><em>nodeB</em>, <em>emptyPoseValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.copyPoses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy poses from nodeA to nodeB with the option to be blank or node
+for syncing nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nodeB</strong> (<em>str</em>) – name of weightedNode</li>
+<li><strong>emptyPoseValues</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the copy just be the same</li>
+<li><strong>of poses but blank output value</strong> (<em>number</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">n/a</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">n/a</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.create">
+<code class="descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an RBF node of type, defined by the subclassed module</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.deletePose">
+<code class="descname">deletePose</code><span class="sig-paren">(</span><em>indexToPop</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.deletePose" title="Permalink to this definition">¶</a></dt>
+<dd><p>gather information on node, remove desired index and reapply</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – weightDriver</li>
+<li><strong>indexToPop</strong> (<em>int</em>) – pose index to remove</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.deleteRBFToggleAttr">
+<code class="descname">deleteRBFToggleAttr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.deleteRBFToggleAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>convenience function to delete the connected “enevelope” from the
+anim control node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">TYPE</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.forceEvaluation">
+<code class="descname">forceEvaluation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.forceEvaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>convenience function to force re evaluation on the rbf nodes
+most nodes support this</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.formatName">
+<code class="descname">formatName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.formatName" title="Permalink to this definition">¶</a></dt>
+<dd><p>standardized the naming of all rbf nodes for consistency</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name of all supported rbf nodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getConnectedRBFToggleNode">
+<code class="descname">getConnectedRBFToggleNode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getConnectedRBFToggleNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the node connected to the RBFNodes toggle attr</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name of node</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getDrivenNode">
+<code class="descname">getDrivenNode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getDrivenNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>get driven nodes connected to weightDriver</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of driven nodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getDrivenNodeAttributes">
+<code class="descname">getDrivenNodeAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getDrivenNodeAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the connected attributes of the provided compound attr in order
+of index - Sanity check</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of connected attrs in order</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getDriverControlAttr">
+<code class="descname">getDriverControlAttr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getDriverControlAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the driverControlAttr</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the name of the control set within the attr</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getDriverControlPoseAttr">
+<code class="descname">getDriverControlPoseAttr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getDriverControlPoseAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve poseInfo from the driverControlPoseAttr as a dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of pose information</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getDriverNode">
+<code class="descname">getDriverNode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getDriverNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>get nodes that are driving weightDriver node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of driver nodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getDriverNodeAttributes">
+<code class="descname">getDriverNodeAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getDriverNodeAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the connected attributes of the provided compound attr in order
+of index - Sanity check</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of connected attrs in order</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getNodeInfo">
+<code class="descname">getNodeInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getNodeInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all the info for for the node in the form of a dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> – NotImplementedError: each rbf node is unique,</li>
+<li>adhere here for rbf manager ui support</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getPoseInfo">
+<code class="descname">getPoseInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getPoseInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>get poseInfo dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> – each rbf node is unique, adhere here for</li>
+<li>rbf manager ui support</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getPoseValues">
+<code class="descname">getPoseValues</code><span class="sig-paren">(</span><em>resetDriven=True</em>, <em>absoluteWorld=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getPoseValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all pose values from rbf node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resetDriven</strong> (<em>bool</em><em>, </em><em>optional</em>) – reset driven animControl</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of poseValues</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getRBFToggleAttr">
+<code class="descname">getRBFToggleAttr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getRBFToggleAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the specific to the type, “envelope” attr for rbf node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getSetupName">
+<code class="descname">getSetupName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getSetupName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the name of the setup that the RBFNode belongs to</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">skirt_L0, shoulder_R0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.getTransformParent">
+<code class="descname">getTransformParent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.getTransformParent" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a dict of all the information to be serialized to/from json</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">information to be recreated on import</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.lengthenCompoundAttrs">
+<code class="descname">lengthenCompoundAttrs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.lengthenCompoundAttrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>convenience function, sanity check for zero’d compound attrs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.nodeType_suffix">
+<code class="descname">nodeType_suffix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.nodeType_suffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>optional override with a module/node specific suffix for naming</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.recallDriverPose">
+<code class="descname">recallDriverPose</code><span class="sig-paren">(</span><em>poseIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.recallDriverPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>recall the pose on the controlDriver with information at the
+specified index</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>poseIndex</strong> (<em>int</em>) – desired index, matches pose index on rbfNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.setDrivenNode">
+<code class="descname">setDrivenNode</code><span class="sig-paren">(</span><em>drivenNode</em>, <em>drivenAttrs</em>, <em>parent=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.setDrivenNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the node to be driven by the weightDriver</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – weightDriver node</li>
+<li><strong>drivenNode</strong> (<em>str</em>) – name of node to be driven</li>
+<li><strong>drivenAttrs</strong> (<em>list</em>) – of attributes to be driven by weightDriver</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.setDriverControlAttr">
+<code class="descname">setDriverControlAttr</code><span class="sig-paren">(</span><em>controlName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.setDriverControlAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>create and set attr with the driver animControl string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>controlName</strong> (<em>str</em>) – name of animControl(usually)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.setDriverControlPoseAttr">
+<code class="descname">setDriverControlPoseAttr</code><span class="sig-paren">(</span><em>poseInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.setDriverControlPoseAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the poseInfo as a string to the DriverControlPoseAttr</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>poseInfo</strong> (<em>dict</em>) – of pose information to set, as a str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.setDriverNode">
+<code class="descname">setDriverNode</code><span class="sig-paren">(</span><em>driverNode</em>, <em>driverAttrs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.setDriverNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the node that will be driving the evaluation on our poses</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – name of weightDriver node</li>
+<li><strong>driverNode</strong> (<em>str</em>) – name of driver node</li>
+<li><strong>driverAttrs</strong> (<em>list</em>) – of attributes used to perform evaluations</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.setSetupName">
+<code class="descname">setSetupName</code><span class="sig-paren">(</span><em>setupName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.setSetupName" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the name of the setup for the RBFNode</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>setupName</strong> (<em>str</em>) – desired name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.setToggleRBFAttr">
+<code class="descname">setToggleRBFAttr</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.setToggleRBFAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggle rbfattr on or off (any value provided)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>TYPE</em>) – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.syncPoseIndices">
+<code class="descname">syncPoseIndices</code><span class="sig-paren">(</span><em>srcNode</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.syncPoseIndices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.updateDriverControlPoseAttr">
+<code class="descname">updateDriverControlPoseAttr</code><span class="sig-paren">(</span><em>posesIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.updateDriverControlPoseAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>update the driverControlPoseAttr at the specified index</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>posesIndex</strong> (<em>int</em>) – update the pose information at the index</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.addDrivenGroup">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">addDrivenGroup</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.addDrivenGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>add driven group, pad, above the provided node for direct connection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – name of node to add group above</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of node created</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.connectRBFToggleAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">connectRBFToggleAttr</code><span class="sig-paren">(</span><em>node</em>, <em>rbfNode</em>, <em>rbfEnableAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.connectRBFToggleAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>connect the “envelope” attr with its corresponding rbfNode</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – node with attr</li>
+<li><strong>rbfNode</strong> (<em>str</em>) – rbf node with receiving attr</li>
+<li><strong>rbfEnableAttr</strong> (<em>str</em>) – targeted rbf node for disabling node</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.copyInverseMirrorAttrs">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">copyInverseMirrorAttrs</code><span class="sig-paren">(</span><em>srcNode</em>, <em>dstNode</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.copyInverseMirrorAttrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>within mGear the concept of inverseAttrs, so that transforms can be
+accurately mirrored, exists and this copys the relavent attrs from src
+to dest</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>srcNode</strong> (<em>str</em><em>, </em><em>pynode</em>) – source node</li>
+<li><strong>dstNode</strong> (<em>str</em><em>, </em><em>pynode</em>) – destination to copy attrs to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.createDriverControlAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">createDriverControlAttr</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.createDriverControlAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>create the string attr where information will be stored for query
+associated driver anim control</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – rbf node to tag with information</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.createDriverControlPoseAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">createDriverControlPoseAttr</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.createDriverControlPoseAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>ensure the driverControlPoseAttr exists on the (RBF)node provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – name of the supported RBFNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.createRBFToggleAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">createRBFToggleAttr</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.createRBFToggleAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a node to toggle the rbf pose that drives the node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – desired node to be tagged with attr</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.decompMatrix">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">decompMatrix</code><span class="sig-paren">(</span><em>node</em>, <em>matrix</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.decompMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decomposes a MMatrix in new api. Returns an list of
+translation,rotation,scale in world space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>str</em>) – name of node to query rotate order</li>
+<li><strong>matrix</strong> (<em>MMatrix</em>) – mmatrix to decompos</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Description</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">TYPE</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.deleteRBFToggleAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">deleteRBFToggleAttr</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.deleteRBFToggleAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove the toggle attribute from the node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – node to remove toggle attr from</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getConnectedRBFToggleNode">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getConnectedRBFToggleNode</code><span class="sig-paren">(</span><em>node</em>, <em>toggleAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getConnectedRBFToggleNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the node connected to the rbf(node)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>str</em>) – rbf node</li>
+<li><strong>toggleAttr</strong> (<em>str</em>) – envelope attr to check</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">connected node</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getDrivenMatrix">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getDrivenMatrix</code><span class="sig-paren">(</span><em>node</em>, <em>absoluteWorld=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getDrivenMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if there is a control node for the provided node(driven)
+if so, collect the matrix information for both</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>pynode</em>) – driven group/driven node</li>
+<li><strong>absoluteWorld</strong> (<em>bool</em><em>, </em><em>optional</em>) – get the world matrix or defaulted mat</li>
+<li><strong>the control is zeroed out.</strong> (<em>if</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">of total position including the control</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">MMatrix</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getDriverControlAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getDriverControlAttr</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getDriverControlAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the stored information from control attr</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – name of rbfNode</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">contents of attr, animControl</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getDriverControlPoseAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getDriverControlPoseAttr</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getDriverControlPoseAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>record the dict, stored as a str, holding driver control
+pose information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – name of the RBFNode supported node to query</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of attr:[value at index]</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getMultipleAttrs">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getMultipleAttrs</code><span class="sig-paren">(</span><em>node</em>, <em>attributes</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getMultipleAttrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>get multiple attrs and their values in a list, in order</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node</strong> (<em>str</em>) – name of node</li>
+<li><strong>attributes</strong> (<em>list</em>) – of attrs to query</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">of values</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getRbfSceneSetupsInfo">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getRbfSceneSetupsInfo</code><span class="sig-paren">(</span><em>includeEmpty=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getRbfSceneSetupsInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>gather scene rbf nodes with setups in dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>includeEmpty</strong> (<em>bool</em><em>, </em><em>optional</em>) – should rbf nodes with empty setup names</li>
+<li><strong>included</strong> (<em>be</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">setupName(str):list associated rbf nodes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getSceneRBFNodes">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getSceneRBFNodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getSceneRBFNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all rbf nodes in the scene of supported type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of rbf nodes, see supported types</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getSceneSetupNodes">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getSceneSetupNodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getSceneSetupNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>get rbf nodes with setups attributes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of rbf nodes with setup information</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.getSetupName">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">getSetupName</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.getSetupName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get setup name from specified rbf node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – name of rbf node</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">name of setup associated with node</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.recallDriverControlPose">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">recallDriverControlPose</code><span class="sig-paren">(</span><em>driverControl</em>, <em>poseInfo</em>, <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.recallDriverControlPose" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the driverControl to the index requested. Set as many attrs as is
+provided in the poseInfo</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>driverControl</strong> (<em>str</em>) – control to set poseAttr infomation on</li>
+<li><strong>poseInfo</strong> (<em>dict</em>) – of poses</li>
+<li><strong>index</strong> (<em>int</em>) – poseInfo[attrName]:[index]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.removeDrivenGroup">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">removeDrivenGroup</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.removeDrivenGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove driven group above desired node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – name of node to check</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.resetDrivenNodes">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">resetDrivenNodes</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.resetDrivenNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>use mgear convenience function to reset all available transform nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – node to reset</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.setDriverControlAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">setDriverControlAttr</code><span class="sig-paren">(</span><em>node</em>, <em>controlName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.setDriverControlAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>create and set attr with the driver animControl string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – name of rbfnode</li>
+<li><strong>controlName</strong> (<em>str</em>) – name of animControl(usually)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.setDriverControlPoseAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">setDriverControlPoseAttr</code><span class="sig-paren">(</span><em>node</em>, <em>poseInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.setDriverControlPoseAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the driverControlPoseAttr with the poseInfo provided, as string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – name of rbf node to set it on</li>
+<li><strong>poseInfo</strong> (<em>dict</em>) – of pose information</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.setSetupName">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">setSetupName</code><span class="sig-paren">(</span><em>node</em>, <em>setupName</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.setSetupName" title="Permalink to this definition">¶</a></dt>
+<dd><p>set setup name on the specified node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – name of rbf node to set</li>
+<li><strong>setupName</strong> (<em>str</em>) – name of setup</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.setToggleRBFAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">setToggleRBFAttr</code><span class="sig-paren">(</span><em>node</em>, <em>value</em>, <em>toggleAttr</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.setToggleRBFAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggle rbfattr on or off (any value provided)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – name of node with the attr to toggle rbf on/off</li>
+<li><strong>value</strong> (<em>int</em><em>, </em><em>bool</em>) – on/off</li>
+<li><strong>toggleAttr</strong> (<em>str</em>) – name of the attr to set</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.updateDriverControlPoseAttr">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">updateDriverControlPoseAttr</code><span class="sig-paren">(</span><em>node</em>, <em>driverControl</em>, <em>poseIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.updateDriverControlPoseAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the ControlPoseDict add any additionally recorded values to and set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – name of the RBFNode supported node</li>
+<li><strong>driverControl</strong> (<em>str</em>) – name of the control to queary attr info from</li>
+<li><strong>poseIndex</strong> (<em>int</em>) – to add the collected pose information to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.0.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
