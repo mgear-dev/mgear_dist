@@ -25,6 +25,10 @@
 - Excons: [Gaetan Guidet](https://github.com/gatgui/excons)
 - Grim IK: [Charles Wardlaw](https://github.com/kattkieru/grim_IK)
 - Maya Math Nodes: [Serguei Kalentchouk](https://github.com/serguei-k/maya-math-nodes)
+- QJsonModel Python port: [Marcus Ottosson](https://github.com/mottosso)
+- QJsonModel: [sacha schutz](https://github.com/dridk)
+- Qt: [Marcus Ottosson](https://github.com/mottosso)
+- Weight Driver: [Ingo Clemens](https://github.com/IngoClemens)
 
 ** All listed in alphabetical order  
 ** My apologies is we forget any name. Please contact us! :)  
