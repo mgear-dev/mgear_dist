@@ -1,6 +1,18 @@
 Release Log
 ===========
 
+3.0.4
+-----
+**Bug Fix**
+	* Synoptic: Fix refresh needed on togglButtons and on visibility/control tabs [synoptic#13]
+	* mGear_core: Node: controller_tag_connect fail if ctl parent doesn't have tag [mgear_core#24]
+	* Shifter_classic_components: Eye component update structure [shifter_classic_components#39]
+	* Shifter_classic_components: Spine FK: fisrt joint moving with IK chest control [shifter_classic_components#38]
+	* Shifter: custom step template still have old name import [shifter#56]
+	* Rigbits: hotkey creation command has bad imports [rigbits#19]
+	* Shifter: serialized guide with none parent components issue [shifter#55]
+	* Rigbits: Ghost control creator and Tweaks should handle ctrl Tag and custom pickwalk [rigbits#20]
+
 3.0.3
 -----
 **New Features**
