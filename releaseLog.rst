@@ -1,6 +1,15 @@
 Release Log
 ===========
 
+3.0.5
+-----
+**Bug Fix**
+	* mGear_core: Attribute: moveChannel doesn't support float attr [mgear_core#27]
+	* mGear_core: Callback manager: UserTimeChangedManager change condition state to playingBackAuto [mgear_core#28]
+	* Rigbits: Eye rigger and Lips Rigger bad naming in rig curves [rigbits#21]
+	* Shifter: Export guide to template (.sgt) will break component parent references if name is not unique [shifter#58]
+
+
 3.0.4
 -----
 **Bug Fix**
