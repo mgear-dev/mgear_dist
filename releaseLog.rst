@@ -1,6 +1,31 @@
 Release Log
 ===========
 
+3.1.0
+-----
+**New Features**
+	* shifter_classic_components: New Component: chain_IK_with_variable FK and stack connection [shifter_classic_components#43]
+	* shifter_classic_components: New Component: chain_net_01 [shifter_classic_components#42]
+	* shifter_classic_components: new component: Lite chain stack [shifter_classic_components#40]
+
+**Enhancements**
+	* mgear_core:implemented filesize compression for jSkin and gSkin (pull request #28)
+	* Rigbits: Update tweakers modules [rigbits#18]
+	* Shifter: add optional uihost argument on addAnimParam and addAnimEnumParam [shifter#60]
+	* Shifter: avoid negative scaling in joints [shifter#59]
+	* Shifter: inspect settings open tap option [shifter#62]
+	* Shifter: Shared custom step fix color feedback and hover information [shifter#57]
+	* shifter_classic_components: chain_net_01: improve pickwalk [shifter_classic_components#47]
+	* shifter_classic_components: Chains with stack connection should have connection offset options [shifter_classic_components#46]
+	* shifter_classic_components: Review channel hosts for stack connection chains [shifter_classic_components#44]
+	* simpleRig: handle geometry selection option when convert to shifter rig [simpleRig#6]
+	* Synoptic: Fix refresh needed on togglButtons and on visibility/control tabs [synoptic#13]
+
+**Bug Fix**
+	* mgear_core: applyop stretch: component using squash stretch solver explodes when max stretch above 1.5 [mgear_core#30]
+	* mgear_core: attribute module log error wrong flags [mgear_core#29]
+	* shifter_classic_components: chain FK with variable IK the extreme controls should not be on 0 or 1.0 of the path [shifter_classic_components#45]
+
 3.0.3
 -----
 **New Features**
