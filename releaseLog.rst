@@ -1,7 +1,7 @@
 Release Log
 ===========
 
-3.1.0
+3.1.1
 -----
 **New Features**
 	* shifter_classic_components: New Component: chain_IK_with_variable FK and stack connection [shifter_classic_components#43]
@@ -22,7 +22,6 @@ Release Log
 	* Synoptic: Fix refresh needed on togglButtons and on visibility/control tabs [synoptic#13]
 
 **Bug Fix**
-	* mgear_core: applyop stretch: component using squash stretch solver explodes when max stretch above 1.5 [mgear_core#30]
 	* mgear_core: attribute module log error wrong flags [mgear_core#29]
 	* shifter_classic_components: chain FK with variable IK the extreme controls should not be on 0 or 1.0 of the path [shifter_classic_components#45]
 
