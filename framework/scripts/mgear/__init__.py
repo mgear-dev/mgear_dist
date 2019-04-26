@@ -1,9 +1,14 @@
 """mGear init module"""
 
+# imports
+from pkgutil import extend_path
 import os
 import sys
 import exceptions
 from . import menu
+
+# extend mGear python package by adding the current module
+__path__ = extend_path(__path__, __name__)
 
 # Debug mode for the logger
 logDebug = False
