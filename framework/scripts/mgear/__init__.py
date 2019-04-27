@@ -55,48 +55,13 @@ def reloadModule(name="mgear", *args):
 
     """
     debugMode = setDebug(False)
-    module = __import__(name, globals(), locals(), ["*"], -1)
 
-    path = module.__path__[0]
-
-    __reloadRecursive(path, name)
+    for mod in sys.modules.keys():
+        if mod.startswith(name):
+            log("Removing module: {}".format(mod))
+            del sys.modules[mod]
 
     setDebug(debugMode)
-
-
-def __reloadRecursive(path, parentName):
-    """search subfolders recursive
-
-    Args:
-        path (str): Path to search subfolder recursive
-        parentName (str): parent name
-
-    """
-    for root, dirs, files in os.walk(path, True, None):
-
-        # parse all the files of given path and reload python modules
-        for sfile in files:
-            if sfile.endswith(".py"):
-                if sfile == "__init__.py":
-                    name = parentName
-                else:
-                    name = parentName + "." + sfile[:-3]
-
-                log("reload : %s" % name)
-                try:
-                    module = __import__(name, globals(), locals(), ["*"], -1)
-                    reload(module)
-                except ImportError as e:
-                    for arg in e.args:
-                        log(arg, sev_error)
-                except Exception as e:
-                    for arg in e.args:
-                        log(arg, sev_error)
-
-        # Now reload sub modules
-        for dirName in dirs:
-            __reloadRecursive(path + "/" + dirName, parentName + "." + dirName)
-        break
 
 ##########################################################
 # LOGGER
