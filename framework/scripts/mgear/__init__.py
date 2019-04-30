@@ -2,7 +2,6 @@
 
 # imports
 from pkgutil import extend_path
-import os
 import sys
 import exceptions
 from . import menu
