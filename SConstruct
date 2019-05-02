@@ -9,7 +9,7 @@ maya.SetupMscver()
 env = excons.MakeBaseEnv()
 
 
-version = (3, 1, 1)
+version = (3, 2, 0)
 versionstr = "%d.%d.%d" % version
 platname = {"win32": "windows", "darwin": "osx"}.get(sys.platform, "linux")
 outprefix = "platforms/%s/%s/%s/plug-ins" % (maya.Version(nice=True), platname, excons.arch_dir)
@@ -17,9 +17,13 @@ outprefix = "platforms/%s/%s/%s/plug-ins" % (maya.Version(nice=True), platname, 
 outdir = excons.OutputBaseDirectory()
 
 gen = excons.config.AddGenerator(env, "mgear", {"MGEAR_VERSION": "[%d, %d, %d]" % version,
-                                                "MGEAR_MAJMIN_VERSION": "%d.%d" % (version[0], version[1])})
+                                                "MGEAR_MAJMIN_VERSION": "%d.%d" % (version[0], version[1]),
+                                                "MGEAR_VERSION_MAJOR": "%d" % version[0],
+                                                "MGEAR_VERSION_MINOR": "%d" % version[1],
+                                                "MGEAR_VERSION_PATCH": "%d" % version[2]})
 
 mgearinit = gen("framework/scripts/mgear/__init__.py", "framework/scripts/mgear/__init__.py.in")
+mgearversion = gen("framework/scripts/mgear/version.py", "framework/scripts/mgear/version.py.in")
 mgearmod = gen("mGear.mod", "mGear.mod.in")
 mgearpy = filter(lambda x: not os.path.basename(x).startswith("__init__.py"), excons.glob("scripts/mgear/*"))
 qtpy = ["Qtdotpy/Qt.py"]
@@ -50,7 +54,7 @@ targets = [
         "type": "install",
         "desc": "mgear core python modules",
         "install": {"scripts": excons.glob("framework/scripts/*.py"),
-                    "scripts/mgear": mgearpy + mgearinit,
+                    "scripts/mgear": mgearpy + mgearinit + mgearversion,
                     "scripts/mgear/": excons.glob("framework/scripts/mgear/menu.py"),
                     "scripts/mgear/vendor": [qjason, qtpy, excons.glob("framework/scripts/mgear/vendor/__init__.py")],
                     "scripts/mgear/core": excons.glob("framework/mgear_core/scripts/mgear/core/*"),
