@@ -52,7 +52,7 @@ targets = [
         "install": {"scripts": excons.glob("framework/scripts/*.py"),
                     "scripts/mgear": mgearpy + mgearinit,
                     "scripts/mgear/": excons.glob("framework/scripts/mgear/menu.py"),
-                    "scripts/mgear/vendor": [qjason, qtpy, excons.glob("framework/scripts/mgear/vendor/*.py")],
+                    "scripts/mgear/vendor": [qjason, qtpy, excons.glob("framework/scripts/mgear/vendor/__init__.py")],
                     "scripts/mgear/core": excons.glob("framework/mgear_core/scripts/mgear/core/*"),
                     "scripts/mgear/crank": excons.glob("framework/crank/scripts/mgear/crank/*"),
                     "scripts/mgear/animbits": excons.glob("framework/animbits/scripts/mgear/animbits/*"),
