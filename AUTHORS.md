@@ -9,6 +9,7 @@
 
 ## Contributors:  
 - [Akagi-san](https://github.com/akiwoRM/)
+- [Chris Lesage](https://github.com/chris-lesage)
 - [Gaetan Guidet](https://github.com/gatgui/)
 - [Lior Ben Horin](https://github.com/liorbenhorin/)
 - [Marcus Ottosson](https://github.com/mottosso)
@@ -19,6 +20,7 @@
 - [niteshms04](https://github.com/niteshms04)
 - [Oda-san](https://github.com/Gotetz/)
 - [Ruuttu](https://github.com/Ruuttu/)
+- [Toke Jepsen](https://github.com/tokejepsen/)
 
 ## Forks:  
 - Anim_picker: [Guillaume Barlier](https://github.com/gbarlier/anim_picker)
