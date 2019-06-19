@@ -1,6 +1,20 @@
 Release Log
 ===========
 
+3.2.0
+-----
+**New Features**
+	* Animbits: Animation GPU cache manager [animbits#11]
+	* Rigbits: New Facial Rigger  [rigbits#28][rigbits#27][rigbits#64][rigbits#33][rigbits#32]
+	* Shifter_classic_components: new arm and leg with elbow and knee thickness control [shifter_classic_components#55]
+	* Shifter_classic_components: New component mouth_02 [shifter_classic_components#51]
+	* Shifter_classic_components: New component arm_2jnt_03 with align wrist with guide option [shifter_classic_components#53]
+
+**Enhancements**
+	* Rigbits: RBF manager updated with support for non-control objects  [rigbits#31]
+	* Rigbits: Mirror Controls Shape Tool [rigbits#25]
+	* Shifter_classic_components: control_01, arm_2jnt_04 add orientation visual feedback [shifter_classic_components#54]
+
 3.1.1
 -----
 **New Features**
