@@ -6,46 +6,46 @@
 	url = https://github.com/mottosso/Qt.py
 [submodule "framework/animbits"]
 	path = framework/animbits
-	url = git@github.com:mgear-dev/animbits.git
+	url = https://github.com/mgear-dev/animbits.git
 [submodule "framework/flex"]
 	path = framework/flex
-	url = git@github.com:mgear-dev/flex.git
+	url = https://github.com/mgear-dev/flex.git
 [submodule "framework/mgear_core"]
 	path = framework/mgear_core
-	url = git@github.com:mgear-dev/mgear_core.git
+	url = https://github.com/mgear-dev/mgear_core.git
 [submodule "framework/rigbits"]
 	path = framework/rigbits
-	url = git@github.com:mgear-dev/rigbits.git
+	url = https://github.com/mgear-dev/rigbits.git
 [submodule "framework/shifter"]
 	path = framework/shifter
-	url = git@github.com:mgear-dev/shifter.git
+	url = https://github.com/mgear-dev/shifter.git
 [submodule "framework/shifter_classic_components"]
 	path = framework/shifter_classic_components
-	url = git@github.com:mgear-dev/shifter_classic_components.git
+	url = https://github.com/mgear-dev/shifter_classic_components.git
 [submodule "framework/simpleRig"]
 	path = framework/simpleRig
-	url = git@github.com:mgear-dev/simpleRig.git
+	url = https://github.com/mgear-dev/simpleRig.git
 [submodule "framework/synoptic"]
 	path = framework/synoptic
-	url = git@github.com:mgear-dev/synoptic.git
+	url = https://github.com/mgear-dev/synoptic.git
 [submodule "plugins/maya-math-nodes"]
 	path = plugins/maya-math-nodes
-	url = git@github.com:mgear-dev/maya-math-nodes.git
+	url = https://github.com/mgear-dev/maya-math-nodes.git
 [submodule "plugins/mgear_solvers"]
 	path = plugins/mgear_solvers
-	url = git@github.com:mgear-dev/mgear_solvers.git
+	url = https://github.com/mgear-dev/mgear_solvers.git
 [submodule "plugins/grim_IK"]
 	path = plugins/grim_IK
-	url = git@github.com:mgear-dev/grim_IK.git
+	url = https://github.com/mgear-dev/grim_IK.git
 [submodule "plugins/cvwrap"]
 	path = plugins/cvwrap
-	url = git@github.com:mgear-dev/cvwrap.git
+	url = https://github.com/mgear-dev/cvwrap.git
 [submodule "framework/crank"]
 	path = framework/crank
-	url = git@github.com:mgear-dev/crank.git
+	url = https://github.com/mgear-dev/crank.git
 [submodule "vendor/QJsonModel"]
 	path = vendor/QJsonModel
-	url = git@github.com:mgear-dev/QJsonModel.git
+	url = https://github.com/mgear-dev/QJsonModel.git
 [submodule "plugins/weightDriver"]
 	path = plugins/weightDriver
-	url = git@github.com:mgear-dev/weightDriver.git
+	url = https://github.com/mgear-dev/weightDriver.git
