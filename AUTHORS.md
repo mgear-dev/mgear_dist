@@ -9,8 +9,10 @@
 
 ## Contributors:  
 - [Akagi-san](https://github.com/akiwoRM/)
-- [Chris Lesage](https://github.com/chris-lesage)
+- [Chris Lesage](https://github.com/chris-lesage/)
 - [Gaetan Guidet](https://github.com/gatgui/)
+- [Jascha Wohlkinger](https://github.com/JaschaW/)
+- [Jeroen Hoolmans](https://github.com/jhoolmans/)
 - [Lior Ben Horin](https://github.com/liorbenhorin/)
 - [Marcus Ottosson](https://github.com/mottosso)
 - [Marthinus Wessels](https://github.com/Lohult)

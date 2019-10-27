@@ -1,6 +1,25 @@
 Release Log
 ===========
 
+3.2.1
+-----
+**Enhancements**
+	* Shifter_classic_components:  arm_2jnt_04: wrist align and plane normal [shifter_classic_components#58] [shifter_classic_components#59]
+	* Shifter_classic_components:  S_Spine change the relative connections  [shifter_classic_components#67]
+	* mGear_core: Added 2D guide root for Shifter components [mgear_core#36]
+	* Shifter: Build log window clears instead of reopening. [shifter#74]
+
+**Bug Fix**
+	* Shifter: Fixed a guide renaming issue. [shifter#71]
+	* Shifter: Renamed Connexion to Connection in some places.. [shifter#75]
+	* Shifter: Renaming components will fail if the names are not unique. [shifter#70]
+	* Shifter_classic_components: foot_bk_01 component roll_ctrl issue [shifter_classic_components#68]
+	* Shifter_classic_components: Visual axis reference for control_01 and arm_2jnt_04 is not scaling correctly  [shifter_classic_components#57]
+	* Shifter_classic_components: Fixes building of chain_01 when set to IK only  [shifter_classic_components#65]
+	* Shifter_classic_components:  spine_S_shape rename bug  [shifter_classic_components#50]
+	* mGear_core: dag.findComponentChildren2 fails after a rig was built. [mgear_core#32] [mgear_core#35]
+	* mGear_core: QDragListView ignores drop event on self  [mgear_core#34][mgear_core#33]
+
 3.2.0
 -----
 **New Features**
