@@ -78,3 +78,12 @@ scripts: ../../../../scripts
 
 + MAYAVERSION:2019 PLATFORM:mac   mGear 3.2 ./platforms/2019/osx/x64
 scripts: ../../../../scripts
+
++ MAYAVERSION:2020 PLATFORM:win64 mGear 3.2 ./platforms/2020/windows/x64
+scripts: ../../../../scripts
+
++ MAYAVERSION:2020 PLATFORM:linux mGear 3.2 ./platforms/2020/linux/x64
+scripts: ../../../../scripts
+
++ MAYAVERSION:2020 PLATFORM:mac   mGear 3.2 ./platforms/2020/osx/x64
+scripts: ../../../../scripts
