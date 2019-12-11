@@ -1,6 +1,16 @@
 Release Log
 ===========
 
+3.3.0
+-----
+**New Features**
+	* Shifter_classic_components: Cable component [shifter_classic_components#73]
+	* Shifter_classic_components: UI_slider and UI_container component [shifter_classic_components#66]
+	* Rigbits: New eyebrow Rigger [rigbits#40]
+
+**Enhancements**
+	* Shifter_classic_components: Control_01: Expose more space switch options [shifter_classic_components#7]
+
 3.2.1
 -----
 **Enhancements**

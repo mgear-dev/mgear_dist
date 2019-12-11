@@ -13,6 +13,7 @@
 - [Gaetan Guidet](https://github.com/gatgui/)
 - [Jascha Wohlkinger](https://github.com/JaschaW/)
 - [Jeroen Hoolmans](https://github.com/jhoolmans/)
+- [Krzysztof Marcinowski](https://github.com/krzymRR/)
 - [Lior Ben Horin](https://github.com/liorbenhorin/)
 - [Marcus Ottosson](https://github.com/mottosso)
 - [Marthinus Wessels](https://github.com/Lohult)
