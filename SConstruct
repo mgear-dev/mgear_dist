@@ -60,6 +60,7 @@ targets = [
                     "scripts/mgear/core": excons.glob("framework/mgear_core/scripts/mgear/core/*"),
                     "scripts/mgear/crank": excons.glob("framework/crank/scripts/mgear/crank/*"),
                     "scripts/mgear/animbits": excons.glob("framework/animbits/scripts/mgear/animbits/*"),
+                    "scripts/mgear/anim_picker": excons.glob("framework/anim_picker/scripts/mgear/anim_picker/*"),
                     "scripts/mgear/rigbits": excons.glob("framework/rigbits/scripts/mgear/rigbits/*"),
                     "scripts/mgear/simpleRig": excons.glob("framework/simpleRig/scripts/mgear/simpleRig/*"),
                     "scripts/mgear/synoptic": excons.glob("framework/synoptic/scripts/mgear/synoptic/*"),

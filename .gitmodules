@@ -49,3 +49,6 @@
 [submodule "plugins/weightDriver"]
 	path = plugins/weightDriver
 	url = https://github.com/mgear-dev/weightDriver.git
+[submodule "framework/anim_picker"]
+	path = framework/anim_picker
+	url = https://github.com/mgear-dev/anim_picker.git
