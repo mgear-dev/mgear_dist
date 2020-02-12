@@ -1,10 +1,9 @@
 ### AUTHORS
 
 
-## Core team:  
+## mGear Dev team:  
 - [Jerome Drese](https://github.com/jdrese)
 - [Miquel Campos](https://github.com/miquelcampos)
-- [Rafael Villar](https://github.com/RafaelVillar)
 
 
 ## Contributors:  
@@ -13,6 +12,7 @@
 - [Gaetan Guidet](https://github.com/gatgui/)
 - [Jascha Wohlkinger](https://github.com/JaschaW/)
 - [Jeroen Hoolmans](https://github.com/jhoolmans/)
+- [Justin Pedersen](https://github.com/JustinPedersen)
 - [Krzysztof Marcinowski](https://github.com/krzymRR/)
 - [Lior Ben Horin](https://github.com/liorbenhorin/)
 - [Marcus Ottosson](https://github.com/mottosso)
@@ -22,6 +22,7 @@
 - [Nate Allison](https://github.com/juggernate)
 - [niteshms04](https://github.com/niteshms04)
 - [Oda-san](https://github.com/Gotetz/)
+- [Rafael Villar](https://github.com/RafaelVillar)
 - [Ruuttu](https://github.com/Ruuttu/)
 - [Toke Jepsen](https://github.com/tokejepsen/)
 
