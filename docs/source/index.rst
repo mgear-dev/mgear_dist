@@ -24,11 +24,13 @@ Welcome to mGear: Rigging Framework for Autodesk Maya
    :maxdepth: 2
 
    overview
+   quickStart
    framework
    solvers
    animbitsUserDocumentation
    crankUserDocumentation
    shifterUserDocumentation
+   shifterComponentReference
    synopticUserDocumentation
    videoTutorials
    FAQ
