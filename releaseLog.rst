@@ -1,6 +1,16 @@
 Release Log
 ===========
 
+3.4.0
+-----
+**New Features**
+	* Animbits: Channel Master [animbits#14]
+	* Shifter: Auto Fit Guide (Beta preview). [shifter#82]
+
+**Bug Fix**
+	* Anim Picker: CentOS and windows Maya 2019/2020 TypeErrorr [anim_picker#15]
+	* mGear_core: Fixed path handling in exportSkinPack if it is called with arguments. [mgear_core#37]
+	* mGear_core: Parent switch dag menu not working when root node is parented under a non referenced heararchy. [mgear_core#48]
 
 3.4.0
 -----

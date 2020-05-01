@@ -4,6 +4,7 @@
 ## mGear Dev team:  
 - [Jerome Drese](https://github.com/jdrese)
 - [Miquel Campos](https://github.com/miquelcampos)
+- [Rafael Villar](https://github.com/RafaelVillar)
 
 
 ## Contributors:  
@@ -22,7 +23,7 @@
 - [Nate Allison](https://github.com/juggernate)
 - [niteshms04](https://github.com/niteshms04)
 - [Oda-san](https://github.com/Gotetz/)
-- [Rafael Villar](https://github.com/RafaelVillar)
+- [Ragnar Brynjúlfsson](https://github.com/ragtag)
 - [Ruuttu](https://github.com/Ruuttu/)
 - [Toke Jepsen](https://github.com/tokejepsen/)
 
