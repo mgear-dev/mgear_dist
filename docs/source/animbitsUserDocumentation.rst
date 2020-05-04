@@ -7,6 +7,185 @@ Tools for animators.
     :align: center
     :scale: 95%
 
+
+Channel Master
+==============
+
+Channel Master is an alternative ChannelBox, but allowing the user to create custom configurations and store it.
+
+.. image:: images/animbits/channel_master.png
+    :align: center
+    :scale: 95%
+
+The configuration is stored in a persistent node in the scene. The data can be exported and imported.
+
+.. image:: images/animbits/channel_master_node2.png
+    :align: center
+    :scale: 95%
+
+The channels can be a mix from different objects. The only rule is that the object that contains the channel and the channel master node should be in the same namespace.
+
+However the  internal data is not stored with name spaces, so the same configuration can be re-used in different name spaces.
+
+The Main tab works like  the regular ChannelBox and the data is rebuild on the flight. The advantage is that is possible to lock the content using the lock icon. Also create a node is not required to use the main tab
+
+To create custom configuration, require a custom node.
+
+.. warning::
+	Custom configurations needs to be saved. If to be stored in the node. Missing to save the new configuration will  revert the channel configuration to the previous state when the node is refresh or change node in the drop-down menu
+
+
+.. warning::
+	The tool has been design to avoid bottleneck the evaluation while playback by turning off the refresh and updating on demand in some situations.
+	When scrubbing the timeline still updating the channel values. This will take some FPS away (Only when Scrubbing, not in Playback).
+
+	If you need to do scrubbing a lot and need the performance. You can change the Channel Master to empty Main tab, by lock the tab when nothing is selected. Or Just close Channel Master
+
+	We planning to add more control over this in the future.
+
+
+
+
+**File Menu:**
+
+.. image:: images/animbits/channel_master_menu_file.png
+    :align: center
+    :scale: 95%
+
+
+* **New Node:** Creates a new node
+
+Also is possible  to add nodes from the node bar in the UI
+
+.. image:: images/animbits/channel_master_node.png
+    :align: center
+    :scale: 95%
+
+* **Save Current Node:** Save the current node configuration
+* **Export All Tabs:** Export the current node configuration to a Json file
+* **Export Current Tab:** Export current tab configuration to Json file
+* **Import:** Import and create a new node
+* **Import Add:** Import and add the configuration to an existing node
+
+
+**Display Menu:**
+
+.. image:: images/animbits/channel_master_menu_display.png
+    :align: center
+    :scale: 95%
+
+
+* **Channel Full Name:** Display the full name of the channel
+
+.. image:: images/animbits/channel_master_menu_display_fullname.png
+    :align: center
+    :scale: 95%
+
+* **Order:** Arrange the channels by Alphabetic or Default order
+
+
+**Keyframe Menu:**
+
+.. image:: images/animbits/channel_master_menu_keyframe.png
+    :align: center
+    :scale: 95%
+
+
+* **Keyframe:** Toggle a keyframe for all the channels in the current tab. If there is a channel that doesn't have keyframe will add keyframe. If all channels have keyframe it will remove the keyframe.
+* **Copy key:** Copy current values in the buffer
+* **Paste key:** Paste from buffer and set keyframe
+* **Delete current keyframe:** Delete the current tab keyframe
+* **Keyframe all tabs:** Keyframe command will be applied to all tabs. With this option active the toggle functionality will change to always key.
+
+
+**Tabs Menu:**
+
+.. image:: images/animbits/channel_master_menu_tab.png
+    :align: center
+    :scale: 95%
+
+* **New Tab:** Create new tab.
+* **Duplicate Tab:** Duplicate current Tab
+* **Rename Tab:** Rename current tab
+* **Delete Current Tab:** Delete current Tab
+
+Tabs can be added using the + icon in the tabs row
+
+.. image:: images/animbits/channel_master_add_tab.png
+    :align: center
+    :scale: 95%
+
+
+
+Channels
+--------
+
+.. image:: images/animbits/channel_master_buttons.png
+    :align: center
+    :scale: 95%
+
+1) **Keyframe button:** Same command as keyframe menu
+2) **Copy key button:** Same command as keyframe menu
+3) **Copy paste button:** Same command as keyframe menu
+4) **Plus Button:** Add selected channels from ChannelBox to Channel Master
+5) **Minus Button:** Remove SelecteT channels
+6) **Lock refresh:** in Main Tab
+
+**Search channel:** will filter the channel list
+
+.. image:: images/animbits/channel_master_filter.png
+    :align: center
+    :scale: 95%
+
+
+**In the channels area we will find 2 context menus and a middle click slider precision widget.**
+
+
+**Channel context menu:**  The actions in this menu can be apply to multiple selection
+
+.. image:: images/animbits/channel_master_context_menu.png
+    :align: center
+    :scale: 95%
+
+* **Set Color:** Set a custom color for easy identification.
+* **Clear Color:** Clear custom color.
+* **Set Range:** Set range min and max for the slider.
+* **Reset Value to Default:** Reset the channel value.
+* **Select Host:** Select the object that owns the channel.
+
+**Keyframe channel button context menu.:**
+
+.. image:: images/animbits/channel_master_key_context_menu.png
+    :align: center
+    :scale: 95%
+
+* **Next Keyframe:** Move time to the next keyframe.
+* **Previous Keyframe:** Move time to the previous keyframe.
+* **Remove Animation:** Delete channel animation.
+
+**Keyframe button color coding:**
+
+.. image:: images/animbits/channel_master_key_color_code.png
+    :align: center
+    :scale: 95%
+
+* **Red:** Keyframe in the current frame.
+* **Green:** Animation but not keyframe in the current frame.
+* **Yellow:** Current value changed.
+
+
+
+
+**The slider precision** widget is similar to the one from Houdini
+
+.. image:: images/animbits/channel_master_middle_click_precision_slider.png
+    :align: center
+    :scale: 95%
+
+
+
+
+
 Soft Tweaks
 ===========
 

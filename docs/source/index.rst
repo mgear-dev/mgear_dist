@@ -25,6 +25,7 @@ Welcome to mGear: Rigging Framework for Autodesk Maya
 
    overview
    quickStart
+   official-unofficial-workflow
    framework
    solvers
    animbitsUserDocumentation

@@ -1,15 +1,22 @@
 Release Log
 ===========
 
-3.4.0
+3.5.0
 -----
 **New Features**
 	* Animbits: Channel Master [animbits#14]
 	* Shifter: Auto Fit Guide (Beta preview). [shifter#82]
 
+**Enhancements**
+	* Anim Picker: Make select controls display more noticeable [anim_picker#16]
+
 **Bug Fix**
 	* Anim Picker: CentOS and windows Maya 2019/2020 TypeErrorr [anim_picker#15]
+	* mGear_core: dagmenu error when parent switch with keys on and rig with namespace [mgear_core#53]
+	* mGear_core: Fix loop crash when quering tag childrens [mgear_core#52]
 	* mGear_core: Fixed path handling in exportSkinPack if it is called with arguments. [mgear_core#37]
+	* mGear_core: getRootNode doesn't find the root correctly [mgear_core#51]
+	* mGear_core: Mirror function causes tag attributes to mirror their content [mgear_core#47]
 	* mGear_core: Parent switch dag menu not working when root node is parented under a non referenced heararchy. [mgear_core#48]
 
 3.4.0
