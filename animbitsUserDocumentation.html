@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Animbits User Documentation &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>Animbits User Documentation &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,42 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
-        <link rel="next" title="Crank User Documentation" href="crankUserDocumentation.html"/>
-        <link rel="prev" title="Custom Solvers/Deformers" href="solvers.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Crank User Documentation" href="crankUserDocumentation.html" />
+    <link rel="prev" title="Custom Solvers/Deformers" href="solvers.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -66,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -92,9 +86,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Animbits User Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#channel-master">Channel Master</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#channels">Channels</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#soft-tweaks">Soft Tweaks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#softtweak-manager-gui">SoftTweak Manager GUI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
@@ -105,6 +105,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
@@ -121,7 +122,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">mGear: Rigging Framework</a>
@@ -129,9 +130,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -176,7 +178,111 @@
   <div class="section" id="animbits-user-documentation">
 <h1>Animbits User Documentation<a class="headerlink" href="#animbits-user-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Tools for animators.</p>
-<a class="reference internal image-reference" href="_images/animbits_menu.png"><img alt="_images/animbits_menu.png" class="align-center" src="_images/animbits_menu.png" style="width: 262.2px; height: 86.45px;" /></a>
+<a class="reference internal image-reference" href="_images/animbits_menu.png"><img alt="_images/animbits_menu.png" class="align-center" src="_images/animbits_menu.png" style="width: 246.05px; height: 115.9px;" /></a>
+<div class="section" id="channel-master">
+<h2>Channel Master<a class="headerlink" href="#channel-master" title="Permalink to this headline">¶</a></h2>
+<p>Channel Master is an alternative ChannelBox, but allowing the user to create custom configurations and store it.</p>
+<a class="reference internal image-reference" href="_images/channel_master.png"><img alt="_images/channel_master.png" class="align-center" src="_images/channel_master.png" style="width: 240.35px; height: 517.75px;" /></a>
+<p>The configuration is stored in a persistent node in the scene. The data can be exported and imported.</p>
+<a class="reference internal image-reference" href="_images/channel_master_node2.png"><img alt="_images/channel_master_node2.png" class="align-center" src="_images/channel_master_node2.png" style="width: 528.2px; height: 242.25px;" /></a>
+<p>The channels can be a mix from different objects. The only rule is that the object that contains the channel and the channel master node should be in the same namespace.</p>
+<p>However the  internal data is not stored with name spaces, so the same configuration can be re-used in different name spaces.</p>
+<p>The Main tab works like  the regular ChannelBox and the data is rebuild on the flight. The advantage is that is possible to lock the content using the lock icon. Also create a node is not required to use the main tab</p>
+<p>To create custom configuration, require a custom node.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Custom configurations needs to be saved. If to be stored in the node. Missing to save the new configuration will  revert the channel configuration to the previous state when the node is refresh or change node in the drop-down menu</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>The tool has been design to avoid bottleneck the evaluation while playback by turning off the refresh and updating on demand in some situations.
+When scrubbing the timeline still updating the channel values. This will take some FPS away (Only when Scrubbing, not in Playback).</p>
+<p>If you need to do scrubbing a lot and need the performance. You can change the Channel Master to empty Main tab, by lock the tab when nothing is selected. Or Just close Channel Master</p>
+<p class="last">We planning to add more control over this in the future.</p>
+</div>
+<p><strong>File Menu:</strong></p>
+<a class="reference internal image-reference" href="_images/channel_master_menu_file.png"><img alt="_images/channel_master_menu_file.png" class="align-center" src="_images/channel_master_menu_file.png" style="width: 254.6px; height: 171.0px;" /></a>
+<ul class="simple">
+<li><strong>New Node:</strong> Creates a new node</li>
+</ul>
+<p>Also is possible  to add nodes from the node bar in the UI</p>
+<a class="reference internal image-reference" href="_images/channel_master_node.png"><img alt="_images/channel_master_node.png" class="align-center" src="_images/channel_master_node.png" style="width: 323.0px; height: 108.3px;" /></a>
+<ul class="simple">
+<li><strong>Save Current Node:</strong> Save the current node configuration</li>
+<li><strong>Export All Tabs:</strong> Export the current node configuration to a Json file</li>
+<li><strong>Export Current Tab:</strong> Export current tab configuration to Json file</li>
+<li><strong>Import:</strong> Import and create a new node</li>
+<li><strong>Import Add:</strong> Import and add the configuration to an existing node</li>
+</ul>
+<p><strong>Display Menu:</strong></p>
+<a class="reference internal image-reference" href="_images/channel_master_menu_display.png"><img alt="_images/channel_master_menu_display.png" class="align-center" src="_images/channel_master_menu_display.png" style="width: 399.95px; height: 105.45px;" /></a>
+<ul class="simple">
+<li><strong>Channel Full Name:</strong> Display the full name of the channel</li>
+</ul>
+<a class="reference internal image-reference" href="_images/channel_master_menu_display_fullname.png"><img alt="_images/channel_master_menu_display_fullname.png" class="align-center" src="_images/channel_master_menu_display_fullname.png" style="width: 259.35px; height: 196.65px;" /></a>
+<ul class="simple">
+<li><strong>Order:</strong> Arrange the channels by Alphabetic or Default order</li>
+</ul>
+<p><strong>Keyframe Menu:</strong></p>
+<a class="reference internal image-reference" href="_images/channel_master_menu_keyframe.png"><img alt="_images/channel_master_menu_keyframe.png" class="align-center" src="_images/channel_master_menu_keyframe.png" style="width: 431.3px; height: 147.25px;" /></a>
+<ul class="simple">
+<li><strong>Keyframe:</strong> Toggle a keyframe for all the channels in the current tab. If there is a channel that doesn’t have keyframe will add keyframe. If all channels have keyframe it will remove the keyframe.</li>
+<li><strong>Copy key:</strong> Copy current values in the buffer</li>
+<li><strong>Paste key:</strong> Paste from buffer and set keyframe</li>
+<li><strong>Delete current keyframe:</strong> Delete the current tab keyframe</li>
+<li><strong>Keyframe all tabs:</strong> Keyframe command will be applied to all tabs. With this option active the toggle functionality will change to always key.</li>
+</ul>
+<p><strong>Tabs Menu:</strong></p>
+<a class="reference internal image-reference" href="_images/channel_master_menu_tab.png"><img alt="_images/channel_master_menu_tab.png" class="align-center" src="_images/channel_master_menu_tab.png" style="width: 347.7px; height: 115.9px;" /></a>
+<ul class="simple">
+<li><strong>New Tab:</strong> Create new tab.</li>
+<li><strong>Duplicate Tab:</strong> Duplicate current Tab</li>
+<li><strong>Rename Tab:</strong> Rename current tab</li>
+<li><strong>Delete Current Tab:</strong> Delete current Tab</li>
+</ul>
+<p>Tabs can be added using the + icon in the tabs row</p>
+<a class="reference internal image-reference" href="_images/channel_master_add_tab.png"><img alt="_images/channel_master_add_tab.png" class="align-center" src="_images/channel_master_add_tab.png" style="width: 292.6px; height: 95.95px;" /></a>
+<div class="section" id="channels">
+<h3>Channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h3>
+<a class="reference internal image-reference" href="_images/channel_master_buttons.png"><img alt="_images/channel_master_buttons.png" class="align-center" src="_images/channel_master_buttons.png" style="width: 249.85px; height: 47.5px;" /></a>
+<ol class="arabic simple">
+<li><strong>Keyframe button:</strong> Same command as keyframe menu</li>
+<li><strong>Copy key button:</strong> Same command as keyframe menu</li>
+<li><strong>Copy paste button:</strong> Same command as keyframe menu</li>
+<li><strong>Plus Button:</strong> Add selected channels from ChannelBox to Channel Master</li>
+<li><strong>Minus Button:</strong> Remove SelecteT channels</li>
+<li><strong>Lock refresh:</strong> in Main Tab</li>
+</ol>
+<p><strong>Search channel:</strong> will filter the channel list</p>
+<a class="reference internal image-reference" href="_images/channel_master_filter.png"><img alt="_images/channel_master_filter.png" class="align-center" src="_images/channel_master_filter.png" style="width: 253.65px; height: 222.3px;" /></a>
+<p><strong>In the channels area we will find 2 context menus and a middle click slider precision widget.</strong></p>
+<p><strong>Channel context menu:</strong>  The actions in this menu can be apply to multiple selection</p>
+<a class="reference internal image-reference" href="_images/channel_master_context_menu.png"><img alt="_images/channel_master_context_menu.png" class="align-center" src="_images/channel_master_context_menu.png" style="width: 371.45px; height: 288.8px;" /></a>
+<ul class="simple">
+<li><strong>Set Color:</strong> Set a custom color for easy identification.</li>
+<li><strong>Clear Color:</strong> Clear custom color.</li>
+<li><strong>Set Range:</strong> Set range min and max for the slider.</li>
+<li><strong>Reset Value to Default:</strong> Reset the channel value.</li>
+<li><strong>Select Host:</strong> Select the object that owns the channel.</li>
+</ul>
+<p><strong>Keyframe channel button context menu.:</strong></p>
+<a class="reference internal image-reference" href="_images/channel_master_key_context_menu.png"><img alt="_images/channel_master_key_context_menu.png" class="align-center" src="_images/channel_master_key_context_menu.png" style="width: 381.9px; height: 209.95px;" /></a>
+<ul class="simple">
+<li><strong>Next Keyframe:</strong> Move time to the next keyframe.</li>
+<li><strong>Previous Keyframe:</strong> Move time to the previous keyframe.</li>
+<li><strong>Remove Animation:</strong> Delete channel animation.</li>
+</ul>
+<p><strong>Keyframe button color coding:</strong></p>
+<a class="reference internal image-reference" href="_images/channel_master_key_color_code.png"><img alt="_images/channel_master_key_color_code.png" class="align-center" src="_images/channel_master_key_color_code.png" style="width: 246.05px; height: 60.8px;" /></a>
+<ul class="simple">
+<li><strong>Red:</strong> Keyframe in the current frame.</li>
+<li><strong>Green:</strong> Animation but not keyframe in the current frame.</li>
+<li><strong>Yellow:</strong> Current value changed.</li>
+</ul>
+<p><strong>The slider precision</strong> widget is similar to the one from Houdini</p>
+<a class="reference internal image-reference" href="_images/channel_master_middle_click_precision_slider.png"><img alt="_images/channel_master_middle_click_precision_slider.png" class="align-center" src="_images/channel_master_middle_click_precision_slider.png" style="width: 225.15px; height: 297.35px;" /></a>
+</div>
+</div>
 <div class="section" id="soft-tweaks">
 <h2>Soft Tweaks<a class="headerlink" href="#soft-tweaks" title="Permalink to this headline">¶</a></h2>
 <p>This tool create and manage SoftTweaks (ST for short) and also provide as simple API to import and export configurations, so is possible to integrate with your pipeline and animation publishing system.</p>
@@ -244,14 +350,14 @@ The credit of the idea goes to <a class="reference external" href="http://bindpo
 </div>
 <div class="section" id="api">
 <h3>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># To import a softTweak configuration from script editor or Shifter Custom Step:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To import a softTweak configuration from script editor or Shifter Custom Step:</span>
 
 <span class="kn">from</span> <span class="nn">mgear.animbits</span> <span class="kn">import</span> <span class="n">softTweaks</span> <span class="k">as</span> <span class="n">st</span>
-<span class="n">st</span><span class="o">.</span><span class="n">importConfigurationFromFile</span><span class="p">(</span><span class="n">filePath</span><span class="o">=</span> <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="o">.</span><span class="n">smt</span> <span class="n">configuration</span> <span class="nb">file</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">importConfigurationFromFile</span><span class="p">(</span><span class="n">filePath</span><span class="o">=</span> <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="o">.</span><span class="n">smt</span> <span class="n">configuration</span> <span class="n">file</span><span class="p">)</span>
 
 <span class="c1"># to export configuration</span>
 <span class="c1"># list the softtweaks in the scene</span>
-<span class="n">softtweaks</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">_listSoftModTweaks</span><span class="p">(</span><span class="n">is_asset</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">softtweaks</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">_listSoftModTweaks</span><span class="p">(</span><span class="n">is_asset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="c1"># export</span>
 <span class="n">st</span><span class="o">.</span><span class="n">exportConfiguration</span><span class="p">(</span><span class="n">softtweaks</span><span class="p">)</span>
 </pre></div>
@@ -268,9 +374,7 @@ The credit of the idea goes to <a class="reference external" href="http://bindpo
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -279,7 +383,7 @@ The credit of the idea goes to <a class="reference external" href="http://bindpo
         <a href="crankUserDocumentation.html" class="btn btn-neutral float-right" title="Crank User Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="solvers.html" class="btn btn-neutral" title="Custom Solvers/Deformers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="solvers.html" class="btn btn-neutral float-left" title="Custom Solvers/Deformers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -288,11 +392,11 @@ The credit of the idea goes to <a class="reference external" href="http://bindpo
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -305,36 +409,15 @@ The credit of the idea goes to <a class="reference external" href="http://bindpo
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

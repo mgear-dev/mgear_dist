@@ -1,5 +1,5 @@
-mgear\.rigbits\.ghost
-=====================
+mgear.rigbits.ghost
+===================
 
 .. automodule:: mgear.rigbits.ghost
 

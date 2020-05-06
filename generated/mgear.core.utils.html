@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.core.utils &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.core.utils &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,43 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
-        <link rel="up" title="Base Modules" href="../baseModules.html"/>
-        <link rel="next" title="mgear.core.vector" href="mgear.core.vector.html"/>
-        <link rel="prev" title="mgear.core.transform" href="mgear.core.transform.html"/> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mgear.core.vector" href="mgear.core.vector.html" />
+    <link rel="prev" title="mgear.core.transform" href="mgear.core.transform.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -93,6 +86,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
@@ -130,6 +125,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
@@ -146,7 +142,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">mGear: Rigging Framework</a>
@@ -154,9 +150,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -212,28 +209,28 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.as_pynode" title="mgear.core.utils.as_pynode"><code class="xref py py-obj docutils literal"><span class="pre">as_pynode</span></code></a>(obj)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.as_pynode" title="mgear.core.utils.as_pynode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_pynode</span></code></a>(obj)</td>
 <td>Check and convert a given string to Pynode</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.gatherCustomModuleDirectories" title="mgear.core.utils.gatherCustomModuleDirectories"><code class="xref py py-obj docutils literal"><span class="pre">gatherCustomModuleDirectories</span></code></a>(envvarkey,&nbsp;…)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.gatherCustomModuleDirectories" title="mgear.core.utils.gatherCustomModuleDirectories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gatherCustomModuleDirectories</span></code></a>(envvarkey,&nbsp;…)</td>
 <td>returns component directory</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.getModuleBasePath" title="mgear.core.utils.getModuleBasePath"><code class="xref py py-obj docutils literal"><span class="pre">getModuleBasePath</span></code></a>(directories,&nbsp;moduleName)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.getModuleBasePath" title="mgear.core.utils.getModuleBasePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getModuleBasePath</span></code></a>(directories,&nbsp;moduleName)</td>
 <td>search component path</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.importFromStandardOrCustomDirectories" title="mgear.core.utils.importFromStandardOrCustomDirectories"><code class="xref py py-obj docutils literal"><span class="pre">importFromStandardOrCustomDirectories</span></code></a>(…)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.importFromStandardOrCustomDirectories" title="mgear.core.utils.importFromStandardOrCustomDirectories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">importFromStandardOrCustomDirectories</span></code></a>(…)</td>
 <td>Return imported module</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.is_odd" title="mgear.core.utils.is_odd"><code class="xref py py-obj docutils literal"><span class="pre">is_odd</span></code></a>(num)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.is_odd" title="mgear.core.utils.is_odd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_odd</span></code></a>(num)</td>
 <td>Check if the number is odd.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.one_undo" title="mgear.core.utils.one_undo"><code class="xref py py-obj docutils literal"><span class="pre">one_undo</span></code></a>(func)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.one_undo" title="mgear.core.utils.one_undo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_undo</span></code></a>(func)</td>
 <td>Decorator - guarantee close chunk.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.timeFunc" title="mgear.core.utils.timeFunc"><code class="xref py py-obj docutils literal"><span class="pre">timeFunc</span></code></a>(func)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.timeFunc" title="mgear.core.utils.timeFunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeFunc</span></code></a>(func)</td>
 <td>Use as a property to time any desired function</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.viewport_off" title="mgear.core.utils.viewport_off"><code class="xref py py-obj docutils literal"><span class="pre">viewport_off</span></code></a>(func)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/utils.html#mgear.core.utils.viewport_off" title="mgear.core.utils.viewport_off"><code class="xref py py-obj docutils literal notranslate"><span class="pre">viewport_off</span></code></a>(func)</td>
 <td>Decorator - Turn off Maya display while func is running.</td>
 </tr>
 </tbody>
@@ -242,9 +239,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -253,7 +248,7 @@
         <a href="mgear.core.vector.html" class="btn btn-neutral float-right" title="mgear.core.vector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mgear.core.transform.html" class="btn btn-neutral" title="mgear.core.transform" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mgear.core.transform.html" class="btn btn-neutral float-left" title="mgear.core.transform" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -262,11 +257,11 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -279,36 +274,15 @@
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

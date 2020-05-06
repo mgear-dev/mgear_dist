@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.rigbits.rbf_node &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.rigbits.rbf_node &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,40 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -64,7 +58,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -90,11 +84,14 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -111,7 +108,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -119,9 +116,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -363,6 +361,11 @@ will result in rbf decomp error.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="mgear.rigbits.rbf_node.RBFNode.compensateForDirectConnect">
+<code class="descname">compensateForDirectConnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.compensateForDirectConnect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="mgear.rigbits.rbf_node.RBFNode.copyPoses">
 <code class="descname">copyPoses</code><span class="sig-paren">(</span><em>nodeB</em>, <em>emptyPoseValues=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.RBFNode.copyPoses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy poses from nodeA to nodeB with the option to be blank or node
@@ -396,7 +399,7 @@ for syncing nodes</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> – Description</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code> – Description</td>
 </tr>
 </tbody>
 </table>
@@ -583,7 +586,7 @@ of index - Sanity check</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> – NotImplementedError: each rbf node is unique,</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code> – NotImplementedError: each rbf node is unique,</li>
 <li>adhere here for rbf manager ui support</li>
 </ul>
 </td>
@@ -601,7 +604,7 @@ of index - Sanity check</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><code class="xref py py-exc docutils literal"><span class="pre">NotImplementedError</span></code> – each rbf node is unique, adhere here for</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code> – each rbf node is unique, adhere here for</li>
 <li>rbf manager ui support</li>
 </ul>
 </td>
@@ -819,6 +822,26 @@ specified index</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – name of node to add group above</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of node created</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.rbf_node.compensateLocator">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">compensateLocator</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.compensateLocator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a locator that parents under desired node, to manipulated
+directly connected nodes.
+Functionality that is disable, but for future use.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – desired node</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">name of the created locator</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
 </tr>
@@ -1153,6 +1176,20 @@ provided in the poseInfo</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="mgear.rigbits.rbf_node.removeCompensateLocator">
+<code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">removeCompensateLocator</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.removeCompensateLocator" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove the locator under the desired node if exists</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<em>str</em>) – name of the ndoe to look under.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mgear.rigbits.rbf_node.removeDrivenGroup">
 <code class="descclassname">mgear.rigbits.rbf_node.</code><code class="descname">removeDrivenGroup</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_node.removeDrivenGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>remove driven group above desired node</p>
@@ -1276,9 +1313,7 @@ provided in the poseInfo</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -1287,11 +1322,11 @@ provided in the poseInfo</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1304,36 +1339,15 @@ provided in the poseInfo</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

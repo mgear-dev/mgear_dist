@@ -1,5 +1,5 @@
-mgear\.rigbits\.cycleTweaks
-===========================
+mgear.rigbits.cycleTweaks
+=========================
 
 .. automodule:: mgear.rigbits.cycleTweaks
 

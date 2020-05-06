@@ -1,5 +1,5 @@
-mgear\.core\.applyop
-====================
+mgear.core.applyop
+==================
 
 .. automodule:: mgear.core.applyop
 

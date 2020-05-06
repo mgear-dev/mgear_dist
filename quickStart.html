@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quick Start &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mGear Rigging Workflow" href="official-unofficial-workflow.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rigging-a-biped">Rigging a Biped</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-guides-from-a-template">Build Guides from a Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#positioning-the-guides">Positioning the Guides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-animation-rig">Building the Animation Rig</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#animating-the-biped">Animating the Biped</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mgear-viewport-menu">mGear Viewport Menu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#anim-picker">Anim Picker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#animate">Animate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterComponentReference.html">Shifter Component Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Quick Start</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/quickStart.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<p>This is a quick guide to get you up and running with mGear’s Shifter. Shifter is the character rigging part of mGear, with which you can combine various components (arms, legs, spines, chains etc.) to rig most kinds of characters, creatures and mechanical contraptions. Shifter currently ships with over 40 different components, and more are constantly being added. Here we’ll only focus on building a basic human biped.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To install mGear on your computer:</p>
+<ol class="arabic simple">
+<li>Download the latest mGear release from <a class="reference external" href="https://github.com/mgear-dev/mgear_dist/releases">here</a>.</li>
+<li>Unzip it</li>
+<li>Copy the content of the mGear <strong>release</strong> folder to your maya/modules folder:</li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Windows: Users&lt;username&gt;DocumentsMayamodules</li>
+<li>Linux: ~/maya/modules</li>
+<li>Mac OS X: ~/maya/modules</li>
+</ol>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Start Maya</li>
+</ol>
+<p>You should now have an mGear menu in Maya.</p>
+</div>
+<div class="section" id="rigging-a-biped">
+<h2>Rigging a Biped<a class="headerlink" href="#rigging-a-biped" title="Permalink to this headline">¶</a></h2>
+<p>Rigging a biped character is very quick and easy with mGear’s Shifter, as it comes with ready made guide templates for both a standard biped and a quadruped. The steps involved in building a rig are:</p>
+<ol class="arabic simple">
+<li>Load the guide template</li>
+<li>Position the guides to match your characters anatomy</li>
+<li>Build the animation rig</li>
+<li>Adjust the control curves if needed</li>
+<li>Skin the character to the deformer joints</li>
+<li>Animate!</li>
+</ol>
+<div class="section" id="build-guides-from-a-template">
+<h3>Build Guides from a Template<a class="headerlink" href="#build-guides-from-a-template" title="Permalink to this headline">¶</a></h3>
+<p>Start by selecting mGear&gt;Shifter&gt;Guide Template Samples&gt;Biped Template from the menu.</p>
+<img alt="_images/quickstart_bipedTemplate.png" class="align-center" src="_images/quickstart_bipedTemplate.png" />
+<p>This builds all the guides we need to build a biped rig. The biped guides consist of multiple components that we will position to match the proportions of our character.  Each guide component consists of a:</p>
+<ul class="simple">
+<li><strong>root:</strong> (red cubes) These are the top level node of each component.</li>
+<li><strong>position:</strong> (yellow spheres) These are the positions of each joint (e.g. elbow, wrist etc).</li>
+<li><strong>blade:</strong> (red triangular wedges) These controls the up axis of some components.</li>
+<li><strong>curve:</strong> (gray lines) These are only for reference, to show how evrything connects together.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All components have a <strong>root</strong>, but not all have <strong>position</strong>, <strong>blade</strong> or <strong>curve</strong>.</p>
+</div>
+<p>You can position, rotate and scale the <strong>root</strong> and <strong>position</strong> guides to fit your character, and use the Blade Roll Offset attribute to adjust the <strong>blade</strong> guides.</p>
+<p>Since we don’t want to do double work, we can start by deleting the right side <strong>root</strong> guides; the <strong>eye_R0_root</strong>, <strong>shouler_R0_root</strong> and <strong>leg_R0_root</strong>. Once we’re happy with the placement of the guides on the left side, we can simply use mGear&gt;Shifter&gt;Duplicate Sym to mirror them over to the right side.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can test your rig at any point, by simply selecting the <strong>guide</strong> node from the Outliner and running mGear&gt;Shifter&gt;Build from Selection. The will bulid the complete animation rig. Once finished testing, you simply delete the <strong>rig</strong> node from the Outliner, and continue adjusting your guides.</p>
+</div>
+</div>
+<div class="section" id="positioning-the-guides">
+<h3>Positioning the Guides<a class="headerlink" href="#positioning-the-guides" title="Permalink to this headline">¶</a></h3>
+<p>Start by selecting the top <strong>guide</strong> node in the oulinter and scale it so the hip is in the correct place. Then work your way down the hierarchy, from the spine and out to the different bodyparts, positioning each one in turn. If you need to re-position a parent guide, after positioning it’s children, you can temporarily de-parent the children, while moving the parent.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We’ll only be covering what you need to get your character rigged here. For details on each component, see the <span class="xref std std-ref">shifter-component-reference</span>. (TODO! Broken link)</p>
+</div>
+<p><strong>Settings</strong></p>
+<p>Each <strong>guide</strong> has settings you can adjust to change the behaviour of that component. To access the settings of <strong>guide</strong>, simply got the mGear&gt;Shifter&gt;Settings menu. For this quick start, we won’t be touching the settings, but it’s good to know they are there.</p>
+<p><strong>Host Guides</strong></p>
+<p>You’ll notice that next to the hand and feet, and above the head and one of the shouder there are <strong>root</strong> nodes that are seemingly not connected to anything. These are used to position Host controllers from which you can control things like IK/FK blending, arm/leg stretching and more.</p>
+<p><strong>Hip and Spine</strong></p>
+<p>There are two <strong>root</strong> nodes at the hip. The bigger one controls the position of the hips and where the controler that moves the entire upper body will be, while the smaller one sets the position of the controller that only moves the hips, keeping the torso in place. The yellow <strong>position</strong> guide controls the length of the flexible part of the spine.</p>
+<p><strong>Neck</strong></p>
+<p>The neck has two yellow <strong>position</strong> tangent guides, that control the neck curve. These are more usefull for rigs with longer necks with more neck joints.</p>
+<p><strong>Thumb Rotation</strong></p>
+<img alt="_images/quickstart_handTemplate.png" class="align-center" src="_images/quickstart_handTemplate.png" />
+<p>You’ll notice that the thumbRoll <strong>root</strong> guide has an RGB axis. This controls the orientation of the thumbRoll controller. In addition the thumbs and each of the fingers have a <strong>blade</strong> guides to control the plane fingers should rotate on.</p>
+<p><strong>Feet</strong></p>
+<img alt="_images/quickstart_footTemplate.png" class="align-center" src="_images/quickstart_footTemplate.png" />
+<p>The foot has a lot of guides, but most of them are quite straight forward. The bottom three, the <strong>heel</strong> and <strong>in/outpivot</strong> set the pivot points when you rotate the foot. The one in front of the ankle called <strong>eff</strong> controls the direction of the FK foot control. The remaining ones are simply to position the characters joints and toes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You’ll notice there are no guides for the pole vectors for the knees and elbows. These are positioned automatically based on the direction the knee or elbow is pointing in when you build the rig.</p>
+</div>
+</div>
+<div class="section" id="building-the-animation-rig">
+<h3>Building the Animation Rig<a class="headerlink" href="#building-the-animation-rig" title="Permalink to this headline">¶</a></h3>
+<p>Once you are ready to build the rig, you can simply select the <strong>guide</strong> node from the Outliner and run mGear&gt;Shifter&gt;Build from Selection from the menu. This will bulid the complete animation rig, with all controls ready to use. You can now hide the <strong>guide</strong> node in the Outliner, and test out the rig. If you need to adjust something, simply delete the <strong>rig</strong> group from the outliner, adjust your <strong>guides</strong> and rebuild it.</p>
+<p><strong>Adjusting Controls</strong></p>
+<p>Some times the shape or size of the default control curves doesn’t fit well with the proportions of your character. You can easily fix this by selecting the vertcies of the control curves, and positining and scaling them as needed.</p>
+<p>Once you’re happy with your new control curves, select the ones you’ve modified and store them by choosing mGear&gt;Shifter&gt;Extract Controls from the menu. This will store them under <strong>guide**|**controllers_org</strong>, so that if you delete the rig and rebuild it, it will get your modified control curves instead of the default ones.</p>
+<p><strong>Skinning</strong></p>
+<p>When you built the rig a selection set was added under <strong>rig_sets_grp</strong> called <strong>rig_deformers_grp</strong> that contains all the joints in the rig you can skin to. Simply skin your mesh to these joints, and the rig is ready for animation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You may be thinking, what do you do if you need to adjust the position of a joint after skinning and adding blend shapes? You can’t simply delete the rig, and rebuild, as that will break the skinning. Shifter is built around the idea of <a class="reference external" href="https://www.youtube.com/playlist?list=PL9LaIDCCDjfimQVcMdh0rG0MPabPG9FK-">Data Centric Rigging</a>. In short this means that rather storing all the skinning data, blend shapes, model and rig in one file, we store each in separate files, and bring it all together when we build the rig. This is a bit beyond the scope of this quick start, so hop on over to the mGear YouTube channel and check out the <a class="reference external" href="https://www.youtube.com/playlist?list=PL9LaIDCCDjfimQVcMdh0rG0MPabPG9FK-">Data Centric Rigging</a> workshop.</p>
+</div>
+</div>
+</div>
+<div class="section" id="animating-the-biped">
+<h2>Animating the Biped<a class="headerlink" href="#animating-the-biped" title="Permalink to this headline">¶</a></h2>
+<p>The Shifter biped rig comes with a lot of functionality straight out of the box, including IK/FK blending, stretchy arms, legs and spines, space shifting and even rubber hosing, should you need it. It also performs quite well, so should be able to run in real-time on most modern hardware. Before starting animation, let’s cover some of the interfaces to make your work easier.</p>
+<div class="section" id="mgear-viewport-menu">
+<h3>mGear Viewport Menu<a class="headerlink" href="#mgear-viewport-menu" title="Permalink to this headline">¶</a></h3>
+<p>At the top of the mGear menu, there is a checkbox for the mGear Viewport Menu. If you have this enabled it will replace Maya’s default right click menu if you have Shifter animation controls selected. Note that the normal right click menu still work as normal, if you have something else selected.</p>
+<p>This menu is dynamic, and changes based on what kind of controller you have selected. For most controllers and host controllers it will look like this:</p>
+<img alt="_images/quickstart_viewportMenu.png" class="align-right" src="_images/quickstart_viewportMenu.png" />
+<p><strong>Controller Viewport Menu</strong></p>
+<ul class="simple">
+<li><strong>Select host</strong>: Select the host controller for this bodypart, from which you can do IK/FK blending and more.</li>
+<li><strong>Select child controls</strong>: Selects the child controls underneath the current one.</li>
+<li><strong>Reset</strong>: Resets the selected control to it’s default position (similar to bind pose)</li>
+<li><strong>Reset all below</strong>: First does Select Child Controls, and then Reset like above.</li>
+<li><strong>Reset translate/rotate/scale</strong>: Same as the normal Reset above, but for translate, rotate and scale specifically.</li>
+<li><strong>Mirror</strong>: Mirrors the selected controllers pose over to the opposite side.</li>
+<li><strong>Mirror all below</strong>: Same as Mirror, but for all the child controls</li>
+<li><strong>Flip</strong>: Flip the selected controllers pose to the other side</li>
+<li><strong>Flip all below</strong>: Same as fliip, but for all the child controls</li>
+<li><strong>Rotate Order switch</strong>: Change the rotate order, while attempting to keep animation intact</li>
+</ul>
+<p><strong>Host Viewport Menu</strong></p>
+<ul class="simple">
+<li><strong>Switch arm/leg to Ik/Fk</strong>: Toggle between IK and FK, while keeping the pose intact</li>
+<li><strong>Switch arm/leg to Ik/Fk + Key</strong>: Toggle between IK and FK, while keeping the pose intact. Adds keyframes before and after the switch.</li>
+<li><strong>Range switch</strong>: WIP</li>
+<li><strong>Parent [various]</strong>: Drop down menus for various controllers, such as the IK controller, that set what space that controller follows. You can, for instance switch between the arm’s IK controller following the shoulder, body or global controller. If you have keyframes on the component already, this will add keyframes before and after the switch.</li>
+<li><strong>Select all controls</strong>: Selects all the controllers of the rig</li>
+<li><strong>Keyframe child controls</strong>: Keyframes all the child controls of the current selection</li>
+</ul>
+</div>
+<div class="section" id="anim-picker">
+<h3>Anim Picker<a class="headerlink" href="#anim-picker" title="Permalink to this headline">¶</a></h3>
+<p>mGear comes with a customizable Anim Picker interface to give you easy access to all controls. Choose mGear&gt;Anim Picker&gt;Anim Picker. When you first open it up, it will be empty. Hit the <strong>Load</strong> button and the <strong>Selecte File</strong> and navigate to the biped.pkr file (it comes with mGear and can be found in anim_picker/picker_templates/biped.pkr).</p>
+<p>Once you’ve selected the biped.pkr file, hit the <strong>Load Picker</strong> button. A dialog will pop up askin you to enter a node name for the character. This will create a node in Maya that stores the Anim Picker layout in your scene. You should now see a dialog that looks like this:</p>
+<img alt="_images/quickstart_animPicker.png" class="align-center" src="_images/quickstart_animPicker.png" />
+<p>From this interface you can select any of the controls by simply clicking the different colored boxes. You can also box select or shift-select multiple controls at a time. The little guy at the top left of the interface gives you access to the <strong>host</strong> controllers, while the two dots and a square on the right are eye controllers. In addition, there are a number of buttons you can use to switch between different spaces or toggle between IK and FK.</p>
+<p>Finally if you right-click outside the boxes, you can choose Frame Selection, to zoom in on parts of the interface, or Reset View, to reset the zoom.</p>
+<p><strong>Adding Multiple Characters to the Anim Picker</strong></p>
+<p>If you have multiple rigs in your scene, you can switch between the characters using the Character Selector menu in the Anim Picker. Note that you can have multiple Anim Pickers windows open at the same time, if you have the screen space for it.</p>
+</div>
+<div class="section" id="animate">
+<h3>Animate<a class="headerlink" href="#animate" title="Permalink to this headline">¶</a></h3>
+<p>That’s it. You should now be ready to animate with mGear and Shifter. For more in-depth tutorials, please check out the <a class="reference external" href="https://www.youtube.com/c/mgearriggingframework/">mGear Youtube channel</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="official-unofficial-workflow.html" class="btn btn-neutral float-right" title="mGear Rigging Workflow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

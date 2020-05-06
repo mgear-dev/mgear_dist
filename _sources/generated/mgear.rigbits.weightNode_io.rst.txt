@@ -1,5 +1,5 @@
-mgear\.rigbits\.weightNode\_io
-==============================
+mgear.rigbits.weightNode\_io
+============================
 
 .. automodule:: mgear.rigbits.weightNode_io
 

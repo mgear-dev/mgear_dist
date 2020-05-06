@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.rigbits.tweaks &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.rigbits.tweaks &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,40 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -64,7 +58,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -90,11 +84,14 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -111,7 +108,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -119,9 +116,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -168,7 +166,7 @@
 <p>Rigbits tweaks rig module</p>
 <dl class="function">
 <dt id="mgear.rigbits.tweaks.createJntTweak">
-<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createJntTweak</code><span class="sig-paren">(</span><em>mesh</em>, <em>parentJnt</em>, <em>ctlParent</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createJntTweak" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createJntTweak</code><span class="sig-paren">(</span><em>mesh</em>, <em>jntParent</em>, <em>ctlParent</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createJntTweak" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a joint tweak</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -176,7 +174,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>mesh</strong> (<em>mesh</em>) – The object to deform with the tweak</li>
-<li><strong>parentJnt</strong> (<em>dagNode</em>) – The parent for the new joint</li>
+<li><strong>jntParent</strong> (<em>dagNode</em>) – The parent for the new joint</li>
 <li><strong>ctlParent</strong> (<em>dagNode</em>) – The parent for the control.</li>
 </ul>
 </td>
@@ -187,7 +185,7 @@
 
 <dl class="function">
 <dt id="mgear.rigbits.tweaks.createMirrorRivetTweak">
-<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createMirrorRivetTweak</code><span class="sig-paren">(</span><em>mesh, edgePair, name, parent=None, ctlParent=None, color=[0, 0, 0], size=0.04, defSet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createMirrorRivetTweak" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createMirrorRivetTweak</code><span class="sig-paren">(</span><em>mesh, edgePair, name, parent=None, ctlParent=None, jntParent=None, color=[0, 0, 0], size=0.04, defSet=None, ctlSet=None, side=None, gearMulMatrix=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createMirrorRivetTweak" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a tweak joint attached to the mesh using a rivet.
 The edge pair will be used to find the mirror position on the mesh</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -196,13 +194,20 @@ The edge pair will be used to find the mirror position on the mesh</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>mesh</strong> (<em>mesh</em>) – The object to add the tweak</li>
-<li><strong>edgePair</strong> (<em>pari list</em>) – The edge pair to create the rivet in mirror side</li>
+<li><strong>edgePair</strong> (<em>pari list</em>) – The edge pairt to create the rivet</li>
 <li><strong>name</strong> (<em>str</em>) – The name for the tweak</li>
 <li><strong>parent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak</li>
 <li><strong>ctlParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak control</li>
+<li><strong>jntParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the joints</li>
 <li><strong>color</strong> (<em>list</em><em>, </em><em>optional</em>) – The color for the control</li>
 <li><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – Size of the control</li>
-<li><strong>defSet</strong> (<em>None</em><em>, </em><em>optional</em>) – Deformer set to add the joints</li>
+<li><strong>defSet</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – Deformer set to add the joints</li>
+<li><strong>ctlSet</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – the set to add the controls</li>
+<li><strong>side</strong> (<em>None</em><em>, </em><em>str</em>) – String to set the side. Valid values are L, R or C.
+If the side is not set or the value is not valid, the side will be
+set automatically based on the world position</li>
+<li><strong>gearMulMatrix</strong> (<em>bool</em><em>, </em><em>optional</em>) – If False will use Maya default multiply
+matrix node</li>
 </ul>
 </td>
 </tr>
@@ -218,7 +223,7 @@ The edge pair will be used to find the mirror position on the mesh</p>
 
 <dl class="function">
 <dt id="mgear.rigbits.tweaks.createRivetTweak">
-<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createRivetTweak</code><span class="sig-paren">(</span><em>mesh, edgePair, name, parent=None, ctlParent=None, color=[0, 0, 0], size=0.04, defSet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createRivetTweak" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createRivetTweak</code><span class="sig-paren">(</span><em>mesh, edgePair, name, parent=None, ctlParent=None, jntParent=None, color=[0, 0, 0], size=0.04, defSet=None, ctlSet=None, side=None, gearMulMatrix=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createRivetTweak" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a tweak joint attached to the mesh using a rivet</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -229,10 +234,17 @@ The edge pair will be used to find the mirror position on the mesh</p>
 <li><strong>edgePair</strong> (<em>pari list</em>) – The edge pairt to create the rivet</li>
 <li><strong>name</strong> (<em>str</em>) – The name for the tweak</li>
 <li><strong>parent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak</li>
+<li><strong>jntParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the joints</li>
 <li><strong>ctlParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak control</li>
 <li><strong>color</strong> (<em>list</em><em>, </em><em>optional</em>) – The color for the control</li>
 <li><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – Size of the control</li>
-<li><strong>defSet</strong> (<em>None</em><em>, </em><em>optional</em>) – Deformer set to add the joints</li>
+<li><strong>defSet</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – Deformer set to add the joints</li>
+<li><strong>ctlSet</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – the set to add the controls</li>
+<li><strong>side</strong> (<em>None</em><em>, </em><em>str</em>) – String to set the side. Valid values are L, R or C.
+If the side is not set or the value is not valid, the side will be
+set automatically based on the world position</li>
+<li><strong>gearMulMatrix</strong> (<em>bool</em><em>, </em><em>optional</em>) – If False will use Maya default multiply
+matrix node</li>
 </ul>
 </td>
 </tr>
@@ -248,20 +260,43 @@ The edge pair will be used to find the mirror position on the mesh</p>
 
 <dl class="function">
 <dt id="mgear.rigbits.tweaks.createRivetTweakFromList">
-<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createRivetTweakFromList</code><span class="sig-paren">(</span><em>mesh, edgeIndexPairList, name, parent=None, ctlParent=None, color=[0, 0, 0]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createRivetTweakFromList" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createRivetTweakFromList</code><span class="sig-paren">(</span><em>mesh, edgePairList, name, parent=None, ctlParent=None, jntParent=None, color=[0, 0, 0], size=0.04, defSet=None, ctlSet=None, side=None, mirror=False, mParent=None, mCtlParent=None, mjntParent=None, mColor=None, gearMulMatrix=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createRivetTweakFromList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create multiple rivet tweaks from a list of edge pairs</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>mesh</strong> (<em>mesh</em>) – The object to add the tweak</li>
-<li><strong>edgeIndexPairList</strong> (<em>list of list</em>) – The edge pair list of list</li>
+<li><strong>edgePairList</strong> (<em>list of list</em>) – The edge pair list of list</li>
 <li><strong>name</strong> (<em>str</em>) – The name for the tweak</li>
 <li><strong>parent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak</li>
 <li><strong>ctlParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak control</li>
+<li><strong>jntParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the joints</li>
 <li><strong>color</strong> (<em>list</em><em>, </em><em>optional</em>) – The color for the control</li>
+<li><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – Size of the control</li>
+<li><strong>defSet</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – Deformer set to add the joints</li>
+<li><strong>ctlSet</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – the set to add the controls</li>
+<li><strong>side</strong> (<em>None</em><em>, </em><em>str</em>) – String to set the side. Valid values are L, R or C.
+If the side is not set or the value is not valid, the side will be
+set automatically based on the world position</li>
+<li><strong>mirror</strong> (<em>bool</em><em>, </em><em>optional</em>) – Create the mirror tweak on X axis symmetry</li>
+<li><strong>mParent</strong> (<em>None</em><em>, </em><em>optional</em>) – Mirror tweak parent, if None will use
+parent arg</li>
+<li><strong>mjntParent</strong> (<em>None</em><em>, </em><em>optional</em>) – Mirror  parent joint, if None will use
+jntParent arg</li>
+<li><strong>mCtlParent</strong> (<em>None</em><em>, </em><em>optional</em>) – Mirror ctl parent, if None will use
+ctlParent arg</li>
+<li><strong>mColor</strong> (<em>None</em><em>, </em><em>optional</em>) – Mirror controls color, if None will color arg</li>
+<li><strong>gearMulMatrix</strong> (<em>bool</em><em>, </em><em>optional</em>) – If False will use Maya default multiply
+matrix node</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Description</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">TYPE</p>
 </td>
 </tr>
 </tbody>
@@ -270,8 +305,8 @@ The edge pair will be used to find the mirror position on the mesh</p>
 
 <dl class="function">
 <dt id="mgear.rigbits.tweaks.createRivetTweakLayer">
-<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createRivetTweakLayer</code><span class="sig-paren">(</span><em>layerMesh</em>, <em>bst</em>, <em>edgeList</em>, <em>tweakName</em>, <em>parent=None</em>, <em>ctlParent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createRivetTweakLayer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a rivet tweak layer</p>
+<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">createRivetTweakLayer</code><span class="sig-paren">(</span><em>layerMesh, bst, edgePairList, name, parent=None, ctlParent=None, jntParent=None, color=[0, 0, 0], size=0.04, defSet=None, ctlSet=None, side=None, mirror=False, mParent=None, mCtlParent=None, mjntParent=None, mColor=None, gearMulMatrix=True, static_jnt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.createRivetTweakLayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a rivet tweak layer setup</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -279,10 +314,29 @@ The edge pair will be used to find the mirror position on the mesh</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>layerMesh</strong> (<em>mesh</em>) – The tweak layer mesh</li>
 <li><strong>bst</strong> (<em>mesh</em>) – The mesh blendshape target</li>
-<li><strong>edgeList</strong> (<em>list</em>) – List of edges</li>
-<li><strong>tweakName</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – The name for the tweak</li>
+<li><strong>edgePairList</strong> (<em>list of list</em>) – The edge pair list of list</li>
+<li><strong>name</strong> (<em>str</em>) – The name for the tweak</li>
 <li><strong>parent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak</li>
-<li><strong>ctlParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – the parent for the tweak control</li>
+<li><strong>jntParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the joints</li>
+<li><strong>ctlParent</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – The parent for the tweak control</li>
+<li><strong>color</strong> (<em>list</em><em>, </em><em>optional</em>) – The color for the control</li>
+<li><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – Size of the control</li>
+<li><strong>defSet</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – Deformer set to add the joints</li>
+<li><strong>ctlSet</strong> (<em>None</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – the set to add the controls</li>
+<li><strong>side</strong> (<em>None</em><em>, </em><em>str</em>) – String to set the side. Valid values are L, R or C.
+If the side is not set or the value is not valid, the side will be
+set automatically based on the world position</li>
+<li><strong>mirror</strong> (<em>bool</em><em>, </em><em>optional</em>) – Create the mirror tweak on X axis symmetry</li>
+<li><strong>mParent</strong> (<em>None</em><em>, </em><em>optional</em>) – Mirror tweak parent, if None will use
+parent arg</li>
+<li><strong>mjntParent</strong> (<em>None</em><em>, </em><em>optional</em>) – Mirror  parent joint, if None will use
+jntParent arg</li>
+<li><strong>mCtlParent</strong> (<em>None</em><em>, </em><em>optional</em>) – Mirror ctl parent, if None will use
+ctlParent arg</li>
+<li><strong>mColor</strong> (<em>None</em><em>, </em><em>optional</em>) – Mirror controls color, if None will color arg</li>
+<li><strong>gearMulMatrix</strong> (<em>bool</em><em>, </em><em>optional</em>) – If False will use Maya default multiply
+matrix node</li>
+<li><strong>static_jnt</strong> (<em>dagNode</em><em>, </em><em>optional</em>) – Static joint for the setup</li>
 </ul>
 </td>
 </tr>
@@ -291,9 +345,46 @@ The edge pair will be used to find the mirror position on the mesh</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="mgear.rigbits.tweaks.doritosMagic">
-<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">doritosMagic</code><span class="sig-paren">(</span><em>mesh</em>, <em>joint</em>, <em>jointBase</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.doritosMagic" title="Permalink to this definition">¶</a></dt>
+<dt id="mgear.rigbits.tweaks.edgePairList">
+<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">edgePairList</code><span class="sig-paren">(</span><em>log=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.edgePairList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print and return a list of edge pairs to be use with
+createRivetTweakLayer and createRivetTweakFromList</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of edge pairs</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.tweaks.negateTransformConnection">
+<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">negateTransformConnection</code><span class="sig-paren">(</span><em>in_rot, out_rot, neg_axis=[-1, -1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.negateTransformConnection" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="function">
+<dt id="mgear.rigbits.tweaks.pre_bind_matrix_connect">
+<code class="descclassname">mgear.rigbits.tweaks.</code><code class="descname">pre_bind_matrix_connect</code><span class="sig-paren">(</span><em>mesh</em>, <em>joint</em>, <em>jointBase</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.tweaks.pre_bind_matrix_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect the pre bind matrix of the skin cluseter to the joint parent.
+This create the offset in the  deformation to avoid double transformation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mesh</strong> (<em>PyNode</em>) – Mesh object with the tweak skin cluster</li>
+<li><strong>joint</strong> (<em>PyNode</em>) – Tweak joint</li>
+<li><strong>jointBase</strong> (<em>PyNode</em>) – Tweak joint parent</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="mgear.rigbits.tweaks.resetJntLocalSRT">
@@ -313,9 +404,7 @@ The edge pair will be used to find the mirror position on the mesh</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -324,11 +413,11 @@ The edge pair will be used to find the mirror position on the mesh</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -341,36 +430,15 @@ The edge pair will be used to find the mirror position on the mesh</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

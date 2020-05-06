@@ -1,5 +1,5 @@
-mgear\.core\.meshNavigation
-===========================
+mgear.core.meshNavigation
+=========================
 
 .. automodule:: mgear.core.meshNavigation
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release Log &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>Release Log &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,42 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="index.html"/>
-        <link rel="next" title="License" href="license.html"/>
-        <link rel="prev" title="FAQ" href="FAQ.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="FAQ" href="FAQ.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -66,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -92,29 +86,41 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">3.0.3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">2.6.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">2.5.24</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">2.4.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">2.4.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">2.4.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">2.3.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">2.2.4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">2.2.3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id10">2.2.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">2.2.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id12">2.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id13">2.1.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id14">2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">3.5.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">3.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">3.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">3.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">3.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">3.0.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">3.0.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">3.0.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">2.6.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">2.5.24</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">2.4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">2.4.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">2.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">2.2.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">2.2.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id19">2.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">2.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id21">2.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id22">2.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id23">2.0</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -129,7 +135,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">mGear: Rigging Framework</a>
@@ -137,9 +143,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -184,7 +191,184 @@
   <div class="section" id="release-log">
 <h1>Release Log<a class="headerlink" href="#release-log" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>3.0.3<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>3.5.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
+<dd><ul class="first last simple">
+<li>Animbits: Channel Master [animbits<a class="reference external" href="https://github.com/mgear-dev/animbits/issues/14">#14</a>]</li>
+<li>Shifter: Auto Fit Guide (Beta preview). [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/82">#82</a>]</li>
+</ul>
+</dd>
+<dt><strong>Enhancements</strong></dt>
+<dd><ul class="first last simple">
+<li>Anim Picker: Make select controls display more noticeable [anim_picker<a class="reference external" href="https://github.com/mgear-dev/anim_picker/issues/16">#16</a>]</li>
+</ul>
+</dd>
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Anim Picker: CentOS and windows Maya 2019/2020 TypeErrorr [anim_picker<a class="reference external" href="https://github.com/mgear-dev/anim_picker/issues/15">#15</a>]</li>
+<li>mGear_core: dagmenu error when parent switch with keys on and rig with namespace [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/53">#53</a>]</li>
+<li>mGear_core: Fix loop crash when quering tag childrens [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/52">#52</a>]</li>
+<li>mGear_core: Fixed path handling in exportSkinPack if it is called with arguments. [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/37">#37</a>]</li>
+<li>mGear_core: getRootNode doesn’t find the root correctly [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/51">#51</a>]</li>
+<li>mGear_core: Mirror function causes tag attributes to mirror their content [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/47">#47</a>]</li>
+<li>mGear_core: Parent switch dag menu not working when root node is parented under a non referenced heararchy. [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/48">#48</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id2">
+<h2>3.4.0<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
+<dd><ul class="first last simple">
+<li>Anim Picker: New Animation Picker [anim_picker<a class="reference external" href="https://github.com/mgear-dev/anim_picker/issues/2">#2</a>]</li>
+<li>mGear_core: mGear viewport menu [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/38">#38</a>]</li>
+<li>Rigbits: SDK Manager [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/42">#42</a>]</li>
+<li>Shifter_classic_components: SDK manager special component [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/75">#75</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id3">
+<h2>3.3.1<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Rigbits: Facial rigger tools QT aligment argument [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/44">#44</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id4">
+<h2>3.3.0<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter_classic_components: Cable component [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/73">#73</a>]</li>
+<li>Shifter_classic_components: UI_slider and UI_container component [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/66">#66</a>]</li>
+<li>Rigbits: New eyebrow Rigger [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/40">#40</a>]</li>
+</ul>
+</dd>
+<dt><strong>Enhancements</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter_classic_components: Control_01: Expose more space switch options [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/7">#7</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id5">
+<h2>3.2.1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Enhancements</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter_classic_components:  arm_2jnt_04: wrist align and plane normal [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/58">#58</a>] [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/59">#59</a>]</li>
+<li>Shifter_classic_components:  S_Spine change the relative connections  [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/67">#67</a>]</li>
+<li>mGear_core: Added 2D guide root for Shifter components [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/36">#36</a>]</li>
+<li>Shifter: Build log window clears instead of reopening. [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/74">#74</a>]</li>
+</ul>
+</dd>
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Shifter: Fixed a guide renaming issue. [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/71">#71</a>]</li>
+<li>Shifter: Renamed Connexion to Connection in some places.. [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/75">#75</a>]</li>
+<li>Shifter: Renaming components will fail if the names are not unique. [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/70">#70</a>]</li>
+<li>Shifter_classic_components: foot_bk_01 component roll_ctrl issue [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/68">#68</a>]</li>
+<li>Shifter_classic_components: Visual axis reference for control_01 and arm_2jnt_04 is not scaling correctly  [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/57">#57</a>]</li>
+<li>Shifter_classic_components: Fixes building of chain_01 when set to IK only  [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/65">#65</a>]</li>
+<li>Shifter_classic_components:  spine_S_shape rename bug  [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/50">#50</a>]</li>
+<li>mGear_core: dag.findComponentChildren2 fails after a rig was built. [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/32">#32</a>] [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/35">#35</a>]</li>
+<li>mGear_core: QDragListView ignores drop event on self  [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/34">#34</a>][mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/33">#33</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id6">
+<h2>3.2.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
+<dd><ul class="first last simple">
+<li>Animbits: Animation GPU cache manager [animbits<a class="reference external" href="https://github.com/mgear-dev/animbits/issues/11">#11</a>]</li>
+<li>Rigbits: New Facial Rigger  [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/28">#28</a>][rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/27">#27</a>][rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/64">#64</a>][rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/33">#33</a>][rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/32">#32</a>]</li>
+<li>Shifter_classic_components: new arm and leg with elbow and knee thickness control [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/55">#55</a>]</li>
+<li>Shifter_classic_components: New component arm_2jnt_03 with align wrist with guide option [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/53">#53</a>]</li>
+<li>Shifter_classic_components: New component mouth_02 [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/51">#51</a>]</li>
+</ul>
+</dd>
+<dt><strong>Enhancements</strong></dt>
+<dd><ul class="first last simple">
+<li>Rigbits: Mirror Controls Shape Tool [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/25">#25</a>]</li>
+<li>Rigbits: RBF manager updated with support for non-control objects  [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/31">#31</a>]</li>
+<li>Shifter_classic_components: control_01, arm_2jnt_04 add orientation visual feedback [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/54">#54</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id7">
+<h2>3.1.1<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>New Features</strong></dt>
+<dd><ul class="first last simple">
+<li>shifter_classic_components: New Component: chain_IK_with_variable FK and stack connection [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/43">#43</a>]</li>
+<li>shifter_classic_components: New Component: chain_net_01 [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/42">#42</a>]</li>
+<li>shifter_classic_components: new component: Lite chain stack [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/40">#40</a>]</li>
+</ul>
+</dd>
+<dt><strong>Enhancements</strong></dt>
+<dd><ul class="first last simple">
+<li>mgear_core:implemented filesize compression for jSkin and gSkin (pull request #28)</li>
+<li>Rigbits: Update tweakers modules [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/18">#18</a>]</li>
+<li>Shifter: add optional uihost argument on addAnimParam and addAnimEnumParam [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/60">#60</a>]</li>
+<li>Shifter: avoid negative scaling in joints [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/59">#59</a>]</li>
+<li>Shifter: inspect settings open tap option [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/62">#62</a>]</li>
+<li>Shifter: Shared custom step fix color feedback and hover information [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/57">#57</a>]</li>
+<li>shifter_classic_components: chain_net_01: improve pickwalk [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/47">#47</a>]</li>
+<li>shifter_classic_components: Chains with stack connection should have connection offset options [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/46">#46</a>]</li>
+<li>shifter_classic_components: Review channel hosts for stack connection chains [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/44">#44</a>]</li>
+<li>simpleRig: handle geometry selection option when convert to shifter rig [simpleRig<a class="reference external" href="https://github.com/mgear-dev/simpleRig/issues/6">#6</a>]</li>
+<li>Synoptic: Fix refresh needed on togglButtons and on visibility/control tabs [synoptic<a class="reference external" href="https://github.com/mgear-dev/synoptic/issues/13">#13</a>]</li>
+</ul>
+</dd>
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>mgear_core: attribute module log error wrong flags [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/29">#29</a>]</li>
+<li>shifter_classic_components: chain FK with variable IK the extreme controls should not be on 0 or 1.0 of the path [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/45">#45</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id8">
+<h2>3.0.5<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>mGear_core: Attribute: moveChannel doesn’t support float attr [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/27">#27</a>]</li>
+<li>mGear_core: Callback manager: UserTimeChangedManager change condition state to playingBackAuto [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/28">#28</a>]</li>
+<li>Rigbits: Eye rigger and Lips Rigger bad naming in rig curves [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/21">#21</a>]</li>
+<li>Shifter: Export guide to template (.sgt) will break component parent references if name is not unique [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/58">#58</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id9">
+<h2>3.0.4<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Bug Fix</strong></dt>
+<dd><ul class="first last simple">
+<li>Synoptic: Fix refresh needed on togglButtons and on visibility/control tabs [synoptic<a class="reference external" href="https://github.com/mgear-dev/synoptic/issues/13">#13</a>]</li>
+<li>mGear_core: Node: controller_tag_connect fail if ctl parent doesn’t have tag [mgear_core<a class="reference external" href="https://github.com/mgear-dev/mgear_core/issues/24">#24</a>]</li>
+<li>Shifter_classic_components: Eye component update structure [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/39">#39</a>]</li>
+<li>Shifter_classic_components: Spine FK: fisrt joint moving with IK chest control [shifter_classic_components<a class="reference external" href="https://github.com/mgear-dev/shifter_classic_components/issues/38">#38</a>]</li>
+<li>Shifter: custom step template still have old name import [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/56">#56</a>]</li>
+<li>Rigbits: hotkey creation command has bad imports [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/19">#19</a>]</li>
+<li>Shifter: serialized guide with none parent components issue [shifter<a class="reference external" href="https://github.com/mgear-dev/shifter/issues/55">#55</a>]</li>
+<li>Rigbits: Ghost control creator and Tweaks should handle ctrl Tag and custom pickwalk [rigbits<a class="reference external" href="https://github.com/mgear-dev/rigbits/issues/20">#20</a>]</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id10">
+<h2>3.0.3<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -242,8 +426,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id2">
-<h2>2.6.1<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h2>2.6.1<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -253,8 +437,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id3">
-<h2>2.5.24<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id12">
+<h2>2.5.24<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -309,8 +493,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id4">
-<h2>2.4.2<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id13">
+<h2>2.4.2<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Bug Fix</strong></dt>
 <dd><ul class="first last simple">
@@ -319,8 +503,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id5">
-<h2>2.4.1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id14">
+<h2>2.4.1<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Bug Fix</strong></dt>
 <dd><ul class="first last simple">
@@ -329,8 +513,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id6">
-<h2>2.4.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id15">
+<h2>2.4.0<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -370,8 +554,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id7">
-<h2>2.3.0<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id16">
+<h2>2.3.0<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
@@ -414,8 +598,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id8">
-<h2>2.2.4<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id17">
+<h2>2.2.4<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
@@ -424,8 +608,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id9">
-<h2>2.2.3<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id18">
+<h2>2.2.3<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
@@ -439,8 +623,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id10">
-<h2>2.2.2<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id19">
+<h2>2.2.2<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Enhancements</strong></dt>
 <dd><ul class="first last simple">
@@ -458,8 +642,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id11">
-<h2>2.2.1<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id20">
+<h2>2.2.1<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>Bug Fix</strong></dt>
 <dd><ul class="first last simple">
@@ -470,8 +654,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id12">
-<h2>2.2.0<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id21">
+<h2>2.2.0<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -504,8 +688,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id13">
-<h2>2.1.1<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id22">
+<h2>2.1.1<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -545,8 +729,8 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="id14">
-<h2>2.0<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id23">
+<h2>2.0<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt><strong>New Features</strong></dt>
 <dd><ul class="first last simple">
@@ -582,9 +766,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -593,7 +775,7 @@
         <a href="license.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="FAQ.html" class="btn btn-neutral" title="FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="FAQ.html" class="btn btn-neutral float-left" title="FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -602,11 +784,11 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -619,36 +801,15 @@
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

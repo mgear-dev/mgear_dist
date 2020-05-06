@@ -1,5 +1,5 @@
-mgear\.core\.curve
-==================
+mgear.core.curve
+================
 
 .. automodule:: mgear.core.curve
 

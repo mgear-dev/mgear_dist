@@ -1,5 +1,5 @@
-mgear\.synoptic\.utils
-======================
+mgear.synoptic.utils
+====================
 
 .. automodule:: mgear.synoptic.utils
 
@@ -9,55 +9,13 @@ mgear\.synoptic\.utils
 
    .. autosummary::
    
-      applyMirror
-      bakeSprings
-      bindPose
-      calculateMirrorData
-      changeSpace
-      clearSprings
-      gatherMirrorData
-      getClosestNode
-      getComboIndex
-      getComboKeys
-      getControlers
-      getInvertCheckButtonAttrName
       getModel
-      getNamespace
-      getNode
       getSynopticWidget
-      ikFkMatch
-      isSideElement
-      keyAll
-      keyGroup
-      keyObj
-      keySel
-      listAttrForMirror
-      mirrorPose
-      mirrorPoseOld
-      quickSel
-      recordNodesMatrices
-      resetSelTrans
-      selAll
-      selGroup
       selectObj
-      spine_FKToIK
-      spine_IKToFK
-      stripNamespace
-      swapSideLabel
-      toggleAttr
    
    
 
    
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      AbstractAnimationTransfer
-      IkFkTransfer
-      ParentSpaceTransfer
-      SpineIkFkTransfer
    
    
 

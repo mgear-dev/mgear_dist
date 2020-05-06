@@ -1,5 +1,5 @@
-mgear\.rigbits\.lips\_rigger
-============================
+mgear.rigbits.lips\_rigger
+==========================
 
 .. automodule:: mgear.rigbits.lips_rigger
 

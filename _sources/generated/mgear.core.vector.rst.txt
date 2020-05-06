@@ -1,5 +1,5 @@
-mgear\.core\.vector
-===================
+mgear.core.vector
+=================
 
 .. automodule:: mgear.core.vector
 

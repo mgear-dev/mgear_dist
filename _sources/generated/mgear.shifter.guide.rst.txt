@@ -1,5 +1,5 @@
-mgear\.shifter\.guide
-=====================
+mgear.shifter.guide
+===================
 
 .. automodule:: mgear.shifter.guide
 

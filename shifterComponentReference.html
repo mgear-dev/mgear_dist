@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Shifter Component Reference &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Synoptic User Documentation" href="synopticUserDocumentation.html" />
+    <link rel="prev" title="Shifter User Documentation" href="shifterUserDocumentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mGear: Rigging Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="framework.html">Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Custom Solvers/Deformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="animbitsUserDocumentation.html">Animbits User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crankUserDocumentation.html">Crank User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Shifter Component Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#guide-settings">Guide Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-settings">Main Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#joint-connection-settings">Joint Connection Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#channel-host-settings">Channel Host Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-ctonrollers-group">Custom Ctonrollers Group</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#shifter-components">Shifter Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arm-2jnt-01">arm_2jnt_01</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#guide-positioning">Guide Positioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compoent-settings">Compoent Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#source">Source</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#arm-2jnt-02">arm_2jnt_02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arm-2jnt-03">arm_2jnt_03</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arm-2jnt-04">arm_2jnt_04</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arm-2jnt-freetangents-01">arm_2jnt_freeTangents_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arm-ms-2jnt-01">arm_ms_2jnt_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cable-01">cable_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-01">chain_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-fk-spline-01">chain_FK_spline_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-fk-spline-02">chain_FK_spline_02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-fk-spline-variable-ik-01">chain_FK_spline_variable_IK_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-ik-spline-variable-fk-01">chain_IK_spline_variable_FK_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-ik-spline-variable-fk-stack-01">chain_IK_spline_variable_FK_stack_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-net-01">chain_net_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-spring-01">chain_spring_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-stack-01">chain_stack_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chain-whip-01">chain_whip_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-01">control_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eye-01">eye_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#foot-bk-01">foot_bk_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hydraulic-01">hydraulic_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#leg-2jnt-01">leg_2jnt_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#leg-2jnt-02">leg_2jnt_02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#leg-2jnt-freetangents-01">leg_2jnt_freeTangents_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#leg-3jnt-01">leg_3jnt_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#leg-ms-2jnt-01">leg_ms_2jnt_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lite-chain-01">lite_chain_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lite-chain-stack-01">lite_chain_stack_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meta-01">meta_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mouth-01">mouth_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mouth-02">mouth_02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#neck-ik-01">neck_ik_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sdk-control-01">sdk_control_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shoulder-01">shoulder_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shoulder-02">shoulder_02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shoulder-ms-01">shoulder_ms_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spine-fk-01">spine_FK_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spine-s-shape-01">spine_S_shape_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spine-ik-01">spine_ik_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spine-ik-02">spine_ik_02</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#squash4sides-01">squash4Sides_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#squash-01">squash_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tangent-spline-01">tangent_spline_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ui-container-01">ui_container_01</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ui-slider-01">ui_slider_01</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="synopticUserDocumentation.html">Synoptic User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="videoTutorials.html">Video Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releaseLog.html">Release Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mGear: Rigging Framework</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Shifter Component Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/shifterComponentReference.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>Shifter Component Reference<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Shifter comes with over 40 components you can build your rig from. This section covers the functionality and settings of each one in detail.</p>
+<div class="section" id="guide-settings">
+<h2>Guide Settings<a class="headerlink" href="#guide-settings" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="main-settings">
+<h2>Main Settings<a class="headerlink" href="#main-settings" title="Permalink to this headline">¶</a></h2>
+<p>Settings shared by all components.</p>
+<ul class="simple">
+<li><strong>Name</strong>: The base name of the component, all the parts of the component get renmaed.</li>
+<li><strong>Side</strong>: Which side the component is on; Left, Right or Center</li>
+<li><strong>Component Index</strong>: WIP</li>
+<li><strong>Connector</strong>: WIP</li>
+</ul>
+<div class="section" id="joint-connection-settings">
+<h3>Joint Connection Settings<a class="headerlink" href="#joint-connection-settings" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Use Joint Index</strong>: WIP</li>
+<li><strong>Parent Joint Index</strong>: WIP</li>
+</ul>
+</div>
+<div class="section" id="channel-host-settings">
+<h3>Channel Host Settings<a class="headerlink" href="#channel-host-settings" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>Host</strong>: The guide that stores the extra attributes for this component, such as IK/FK blendering and more. This will generally be a control_01 component.</li>
+</ul>
+</div>
+<div class="section" id="custom-ctonrollers-group">
+<h3>Custom Ctonrollers Group<a class="headerlink" href="#custom-ctonrollers-group" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="shifter-components">
+<h2>Shifter Components<a class="headerlink" href="#shifter-components" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="arm-2jnt-01">
+<h3>arm_2jnt_01<a class="headerlink" href="#arm-2jnt-01" title="Permalink to this headline">¶</a></h3>
+<p>Two bone arm setup with:</p>
+<ul class="simple">
+<li><strong>IK/FK blending</strong> for switching between animating with IK or FK</li>
+<li><strong>Roll</strong> attribute that lets you adjust the elbow direction, without moving the pole vector</li>
+<li><strong>Twist joints</strong> for better deformations around the shoulder and wrist joints</li>
+<li><strong>Armpit roll</strong> to manually adjust the twist joints around the shoulder joint</li>
+<li><strong>Scale</strong> of the entire arm</li>
+<li><strong>Stretching</strong> so the arm can elongate when the IK control is too far away to reach, including a maximum stretch limit</li>
+<li><strong>Sliding</strong> of the elbow, which elongates the upper arm while shortening the lower arm, or vice versa</li>
+<li><strong>Softness</strong> to prevent popping when the IK arm is stretched out straight</li>
+<li><strong>Reverse</strong> to make the arm bend in the opposite direction when using IK</li>
+<li><strong>Roundness</strong> for rubber hose style animation</li>
+<li><strong>Volume</strong> preservation during stretching</li>
+<li><strong>Elbow</strong> controller for accurately positioning the elbow, for instance when a character is resting her elbows on a table</li>
+<li><strong>Space switchers</strong> for the IK, Up Vector and Elbow controllers that controls which space they follow</li>
+</ul>
+<p>This is the default arm comoponent used by the biped template rig.</p>
+<div class="section" id="guide-positioning">
+<h4>Guide Positioning<a class="headerlink" href="#guide-positioning" title="Permalink to this headline">¶</a></h4>
+<p>WIP</p>
+</div>
+<div class="section" id="compoent-settings">
+<h4>Compoent Settings<a class="headerlink" href="#compoent-settings" title="Permalink to this headline">¶</a></h4>
+<p>TODO! Should this be tools tips in the interface itself.</p>
+<ul class="simple">
+<li><strong>IK/FK Blender</strong>: Default</li>
+</ul>
+</div>
+<div class="section" id="source">
+<h4>Source<a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h4>
+<p>Link to Module (how)</p>
+</div>
+</div>
+<div class="section" id="arm-2jnt-02">
+<h3>arm_2jnt_02<a class="headerlink" href="#arm-2jnt-02" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="arm-2jnt-03">
+<h3>arm_2jnt_03<a class="headerlink" href="#arm-2jnt-03" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="arm-2jnt-04">
+<h3>arm_2jnt_04<a class="headerlink" href="#arm-2jnt-04" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="arm-2jnt-freetangents-01">
+<h3>arm_2jnt_freeTangents_01<a class="headerlink" href="#arm-2jnt-freetangents-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="arm-ms-2jnt-01">
+<h3>arm_ms_2jnt_01<a class="headerlink" href="#arm-ms-2jnt-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="cable-01">
+<h3>cable_01<a class="headerlink" href="#cable-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-01">
+<h3>chain_01<a class="headerlink" href="#chain-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-fk-spline-01">
+<h3>chain_FK_spline_01<a class="headerlink" href="#chain-fk-spline-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-fk-spline-02">
+<h3>chain_FK_spline_02<a class="headerlink" href="#chain-fk-spline-02" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-fk-spline-variable-ik-01">
+<h3>chain_FK_spline_variable_IK_01<a class="headerlink" href="#chain-fk-spline-variable-ik-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-ik-spline-variable-fk-01">
+<h3>chain_IK_spline_variable_FK_01<a class="headerlink" href="#chain-ik-spline-variable-fk-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-ik-spline-variable-fk-stack-01">
+<h3>chain_IK_spline_variable_FK_stack_01<a class="headerlink" href="#chain-ik-spline-variable-fk-stack-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-net-01">
+<h3>chain_net_01<a class="headerlink" href="#chain-net-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-spring-01">
+<h3>chain_spring_01<a class="headerlink" href="#chain-spring-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-stack-01">
+<h3>chain_stack_01<a class="headerlink" href="#chain-stack-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="chain-whip-01">
+<h3>chain_whip_01<a class="headerlink" href="#chain-whip-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="control-01">
+<h3>control_01<a class="headerlink" href="#control-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="eye-01">
+<h3>eye_01<a class="headerlink" href="#eye-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="foot-bk-01">
+<h3>foot_bk_01<a class="headerlink" href="#foot-bk-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="hydraulic-01">
+<h3>hydraulic_01<a class="headerlink" href="#hydraulic-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="leg-2jnt-01">
+<h3>leg_2jnt_01<a class="headerlink" href="#leg-2jnt-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="leg-2jnt-02">
+<h3>leg_2jnt_02<a class="headerlink" href="#leg-2jnt-02" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="leg-2jnt-freetangents-01">
+<h3>leg_2jnt_freeTangents_01<a class="headerlink" href="#leg-2jnt-freetangents-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="leg-3jnt-01">
+<h3>leg_3jnt_01<a class="headerlink" href="#leg-3jnt-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="leg-ms-2jnt-01">
+<h3>leg_ms_2jnt_01<a class="headerlink" href="#leg-ms-2jnt-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="lite-chain-01">
+<h3>lite_chain_01<a class="headerlink" href="#lite-chain-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="lite-chain-stack-01">
+<h3>lite_chain_stack_01<a class="headerlink" href="#lite-chain-stack-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="meta-01">
+<h3>meta_01<a class="headerlink" href="#meta-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="mouth-01">
+<h3>mouth_01<a class="headerlink" href="#mouth-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="mouth-02">
+<h3>mouth_02<a class="headerlink" href="#mouth-02" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="neck-ik-01">
+<h3>neck_ik_01<a class="headerlink" href="#neck-ik-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="sdk-control-01">
+<h3>sdk_control_01<a class="headerlink" href="#sdk-control-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="shoulder-01">
+<h3>shoulder_01<a class="headerlink" href="#shoulder-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="shoulder-02">
+<h3>shoulder_02<a class="headerlink" href="#shoulder-02" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="shoulder-ms-01">
+<h3>shoulder_ms_01<a class="headerlink" href="#shoulder-ms-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="spine-fk-01">
+<h3>spine_FK_01<a class="headerlink" href="#spine-fk-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="spine-s-shape-01">
+<h3>spine_S_shape_01<a class="headerlink" href="#spine-s-shape-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="spine-ik-01">
+<h3>spine_ik_01<a class="headerlink" href="#spine-ik-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="spine-ik-02">
+<h3>spine_ik_02<a class="headerlink" href="#spine-ik-02" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="squash4sides-01">
+<h3>squash4Sides_01<a class="headerlink" href="#squash4sides-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="squash-01">
+<h3>squash_01<a class="headerlink" href="#squash-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="tangent-spline-01">
+<h3>tangent_spline_01<a class="headerlink" href="#tangent-spline-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="ui-container-01">
+<h3>ui_container_01<a class="headerlink" href="#ui-container-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+<div class="section" id="ui-slider-01">
+<h3>ui_slider_01<a class="headerlink" href="#ui-slider-01" title="Permalink to this headline">¶</a></h3>
+<p>WIP</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="synopticUserDocumentation.html" class="btn btn-neutral float-right" title="Synoptic User Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="shifterUserDocumentation.html" class="btn btn-neutral float-left" title="Shifter User Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

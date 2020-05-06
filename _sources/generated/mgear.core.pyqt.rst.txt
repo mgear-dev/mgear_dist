@@ -1,5 +1,5 @@
-mgear\.core\.pyqt
-=================
+mgear.core.pyqt
+===============
 
 .. automodule:: mgear.core.pyqt
 
@@ -11,7 +11,12 @@ mgear\.core\.pyqt
    
       deleteInstances
       fakeTranslate
+      get_icon
+      get_icon_path
+      get_instance
+      get_main_window
       maya_main_window
+      position_window
       qt_import
       showDialog
       ui2py

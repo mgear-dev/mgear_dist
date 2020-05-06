@@ -1,5 +1,5 @@
-mgear\.rigbits\.widgets
-=======================
+mgear.rigbits.widgets
+=====================
 
 .. automodule:: mgear.rigbits.widgets
 

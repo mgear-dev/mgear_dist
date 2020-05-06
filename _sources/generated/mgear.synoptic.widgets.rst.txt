@@ -1,5 +1,5 @@
-mgear\.synoptic\.widgets
-========================
+mgear.synoptic.widgets
+======================
 
 .. automodule:: mgear.synoptic.widgets
 

@@ -1,5 +1,5 @@
-mgear\.rigbits\.eye\_rigger
-===========================
+mgear.rigbits.eye\_rigger
+=========================
 
 .. automodule:: mgear.rigbits.eye_rigger
 

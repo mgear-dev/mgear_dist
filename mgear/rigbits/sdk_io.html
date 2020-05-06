@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.rigbits.sdk_io &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.rigbits.sdk_io &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,40 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -64,7 +58,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -90,11 +84,14 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -111,7 +108,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -119,9 +116,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -200,7 +198,7 @@ copySDKsToNode(“jacketFlap_L0_fk0_sdk”,</p>
 
 <dl class="function">
 <dt id="mgear.rigbits.sdk_io.copySDKsToNode">
-<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">copySDKsToNode</code><span class="sig-paren">(</span><em>sourceDriven</em>, <em>targetDriver</em>, <em>targetDriven</em>, <em>sourceAttributes=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.copySDKsToNode" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">copySDKsToNode</code><span class="sig-paren">(</span><em>sourceDriven</em>, <em>targetDriver</em>, <em>targetDriven</em>, <em>sourceAttributes=[]</em>, <em>sourceDriverFilter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.copySDKsToNode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Duplicates sdk nodes from the source drive, to any designated target
 driver/driven</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -213,6 +211,8 @@ driver/driven</p>
 <li><strong>targetDriven</strong> (<em>pynode</em>) – node to be driven</li>
 <li><strong>sourceAttributes</strong> (<em>list</em><em>, </em><em>optional</em>) – of attrs to copy, if none provided</li>
 <li><strong>all</strong> (<em>assume</em>) – </li>
+<li><strong>sourceDriverFilter</strong> (<em>list</em><em>, </em><em>pynode</em>) – Driver transforms to filter by,</li>
+<li><strong>the connected SDK is not driven by this node it will not be returned.</strong> (<em>if</em>) – </li>
 </ul>
 </td>
 </tr>
@@ -254,7 +254,7 @@ driver/driven</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>nodes</strong> (<em>list</em>) – of nodes to export</li>
-<li><strong>filePath</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – full filepath to export jsons to</li>
+<li><strong>filePath</strong> (<em>string</em>) – full filepath to export jsons to</li>
 </ul>
 </td>
 </tr>
@@ -291,12 +291,12 @@ a blendweighted and connect sdk, return input[#]</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attrPlug</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – node.attr</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attrPlug</strong> (<em>string</em>) – node.attr</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">node.attr of the blendweighted node that was just created or
 existing</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string">string</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
@@ -304,7 +304,7 @@ existing</td>
 
 <dl class="function">
 <dt id="mgear.rigbits.sdk_io.getConnectedSDKs">
-<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getConnectedSDKs</code><span class="sig-paren">(</span><em>driven</em>, <em>curvesOfType=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getConnectedSDKs" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getConnectedSDKs</code><span class="sig-paren">(</span><em>driven</em>, <em>curvesOfType=[]</em>, <em>sourceDriverFilter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getConnectedSDKs" title="Permalink to this definition">¶</a></dt>
 <dd><p>get all the sdk, animcurve, nodes/plugs connected to the provided node.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -314,6 +314,8 @@ existing</td>
 <li><strong>node</strong> (<em>str</em><em>, </em><em>pynode</em>) – name of node, or pynode</li>
 <li><strong>curvesOfType</strong> (<em>list</em><em>, </em><em>optional</em>) – animCurve nodes of type if none provided</li>
 <li><strong>fall back on module defined supported set.</strong> (<em>will</em>) – </li>
+<li><strong>sourceDriverFilter</strong> (<em>list</em><em>, </em><em>pynode</em>) – Driver transforms to filter by,</li>
+<li><strong>the connected SDK is not driven by this node it will not be returned.</strong> (<em>if</em>) – </li>
 </ul>
 </td>
 </tr>
@@ -329,17 +331,24 @@ existing</td>
 
 <dl class="function">
 <dt id="mgear.rigbits.sdk_io.getMultiDriverSDKs">
-<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getMultiDriverSDKs</code><span class="sig-paren">(</span><em>driven</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getMultiDriverSDKs" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">getMultiDriverSDKs</code><span class="sig-paren">(</span><em>driven</em>, <em>sourceDriverFilter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.getMultiDriverSDKs" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the sdk nodes that are added through a blendweighted node</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>driven</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – name of the driven node</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>driven</strong> (<em>string</em>) – name of the driven node</li>
+<li><strong>sourceDriverFilter</strong> (<em>list</em><em>, </em><em>pynode</em>) – Driver transforms to filter by,</li>
+<li><strong>the connected SDK is not driven by this node it will not be returned.</strong> (<em>if</em>) – </li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">of sdk nodes</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">of sdk nodes</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -374,7 +383,7 @@ TODO: Open this up to provided type destination</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>animNodeOutputPlug</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – animationNode.output</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>animNodeOutputPlug</strong> (<em>string</em>) – animationNode.output</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">name of the node, and attr</td>
 </tr>
@@ -411,7 +420,7 @@ for exporting.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filePath</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a>) – path to json file</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filePath</strong> (<em>string</em>) – path to json file</td>
 </tr>
 </tbody>
 </table>
@@ -461,7 +470,7 @@ and invert those values</p>
 
 <dl class="function">
 <dt id="mgear.rigbits.sdk_io.removeSDKs">
-<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">removeSDKs</code><span class="sig-paren">(</span><em>node</em>, <em>attributes=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.removeSDKs" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.sdk_io.</code><code class="descname">removeSDKs</code><span class="sig-paren">(</span><em>node</em>, <em>attributes=[]</em>, <em>sourceDriverFilter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.sdk_io.removeSDKs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience function to remove, delete, all sdk nodes associated with
 the provided node</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -472,6 +481,8 @@ the provided node</p>
 <li><strong>node</strong> (<em>pynode</em>) – name of the node</li>
 <li><strong>attributes</strong> (<em>list</em><em>, </em><em>optional</em>) – list of attributes to remove sdks from</li>
 <li><strong>none provided</strong><strong>, </strong><strong>assume all</strong> (<em>if</em>) – </li>
+<li><strong>sourceDriverFilter</strong> (<em>list</em><em>, </em><em>pynode</em>) – Driver transforms to filter by,</li>
+<li><strong>the connected SDK is not driven by this node it will not be returned.</strong> (<em>if</em>) – </li>
 </ul>
 </td>
 </tr>
@@ -497,9 +508,7 @@ the provided node</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -508,11 +517,11 @@ the provided node</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -525,36 +534,15 @@ the provided node</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

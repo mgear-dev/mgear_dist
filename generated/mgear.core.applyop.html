@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.core.applyop &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.core.applyop &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,43 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
-        <link rel="up" title="Base Modules" href="../baseModules.html"/>
-        <link rel="next" title="mgear.core.attribute" href="mgear.core.attribute.html"/>
-        <link rel="prev" title="mgear.core" href="mgear.core.html"/> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mgear.core.attribute" href="mgear.core.attribute.html" />
+    <link rel="prev" title="mgear.core" href="mgear.core.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -93,6 +86,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
@@ -130,6 +125,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
@@ -146,7 +142,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">mGear: Rigging Framework</a>
@@ -154,9 +150,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -206,7 +203,7 @@
 <span id="mgear-core-applyop"></span><h1>mgear.core.applyop<a class="headerlink" href="#module-mgear.core.applyop" title="Permalink to this headline">¶</a></h1>
 <p><strong>Apply operator module</strong></p>
 <p>Operators are any node that connected to other nodes creates a rig behaviour:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">I</span><span class="o">.</span><span class="n">E</span><span class="p">:</span> <span class="n">IK</span> <span class="n">solvers</span> <span class="ow">and</span>  <span class="n">constraints</span> <span class="n">are</span> <span class="n">operators</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">I</span><span class="o">.</span><span class="n">E</span><span class="p">:</span> <span class="n">IK</span> <span class="n">solvers</span> <span class="ow">and</span>  <span class="n">constraints</span> <span class="n">are</span> <span class="n">operators</span>
 </pre></div>
 </div>
 <p class="rubric">Functions</p>
@@ -216,52 +213,52 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.aimCns" title="mgear.core.applyop.aimCns"><code class="xref py py-obj docutils literal"><span class="pre">aimCns</span></code></a>(obj,&nbsp;master[,&nbsp;axis,&nbsp;wupType,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.aimCns" title="mgear.core.applyop.aimCns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aimCns</span></code></a>(obj,&nbsp;master[,&nbsp;axis,&nbsp;wupType,&nbsp;…])</td>
 <td>Apply a direction constraint</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.curvecns_op" title="mgear.core.applyop.curvecns_op"><code class="xref py py-obj docutils literal"><span class="pre">curvecns_op</span></code></a>(crv[,&nbsp;inputs])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.curvecns_op" title="mgear.core.applyop.curvecns_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">curvecns_op</span></code></a>(crv[,&nbsp;inputs])</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_curvecns_op" title="mgear.core.applyop.gear_curvecns_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_curvecns_op</span></code></a>(crv[,&nbsp;inputs])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_curvecns_op" title="mgear.core.applyop.gear_curvecns_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_curvecns_op</span></code></a>(crv[,&nbsp;inputs])</td>
 <td>create mGear curvecns node.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_curveslide2_op" title="mgear.core.applyop.gear_curveslide2_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_curveslide2_op</span></code></a>(outcrv,&nbsp;incrv[,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_curveslide2_op" title="mgear.core.applyop.gear_curveslide2_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_curveslide2_op</span></code></a>(outcrv,&nbsp;incrv[,&nbsp;…])</td>
 <td>Apply a sn_curveslide2_op operator</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_ikfk2bone_op" title="mgear.core.applyop.gear_ikfk2bone_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_ikfk2bone_op</span></code></a>([out,&nbsp;root,&nbsp;eff,&nbsp;upv,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_ikfk2bone_op" title="mgear.core.applyop.gear_ikfk2bone_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_ikfk2bone_op</span></code></a>([out,&nbsp;root,&nbsp;eff,&nbsp;upv,&nbsp;…])</td>
 <td>Apply a sn_ikfk2bone_op operator</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_intmatrix_op" title="mgear.core.applyop.gear_intmatrix_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_intmatrix_op</span></code></a>(mA,&nbsp;mB[,&nbsp;blend])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_intmatrix_op" title="mgear.core.applyop.gear_intmatrix_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_intmatrix_op</span></code></a>(mA,&nbsp;mB[,&nbsp;blend])</td>
 <td>create mGear interpolate Matrix node.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_inverseRotorder_op" title="mgear.core.applyop.gear_inverseRotorder_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_inverseRotorder_op</span></code></a>(out_obj,&nbsp;in_obj)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_inverseRotorder_op" title="mgear.core.applyop.gear_inverseRotorder_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_inverseRotorder_op</span></code></a>(out_obj,&nbsp;in_obj)</td>
 <td>Apply a sn_inverseRotorder_op operator</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_mulmatrix_op" title="mgear.core.applyop.gear_mulmatrix_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_mulmatrix_op</span></code></a>(mA,&nbsp;mB[,&nbsp;target,&nbsp;transform])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_mulmatrix_op" title="mgear.core.applyop.gear_mulmatrix_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_mulmatrix_op</span></code></a>(mA,&nbsp;mB[,&nbsp;target,&nbsp;transform])</td>
 <td>Create mGear multiply Matrix node.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_rollsplinekine_op" title="mgear.core.applyop.gear_rollsplinekine_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_rollsplinekine_op</span></code></a>(out[,&nbsp;controlers,&nbsp;u,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_rollsplinekine_op" title="mgear.core.applyop.gear_rollsplinekine_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_rollsplinekine_op</span></code></a>(out[,&nbsp;controlers,&nbsp;u,&nbsp;…])</td>
 <td>Apply a sn_rollsplinekine_op operator</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_spinePointAtOp" title="mgear.core.applyop.gear_spinePointAtOp"><code class="xref py py-obj docutils literal"><span class="pre">gear_spinePointAtOp</span></code></a>(cns,&nbsp;startobj,&nbsp;endobj[,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_spinePointAtOp" title="mgear.core.applyop.gear_spinePointAtOp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_spinePointAtOp</span></code></a>(cns,&nbsp;startobj,&nbsp;endobj[,&nbsp;…])</td>
 <td>Apply a SpinePointAt operator</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_spinePointAtOpWM" title="mgear.core.applyop.gear_spinePointAtOpWM"><code class="xref py py-obj docutils literal"><span class="pre">gear_spinePointAtOpWM</span></code></a>(cns,&nbsp;startobj,&nbsp;endobj)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_spinePointAtOpWM" title="mgear.core.applyop.gear_spinePointAtOpWM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_spinePointAtOpWM</span></code></a>(cns,&nbsp;startobj,&nbsp;endobj)</td>
 <td>Apply a SpinePointAt operator using world matrix</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_spring_op" title="mgear.core.applyop.gear_spring_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_spring_op</span></code></a>(in_obj[,&nbsp;goal])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_spring_op" title="mgear.core.applyop.gear_spring_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_spring_op</span></code></a>(in_obj[,&nbsp;goal])</td>
 <td>Apply mGear spring node.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_squashstretch2_op" title="mgear.core.applyop.gear_squashstretch2_op"><code class="xref py py-obj docutils literal"><span class="pre">gear_squashstretch2_op</span></code></a>(out[,&nbsp;sclref,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.gear_squashstretch2_op" title="mgear.core.applyop.gear_squashstretch2_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gear_squashstretch2_op</span></code></a>(out[,&nbsp;sclref,&nbsp;…])</td>
 <td>Apply a sn_squashstretch2_op operator</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.oriCns" title="mgear.core.applyop.oriCns"><code class="xref py py-obj docutils literal"><span class="pre">oriCns</span></code></a>(driver,&nbsp;driven[,&nbsp;maintainOffset])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.oriCns" title="mgear.core.applyop.oriCns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oriCns</span></code></a>(driver,&nbsp;driven[,&nbsp;maintainOffset])</td>
 <td>Apply orientation constraint</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.pathCns" title="mgear.core.applyop.pathCns"><code class="xref py py-obj docutils literal"><span class="pre">pathCns</span></code></a>(obj,&nbsp;curve[,&nbsp;cnsType,&nbsp;u,&nbsp;tangent])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.pathCns" title="mgear.core.applyop.pathCns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pathCns</span></code></a>(obj,&nbsp;curve[,&nbsp;cnsType,&nbsp;u,&nbsp;tangent])</td>
 <td>Apply a path constraint or curve constraint.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.splineIK" title="mgear.core.applyop.splineIK"><code class="xref py py-obj docutils literal"><span class="pre">splineIK</span></code></a>(name,&nbsp;chn[,&nbsp;parent,&nbsp;cParent,&nbsp;curve])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/applyop.html#mgear.core.applyop.splineIK" title="mgear.core.applyop.splineIK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splineIK</span></code></a>(name,&nbsp;chn[,&nbsp;parent,&nbsp;cParent,&nbsp;curve])</td>
 <td>Apply a splineIK solver to a chain.</td>
 </tr>
 </tbody>
@@ -270,9 +267,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -281,7 +276,7 @@
         <a href="mgear.core.attribute.html" class="btn btn-neutral float-right" title="mgear.core.attribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mgear.core.html" class="btn btn-neutral" title="mgear.core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mgear.core.html" class="btn btn-neutral float-left" title="mgear.core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -290,11 +285,11 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -307,36 +302,15 @@
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

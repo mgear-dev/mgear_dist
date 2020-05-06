@@ -1,5 +1,5 @@
-mgear\.rigbits\.proxySlicer
-===========================
+mgear.rigbits.proxySlicer
+=========================
 
 .. automodule:: mgear.rigbits.proxySlicer
 

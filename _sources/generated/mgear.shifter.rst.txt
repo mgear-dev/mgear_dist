@@ -1,5 +1,5 @@
-mgear\.shifter
-==============
+mgear.shifter
+=============
 
 .. automodule:: mgear.shifter
 

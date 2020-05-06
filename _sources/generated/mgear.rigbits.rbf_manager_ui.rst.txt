@@ -1,5 +1,5 @@
-mgear\.rigbits\.rbf\_manager\_ui
-================================
+mgear.rigbits.rbf\_manager\_ui
+==============================
 
 .. automodule:: mgear.rigbits.rbf_manager_ui
 

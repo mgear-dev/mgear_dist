@@ -1,5 +1,5 @@
-mgear\.core\.widgets
-====================
+mgear.core.widgets
+==================
 
 .. automodule:: mgear.core.widgets
 

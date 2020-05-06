@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.rigbits.weightNode_io &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.rigbits.weightNode_io &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,40 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -64,7 +58,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -90,11 +84,14 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -111,7 +108,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -119,9 +116,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -251,87 +249,264 @@ specific to the module rbf node.</p>
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.addPose">
 <code class="descname">addPose</code><span class="sig-paren">(</span><em>poseInput</em>, <em>poseValue</em>, <em>posesIndex=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.addPose" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>add pose to the weightDriver node provided. Also used for editing
+an existing pose, since you can specify the index. If non provided
+assume new</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – weightedDriver</li>
+<li><strong>poseInput</strong> (<em>list</em>) – list of the poseInput values</li>
+<li><strong>poseValue</strong> (<em>list</em>) – of poseValue values</li>
+<li><strong>posesIndex</strong> (<em>int</em><em>, </em><em>optional</em>) – at desired index, if none assume</li>
+<li><strong>latest/new</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.copyPoses">
 <code class="descname">copyPoses</code><span class="sig-paren">(</span><em>nodeB</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.copyPoses" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Copy poses from nodeA to nodeB with the option to be blank or node
+for syncing nodes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nodeB</strong> (<em>str</em>) – name of weightedNode</li>
+<li><strong>emptyPoseValues</strong> (<em>bool</em><em>, </em><em>optional</em>) – should the copy just be the same</li>
+<li><strong>of poses but blank output value</strong> (<em>number</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">n/a</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">n/a</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.create">
 <code class="descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.create" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>create an RBF node of type, defined by the subclassed module</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code> – Description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.deletePose">
 <code class="descname">deletePose</code><span class="sig-paren">(</span><em>indexToPop</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.deletePose" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>gather information on node, remove desired index and reapply</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – weightDriver</li>
+<li><strong>indexToPop</strong> (<em>int</em>) – pose index to remove</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.forceEvaluation">
 <code class="descname">forceEvaluation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.forceEvaluation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>convenience function to force re evaluation on the rbf nodes
+most nodes support this</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.getDrivenNode">
 <code class="descname">getDrivenNode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.getDrivenNode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get driven nodes connected to weightDriver</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of driven nodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.getDrivenNodeAttributes">
 <code class="descname">getDrivenNodeAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.getDrivenNodeAttributes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get the connected attributes of the provided compound attr in order
+of index - Sanity check</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of connected attrs in order</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.getDriverNode">
 <code class="descname">getDriverNode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.getDriverNode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get nodes that are driving weightDriver node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of driver nodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.getDriverNodeAttributes">
 <code class="descname">getDriverNodeAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.getDriverNodeAttributes" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get the connected attributes of the provided compound attr in order
+of index - Sanity check</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">of connected attrs in order</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.getNodeInfo">
 <code class="descname">getNodeInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.getNodeInfo" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get all the info for for the node in the form of a dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code> – NotImplementedError: each rbf node is unique,</li>
+<li>adhere here for rbf manager ui support</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.getPoseInfo">
 <code class="descname">getPoseInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.getPoseInfo" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get poseInfo dict</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code> – each rbf node is unique, adhere here for</li>
+<li>rbf manager ui support</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.getRBFToggleAttr">
 <code class="descname">getRBFToggleAttr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.getRBFToggleAttr" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get the specific to the type, “envelope” attr for rbf node</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.getTransformParent">
 <code class="descname">getTransformParent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.getTransformParent" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get a dict of all the information to be serialized to/from json</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">information to be recreated on import</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.lengthenCompoundAttrs">
 <code class="descname">lengthenCompoundAttrs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.lengthenCompoundAttrs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>convenience function, sanity check for zero’d compound attrs</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.nodeType_suffix">
 <code class="descname">nodeType_suffix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.nodeType_suffix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>optional override with a module/node specific suffix for naming</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.setDrivenNode">
 <code class="descname">setDrivenNode</code><span class="sig-paren">(</span><em>drivenNode</em>, <em>drivenAttrs</em>, <em>parent=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.setDrivenNode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>set the node to be driven by the weightDriver</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – weightDriver node</li>
+<li><strong>drivenNode</strong> (<em>str</em>) – name of node to be driven</li>
+<li><strong>drivenAttrs</strong> (<em>list</em>) – of attributes to be driven by weightDriver</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.setDriverNode">
 <code class="descname">setDriverNode</code><span class="sig-paren">(</span><em>driverNode</em>, <em>driverAttrs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.weightNode_io.RBFNode.setDriverNode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>set the node that will be driving the evaluation on our poses</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> (<em>str</em>) – name of weightDriver node</li>
+<li><strong>driverNode</strong> (<em>str</em>) – name of driver node</li>
+<li><strong>driverAttrs</strong> (<em>list</em>) – of attributes used to perform evaluations</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="mgear.rigbits.weightNode_io.RBFNode.syncPoseIndices">
@@ -942,9 +1117,7 @@ be defaulted to 0 or 1(if scaleAttr)</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -953,11 +1126,11 @@ be defaulted to 0 or 1(if scaleAttr)</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -970,36 +1143,15 @@ be defaulted to 0 or 1(if scaleAttr)</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

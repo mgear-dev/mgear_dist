@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.rigbits.weightNode_io &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.rigbits.weightNode_io &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,43 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
-        <link rel="up" title="Rigbits" href="../rigbitsModules.html"/>
-        <link rel="next" title="mgear.rigbits.widgets" href="mgear.rigbits.widgets.html"/>
-        <link rel="prev" title="mgear.rigbits.utils" href="mgear.rigbits.utils.html"/> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mgear.rigbits.widgets" href="mgear.rigbits.widgets.html" />
+    <link rel="prev" title="mgear.rigbits.utils" href="mgear.rigbits.utils.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -93,6 +86,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../baseModules.html">Base Modules</a></li>
@@ -133,6 +128,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
@@ -149,7 +145,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">mGear: Rigging Framework</a>
@@ -157,9 +153,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -274,100 +271,100 @@ __email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravr
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.addPose" title="mgear.rigbits.weightNode_io.addPose"><code class="xref py py-obj docutils literal"><span class="pre">addPose</span></code></a>(node,&nbsp;poseInput,&nbsp;poseValue[,&nbsp;posesIndex])</td>
-<td>add pose to the weightDriver node provided. Also used for editing an</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.addPose" title="mgear.rigbits.weightNode_io.addPose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addPose</span></code></a>(node,&nbsp;poseInput,&nbsp;poseValue[,&nbsp;posesIndex])</td>
+<td>add pose to the weightDriver node provided.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.copyPoses" title="mgear.rigbits.weightNode_io.copyPoses"><code class="xref py py-obj docutils literal"><span class="pre">copyPoses</span></code></a>(nodeA,&nbsp;nodeB[,&nbsp;emptyPoseValues])</td>
-<td>Copy poses from nodeA to nodeB with the option to be blank or node</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.copyPoses" title="mgear.rigbits.weightNode_io.copyPoses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copyPoses</span></code></a>(nodeA,&nbsp;nodeB[,&nbsp;emptyPoseValues])</td>
+<td>Copy poses from nodeA to nodeB with the option to be blank or node for syncing nodes OF EQUAL LENGTH IN POSE INFO</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.createRBF" title="mgear.rigbits.weightNode_io.createRBF"><code class="xref py py-obj docutils literal"><span class="pre">createRBF</span></code></a>(name[,&nbsp;transformName])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.createRBF" title="mgear.rigbits.weightNode_io.createRBF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createRBF</span></code></a>(name[,&nbsp;transformName])</td>
 <td>Creates a rbf node of type weightDriver</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.createRBFFromInfo" title="mgear.rigbits.weightNode_io.createRBFFromInfo"><code class="xref py py-obj docutils literal"><span class="pre">createRBFFromInfo</span></code></a>(weightNodeInfo_dict)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.createRBFFromInfo" title="mgear.rigbits.weightNode_io.createRBFFromInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createRBFFromInfo</span></code></a>(weightNodeInfo_dict)</td>
 <td>create an rbf node from the dictionary provided information</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.createVectorDriver" title="mgear.rigbits.weightNode_io.createVectorDriver"><code class="xref py py-obj docutils literal"><span class="pre">createVectorDriver</span></code></a>(driverInfo)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.createVectorDriver" title="mgear.rigbits.weightNode_io.createVectorDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createVectorDriver</span></code></a>(driverInfo)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.deletePose" title="mgear.rigbits.weightNode_io.deletePose"><code class="xref py py-obj docutils literal"><span class="pre">deletePose</span></code></a>(node,&nbsp;indexToPop)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.deletePose" title="mgear.rigbits.weightNode_io.deletePose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deletePose</span></code></a>(node,&nbsp;indexToPop)</td>
 <td>gather information on node, remove desired index and reapply</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.exportNodes" title="mgear.rigbits.weightNode_io.exportNodes"><code class="xref py py-obj docutils literal"><span class="pre">exportNodes</span></code></a>(filePath,&nbsp;weightDriverNodes)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.exportNodes" title="mgear.rigbits.weightNode_io.exportNodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exportNodes</span></code></a>(filePath,&nbsp;weightDriverNodes)</td>
 <td>export serialized node information to the specified filepath</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.forceEvaluation" title="mgear.rigbits.weightNode_io.forceEvaluation"><code class="xref py py-obj docutils literal"><span class="pre">forceEvaluation</span></code></a>(node)</td>
-<td>force evaluation of the weightDriver node</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.forceEvaluation" title="mgear.rigbits.weightNode_io.forceEvaluation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forceEvaluation</span></code></a>(node)</td>
+<td>force evaluation of the weightDriver node thank you Ingo</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getAttrInOrder" title="mgear.rigbits.weightNode_io.getAttrInOrder"><code class="xref py py-obj docutils literal"><span class="pre">getAttrInOrder</span></code></a>(node,&nbsp;attrWithIndex)</td>
-<td>get the connected attributes of the provided compound attr in order</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getAttrInOrder" title="mgear.rigbits.weightNode_io.getAttrInOrder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getAttrInOrder</span></code></a>(node,&nbsp;attrWithIndex)</td>
+<td>get the connected attributes of the provided compound attr in order of index - Sanity check</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDrivenNode" title="mgear.rigbits.weightNode_io.getDrivenNode"><code class="xref py py-obj docutils literal"><span class="pre">getDrivenNode</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDrivenNode" title="mgear.rigbits.weightNode_io.getDrivenNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getDrivenNode</span></code></a>(node)</td>
 <td>get driven nodes connected to weightDriver</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDrivenNodeAttributes" title="mgear.rigbits.weightNode_io.getDrivenNodeAttributes"><code class="xref py py-obj docutils literal"><span class="pre">getDrivenNodeAttributes</span></code></a>(node)</td>
-<td>get the connected attributes of the provided compound attr in order</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDrivenNodeAttributes" title="mgear.rigbits.weightNode_io.getDrivenNodeAttributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getDrivenNodeAttributes</span></code></a>(node)</td>
+<td>get the connected attributes of the provided compound attr in order of index - Sanity check</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDriverListInfo" title="mgear.rigbits.weightNode_io.getDriverListInfo"><code class="xref py py-obj docutils literal"><span class="pre">getDriverListInfo</span></code></a>(node)</td>
-<td>used for when live connections are supported on the weightDriver</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDriverListInfo" title="mgear.rigbits.weightNode_io.getDriverListInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getDriverListInfo</span></code></a>(node)</td>
+<td>used for when live connections are supported on the weightDriver # TODO - Complete support</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDriverNode" title="mgear.rigbits.weightNode_io.getDriverNode"><code class="xref py py-obj docutils literal"><span class="pre">getDriverNode</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDriverNode" title="mgear.rigbits.weightNode_io.getDriverNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getDriverNode</span></code></a>(node)</td>
 <td>get nodes that are driving weightDriver node</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDriverNodeAttributes" title="mgear.rigbits.weightNode_io.getDriverNodeAttributes"><code class="xref py py-obj docutils literal"><span class="pre">getDriverNodeAttributes</span></code></a>(node)</td>
-<td>get the connected attributes of the provided compound attr in order</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getDriverNodeAttributes" title="mgear.rigbits.weightNode_io.getDriverNodeAttributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getDriverNodeAttributes</span></code></a>(node)</td>
+<td>get the connected attributes of the provided compound attr in order of index - Sanity check</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getIndexValue" title="mgear.rigbits.weightNode_io.getIndexValue"><code class="xref py py-obj docutils literal"><span class="pre">getIndexValue</span></code></a>(nodePlug,&nbsp;indices)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getIndexValue" title="mgear.rigbits.weightNode_io.getIndexValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getIndexValue</span></code></a>(nodePlug,&nbsp;indices)</td>
 <td>return the values of a compound attr at the specified index</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getNodeConnections" title="mgear.rigbits.weightNode_io.getNodeConnections"><code class="xref py py-obj docutils literal"><span class="pre">getNodeConnections</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getNodeConnections" title="mgear.rigbits.weightNode_io.getNodeConnections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getNodeConnections</span></code></a>(node)</td>
 <td>get all connections on weightDriver node</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getNodeInfo" title="mgear.rigbits.weightNode_io.getNodeInfo"><code class="xref py py-obj docutils literal"><span class="pre">getNodeInfo</span></code></a>(node)</td>
-<td>get a dictionary of all the serialized information from the desired</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getNodeInfo" title="mgear.rigbits.weightNode_io.getNodeInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getNodeInfo</span></code></a>(node)</td>
+<td>get a dictionary of all the serialized information from the desired weightDriver node for export/import/duplication</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getNodesInfo" title="mgear.rigbits.weightNode_io.getNodesInfo"><code class="xref py py-obj docutils literal"><span class="pre">getNodesInfo</span></code></a>(weightDriverNodes)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getNodesInfo" title="mgear.rigbits.weightNode_io.getNodesInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getNodesInfo</span></code></a>(weightDriverNodes)</td>
 <td>convenience function to get a dict of all the provided nodes</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getPoseInfo" title="mgear.rigbits.weightNode_io.getPoseInfo"><code class="xref py py-obj docutils literal"><span class="pre">getPoseInfo</span></code></a>(node)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getPoseInfo" title="mgear.rigbits.weightNode_io.getPoseInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getPoseInfo</span></code></a>(node)</td>
 <td>Get dict of the pose info from the provided weightDriver node</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getRBFTransformInfo" title="mgear.rigbits.weightNode_io.getRBFTransformInfo"><code class="xref py py-obj docutils literal"><span class="pre">getRBFTransformInfo</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.getRBFTransformInfo" title="mgear.rigbits.weightNode_io.getRBFTransformInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getRBFTransformInfo</span></code></a>(node)</td>
 <td>get a dict of all the information to be serialized to/from json</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.importNodes" title="mgear.rigbits.weightNode_io.importNodes"><code class="xref py py-obj docutils literal"><span class="pre">importNodes</span></code></a>(filePath)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.importNodes" title="mgear.rigbits.weightNode_io.importNodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">importNodes</span></code></a>(filePath)</td>
 <td>create nodes from serialized data from the provided json filepath</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.lengthenCompoundAttrs" title="mgear.rigbits.weightNode_io.lengthenCompoundAttrs"><code class="xref py py-obj docutils literal"><span class="pre">lengthenCompoundAttrs</span></code></a>(node)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.lengthenCompoundAttrs" title="mgear.rigbits.weightNode_io.lengthenCompoundAttrs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lengthenCompoundAttrs</span></code></a>(node)</td>
 <td>In core, if a compound attr has a value of 0,0,0 it will skip creating the attribute.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.loadWeightPlugin" title="mgear.rigbits.weightNode_io.loadWeightPlugin"><code class="xref py py-obj docutils literal"><span class="pre">loadWeightPlugin</span></code></a>(dependentFunc)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.loadWeightPlugin" title="mgear.rigbits.weightNode_io.loadWeightPlugin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadWeightPlugin</span></code></a>(dependentFunc)</td>
 <td>ensure that plugin is always loaded prior to importing from json</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.recreateAttributes" title="mgear.rigbits.weightNode_io.recreateAttributes"><code class="xref py py-obj docutils literal"><span class="pre">recreateAttributes</span></code></a>(node,&nbsp;attributesToRecreate)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.recreateAttributes" title="mgear.rigbits.weightNode_io.recreateAttributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recreateAttributes</span></code></a>(node,&nbsp;attributesToRecreate)</td>
 <td>add any attributes to the provided node from list</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.recreateConnections" title="mgear.rigbits.weightNode_io.recreateConnections"><code class="xref py py-obj docutils literal"><span class="pre">recreateConnections</span></code></a>(connectionsInfo)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.recreateConnections" title="mgear.rigbits.weightNode_io.recreateConnections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">recreateConnections</span></code></a>(connectionsInfo)</td>
 <td>recreate connections from dict</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setDrivenNode" title="mgear.rigbits.weightNode_io.setDrivenNode"><code class="xref py py-obj docutils literal"><span class="pre">setDrivenNode</span></code></a>(node,&nbsp;drivenNode,&nbsp;drivenAttrs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setDrivenNode" title="mgear.rigbits.weightNode_io.setDrivenNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setDrivenNode</span></code></a>(node,&nbsp;drivenNode,&nbsp;drivenAttrs)</td>
 <td>set the node to be driven by the weightDriver</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setDriverListFromInfo" title="mgear.rigbits.weightNode_io.setDriverListFromInfo"><code class="xref py py-obj docutils literal"><span class="pre">setDriverListFromInfo</span></code></a>(node,&nbsp;driverListInfo)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setDriverListFromInfo" title="mgear.rigbits.weightNode_io.setDriverListFromInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setDriverListFromInfo</span></code></a>(node,&nbsp;driverListInfo)</td>
 <td>set driverlist node with information from dict proivided</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setDriverNode" title="mgear.rigbits.weightNode_io.setDriverNode"><code class="xref py py-obj docutils literal"><span class="pre">setDriverNode</span></code></a>(node,&nbsp;driverNode,&nbsp;driverAttrs)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setDriverNode" title="mgear.rigbits.weightNode_io.setDriverNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setDriverNode</span></code></a>(node,&nbsp;driverNode,&nbsp;driverAttrs)</td>
 <td>set the node that will be driving the evaluation on our poses</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setPosesFromInfo" title="mgear.rigbits.weightNode_io.setPosesFromInfo"><code class="xref py py-obj docutils literal"><span class="pre">setPosesFromInfo</span></code></a>(node,&nbsp;posesInfo)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setPosesFromInfo" title="mgear.rigbits.weightNode_io.setPosesFromInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setPosesFromInfo</span></code></a>(node,&nbsp;posesInfo)</td>
 <td>set a large number of poses from the dictionary provided</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setTransformNode" title="mgear.rigbits.weightNode_io.setTransformNode"><code class="xref py py-obj docutils literal"><span class="pre">setTransformNode</span></code></a>(transformNode,&nbsp;transformInfo)</td>
-<td>set the transform node of a weightedDriver with the information from</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setTransformNode" title="mgear.rigbits.weightNode_io.setTransformNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setTransformNode</span></code></a>(transformNode,&nbsp;transformInfo)</td>
+<td>set the transform node of a weightedDriver with the information from dict</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setWeightNodeAttributes" title="mgear.rigbits.weightNode_io.setWeightNodeAttributes"><code class="xref py py-obj docutils literal"><span class="pre">setWeightNodeAttributes</span></code></a>(node,&nbsp;weightNodeAttrInfo)</td>
-<td>set the attribute information on the weightDriver node provided from</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.setWeightNodeAttributes" title="mgear.rigbits.weightNode_io.setWeightNodeAttributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWeightNodeAttributes</span></code></a>(node,&nbsp;weightNodeAttrInfo)</td>
+<td>set the attribute information on the weightDriver node provided from the info dict</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.syncPoseIndices" title="mgear.rigbits.weightNode_io.syncPoseIndices"><code class="xref py py-obj docutils literal"><span class="pre">syncPoseIndices</span></code></a>(srcNode,&nbsp;destNode)</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.syncPoseIndices" title="mgear.rigbits.weightNode_io.syncPoseIndices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">syncPoseIndices</span></code></a>(srcNode,&nbsp;destNode)</td>
 <td>Syncs the pose indices between the srcNode and destNode.</td>
 </tr>
 </tbody>
@@ -379,8 +376,8 @@ __email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravr
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.RBFNode" title="mgear.rigbits.weightNode_io.RBFNode"><code class="xref py py-obj docutils literal"><span class="pre">RBFNode</span></code></a>(name)</td>
-<td>when subclassed everything that need be overrided is information</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/rigbits/weightNode_io.html#mgear.rigbits.weightNode_io.RBFNode" title="mgear.rigbits.weightNode_io.RBFNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RBFNode</span></code></a>(name)</td>
+<td>when subclassed everything that need be overrided is information specific to the module rbf node.</td>
 </tr>
 </tbody>
 </table>
@@ -388,9 +385,7 @@ __email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravr
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -399,7 +394,7 @@ __email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravr
         <a href="mgear.rigbits.widgets.html" class="btn btn-neutral float-right" title="mgear.rigbits.widgets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mgear.rigbits.utils.html" class="btn btn-neutral" title="mgear.rigbits.utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mgear.rigbits.utils.html" class="btn btn-neutral float-left" title="mgear.rigbits.utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -408,11 +403,11 @@ __email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravr
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -425,36 +420,15 @@ __email__ = “<a class="reference external" href="mailto:rav&#37;&#52;&#48;ravr
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

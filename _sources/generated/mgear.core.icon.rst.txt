@@ -1,5 +1,5 @@
-mgear\.core\.icon
-=================
+mgear.core.icon
+===============
 
 .. automodule:: mgear.core.icon
 
@@ -26,6 +26,7 @@ mgear\.core\.icon
       guideBladeIcon
       guideLocatorIcon
       guideRootIcon
+      guideRootIcon2D
       null
       pyramid
       setcolor

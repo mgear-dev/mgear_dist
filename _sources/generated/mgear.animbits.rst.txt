@@ -1,5 +1,5 @@
-mgear\.animbits
-===============
+mgear.animbits
+==============
 
 .. automodule:: mgear.animbits
 

@@ -1,5 +1,5 @@
-mgear\.core\.pickWalk
-=====================
+mgear.core.pickWalk
+===================
 
 .. automodule:: mgear.core.pickWalk
 
@@ -16,6 +16,7 @@ mgear\.core\.pickWalk
       controllerWalkUp
       getMirror
       getWalkTag
+      get_all_tag_children
       reorderControllerChildrenTags
       transformWalkDown
       transformWalkLeft

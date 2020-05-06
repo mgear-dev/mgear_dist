@@ -1,5 +1,5 @@
-mgear\.rigbits\.menu
-====================
+mgear.rigbits.menu
+==================
 
 .. automodule:: mgear.rigbits.menu
 
@@ -14,6 +14,7 @@ mgear\.rigbits\.menu
       gimmick_submenu
       install
       install_utils_menu
+      legacy_submenu
       pCtl_sub
    
    

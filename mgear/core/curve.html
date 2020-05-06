@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.core.curve &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.core.curve &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,43 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
-        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
-        <link rel="next" title="mgear.core.dag" href="dag.html"/>
-        <link rel="prev" title="mgear.core.attribute" href="attribute.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mgear.core.dag" href="dag.html" />
+    <link rel="prev" title="mgear.core.attribute" href="attribute.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -93,6 +86,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
@@ -134,6 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -150,7 +146,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -158,9 +154,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -266,7 +263,7 @@
 
 <dl class="function">
 <dt id="mgear.core.curve.collect_curve_data">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">collect_curve_data</code><span class="sig-paren">(</span><em>objs, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.collect_curve_data" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">collect_curve_data</code><span class="sig-paren">(</span><em>objs, rplStr=['', '']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.collect_curve_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a dictionary descriving the curve data</p>
 <p>Suport multiple objects</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -295,7 +292,7 @@ change the curve names before store it.
 
 <dl class="function">
 <dt id="mgear.core.curve.collect_curve_shapes">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">collect_curve_shapes</code><span class="sig-paren">(</span><em>crv, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.collect_curve_shapes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">collect_curve_shapes</code><span class="sig-paren">(</span><em>crv, rplStr=['', '']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.collect_curve_shapes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect curve shapes data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -342,7 +339,7 @@ change the curve names before store it.
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>srcCrv</strong> (<a class="reference internal" href="#module-mgear.core.curve" title="mgear.core.curve"><em>curve</em></a>) – The source curve.</li>
+<li><strong>srcCrv</strong> (<em>curve</em>) – The source curve.</li>
 <li><strong>name</strong> (<em>str</em>) – The new curve name.</li>
 <li><strong>nbPoints</strong> (<em>int</em>) – Number of control points for the new curve.</li>
 <li><strong>parent</strong> (<em>dagNode</em>) – Parent of the new curve.</li>
@@ -388,7 +385,7 @@ change the curve names before store it.
 
 <dl class="function">
 <dt id="mgear.core.curve.createCuveFromEdges">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">createCuveFromEdges</code><span class="sig-paren">(</span><em>edgeList</em>, <em>name</em>, <em>parent=None</em>, <em>degree=3</em>, <em>sortingAxis=’x’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.createCuveFromEdges" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">createCuveFromEdges</code><span class="sig-paren">(</span><em>edgeList</em>, <em>name</em>, <em>parent=None</em>, <em>degree=3</em>, <em>sortingAxis='x'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.createCuveFromEdges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create curve from a edge list.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -415,7 +412,7 @@ change the curve names before store it.
 
 <dl class="function">
 <dt id="mgear.core.curve.create_curve_from_data">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">create_curve_from_data</code><span class="sig-paren">(</span><em>data, replaceShape=False, rebuildHierarchy=False, rplStr=[”, ”], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.create_curve_from_data" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">create_curve_from_data</code><span class="sig-paren">(</span><em>data, replaceShape=False, rebuildHierarchy=False, rplStr=['', ''], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.create_curve_from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the curves from a given curve data dict</p>
 <p>Hierarchy rebuild after all curves are build to avoid lost parents</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -437,7 +434,7 @@ hierarchy</li>
 
 <dl class="function">
 <dt id="mgear.core.curve.create_curve_from_data_by_name">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">create_curve_from_data_by_name</code><span class="sig-paren">(</span><em>crv, data, replaceShape=False, rebuildHierarchy=False, rplStr=[”, ”], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.create_curve_from_data_by_name" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">create_curve_from_data_by_name</code><span class="sig-paren">(</span><em>crv, data, replaceShape=False, rebuildHierarchy=False, rplStr=['', ''], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.create_curve_from_data_by_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build one curve from a given curve data dict</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -464,7 +461,7 @@ parent, if  several objects with the same name</li>
 
 <dl class="function">
 <dt id="mgear.core.curve.crv_parenting">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">crv_parenting</code><span class="sig-paren">(</span><em>data, crv, rplStr=[”, ”], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.crv_parenting" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">crv_parenting</code><span class="sig-paren">(</span><em>data, crv, rplStr=['', ''], model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.crv_parenting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parent the new created curves</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -519,7 +516,7 @@ parent, if  several objects with the same name</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>param</strong> (<em>float</em>) – The parameter to get the legth</li>
-<li><strong>crv</strong> (<a class="reference internal" href="#module-mgear.core.curve" title="mgear.core.curve"><em>curve</em></a>) – The source curve.</li>
+<li><strong>crv</strong> (<em>curve</em>) – The source curve.</li>
 </ul>
 </td>
 </tr>
@@ -532,7 +529,7 @@ parent, if  several objects with the same name</li>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">oParam</span><span class="p">,</span> <span class="n">oLength</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">getCurveParamAtPosition</span><span class="p">(</span><span class="n">upRope</span><span class="p">,</span> <span class="n">cv</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">oParam</span><span class="p">,</span> <span class="n">oLength</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">getCurveParamAtPosition</span><span class="p">(</span><span class="n">upRope</span><span class="p">,</span> <span class="n">cv</span><span class="p">)</span>
 <span class="n">uLength</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">findLenghtFromParam</span><span class="p">(</span><span class="n">upRope</span><span class="p">,</span> <span class="n">oParam</span><span class="p">)</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">uLength</span> <span class="o">/</span> <span class="n">oLength</span>
 </pre></div>
@@ -550,7 +547,7 @@ parent, if  several objects with the same name</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>position</strong> (<em>list of float</em>) – Represents the position in worldSpace
 exp: [1.4, 3.55, 42.6]</li>
-<li><strong>crv</strong> (<a class="reference internal" href="#module-mgear.core.curve" title="mgear.core.curve"><em>curve</em></a>) – The  source curve to get the parameter.</li>
+<li><strong>crv</strong> (<em>curve</em>) – The  source curve to get the parameter.</li>
 </ul>
 </td>
 </tr>
@@ -584,7 +581,7 @@ exp: [1.4, 3.55, 42.6]</li>
 
 <dl class="function">
 <dt id="mgear.core.curve.import_curve">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">import_curve</code><span class="sig-paren">(</span><em>filePath=None, replaceShape=False, rebuildHierarchy=False, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.import_curve" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">import_curve</code><span class="sig-paren">(</span><em>filePath=None, replaceShape=False, rebuildHierarchy=False, rplStr=['', '']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.import_curve" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -607,7 +604,7 @@ exp: [1.4, 3.55, 42.6]</li>
 
 <dl class="function">
 <dt id="mgear.core.curve.update_curve_from_data">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">update_curve_from_data</code><span class="sig-paren">(</span><em>data, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.update_curve_from_data" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">update_curve_from_data</code><span class="sig-paren">(</span><em>data, rplStr=['', '']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.update_curve_from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>update the curves from a given curve data dict</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -621,16 +618,14 @@ exp: [1.4, 3.55, 42.6]</li>
 
 <dl class="function">
 <dt id="mgear.core.curve.update_curve_from_file">
-<code class="descclassname">mgear.core.curve.</code><code class="descname">update_curve_from_file</code><span class="sig-paren">(</span><em>filePath=None, rplStr=[”, ”]</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.update_curve_from_file" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.curve.</code><code class="descname">update_curve_from_file</code><span class="sig-paren">(</span><em>filePath=None, rplStr=['', '']</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.curve.update_curve_from_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -639,7 +634,7 @@ exp: [1.4, 3.55, 42.6]</li>
         <a href="dag.html" class="btn btn-neutral float-right" title="mgear.core.dag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="attribute.html" class="btn btn-neutral" title="mgear.core.attribute" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="attribute.html" class="btn btn-neutral float-left" title="mgear.core.attribute" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -648,11 +643,11 @@ exp: [1.4, 3.55, 42.6]</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -665,36 +660,15 @@ exp: [1.4, 3.55, 42.6]</li>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

@@ -1,5 +1,5 @@
-mgear\.simpleRig
-================
+mgear.simpleRig
+===============
 
 .. automodule:: mgear.simpleRig
 

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.rigbits &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.rigbits &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,40 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -64,7 +58,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -90,11 +84,14 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -111,7 +108,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -119,9 +116,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -276,7 +274,7 @@ selection.</li>
 <li><strong>points</strong> (<em>None</em><em> or </em><em>vertex list</em><em>, </em><em>optional</em>) – The reference vertex to align
 the ref locator</li>
 <li><strong>loc</strong> (<em>None</em><em> or </em><em>dagNode</em><em>, </em><em>optional</em>) – If none will create a new locator</li>
-<li><strong>name</strong> (<em>None</em><em> or </em><a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a><em>, </em><em>optional</em>) – Name of the new locator</li>
+<li><strong>name</strong> (<em>None</em><em> or </em><em>string</em><em>, </em><em>optional</em>) – Name of the new locator</li>
 <li><strong>*args</strong> – Description</li>
 </ul>
 </td>
@@ -293,7 +291,7 @@ the ref locator</li>
 
 <dl class="function">
 <dt id="mgear.rigbits.connectInvertSRT">
-<code class="descclassname">mgear.rigbits.</code><code class="descname">connectInvertSRT</code><span class="sig-paren">(</span><em>source</em>, <em>target</em>, <em>srt=’srt’</em>, <em>axis=’xyz’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.connectInvertSRT" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.</code><code class="descname">connectInvertSRT</code><span class="sig-paren">(</span><em>source</em>, <em>target</em>, <em>srt='srt'</em>, <em>axis='xyz'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.connectInvertSRT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect the locat transformations with inverted values.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -302,10 +300,10 @@ the ref locator</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>source</strong> (<em>dagNode</em>) – The source driver dagNode</li>
 <li><strong>target</strong> (<em>dagNode</em>) – The target driven dagNode</li>
-<li><strong>srt</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a><em>, </em><em>optional</em>) – String value for the scale(s), rotate(r),
+<li><strong>srt</strong> (<em>string</em><em>, </em><em>optional</em>) – String value for the scale(s), rotate(r),
 translation(t). Default value is “srt”. Posible values “s”, “r”,
 “t” or any combination</li>
-<li><strong>axis</strong> (<a class="reference internal" href="../../generated/mgear.core.string.html#module-mgear.core.string" title="mgear.core.string"><em>string</em></a><em>, </em><em>optional</em>) – String value for the axis. Default
+<li><strong>axis</strong> (<em>string</em><em>, </em><em>optional</em>) – String value for the axis. Default
 value is “xyz”. Posible values “x”, “y”, “z” or any combination</li>
 </ul>
 </td>
@@ -377,7 +375,7 @@ defined channels to be connected.</li>
 
 <dl class="function">
 <dt id="mgear.rigbits.createCTL">
-<code class="descclassname">mgear.rigbits.</code><code class="descname">createCTL</code><span class="sig-paren">(</span><em>type=’square’</em>, <em>child=False</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.createCTL" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.</code><code class="descname">createCTL</code><span class="sig-paren">(</span><em>type='square'</em>, <em>child=False</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.createCTL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a control for each selected object.</p>
 <p>The newly create control can be parent or child of the object.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -507,9 +505,7 @@ hierarchy</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -518,11 +514,11 @@ hierarchy</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -535,36 +531,15 @@ hierarchy</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

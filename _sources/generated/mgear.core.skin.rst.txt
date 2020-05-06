@@ -1,5 +1,5 @@
-mgear\.core\.skin
-=================
+mgear.core.skin
+===============
 
 .. automodule:: mgear.core.skin
 

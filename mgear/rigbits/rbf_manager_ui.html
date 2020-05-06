@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.rigbits.rbf_manager_ui &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.rigbits.rbf_manager_ui &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,40 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -64,7 +58,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -90,11 +84,14 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../framework.html">Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../solvers.html">Custom Solvers/Deformers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -111,7 +108,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -119,9 +116,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -1123,7 +1121,7 @@ with latest information.</p>
 
 <dl class="method">
 <dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.selectNodeWidget">
-<code class="descname">selectNodeWidget</code><span class="sig-paren">(</span><em>label</em>, <em>buttonLabel=’Select’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.selectNodeWidget" title="Permalink to this definition">¶</a></dt>
+<code class="descname">selectNodeWidget</code><span class="sig-paren">(</span><em>label</em>, <em>buttonLabel='Select'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.selectNodeWidget" title="Permalink to this definition">¶</a></dt>
 <dd><p>create a lout with label, lineEdit, QPushbutton for user input</p>
 </dd></dl>
 
@@ -1306,6 +1304,20 @@ rbf nodes in the setup.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.toggleDefaultType">
+<code class="descname">toggleDefaultType</code><span class="sig-paren">(</span><em>toggleState</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.toggleDefaultType" title="Permalink to this definition">¶</a></dt>
+<dd><p>records whether the user wants default poses to be zeroed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>toggleState</strong> (<em>bool</em>) – default True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.toggleGetPoseType">
 <code class="descname">toggleGetPoseType</code><span class="sig-paren">(</span><em>toggleState</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.toggleGetPoseType" title="Permalink to this definition">¶</a></dt>
 <dd><p>records whether the user wants poses recorded in worldSpace or check
@@ -1340,7 +1352,7 @@ local space</p>
 
 <dl class="method">
 <dt id="mgear.rigbits.rbf_manager_ui.RBFManagerUI.updateAttributeDisplay">
-<code class="descname">updateAttributeDisplay</code><span class="sig-paren">(</span><em>attrListWidget</em>, <em>driverNames</em>, <em>highlight=[]</em>, <em>attrType=’all’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.updateAttributeDisplay" title="Permalink to this definition">¶</a></dt>
+<code class="descname">updateAttributeDisplay</code><span class="sig-paren">(</span><em>attrListWidget</em>, <em>driverNames</em>, <em>highlight=[]</em>, <em>attrType='all'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.RBFManagerUI.updateAttributeDisplay" title="Permalink to this definition">¶</a></dt>
 <dd><p>update the provided listwidget with the attrs collected from the
 list of nodes provided</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1528,7 +1540,7 @@ list of nodes provided</p>
 
 <dl class="function">
 <dt id="mgear.rigbits.rbf_manager_ui.getControlAttrWidget">
-<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">getControlAttrWidget</code><span class="sig-paren">(</span><em>nodeAttr</em>, <em>label=”</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.getControlAttrWidget" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">getControlAttrWidget</code><span class="sig-paren">(</span><em>nodeAttr</em>, <em>label=''</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.getControlAttrWidget" title="Permalink to this definition">¶</a></dt>
 <dd><p>get a cmds.attrControlGrp wrapped in a qtWidget, still connected
 to the specified attr</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1570,7 +1582,7 @@ modules for the UI, query and return dict</p>
 
 <dl class="function">
 <dt id="mgear.rigbits.rbf_manager_ui.getPlugAttrs">
-<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">getPlugAttrs</code><span class="sig-paren">(</span><em>nodes</em>, <em>attrType=’all’</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.getPlugAttrs" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.rigbits.rbf_manager_ui.</code><code class="descname">getPlugAttrs</code><span class="sig-paren">(</span><em>nodes</em>, <em>attrType='all'</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.rigbits.rbf_manager_ui.getPlugAttrs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of attributes to display to the user</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1691,9 +1703,7 @@ modules for the UI, query and return dict</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -1702,11 +1712,11 @@ modules for the UI, query and return dict</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1719,36 +1729,15 @@ modules for the UI, query and return dict</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

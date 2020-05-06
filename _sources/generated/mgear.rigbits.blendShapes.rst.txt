@@ -1,5 +1,5 @@
-mgear\.rigbits\.blendShapes
-===========================
+mgear.rigbits.blendShapes
+=========================
 
 .. automodule:: mgear.rigbits.blendShapes
 

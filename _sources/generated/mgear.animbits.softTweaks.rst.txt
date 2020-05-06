@@ -1,5 +1,5 @@
-mgear\.animbits\.softTweaks
-===========================
+mgear.animbits.softTweaks
+=========================
 
 .. automodule:: mgear.animbits.softTweaks
 

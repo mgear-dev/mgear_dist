@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.shifter.guide &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.shifter.guide &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,43 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
-        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
-        <link rel="next" title="mgear.shifter.gui" href="gui.html"/>
-        <link rel="prev" title="mgear.shifter" href="shifter.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mgear.shifter.gui" href="gui.html" />
+    <link rel="prev" title="mgear.shifter" href="shifter.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -93,6 +86,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
@@ -134,6 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -150,7 +146,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -158,9 +154,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -328,6 +325,11 @@ pre step list</li>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.hover_info_item_entered">
+<code class="descname">hover_info_item_entered</code><span class="sig-paren">(</span><em>view</em>, <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.hover_info_item_entered" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="mgear.shifter.guide.GuideSettings.importCustomStep">
 <code class="descname">importCustomStep</code><span class="sig-paren">(</span><em>pre=True</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.importCustomStep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Import custom steps from a json file</p>
@@ -403,6 +405,11 @@ from the custom attributes of the component.</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.post_info">
+<code class="descname">post_info</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.post_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="mgear.shifter.guide.GuideSettings.preCustomStepMenu">
 <code class="descname">preCustomStepMenu</code><span class="sig-paren">(</span><em>QPos</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.preCustomStepMenu" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -410,6 +417,11 @@ from the custom attributes of the component.</p>
 <dl class="method">
 <dt id="mgear.shifter.guide.GuideSettings.preHighlightSearch">
 <code class="descname">preHighlightSearch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.preHighlightSearch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.GuideSettings.pre_info">
+<code class="descname">pre_info</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.GuideSettings.pre_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -497,6 +509,16 @@ from the custom attributes of the component.</p>
 <code class="descname">editFile</code><span class="sig-paren">(</span><em>widgetList</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.editFile" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.format_info">
+<code class="descname">format_info</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.format_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.get_cs_file_fullpath">
+<code class="descname">get_cs_file_fullpath</code><span class="sig-paren">(</span><em>cs_data</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.get_cs_file_fullpath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="classmethod">
 <dt id="mgear.shifter.guide.HelperSlots.get_steps_dict">
 <em class="property">classmethod </em><code class="descname">get_steps_dict</code><span class="sig-paren">(</span><em>itemsList</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.get_steps_dict" title="Permalink to this definition">¶</a></dt>
@@ -530,6 +552,11 @@ from the custom attributes of the component.</p>
 <dl class="method">
 <dt id="mgear.shifter.guide.HelperSlots.setProfile">
 <code class="descname">setProfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.setProfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mgear.shifter.guide.HelperSlots.shared_owner">
+<code class="descname">shared_owner</code><span class="sig-paren">(</span><em>cs_fullpath</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.HelperSlots.shared_owner" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -801,7 +828,7 @@ warning message will be display and the guide should be updated.</p>
 <dl class="attribute">
 <dt id="mgear.shifter.guide.MainGuide">
 <code class="descclassname">mgear.shifter.guide.</code><code class="descname">MainGuide</code><a class="headerlink" href="#mgear.shifter.guide.MainGuide" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.Main" title="mgear.shifter.guide.Main"><code class="xref py py-class docutils literal"><span class="pre">Main</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.Main" title="mgear.shifter.guide.Main"><code class="xref py py-class docutils literal notranslate"><span class="pre">mgear.shifter.guide.Main</span></code></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -916,7 +943,7 @@ the scale of the character</p>
 
 <dl class="method">
 <dt id="mgear.shifter.guide.Rig.draw_guide">
-<code class="descname">draw_guide</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.draw_guide" title="Permalink to this definition">¶</a></dt>
+<code class="descname">draw_guide</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.shifter.guide.Rig.draw_guide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a new guide from  the guide object.
 Usually the information of the guide have been set from a configuration
 Dictionary</p>
@@ -1114,40 +1141,38 @@ Shifter’s guide.</p>
 <dl class="attribute">
 <dt id="mgear.shifter.guide.RigGuide">
 <code class="descclassname">mgear.shifter.guide.</code><code class="descname">RigGuide</code><a class="headerlink" href="#mgear.shifter.guide.RigGuide" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.Rig" title="mgear.shifter.guide.Rig"><code class="xref py py-class docutils literal"><span class="pre">Rig</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.Rig" title="mgear.shifter.guide.Rig"><code class="xref py py-class docutils literal notranslate"><span class="pre">mgear.shifter.guide.Rig</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.shifter.guide.customStepTab">
 <code class="descclassname">mgear.shifter.guide.</code><code class="descname">customStepTab</code><a class="headerlink" href="#mgear.shifter.guide.customStepTab" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.CustomStepTab" title="mgear.shifter.guide.CustomStepTab"><code class="xref py py-class docutils literal"><span class="pre">CustomStepTab</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.CustomStepTab" title="mgear.shifter.guide.CustomStepTab"><code class="xref py py-class docutils literal notranslate"><span class="pre">mgear.shifter.guide.CustomStepTab</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.shifter.guide.guideSettings">
 <code class="descclassname">mgear.shifter.guide.</code><code class="descname">guideSettings</code><a class="headerlink" href="#mgear.shifter.guide.guideSettings" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.GuideSettings" title="mgear.shifter.guide.GuideSettings"><code class="xref py py-class docutils literal"><span class="pre">GuideSettings</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.GuideSettings" title="mgear.shifter.guide.GuideSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">mgear.shifter.guide.GuideSettings</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.shifter.guide.guideSettingsTab">
 <code class="descclassname">mgear.shifter.guide.</code><code class="descname">guideSettingsTab</code><a class="headerlink" href="#mgear.shifter.guide.guideSettingsTab" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.GuideSettingsTab" title="mgear.shifter.guide.GuideSettingsTab"><code class="xref py py-class docutils literal"><span class="pre">GuideSettingsTab</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.GuideSettingsTab" title="mgear.shifter.guide.GuideSettingsTab"><code class="xref py py-class docutils literal notranslate"><span class="pre">mgear.shifter.guide.GuideSettingsTab</span></code></a></p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mgear.shifter.guide.helperSlots">
 <code class="descclassname">mgear.shifter.guide.</code><code class="descname">helperSlots</code><a class="headerlink" href="#mgear.shifter.guide.helperSlots" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.HelperSlots" title="mgear.shifter.guide.HelperSlots"><code class="xref py py-class docutils literal"><span class="pre">HelperSlots</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#mgear.shifter.guide.HelperSlots" title="mgear.shifter.guide.HelperSlots"><code class="xref py py-class docutils literal notranslate"><span class="pre">mgear.shifter.guide.HelperSlots</span></code></a></p>
 </dd></dl>
 
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -1156,7 +1181,7 @@ Shifter’s guide.</p>
         <a href="gui.html" class="btn btn-neutral float-right" title="mgear.shifter.gui" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="shifter.html" class="btn btn-neutral" title="mgear.shifter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="shifter.html" class="btn btn-neutral float-left" title="mgear.shifter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1165,11 +1190,11 @@ Shifter’s guide.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1182,36 +1207,15 @@ Shifter’s guide.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

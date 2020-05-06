@@ -1,5 +1,5 @@
-mgear\.rigbits\.rbf\_node
-=========================
+mgear.rigbits.rbf\_node
+=======================
 
 .. automodule:: mgear.rigbits.rbf_node
 
@@ -10,6 +10,7 @@ mgear\.rigbits\.rbf\_node
    .. autosummary::
    
       addDrivenGroup
+      compensateLocator
       connectRBFToggleAttr
       copyInverseMirrorAttrs
       createDriverControlAttr
@@ -27,6 +28,7 @@ mgear\.rigbits\.rbf\_node
       getSceneSetupNodes
       getSetupName
       recallDriverControlPose
+      removeCompensateLocator
       removeDrivenGroup
       resetDrivenNodes
       setDriverControlAttr

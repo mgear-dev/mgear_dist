@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.core.icon &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.core.icon &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,43 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../index.html"/>
-        <link rel="up" title="Base Modules" href="../baseModules.html"/>
-        <link rel="next" title="mgear.core.log" href="mgear.core.log.html"/>
-        <link rel="prev" title="mgear.core.fcurve" href="mgear.core.fcurve.html"/> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mgear.core.log" href="mgear.core.log.html" />
+    <link rel="prev" title="mgear.core.fcurve" href="mgear.core.fcurve.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -93,6 +86,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../baseModules.html">Base Modules</a><ul class="current">
@@ -130,6 +125,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQ</a></li>
@@ -146,7 +142,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">mGear: Rigging Framework</a>
@@ -154,9 +150,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -212,70 +209,73 @@
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.arrow" title="mgear.core.icon.arrow"><code class="xref py py-obj docutils literal"><span class="pre">arrow</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.arrow" title="mgear.core.icon.arrow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arrow</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a ARROW shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.axis" title="mgear.core.icon.axis"><code class="xref py py-obj docutils literal"><span class="pre">axis</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.axis" title="mgear.core.icon.axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axis</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a AXIS shape.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.circle" title="mgear.core.icon.circle"><code class="xref py py-obj docutils literal"><span class="pre">circle</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.circle" title="mgear.core.icon.circle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circle</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a CIRCLE shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.compas" title="mgear.core.icon.compas"><code class="xref py py-obj docutils literal"><span class="pre">compas</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.compas" title="mgear.core.icon.compas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compas</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a COMPAS shape.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.connection_display_curve" title="mgear.core.icon.connection_display_curve"><code class="xref py py-obj docutils literal"><span class="pre">connection_display_curve</span></code></a>(name[,&nbsp;centers,&nbsp;degree])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.connection_display_curve" title="mgear.core.icon.connection_display_curve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connection_display_curve</span></code></a>(name[,&nbsp;centers,&nbsp;degree])</td>
 <td>Visual reference curves connectiong points.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.create" title="mgear.core.icon.create"><code class="xref py py-obj docutils literal"><span class="pre">create</span></code></a>([parent,&nbsp;name,&nbsp;m,&nbsp;color,&nbsp;icon])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.create" title="mgear.core.icon.create"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create</span></code></a>([parent,&nbsp;name,&nbsp;m,&nbsp;color,&nbsp;icon])</td>
 <td>Icon master function</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.cross" title="mgear.core.icon.cross"><code class="xref py py-obj docutils literal"><span class="pre">cross</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.cross" title="mgear.core.icon.cross"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a CROSS shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.crossarrow" title="mgear.core.icon.crossarrow"><code class="xref py py-obj docutils literal"><span class="pre">crossarrow</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.crossarrow" title="mgear.core.icon.crossarrow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crossarrow</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a CROSS ARROW shape.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.cube" title="mgear.core.icon.cube"><code class="xref py py-obj docutils literal"><span class="pre">cube</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;height,&nbsp;depth,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.cube" title="mgear.core.icon.cube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cube</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;height,&nbsp;depth,&nbsp;…])</td>
 <td>Create a curve with a CUBE shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.cubewithpeak" title="mgear.core.icon.cubewithpeak"><code class="xref py py-obj docutils literal"><span class="pre">cubewithpeak</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.cubewithpeak" title="mgear.core.icon.cubewithpeak"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cubewithpeak</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;…])</td>
 <td>Create a curve with a CUBE WITH PEAK shape.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.cylinder" title="mgear.core.icon.cylinder"><code class="xref py py-obj docutils literal"><span class="pre">cylinder</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;heigth,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.cylinder" title="mgear.core.icon.cylinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cylinder</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;heigth,&nbsp;…])</td>
 <td>Create a curve with a CYLINDER shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.diamond" title="mgear.core.icon.diamond"><code class="xref py py-obj docutils literal"><span class="pre">diamond</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.diamond" title="mgear.core.icon.diamond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diamond</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a DIAMOND shape.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.flower" title="mgear.core.icon.flower"><code class="xref py py-obj docutils literal"><span class="pre">flower</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.flower" title="mgear.core.icon.flower"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flower</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a FLOWER shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.getPointArrayWithOffset" title="mgear.core.icon.getPointArrayWithOffset"><code class="xref py py-obj docutils literal"><span class="pre">getPointArrayWithOffset</span></code></a>(point_pos[,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.getPointArrayWithOffset" title="mgear.core.icon.getPointArrayWithOffset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getPointArrayWithOffset</span></code></a>(point_pos[,&nbsp;…])</td>
 <td>Get Point array with offset</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.guideBladeIcon" title="mgear.core.icon.guideBladeIcon"><code class="xref py py-obj docutils literal"><span class="pre">guideBladeIcon</span></code></a>([parent,&nbsp;name,&nbsp;lenX,&nbsp;color,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.guideBladeIcon" title="mgear.core.icon.guideBladeIcon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">guideBladeIcon</span></code></a>([parent,&nbsp;name,&nbsp;lenX,&nbsp;color,&nbsp;…])</td>
 <td>Create a curve with a BLADE GUIDE shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.guideLocatorIcon" title="mgear.core.icon.guideLocatorIcon"><code class="xref py py-obj docutils literal"><span class="pre">guideLocatorIcon</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.guideLocatorIcon" title="mgear.core.icon.guideLocatorIcon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">guideLocatorIcon</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;…])</td>
 <td>Create a curve with a LOCATOR GUIDE shape.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.guideRootIcon" title="mgear.core.icon.guideRootIcon"><code class="xref py py-obj docutils literal"><span class="pre">guideRootIcon</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.guideRootIcon" title="mgear.core.icon.guideRootIcon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">guideRootIcon</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;…])</td>
 <td>Create a curve with a ROOT GUIDE shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.null" title="mgear.core.icon.null"><code class="xref py py-obj docutils literal"><span class="pre">null</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.guideRootIcon2D" title="mgear.core.icon.guideRootIcon2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">guideRootIcon2D</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;…])</td>
+<td>Create a curve with a 2D ROOT GUIDE shape.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.null" title="mgear.core.icon.null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">null</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a NULL shape.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.pyramid" title="mgear.core.icon.pyramid"><code class="xref py py-obj docutils literal"><span class="pre">pyramid</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;height,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.pyramid" title="mgear.core.icon.pyramid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyramid</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;height,&nbsp;…])</td>
 <td>Create a curve with a PYRAMIDE shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.setcolor" title="mgear.core.icon.setcolor"><code class="xref py py-obj docutils literal"><span class="pre">setcolor</span></code></a>(node,&nbsp;color)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.setcolor" title="mgear.core.icon.setcolor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setcolor</span></code></a>(node,&nbsp;color)</td>
 <td>Set the color in the Icons.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.sphere" title="mgear.core.icon.sphere"><code class="xref py py-obj docutils literal"><span class="pre">sphere</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
+<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.sphere" title="mgear.core.icon.sphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sphere</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;color,&nbsp;m,&nbsp;…])</td>
 <td>Create a curve with a SPHERE shape.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.square" title="mgear.core.icon.square"><code class="xref py py-obj docutils literal"><span class="pre">square</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;depth,&nbsp;color,&nbsp;…])</td>
+<tr class="row-odd"><td><a class="reference internal" href="../mgear/core/icon.html#mgear.core.icon.square" title="mgear.core.icon.square"><code class="xref py py-obj docutils literal notranslate"><span class="pre">square</span></code></a>([parent,&nbsp;name,&nbsp;width,&nbsp;depth,&nbsp;color,&nbsp;…])</td>
 <td>Create a curve with a SQUARE shape.</td>
 </tr>
 </tbody>
@@ -284,9 +284,7 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -295,7 +293,7 @@
         <a href="mgear.core.log.html" class="btn btn-neutral float-right" title="mgear.core.log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mgear.core.fcurve.html" class="btn btn-neutral" title="mgear.core.fcurve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mgear.core.fcurve.html" class="btn btn-neutral float-left" title="mgear.core.fcurve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -304,11 +302,11 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -321,36 +319,15 @@
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

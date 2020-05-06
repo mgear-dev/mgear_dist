@@ -1,5 +1,5 @@
-mgear\.core\.node
-=================
+mgear.core.node
+===============
 
 .. automodule:: mgear.core.node
 

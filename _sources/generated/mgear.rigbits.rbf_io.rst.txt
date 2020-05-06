@@ -1,5 +1,5 @@
-mgear\.rigbits\.rbf\_io
-=======================
+mgear.rigbits.rbf\_io
+=====================
 
 .. automodule:: mgear.rigbits.rbf_io
 

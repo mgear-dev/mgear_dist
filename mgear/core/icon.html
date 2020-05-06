@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.core.icon &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.core.icon &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,43 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
-        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
-        <link rel="next" title="mgear.core.log" href="log.html"/>
-        <link rel="prev" title="mgear.core.fcurve" href="fcurve.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mgear.core.log" href="log.html" />
+    <link rel="prev" title="mgear.core.fcurve" href="fcurve.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -93,6 +86,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
@@ -134,6 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -150,7 +146,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -158,9 +154,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -211,7 +208,7 @@
 <p>Predefined nurbsCurve shapes to be use as a rigging control Icons</p>
 <dl class="function">
 <dt id="mgear.core.icon.arrow">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">arrow</code><span class="sig-paren">(</span><em>parent=None, name=’arrow’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.arrow" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">arrow</code><span class="sig-paren">(</span><em>parent=None, name='arrow', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.arrow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a ARROW shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -223,9 +220,9 @@
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -242,7 +239,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.axis">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">axis</code><span class="sig-paren">(</span><em>parent=None, name=’axis’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.axis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">axis</code><span class="sig-paren">(</span><em>parent=None, name='axis', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.axis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a AXIS shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -254,9 +251,9 @@ its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -273,7 +270,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.circle">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">circle</code><span class="sig-paren">(</span><em>parent=None, name=’circle’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.circle" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">circle</code><span class="sig-paren">(</span><em>parent=None, name='circle', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.circle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CIRCLE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -285,9 +282,9 @@ its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -304,7 +301,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.compas">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">compas</code><span class="sig-paren">(</span><em>parent=None, name=’compas’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.compas" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">compas</code><span class="sig-paren">(</span><em>parent=None, name='compas', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.compas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a COMPAS shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -316,9 +313,9 @@ its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -362,7 +359,7 @@ different guide element..</p>
 
 <dl class="function">
 <dt id="mgear.core.icon.create">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">create</code><span class="sig-paren">(</span><em>parent=None, name=’icon’, m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), color=[0, 0, 0], icon=’cube’, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.create" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">create</code><span class="sig-paren">(</span><em>parent=None, name='icon', m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), color=[0, 0, 0], icon='cube', **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Icon master function</p>
 <p><strong>Create icon master function.</strong>
 This function centralize all the icons creation</p>
@@ -398,7 +395,7 @@ Please refear to the specific icon method for more info.</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.cross">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">cross</code><span class="sig-paren">(</span><em>parent=None, name=’cross’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.cross" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">cross</code><span class="sig-paren">(</span><em>parent=None, name='cross', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.cross" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CROSS shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -410,9 +407,9 @@ Please refear to the specific icon method for more info.</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -429,7 +426,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.crossarrow">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">crossarrow</code><span class="sig-paren">(</span><em>parent=None, name=’crossArrow’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.crossarrow" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">crossarrow</code><span class="sig-paren">(</span><em>parent=None, name='crossArrow', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.crossarrow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CROSS ARROW shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -441,9 +438,9 @@ its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -460,7 +457,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.cube">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">cube</code><span class="sig-paren">(</span><em>parent=None, name=’cube’, width=1, height=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.cube" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">cube</code><span class="sig-paren">(</span><em>parent=None, name='cube', width=1, height=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.cube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CUBE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -474,9 +471,9 @@ its center. xyz in radians</li>
 <li><strong>depth</strong> (<em>float</em>) – Depth of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve
 from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve
 from its center. xyz in radians</li>
 </ul>
 </td>
@@ -493,7 +490,7 @@ from its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.cubewithpeak">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">cubewithpeak</code><span class="sig-paren">(</span><em>parent=None, name=’cubewithpeak’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.cubewithpeak" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">cubewithpeak</code><span class="sig-paren">(</span><em>parent=None, name='cubewithpeak', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.cubewithpeak" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CUBE WITH PEAK shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -505,9 +502,9 @@ from its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -524,7 +521,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.cylinder">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">cylinder</code><span class="sig-paren">(</span><em>parent=None, name=’cylinder’, width=1, heigth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.cylinder" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">cylinder</code><span class="sig-paren">(</span><em>parent=None, name='cylinder', width=1, heigth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.cylinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a CYLINDER shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -537,9 +534,9 @@ its center. xyz in radians</li>
 <li><strong>height</strong> (<em>float</em>) – Height of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -556,7 +553,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.diamond">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">diamond</code><span class="sig-paren">(</span><em>parent=None, name=’diamond’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.diamond" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">diamond</code><span class="sig-paren">(</span><em>parent=None, name='diamond', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.diamond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a DIAMOND shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -570,9 +567,9 @@ its center. xyz in radians</li>
 <li><strong>depth</strong> (<em>float</em>) – Depth of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -589,7 +586,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.flower">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">flower</code><span class="sig-paren">(</span><em>parent=None, name=’flower’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.flower" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">flower</code><span class="sig-paren">(</span><em>parent=None, name='flower', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.flower" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a FLOWER shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -601,9 +598,9 @@ its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -630,9 +627,9 @@ rotation offset.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>point_pos</strong> (<em>list of vector</em>) – Point positions.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The position offset of the curve from its
+<li><strong>pos_offset</strong> (<em>vector</em>) – The position offset of the curve from its
 center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The rotation offset of the curve from its
+<li><strong>rot_offset</strong> (<em>vector</em>) – The rotation offset of the curve from its
 center. In radians.</li>
 </ul>
 </td>
@@ -649,7 +646,7 @@ center. In radians.</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.guideBladeIcon">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">guideBladeIcon</code><span class="sig-paren">(</span><em>parent=None, name=’blade’, lenX=1.0, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.guideBladeIcon" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">guideBladeIcon</code><span class="sig-paren">(</span><em>parent=None, name='blade', lenX=1.0, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.guideBladeIcon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a BLADE GUIDE shape.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -665,9 +662,9 @@ center. In radians.</li>
 <li><strong>lenX</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -684,7 +681,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.guideLocatorIcon">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">guideLocatorIcon</code><span class="sig-paren">(</span><em>parent=None, name=’locator’, width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.guideLocatorIcon" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">guideLocatorIcon</code><span class="sig-paren">(</span><em>parent=None, name='locator', width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.guideLocatorIcon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a LOCATOR GUIDE shape.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -700,9 +697,9 @@ its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -719,7 +716,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.guideRootIcon">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">guideRootIcon</code><span class="sig-paren">(</span><em>parent=None, name=’root’, width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.guideRootIcon" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">guideRootIcon</code><span class="sig-paren">(</span><em>parent=None, name='root', width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.guideRootIcon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a ROOT GUIDE shape.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -735,9 +732,44 @@ its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
+its center. xyz in radians</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The newly created icon.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dagNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mgear.core.icon.guideRootIcon2D">
+<code class="descclassname">mgear.core.icon.</code><code class="descname">guideRootIcon2D</code><span class="sig-paren">(</span><em>parent=None, name='root', width=0.5, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.guideRootIcon2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a curve with a 2D ROOT GUIDE shape.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This icon is specially design for <strong>Shifter</strong> root guides</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<em>dagNode</em>) – The parent object of the newly created curve.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the curve.</li>
+<li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
+<li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
+<li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
+its center.</li>
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -754,7 +786,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.null">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">null</code><span class="sig-paren">(</span><em>parent=None, name=’null’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.null" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">null</code><span class="sig-paren">(</span><em>parent=None, name='null', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.null" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a NULL shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -766,9 +798,9 @@ its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -785,7 +817,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.pyramid">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">pyramid</code><span class="sig-paren">(</span><em>parent=None, name=’pyramid’, width=1, height=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.pyramid" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">pyramid</code><span class="sig-paren">(</span><em>parent=None, name='pyramid', width=1, height=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.pyramid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a PYRAMIDE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -799,9 +831,9 @@ its center. xyz in radians</li>
 <li><strong>depth</strong> (<em>float</em>) – Depth of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve
 from its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve
 from its center. xyz in radians</li>
 </ul>
 </td>
@@ -836,7 +868,7 @@ from its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.sphere">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">sphere</code><span class="sig-paren">(</span><em>parent=None, name=’sphere’, width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.sphere" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">sphere</code><span class="sig-paren">(</span><em>parent=None, name='sphere', width=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None, degree=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.sphere" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a SPHERE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -848,9 +880,9 @@ from its center. xyz in radians</li>
 <li><strong>width</strong> (<em>float</em>) – Width of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -867,7 +899,7 @@ its center. xyz in radians</li>
 
 <dl class="function">
 <dt id="mgear.core.icon.square">
-<code class="descclassname">mgear.core.icon.</code><code class="descname">square</code><span class="sig-paren">(</span><em>parent=None, name=’square’, width=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.square" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.icon.</code><code class="descname">square</code><span class="sig-paren">(</span><em>parent=None, name='square', width=1, depth=1, color=[0, 0, 0], m=Matrix([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0], [0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 1.0]]), pos_offset=None, rot_offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.icon.square" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a curve with a SQUARE shape.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -880,9 +912,9 @@ its center. xyz in radians</li>
 <li><strong>depth</strong> (<em>float</em>) – Depth of the shape.</li>
 <li><strong>color</strong> (<em>int</em><em> or </em><em>list of float</em>) – The color in index base or RGB.</li>
 <li><strong>m</strong> (<em>matrix</em>) – The global transformation of the curve.</li>
-<li><strong>pos_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz position offset of the curve from
+<li><strong>pos_offset</strong> (<em>vector</em>) – The xyz position offset of the curve from
 its center.</li>
-<li><strong>rot_offset</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The xyz rotation offset of the curve from
+<li><strong>rot_offset</strong> (<em>vector</em>) – The xyz rotation offset of the curve from
 its center. xyz in radians</li>
 </ul>
 </td>
@@ -901,9 +933,7 @@ its center. xyz in radians</li>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -912,7 +942,7 @@ its center. xyz in radians</li>
         <a href="log.html" class="btn btn-neutral float-right" title="mgear.core.log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="fcurve.html" class="btn btn-neutral" title="mgear.core.fcurve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="fcurve.html" class="btn btn-neutral float-left" title="mgear.core.fcurve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -921,11 +951,11 @@ its center. xyz in radians</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -938,36 +968,15 @@ its center. xyz in radians</li>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

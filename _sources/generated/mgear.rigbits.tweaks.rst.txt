@@ -1,5 +1,5 @@
-mgear\.rigbits\.tweaks
-======================
+mgear.rigbits.tweaks
+====================
 
 .. automodule:: mgear.rigbits.tweaks
 
@@ -14,7 +14,9 @@ mgear\.rigbits\.tweaks
       createRivetTweak
       createRivetTweakFromList
       createRivetTweakLayer
-      doritosMagic
+      edgePairList
+      negateTransformConnection
+      pre_bind_matrix_connect
       resetJntLocalSRT
    
    

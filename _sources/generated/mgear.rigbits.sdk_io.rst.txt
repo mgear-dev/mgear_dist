@@ -1,5 +1,5 @@
-mgear\.rigbits\.sdk\_io
-=======================
+mgear.rigbits.sdk\_io
+=====================
 
 .. automodule:: mgear.rigbits.sdk_io
 

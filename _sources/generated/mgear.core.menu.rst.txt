@@ -1,5 +1,5 @@
-mgear\.core\.menu
-=================
+mgear.core.menu
+===============
 
 .. automodule:: mgear.core.menu
 

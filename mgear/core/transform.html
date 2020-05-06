@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mgear.core.transform &mdash; mGear: Rigging Framework 3.0.3 documentation</title>
+  <title>mgear.core.transform &mdash; mGear: Rigging Framework 3.5.0 documentation</title>
   
 
   
@@ -17,43 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="mGear: Rigging Framework 3.0.3 documentation" href="../../index.html"/>
-        <link rel="up" title="Modules flat List" href="../../modulesList.html"/>
-        <link rel="next" title="mgear.core.utils" href="utils.html"/>
-        <link rel="prev" title="mgear.string" href="string.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mgear.core.utils" href="utils.html" />
+    <link rel="prev" title="mgear.string" href="string.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +60,7 @@
             
             
               <div class="version">
-                3.0
+                3.5
               </div>
             
           
@@ -93,6 +86,8 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../official-unofficial-workflow.html">mGear Rigging Workflow</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../framework.html">Framework</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../animbitsModules.html">Animbits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../baseModules.html">Base Modules</a></li>
@@ -134,6 +129,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../animbitsUserDocumentation.html">Animbits User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../crankUserDocumentation.html">Crank User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../shifterUserDocumentation.html">Shifter User Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../shifterComponentReference.html">Shifter Component Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../synopticUserDocumentation.html">Synoptic User Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../videoTutorials.html">Video Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">FAQ</a></li>
@@ -150,7 +146,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">mGear: Rigging Framework</a>
@@ -158,9 +154,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -239,7 +236,7 @@ matrix in world space.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>positions</strong> (<em>list of vector</em>) – List with the chain positions.</li>
-<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – Normal direction.</li>
+<li><strong>normal</strong> (<em>vector</em>) – Normal direction.</li>
 <li><strong>negate</strong> (<em>bool</em>) – If true invert the chain orientation.</li>
 </ul>
 </td>
@@ -253,7 +250,7 @@ for the chain.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tra</span><span class="o">.</span><span class="n">getChainTransform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tra</span><span class="o">.</span><span class="n">getChainTransform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">negate</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -272,7 +269,7 @@ for the chain.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>positions</strong> (<em>list of vector</em>) – List with the chain positions.</li>
-<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – Normal direction.</li>
+<li><strong>normal</strong> (<em>vector</em>) – Normal direction.</li>
 <li><strong>negate</strong> (<em>bool</em>) – If true invert the chain orientation.</li>
 </ul>
 </td>
@@ -286,7 +283,7 @@ for the chain.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tra</span><span class="o">.</span><span class="n">getChainTransform2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tra</span><span class="o">.</span><span class="n">getChainTransform2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">,</span>
 <span class="go">                           self.normal,</span>
 <span class="go">                           self.negate)</span>
 </pre></div>
@@ -345,7 +342,7 @@ scaling.</li>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getInterpolateTransformMatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fk_ctl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getInterpolateTransformMatrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fk_ctl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
 <span class="go">                                          self.tws1A_npo,</span>
 <span class="go">                                          .3333)</span>
 </pre></div>
@@ -376,7 +373,7 @@ exp : [1.2, 4.6, 32.78]</li>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addRoot</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addRoot</span><span class="p">()</span>
 <span class="n">vTemp</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getOffsetPosition</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.1</span><span class="p">])</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">knee</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addLoc</span><span class="p">(</span><span class="s2">&quot;knee&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">vTemp</span><span class="p">)</span>
 </pre></div>
@@ -403,15 +400,15 @@ exp : [1.2, 4.6, 32.78]</li>
 
 <dl class="function">
 <dt id="mgear.core.transform.getRotationFromAxis">
-<code class="descclassname">mgear.core.transform.</code><code class="descname">getRotationFromAxis</code><span class="sig-paren">(</span><em>in_a</em>, <em>in_b</em>, <em>axis=’xy’</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.transform.getRotationFromAxis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.transform.</code><code class="descname">getRotationFromAxis</code><span class="sig-paren">(</span><em>in_a</em>, <em>in_b</em>, <em>axis='xy'</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.transform.getRotationFromAxis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the matrix rotation from a given axis.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>in_a</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – Axis A</li>
-<li><strong>in_b</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – Axis B</li>
+<li><strong>in_a</strong> (<em>vector</em>) – Axis A</li>
+<li><strong>in_b</strong> (<em>vector</em>) – Axis B</li>
 <li><strong>axis</strong> (<em>str</em>) – The axis to use for the orientation. Default: “xy”</li>
 <li><strong>negate</strong> (<em>bool</em>) – negates the axis orientation.</li>
 </ul>
@@ -426,7 +423,7 @@ exp : [1.2, 4.6, 32.78]</li>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eff_loc</span><span class="p">)</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
                      <span class="bp">self</span><span class="o">.</span><span class="n">normal</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
@@ -439,7 +436,7 @@ exp : [1.2, 4.6, 32.78]</li>
 
 <dl class="function">
 <dt id="mgear.core.transform.getSymmetricalTransform">
-<code class="descclassname">mgear.core.transform.</code><code class="descname">getSymmetricalTransform</code><span class="sig-paren">(</span><em>t</em>, <em>axis=’yz’</em>, <em>fNegScale=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.transform.getSymmetricalTransform" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.transform.</code><code class="descname">getSymmetricalTransform</code><span class="sig-paren">(</span><em>t</em>, <em>axis='yz'</em>, <em>fNegScale=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.transform.getSymmetricalTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the symmetrical tranformation</p>
 <p>Get the symmetrical tranformation matrix from a define 2 axis mirror
 plane. exp:”yz”.</p>
@@ -490,7 +487,7 @@ plane. exp:”yz”.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – Position for the transformation matrix</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<em>vector</em>) – Position for the transformation matrix</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The newly created transformation matrix</td>
 </tr>
@@ -498,14 +495,14 @@ plane. exp:”yz”.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransformFromPos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransformFromPos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="mgear.core.transform.getTransformLookingAt">
-<code class="descclassname">mgear.core.transform.</code><code class="descname">getTransformLookingAt</code><span class="sig-paren">(</span><em>pos</em>, <em>lookat</em>, <em>normal</em>, <em>axis=’xy’</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.transform.getTransformLookingAt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">mgear.core.transform.</code><code class="descname">getTransformLookingAt</code><span class="sig-paren">(</span><em>pos</em>, <em>lookat</em>, <em>normal</em>, <em>axis='xy'</em>, <em>negate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mgear.core.transform.getTransformLookingAt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a transformation mstrix using vector positions.</p>
 <p>Return the transformation matrix of the dagNode oriented looking to
 an specific point.</p>
@@ -514,9 +511,9 @@ an specific point.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>pos</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The position for the transformation</li>
-<li><strong>lookat</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The aiming position to stablish the orientation</li>
-<li><strong>normal</strong> (<a class="reference internal" href="vector.html#module-mgear.core.vector" title="mgear.core.vector"><em>vector</em></a>) – The normal control the transformation roll.</li>
+<li><strong>pos</strong> (<em>vector</em>) – The position for the transformation</li>
+<li><strong>lookat</strong> (<em>vector</em>) – The aiming position to stablish the orientation</li>
+<li><strong>normal</strong> (<em>vector</em>) – The normal control the transformation roll.</li>
 <li><strong>axis</strong> (<em>str</em>) – The 2 axis used for lookat and normal. Default “xy”</li>
 <li><strong>negate</strong> (<em>bool</em>) – If true, invert the aiming direction.</li>
 </ul>
@@ -530,7 +527,7 @@ an specific point.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransformLookingAt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="s2">&quot;heel&quot;</span><span class="p">],</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">getTransformLookingAt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="s2">&quot;heel&quot;</span><span class="p">],</span>
 <span class="go">                                   self.guide.apos[-4],</span>
 <span class="go">                                   self.normal,</span>
 <span class="go">                                   &quot;xz&quot;,</span>
@@ -626,7 +623,7 @@ an specific point.</p>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">quaternionSlerp</span><span class="p">(</span><span class="n">datatypes</span><span class="o">.</span><span class="n">Quaternion</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">quaternionSlerp</span><span class="p">(</span><span class="n">datatypes</span><span class="o">.</span><span class="n">Quaternion</span><span class="p">(</span>
                     <span class="n">t1</span><span class="o">.</span><span class="n">getRotationQuaternion</span><span class="p">()),</span>
                     <span class="n">datatypes</span><span class="o">.</span><span class="n">Quaternion</span><span class="p">(</span>
                         <span class="n">t2</span><span class="o">.</span><span class="n">getRotationQuaternion</span><span class="p">()),</span> <span class="n">blend</span><span class="p">)</span>
@@ -679,10 +676,10 @@ an specific point.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tnpo</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">setMatrixPosition</span><span class="p">(</span><span class="n">tOld</span><span class="p">,</span> <span class="n">tra</span><span class="o">.</span><span class="n">getPositionFromMatrix</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tnpo</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">setMatrixPosition</span><span class="p">(</span><span class="n">tOld</span><span class="p">,</span> <span class="n">tra</span><span class="o">.</span><span class="n">getPositionFromMatrix</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">setMatrixPosition</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">tra</span><span class="o">.</span><span class="n">setMatrixPosition</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">guide</span><span class="o">.</span><span class="n">apos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -739,9 +736,7 @@ an specific point.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -750,7 +745,7 @@ an specific point.</p>
         <a href="utils.html" class="btn btn-neutral float-right" title="mgear.core.utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="string.html" class="btn btn-neutral" title="mgear.string" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="string.html" class="btn btn-neutral float-left" title="mgear.string" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -759,11 +754,11 @@ an specific point.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018 The mGear Dev Team.
+        &copy; Copyright 2011-2018, Jeremie Passerin, Miquel Campos, 2018-2020 The mGear Dev Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -776,36 +771,15 @@ an specific point.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'3.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>
