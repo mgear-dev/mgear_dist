@@ -1,6 +1,12 @@
 Release Log
 ===========
 
+3.5.1
+-----
+**Bug Fix**
+	* mGear_core: When copy skin, match the skinningMethod as well [mgear_core#55]
+	* Rigbits: RBF Manager mirror bug with Flex Add_attribute [rigbits#54]
+
 3.5.0
 -----
 **New Features**
