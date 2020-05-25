@@ -1,6 +1,28 @@
 Release Log
 ===========
 
+3.6.0
+-----
+**New Features**
+	* Shifter_classic_components: chain_spring_lite_stack_master_01: New component [shifter_classic_components#79]
+
+**Enhancements**
+	* Anim Picker: Add create picker menu items based on selection [anim_picker#18]
+	* Anim Picker: Make select controls display more noticeable [anim_picker#16]
+	* Animbits: Channel Master: Add channels from any section in ChannelBox. [animbits#50]
+	* Animbits: Channel Master: Auto color options. [animbits#51]
+	* Animbits: Channel Master: option to configure channel order. [animbits#37]
+	* Animbits: Channel Master: Turn off real time update on scrubbing. [animbits#51]
+	* Animbits: Channel Master: Use selected channels for copy/paste keyframes. [animbits#52]
+	* Animbits: softTweak: add surface fallof option [animbits#53]
+	* mGear_core: attribute module new functions: get_selected_channels_full_path + collect_attrs [mgear_core#56]
+	* Shifter: Add Joint Names parameter for customizing joint names in guide settings. [shifter#85]
+	* Shifter_classic_components: lite_chain_stack_02 component: add blend option to turn off the connection [shifter_classic_components#78]
+
+**Bug Fix**
+	* Animbits: Channel Master: Blendshape node channels bug. [animbits#49]
+	* Shifter: Importing old guides with missing parameters error. [shifter#69]
+
 3.5.1
 -----
 **Bug Fix**
