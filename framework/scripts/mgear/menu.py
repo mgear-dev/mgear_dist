@@ -1,5 +1,3 @@
-from functools import partial
-import webbrowser
 import pymel.core as pm
 import mgear
 
@@ -39,16 +37,12 @@ def install_help_menu(menuId=menuId):
     pm.setParent(menuId, menu=True)
     pm.menuItem(divider=True)
     pm.menuItem(parent=menuId, subMenu=True, tearOff=True, label="Help")
-    pm.menuItem(label="Web",
-                command=lambda _=None: webbrowser.open(
-                    "http://www.mgear-framework.com/")
-                )
-    pm.menuItem(label="Forum",
-                command=lambda _=None: webbrowser.open(
-                    "http://forum.mgear-framework.com/")
-                )
+    pm.menuItem(label="Web", command=str_web)
+    pm.menuItem(label="Forum", command=str_forum)
     pm.menuItem(divider=True)
-    pm.menuItem(label="About", command=mgear.core.aboutMgear)
+    pm.menuItem(label="Documentation", command=str_docs)
+    pm.menuItem(divider=True)
+    pm.menuItem(label="About", command=str_about)
 
 
 def install_utils_menu():
@@ -56,7 +50,7 @@ def install_utils_menu():
     """
     pm.setParent(mgear.menu_id, menu=True)
     pm.menuItem(divider=True)
-    commands = [("Reload", partial(mgear.reloadModule, "mgear"))]
+    commands = [("Reload", str_reload)]
 
     m = install("Utilities", commands)
     return m
@@ -93,3 +87,30 @@ def install(label, commands, parent=menuId):
                     "Arguments:\n{1!r}")
         message = template.format(type(ex).__name__, ex.args)
         pm.displayError(message)
+
+
+str_web = """
+import webbrowser
+webbrowser.open("http://www.mgear-framework.com/")
+"""
+
+str_forum = """
+import webbrowser
+webbrowser.open("http://forum.mgear-framework.com/")
+"""
+
+str_docs = """
+import webbrowser
+webbrowser.open("https://www.mgear-framework.com/mgear_dist/")
+"""
+
+str_about = """
+import mgear
+mgear.core.aboutMgear()
+"""
+
+
+str_reload = """
+import mgear
+mgear.reloadModule("mgear")
+"""
