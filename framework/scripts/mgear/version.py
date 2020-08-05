@@ -2,7 +2,7 @@
 
 VERSION_MAJOR = 3
 VERSION_MINOR = 6
-VERSION_PATCH = 5
+VERSION_PATCH = 6
 
 version_info = (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH)
 version = '%i.%i.%i' % version_info
