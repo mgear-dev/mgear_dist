@@ -6,7 +6,7 @@ End-user distribution of mgear.
 
 mgear consists of many parts, developed independently. Some of these parts fit together at particular versions, this repository maintains a collection of versions that are compatible with each other.
 
-- See [**Releases**](../releases) for a ready-to-use distribution of mgear.
+- See [**Releases**](../../releases) for a ready-to-use distribution of mgear.
 
 The general rule is; each individual repository MUST be usable standalone (in conjuntion with core) to facilitate independent development of each part in isolation from each other. This repository is then an *additional* method with which to distribute and consume mgear, primarily intended for the end-user who *does not* want to contribute back to the project through GitHub.
 <br>
