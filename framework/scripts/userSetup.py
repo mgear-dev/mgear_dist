@@ -36,17 +36,21 @@ def mGear_menu_loader():
     import mgear.simpleRig.menu
     mgear.simpleRig.menu.install()
 
-    # Install Rigbits Menu
-    import mgear.rigbits.menu
-    mgear.rigbits.menu.install()
-
     # Install Skinning Menu
     import mgear.core.menu
     mgear.core.menu.install_skinning_menu()
 
+    # Install Rigbits Menu
+    import mgear.rigbits.menu
+    mgear.rigbits.menu.install()
+
     # Install Animbits Menu
     import mgear.animbits.menu
     mgear.animbits.menu.install()
+
+    # Install CFXbits Menu
+    import mgear.cfxbits.menu
+    mgear.cfxbits.menu.install()
 
     # Install Crank Menu
     import mgear.crank.menu
