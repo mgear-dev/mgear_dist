@@ -52,3 +52,9 @@
 [submodule "framework/anim_picker"]
 	path = framework/anim_picker
 	url = https://github.com/mgear-dev/anim_picker.git
+[submodule "framework/cfxbits"]
+	path = framework/cfxbits
+	url = https://github.com/mgear-dev/cfxbits.git
+[submodule "framework/shifter_epic_components"]
+	path = framework/shifter_epic_components
+	url = https://github.com/mgear-dev/shifter_epic_components.git

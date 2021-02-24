@@ -67,6 +67,8 @@ targets = [
                     "scripts/mgear/shifter": excons.glob("framework/shifter/scripts/mgear/shifter/*"),
                     "scripts/mgear/flex": excons.glob("framework/flex/scripts/mgear/flex/*"),
                     "scripts/mgear/shifter_classic_components": excons.glob("framework/shifter_classic_components/scripts/mgear/shifter_classic_components/*"),
+                    "scripts/mgear/shifter_epic_components": excons.glob("framework/shifter_epic_components/scripts/mgear/shifter_epic_components/*"),
+                    "scripts/mgear/cfxbits": excons.glob("framework/cfxbits/scripts/mgear/cfxbits/*"),
                     "": mgearmod}
     },
     {
