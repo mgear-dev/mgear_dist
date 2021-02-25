@@ -73,6 +73,8 @@ def mGear_menu_loader():
     m = mgear.menu.install_utils_menu()
     mgear.core.menu.install_utils_menu(m)
     mgear.rigbits.menu.install_utils_menu(m)
+    if hasattr(mgear.core.dagmenu, "install_utils_menu"):
+        mgear.core.dagmenu.install_utils_menu(m)
 
     # Install Help Menu
     mgear.menu.install_help_menu()
