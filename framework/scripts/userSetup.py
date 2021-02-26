@@ -74,6 +74,10 @@ def mGear_menu_loader():
     mgear.core.menu.install_utils_menu(m)
     mgear.rigbits.menu.install_utils_menu(m)
 
+    # install dragdrop override in utilities
+    import mgear.core.dragdrop
+    mgear.core.dragdrop.install_utils_menu(m)
+
     # Install Help Menu
     mgear.menu.install_help_menu()
 
