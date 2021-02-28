@@ -1,6 +1,65 @@
 Release Log
 ===========
 
+3.7.7
+-----
+**New Features**
+	* Shifter_EPIC_components: New set of componets specially design for Unreal engine and Games in general.
+	* Shifter: Configurable naming template. [shifter#83]
+	* Shifter: Joint orientation options. [shifter#73]
+	* Shifter: Plebes (a tool for rigging character generator characters with mGear). [shifter#96]
+	* mGear solvers: New matrixConstraint node [mgear_solvers#5]
+	* mgear_dist: Drag and Drop easy installer  [mgear_dist#56]
+	* mGear_core: Add support for drag n drop of mGear filetypes, .sgt [mgear_core#79]
+	* mGear_core: Deformer weight IO module [mgear_core#75]
+	* CFXbits: Xgen IGS boost: New tool to create curve based grooming with xgen interactive grooming splines [cfxbits#1]
+
+
+**Enhancements**
+	* Shifter: Add support for #_blade in chain coponents. [shifter#107]
+	* Shifter: IO return shifter rig object for NXT tools integration. [shifter#94]
+	* simpleRig: Improve automatic hierarchy creation [simpleRig#8]
+	* mGear_core: Skinning mismatch vertex warning should include the name of the object [mgear_core#63]
+	* mGear_core: General update to add CFXbits required functions [mgear_core#63]
+
+**Bug Fix**
+	* mGear solvers: added in the clamp values for the squash and stretch node [mgear_solvers#6]
+	* mgear_dist: update menus to str command [mgear_dist#53]
+	* mgear_dist: Incorrect grammar in UI [mgear_dist#26]
+	* Anim Picker: save overlay offset when change windows size [anim_picker#19]
+	* Anim Picker: UI buttons hidden in OSX [anim_picker#34]
+	* Anim Picker: Fail gracefully when space switch controls are not found [anim_picker#33]
+	* Anim Picker: Duplicating pickers, spacing issue [anim_picker#22]
+	* Anim Picker: Create picker improvements [anim_picker#21]
+	* Anim Picker: Duplicate behavior creates instances [anim_picker#24]
+	* Rigbits: Facial rigger is compatible with Shifter's game tools [rigbits#37]
+	* Shifter_classic_components: Control_01 component space switching with mgear viewport menu [shifter_classic_components#82]
+	* Shifter_classic_components: Change on Shifter leg_2jnt_tangent component settings UI [shifter_classic_components#81]
+	* Shifter_classic_components: Fix for issue "Menu: Ctrl+Shift results in broken shelf items" [shifter_classic_components#87]
+	* Shifter: Set by default Force uniform scaling to ON. [shifter#79]
+	* mGear_core: Attribute module new functions: Make it work with control custom names [mgear_core#62]
+	* mGear_core: Mirror/flip pose fail [mgear_core#70]
+	* mGear_core: anim_utils: improve IK FK match pole vector calculation [mgear_core#65]
+	* mGear_core: shifter_classic_components repeatedly added to sys.path  [mgear_core#69]
+	* mGear_core: Mirro/flip pose not working with custom names [mgear_core#71]
+	* mGear_core: QApplication instance dont have widgetAt method on Maya 2020 [mgear_core#66]
+	* mGear_core: Stripe pipes from skinCluster names [mgear_core#64]
+	* Shifter: Game tools is not disconnecting all the connections between rig and model. [shifter#68]
+	* Shifter: Game tools fix connection issue with new matrix constraint node. [shifter#108]
+	* Shifter: Guide component scale inconsistency at creation time. [shifter#97]
+	* Shifter: replaces backslashes with forward slashes for Mac OS. [shifter#101]
+	* Rigbits: RBF manager mirror with custom names  [rigbits#63]
+	* Rigbits: Mirror controls required target shape to exist  [rigbits#56]
+	* Rigbits: Add control and tweaks module controls need to create "isCtrl" control tag  [rigbits#50]
+	* Rigbits: Add attr ctrl tweaks  [rigbits#60]
+	* Animbits: Channel Master: Channel Master: Sync with Graph editor. [animbits#54]
+	* Animbits: Channel Master: sync selected channels in graph editor. [animbits#55]
+
+**WARNING**
+	* mgear_dist: dropping support for Maya 2017 and older [mgear_dist#60]
+
+
+
 3.6.0
 -----
 **New Features**

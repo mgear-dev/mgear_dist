@@ -22,7 +22,7 @@ Originally mGear was design and develope by Jeremie Passerin and Miquel Campos. 
 - [mGear Web](http://www.mgear-framework.com/)
 - [mGear Forum](http://forum.mgear-framework.com/)
 - [mGear Youtube channel](https://www.youtube.com/c/mgearriggingframework)
-- [API Docs](http://www.mgear-framework.com/mgear/)
+- [API Docs](https://www.mgear-framework.com/mgear_dist/)
 - [Release Log](http://www.mgear-framework.com/mgear/releaseLog.html)
 - For the official release, with compiled solvers: [Releases](https://github.com/mgear-dev/mgear/releases)
 

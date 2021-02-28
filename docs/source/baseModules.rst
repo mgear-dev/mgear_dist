@@ -6,10 +6,14 @@ Base Modules
 
    mgear
    mgear.core
+   mgear.core.anim_utils
    mgear.core.applyop
    mgear.core.attribute
+   mgear.core.callbackManager
    mgear.core.curve
    mgear.core.dag
+   mgear.core.dagmenu
+   mgear.core.dragdrop
    mgear.core.fcurve
    mgear.core.icon
    mgear.core.log
@@ -18,6 +22,7 @@ Base Modules
    mgear.core.node
    mgear.core.pickWalk
    mgear.core.primitive
+   mgear.core.pyflow_widgets
    mgear.core.pyqt
    mgear.core.skin
    mgear.core.string
@@ -25,4 +30,5 @@ Base Modules
    mgear.core.utils
    mgear.core.vector
    mgear.core.widgets
+   mgear.core.wmap
 
