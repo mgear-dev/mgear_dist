@@ -1,7 +1,7 @@
 Release Log
 ===========
 
-3.7.7
+3.7.8
 -----
 **New Features**
 	* CFXbits: Xgen IGS boost: New tool to create curve based grooming with xgen interactive grooming splines [cfxbits#1]
@@ -19,6 +19,7 @@ Release Log
 	* mGear_core: General update to add CFXbits required functions [mgear_core#63]
 	* mGear_core: Skinning mismatch vertex warning should include the name of the object [mgear_core#63]
 	* Shifter: Add support for #_blade in chain coponents. [shifter#107]
+	* Shifter: Attributes naming using component short name(instance Name) not component type name. [shifter#95]
 	* Shifter: IO return shifter rig object for NXT tools integration. [shifter#94]
 	* simpleRig: Improve automatic hierarchy creation [simpleRig#8]
 
