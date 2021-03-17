@@ -118,18 +118,20 @@ There is an autorigging utility to build the eyes and lips based on selecting ed
 
 	.. code-block:: python
 
-		 from mgear import rigbits
 		 import os
 		 lipsConfigPath = os.path.abspath(os.path.join('YOUR PATH HERE'))
 		 eyesConfigPath = os.path.abspath(os.path.join('YOUR PATH HERE'))
 
 		 # OLD LEGACY eye_rigger and lips_rigger tool
+		 from mgear import rigbits
 		 rigbits.eye_rigger.eyesFromfile(eyesConfigPath)
 		 rigbits.lips_rigger.lipsFromfile(lipsConfigPath)
 
 		 # NEW "facial_rigger" module
-		 rigbits.facial_rigger.eye_rigger.rig_from_file(eyesConfigPath)
-		 rigbits.facial_rigger.lips_rigger.rig_from_file(lipsConfigPath)
+		 from mgear.rigbits.facial_rigger import eye_rigger
+		 from mgear.rigbits.facial_rigger import facial_rigger
+		 eye_rigger.rig_from_file(eyesConfigPath)
+		 lips_rigger.rig_from_file(lipsConfigPath)
 
 	8) That is going to load your lip rigging. AFTER you load the lip rigging, you want to load your skin weights. Make sure to run the lips rig first, and then import the skinning, otherwise the joints won't exist yet! In this pipeline, you need to think about the order that things happen.
 
