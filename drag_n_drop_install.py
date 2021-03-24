@@ -178,10 +178,10 @@ def _dropped_install():
         # -- we look for the Maya.env file and write the path to it
         env_file = os.path.normpath(os.path.join(
             os.environ["MAYA_APP_DIR"], pm.about(version=True), "Maya.env"))
-        if os.path.exists(env_file):
-            f = open(env_file, "w")
-            f.write("MAYA_MODULE_PATH={0}".format(install_path))
-            f.close()
+        # -- will create a file if it does not exist
+        f = open(env_file, "a+")
+        f.write("MAYA_MODULE_PATH={0}".format(install_path))
+        f.close()
 
         # -- custom install dialog message
         message = ("A re-start of Maya will be required after this setup.")
