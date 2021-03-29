@@ -147,7 +147,7 @@ class InstallUI(QtWidgets.QDialog):
     def on_help_button_clicked(self):
         """Help button command."""
 
-        QtGui.QDesktopServices.openUrl(QtCore.QUrl("http://forum.mgear-framework.com"))
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl("http://forum.mgear-framework.com/t/official-installation-support-help"))
 
     def on_uninstall_button_clicked(self):
         """Uninstall button command."""
