@@ -1,6 +1,27 @@
 Release Log
 ===========
 
+3.7.11
+------
+
+**Enhancements**
+	* mgear_dist: New drag and drop installer [mgear_dist#62]
+	* Shifter: Extending the CustomShifterStep base class functionality. [shifter#109]
+	* mGear_core: Added meshNavigation.edgeLoopBetweenVertices [mgear_core#77]
+	* mGear_core: Added create raycast node function in applyop.py [mgear_core#90]
+
+**Bug Fix**
+	* Shifter: Error when joint name start with number [shifter#111]
+	* mGear_core: Bad IKRot rol reference anim_utils.py [shifter#82]
+	* mGear_core: Remove compile PyQt ui menu command for Maya 2022 compatibility [shifter#81]
+	* mGear_core: Knots saved in json file and read if they exist [shifter#76]
+	* Rigbits: Fix missing import in menu.py [rigbits#68]
+	* Rigbits: rbf manager, import error catch and cleanup [rigbits#73]
+	* Rigbits: Fix eyebrow joint orientation [rigbits#72]
+	* Shifter_EPIC_components: Improve joint placement precision on arm, leg and spine. [shifter_epic_components#20]
+	* Shifter_EPIC_components: Fixed relation dict value of "knee" in EPIC_leg_01 which causes building failure in certain cases. [shifter_epic_components#19]
+
+
 3.7.8
 -----
 **New Features**
@@ -13,7 +34,6 @@ Release Log
 	* Shifter: Joint orientation options. [shifter#73]
 	* Shifter: Plebes (a tool for rigging character generator characters with mGear). [shifter#96]
 	* Shifter_EPIC_components: New set of componets specially design for Unreal engine and Games in general.
-
 
 **Enhancements**
 	* mGear_core: General update to add CFXbits required functions [mgear_core#63]
