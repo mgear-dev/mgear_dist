@@ -161,7 +161,7 @@ class InstallUI(QtWidgets.QDialog):
         self.start_uninstall(self.get_line_edit_text(
             self.install_path_line_edit))
 
-    # def start_install(self):
+    def start_install(self):
         """Main install command to run through."""
 
         # -- folder of all the contents of mgear resides
