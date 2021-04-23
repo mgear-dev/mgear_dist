@@ -3,7 +3,7 @@
 # imports
 from pkgutil import extend_path
 import sys
-import exceptions
+# import exceptions
 from . import menu
 
 # extend mGear python package by adding the current module
@@ -33,7 +33,7 @@ def install():
 
 def logInfos():
     """Log version of Gear"""
-    print "GEAR version : " + getVersion()
+    print("GEAR version : " + getVersion())
 
 
 def getVersion():
@@ -124,7 +124,7 @@ def log(message, severity=sev_comment, infos=False):
 # Exception
 
 
-class FakeException(exceptions.Exception):
+class FakeException(Exception):
     pass
 
 
